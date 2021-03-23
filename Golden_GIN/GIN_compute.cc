@@ -3,7 +3,7 @@
 
 /// h_x: node feature vectors
 /// e_x: edge attribute vectors
-/// message: recieved message of each node
+/// message: received message of each node
 /// mlp_in/out: buffers for mlp
 
 float message[MAX_NODE][EMB_DIM];
@@ -30,7 +30,11 @@ float h_5[MAX_NODE][EMB_DIM];
 float h_graph[EMB_DIM];
 float task[NUM_TASK];
 
-void message_passing(float (*ed)[EMB_DIM], float (*h)[EMB_DIM], int* edge_list, int num_of_nodes, int num_of_edges)
+
+
+
+
+void message_passing(float ed[MAX_EDGE][EMB_DIM], float h[MAX_NODE][EMB_DIM], int* edge_list, int num_of_nodes, int num_of_edges)
 {
     memset(message, 0, MAX_NODE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
@@ -45,6 +49,7 @@ void message_passing(float (*ed)[EMB_DIM], float (*h)[EMB_DIM], int* edge_list, 
         }
     }
 
+#ifdef _PRINT_
     printf("\nMessage of Conv 0\n");
     for(int nd = 0; nd < num_of_nodes; nd++) {
         printf("Node %d: ", nd);
@@ -53,21 +58,22 @@ void message_passing(float (*ed)[EMB_DIM], float (*h)[EMB_DIM], int* edge_list, 
         }
         printf("...\n");
     }
+#endif
 }
 
 
 
-void MLP_BatchNorm_Relu(float (*d_in)[MLP_BN_DIM], float (*d_out)[MLP_BN_DIM], 
-                    float (*weight), float (*bias), 
-                    float (*running_mean),
-                    float (*running_var),
+void MLP_BatchNorm_Relu(float d_in[MAX_NODE][MLP_BN_DIM], float d_out[MAX_NODE][MLP_BN_DIM], 
+                    // float (*weight), float (*bias), 
+                    // float (*running_mean),
+                    // float (*running_var),
                     int num_of_nodes)
 {
 
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < MLP_BN_DIM; dim_out++) {
-            d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / sqrt((running_var[dim_out] + E_EPS))
-                                   * weight[dim_out] + bias[dim_out];
+            // d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / sqrt((running_var[dim_out] + E_EPS))
+            //                        * weight[dim_out] + bias[dim_out];
         
             d_out[nd][dim_out] = d_in[nd][dim_out] > 0 ? d_in[nd][dim_out] : 0.0;
         }
@@ -76,17 +82,17 @@ void MLP_BatchNorm_Relu(float (*d_in)[MLP_BN_DIM], float (*d_out)[MLP_BN_DIM],
 
 
 
-void Conv_BatchNorm_Relu(float (*d_in)[MLP_OUT_MAX], float (*d_out)[EMB_DIM], 
-                    float (*weight), float (*bias), 
-                    float (*running_mean),
-                    float (*running_var),
+void Conv_BatchNorm_Relu(float d_in[MAX_NODE][MLP_OUT_MAX], float d_out[MAX_NODE][EMB_DIM], 
+                    // float (*weight), float (*bias), 
+                    // float (*running_mean),
+                    // float (*running_var),
                     int num_of_nodes, bool last_layer = false)
 {
 
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < MLP_BN_DIM; dim_out++) {
-            d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / sqrt((running_var[dim_out] + E_EPS))
-                                   * weight[dim_out] + bias[dim_out];
+            // d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / sqrt((running_var[dim_out] + E_EPS))
+            //                        * weight[dim_out] + bias[dim_out];
         
             d_out[nd][dim_out] = (d_in[nd][dim_out] < 0 && !last_layer ) ? 0.0 : d_in[nd][dim_out];
         }
@@ -95,10 +101,11 @@ void Conv_BatchNorm_Relu(float (*d_in)[MLP_OUT_MAX], float (*d_out)[EMB_DIM],
 
 
 
-void MLP(float (*mlp_in)[MLP_IN_MAX], float (*mlp_out)[MLP_OUT_MAX], float (*h)[EMB_DIM], int num_of_nodes,
-         float (*mlp_0_weight)[MLP_0_IN], float (*mlp_0_bias), 
-         float (*mlp_3_weight)[MLP_3_IN], float (*mlp_3_bias),
-         float (*bn_weight), float (*bn_bias), float (*bn_running_mean), float (*bn_running_var), float eps)
+void MLP(float mlp_in[MAX_NODE][MLP_IN_MAX], float mlp_out[MAX_NODE][MLP_OUT_MAX], float h[MAX_NODE][EMB_DIM], int num_of_nodes,
+         float mlp_0_weight[MLP_0_OUT][MLP_0_IN], float (*mlp_0_bias), 
+         float mlp_3_weight[MLP_3_OUT][MLP_3_IN], float (*mlp_3_bias),
+         //float (*bn_weight), float (*bn_bias), float (*bn_running_mean), float (*bn_running_var), 
+         float eps)
 {
     /// MLP input by aggregating messages and self features
     for(int nd = 0; nd < num_of_nodes; nd++) {
@@ -107,6 +114,7 @@ void MLP(float (*mlp_in)[MLP_IN_MAX], float (*mlp_out)[MLP_OUT_MAX], float (*h)[
         }
     }
 
+#ifdef _PRINT_
     printf("\nInput of MLP\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -115,6 +123,7 @@ void MLP(float (*mlp_in)[MLP_IN_MAX], float (*mlp_out)[MLP_OUT_MAX], float (*h)[
         }
         printf("...\n");
     }
+#endif
 
 
     /// MLP 0 (linear)
@@ -129,8 +138,10 @@ void MLP(float (*mlp_in)[MLP_IN_MAX], float (*mlp_out)[MLP_OUT_MAX], float (*h)[
     }
 
     /// MLP 1 (batch-norm) + Relu
-    MLP_BatchNorm_Relu(mlp_out, mlp_in, bn_weight, bn_bias,
-                    bn_running_mean, bn_running_var, num_of_nodes);
+    MLP_BatchNorm_Relu(mlp_out, mlp_in, 
+                    //bn_weight, bn_bias,
+                    //bn_running_mean, bn_running_var, 
+                    num_of_nodes);
 
 
     /// MLP 3 (linear)
@@ -143,7 +154,7 @@ void MLP(float (*mlp_in)[MLP_IN_MAX], float (*mlp_out)[MLP_OUT_MAX], float (*h)[
         }
     }
 
-
+#ifdef _PRINT_
     printf("\nOutput of MLP\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -152,13 +163,14 @@ void MLP(float (*mlp_in)[MLP_IN_MAX], float (*mlp_out)[MLP_OUT_MAX], float (*h)[
         }
         printf("...\n");
     }
+#endif
 }
 
 
 
 void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
 {
-    printf("\n---- Computing CONV 0 ----\n");
+    //printf("\n---- Computing CONV 0 ----\n");
     ////////////// Embedding: compute edge embedding
     memset(e_0, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
@@ -182,6 +194,7 @@ void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
     }
 
+#ifdef _PRINT_
     printf("\nInitial edge embedding:\n");
     for(int e = 0; e < 5; e++) {
         printf("Edge %d: ", e);
@@ -190,6 +203,7 @@ void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 
     ////////////// Message Passing
     message_passing(e_0, h_0, edge_list, num_of_nodes, num_of_edges);
@@ -197,14 +211,18 @@ void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
     ////////////// MLP of Conv 0
     float eps = gnn_node_convs_0_eps[0];
     MLP(mlp_in, mlp_out, h_0, num_of_nodes,
-        gnn_node_convs_0_mlp_0_weight, gnn_node_convs_0_mlp_0_bias, gnn_node_convs_0_mlp_3_weight, gnn_node_convs_0_mlp_3_bias,
-        gnn_node_convs_0_mlp_1_weight, gnn_node_convs_0_mlp_1_bias, gnn_node_convs_0_mlp_1_running_mean, gnn_node_convs_0_mlp_1_running_var, eps);
+        gnn_node_convs_0_mlp_0_weight, gnn_node_convs_0_mlp_0_bias, gnn_node_convs_0_mlp_2_weight, gnn_node_convs_0_mlp_2_bias,
+        //gnn_node_convs_0_mlp_1_weight, gnn_node_convs_0_mlp_1_bias, gnn_node_convs_0_mlp_1_running_mean, gnn_node_convs_0_mlp_1_running_var, 
+        eps);
 
 
     ////////////// Batchnorm + Relu of Conv 0
-    Conv_BatchNorm_Relu(mlp_out, h_1, gnn_node_batch_norms_0_weight, gnn_node_batch_norms_0_bias,
-                    gnn_node_batch_norms_0_running_mean, gnn_node_batch_norms_0_running_var, num_of_nodes);
+    Conv_BatchNorm_Relu(mlp_out, h_1, 
+                    //gnn_node_batch_norms_0_weight, gnn_node_batch_norms_0_bias,
+                    //gnn_node_batch_norms_0_running_mean, gnn_node_batch_norms_0_running_var, 
+                    num_of_nodes);
 
+#ifdef _PRINT_
     printf("\nOutput of BatchNorm and Relu of Conv 0\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -213,6 +231,7 @@ void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 }
 
 
@@ -220,7 +239,7 @@ void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
 
 void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
 {
-    printf("\n---- Computing CONV 1 ----\n");
+    //printf("\n---- Computing CONV 1 ----\n");
     ////////////// Embedding: compute edge embedding
     memset(e_1, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
@@ -244,6 +263,7 @@ void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
     }
 
+#ifdef _PRINT_
     printf("\nInitial edge embedding:\n");
     for(int e = 0; e < 5; e++) {
         printf("Edge %d: ", e);
@@ -252,6 +272,7 @@ void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 
     ////////////// Message Passing
     message_passing(e_1, h_1, edge_list, num_of_nodes, num_of_edges);
@@ -259,14 +280,18 @@ void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
     ////////////// MLP of Conv 1
     float eps = gnn_node_convs_1_eps[0];
     MLP(mlp_in, mlp_out, h_1, num_of_nodes,
-        gnn_node_convs_1_mlp_0_weight, gnn_node_convs_1_mlp_0_bias, gnn_node_convs_1_mlp_3_weight, gnn_node_convs_1_mlp_3_bias,
-        gnn_node_convs_1_mlp_1_weight, gnn_node_convs_1_mlp_1_bias, gnn_node_convs_1_mlp_1_running_mean, gnn_node_convs_1_mlp_1_running_var, eps);
+        gnn_node_convs_1_mlp_0_weight, gnn_node_convs_1_mlp_0_bias, gnn_node_convs_1_mlp_2_weight, gnn_node_convs_1_mlp_2_bias,
+        //gnn_node_convs_1_mlp_1_weight, gnn_node_convs_1_mlp_1_bias, gnn_node_convs_1_mlp_1_running_mean, gnn_node_convs_1_mlp_1_running_var, 
+        eps);
 
 
     ////////////// Batchnorm + Relu of Conv 1
-    Conv_BatchNorm_Relu(mlp_out, h_2, gnn_node_batch_norms_1_weight, gnn_node_batch_norms_1_bias,
-                    gnn_node_batch_norms_1_running_mean, gnn_node_batch_norms_1_running_var, num_of_nodes);
+    Conv_BatchNorm_Relu(mlp_out, h_2, 
+                    //gnn_node_batch_norms_1_weight, gnn_node_batch_norms_1_bias,
+                    //gnn_node_batch_norms_1_running_mean, gnn_node_batch_norms_1_running_var, 
+                    num_of_nodes);
 
+#ifdef _PRINT_
     printf("\nOutput of BatchNorm and Relu of Conv 1\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -275,6 +300,7 @@ void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 }
 
 
@@ -282,7 +308,7 @@ void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
 
 void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
 {
-    printf("\n---- Computing CONV 2 ----\n");
+    //printf("\n---- Computing CONV 2 ----\n");
     ////////////// Embedding: compute edge embedding
     memset(e_2, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
@@ -306,6 +332,7 @@ void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
     }
 
+#ifdef _PRINT_
     printf("\nInitial edge embedding:\n");
     for(int e = 0; e < 5; e++) {
         printf("Edge %d: ", e);
@@ -314,6 +341,7 @@ void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 
     ////////////// Message Passing
     message_passing(e_2, h_2, edge_list, num_of_nodes, num_of_edges);
@@ -321,14 +349,18 @@ void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
     ////////////// MLP of Conv 2
     float eps = gnn_node_convs_2_eps[0];
     MLP(mlp_in, mlp_out, h_2, num_of_nodes,
-        gnn_node_convs_2_mlp_0_weight, gnn_node_convs_2_mlp_0_bias, gnn_node_convs_2_mlp_3_weight, gnn_node_convs_2_mlp_3_bias,
-        gnn_node_convs_2_mlp_1_weight, gnn_node_convs_2_mlp_1_bias, gnn_node_convs_2_mlp_1_running_mean, gnn_node_convs_2_mlp_1_running_var, eps);
+        gnn_node_convs_2_mlp_0_weight, gnn_node_convs_2_mlp_0_bias, gnn_node_convs_2_mlp_2_weight, gnn_node_convs_2_mlp_2_bias,
+        //gnn_node_convs_2_mlp_1_weight, gnn_node_convs_2_mlp_1_bias, gnn_node_convs_2_mlp_1_running_mean, gnn_node_convs_2_mlp_1_running_var, 
+        eps);
 
 
     ////////////// Batchnorm + Relu of Conv 2
-    Conv_BatchNorm_Relu(mlp_out, h_3, gnn_node_batch_norms_2_weight, gnn_node_batch_norms_2_bias,
-                    gnn_node_batch_norms_2_running_mean, gnn_node_batch_norms_2_running_var, num_of_nodes);
+    Conv_BatchNorm_Relu(mlp_out, h_3, 
+                    //gnn_node_batch_norms_2_weight, gnn_node_batch_norms_2_bias,
+                    //gnn_node_batch_norms_2_running_mean, gnn_node_batch_norms_2_running_var, 
+                    num_of_nodes);
 
+#ifdef _PRINT_
     printf("\nOutput of BatchNorm and Relu of Conv 2\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -337,6 +369,7 @@ void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 }
 
 
@@ -345,7 +378,7 @@ void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
 
 void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
 {
-    printf("\n---- Computing CONV 3 ----\n");
+    //printf("\n---- Computing CONV 3 ----\n");
     ////////////// Embedding: compute edge embedding
     memset(e_3, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
@@ -369,6 +402,7 @@ void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
     }
 
+#ifdef _PRINT_
     printf("\nInitial edge embedding:\n");
     for(int e = 0; e < 5; e++) {
         printf("Edge %d: ", e);
@@ -377,6 +411,7 @@ void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 
     ////////////// Message Passing
     message_passing(e_3, h_3, edge_list, num_of_nodes, num_of_edges);
@@ -384,14 +419,18 @@ void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
     ////////////// MLP of Conv 3
     float eps = gnn_node_convs_3_eps[0];
     MLP(mlp_in, mlp_out, h_3, num_of_nodes,
-        gnn_node_convs_3_mlp_0_weight, gnn_node_convs_3_mlp_0_bias, gnn_node_convs_3_mlp_3_weight, gnn_node_convs_3_mlp_3_bias,
-        gnn_node_convs_3_mlp_1_weight, gnn_node_convs_3_mlp_1_bias, gnn_node_convs_3_mlp_1_running_mean, gnn_node_convs_3_mlp_1_running_var, eps);
+        gnn_node_convs_3_mlp_0_weight, gnn_node_convs_3_mlp_0_bias, gnn_node_convs_3_mlp_2_weight, gnn_node_convs_3_mlp_2_bias,
+        //gnn_node_convs_3_mlp_1_weight, gnn_node_convs_3_mlp_1_bias, gnn_node_convs_3_mlp_1_running_mean, gnn_node_convs_3_mlp_1_running_var, 
+        eps);
 
 
     ////////////// Batchnorm + Relu of Conv 3
-    Conv_BatchNorm_Relu(mlp_out, h_4, gnn_node_batch_norms_3_weight, gnn_node_batch_norms_3_bias,
-                    gnn_node_batch_norms_3_running_mean, gnn_node_batch_norms_3_running_var, num_of_nodes);
+    Conv_BatchNorm_Relu(mlp_out, h_4, 
+                    //gnn_node_batch_norms_3_weight, gnn_node_batch_norms_3_bias,
+                    //gnn_node_batch_norms_3_running_mean, gnn_node_batch_norms_3_running_var, 
+                    num_of_nodes);
 
+#ifdef _PRINT_
     printf("\nOutput of BatchNorm and Relu of Conv 3\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -400,6 +439,7 @@ void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 }
 
 
@@ -407,7 +447,7 @@ void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
 
 void CONV_4(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
 {
-    printf("\n---- Computing CONV 4 ----\n");
+    //printf("\n---- Computing CONV 4 ----\n");
     ////////////// Embedding: compute edge embedding
     memset(e_4, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
@@ -431,6 +471,7 @@ void CONV_4(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
     }
 
+#ifdef _PRINT_
     printf("\nInitial edge embedding:\n");
     for(int e = 0; e < 5; e++) {
         printf("Edge %d: ", e);
@@ -439,6 +480,7 @@ void CONV_4(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 
     ////////////// Message Passing
     message_passing(e_4, h_4, edge_list, num_of_nodes, num_of_edges);
@@ -446,14 +488,18 @@ void CONV_4(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
     ////////////// MLP of Conv 4
     float eps = gnn_node_convs_4_eps[0];
     MLP(mlp_in, mlp_out, h_4, num_of_nodes,
-        gnn_node_convs_4_mlp_0_weight, gnn_node_convs_4_mlp_0_bias, gnn_node_convs_4_mlp_3_weight, gnn_node_convs_4_mlp_3_bias,
-        gnn_node_convs_4_mlp_1_weight, gnn_node_convs_4_mlp_1_bias, gnn_node_convs_4_mlp_1_running_mean, gnn_node_convs_4_mlp_1_running_var, eps);
+        gnn_node_convs_4_mlp_0_weight, gnn_node_convs_4_mlp_0_bias, gnn_node_convs_4_mlp_2_weight, gnn_node_convs_4_mlp_2_bias,
+        //gnn_node_convs_4_mlp_1_weight, gnn_node_convs_4_mlp_1_bias, gnn_node_convs_4_mlp_1_running_mean, gnn_node_convs_4_mlp_1_running_var, 
+        eps);
 
 
     ////////////// Batchnorm + Relu of Conv 4
-    Conv_BatchNorm_Relu(mlp_out, h_5, gnn_node_batch_norms_4_weight, gnn_node_batch_norms_4_bias,
-                    gnn_node_batch_norms_4_running_mean, gnn_node_batch_norms_4_running_var, num_of_nodes, true);
+    Conv_BatchNorm_Relu(mlp_out, h_5, 
+                    //gnn_node_batch_norms_4_weight, gnn_node_batch_norms_4_bias,
+                    //gnn_node_batch_norms_4_running_mean, gnn_node_batch_norms_4_running_var, 
+                    num_of_nodes, true);
 
+#ifdef _PRINT_
     printf("\nOutput of BatchNorm and Relu of Conv 4\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -462,13 +508,18 @@ void CONV_4(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
         }
         printf("...\n");
     }
+#endif
 }
 
 
 
-void GIN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
+void GIN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, int* graph_attr)
 {
-    printf("\nComputing GIN ...\n");
+    int num_of_nodes = graph_attr[0];
+    int num_of_edges = graph_attr[1];
+
+
+    printf("Computing GIN ...\n");
 
     ////////////// Embedding: compute input node embedding
     memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(float));
@@ -511,6 +562,7 @@ void GIN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
         }
     }
 
+#ifdef _PRINT_
     printf("\nInitial node embedding:\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
@@ -519,7 +571,7 @@ void GIN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
         }
         printf("...\n");
     }
-
+#endif
 
     ////////////// CONV 0 //////////////////////////////////
     CONV_0(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
@@ -543,12 +595,13 @@ void GIN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
         h_graph[dim] = h_graph[dim] / num_of_nodes;
     }
 
+#ifdef _PRINT_
     printf("\nGlobal h_graph (global mean pool):\n");
     for(int dim = 0; dim < 10; dim++) {
         printf("%.5f ", h_graph[dim]);
     }
     printf("...\n");
-
+#endif
     
     ////////////// Graph prediction linear ///////////////////
     memset(task, 0, NUM_TASK * sizeof(float));
@@ -558,10 +611,13 @@ void GIN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
             task[tsk] += h_graph[dim] * graph_pred_linear_weight[tsk][dim];
         }
     }
-    printf("\nFinal graph prediction:\n");
+
+//#ifdef _PRINT_
+    printf("Final graph prediction:\n");
     for(int tsk = 0; tsk < NUM_TASK; tsk++) {
         printf("%.7f\n", task[tsk]);
     }
-    printf("\nGIN computation done.\n\n");
+    printf("\nGIN computation done.\n");
+//#endif
 
 }
