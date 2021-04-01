@@ -15,7 +15,7 @@ CFLAG += -std=c++11
 
 
 all:
-	g++ *_noBN.cc -o result $(CFLAG) $(IFLAG)
+	g++ *.cc -o result $(CFLAG) $(IFLAG)
 
 clean:
 	rm -f *.o result

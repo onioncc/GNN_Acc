@@ -2,102 +2,27 @@
 #include <stdlib.h>
 #include "dcl.h"
 
-// global weights
-float gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight[6][300];
-float gnn_node_convs_0_mlp_3_weight[300][600];
-float gnn_node_convs_3_mlp_1_running_var[600];
-float gnn_node_batch_norms_3_weight[300];
-float gnn_node_convs_1_mlp_3_bias[300];
-float gnn_node_convs_0_mlp_1_weight[600];
-float gnn_node_batch_norms_4_running_var[300];
-float gnn_node_batch_norms_2_running_var[300];
-float gnn_node_atom_encoder_atom_embedding_list_2_weight[12][300];
-float gnn_node_convs_1_eps[1];
-float gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight[6][300];
-float gnn_node_convs_0_mlp_1_running_mean[600];
-float gnn_node_atom_encoder_atom_embedding_list_6_weight[6][300];
-float gnn_node_convs_2_mlp_3_weight[300][600];
-float gnn_node_batch_norms_1_bias[300];
-float gnn_node_batch_norms_4_bias[300];
-float gnn_node_atom_encoder_atom_embedding_list_0_weight[119][300];
-float gnn_node_convs_2_mlp_1_weight[600];
-float gnn_node_convs_2_mlp_3_bias[300];
-float gnn_node_convs_4_mlp_3_weight[300][600];
-float gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight[2][300];
-float gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight[5][300];
-float gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight[2][300];
-float gnn_node_convs_4_mlp_0_bias[600];
-float gnn_node_convs_3_mlp_3_bias[300];
-float gnn_node_convs_1_mlp_1_weight[600];
-float gnn_node_batch_norms_2_weight[300];
-float gnn_node_convs_3_mlp_0_weight[600][300];
-float gnn_node_convs_2_mlp_0_weight[600][300];
-float gnn_node_convs_2_mlp_0_bias[600];
-float gnn_node_convs_2_mlp_1_running_mean[600];
-float gnn_node_convs_0_mlp_1_bias[600];
-float gnn_node_convs_0_eps[1];
-float gnn_node_batch_norms_1_running_var[300];
-float gnn_node_atom_encoder_atom_embedding_list_8_weight[2][300];
-float gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight[5][300];
-float gnn_node_convs_4_mlp_1_running_var[600];
-float gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight[6][300];
-float gnn_node_batch_norms_0_running_mean[300];
-float gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight[2][300];
-float gnn_node_convs_1_mlp_0_bias[600];
-float gnn_node_atom_encoder_atom_embedding_list_4_weight[10][300];
-float graph_pred_linear_weight[1][300];
-float gnn_node_batch_norms_1_running_mean[300];
-float gnn_node_atom_encoder_atom_embedding_list_1_weight[4][300];
-float gnn_node_convs_4_mlp_1_bias[600];
-float gnn_node_batch_norms_3_bias[300];
-float gnn_node_batch_norms_2_running_mean[300];
-float gnn_node_convs_1_mlp_3_weight[300][600];
-float gnn_node_batch_norms_1_weight[300];
-float gnn_node_convs_1_mlp_1_running_var[600];
-float gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight[6][300];
-float gnn_node_batch_norms_0_running_var[300];
-float gnn_node_convs_2_eps[1];
-float gnn_node_batch_norms_0_bias[300];
-float gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight[5][300];
-float gnn_node_convs_4_mlp_1_weight[600];
-float gnn_node_convs_1_mlp_1_running_mean[600];
-float gnn_node_convs_4_eps[1];
-float gnn_node_batch_norms_4_running_mean[300];
-float gnn_node_atom_encoder_atom_embedding_list_5_weight[6][300];
-float gnn_node_convs_3_mlp_0_bias[600];
-float gnn_node_convs_3_mlp_3_weight[300][600];
-float gnn_node_convs_3_mlp_1_running_mean[600];
-float gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight[2][300];
-float gnn_node_convs_3_eps[1];
-float gnn_node_atom_encoder_atom_embedding_list_7_weight[2][300];
-float gnn_node_convs_0_mlp_0_bias[600];
-float gnn_node_convs_2_mlp_1_running_var[600];
-float graph_pred_linear_bias[1];
-float gnn_node_convs_1_mlp_0_weight[600][300];
-float gnn_node_convs_0_mlp_3_bias[300];
-float gnn_node_convs_4_mlp_1_running_mean[600];
-float gnn_node_batch_norms_3_running_var[300];
-float gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight[5][300];
-float gnn_node_convs_1_mlp_1_bias[600];
-float gnn_node_convs_4_mlp_3_bias[300];
-float gnn_node_batch_norms_2_bias[300];
-float gnn_node_convs_0_mlp_0_weight[600][300];
-float gnn_node_batch_norms_3_running_mean[300];
-float gnn_node_convs_2_mlp_1_bias[600];
-float gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight[2][300];
-float gnn_node_convs_4_mlp_0_weight[600][300];
-float gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight[5][300];
-float gnn_node_convs_3_mlp_1_weight[600];
-float gnn_node_convs_0_mlp_1_running_var[600];
-float gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight[6][300];
-float gnn_node_batch_norms_4_weight[300];
-float gnn_node_batch_norms_0_weight[300];
-float gnn_node_atom_encoder_atom_embedding_list_3_weight[12][300];
-float gnn_node_convs_3_mlp_1_bias[600];
 
+float gnn_node_mlp_1_weights[LAYER_NUM][MLP_1_OUT][MLP_1_IN];
+float gnn_node_mlp_1_bias[LAYER_NUM][MLP_1_OUT];
+float gnn_node_mlp_2_weights[LAYER_NUM][MLP_2_OUT][MLP_2_IN];
+float gnn_node_mlp_2_bias[LAYER_NUM][MLP_2_OUT];
+float gnn_node_embedding_table[ND_FEATURE_TOTAL][EMB_DIM];
+float gnn_edge_embedding_table[EG_FEATURE_TOTAL][EMB_DIM];
+float graph_pred_linear_weight[NUM_TASK][MLP_2_OUT];
+float graph_pred_linear_bias[NUM_TASK];
+float eps[LAYER_NUM];
 
+WT_TYPE gnn_node_mlp_1_weights_fixed[LAYER_NUM][MLP_1_OUT][MLP_1_IN];
+WT_TYPE gnn_node_mlp_1_bias_fixed[LAYER_NUM][MLP_1_OUT];
+WT_TYPE gnn_node_mlp_2_weights_fixed[LAYER_NUM][MLP_2_OUT][MLP_2_IN];
+WT_TYPE gnn_node_mlp_2_bias_fixed[LAYER_NUM][MLP_2_OUT];
+WT_TYPE gnn_node_embedding_table_fixed[ND_FEATURE_TOTAL][EMB_DIM];
+WT_TYPE gnn_edge_embedding_table_fixed[EG_FEATURE_TOTAL][EMB_DIM];
+WT_TYPE graph_pred_linear_weight_fixed[NUM_TASK][MLP_2_OUT];
+WT_TYPE graph_pred_linear_bias_fixed[NUM_TASK];
+WT_TYPE eps_fixed[LAYER_NUM];
 
-extern float task[NUM_TASK];
 
 int main()
 {
@@ -127,21 +52,28 @@ int main()
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
 
+        FM_TYPE task_tb[NUM_TASK];
+
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
+
+
+
+        GIN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr, task_tb, 
+                              gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed, 
+                              gnn_node_embedding_table_fixed, gnn_edge_embedding_table_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, eps_fixed);
+
         
-        GIN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr);
-        
-        all_results[g-1] = task[0];
+        //all_results[g-1] = task[0];
 
         free(node_feature);
         free(edge_list);
         free(edge_attr);
     }
 
-    for(int g = 1; g <= 10; g++) {
-        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
-    }
-    fclose(c_output);
+    // for(int g = 1; g <= 10; g++) {
+    //     fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
+    // }
+    // fclose(c_output);
     
     return 0;
 }
