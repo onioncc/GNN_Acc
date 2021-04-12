@@ -1,0 +1,666 @@
+float gnn_node_convs_3_mlp_2_bias[300];
+float gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight[5][300];
+float gnn_node_convs_2_mlp_0_bias[600];
+float gnn_node_convs_1_mlp_2_weight[300][600];
+float gnn_node_atom_encoder_atom_embedding_list_1_weight[4][300];
+float gnn_node_convs_1_mlp_0_weight[600][300];
+float gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight[5][300];
+float gnn_node_convs_4_mlp_2_bias[300];
+float gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight[2][300];
+float gnn_node_convs_0_mlp_2_weight[300][600];
+float gnn_node_convs_2_mlp_2_weight[300][600];
+float gnn_node_atom_encoder_atom_embedding_list_8_weight[2][300];
+float gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight[2][300];
+float gnn_node_convs_1_mlp_2_bias[300];
+float gnn_node_atom_encoder_atom_embedding_list_3_weight[12][300];
+float gnn_node_convs_1_eps[1];
+float gnn_node_convs_3_eps[1];
+float gnn_node_convs_2_mlp_2_bias[300];
+float gnn_node_convs_1_mlp_0_bias[600];
+float gnn_node_convs_2_mlp_0_weight[600][300];
+float gnn_node_convs_4_mlp_0_bias[600];
+float gnn_node_convs_4_mlp_2_weight[300][600];
+float gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight[6][300];
+float gnn_node_atom_encoder_atom_embedding_list_4_weight[10][300];
+float gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight[2][300];
+float graph_pred_linear_weight[1][300];
+float gnn_node_convs_3_mlp_0_weight[600][300];
+float gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight[6][300];
+float gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight[5][300];
+float gnn_node_atom_encoder_atom_embedding_list_2_weight[12][300];
+float gnn_node_atom_encoder_atom_embedding_list_7_weight[2][300];
+float gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight[6][300];
+float gnn_node_atom_encoder_atom_embedding_list_5_weight[6][300];
+float gnn_node_convs_3_mlp_2_weight[300][600];
+float gnn_node_convs_4_eps[1];
+float gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight[2][300];
+float gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight[5][300];
+float gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight[6][300];
+float gnn_node_convs_0_mlp_2_bias[300];
+float gnn_node_convs_0_mlp_0_weight[600][300];
+float gnn_node_atom_encoder_atom_embedding_list_0_weight[119][300];
+float gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight[5][300];
+float gnn_node_convs_3_mlp_0_bias[600];
+float gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight[6][300];
+float gnn_node_atom_encoder_atom_embedding_list_6_weight[6][300];
+float gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight[2][300];
+float gnn_node_convs_0_mlp_0_bias[600];
+float gnn_node_convs_0_eps[1];
+float gnn_node_convs_2_eps[1];
+float gnn_node_convs_4_mlp_0_weight[600][300];
+float graph_pred_linear_bias[1];
+
+
+
+extern WT_TYPE gnn_node_convs_3_mlp_2_bias_fixed[300];
+extern WT_TYPE gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight_fixed[5][300];
+extern WT_TYPE gnn_node_convs_2_mlp_0_bias_fixed[600];
+extern WT_TYPE gnn_node_convs_1_mlp_2_weight_fixed[300][600];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_1_weight_fixed[4][300];
+extern WT_TYPE gnn_node_convs_1_mlp_0_weight_fixed[600][300];
+extern WT_TYPE gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight_fixed[5][300];
+extern WT_TYPE gnn_node_convs_4_mlp_2_bias_fixed[300];
+extern WT_TYPE gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight_fixed[2][300];
+extern WT_TYPE gnn_node_convs_0_mlp_2_weight_fixed[300][600];
+extern WT_TYPE gnn_node_convs_2_mlp_2_weight_fixed[300][600];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_8_weight_fixed[2][300];
+extern WT_TYPE gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight_fixed[2][300];
+extern WT_TYPE gnn_node_convs_1_mlp_2_bias_fixed[300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_3_weight_fixed[12][300];
+extern WT_TYPE gnn_node_convs_1_eps_fixed[1];
+extern WT_TYPE gnn_node_convs_3_eps_fixed[1];
+extern WT_TYPE gnn_node_convs_2_mlp_2_bias_fixed[300];
+extern WT_TYPE gnn_node_convs_1_mlp_0_bias_fixed[600];
+extern WT_TYPE gnn_node_convs_2_mlp_0_weight_fixed[600][300];
+extern WT_TYPE gnn_node_convs_4_mlp_0_bias_fixed[600];
+extern WT_TYPE gnn_node_convs_4_mlp_2_weight_fixed[300][600];
+extern WT_TYPE gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight_fixed[6][300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_4_weight_fixed[10][300];
+extern WT_TYPE gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight_fixed[2][300];
+extern WT_TYPE graph_pred_linear_weight_fixed[1][300];
+extern WT_TYPE gnn_node_convs_3_mlp_0_weight_fixed[600][300];
+extern WT_TYPE gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight_fixed[6][300];
+extern WT_TYPE gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight_fixed[5][300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_2_weight_fixed[12][300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_7_weight_fixed[2][300];
+extern WT_TYPE gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight_fixed[6][300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_5_weight_fixed[6][300];
+extern WT_TYPE gnn_node_convs_3_mlp_2_weight_fixed[300][600];
+extern WT_TYPE gnn_node_convs_4_eps_fixed[1];
+extern WT_TYPE gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight_fixed[2][300];
+extern WT_TYPE gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight_fixed[5][300];
+extern WT_TYPE gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight_fixed[6][300];
+extern WT_TYPE gnn_node_convs_0_mlp_2_bias_fixed[300];
+extern WT_TYPE gnn_node_convs_0_mlp_0_weight_fixed[600][300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_0_weight_fixed[119][300];
+extern WT_TYPE gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight_fixed[5][300];
+extern WT_TYPE gnn_node_convs_3_mlp_0_bias_fixed[600];
+extern WT_TYPE gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight_fixed[6][300];
+extern WT_TYPE gnn_node_atom_encoder_atom_embedding_list_6_weight_fixed[6][300];
+extern WT_TYPE gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight_fixed[2][300];
+extern WT_TYPE gnn_node_convs_0_mlp_0_bias_fixed[600];
+extern WT_TYPE gnn_node_convs_0_eps_fixed[1];
+extern WT_TYPE gnn_node_convs_2_eps_fixed[1];
+extern WT_TYPE gnn_node_convs_4_mlp_0_weight_fixed[600][300];
+extern WT_TYPE graph_pred_linear_bias_fixed[1];
+
+
+
+fseek(f, 1506904*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_mlp_2_bias, sizeof(float), 300, f);
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_3_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_3_mlp_2_bias[i];
+}
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_3_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_3_mlp_2_bias[i];
+}
+
+fseek(f, 1142403*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 1500, f);
+
+
+for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight[i][j];
+    }
+}
+
+fseek(f, 961503*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_mlp_0_bias, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_2_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_2_mlp_0_bias[i];
+}
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_2_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_2_mlp_0_bias[i];
+}
+
+fseek(f, 597302*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_mlp_2_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 300; i++) {
+    for(int j = 0; j < 600; j++) {
+        gnn_node_convs_1_mlp_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_1_mlp_2_weight[i][j];
+    }
+}
+
+fseek(f, 35700*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_1_weight, sizeof(float), 1200, f);
+
+
+for(int i = 0; i < 4; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_1_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_1_weight[i][j];
+    }
+}
+
+fseek(f, 416702*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_mlp_0_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 600; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_1_mlp_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_1_mlp_0_weight[i][j];
+    }
+}
+
+fseek(f, 1872005*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 1500, f);
+
+
+for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight[i][j];
+    }
+}
+
+fseek(f, 1871705*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_mlp_2_bias, sizeof(float), 300, f);
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_4_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_4_mlp_2_bias[i];
+}
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_4_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_4_mlp_2_bias[i];
+}
+
+fseek(f, 780902*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight[i][j];
+    }
+}
+
+fseek(f, 232501*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_mlp_2_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 300; i++) {
+    for(int j = 0; j < 600; j++) {
+        gnn_node_convs_0_mlp_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_0_mlp_2_weight[i][j];
+    }
+}
+
+fseek(f, 962103*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_mlp_2_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 300; i++) {
+    for(int j = 0; j < 600; j++) {
+        gnn_node_convs_2_mlp_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_2_mlp_2_weight[i][j];
+    }
+}
+
+fseek(f, 51300*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_8_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_8_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_8_weight[i][j];
+    }
+}
+
+fseek(f, 1145703*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight[i][j];
+    }
+}
+
+fseek(f, 777302*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_mlp_2_bias, sizeof(float), 300, f);
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_1_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_1_mlp_2_bias[i];
+}
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_1_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_1_mlp_2_bias[i];
+}
+
+fseek(f, 40500*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_3_weight, sizeof(float), 3600, f);
+
+
+for(int i = 0; i < 12; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_3_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_3_weight[i][j];
+    }
+}
+
+fseek(f, 416701*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_eps, sizeof(float), 1, f);
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_1_eps_fixed[i] = (WT_TYPE) gnn_node_convs_1_eps[i];
+}
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_1_eps_fixed[i] = (WT_TYPE) gnn_node_convs_1_eps[i];
+}
+
+fseek(f, 1146303*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_eps, sizeof(float), 1, f);
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_3_eps_fixed[i] = (WT_TYPE) gnn_node_convs_3_eps[i];
+}
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_3_eps_fixed[i] = (WT_TYPE) gnn_node_convs_3_eps[i];
+}
+
+fseek(f, 1142103*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_mlp_2_bias, sizeof(float), 300, f);
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_2_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_2_mlp_2_bias[i];
+}
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_2_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_2_mlp_2_bias[i];
+}
+
+fseek(f, 596702*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_mlp_0_bias, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_1_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_1_mlp_0_bias[i];
+}
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_1_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_1_mlp_0_bias[i];
+}
+
+fseek(f, 781503*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_mlp_0_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 600; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_2_mlp_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_2_mlp_0_weight[i][j];
+    }
+}
+
+fseek(f, 1691105*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_mlp_0_bias, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_4_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_4_mlp_0_bias[i];
+}
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_4_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_4_mlp_0_bias[i];
+}
+
+fseek(f, 1691705*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_mlp_2_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 300; i++) {
+    for(int j = 0; j < 600; j++) {
+        gnn_node_convs_4_mlp_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_4_mlp_2_weight[i][j];
+    }
+}
+
+fseek(f, 1873505*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight[i][j];
+    }
+}
+
+fseek(f, 44100*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_4_weight, sizeof(float), 3000, f);
+
+
+for(int i = 0; i < 10; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_4_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_4_weight[i][j];
+    }
+}
+
+fseek(f, 1510504*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight[i][j];
+    }
+}
+
+fseek(f, 1875905*sizeof(float), SEEK_SET);
+fread(graph_pred_linear_weight, sizeof(float), 300, f);
+
+
+for(int i = 0; i < 1; i++) {
+    for(int j = 0; j < 300; j++) {
+        graph_pred_linear_weight_fixed[i][j] = (WT_TYPE) graph_pred_linear_weight[i][j];
+    }
+}
+
+fseek(f, 1146304*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_mlp_0_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 600; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_3_mlp_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_3_mlp_0_weight[i][j];
+    }
+}
+
+fseek(f, 414301*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight[i][j];
+    }
+}
+
+fseek(f, 412801*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 1500, f);
+
+
+for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight[i][j];
+    }
+}
+
+fseek(f, 36900*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_2_weight, sizeof(float), 3600, f);
+
+
+for(int i = 0; i < 12; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_2_weight[i][j];
+    }
+}
+
+fseek(f, 50700*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_7_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_7_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_7_weight[i][j];
+    }
+}
+
+fseek(f, 1508704*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight[i][j];
+    }
+}
+
+fseek(f, 47100*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_5_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_5_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_5_weight[i][j];
+    }
+}
+
+fseek(f, 1326904*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_mlp_2_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 300; i++) {
+    for(int j = 0; j < 600; j++) {
+        gnn_node_convs_3_mlp_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_3_mlp_2_weight[i][j];
+    }
+}
+
+fseek(f, 1511104*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_eps, sizeof(float), 1, f);
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_4_eps_fixed[i] = (WT_TYPE) gnn_node_convs_4_eps[i];
+}
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_4_eps_fixed[i] = (WT_TYPE) gnn_node_convs_4_eps[i];
+}
+
+fseek(f, 1875305*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight[i][j];
+    }
+}
+
+fseek(f, 1507204*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 1500, f);
+
+
+for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight[i][j];
+    }
+}
+
+fseek(f, 1143903*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight[i][j];
+    }
+}
+
+fseek(f, 412501*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_mlp_2_bias, sizeof(float), 300, f);
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_0_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_0_mlp_2_bias[i];
+}
+
+
+for(int i = 0; i < 300; i++) {
+    gnn_node_convs_0_mlp_2_bias_fixed[i] = (WT_TYPE) gnn_node_convs_0_mlp_2_bias[i];
+}
+
+fseek(f, 51901*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_mlp_0_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 600; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_0_mlp_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_0_mlp_0_weight[i][j];
+    }
+}
+
+fseek(f, 0*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_0_weight, sizeof(float), 35700, f);
+
+
+for(int i = 0; i < 119; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_0_weight[i][j];
+    }
+}
+
+fseek(f, 777602*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 1500, f);
+
+
+for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight[i][j];
+    }
+}
+
+fseek(f, 1326304*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_3_mlp_0_bias, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_3_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_3_mlp_0_bias[i];
+}
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_3_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_3_mlp_0_bias[i];
+}
+
+fseek(f, 779102*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight[i][j];
+    }
+}
+
+fseek(f, 48900*sizeof(float), SEEK_SET);
+fread(gnn_node_atom_encoder_atom_embedding_list_6_weight, sizeof(float), 1800, f);
+
+
+for(int i = 0; i < 6; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_atom_encoder_atom_embedding_list_6_weight_fixed[i][j] = (WT_TYPE) gnn_node_atom_encoder_atom_embedding_list_6_weight[i][j];
+    }
+}
+
+fseek(f, 416101*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 2; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight[i][j];
+    }
+}
+
+fseek(f, 231901*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_mlp_0_bias, sizeof(float), 600, f);
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_0_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_0_mlp_0_bias[i];
+}
+
+
+for(int i = 0; i < 600; i++) {
+    gnn_node_convs_0_mlp_0_bias_fixed[i] = (WT_TYPE) gnn_node_convs_0_mlp_0_bias[i];
+}
+
+fseek(f, 51900*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_0_eps, sizeof(float), 1, f);
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_0_eps_fixed[i] = (WT_TYPE) gnn_node_convs_0_eps[i];
+}
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_0_eps_fixed[i] = (WT_TYPE) gnn_node_convs_0_eps[i];
+}
+
+fseek(f, 781502*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_2_eps, sizeof(float), 1, f);
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_2_eps_fixed[i] = (WT_TYPE) gnn_node_convs_2_eps[i];
+}
+
+
+for(int i = 0; i < 1; i++) {
+    gnn_node_convs_2_eps_fixed[i] = (WT_TYPE) gnn_node_convs_2_eps[i];
+}
+
+fseek(f, 1511105*sizeof(float), SEEK_SET);
+fread(gnn_node_convs_4_mlp_0_weight, sizeof(float), 180000, f);
+
+
+for(int i = 0; i < 600; i++) {
+    for(int j = 0; j < 300; j++) {
+        gnn_node_convs_4_mlp_0_weight_fixed[i][j] = (WT_TYPE) gnn_node_convs_4_mlp_0_weight[i][j];
+    }
+}
+
+fseek(f, 1876205*sizeof(float), SEEK_SET);
+fread(graph_pred_linear_bias, sizeof(float), 1, f);
+
+
+for(int i = 0; i < 1; i++) {
+    graph_pred_linear_bias_fixed[i] = (WT_TYPE) graph_pred_linear_bias[i];
+}
+
+
+for(int i = 0; i < 1; i++) {
+    graph_pred_linear_bias_fixed[i] = (WT_TYPE) graph_pred_linear_bias[i];
+}
+

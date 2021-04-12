@@ -1,0 +1,264 @@
+
+
+================================================================
+== Vitis HLS Report for 'MLP_1_batch_nodes'
+================================================================
+* Date:           Mon Apr 12 16:08:30 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  5.580 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+----------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline |
+    |   min   |   max   |    min   |    max   | min | max |   Type   |
+    +---------+---------+----------+----------+-----+-----+----------+
+    |      323|      323|  3.230 us|  3.230 us|  318|  318|  dataflow|
+    +---------+---------+----------+----------+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        +-----------------------------------------+--------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+        |                                         |                                      |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+        |                 Instance                |                Module                |   min   |   max   |    min    |    max    | min | max |   Type  |
+        +-----------------------------------------+--------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+        |MLP_PE_148_U0                            |MLP_PE_148                            |      317|      317|   3.170 us|   3.170 us|  317|  317|     none|
+        |MLP_PE_147_U0                            |MLP_PE_147                            |      316|      316|   3.160 us|   3.160 us|  316|  316|     none|
+        |MLP_PE_146_U0                            |MLP_PE_146                            |      302|      302|   3.020 us|   3.020 us|  302|  302|     none|
+        |MLP_PE45_U0                              |MLP_PE45                              |      302|      302|   3.020 us|   3.020 us|  302|  302|     none|
+        |load_mlp_weight_vector_U0                |load_mlp_weight_vector                |      305|      305|   3.050 us|   3.050 us|  305|  305|     none|
+        |MLP_1_batch_nodes_Block_split13_proc_U0  |MLP_1_batch_nodes_Block_split13_proc  |        1|        1|  10.000 ns|  10.000 ns|    1|    1|     none|
+        |MLP_1_batch_nodes_entry59_U0             |MLP_1_batch_nodes_entry59             |        0|        0|       0 ns|       0 ns|    0|    0|     none|
+        +-----------------------------------------+--------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       36|    -|
+|FIFO                 |        -|     -|      616|      366|    -|
+|Instance             |        -|     1|     1254|     1917|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|       63|    -|
+|Register             |        -|     -|        7|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     1|     1877|     2382|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +-----------------------------------------+--------------------------------------+---------+----+-----+-----+-----+
+    |                 Instance                |                Module                | BRAM_18K| DSP|  FF | LUT | URAM|
+    +-----------------------------------------+--------------------------------------+---------+----+-----+-----+-----+
+    |MLP_1_batch_nodes_Block_split13_proc_U0  |MLP_1_batch_nodes_Block_split13_proc  |        0|   0|    3|   43|    0|
+    |MLP_1_batch_nodes_entry59_U0             |MLP_1_batch_nodes_entry59             |        0|   0|    2|   29|    0|
+    |MLP_PE45_U0                              |MLP_PE45                              |        0|   0|   79|  255|    0|
+    |MLP_PE_146_U0                            |MLP_PE_146                            |        0|   0|   79|  312|    0|
+    |MLP_PE_147_U0                            |MLP_PE_147                            |        0|   0|  497|  551|    0|
+    |MLP_PE_148_U0                            |MLP_PE_148                            |        0|   0|  557|  578|    0|
+    |load_mlp_weight_vector_U0                |load_mlp_weight_vector                |        0|   1|   37|  149|    0|
+    +-----------------------------------------+--------------------------------------+---------+----+-----+-----+-----+
+    |Total                                    |                                      |        0|   1| 1254| 1917|    0|
+    +-----------------------------------------+--------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    +-----------------------------+---------+----+----+-----+------+-----+---------+
+    |             Name            | BRAM_18K| FF | LUT| URAM| Depth| Bits| Size:D*B|
+    +-----------------------------+---------+----+----+-----+------+-----+---------+
+    |d_out_c14_U                  |        0|  36|   0|    -|     2|   10|       20|
+    |d_out_c_U                    |        0|  36|   0|    -|     2|   10|       20|
+    |mlp_1_bias_V_load_loc_c15_U  |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_bias_V_load_loc_c16_U  |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_bias_V_load_loc_c17_U  |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_bias_V_load_loc_c_U    |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_weight_fifo_0_V_V_U    |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_weight_fifo_1_V_V_U    |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_weight_fifo_2_V_V_U    |        0|  68|   0|    -|     2|   32|       64|
+    |mlp_1_weight_fifo_3_V_V_U    |        0|  68|   0|    -|     2|   32|       64|
+    +-----------------------------+---------+----+----+-----+------+-----+---------+
+    |Total                        |        0| 616|   0|    0|    20|  276|      552|
+    +-----------------------------+---------+----+----+-----+------+-----+---------+
+
+    * Expression: 
+    +----------------------------------------------------------+----------+----+---+----+------------+------------+
+    |                       Variable Name                      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------------------------------------+----------+----+---+----+------------+------------+
+    |MLP_1_batch_nodes_Block_split13_proc_U0_ap_start          |       and|   0|  0|   2|           1|           1|
+    |MLP_1_batch_nodes_entry59_U0_ap_start                     |       and|   0|  0|   2|           1|           1|
+    |MLP_PE45_U0_ap_start                                      |       and|   0|  0|   2|           1|           1|
+    |MLP_PE_146_U0_ap_start                                    |       and|   0|  0|   2|           1|           1|
+    |MLP_PE_147_U0_ap_start                                    |       and|   0|  0|   2|           1|           1|
+    |MLP_PE_148_U0_ap_start                                    |       and|   0|  0|   2|           1|           1|
+    |ap_idle                                                   |       and|   0|  0|   2|           1|           1|
+    |ap_sync_continue                                          |       and|   0|  0|   2|           1|           1|
+    |ap_sync_done                                              |       and|   0|  0|   2|           1|           1|
+    |ap_sync_ready                                             |       and|   0|  0|   2|           1|           1|
+    |load_mlp_weight_vector_U0_ap_start                        |       and|   0|  0|   2|           1|           1|
+    |ap_sync_MLP_1_batch_nodes_Block_split13_proc_U0_ap_ready  |        or|   0|  0|   2|           1|           1|
+    |ap_sync_MLP_1_batch_nodes_entry59_U0_ap_ready             |        or|   0|  0|   2|           1|           1|
+    |ap_sync_MLP_PE45_U0_ap_ready                              |        or|   0|  0|   2|           1|           1|
+    |ap_sync_MLP_PE_146_U0_ap_ready                            |        or|   0|  0|   2|           1|           1|
+    |ap_sync_MLP_PE_147_U0_ap_ready                            |        or|   0|  0|   2|           1|           1|
+    |ap_sync_MLP_PE_148_U0_ap_ready                            |        or|   0|  0|   2|           1|           1|
+    |ap_sync_load_mlp_weight_vector_U0_ap_ready                |        or|   0|  0|   2|           1|           1|
+    +----------------------------------------------------------+----------+----+---+----+------------+------------+
+    |Total                                                     |          |   0|  0|  36|          18|          18|
+    +----------------------------------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------------------------------------------+----+-----------+-----+-----------+
+    |                             Name                             | LUT| Input Size| Bits| Total Bits|
+    +--------------------------------------------------------------+----+-----------+-----+-----------+
+    |ap_sync_reg_MLP_1_batch_nodes_Block_split13_proc_U0_ap_ready  |   9|          2|    1|          2|
+    |ap_sync_reg_MLP_1_batch_nodes_entry59_U0_ap_ready             |   9|          2|    1|          2|
+    |ap_sync_reg_MLP_PE45_U0_ap_ready                              |   9|          2|    1|          2|
+    |ap_sync_reg_MLP_PE_146_U0_ap_ready                            |   9|          2|    1|          2|
+    |ap_sync_reg_MLP_PE_147_U0_ap_ready                            |   9|          2|    1|          2|
+    |ap_sync_reg_MLP_PE_148_U0_ap_ready                            |   9|          2|    1|          2|
+    |ap_sync_reg_load_mlp_weight_vector_U0_ap_ready                |   9|          2|    1|          2|
+    +--------------------------------------------------------------+----+-----------+-----+-----------+
+    |Total                                                         |  63|         14|    7|         14|
+    +--------------------------------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------------------------------------------+---+----+-----+-----------+
+    |                             Name                             | FF| LUT| Bits| Const Bits|
+    +--------------------------------------------------------------+---+----+-----+-----------+
+    |ap_sync_reg_MLP_1_batch_nodes_Block_split13_proc_U0_ap_ready  |  1|   0|    1|          0|
+    |ap_sync_reg_MLP_1_batch_nodes_entry59_U0_ap_ready             |  1|   0|    1|          0|
+    |ap_sync_reg_MLP_PE45_U0_ap_ready                              |  1|   0|    1|          0|
+    |ap_sync_reg_MLP_PE_146_U0_ap_ready                            |  1|   0|    1|          0|
+    |ap_sync_reg_MLP_PE_147_U0_ap_ready                            |  1|   0|    1|          0|
+    |ap_sync_reg_MLP_PE_148_U0_ap_ready                            |  1|   0|    1|          0|
+    |ap_sync_reg_load_mlp_weight_vector_U0_ap_ready                |  1|   0|    1|          0|
+    +--------------------------------------------------------------+---+----+-----+-----------+
+    |Total                                                         |  7|   0|    7|          0|
+    +--------------------------------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------+-----+-----+------------+-------------------+--------------+
+|         RTL Ports        | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++--------------------------+-----+-----+------------+-------------------+--------------+
+|mlp_in_local_address0     |  out|   10|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_ce0          |  out|    1|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_d0           |  out|   32|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_q0           |   in|   32|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_we0          |  out|    1|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_address1     |  out|   10|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_ce1          |  out|    1|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_d1           |  out|   32|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_q1           |   in|   32|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local_we1          |  out|    1|   ap_memory|       mlp_in_local|         array|
+|mlp_in_local1_address0    |  out|   10|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_ce0         |  out|    1|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_d0          |  out|   32|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_q0          |   in|   32|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_we0         |  out|    1|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_address1    |  out|   10|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_ce1         |  out|    1|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_d1          |  out|   32|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_q1          |   in|   32|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local1_we1         |  out|    1|   ap_memory|      mlp_in_local1|         array|
+|mlp_in_local2_address0    |  out|   10|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_ce0         |  out|    1|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_d0          |  out|   32|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_q0          |   in|   32|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_we0         |  out|    1|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_address1    |  out|   10|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_ce1         |  out|    1|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_d1          |  out|   32|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_q1          |   in|   32|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local2_we1         |  out|    1|   ap_memory|      mlp_in_local2|         array|
+|mlp_in_local3_address0    |  out|   10|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_ce0         |  out|    1|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_d0          |  out|   32|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_q0          |   in|   32|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_we0         |  out|    1|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_address1    |  out|   10|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_ce1         |  out|    1|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_d1          |  out|   32|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_q1          |   in|   32|   ap_memory|      mlp_in_local3|         array|
+|mlp_in_local3_we1         |  out|    1|   ap_memory|      mlp_in_local3|         array|
+|mlp_out_local             |  out|   31|      ap_vld|      mlp_out_local|       pointer|
+|mlp_out_local_ap_vld      |  out|    1|      ap_vld|      mlp_out_local|       pointer|
+|mlp_out_local4            |  out|   31|      ap_vld|     mlp_out_local4|       pointer|
+|mlp_out_local4_ap_vld     |  out|    1|      ap_vld|     mlp_out_local4|       pointer|
+|mlp_out_local5            |  out|   31|      ap_vld|     mlp_out_local5|       pointer|
+|mlp_out_local5_ap_vld     |  out|    1|      ap_vld|     mlp_out_local5|       pointer|
+|mlp_out_local6            |  out|   31|      ap_vld|     mlp_out_local6|       pointer|
+|mlp_out_local6_ap_vld     |  out|    1|      ap_vld|     mlp_out_local6|       pointer|
+|d_out                     |   in|   10|     ap_none|              d_out|        scalar|
+|d_out_ap_vld              |   in|    1|     ap_none|              d_out|        scalar|
+|mlp_1_weights_V_address0  |  out|   18|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_ce0       |  out|    1|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_d0        |  out|   32|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_q0        |   in|   32|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_we0       |  out|    1|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_address1  |  out|   18|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_ce1       |  out|    1|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_d1        |  out|   32|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_q1        |   in|   32|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_weights_V_we1       |  out|    1|   ap_memory|    mlp_1_weights_V|         array|
+|mlp_1_bias_V_address0     |  out|   10|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_ce0          |  out|    1|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_d0           |  out|   32|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_q0           |   in|   32|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_we0          |  out|    1|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_address1     |  out|   10|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_ce1          |  out|    1|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_d1           |  out|   32|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_q1           |   in|   32|   ap_memory|       mlp_1_bias_V|         array|
+|mlp_1_bias_V_we1          |  out|    1|   ap_memory|       mlp_1_bias_V|         array|
+|ap_clk                    |   in|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
+|ap_rst                    |   in|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
+|ap_start                  |   in|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
+|ap_done                   |  out|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
+|ap_ready                  |  out|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
+|ap_idle                   |  out|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
+|ap_continue               |   in|    1|  ap_ctrl_hs|  MLP_1_batch_nodes|  return value|
++--------------------------+-----+-----+------------+-------------------+--------------+
+

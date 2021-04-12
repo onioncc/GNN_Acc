@@ -38,10 +38,10 @@ int main()
         int num_of_nodes;
         int num_of_edges;
 
-        sprintf(info_file, "../../graph_info/g%d_info.txt", g);
+        sprintf(info_file, "../../../graph_info/g%d_info.txt", g);
         FILE* f_info = fopen(info_file, "r");
         fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
-        sprintf(graph_name, "../../graph_bin/g%d", g);
+        sprintf(graph_name, "../../../graph_bin/g%d", g);
         printf("********** Computing Graph %s *************\n", graph_name);
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 

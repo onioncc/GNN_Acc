@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1618258106128">
+  <ports id="1" name="mem" type="PortType" coreId="49" bitwidth="32" iftype="IfTypeFifo">
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <ports id="2" name="node_feature_in" type="PortType" coreId="0" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="3" name="edge_list_in" type="PortType" coreId="49" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="4" name="edge_attr_in" type="PortType" coreId="49" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="5" name="num_of_nodes" type="PortType" coreId="49" bitwidth="32">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="6" name="num_of_edges" type="PortType" coreId="129" bitwidth="32">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="8" name="node_feature" type="PortType" coreName="RAM_2P_BRAM" coreId="49" bitwidth="32" direction="DirOut" iftype="IfTypeRegister" arraysize="9000">
+    <dataInputObjs>getelementptr</dataInputObjs>
+  </ports>
+  <ports id="10" name="edge_attr" type="PortType" coreName="RAM_2P_BRAM" coreId="0" bitwidth="32" direction="DirOut" iftype="IfTypeRegister" arraysize="6000">
+    <dataInputObjs>getelementptr</dataInputObjs>
+  </ports>
+  <ports id="12" name="edge_list" type="PortType" coreName="RAM_2P_BRAM" coreId="49" bitwidth="32" direction="DirOut" iftype="IfTypeRegister" arraysize="4000">
+    <dataInputObjs>getelementptr</dataInputObjs>
+  </ports>
+  <edges id="113" source_obj="//@ports.5" sink_obj="//@blocks.0/@node_objs.0"/>
+  <edges id="115" source_obj="//@ports.4" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="118" source_obj="//@ports.3" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="120" source_obj="//@ports.2" sink_obj="//@blocks.0/@node_objs.3"/>
+  <edges id="122" source_obj="//@ports.1" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="123" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="126" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.6"/>
+  <edges id="127" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.7"/>
+  <edges id="130" source_obj="//@blocks.0/@node_objs.7" sink_obj="//@blocks.0/@node_objs.8"/>
+  <edges id="133" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@blocks.0/@node_objs.9"/>
+  <edges id="134" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.9"/>
+  <edges id="135" source_obj="//@blocks.0/@node_objs.9" sink_obj="//@blocks.0/@node_objs.10"/>
+  <edges id="138" source_obj="//@blocks.0/@node_objs.10" sink_obj="//@blocks.0/@node_objs.11"/>
+  <edges id="139" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.0/@node_objs.11"/>
+  <edges id="140" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.0/@node_objs.11"/>
+  <edges id="141" source_obj="//@blocks.0/@node_objs.8" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="142" source_obj="//@blocks.0/@node_objs.6" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="145" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@blocks.1/@node_objs.1"/>
+  <edges id="150" source_obj="//@blocks.1/@node_objs.1" sink_obj="//@blocks.1/@node_objs.2"/>
+  <edges id="151" source_obj="//@ports.0" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="152" source_obj="//@blocks.1/@node_objs.2" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="155" source_obj="//@blocks.1/@node_objs.3" sink_obj="//@blocks.1/@node_objs.4"/>
+  <edges id="156" source_obj="//@blocks.0/@node_objs.9" sink_obj="//@blocks.1/@node_objs.4"/>
+  <edges id="157" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.1/@node_objs.5"/>
+  <edges id="158" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="159" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="162" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="163" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="166" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="167" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="168" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="169" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="170" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="171" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="174" source_obj="//@blocks.1/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="175" source_obj="//@regions.0/@basic_blocks.1/@node_objs.2" sink_obj="//@ports.6"/>
+  <edges id="178" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="179" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="180" source_obj="//@regions.0/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="181" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.4"/>
+  <edges id="182" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="183" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="184" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.3/@node_objs.1"/>
+  <edges id="186" source_obj="//@blocks.3/@node_objs.1" sink_obj="//@blocks.3/@node_objs.2"/>
+  <edges id="187" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.3/@node_objs.2"/>
+  <edges id="188" source_obj="//@blocks.3/@node_objs.2" sink_obj="//@blocks.3/@node_objs.3"/>
+  <edges id="190" source_obj="//@blocks.3/@node_objs.3" sink_obj="//@blocks.3/@node_objs.4"/>
+  <edges id="191" edge_type="CtrlEdge" source_obj="//@blocks.6" sink_obj="//@blocks.3/@node_objs.4"/>
+  <edges id="192" edge_type="CtrlEdge" source_obj="//@blocks.4" sink_obj="//@blocks.3/@node_objs.4"/>
+  <edges id="193" source_obj="//@blocks.3/@node_objs.2" sink_obj="//@blocks.4/@node_objs.0"/>
+  <edges id="195" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.4/@node_objs.1"/>
+  <edges id="198" source_obj="//@blocks.4/@node_objs.1" sink_obj="//@blocks.4/@node_objs.2"/>
+  <edges id="199" source_obj="//@ports.0" sink_obj="//@blocks.4/@node_objs.3"/>
+  <edges id="200" source_obj="//@blocks.4/@node_objs.2" sink_obj="//@blocks.4/@node_objs.3"/>
+  <edges id="202" source_obj="//@blocks.4/@node_objs.3" sink_obj="//@blocks.4/@node_objs.4"/>
+  <edges id="203" source_obj="//@blocks.3/@node_objs.2" sink_obj="//@blocks.4/@node_objs.4"/>
+  <edges id="204" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.4/@node_objs.5"/>
+  <edges id="205" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="206" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="208" edge_type="CtrlEdge" source_obj="//@blocks.4" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0"/>
+  <edges id="209" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1"/>
+  <edges id="211" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="212" source_obj="//@blocks.4/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="213" source_obj="//@regions.1/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.3"/>
+  <edges id="214" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.3"/>
+  <edges id="215" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.3"/>
+  <edges id="216" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.0"/>
+  <edges id="218" source_obj="//@blocks.4/@node_objs.3" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="219" source_obj="//@regions.1/@basic_blocks.1/@node_objs.2" sink_obj="//@ports.7"/>
+  <edges id="221" source_obj="//@regions.1/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.2"/>
+  <edges id="222" source_obj="//@regions.1/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="223" source_obj="//@regions.1/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="224" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.4"/>
+  <edges id="225" edge_type="CtrlEdge" source_obj="//@blocks.6" sink_obj="//@blocks.5/@node_objs.0"/>
+  <edges id="226" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.6/@node_objs.0"/>
+  <edges id="229" source_obj="//@blocks.6/@node_objs.0" sink_obj="//@blocks.6/@node_objs.1"/>
+  <edges id="231" source_obj="//@blocks.6/@node_objs.1" sink_obj="//@blocks.6/@node_objs.2"/>
+  <edges id="232" edge_type="CtrlEdge" source_obj="//@blocks.9" sink_obj="//@blocks.6/@node_objs.2"/>
+  <edges id="233" edge_type="CtrlEdge" source_obj="//@blocks.7" sink_obj="//@blocks.6/@node_objs.2"/>
+  <edges id="236" source_obj="//@blocks.3/@node_objs.0" sink_obj="//@blocks.7/@node_objs.0"/>
+  <edges id="240" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@blocks.7/@node_objs.1"/>
+  <edges id="243" source_obj="//@blocks.7/@node_objs.1" sink_obj="//@blocks.7/@node_objs.2"/>
+  <edges id="244" source_obj="//@ports.0" sink_obj="//@blocks.7/@node_objs.3"/>
+  <edges id="245" source_obj="//@blocks.7/@node_objs.2" sink_obj="//@blocks.7/@node_objs.3"/>
+  <edges id="247" source_obj="//@blocks.7/@node_objs.3" sink_obj="//@blocks.7/@node_objs.4"/>
+  <edges id="248" source_obj="//@blocks.6/@node_objs.0" sink_obj="//@blocks.7/@node_objs.4"/>
+  <edges id="249" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@blocks.7/@node_objs.5"/>
+  <edges id="250" source_obj="//@regions.2/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="251" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="253" edge_type="CtrlEdge" source_obj="//@blocks.7" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0"/>
+  <edges id="254" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.1"/>
+  <edges id="256" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.2"/>
+  <edges id="257" source_obj="//@blocks.7/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.2"/>
+  <edges id="258" source_obj="//@regions.2/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.3"/>
+  <edges id="259" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.3"/>
+  <edges id="260" edge_type="CtrlEdge" source_obj="//@blocks.8" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.3"/>
+  <edges id="261" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.0"/>
+  <edges id="263" source_obj="//@blocks.7/@node_objs.3" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="264" source_obj="//@regions.2/@basic_blocks.1/@node_objs.2" sink_obj="//@ports.8"/>
+  <edges id="266" source_obj="//@regions.2/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.2"/>
+  <edges id="267" source_obj="//@regions.2/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.3"/>
+  <edges id="268" source_obj="//@regions.2/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.3"/>
+  <edges id="269" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.4"/>
+  <edges id="270" edge_type="CtrlEdge" source_obj="//@blocks.9" sink_obj="//@blocks.8/@node_objs.0"/>
+  <edges id="366" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="367" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@blocks.3"/>
+  <edges id="368" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="369" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.2"/>
+  <edges id="370" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="371" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="372" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.3"/>
+  <edges id="373" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.4"/>
+  <edges id="374" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.6"/>
+  <edges id="375" edge_type="CtrlEdge" source_obj="//@blocks.4" sink_obj="//@regions.1/@basic_blocks.0"/>
+  <edges id="376" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.5"/>
+  <edges id="377" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1"/>
+  <edges id="378" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="379" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@blocks.6"/>
+  <edges id="380" edge_type="CtrlEdge" source_obj="//@blocks.6" sink_obj="//@blocks.7"/>
+  <edges id="381" edge_type="CtrlEdge" source_obj="//@blocks.6" sink_obj="//@blocks.9"/>
+  <edges id="382" edge_type="CtrlEdge" source_obj="//@blocks.7" sink_obj="//@regions.2/@basic_blocks.0"/>
+  <edges id="383" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@blocks.8"/>
+  <edges id="384" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.1"/>
+  <edges id="385" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="386" edge_type="CtrlEdge" source_obj="//@blocks.8" sink_obj="//@blocks.9"/>
+  <edges id="387" edge_type="VirtEdge" source_obj="//@blocks.1/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="388" edge_type="VirtEdge" source_obj="//@blocks.1/@node_objs.4" sink_obj="//@blocks.4/@node_objs.4"/>
+  <edges id="389" edge_type="VirtEdge" source_obj="//@blocks.1/@node_objs.4" sink_obj="//@blocks.7/@node_objs.4"/>
+  <edges id="390" edge_type="VirtEdge" source_obj="//@blocks.1/@node_objs.4" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="391" edge_type="VirtEdge" source_obj="//@blocks.1/@node_objs.4" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="392" edge_type="VirtEdge" source_obj="//@blocks.4/@node_objs.4" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="393" edge_type="VirtEdge" source_obj="//@blocks.4/@node_objs.4" sink_obj="//@blocks.7/@node_objs.4"/>
+  <edges id="394" edge_type="VirtEdge" source_obj="//@blocks.4/@node_objs.4" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="395" edge_type="VirtEdge" source_obj="//@blocks.7/@node_objs.4" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <blocks id="29" name="block_29" type="BlockType">
+    <controlOutputObjs>.lr.ph14</controlOutputObjs>
+    <controlOutputObjs>._crit_edge15</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="17" name="num_of_edges_read" coreId="1360880208" bitwidth="32" opcode="read" nodeLabel="1.0" m_display="0" m_topoIndex="7" m_clusterGroupNumber="-1">
+      <dataInputObjs>num_of_edges</dataInputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+      <dataOutputObjs>shl</dataOutputObjs>
+      <dataOutputObjs>sub</dataOutputObjs>
+      <dataOutputObjs>shl</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="18" name="num_of_nodes_read" coreId="1379" bitwidth="32" opcode="read" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <dataInputObjs>num_of_nodes</dataInputObjs>
+      <dataOutputObjs>shl</dataOutputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="19" name="edge_attr_in_read" coreId="1360152016" bitwidth="64" opcode="read" nodeLabel="1.0" m_display="0" m_topoIndex="8" m_clusterGroupNumber="-1">
+      <dataInputObjs>edge_attr_in</dataInputObjs>
+      <dataOutputObjs>partselect</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="20" name="edge_list_in_read" coreId="1374734160" bitwidth="64" opcode="read" nodeLabel="1.0" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+      <dataInputObjs>edge_list_in</dataInputObjs>
+      <dataOutputObjs>partselect</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="21" name="node_feature_in_read" coreId="2283025576" bitwidth="64" opcode="read" nodeLabel="1.0" m_display="0" m_topoIndex="10" m_clusterGroupNumber="-1">
+      <dataInputObjs>node_feature_in</dataInputObjs>
+      <dataOutputObjs>partselect</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="22" name="empty" rtlName="empty_fu_242_p2" coreId="1340138704" bitwidth="32" opcode="shl" m_display="0" m_topoIndex="2" m_clusterGroupNumber="1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="23" name="empty_79" rtlName="empty_79_fu_248_p1" coreId="1908676544" bitwidth="31" opcode="trunc" m_display="0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="24" name="empty_80" rtlName="empty_80_fu_252_p1" coreId="49" bitwidth="28" opcode="trunc" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>bitconcatenate</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="25" name="p_shl_cast" rtlName="p_shl_cast_fu_268_p3" coreId="0" bitwidth="31" opcode="bitconcatenate" nodeLabel="1.0" m_display="0" m_topoIndex="11" m_clusterGroupNumber="-1">
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="26" name="mul" rtlName="mul_fu_256_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" bitwidth="32" opcode="add" m_display="0" m_delay="0.88" m_topoIndex="5" m_clusterGroupNumber="1">
+      <dataInputObjs>shl</dataInputObjs>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>readreq</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="27" name="icmp_ln370" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln370_fu_262_p2" opType="icmp" coreId="0" contextFuncName="load_graph" bitwidth="1" opcode="icmp" m_display="0" m_delay="0.85" m_topoIndex="6" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>br</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="28" name="br_ln370" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="load_graph" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="12" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <controlInputObjs>._crit_edge15</controlInputObjs>
+      <controlInputObjs>.lr.ph14</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>370</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="36" name=".lr.ph14" type="BlockType">
+    <controlInputObjs>block_29</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_43</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="30" name="add_ln370_1" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln370_1_fu_275_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="load_graph" bitwidth="31" opcode="add" nodeLabel="1.0" m_display="0" m_delay="0.87" m_topoIndex="13" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>bitconcatenate</dataInputObjs>
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="31" name="trunc_ln" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln_fu_280_p4" coreId="49" contextFuncName="load_graph" bitwidth="62" opcode="partselect" nodeLabel="1.0" m_display="0" m_topoIndex="14" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>sext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="32" name="sext_ln370" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="sext_ln370_fu_290_p1" coreId="892154672" contextFuncName="load_graph" bitwidth="64" opcode="sext" nodeLabel="1.0" m_display="0" m_topoIndex="15" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>partselect</dataInputObjs>
+      <dataOutputObjs>getelementptr</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="33" name="mem_addr" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." coreId="657" contextFuncName="load_graph" bitwidth="32" opcode="getelementptr" nodeLabel="1.0" m_display="0" m_topoIndex="16" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>mem</dataInputObjs>
+      <dataInputObjs>sext</dataInputObjs>
+      <dataOutputObjs>readreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="34" name="empty_81" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." coreName="m_axi" implIndex="m_axi" control="auto" opType="readreq" coreId="121" contextFuncName="load_graph" bitwidth="1" opcode="readreq" nodeLabel="1.0" nodeLatency="6" m_display="0" m_delay="7.3" m_topoIndex="17" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>getelementptr</dataInputObjs>
+      <dataInputObjs>add</dataInputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="35" name="br_ln370" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="load_graph" opcode="br" nodeLabel="7.0" m_display="0" m_delay="0.38" m_topoIndex="18" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <controlInputObjs>block_43</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>370</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="52" name="._crit_edge15.loopexit" type="BlockType">
+    <controlInputObjs>block_43</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>._crit_edge15</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="51" name="br_ln0" coreId="4" opcode="br" nodeLabel="11.0" m_display="0" m_topoIndex="28" m_clusterGroupNumber="-1">
+      <controlInputObjs>._crit_edge15</controlInputObjs>
+    </node_objs>
+  </blocks>
+  <blocks id="58" name="._crit_edge15" type="BlockType">
+    <controlInputObjs>block_29</controlInputObjs>
+    <controlInputObjs>._crit_edge15.loopexit</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>.lr.ph9</controlOutputObjs>
+    <controlOutputObjs>._crit_edge10</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="53" name="empty_83" rtlName="empty_83_fu_317_p1" coreId="1852452608" bitwidth="30" opcode="trunc" nodeLabel="11.0" m_display="0" m_topoIndex="29" m_clusterGroupNumber="-1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>bitconcatenate</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="54" name="empty_84" rtlName="empty_84_fu_320_p2" coreId="49" bitwidth="32" opcode="shl" nodeLabel="11.0" m_display="0" m_topoIndex="30" m_clusterGroupNumber="2">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>sub</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="55" name="mul4" rtlName="mul4_fu_325_p2" coreName="Adder" implIndex="fabric" control="auto" opType="sub" coreId="1" bitwidth="32" opcode="sub" nodeLabel="11.0" m_display="0" m_delay="0.88" m_topoIndex="31" m_clusterGroupNumber="2">
+      <dataInputObjs>shl</dataInputObjs>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+      <dataOutputObjs>readreq</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="56" name="icmp_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln374_fu_330_p2" opType="icmp" coreId="0" contextFuncName="load_graph" bitwidth="1" opcode="icmp" nodeLabel="11.0" m_display="0" m_delay="0.85" m_topoIndex="32" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>sub</dataInputObjs>
+      <dataOutputObjs>br</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="57" name="br_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="load_graph" opcode="br" nodeLabel="11.0" m_display="0" m_topoIndex="33" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <controlInputObjs>._crit_edge10</controlInputObjs>
+      <controlInputObjs>.lr.ph9</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>374</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="65" name=".lr.ph9" type="BlockType">
+    <controlInputObjs>._crit_edge15</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_72</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="59" name="trunc_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln374_fu_355_p1" coreId="0" contextFuncName="load_graph" bitwidth="31" opcode="trunc" nodeLabel="12.0" m_display="0" m_topoIndex="37" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>sub</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="60" name="trunc_ln2" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln2_fu_336_p4" coreId="49" contextFuncName="load_graph" bitwidth="62" opcode="partselect" nodeLabel="11.0" m_display="0" m_topoIndex="34" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>sext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="61" name="sext_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="sext_ln374_fu_345_p1" coreId="0" contextFuncName="load_graph" bitwidth="64" opcode="sext" nodeLabel="11.0" m_display="0" m_topoIndex="35" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>partselect</dataInputObjs>
+      <dataOutputObjs>getelementptr</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="62" name="mem_addr_4" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="load_graph" bitwidth="32" opcode="getelementptr" nodeLabel="11.0" m_display="0" m_topoIndex="36" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>mem</dataInputObjs>
+      <dataInputObjs>sext</dataInputObjs>
+      <dataOutputObjs>readreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="63" name="empty_85" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." coreName="m_axi" implIndex="m_axi" control="auto" opType="readreq" coreId="121" contextFuncName="load_graph" bitwidth="1" opcode="readreq" nodeLabel="12.0" nodeLatency="6" m_display="0" m_delay="7.3" m_topoIndex="38" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>getelementptr</dataInputObjs>
+      <dataInputObjs>sub</dataInputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="64" name="br_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="load_graph" opcode="br" nodeLabel="18.0" m_display="0" m_delay="0.38" m_topoIndex="39" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <controlInputObjs>block_72</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>374</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="81" name="._crit_edge10.loopexit" type="BlockType">
+    <controlInputObjs>block_72</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>._crit_edge10</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="80" name="br_ln0" coreId="0" opcode="br" nodeLabel="22.0" m_display="0" m_topoIndex="49" m_clusterGroupNumber="-1">
+      <controlInputObjs>._crit_edge10</controlInputObjs>
+    </node_objs>
+  </blocks>
+  <blocks id="85" name="._crit_edge10" type="BlockType">
+    <controlInputObjs>._crit_edge15</controlInputObjs>
+    <controlInputObjs>._crit_edge10.loopexit</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>.lr.ph</controlOutputObjs>
+    <controlOutputObjs>._crit_edge</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="82" name="empty_87" rtlName="empty_87_fu_374_p2" coreId="1852484624" bitwidth="32" opcode="shl" nodeLabel="22.0" m_display="0" m_topoIndex="50" m_clusterGroupNumber="-1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>readreq</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="83" name="icmp_ln378" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln378_fu_379_p2" opType="icmp" coreId="2818572416" contextFuncName="load_graph" bitwidth="1" opcode="icmp" nodeLabel="22.0" m_display="0" m_delay="0.85" m_topoIndex="51" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>shl</dataInputObjs>
+      <dataOutputObjs>br</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="84" name="br_ln378" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." coreId="1852485712" contextFuncName="load_graph" opcode="br" nodeLabel="22.0" m_display="0" m_topoIndex="52" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <controlInputObjs>._crit_edge</controlInputObjs>
+      <controlInputObjs>.lr.ph</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>378</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="92" name=".lr.ph" type="BlockType">
+    <controlInputObjs>._crit_edge10</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_99</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="86" name="trunc_ln378_1" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln378_1_fu_404_p3" coreId="1852481984" contextFuncName="load_graph" bitwidth="31" opcode="bitconcatenate" nodeLabel="29.0" m_display="0" m_topoIndex="57" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="87" name="trunc_ln3" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln3_fu_385_p4" coreId="1852482896" contextFuncName="load_graph" bitwidth="62" opcode="partselect" nodeLabel="22.0" m_display="0" m_topoIndex="53" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>sext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="88" name="sext_ln378" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="sext_ln378_fu_394_p1" coreId="0" contextFuncName="load_graph" bitwidth="64" opcode="sext" nodeLabel="22.0" m_display="0" m_topoIndex="54" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>partselect</dataInputObjs>
+      <dataOutputObjs>getelementptr</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="89" name="mem_addr_5" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." coreId="132" contextFuncName="load_graph" bitwidth="32" opcode="getelementptr" nodeLabel="22.0" m_display="0" m_topoIndex="55" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>mem</dataInputObjs>
+      <dataInputObjs>sext</dataInputObjs>
+      <dataOutputObjs>readreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="90" name="empty_88" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." coreName="m_axi" implIndex="m_axi" control="auto" opType="readreq" coreId="121" contextFuncName="load_graph" bitwidth="1" opcode="readreq" nodeLabel="23.0" nodeLatency="6" m_display="0" m_delay="7.3" m_topoIndex="56" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <dataInputObjs>getelementptr</dataInputObjs>
+      <dataInputObjs>shl</dataInputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="91" name="br_ln378" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." coreId="2316340848" contextFuncName="load_graph" opcode="br" nodeLabel="29.0" m_display="0" m_delay="0.38" m_topoIndex="58" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+      <controlInputObjs>block_99</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>378</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="108" name="._crit_edge.loopexit" type="BlockType">
+    <controlInputObjs>block_99</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>._crit_edge</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="107" name="br_ln0" coreId="10" opcode="br" nodeLabel="33.0" m_display="0" m_topoIndex="68" m_clusterGroupNumber="-1">
+      <controlInputObjs>._crit_edge</controlInputObjs>
+    </node_objs>
+  </blocks>
+  <blocks id="110" name="._crit_edge" type="BlockType">
+    <controlInputObjs>._crit_edge10</controlInputObjs>
+    <controlInputObjs>._crit_edge.loopexit</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="109" name="_ln381" lineNumber="381" fileName="GIN_compute.cpp" fileDirectory=".." coreId="2316427696" contextFuncName="load_graph" opcode="ret" nodeLabel="33.0" m_display="0" m_topoIndex="69" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="381" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>381</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="448" pipe_depth="3" RegionName="VITIS_LOOP_370_1">
+    <basic_blocks id="43" name="block_43" type="BlockType">
+      <controlInputObjs>.lr.ph14</controlInputObjs>
+      <controlInputObjs>.split6</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>._crit_edge15.loopexit</controlOutputObjs>
+      <controlOutputObjs>.split6</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="37" name="i" lineNumber="370" originalName="i" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="load_graph" bitwidth="31" opcode="phi" nodeLabel="8.0" m_display="0" m_topoIndex="19" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <controlInputObjs>.split6</controlInputObjs>
+        <controlInputObjs>.lr.ph14</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="38" name="add_ln370" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln370_fu_301_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="load_graph" bitwidth="31" opcode="add" nodeLabel="8.0" m_display="0" m_delay="0.87" m_topoIndex="20" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="40" name="icmp_ln370_1" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln370_1_fu_307_p2" opType="icmp" coreId="1217" contextFuncName="load_graph" bitwidth="1" opcode="icmp" nodeLabel="8.0" m_display="0" m_delay="0.84" m_topoIndex="21" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="42" name="br_ln370" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." coreId="132" contextFuncName="load_graph" opcode="br" nodeLabel="8.0" m_display="0" m_topoIndex="22" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>.split6</controlInputObjs>
+        <controlInputObjs>._crit_edge15.loopexit</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>370</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="50" name=".split6" type="BlockType">
+      <controlInputObjs>block_43</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_43</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="44" name="i_cast" lineNumber="370" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="i_cast_fu_312_p1" coreId="1852457040" contextFuncName="load_graph" bitwidth="64" opcode="zext" nodeLabel="10.0" m_display="0" m_topoIndex="24" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="46" name="mem_addr_read" lineNumber="371" fileName="GIN_compute.cpp" fileDirectory=".." coreName="m_axi" implIndex="UNSUPPORTED" control="auto" coreId="121" contextFuncName="load_graph" bitwidth="32" opcode="read" nodeLabel="9.0" m_display="0" m_delay="7.3" m_topoIndex="23" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="371" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="47" name="node_feature_addr" lineNumber="371" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="load_graph" bitwidth="14" opcode="getelementptr" nodeLabel="10.0" m_display="0" m_topoIndex="25" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="371" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>node_feature</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="48" name="node_feature_addr_write_ln371" lineNumber="371" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="auto" opType="ram_2p" coreId="94" contextFuncName="load_graph" opcode="store" nodeLabel="10.0" m_display="0" m_delay="1.24" m_topoIndex="26" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="371" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="49" name="br_ln0" coreId="1852455576" opcode="br" nodeLabel="10.0" m_display="0" m_topoIndex="27" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_43</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>370</validLinenumbers>
+        <validLinenumbers>371</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="449" pipe_depth="3" RegionName="VITIS_LOOP_374_2">
+    <basic_blocks id="72" name="block_72" type="BlockType">
+      <controlInputObjs>.lr.ph9</controlInputObjs>
+      <controlInputObjs>.split4</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>._crit_edge10.loopexit</controlOutputObjs>
+      <controlOutputObjs>.split4</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="66" name="i_1" lineNumber="374" originalName="i" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="load_graph" bitwidth="31" opcode="phi" nodeLabel="19.0" m_display="0" m_topoIndex="40" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <controlInputObjs>.split4</controlInputObjs>
+        <controlInputObjs>.lr.ph9</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="67" name="add_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln374_fu_358_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="load_graph" bitwidth="31" opcode="add" nodeLabel="19.0" m_display="0" m_delay="0.87" m_topoIndex="41" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="69" name="icmp_ln374_1" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln374_1_fu_364_p2" opType="icmp" coreId="305" contextFuncName="load_graph" bitwidth="1" opcode="icmp" nodeLabel="19.0" m_display="0" m_delay="0.84" m_topoIndex="42" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="71" name="br_ln374" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="load_graph" opcode="br" nodeLabel="19.0" m_display="0" m_topoIndex="43" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>.split4</controlInputObjs>
+        <controlInputObjs>._crit_edge10.loopexit</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>374</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="79" name=".split4" type="BlockType">
+      <controlInputObjs>block_72</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_72</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="73" name="i_1_cast" lineNumber="374" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="i_1_cast_fu_369_p1" coreId="0" contextFuncName="load_graph" bitwidth="64" opcode="zext" nodeLabel="21.0" m_display="0" m_topoIndex="45" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="374" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="75" name="mem_addr_4_read" lineNumber="375" fileName="GIN_compute.cpp" fileDirectory=".." coreName="m_axi" implIndex="UNSUPPORTED" control="auto" coreId="121" contextFuncName="load_graph" bitwidth="32" opcode="read" nodeLabel="20.0" m_display="0" m_delay="7.3" m_topoIndex="44" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="375" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="76" name="edge_attr_addr" lineNumber="375" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="load_graph" bitwidth="13" opcode="getelementptr" nodeLabel="21.0" m_display="0" m_topoIndex="46" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="375" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>edge_attr</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="77" name="edge_attr_addr_write_ln375" lineNumber="375" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="auto" opType="ram_2p" coreId="94" contextFuncName="load_graph" opcode="store" nodeLabel="21.0" m_display="0" m_delay="1.24" m_topoIndex="47" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="375" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="78" name="br_ln0" coreId="49" opcode="br" nodeLabel="21.0" m_display="0" m_topoIndex="48" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_72</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>374</validLinenumbers>
+        <validLinenumbers>375</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="450" pipe_depth="3" RegionName="VITIS_LOOP_378_3">
+    <basic_blocks id="99" name="block_99" type="BlockType">
+      <controlInputObjs>.lr.ph</controlInputObjs>
+      <controlInputObjs>.split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>._crit_edge.loopexit</controlOutputObjs>
+      <controlOutputObjs>.split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="93" name="i_2" lineNumber="378" originalName="i" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="load_graph" bitwidth="31" opcode="phi" nodeLabel="30.0" m_display="0" m_topoIndex="59" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <controlInputObjs>.split</controlInputObjs>
+        <controlInputObjs>.lr.ph</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="94" name="add_ln378" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln378_fu_411_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="load_graph" bitwidth="31" opcode="add" nodeLabel="30.0" m_display="0" m_delay="0.87" m_topoIndex="60" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="96" name="icmp_ln378_1" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln378_1_fu_417_p2" opType="icmp" coreId="0" contextFuncName="load_graph" bitwidth="1" opcode="icmp" nodeLabel="30.0" m_display="0" m_delay="0.84" m_topoIndex="61" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>bitconcatenate</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="98" name="br_ln378" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." coreId="132" contextFuncName="load_graph" opcode="br" nodeLabel="30.0" m_display="0" m_topoIndex="62" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>.split</controlInputObjs>
+        <controlInputObjs>._crit_edge.loopexit</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>378</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="106" name=".split" type="BlockType">
+      <controlInputObjs>block_99</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_99</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="100" name="i_2_cast" lineNumber="378" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="i_2_cast_fu_422_p1" coreId="909729585" contextFuncName="load_graph" bitwidth="64" opcode="zext" nodeLabel="32.0" m_display="0" m_topoIndex="64" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="378" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="102" name="mem_addr_5_read" lineNumber="379" fileName="GIN_compute.cpp" fileDirectory=".." coreName="m_axi" implIndex="UNSUPPORTED" control="auto" coreId="121" contextFuncName="load_graph" bitwidth="32" opcode="read" nodeLabel="31.0" m_display="0" m_delay="7.3" m_topoIndex="63" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="379" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="103" name="edge_list_addr" lineNumber="379" fileName="GIN_compute.cpp" fileDirectory=".." coreId="807414835" contextFuncName="load_graph" bitwidth="12" opcode="getelementptr" nodeLabel="32.0" m_display="0" m_topoIndex="65" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="379" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>edge_list</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="104" name="edge_list_addr_write_ln379" lineNumber="379" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="auto" opType="ram_2p" coreId="94" contextFuncName="load_graph" opcode="store" nodeLabel="32.0" m_display="0" m_delay="1.23" m_topoIndex="66" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="379" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v2" functionName="load_graph"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="105" name="br_ln0" coreId="0" opcode="br" nodeLabel="32.0" m_display="0" m_topoIndex="67" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_99</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>378</validLinenumbers>
+        <validLinenumbers>379</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <ScheduleInfo time="8"/>
+  <ScheduleInfo time="9"/>
+  <ScheduleInfo time="10"/>
+  <ScheduleInfo time="11"/>
+  <ScheduleInfo time="12"/>
+  <ScheduleInfo time="13"/>
+  <ScheduleInfo time="14"/>
+  <ScheduleInfo time="15"/>
+  <ScheduleInfo time="16"/>
+  <ScheduleInfo time="17"/>
+  <ScheduleInfo time="18"/>
+  <ScheduleInfo time="19"/>
+  <ScheduleInfo time="20"/>
+  <ScheduleInfo time="21"/>
+  <ScheduleInfo time="22"/>
+  <ScheduleInfo time="23"/>
+  <ScheduleInfo time="24"/>
+  <ScheduleInfo time="25"/>
+  <ScheduleInfo time="26"/>
+  <ScheduleInfo time="27"/>
+  <ScheduleInfo time="28"/>
+  <ScheduleInfo time="29"/>
+  <ScheduleInfo time="30"/>
+  <ScheduleInfo time="31"/>
+  <ScheduleInfo time="32"/>
+  <ScheduleInfo time="33"/>
+  <regnodes realName="empty_87_reg_529">
+    <nodeIds>82</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln370_1_reg_480">
+    <nodeIds>40</nodeIds>
+  </regnodes>
+  <regnodes realName="mem_addr_read_reg_484">
+    <nodeIds>46</nodeIds>
+  </regnodes>
+  <regnodes realName="mul4_reg_494">
+    <nodeIds>55</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln378_reg_549">
+    <nodeIds>94</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln370_1_reg_464">
+    <nodeIds>30</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln374_1_reg_520">
+    <nodeIds>69</nodeIds>
+  </regnodes>
+  <regnodes realName="num_of_edges_read_reg_446">
+    <nodeIds>17</nodeIds>
+  </regnodes>
+  <regnodes realName="mem_addr_5_reg_538">
+    <nodeIds>89</nodeIds>
+  </regnodes>
+  <regnodes realName="mem_addr_4_reg_504">
+    <nodeIds>62</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_83_reg_489">
+    <nodeIds>53</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln374_reg_500">
+    <nodeIds>56</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln378_reg_534">
+    <nodeIds>83</nodeIds>
+  </regnodes>
+  <regnodes realName="mem_addr_4_read_reg_524">
+    <nodeIds>75</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_79_reg_427">
+    <nodeIds>23</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln374_reg_515">
+    <nodeIds>67</nodeIds>
+  </regnodes>
+  <regnodes realName="i_1_reg_218">
+    <nodeIds>66</nodeIds>
+  </regnodes>
+  <regnodes realName="mul_reg_437">
+    <nodeIds>26</nodeIds>
+  </regnodes>
+  <regnodes realName="trunc_ln374_reg_510">
+    <nodeIds>59</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln370_reg_442">
+    <nodeIds>27</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_attr_in_read_reg_454">
+    <nodeIds>19</nodeIds>
+  </regnodes>
+  <regnodes realName="i_reg_206">
+    <nodeIds>37</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_80_reg_432">
+    <nodeIds>24</nodeIds>
+  </regnodes>
+  <regnodes realName="i_2_reg_230">
+    <nodeIds>93</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln378_1_reg_554">
+    <nodeIds>96</nodeIds>
+  </regnodes>
+  <regnodes realName="trunc_ln378_1_reg_544">
+    <nodeIds>86</nodeIds>
+  </regnodes>
+  <regnodes realName="mem_addr_reg_469">
+    <nodeIds>33</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_list_in_read_reg_459">
+    <nodeIds>20</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln370_reg_475">
+    <nodeIds>38</nodeIds>
+  </regnodes>
+  <regnodes realName="mem_addr_5_read_reg_558">
+    <nodeIds>102</nodeIds>
+  </regnodes>
+  <expressionNodes realName="sext_ln378_fu_394">
+    <nodeIds>88</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_84_fu_320">
+    <nodeIds>54</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln2_fu_336">
+    <nodeIds>60</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="sext_ln370_fu_290">
+    <nodeIds>32</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_79_fu_248">
+    <nodeIds>23</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_attr_addr_gep_fu_172">
+    <nodeIds>76</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln370_1_fu_307">
+    <nodeIds>40</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln_fu_280">
+    <nodeIds>31</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_fu_242">
+    <nodeIds>22</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_1_cast_fu_369">
+    <nodeIds>73</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="sext_ln374_fu_345">
+    <nodeIds>61</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mul4_fu_325">
+    <nodeIds>55</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="node_feature_addr_gep_fu_155">
+    <nodeIds>47</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln378_1_fu_404">
+    <nodeIds>86</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mem_addr_fu_294">
+    <nodeIds>33</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_2_cast_fu_422">
+    <nodeIds>100</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mul_fu_256">
+    <nodeIds>26</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_shl_cast_fu_268">
+    <nodeIds>25</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mem_addr_5_fu_398">
+    <nodeIds>89</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln370_fu_262">
+    <nodeIds>27</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_cast_fu_312">
+    <nodeIds>44</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln374_fu_355">
+    <nodeIds>59</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_83_fu_317">
+    <nodeIds>53</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_80_fu_252">
+    <nodeIds>24</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln3_fu_385">
+    <nodeIds>87</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln374_1_fu_364">
+    <nodeIds>69</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_phi_fu_210">
+    <nodeIds>37</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln378_fu_379">
+    <nodeIds>83</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln370_1_fu_275">
+    <nodeIds>30</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln378_fu_411">
+    <nodeIds>94</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln370_fu_301">
+    <nodeIds>38</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln378_1_fu_417">
+    <nodeIds>96</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_1_phi_fu_222">
+    <nodeIds>66</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_87_fu_374">
+    <nodeIds>82</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln374_fu_358">
+    <nodeIds>67</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_list_addr_gep_fu_189">
+    <nodeIds>103</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_2_phi_fu_234">
+    <nodeIds>93</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mem_addr_4_fu_349">
+    <nodeIds>62</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln374_fu_330">
+    <nodeIds>56</nodeIds>
+  </expressionNodes>
+  <ioNodes realName="grp_readreq_fu_122">
+    <nodeIds>34</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_readreq_fu_133">
+    <nodeIds>63</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_readreq_fu_144">
+    <nodeIds>90</nodeIds>
+  </ioNodes>
+  <ioNodes realName="edge_list_in_read_read_fu_110">
+    <nodeIds>20</nodeIds>
+  </ioNodes>
+  <ioNodes realName="num_of_edges_read_read_fu_98">
+    <nodeIds>17</nodeIds>
+  </ioNodes>
+  <ioNodes realName="num_of_nodes_read_read_fu_92">
+    <nodeIds>18</nodeIds>
+  </ioNodes>
+  <ioNodes realName="mem_addr_4_read_read_fu_139">
+    <nodeIds>75</nodeIds>
+  </ioNodes>
+  <ioNodes realName="mem_addr_read_read_fu_128">
+    <nodeIds>46</nodeIds>
+  </ioNodes>
+  <ioNodes realName="mem_addr_5_read_read_fu_150">
+    <nodeIds>102</nodeIds>
+  </ioNodes>
+  <ioNodes realName="edge_attr_in_read_read_fu_104">
+    <nodeIds>19</nodeIds>
+  </ioNodes>
+  <ioNodes realName="node_feature_in_read_read_fu_116">
+    <nodeIds>21</nodeIds>
+  </ioNodes>
+  <memoryPorts dataString="edge_attr" portID="1">
+    <nodeIds>77</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_list" portID="1">
+    <nodeIds>104</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_feature" portID="1">
+    <nodeIds>48</nodeIds>
+  </memoryPorts>
+  <ioPorts name="edge_attr(p1)">
+    <contents name="store">
+      <nodeIds>77</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_attr_in">
+    <contents name="read">
+      <nodeIds>19</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_list(p1)">
+    <contents name="store">
+      <nodeIds>104</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_list_in">
+    <contents name="read">
+      <nodeIds>20</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="mem"/>
+  <ioPorts name="node_feature(p1)">
+    <contents name="store">
+      <nodeIds>48</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="node_feature_in">
+    <contents name="read">
+      <nodeIds>21</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="num_of_edges">
+    <contents name="read">
+      <nodeIds>17</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="num_of_nodes">
+    <contents name="read">
+      <nodeIds>18</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="24" stage="1" latency="1"/>
+      <operations id="26" stage="1" latency="1"/>
+      <operations id="27" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="13" stage="1" latency="1"/>
+      <operations id="14" stage="1" latency="1"/>
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="20" stage="1" latency="1"/>
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="25" stage="1" latency="1"/>
+      <operations id="28" stage="1" latency="1"/>
+      <operations id="30" stage="1" latency="1"/>
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="33" stage="1" latency="1"/>
+      <operations id="34" stage="7" latency="7"/>
+    </states>
+    <states id="3">
+      <operations id="34" stage="6" latency="7"/>
+    </states>
+    <states id="4">
+      <operations id="34" stage="5" latency="7"/>
+    </states>
+    <states id="5">
+      <operations id="34" stage="4" latency="7"/>
+    </states>
+    <states id="6">
+      <operations id="34" stage="3" latency="7"/>
+    </states>
+    <states id="7">
+      <operations id="34" stage="2" latency="7"/>
+    </states>
+    <states id="8">
+      <operations id="34" stage="1" latency="7"/>
+      <operations id="35" stage="1" latency="1"/>
+    </states>
+    <states id="9">
+      <operations id="37" stage="1" latency="1"/>
+      <operations id="38" stage="1" latency="1"/>
+      <operations id="39" stage="1" latency="1"/>
+      <operations id="40" stage="1" latency="1"/>
+      <operations id="41" stage="1" latency="1"/>
+      <operations id="42" stage="1" latency="1"/>
+    </states>
+    <states id="10">
+      <operations id="46" stage="1" latency="1"/>
+    </states>
+    <states id="11">
+      <operations id="44" stage="1" latency="1"/>
+      <operations id="45" stage="1" latency="1"/>
+      <operations id="47" stage="1" latency="1"/>
+      <operations id="48" stage="1" latency="1"/>
+      <operations id="49" stage="1" latency="1"/>
+    </states>
+    <states id="12">
+      <operations id="51" stage="1" latency="1"/>
+      <operations id="53" stage="1" latency="1"/>
+      <operations id="54" stage="1" latency="1"/>
+      <operations id="55" stage="1" latency="1"/>
+      <operations id="56" stage="1" latency="1"/>
+      <operations id="57" stage="1" latency="1"/>
+      <operations id="60" stage="1" latency="1"/>
+      <operations id="61" stage="1" latency="1"/>
+      <operations id="62" stage="1" latency="1"/>
+    </states>
+    <states id="13">
+      <operations id="59" stage="1" latency="1"/>
+      <operations id="63" stage="7" latency="7"/>
+    </states>
+    <states id="14">
+      <operations id="63" stage="6" latency="7"/>
+    </states>
+    <states id="15">
+      <operations id="63" stage="5" latency="7"/>
+    </states>
+    <states id="16">
+      <operations id="63" stage="4" latency="7"/>
+    </states>
+    <states id="17">
+      <operations id="63" stage="3" latency="7"/>
+    </states>
+    <states id="18">
+      <operations id="63" stage="2" latency="7"/>
+    </states>
+    <states id="19">
+      <operations id="63" stage="1" latency="7"/>
+      <operations id="64" stage="1" latency="1"/>
+    </states>
+    <states id="20">
+      <operations id="66" stage="1" latency="1"/>
+      <operations id="67" stage="1" latency="1"/>
+      <operations id="68" stage="1" latency="1"/>
+      <operations id="69" stage="1" latency="1"/>
+      <operations id="70" stage="1" latency="1"/>
+      <operations id="71" stage="1" latency="1"/>
+    </states>
+    <states id="21">
+      <operations id="75" stage="1" latency="1"/>
+    </states>
+    <states id="22">
+      <operations id="73" stage="1" latency="1"/>
+      <operations id="74" stage="1" latency="1"/>
+      <operations id="76" stage="1" latency="1"/>
+      <operations id="77" stage="1" latency="1"/>
+      <operations id="78" stage="1" latency="1"/>
+    </states>
+    <states id="23">
+      <operations id="80" stage="1" latency="1"/>
+      <operations id="82" stage="1" latency="1"/>
+      <operations id="83" stage="1" latency="1"/>
+      <operations id="84" stage="1" latency="1"/>
+      <operations id="87" stage="1" latency="1"/>
+      <operations id="88" stage="1" latency="1"/>
+      <operations id="89" stage="1" latency="1"/>
+    </states>
+    <states id="24">
+      <operations id="90" stage="7" latency="7"/>
+    </states>
+    <states id="25">
+      <operations id="90" stage="6" latency="7"/>
+    </states>
+    <states id="26">
+      <operations id="90" stage="5" latency="7"/>
+    </states>
+    <states id="27">
+      <operations id="90" stage="4" latency="7"/>
+    </states>
+    <states id="28">
+      <operations id="90" stage="3" latency="7"/>
+    </states>
+    <states id="29">
+      <operations id="90" stage="2" latency="7"/>
+    </states>
+    <states id="30">
+      <operations id="86" stage="1" latency="1"/>
+      <operations id="90" stage="1" latency="7"/>
+      <operations id="91" stage="1" latency="1"/>
+    </states>
+    <states id="31">
+      <operations id="93" stage="1" latency="1"/>
+      <operations id="94" stage="1" latency="1"/>
+      <operations id="95" stage="1" latency="1"/>
+      <operations id="96" stage="1" latency="1"/>
+      <operations id="97" stage="1" latency="1"/>
+      <operations id="98" stage="1" latency="1"/>
+    </states>
+    <states id="32">
+      <operations id="102" stage="1" latency="1"/>
+    </states>
+    <states id="33">
+      <operations id="100" stage="1" latency="1"/>
+      <operations id="101" stage="1" latency="1"/>
+      <operations id="103" stage="1" latency="1"/>
+      <operations id="104" stage="1" latency="1"/>
+      <operations id="105" stage="1" latency="1"/>
+    </states>
+    <states id="34">
+      <operations id="107" stage="1" latency="1"/>
+      <operations id="109" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="12">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="12" outState="13">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="12" outState="23">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="13" outState="14">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="14" outState="15">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="15" outState="16">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="16" outState="17">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="17" outState="18">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="18" outState="19">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="19" outState="20">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="23" outState="24">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="23" outState="34">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="24" outState="25">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="25" outState="26">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="26" outState="27">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="27" outState="28">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="28" outState="29">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="29" outState="30">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="30" outState="31">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="10" outState="11">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="11" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="12">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="10">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="21" outState="22">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="22" outState="20">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="20" outState="23">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="20" outState="21">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="32" outState="33">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="33" outState="31">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="31" outState="34">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="31" outState="32">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="load_graph" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="4" mMaxLatency="-1">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <subRegions>5</subRegions>
+      <subRegions>6</subRegions>
+      <subRegions>7</subRegions>
+      <subRegions>8</subRegions>
+      <subRegions>9</subRegions>
+      <subRegions>10</subRegions>
+      <subRegions>11</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="1" mMaxLatency="7">
+      <basicBlocks>29</basicBlocks>
+      <basicBlocks>36</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="VITIS_LOOP_370_1" mII="1" mDepth="3" mMinTripCount="1" mMaxTripCount="-1" mMinLatency="2" mMaxLatency="-1" mType="1">
+      <basicBlocks>43</basicBlocks>
+      <basicBlocks>50</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Region 1" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>52</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="5" mTag="Region 2" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMaxLatency="7">
+      <basicBlocks>58</basicBlocks>
+      <basicBlocks>65</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="6" mTag="VITIS_LOOP_374_2" mII="1" mDepth="3" mMinTripCount="1" mMaxTripCount="-1" mMinLatency="2" mMaxLatency="-1" mType="1">
+      <basicBlocks>72</basicBlocks>
+      <basicBlocks>79</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="7" mTag="Region 3" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>81</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="8" mTag="Region 4" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMaxLatency="7">
+      <basicBlocks>85</basicBlocks>
+      <basicBlocks>92</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="9" mTag="VITIS_LOOP_378_3" mII="1" mDepth="3" mMinTripCount="1" mMaxTripCount="-1" mMinLatency="2" mMaxLatency="-1" mType="1">
+      <basicBlocks>99</basicBlocks>
+      <basicBlocks>106</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="10" mTag="Region 5" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>108</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="11" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>110</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

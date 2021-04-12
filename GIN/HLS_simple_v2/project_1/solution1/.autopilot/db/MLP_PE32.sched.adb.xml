@@ -1,0 +1,734 @@
+<stg><name>MLP_PE32</name>
+
+
+<trans_list>
+
+<trans id="49" from="1" to="2">
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+</trans>
+
+<trans id="56" from="2" to="4">
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="1"/>
+</and_exp></or_exp>
+</condition>
+</trans>
+
+<trans id="57" from="2" to="3">
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+</trans>
+
+<trans id="55" from="3" to="2">
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+</trans>
+</trans_list>
+
+
+
+<state_list>
+
+<state id="1" st_id="1">
+
+<operation id="5" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="9" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:0 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mlp_1_weight_fifo_0_V_V, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="6" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="10" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:1 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mlp_1_weight_fifo_1_V_V, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="7" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="11" bw="0" op_0_bw="0" op_1_bw="10" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:2 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i10 %d_out, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="8" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="12" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:3 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mlp_1_bias_V_load_loc, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="9" st_id="1" stage="1" lat="1">
+<core>FIFO_SRL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="13" bw="32" op_0_bw="32" op_1_bw="32">
+<![CDATA[
+entry:4 %mlp_1_bias_V_load_loc_read = read i32 @_ssdm_op_Read.ap_fifo.i32P0A, i32 %mlp_1_bias_V_load_loc
+
+]]></Node>
+<StgValue><ssdm name="mlp_1_bias_V_load_loc_read"/></StgValue>
+</operation>
+
+<operation id="10" st_id="1" stage="1" lat="1">
+<core>FIFO_SRL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="14" bw="10" op_0_bw="10" op_1_bw="10">
+<![CDATA[
+entry:5 %d_out_4 = read i10 @_ssdm_op_Read.ap_fifo.i10P0A, i10 %d_out
+
+]]></Node>
+<StgValue><ssdm name="d_out_4"/></StgValue>
+</operation>
+
+<operation id="11" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="15" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:6 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mlp_1_bias_V_load_loc_out, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="12" st_id="1" stage="1" lat="1">
+<core>FIFO_SRL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="16" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32">
+<![CDATA[
+entry:7 %write_ln0 = write void @_ssdm_op_Write.ap_fifo.i32P0A, i32 %mlp_1_bias_V_load_loc_out, i32 %mlp_1_bias_V_load_loc_read
+
+]]></Node>
+<StgValue><ssdm name="write_ln0"/></StgValue>
+</operation>
+
+<operation id="13" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="17" bw="0" op_0_bw="0" op_1_bw="10" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:8 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i10 %d_out_out, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @ScalarProp_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="14" st_id="1" stage="1" lat="1">
+<core>FIFO_SRL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="18" bw="0" op_0_bw="0" op_1_bw="10" op_2_bw="10">
+<![CDATA[
+entry:9 %write_ln83 = write void @_ssdm_op_Write.ap_fifo.i10P0A, i10 %d_out_out, i10 %d_out_4
+
+]]></Node>
+<StgValue><ssdm name="write_ln83"/></StgValue>
+</operation>
+
+<operation id="15" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="19" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:10 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mlp_1_weight_fifo_1_V_V, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="16" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="20" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+entry:11 %specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mlp_1_weight_fifo_0_V_V, void @ap_fifo_str, i32 0, i32 0, void @p_str, i32 0, i32 0, void @p_str, void @p_str, void @p_str, i32 2, i32 2, i32 16, i32 16, void @p_str, void @p_str
+
+]]></Node>
+<StgValue><ssdm name="specinterface_ln0"/></StgValue>
+</operation>
+
+<operation id="17" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="21" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="0" op_4_bw="0" op_5_bw="0" op_6_bw="0" op_7_bw="0" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="0" op_12_bw="0" op_13_bw="0" op_14_bw="0" op_15_bw="0" op_16_bw="0" op_17_bw="0" op_18_bw="0" op_19_bw="0" op_20_bw="0" op_21_bw="0" op_22_bw="0" op_23_bw="0" op_24_bw="0" op_25_bw="0" op_26_bw="0" op_27_bw="0" op_28_bw="0" op_29_bw="0" op_30_bw="0" op_31_bw="0" op_32_bw="0" op_33_bw="0" op_34_bw="0" op_35_bw="0" op_36_bw="0" op_37_bw="0" op_38_bw="0" op_39_bw="0" op_40_bw="0" op_41_bw="0" op_42_bw="0" op_43_bw="0" op_44_bw="0" op_45_bw="0" op_46_bw="0" op_47_bw="0" op_48_bw="0" op_49_bw="0" op_50_bw="0" op_51_bw="0" op_52_bw="0" op_53_bw="0" op_54_bw="0" op_55_bw="0" op_56_bw="0" op_57_bw="0" op_58_bw="0" op_59_bw="0" op_60_bw="0" op_61_bw="0" op_62_bw="0" op_63_bw="0" op_64_bw="0" op_65_bw="0" op_66_bw="0" op_67_bw="0" op_68_bw="0" op_69_bw="0" op_70_bw="0" op_71_bw="0" op_72_bw="0" op_73_bw="0" op_74_bw="0" op_75_bw="0" op_76_bw="0" op_77_bw="0" op_78_bw="0" op_79_bw="0" op_80_bw="0" op_81_bw="0" op_82_bw="0" op_83_bw="0" op_84_bw="0" op_85_bw="0" op_86_bw="0" op_87_bw="0" op_88_bw="0" op_89_bw="0" op_90_bw="0" op_91_bw="0" op_92_bw="0" op_93_bw="0" op_94_bw="0" op_95_bw="0" op_96_bw="0" op_97_bw="0" op_98_bw="0" op_99_bw="0" op_100_bw="0" op_101_bw="0" op_102_bw="0" op_103_bw="0" op_104_bw="0" op_105_bw="0" op_106_bw="0" op_107_bw="0" op_108_bw="0" op_109_bw="0" op_110_bw="0" op_111_bw="0" op_112_bw="0" op_113_bw="0" op_114_bw="0" op_115_bw="0" op_116_bw="0" op_117_bw="0" op_118_bw="0" op_119_bw="0" op_120_bw="0" op_121_bw="0" op_122_bw="0" op_123_bw="0" op_124_bw="0" op_125_bw="0" op_126_bw="0" op_127_bw="0" op_128_bw="0" op_129_bw="0" op_130_bw="0" op_131_bw="0" op_132_bw="0" op_133_bw="0" op_134_bw="0" op_135_bw="0" op_136_bw="0" op_137_bw="0" op_138_bw="0" op_139_bw="0" op_140_bw="0" op_141_bw="0" op_142_bw="0" op_143_bw="0" op_144_bw="0" op_145_bw="0" op_146_bw="0" op_147_bw="0" op_148_bw="0" op_149_bw="0" op_150_bw="0" op_151_bw="0" op_152_bw="0" op_153_bw="0" op_154_bw="0" op_155_bw="0" op_156_bw="0" op_157_bw="0" op_158_bw="0" op_159_bw="0" op_160_bw="0" op_161_bw="0" op_162_bw="0" op_163_bw="0" op_164_bw="0" op_165_bw="0" op_166_bw="0" op_167_bw="0" op_168_bw="0" op_169_bw="0" op_170_bw="0" op_171_bw="0" op_172_bw="0" op_173_bw="0" op_174_bw="0" op_175_bw="0" op_176_bw="0" op_177_bw="0" op_178_bw="0" op_179_bw="0" op_180_bw="0" op_181_bw="0" op_182_bw="0" op_183_bw="0" op_184_bw="0" op_185_bw="0" op_186_bw="0" op_187_bw="0" op_188_bw="0" op_189_bw="0" op_190_bw="0" op_191_bw="0" op_192_bw="0" op_193_bw="0" op_194_bw="0" op_195_bw="0" op_196_bw="0" op_197_bw="0" op_198_bw="0" op_199_bw="0" op_200_bw="0" op_201_bw="0" op_202_bw="0" op_203_bw="0" op_204_bw="0" op_205_bw="0" op_206_bw="0" op_207_bw="0" op_208_bw="0" op_209_bw="0" op_210_bw="0" op_211_bw="0" op_212_bw="0" op_213_bw="0" op_214_bw="0" op_215_bw="0" op_216_bw="0" op_217_bw="0" op_218_bw="0" op_219_bw="0" op_220_bw="0" op_221_bw="0" op_222_bw="0" op_223_bw="0" op_224_bw="0" op_225_bw="0" op_226_bw="0" op_227_bw="0" op_228_bw="0" op_229_bw="0" op_230_bw="0" op_231_bw="0" op_232_bw="0" op_233_bw="0" op_234_bw="0" op_235_bw="0" op_236_bw="0" op_237_bw="0" op_238_bw="0" op_239_bw="0" op_240_bw="0" op_241_bw="0" op_242_bw="0" op_243_bw="0" op_244_bw="0" op_245_bw="0" op_246_bw="0" op_247_bw="0" op_248_bw="0" op_249_bw="0" op_250_bw="0" op_251_bw="0" op_252_bw="0" op_253_bw="0" op_254_bw="0" op_255_bw="0" op_256_bw="0" op_257_bw="0" op_258_bw="0" op_259_bw="0" op_260_bw="0" op_261_bw="0" op_262_bw="0" op_263_bw="0" op_264_bw="0" op_265_bw="0" op_266_bw="0" op_267_bw="0" op_268_bw="0" op_269_bw="0" op_270_bw="0" op_271_bw="0" op_272_bw="0" op_273_bw="0" op_274_bw="0" op_275_bw="0" op_276_bw="0" op_277_bw="0" op_278_bw="0" op_279_bw="0" op_280_bw="0" op_281_bw="0" op_282_bw="0" op_283_bw="0" op_284_bw="0" op_285_bw="0" op_286_bw="0" op_287_bw="0" op_288_bw="0" op_289_bw="0" op_290_bw="0" op_291_bw="0" op_292_bw="0" op_293_bw="0" op_294_bw="0" op_295_bw="0" op_296_bw="0" op_297_bw="0" op_298_bw="0" op_299_bw="0" op_300_bw="0" op_301_bw="0" op_302_bw="0" op_303_bw="0" op_304_bw="0" op_305_bw="0" op_306_bw="0" op_307_bw="0" op_308_bw="0" op_309_bw="0" op_310_bw="0" op_311_bw="0" op_312_bw="0" op_313_bw="0" op_314_bw="0" op_315_bw="0" op_316_bw="0" op_317_bw="0" op_318_bw="0" op_319_bw="0" op_320_bw="0" op_321_bw="0" op_322_bw="0" op_323_bw="0" op_324_bw="0" op_325_bw="0" op_326_bw="0" op_327_bw="0" op_328_bw="0" op_329_bw="0" op_330_bw="0" op_331_bw="0" op_332_bw="0" op_333_bw="0" op_334_bw="0" op_335_bw="0" op_336_bw="0" op_337_bw="0" op_338_bw="0" op_339_bw="0" op_340_bw="0" op_341_bw="0" op_342_bw="0" op_343_bw="0" op_344_bw="0" op_345_bw="0" op_346_bw="0" op_347_bw="0" op_348_bw="0" op_349_bw="0" op_350_bw="0" op_351_bw="0" op_352_bw="0" op_353_bw="0" op_354_bw="0" op_355_bw="0" op_356_bw="0" op_357_bw="0" op_358_bw="0" op_359_bw="0" op_360_bw="0" op_361_bw="0" op_362_bw="0" op_363_bw="0" op_364_bw="0" op_365_bw="0" op_366_bw="0" op_367_bw="0" op_368_bw="0" op_369_bw="0" op_370_bw="0" op_371_bw="0" op_372_bw="0" op_373_bw="0" op_374_bw="0" op_375_bw="0" op_376_bw="0" op_377_bw="0" op_378_bw="0" op_379_bw="0" op_380_bw="0" op_381_bw="0" op_382_bw="0" op_383_bw="0" op_384_bw="0" op_385_bw="0" op_386_bw="0" op_387_bw="0" op_388_bw="0" op_389_bw="0" op_390_bw="0" op_391_bw="0" op_392_bw="0" op_393_bw="0" op_394_bw="0" op_395_bw="0" op_396_bw="0" op_397_bw="0" op_398_bw="0" op_399_bw="0" op_400_bw="0" op_401_bw="0" op_402_bw="0" op_403_bw="0" op_404_bw="0" op_405_bw="0" op_406_bw="0" op_407_bw="0" op_408_bw="0" op_409_bw="0" op_410_bw="0" op_411_bw="0" op_412_bw="0" op_413_bw="0" op_414_bw="0" op_415_bw="0" op_416_bw="0" op_417_bw="0" op_418_bw="0" op_419_bw="0" op_420_bw="0" op_421_bw="0" op_422_bw="0" op_423_bw="0" op_424_bw="0" op_425_bw="0" op_426_bw="0" op_427_bw="0" op_428_bw="0" op_429_bw="0" op_430_bw="0" op_431_bw="0" op_432_bw="0" op_433_bw="0" op_434_bw="0" op_435_bw="0" op_436_bw="0" op_437_bw="0" op_438_bw="0" op_439_bw="0" op_440_bw="0" op_441_bw="0" op_442_bw="0" op_443_bw="0" op_444_bw="0" op_445_bw="0" op_446_bw="0" op_447_bw="0" op_448_bw="0" op_449_bw="0" op_450_bw="0" op_451_bw="0" op_452_bw="0" op_453_bw="0" op_454_bw="0" op_455_bw="0" op_456_bw="0" op_457_bw="0" op_458_bw="0" op_459_bw="0" op_460_bw="0" op_461_bw="0" op_462_bw="0" op_463_bw="0" op_464_bw="0" op_465_bw="0" op_466_bw="0" op_467_bw="0" op_468_bw="0" op_469_bw="0" op_470_bw="0" op_471_bw="0" op_472_bw="0" op_473_bw="0" op_474_bw="0" op_475_bw="0" op_476_bw="0" op_477_bw="0" op_478_bw="0" op_479_bw="0" op_480_bw="0" op_481_bw="0" op_482_bw="0" op_483_bw="0" op_484_bw="0" op_485_bw="0" op_486_bw="0" op_487_bw="0" op_488_bw="0" op_489_bw="0" op_490_bw="0" op_491_bw="0" op_492_bw="0" op_493_bw="0" op_494_bw="0" op_495_bw="0" op_496_bw="0" op_497_bw="0" op_498_bw="0" op_499_bw="0" op_500_bw="0" op_501_bw="0" op_502_bw="0" op_503_bw="0" op_504_bw="0" op_505_bw="0" op_506_bw="0" op_507_bw="0" op_508_bw="0" op_509_bw="0" op_510_bw="0" op_511_bw="0" op_512_bw="0" op_513_bw="0" op_514_bw="0" op_515_bw="0" op_516_bw="0" op_517_bw="0" op_518_bw="0" op_519_bw="0" op_520_bw="0" op_521_bw="0" op_522_bw="0" op_523_bw="0" op_524_bw="0" op_525_bw="0" op_526_bw="0" op_527_bw="0" op_528_bw="0" op_529_bw="0" op_530_bw="0" op_531_bw="0" op_532_bw="0" op_533_bw="0" op_534_bw="0" op_535_bw="0" op_536_bw="0" op_537_bw="0" op_538_bw="0" op_539_bw="0" op_540_bw="0" op_541_bw="0" op_542_bw="0" op_543_bw="0" op_544_bw="0" op_545_bw="0" op_546_bw="0" op_547_bw="0" op_548_bw="0" op_549_bw="0" op_550_bw="0" op_551_bw="0" op_552_bw="0" op_553_bw="0" op_554_bw="0" op_555_bw="0" op_556_bw="0" op_557_bw="0" op_558_bw="0" op_559_bw="0" op_560_bw="0" op_561_bw="0" op_562_bw="0" op_563_bw="0" op_564_bw="0" op_565_bw="0" op_566_bw="0" op_567_bw="0" op_568_bw="0" op_569_bw="0" op_570_bw="0" op_571_bw="0" op_572_bw="0" op_573_bw="0" op_574_bw="0" op_575_bw="0" op_576_bw="0" op_577_bw="0" op_578_bw="0" op_579_bw="0" op_580_bw="0" op_581_bw="0" op_582_bw="0" op_583_bw="0" op_584_bw="0" op_585_bw="0" op_586_bw="0" op_587_bw="0" op_588_bw="0" op_589_bw="0" op_590_bw="0" op_591_bw="0" op_592_bw="0" op_593_bw="0" op_594_bw="0" op_595_bw="0" op_596_bw="0" op_597_bw="0" op_598_bw="0" op_599_bw="0" op_600_bw="0" op_601_bw="0" op_602_bw="0" op_603_bw="0" op_604_bw="0" op_605_bw="0" op_606_bw="0" op_607_bw="0" op_608_bw="0" op_609_bw="0" op_610_bw="0" op_611_bw="0" op_612_bw="0" op_613_bw="0" op_614_bw="0" op_615_bw="0" op_616_bw="0" op_617_bw="0" op_618_bw="0" op_619_bw="0" op_620_bw="0" op_621_bw="0" op_622_bw="0" op_623_bw="0" op_624_bw="0" op_625_bw="0" op_626_bw="0" op_627_bw="0" op_628_bw="0" op_629_bw="0" op_630_bw="0" op_631_bw="0" op_632_bw="0" op_633_bw="0" op_634_bw="0" op_635_bw="0" op_636_bw="0" op_637_bw="0" op_638_bw="0" op_639_bw="0" op_640_bw="0" op_641_bw="0" op_642_bw="0" op_643_bw="0" op_644_bw="0" op_645_bw="0" op_646_bw="0" op_647_bw="0" op_648_bw="0" op_649_bw="0" op_650_bw="0" op_651_bw="0" op_652_bw="0" op_653_bw="0" op_654_bw="0" op_655_bw="0" op_656_bw="0" op_657_bw="0" op_658_bw="0" op_659_bw="0" op_660_bw="0" op_661_bw="0" op_662_bw="0" op_663_bw="0" op_664_bw="0" op_665_bw="0" op_666_bw="0" op_667_bw="0" op_668_bw="0" op_669_bw="0" op_670_bw="0" op_671_bw="0" op_672_bw="0" op_673_bw="0" op_674_bw="0" op_675_bw="0" op_676_bw="0" op_677_bw="0" op_678_bw="0" op_679_bw="0" op_680_bw="0" op_681_bw="0" op_682_bw="0" op_683_bw="0" op_684_bw="0" op_685_bw="0" op_686_bw="0" op_687_bw="0" op_688_bw="0" op_689_bw="0" op_690_bw="0" op_691_bw="0" op_692_bw="0" op_693_bw="0" op_694_bw="0" op_695_bw="0" op_696_bw="0" op_697_bw="0" op_698_bw="0" op_699_bw="0" op_700_bw="0" op_701_bw="0" op_702_bw="0" op_703_bw="0" op_704_bw="0" op_705_bw="0" op_706_bw="0" op_707_bw="0" op_708_bw="0" op_709_bw="0" op_710_bw="0" op_711_bw="0" op_712_bw="0" op_713_bw="0" op_714_bw="0" op_715_bw="0" op_716_bw="0" op_717_bw="0" op_718_bw="0" op_719_bw="0" op_720_bw="0" op_721_bw="0" op_722_bw="0" op_723_bw="0" op_724_bw="0" op_725_bw="0" op_726_bw="0" op_727_bw="0" op_728_bw="0" op_729_bw="0" op_730_bw="0" op_731_bw="0" op_732_bw="0" op_733_bw="0" op_734_bw="0" op_735_bw="0" op_736_bw="0" op_737_bw="0" op_738_bw="0" op_739_bw="0" op_740_bw="0" op_741_bw="0" op_742_bw="0" op_743_bw="0" op_744_bw="0" op_745_bw="0" op_746_bw="0" op_747_bw="0" op_748_bw="0" op_749_bw="0" op_750_bw="0" op_751_bw="0" op_752_bw="0" op_753_bw="0" op_754_bw="0" op_755_bw="0" op_756_bw="0" op_757_bw="0" op_758_bw="0" op_759_bw="0" op_760_bw="0" op_761_bw="0" op_762_bw="0" op_763_bw="0" op_764_bw="0" op_765_bw="0" op_766_bw="0" op_767_bw="0" op_768_bw="0" op_769_bw="0" op_770_bw="0" op_771_bw="0" op_772_bw="0" op_773_bw="0" op_774_bw="0" op_775_bw="0" op_776_bw="0" op_777_bw="0" op_778_bw="0" op_779_bw="0" op_780_bw="0" op_781_bw="0" op_782_bw="0" op_783_bw="0" op_784_bw="0" op_785_bw="0" op_786_bw="0" op_787_bw="0" op_788_bw="0" op_789_bw="0" op_790_bw="0" op_791_bw="0" op_792_bw="0" op_793_bw="0" op_794_bw="0" op_795_bw="0" op_796_bw="0" op_797_bw="0" op_798_bw="0" op_799_bw="0" op_800_bw="0" op_801_bw="0" op_802_bw="0" op_803_bw="0" op_804_bw="0" op_805_bw="0" op_806_bw="0" op_807_bw="0" op_808_bw="0" op_809_bw="0" op_810_bw="0" op_811_bw="0" op_812_bw="0" op_813_bw="0" op_814_bw="0" op_815_bw="0" op_816_bw="0" op_817_bw="0" op_818_bw="0" op_819_bw="0" op_820_bw="0" op_821_bw="0" op_822_bw="0" op_823_bw="0" op_824_bw="0" op_825_bw="0" op_826_bw="0" op_827_bw="0" op_828_bw="0" op_829_bw="0" op_830_bw="0" op_831_bw="0" op_832_bw="0" op_833_bw="0" op_834_bw="0" op_835_bw="0" op_836_bw="0" op_837_bw="0" op_838_bw="0" op_839_bw="0" op_840_bw="0" op_841_bw="0" op_842_bw="0" op_843_bw="0" op_844_bw="0" op_845_bw="0" op_846_bw="0" op_847_bw="0" op_848_bw="0" op_849_bw="0" op_850_bw="0" op_851_bw="0" op_852_bw="0" op_853_bw="0" op_854_bw="0" op_855_bw="0" op_856_bw="0" op_857_bw="0" op_858_bw="0" op_859_bw="0" op_860_bw="0" op_861_bw="0" op_862_bw="0" op_863_bw="0" op_864_bw="0" op_865_bw="0" op_866_bw="0" op_867_bw="0" op_868_bw="0" op_869_bw="0" op_870_bw="0" op_871_bw="0" op_872_bw="0" op_873_bw="0" op_874_bw="0" op_875_bw="0" op_876_bw="0" op_877_bw="0" op_878_bw="0" op_879_bw="0" op_880_bw="0" op_881_bw="0" op_882_bw="0" op_883_bw="0" op_884_bw="0" op_885_bw="0" op_886_bw="0" op_887_bw="0" op_888_bw="0" op_889_bw="0" op_890_bw="0" op_891_bw="0" op_892_bw="0" op_893_bw="0" op_894_bw="0" op_895_bw="0" op_896_bw="0" op_897_bw="0" op_898_bw="0" op_899_bw="0" op_900_bw="0" op_901_bw="0" op_902_bw="0" op_903_bw="0" op_904_bw="0" op_905_bw="0" op_906_bw="0" op_907_bw="0" op_908_bw="0" op_909_bw="0" op_910_bw="0" op_911_bw="0" op_912_bw="0" op_913_bw="0" op_914_bw="0" op_915_bw="0" op_916_bw="0" op_917_bw="0" op_918_bw="0" op_919_bw="0" op_920_bw="0" op_921_bw="0" op_922_bw="0" op_923_bw="0" op_924_bw="0" op_925_bw="0" op_926_bw="0" op_927_bw="0" op_928_bw="0" op_929_bw="0" op_930_bw="0" op_931_bw="0" op_932_bw="0" op_933_bw="0" op_934_bw="0" op_935_bw="0" op_936_bw="0" op_937_bw="0" op_938_bw="0" op_939_bw="0" op_940_bw="0" op_941_bw="0" op_942_bw="0" op_943_bw="0" op_944_bw="0" op_945_bw="0" op_946_bw="0" op_947_bw="0" op_948_bw="0" op_949_bw="0" op_950_bw="0" op_951_bw="0" op_952_bw="0" op_953_bw="0" op_954_bw="0" op_955_bw="0" op_956_bw="0" op_957_bw="0" op_958_bw="0" op_959_bw="0" op_960_bw="0" op_961_bw="0" op_962_bw="0" op_963_bw="0" op_964_bw="0" op_965_bw="0" op_966_bw="0" op_967_bw="0" op_968_bw="0" op_969_bw="0" op_970_bw="0" op_971_bw="0" op_972_bw="0" op_973_bw="0" op_974_bw="0" op_975_bw="0" op_976_bw="0" op_977_bw="0" op_978_bw="0" op_979_bw="0" op_980_bw="0" op_981_bw="0" op_982_bw="0" op_983_bw="0" op_984_bw="0" op_985_bw="0" op_986_bw="0" op_987_bw="0" op_988_bw="0" op_989_bw="0" op_990_bw="0" op_991_bw="0" op_992_bw="0" op_993_bw="0" op_994_bw="0" op_995_bw="0" op_996_bw="0" op_997_bw="0" op_998_bw="0" op_999_bw="0" op_1000_bw="0" op_1001_bw="64" op_1002_bw="64" op_1003_bw="64">
+<![CDATA[
+entry:12 %specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %mlp_out_V_0, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, i64 666, i64 24, i64 18446744073709551615
+
+]]></Node>
+<StgValue><ssdm name="specmemcore_ln0"/></StgValue>
+</operation>
+
+<operation id="18" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="22" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="0" op_3_bw="0" op_4_bw="0" op_5_bw="0" op_6_bw="0" op_7_bw="0" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="0" op_12_bw="0" op_13_bw="0" op_14_bw="0" op_15_bw="0" op_16_bw="0" op_17_bw="0" op_18_bw="0" op_19_bw="0" op_20_bw="0" op_21_bw="0" op_22_bw="0" op_23_bw="0" op_24_bw="0" op_25_bw="0" op_26_bw="0" op_27_bw="0" op_28_bw="0" op_29_bw="0" op_30_bw="0" op_31_bw="0" op_32_bw="0" op_33_bw="0" op_34_bw="0" op_35_bw="0" op_36_bw="0" op_37_bw="0" op_38_bw="0" op_39_bw="0" op_40_bw="0" op_41_bw="0" op_42_bw="0" op_43_bw="0" op_44_bw="0" op_45_bw="0" op_46_bw="0" op_47_bw="0" op_48_bw="0" op_49_bw="0" op_50_bw="0" op_51_bw="0" op_52_bw="0" op_53_bw="0" op_54_bw="0" op_55_bw="0" op_56_bw="0" op_57_bw="0" op_58_bw="0" op_59_bw="0" op_60_bw="0" op_61_bw="0" op_62_bw="0" op_63_bw="0" op_64_bw="0" op_65_bw="0" op_66_bw="0" op_67_bw="0" op_68_bw="0" op_69_bw="0" op_70_bw="0" op_71_bw="0" op_72_bw="0" op_73_bw="0" op_74_bw="0" op_75_bw="0" op_76_bw="0" op_77_bw="0" op_78_bw="0" op_79_bw="0" op_80_bw="0" op_81_bw="0" op_82_bw="0" op_83_bw="0" op_84_bw="0" op_85_bw="0" op_86_bw="0" op_87_bw="0" op_88_bw="0" op_89_bw="0" op_90_bw="0" op_91_bw="0" op_92_bw="0" op_93_bw="0" op_94_bw="0" op_95_bw="0" op_96_bw="0" op_97_bw="0" op_98_bw="0" op_99_bw="0" op_100_bw="0" op_101_bw="0" op_102_bw="0" op_103_bw="0" op_104_bw="0" op_105_bw="0" op_106_bw="0" op_107_bw="0" op_108_bw="0" op_109_bw="0" op_110_bw="0" op_111_bw="0" op_112_bw="0" op_113_bw="0" op_114_bw="0" op_115_bw="0" op_116_bw="0" op_117_bw="0" op_118_bw="0" op_119_bw="0" op_120_bw="0" op_121_bw="0" op_122_bw="0" op_123_bw="0" op_124_bw="0" op_125_bw="0" op_126_bw="0" op_127_bw="0" op_128_bw="0" op_129_bw="0" op_130_bw="0" op_131_bw="0" op_132_bw="0" op_133_bw="0" op_134_bw="0" op_135_bw="0" op_136_bw="0" op_137_bw="0" op_138_bw="0" op_139_bw="0" op_140_bw="0" op_141_bw="0" op_142_bw="0" op_143_bw="0" op_144_bw="0" op_145_bw="0" op_146_bw="0" op_147_bw="0" op_148_bw="0" op_149_bw="0" op_150_bw="0" op_151_bw="0" op_152_bw="0" op_153_bw="0" op_154_bw="0" op_155_bw="0" op_156_bw="0" op_157_bw="0" op_158_bw="0" op_159_bw="0" op_160_bw="0" op_161_bw="0" op_162_bw="0" op_163_bw="0" op_164_bw="0" op_165_bw="0" op_166_bw="0" op_167_bw="0" op_168_bw="0" op_169_bw="0" op_170_bw="0" op_171_bw="0" op_172_bw="0" op_173_bw="0" op_174_bw="0" op_175_bw="0" op_176_bw="0" op_177_bw="0" op_178_bw="0" op_179_bw="0" op_180_bw="0" op_181_bw="0" op_182_bw="0" op_183_bw="0" op_184_bw="0" op_185_bw="0" op_186_bw="0" op_187_bw="0" op_188_bw="0" op_189_bw="0" op_190_bw="0" op_191_bw="0" op_192_bw="0" op_193_bw="0" op_194_bw="0" op_195_bw="0" op_196_bw="0" op_197_bw="0" op_198_bw="0" op_199_bw="0" op_200_bw="0" op_201_bw="0" op_202_bw="0" op_203_bw="0" op_204_bw="0" op_205_bw="0" op_206_bw="0" op_207_bw="0" op_208_bw="0" op_209_bw="0" op_210_bw="0" op_211_bw="0" op_212_bw="0" op_213_bw="0" op_214_bw="0" op_215_bw="0" op_216_bw="0" op_217_bw="0" op_218_bw="0" op_219_bw="0" op_220_bw="0" op_221_bw="0" op_222_bw="0" op_223_bw="0" op_224_bw="0" op_225_bw="0" op_226_bw="0" op_227_bw="0" op_228_bw="0" op_229_bw="0" op_230_bw="0" op_231_bw="0" op_232_bw="0" op_233_bw="0" op_234_bw="0" op_235_bw="0" op_236_bw="0" op_237_bw="0" op_238_bw="0" op_239_bw="0" op_240_bw="0" op_241_bw="0" op_242_bw="0" op_243_bw="0" op_244_bw="0" op_245_bw="0" op_246_bw="0" op_247_bw="0" op_248_bw="0" op_249_bw="0" op_250_bw="0" op_251_bw="0" op_252_bw="0" op_253_bw="0" op_254_bw="0" op_255_bw="0" op_256_bw="0" op_257_bw="0" op_258_bw="0" op_259_bw="0" op_260_bw="0" op_261_bw="0" op_262_bw="0" op_263_bw="0" op_264_bw="0" op_265_bw="0" op_266_bw="0" op_267_bw="0" op_268_bw="0" op_269_bw="0" op_270_bw="0" op_271_bw="0" op_272_bw="0" op_273_bw="0" op_274_bw="0" op_275_bw="0" op_276_bw="0" op_277_bw="0" op_278_bw="0" op_279_bw="0" op_280_bw="0" op_281_bw="0" op_282_bw="0" op_283_bw="0" op_284_bw="0" op_285_bw="0" op_286_bw="0" op_287_bw="0" op_288_bw="0" op_289_bw="0" op_290_bw="0" op_291_bw="0" op_292_bw="0" op_293_bw="0" op_294_bw="0" op_295_bw="0" op_296_bw="0" op_297_bw="0" op_298_bw="0" op_299_bw="0" op_300_bw="0" op_301_bw="0" op_302_bw="0" op_303_bw="0" op_304_bw="0" op_305_bw="0" op_306_bw="0" op_307_bw="0" op_308_bw="0" op_309_bw="0" op_310_bw="0" op_311_bw="0" op_312_bw="0" op_313_bw="0" op_314_bw="0" op_315_bw="0" op_316_bw="0" op_317_bw="0" op_318_bw="0" op_319_bw="0" op_320_bw="0" op_321_bw="0" op_322_bw="0" op_323_bw="0" op_324_bw="0" op_325_bw="0" op_326_bw="0" op_327_bw="0" op_328_bw="0" op_329_bw="0" op_330_bw="0" op_331_bw="0" op_332_bw="0" op_333_bw="0" op_334_bw="0" op_335_bw="0" op_336_bw="0" op_337_bw="0" op_338_bw="0" op_339_bw="0" op_340_bw="0" op_341_bw="0" op_342_bw="0" op_343_bw="0" op_344_bw="0" op_345_bw="0" op_346_bw="0" op_347_bw="0" op_348_bw="0" op_349_bw="0" op_350_bw="0" op_351_bw="0" op_352_bw="0" op_353_bw="0" op_354_bw="0" op_355_bw="0" op_356_bw="0" op_357_bw="0" op_358_bw="0" op_359_bw="0" op_360_bw="0" op_361_bw="0" op_362_bw="0" op_363_bw="0" op_364_bw="0" op_365_bw="0" op_366_bw="0" op_367_bw="0" op_368_bw="0" op_369_bw="0" op_370_bw="0" op_371_bw="0" op_372_bw="0" op_373_bw="0" op_374_bw="0" op_375_bw="0" op_376_bw="0" op_377_bw="0" op_378_bw="0" op_379_bw="0" op_380_bw="0" op_381_bw="0" op_382_bw="0" op_383_bw="0" op_384_bw="0" op_385_bw="0" op_386_bw="0" op_387_bw="0" op_388_bw="0" op_389_bw="0" op_390_bw="0" op_391_bw="0" op_392_bw="0" op_393_bw="0" op_394_bw="0" op_395_bw="0" op_396_bw="0" op_397_bw="0" op_398_bw="0" op_399_bw="0" op_400_bw="0" op_401_bw="0" op_402_bw="0" op_403_bw="0" op_404_bw="0" op_405_bw="0" op_406_bw="0" op_407_bw="0" op_408_bw="0" op_409_bw="0" op_410_bw="0" op_411_bw="0" op_412_bw="0" op_413_bw="0" op_414_bw="0" op_415_bw="0" op_416_bw="0" op_417_bw="0" op_418_bw="0" op_419_bw="0" op_420_bw="0" op_421_bw="0" op_422_bw="0" op_423_bw="0" op_424_bw="0" op_425_bw="0" op_426_bw="0" op_427_bw="0" op_428_bw="0" op_429_bw="0" op_430_bw="0" op_431_bw="0" op_432_bw="0" op_433_bw="0" op_434_bw="0" op_435_bw="0" op_436_bw="0" op_437_bw="0" op_438_bw="0" op_439_bw="0" op_440_bw="0" op_441_bw="0" op_442_bw="0" op_443_bw="0" op_444_bw="0" op_445_bw="0" op_446_bw="0" op_447_bw="0" op_448_bw="0" op_449_bw="0" op_450_bw="0" op_451_bw="0" op_452_bw="0" op_453_bw="0" op_454_bw="0" op_455_bw="0" op_456_bw="0" op_457_bw="0" op_458_bw="0" op_459_bw="0" op_460_bw="0" op_461_bw="0" op_462_bw="0" op_463_bw="0" op_464_bw="0" op_465_bw="0" op_466_bw="0" op_467_bw="0" op_468_bw="0" op_469_bw="0" op_470_bw="0" op_471_bw="0" op_472_bw="0" op_473_bw="0" op_474_bw="0" op_475_bw="0" op_476_bw="0" op_477_bw="0" op_478_bw="0" op_479_bw="0" op_480_bw="0" op_481_bw="0" op_482_bw="0" op_483_bw="0" op_484_bw="0" op_485_bw="0" op_486_bw="0" op_487_bw="0" op_488_bw="0" op_489_bw="0" op_490_bw="0" op_491_bw="0" op_492_bw="0" op_493_bw="0" op_494_bw="0" op_495_bw="0" op_496_bw="0" op_497_bw="0" op_498_bw="0" op_499_bw="0" op_500_bw="0" op_501_bw="0" op_502_bw="0" op_503_bw="0" op_504_bw="0" op_505_bw="0" op_506_bw="0" op_507_bw="0" op_508_bw="0" op_509_bw="0" op_510_bw="0" op_511_bw="0" op_512_bw="0" op_513_bw="0" op_514_bw="0" op_515_bw="0" op_516_bw="0" op_517_bw="0" op_518_bw="0" op_519_bw="0" op_520_bw="0" op_521_bw="0" op_522_bw="0" op_523_bw="0" op_524_bw="0" op_525_bw="0" op_526_bw="0" op_527_bw="0" op_528_bw="0" op_529_bw="0" op_530_bw="0" op_531_bw="0" op_532_bw="0" op_533_bw="0" op_534_bw="0" op_535_bw="0" op_536_bw="0" op_537_bw="0" op_538_bw="0" op_539_bw="0" op_540_bw="0" op_541_bw="0" op_542_bw="0" op_543_bw="0" op_544_bw="0" op_545_bw="0" op_546_bw="0" op_547_bw="0" op_548_bw="0" op_549_bw="0" op_550_bw="0" op_551_bw="0" op_552_bw="0" op_553_bw="0" op_554_bw="0" op_555_bw="0" op_556_bw="0" op_557_bw="0" op_558_bw="0" op_559_bw="0" op_560_bw="0" op_561_bw="0" op_562_bw="0" op_563_bw="0" op_564_bw="0" op_565_bw="0" op_566_bw="0" op_567_bw="0" op_568_bw="0" op_569_bw="0" op_570_bw="0" op_571_bw="0" op_572_bw="0" op_573_bw="0" op_574_bw="0" op_575_bw="0" op_576_bw="0" op_577_bw="0" op_578_bw="0" op_579_bw="0" op_580_bw="0" op_581_bw="0" op_582_bw="0" op_583_bw="0" op_584_bw="0" op_585_bw="0" op_586_bw="0" op_587_bw="0" op_588_bw="0" op_589_bw="0" op_590_bw="0" op_591_bw="0" op_592_bw="0" op_593_bw="0" op_594_bw="0" op_595_bw="0" op_596_bw="0" op_597_bw="0" op_598_bw="0" op_599_bw="0" op_600_bw="0" op_601_bw="0" op_602_bw="0" op_603_bw="0" op_604_bw="0" op_605_bw="0" op_606_bw="0" op_607_bw="0" op_608_bw="0" op_609_bw="0" op_610_bw="0" op_611_bw="0" op_612_bw="0" op_613_bw="0" op_614_bw="0" op_615_bw="0" op_616_bw="0" op_617_bw="0" op_618_bw="0" op_619_bw="0" op_620_bw="0" op_621_bw="0" op_622_bw="0" op_623_bw="0" op_624_bw="0" op_625_bw="0" op_626_bw="0" op_627_bw="0" op_628_bw="0" op_629_bw="0" op_630_bw="0" op_631_bw="0" op_632_bw="0" op_633_bw="0" op_634_bw="0" op_635_bw="0" op_636_bw="0" op_637_bw="0" op_638_bw="0" op_639_bw="0" op_640_bw="0" op_641_bw="0" op_642_bw="0" op_643_bw="0" op_644_bw="0" op_645_bw="0" op_646_bw="0" op_647_bw="0" op_648_bw="0" op_649_bw="0" op_650_bw="0" op_651_bw="0" op_652_bw="0" op_653_bw="0" op_654_bw="0" op_655_bw="0" op_656_bw="0" op_657_bw="0" op_658_bw="0" op_659_bw="0" op_660_bw="0" op_661_bw="0" op_662_bw="0" op_663_bw="0" op_664_bw="0" op_665_bw="0" op_666_bw="0" op_667_bw="0" op_668_bw="0" op_669_bw="0" op_670_bw="0" op_671_bw="0" op_672_bw="0" op_673_bw="0" op_674_bw="0" op_675_bw="0" op_676_bw="0" op_677_bw="0" op_678_bw="0" op_679_bw="0" op_680_bw="0" op_681_bw="0" op_682_bw="0" op_683_bw="0" op_684_bw="0" op_685_bw="0" op_686_bw="0" op_687_bw="0" op_688_bw="0" op_689_bw="0" op_690_bw="0" op_691_bw="0" op_692_bw="0" op_693_bw="0" op_694_bw="0" op_695_bw="0" op_696_bw="0" op_697_bw="0" op_698_bw="0" op_699_bw="0" op_700_bw="0" op_701_bw="0" op_702_bw="0" op_703_bw="0" op_704_bw="0" op_705_bw="0" op_706_bw="0" op_707_bw="0" op_708_bw="0" op_709_bw="0" op_710_bw="0" op_711_bw="0" op_712_bw="0" op_713_bw="0" op_714_bw="0" op_715_bw="0" op_716_bw="0" op_717_bw="0" op_718_bw="0" op_719_bw="0" op_720_bw="0" op_721_bw="0" op_722_bw="0" op_723_bw="0" op_724_bw="0" op_725_bw="0" op_726_bw="0" op_727_bw="0" op_728_bw="0" op_729_bw="0" op_730_bw="0" op_731_bw="0" op_732_bw="0" op_733_bw="0" op_734_bw="0" op_735_bw="0" op_736_bw="0" op_737_bw="0" op_738_bw="0" op_739_bw="0" op_740_bw="0" op_741_bw="0" op_742_bw="0" op_743_bw="0" op_744_bw="0" op_745_bw="0" op_746_bw="0" op_747_bw="0" op_748_bw="0" op_749_bw="0" op_750_bw="0" op_751_bw="0" op_752_bw="0" op_753_bw="0" op_754_bw="0" op_755_bw="0" op_756_bw="0" op_757_bw="0" op_758_bw="0" op_759_bw="0" op_760_bw="0" op_761_bw="0" op_762_bw="0" op_763_bw="0" op_764_bw="0" op_765_bw="0" op_766_bw="0" op_767_bw="0" op_768_bw="0" op_769_bw="0" op_770_bw="0" op_771_bw="0" op_772_bw="0" op_773_bw="0" op_774_bw="0" op_775_bw="0" op_776_bw="0" op_777_bw="0" op_778_bw="0" op_779_bw="0" op_780_bw="0" op_781_bw="0" op_782_bw="0" op_783_bw="0" op_784_bw="0" op_785_bw="0" op_786_bw="0" op_787_bw="0" op_788_bw="0" op_789_bw="0" op_790_bw="0" op_791_bw="0" op_792_bw="0" op_793_bw="0" op_794_bw="0" op_795_bw="0" op_796_bw="0" op_797_bw="0" op_798_bw="0" op_799_bw="0" op_800_bw="0" op_801_bw="0" op_802_bw="0" op_803_bw="0" op_804_bw="0" op_805_bw="0" op_806_bw="0" op_807_bw="0" op_808_bw="0" op_809_bw="0" op_810_bw="0" op_811_bw="0" op_812_bw="0" op_813_bw="0" op_814_bw="0" op_815_bw="0" op_816_bw="0" op_817_bw="0" op_818_bw="0" op_819_bw="0" op_820_bw="0" op_821_bw="0" op_822_bw="0" op_823_bw="0" op_824_bw="0" op_825_bw="0" op_826_bw="0" op_827_bw="0" op_828_bw="0" op_829_bw="0" op_830_bw="0" op_831_bw="0" op_832_bw="0" op_833_bw="0" op_834_bw="0" op_835_bw="0" op_836_bw="0" op_837_bw="0" op_838_bw="0" op_839_bw="0" op_840_bw="0" op_841_bw="0" op_842_bw="0" op_843_bw="0" op_844_bw="0" op_845_bw="0" op_846_bw="0" op_847_bw="0" op_848_bw="0" op_849_bw="0" op_850_bw="0" op_851_bw="0" op_852_bw="0" op_853_bw="0" op_854_bw="0" op_855_bw="0" op_856_bw="0" op_857_bw="0" op_858_bw="0" op_859_bw="0" op_860_bw="0" op_861_bw="0" op_862_bw="0" op_863_bw="0" op_864_bw="0" op_865_bw="0" op_866_bw="0" op_867_bw="0" op_868_bw="0" op_869_bw="0" op_870_bw="0" op_871_bw="0" op_872_bw="0" op_873_bw="0" op_874_bw="0" op_875_bw="0" op_876_bw="0" op_877_bw="0" op_878_bw="0" op_879_bw="0" op_880_bw="0" op_881_bw="0" op_882_bw="0" op_883_bw="0" op_884_bw="0" op_885_bw="0" op_886_bw="0" op_887_bw="0" op_888_bw="0" op_889_bw="0" op_890_bw="0" op_891_bw="0" op_892_bw="0" op_893_bw="0" op_894_bw="0" op_895_bw="0" op_896_bw="0" op_897_bw="0" op_898_bw="0" op_899_bw="0" op_900_bw="0" op_901_bw="0" op_902_bw="0" op_903_bw="0" op_904_bw="0" op_905_bw="0" op_906_bw="0" op_907_bw="0" op_908_bw="0" op_909_bw="0" op_910_bw="0" op_911_bw="0" op_912_bw="0" op_913_bw="0" op_914_bw="0" op_915_bw="0" op_916_bw="0" op_917_bw="0" op_918_bw="0" op_919_bw="0" op_920_bw="0" op_921_bw="0" op_922_bw="0" op_923_bw="0" op_924_bw="0" op_925_bw="0" op_926_bw="0" op_927_bw="0" op_928_bw="0" op_929_bw="0" op_930_bw="0" op_931_bw="0" op_932_bw="0" op_933_bw="0" op_934_bw="0" op_935_bw="0" op_936_bw="0" op_937_bw="0" op_938_bw="0" op_939_bw="0" op_940_bw="0" op_941_bw="0" op_942_bw="0" op_943_bw="0" op_944_bw="0" op_945_bw="0" op_946_bw="0" op_947_bw="0" op_948_bw="0" op_949_bw="0" op_950_bw="0" op_951_bw="0" op_952_bw="0" op_953_bw="0" op_954_bw="0" op_955_bw="0" op_956_bw="0" op_957_bw="0" op_958_bw="0" op_959_bw="0" op_960_bw="0" op_961_bw="0" op_962_bw="0" op_963_bw="0" op_964_bw="0" op_965_bw="0" op_966_bw="0" op_967_bw="0" op_968_bw="0" op_969_bw="0" op_970_bw="0" op_971_bw="0" op_972_bw="0" op_973_bw="0" op_974_bw="0" op_975_bw="0" op_976_bw="0" op_977_bw="0" op_978_bw="0" op_979_bw="0" op_980_bw="0" op_981_bw="0" op_982_bw="0" op_983_bw="0" op_984_bw="0" op_985_bw="0" op_986_bw="0" op_987_bw="0" op_988_bw="0" op_989_bw="0" op_990_bw="0" op_991_bw="0" op_992_bw="0" op_993_bw="0" op_994_bw="0" op_995_bw="0" op_996_bw="0" op_997_bw="0" op_998_bw="0" op_999_bw="0" op_1000_bw="0" op_1001_bw="64" op_1002_bw="64" op_1003_bw="64">
+<![CDATA[
+entry:13 %specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %mlp_in_V_0, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, void <undef>, i64 666, i64 24, i64 18446744073709551615
+
+]]></Node>
+<StgValue><ssdm name="specmemcore_ln0"/></StgValue>
+</operation>
+
+<operation id="19" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="23" bw="64" op_0_bw="10">
+<![CDATA[
+entry:14 %zext_ln85 = zext i10 %d_out_4
+
+]]></Node>
+<StgValue><ssdm name="zext_ln85"/></StgValue>
+</operation>
+
+<operation id="20" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="24" bw="10" op_0_bw="32" op_1_bw="64" op_2_bw="64">
+<![CDATA[
+entry:15 %mlp_out_V_0_addr = getelementptr i32 %mlp_out_V_0, i64 0, i64 %zext_ln85
+
+]]></Node>
+<StgValue><ssdm name="mlp_out_V_0_addr"/></StgValue>
+</operation>
+
+<operation id="21" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="25" bw="0" op_0_bw="0">
+<![CDATA[
+entry:16 %br_ln86 = br void %_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i
+
+]]></Node>
+<StgValue><ssdm name="br_ln86"/></StgValue>
+</operation>
+</state>
+
+<state id="2" st_id="2">
+
+<operation id="22" st_id="2" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="27" bw="9" op_0_bw="9" op_1_bw="0" op_2_bw="9" op_3_bw="0">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i:0 %i = phi i9 0, void %entry, i9 %add_ln86, void %_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i
+
+]]></Node>
+<StgValue><ssdm name="i"/></StgValue>
+</operation>
+
+<operation id="23" st_id="2" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="28" bw="32" op_0_bw="32" op_1_bw="0" op_2_bw="32" op_3_bw="0">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i:1 %lhs = phi i32 %mlp_1_bias_V_load_loc_read, void %entry, i32 %trunc_ln8, void %_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i
+
+]]></Node>
+<StgValue><ssdm name="lhs"/></StgValue>
+</operation>
+
+<operation id="24" st_id="2" stage="1" lat="1">
+<core>Adder</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="29" bw="9" op_0_bw="9" op_1_bw="9">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i:2 %add_ln86 = add i9 %i, i9 1
+
+]]></Node>
+<StgValue><ssdm name="add_ln86"/></StgValue>
+</operation>
+
+<operation id="25" st_id="2" stage="1" lat="1">
+<core>Cmp</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="30" bw="1" op_0_bw="9" op_1_bw="9">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i:3 %icmp_ln86 = icmp_eq  i9 %i, i9 300
+
+]]></Node>
+<StgValue><ssdm name="icmp_ln86"/></StgValue>
+</operation>
+
+<operation id="26" st_id="2" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="31" bw="32" op_0_bw="32" op_1_bw="64" op_2_bw="64" op_3_bw="64">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i:4 %empty = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 300, i64 300, i64 300
+
+]]></Node>
+<StgValue><ssdm name="empty"/></StgValue>
+</operation>
+
+<operation id="27" st_id="2" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="32" bw="0" op_0_bw="1" op_1_bw="0" op_2_bw="0">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i:5 %br_ln86 = br i1 %icmp_ln86, void %_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i, void %.exit
+
+]]></Node>
+<StgValue><ssdm name="br_ln86"/></StgValue>
+</operation>
+
+<operation id="28" st_id="2" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="34" bw="64" op_0_bw="9">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:0 %zext_ln86 = zext i9 %i
+
+]]></Node>
+<StgValue><ssdm name="zext_ln86"/></StgValue>
+</operation>
+
+<operation id="29" st_id="2" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="39" bw="10" op_0_bw="32" op_1_bw="64" op_2_bw="64">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:5 %mlp_in_V_0_addr = getelementptr i32 %mlp_in_V_0, i64 0, i64 %zext_ln86
+
+]]></Node>
+<StgValue><ssdm name="mlp_in_V_0_addr"/></StgValue>
+</operation>
+
+<operation id="30" st_id="2" stage="2" lat="2">
+<core>RAM_2P_URAM</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="40" bw="32" op_0_bw="10">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:6 %mlp_in_V_0_load = load i10 %mlp_in_V_0_addr
+
+]]></Node>
+<StgValue><ssdm name="mlp_in_V_0_load"/></StgValue>
+</operation>
+</state>
+
+<state id="3" st_id="3">
+
+<operation id="31" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="35" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32" op_3_bw="32" op_4_bw="32" op_5_bw="0">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:1 %specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 0, i32 0, void @empty_12
+
+]]></Node>
+<StgValue><ssdm name="specpipeline_ln0"/></StgValue>
+</operation>
+
+<operation id="32" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="36" bw="0" op_0_bw="0" op_1_bw="0">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:2 %specloopname_ln0 = specloopname void @_ssdm_op_SpecLoopName, void @empty_33
+
+]]></Node>
+<StgValue><ssdm name="specloopname_ln0"/></StgValue>
+</operation>
+
+<operation id="33" st_id="3" stage="1" lat="1">
+<core>FIFO_SRL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="37" bw="32" op_0_bw="32" op_1_bw="32">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:3 %w_V = read i32 @_ssdm_op_Read.ap_fifo.volatile.i32P0A, i32 %mlp_1_weight_fifo_0_V_V
+
+]]></Node>
+<StgValue><ssdm name="w_V"/></StgValue>
+</operation>
+
+<operation id="34" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="38" bw="54" op_0_bw="32">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:4 %sext_ln1115 = sext i32 %w_V
+
+]]></Node>
+<StgValue><ssdm name="sext_ln1115"/></StgValue>
+</operation>
+
+<operation id="35" st_id="3" stage="1" lat="2">
+<core>RAM_2P_URAM</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="40" bw="32" op_0_bw="10">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:6 %mlp_in_V_0_load = load i10 %mlp_in_V_0_addr
+
+]]></Node>
+<StgValue><ssdm name="mlp_in_V_0_load"/></StgValue>
+</operation>
+
+<operation id="36" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="41" bw="54" op_0_bw="32">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:7 %sext_ln1118 = sext i32 %mlp_in_V_0_load
+
+]]></Node>
+<StgValue><ssdm name="sext_ln1118"/></StgValue>
+</operation>
+
+<operation id="37" st_id="3" stage="1" lat="1">
+<core>Multiplier</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="42" bw="54" op_0_bw="54" op_1_bw="54">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:8 %r_V_5 = mul i54 %sext_ln1118, i54 %sext_ln1115
+
+]]></Node>
+<StgValue><ssdm name="r_V_5"/></StgValue>
+</operation>
+
+<operation id="38" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="43" bw="54" op_0_bw="54" op_1_bw="32" op_2_bw="22">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:9 %lhs_5 = bitconcatenate i54 @_ssdm_op_BitConcatenate.i54.i32.i22, i32 %lhs, i22 0
+
+]]></Node>
+<StgValue><ssdm name="lhs_5"/></StgValue>
+</operation>
+
+<operation id="39" st_id="3" stage="1" lat="1">
+<core>Adder</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="44" bw="54" op_0_bw="54" op_1_bw="54">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:10 %ret_V = add i54 %r_V_5, i54 %lhs_5
+
+]]></Node>
+<StgValue><ssdm name="ret_V"/></StgValue>
+</operation>
+
+<operation id="40" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="45" bw="32" op_0_bw="32" op_1_bw="54" op_2_bw="32" op_3_bw="32">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:11 %trunc_ln8 = partselect i32 @_ssdm_op_PartSelect.i32.i54.i32.i32, i54 %ret_V, i32 22, i32 53
+
+]]></Node>
+<StgValue><ssdm name="trunc_ln8"/></StgValue>
+</operation>
+
+<operation id="41" st_id="3" stage="1" lat="1">
+<core>FIFO_SRL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="46" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:12 %write_ln174 = write void @_ssdm_op_Write.ap_fifo.volatile.i32P0A, i32 %mlp_1_weight_fifo_1_V_V, i32 %w_V
+
+]]></Node>
+<StgValue><ssdm name="write_ln174"/></StgValue>
+</operation>
+
+<operation id="42" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp><literal name="icmp_ln86" val="0"/>
+</and_exp></or_exp>
+</condition>
+
+<Node id="47" bw="0" op_0_bw="0">
+<![CDATA[
+_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.split.i.i:13 %br_ln0 = br void %_ZN13ap_fixed_baseILi65ELi21ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i.i.i
+
+]]></Node>
+<StgValue><ssdm name="br_ln0"/></StgValue>
+</operation>
+</state>
+
+<state id="4" st_id="4">
+
+<operation id="43" st_id="4" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="49" bw="31" op_0_bw="32">
+<![CDATA[
+.exit:0 %trunc_ln86 = trunc i32 %lhs
+
+]]></Node>
+<StgValue><ssdm name="trunc_ln86"/></StgValue>
+</operation>
+
+<operation id="44" st_id="4" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="50" bw="1" op_0_bw="1" op_1_bw="32" op_2_bw="32">
+<![CDATA[
+.exit:1 %tmp = bitselect i1 @_ssdm_op_BitSelect.i1.i32.i32, i32 %lhs, i32 31
+
+]]></Node>
+<StgValue><ssdm name="tmp"/></StgValue>
+</operation>
+
+<operation id="45" st_id="4" stage="1" lat="1">
+<core>Sel</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="51" bw="31" op_0_bw="1" op_1_bw="31" op_2_bw="31">
+<![CDATA[
+.exit:2 %select_ln92 = select i1 %tmp, i31 0, i31 %trunc_ln86
+
+]]></Node>
+<StgValue><ssdm name="select_ln92"/></StgValue>
+</operation>
+
+<operation id="46" st_id="4" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="52" bw="32" op_0_bw="31">
+<![CDATA[
+.exit:3 %zext_ln727 = zext i31 %select_ln92
+
+]]></Node>
+<StgValue><ssdm name="zext_ln727"/></StgValue>
+</operation>
+
+<operation id="47" st_id="4" stage="1" lat="1">
+<core>RAM_2P_URAM</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="53" bw="0" op_0_bw="32" op_1_bw="10">
+<![CDATA[
+.exit:4 %store_ln727 = store i32 %zext_ln727, i10 %mlp_out_V_0_addr
+
+]]></Node>
+<StgValue><ssdm name="store_ln727"/></StgValue>
+</operation>
+
+<operation id="48" st_id="4" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="54" bw="0">
+<![CDATA[
+.exit:5 %ret_ln0 = ret
+
+]]></Node>
+<StgValue><ssdm name="ret_ln0"/></StgValue>
+</operation>
+</state>
+</state_list>
+
+
+<ports>
+</ports>
+
+
+<dataflows>
+</dataflows>
+
+
+</stg>

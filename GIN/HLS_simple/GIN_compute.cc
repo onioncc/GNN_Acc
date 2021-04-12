@@ -113,6 +113,15 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][MLP_IN_MAX], FM_TYPE mlp_out[MAX_NODE][MLP_OUT
         }
     }
 
+    printf("\nOutput of MLP -- 1\n");
+    for(int nd = 0; nd < 5; nd++) {
+        printf("Node %d: ", nd);
+        for(int dim = 0; dim < 10; dim++) {
+            printf("%.5f ", mlp_out[nd][dim].to_float());
+        }
+        printf("...\n");
+    }
+
     /// MLP 2 (linear)
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {

@@ -1,0 +1,207 @@
+
+
+================================================================
+== Vitis HLS Report for 'message_passing'
+================================================================
+* Date:           Mon Apr 12 16:08:27 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  5.834 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        ?|        ?|         ?|         ?|    ?|    ?|     none|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------------------------+---------+---------+----------+-----------+-----------+--------+----------+
+        |                                   |  Latency (cycles) | Iteration|  Initiation Interval  |  Trip  |          |
+        |             Loop Name             |   min   |   max   |  Latency |  achieved |   target  |  Count | Pipelined|
+        +-----------------------------------+---------+---------+----------+-----------+-----------+--------+----------+
+        |- Loop 1                           |   300000|   300000|         1|          1|          1|  300000|       yes|
+        |- VITIS_LOOP_47_1_VITIS_LOOP_51_2  |        ?|        ?|         6|          1|          1|       ?|       yes|
+        +-----------------------------------+---------+---------+----------+-----------+-----------+--------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     3|        -|        -|    -|
+|Expression           |        -|     -|        0|      391|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     0|        0|       20|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|      122|    -|
+|Register             |        -|     -|      362|       64|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     3|      362|      597|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +--------------------------+----------------------+---------+----+---+----+-----+
+    |         Instance         |        Module        | BRAM_18K| DSP| FF| LUT| URAM|
+    +--------------------------+----------------------+---------+----+---+----+-----+
+    |mul_32ns_10ns_41_1_1_U31  |mul_32ns_10ns_41_1_1  |        0|   0|  0|  20|    0|
+    +--------------------------+----------------------+---------+----+---+----+-----+
+    |Total                     |                      |        0|   0|  0|  20|    0|
+    +--------------------------+----------------------+---------+----+---+----+-----+
+
+    * DSP: 
+    +------------------------------------+--------------------------------+--------------+
+    |              Instance              |             Module             |  Expression  |
+    +------------------------------------+--------------------------------+--------------+
+    |mac_muladd_19s_10ns_9ns_19_4_1_U33  |mac_muladd_19s_10ns_9ns_19_4_1  |  i0 * i1 + i2|
+    |mac_muladd_19s_10ns_9ns_19_4_1_U34  |mac_muladd_19s_10ns_9ns_19_4_1  |  i0 * i1 + i2|
+    |mac_muladd_20s_10ns_9ns_20_4_1_U32  |mac_muladd_20s_10ns_9ns_20_4_1  |  i0 * i1 + i2|
+    +------------------------------------+--------------------------------+--------------+
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-------------------------+----------+----+---+----+------------+------------+
+    |      Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |add_ln47_1_fu_231_p2     |         +|   0|  0|  48|          41|           1|
+    |add_ln47_fu_254_p2       |         +|   0|  0|  39|          32|           1|
+    |add_ln51_fu_322_p2       |         +|   0|  0|  16|           9|           1|
+    |add_ln53_fu_368_p2       |         +|   0|  0|  38|          31|          31|
+    |add_ln703_fu_394_p2      |         +|   0|  0|  39|          32|          32|
+    |empty_70_fu_205_p2       |         +|   0|  0|  26|          19|           1|
+    |msg_V_fu_362_p2          |         +|   0|  0|  39|          32|          32|
+    |exitcond974_fu_211_p2    |      icmp|   0|  0|  14|          19|          19|
+    |icmp_ln47_fu_249_p2      |      icmp|   0|  0|  21|          41|          41|
+    |icmp_ln51_fu_260_p2      |      icmp|   0|  0|  11|           9|           9|
+    |or_ln47_fu_311_p2        |        or|   0|  0|  12|          12|           1|
+    |msg_V_1_fu_382_p3        |    select|   0|  0|  31|           1|           1|
+    |select_ln47_1_fu_274_p3  |    select|   0|  0|  32|           1|          32|
+    |select_ln47_2_fu_298_p3  |    select|   0|  0|  12|           1|          12|
+    |select_ln47_fu_266_p3    |    select|   0|  0|   9|           1|           1|
+    |ap_enable_pp1            |       xor|   0|  0|   2|           1|           2|
+    |ap_enable_reg_pp1_iter1  |       xor|   0|  0|   2|           2|           1|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |Total                    |          |   0|  0| 391|         284|         218|
+    +-------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------+----+-----------+-----+-----------+
+    |            Name            | LUT| Input Size| Bits| Total Bits|
+    +----------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                   |  31|          6|    1|          6|
+    |ap_enable_reg_pp1_iter1     |   9|          2|    1|          2|
+    |ap_enable_reg_pp1_iter5     |   9|          2|    1|          2|
+    |ap_phi_mux_e_phi_fu_187_p4  |   9|          2|   32|         64|
+    |dim_reg_194                 |   9|          2|    9|         18|
+    |e_reg_183                   |   9|          2|   32|         64|
+    |empty_reg_161               |   9|          2|   19|         38|
+    |indvar_flatten_reg_172      |   9|          2|   41|         82|
+    |message_V_address1          |  14|          3|   19|         57|
+    |message_V_d1                |  14|          3|   32|         96|
+    +----------------------------+----+-----------+-----+-----------+
+    |Total                       | 122|         26|  187|        429|
+    +----------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------+----+----+-----+-----------+
+    |           Name           | FF | LUT| Bits| Const Bits|
+    +--------------------------+----+----+-----+-----------+
+    |add_ln703_1_reg_506       |  20|   0|   20|          0|
+    |ap_CS_fsm                 |   5|   0|    5|          0|
+    |ap_enable_reg_pp1_iter0   |   1|   0|    1|          0|
+    |ap_enable_reg_pp1_iter1   |   1|   0|    1|          0|
+    |ap_enable_reg_pp1_iter2   |   1|   0|    1|          0|
+    |ap_enable_reg_pp1_iter3   |   1|   0|    1|          0|
+    |ap_enable_reg_pp1_iter4   |   1|   0|    1|          0|
+    |ap_enable_reg_pp1_iter5   |   1|   0|    1|          0|
+    |dim_reg_194               |   9|   0|    9|          0|
+    |e_reg_183                 |  32|   0|   32|          0|
+    |empty_reg_161             |  19|   0|   19|          0|
+    |icmp_ln47_reg_450         |   1|   0|    1|          0|
+    |indvar_flatten_reg_172    |  41|   0|   41|          0|
+    |message_V_addr_1_reg_516  |  19|   0|   19|          0|
+    |mul_ln47_reg_440          |  41|   0|   41|          0|
+    |select_ln47_1_reg_460     |  32|   0|   32|          0|
+    |select_ln47_reg_454       |   9|   0|    9|          0|
+    |icmp_ln47_reg_450         |  64|  32|    1|          0|
+    |select_ln47_reg_454       |  64|  32|    9|          0|
+    +--------------------------+----+----+-----+-----------+
+    |Total                     | 362|  64|  244|          0|
+    +--------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |   Source Object  |    C Type    |
++---------------------------+-----+-----+------------+------------------+--------------+
+|ap_clk                     |   in|    1|  ap_ctrl_hs|   message_passing|  return value|
+|ap_rst                     |   in|    1|  ap_ctrl_hs|   message_passing|  return value|
+|ap_start                   |   in|    1|  ap_ctrl_hs|   message_passing|  return value|
+|ap_done                    |  out|    1|  ap_ctrl_hs|   message_passing|  return value|
+|ap_idle                    |  out|    1|  ap_ctrl_hs|   message_passing|  return value|
+|ap_ready                   |  out|    1|  ap_ctrl_hs|   message_passing|  return value|
+|num_of_edges               |   in|   32|     ap_none|      num_of_edges|        scalar|
+|message_V_address0         |  out|   19|   ap_memory|         message_V|         array|
+|message_V_ce0              |  out|    1|   ap_memory|         message_V|         array|
+|message_V_q0               |   in|   32|   ap_memory|         message_V|         array|
+|message_V_address1         |  out|   19|   ap_memory|         message_V|         array|
+|message_V_ce1              |  out|    1|   ap_memory|         message_V|         array|
+|message_V_we1              |  out|    1|   ap_memory|         message_V|         array|
+|message_V_d1               |  out|   32|   ap_memory|         message_V|         array|
+|edge_list_address0         |  out|   12|   ap_memory|         edge_list|         array|
+|edge_list_ce0              |  out|    1|   ap_memory|         edge_list|         array|
+|edge_list_q0               |   in|   32|   ap_memory|         edge_list|         array|
+|edge_list_address1         |  out|   12|   ap_memory|         edge_list|         array|
+|edge_list_ce1              |  out|    1|   ap_memory|         edge_list|         array|
+|edge_list_q1               |   in|   32|   ap_memory|         edge_list|         array|
+|edge_embedding_V_address0  |  out|   20|   ap_memory|  edge_embedding_V|         array|
+|edge_embedding_V_ce0       |  out|    1|   ap_memory|  edge_embedding_V|         array|
+|edge_embedding_V_q0        |   in|   32|   ap_memory|  edge_embedding_V|         array|
+|node_embedding_V_address0  |  out|   19|   ap_memory|  node_embedding_V|         array|
+|node_embedding_V_ce0       |  out|    1|   ap_memory|  node_embedding_V|         array|
+|node_embedding_V_q0        |   in|   32|   ap_memory|  node_embedding_V|         array|
++---------------------------+-----+-----+------------+------------------+--------------+
+
