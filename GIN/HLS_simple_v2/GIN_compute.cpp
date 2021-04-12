@@ -2,7 +2,7 @@
 
 //#define _PRINT_
 
-#define MLP_BATCH 4
+#define MLP_BATCH 16
 
 /// graph information
 int node_feature[MAX_NODE * ND_FEATURE];
@@ -68,49 +68,49 @@ void message_passing(FM_TYPE ed[MAX_EDGE][EMB_DIM], FM_TYPE h[MAX_NODE][EMB_DIM]
 #endif
 }
 
-
-void load_mlp_weight_vector(WT_TYPE mlp_1_weights[MLP_1_OUT][MLP_1_IN], hls::stream<WT_TYPE> &mlp_1_weight_vector, int d_out)
+template< int MLP_IN_DIM, int MLP_OUT_DIM>
+void load_mlp_weight_vector(WT_TYPE mlp_weights[MLP_OUT_DIM][MLP_IN_DIM], hls::stream<WT_TYPE> &mlp_weight_vector, int d_out)
 {
-    for(int i = 0; i < MLP_1_IN; i++)
+    for(int i = 0; i < MLP_IN_DIM; i++)
     {
 #pragma HLS pipeline
-    	mlp_1_weight_vector.write(mlp_1_weights[d_out][i]);
+    	mlp_weight_vector.write(mlp_weights[d_out][i]);
     }
 }
 
 
-
-void MLP_PE(hls::stream<WT_TYPE> &weights_in, hls::stream<WT_TYPE> &weights_out, WT_TYPE bias, FM_TYPE data_in[MLP_1_IN], FM_TYPE *data_out, int d_out, int final)
+template< int MLP_IN_DIM >
+void MLP_PE(hls::stream<WT_TYPE> &weights_in, hls::stream<WT_TYPE> &weights_out, WT_TYPE bias, FM_TYPE data_in[MLP_IN_DIM], FM_TYPE *data_out, int d_out, int is_final_PE, int do_relu)
 {
 	data_out[d_out] = bias;
-    for(int i = 0; i < MLP_1_IN; i++) {
+    for(int i = 0; i < MLP_IN_DIM; i++) {
 #pragma HLS pipeline
     	WT_TYPE w = weights_in.read();
     	data_out[d_out] += w * data_in[i];
-        if( final != 1 ) weights_out.write(w);
+        if( is_final_PE != 1 ) weights_out.write(w);
     }
-    if(data_out[d_out] < 0) {
+    if((data_out[d_out] < 0) && (do_relu == 1)) {
         data_out[d_out] = 0;
     }
 }
 
 
-
-void MLP_1_batch_nodes(FM_TYPE mlp_in_local[MLP_BATCH][MLP_IN_MAX], FM_TYPE mlp_out_local[MLP_BATCH][MLP_OUT_MAX], WT_TYPE mlp_1_weights[MLP_1_OUT][MLP_1_IN], WT_TYPE mlp_1_bias[MLP_1_OUT], int d_out, int nd_start)
+template< int MLP_IN_DIM, int MLP_OUT_DIM>
+void MLP_batch_nodes(FM_TYPE mlp_in_local[MLP_BATCH][MLP_IN_DIM], FM_TYPE mlp_out_local[MLP_BATCH][MLP_OUT_DIM], WT_TYPE mlp_weights[MLP_OUT_DIM][MLP_IN_DIM], WT_TYPE mlp_bias[MLP_OUT_DIM], int d_out, int do_relu)
 {
 #pragma HLS dataflow
 #pragma HLS array_partition variable=mlp_in_local dim=1 complete
 #pragma HLS array_partition variable=mlp_out_local dim=1 complete
 
 
-    hls::stream<WT_TYPE> mlp_1_weight_fifo[MLP_BATCH + 1];
+    hls::stream<WT_TYPE> mlp_weight_fifo[MLP_BATCH + 1];
 
-    load_mlp_weight_vector(mlp_1_weights, mlp_1_weight_fifo[0], d_out);
+    load_mlp_weight_vector<MLP_IN_DIM, MLP_OUT_DIM>(mlp_weights, mlp_weight_fifo[0], d_out);
 
     for(int n = 0; n < MLP_BATCH; n++) {
 #pragma HLS unroll
-        int is_final = (n == MLP_BATCH - 1) ? 1 : 0;
-        MLP_PE(mlp_1_weight_fifo[n], mlp_1_weight_fifo[n+1], mlp_1_bias[d_out], mlp_in_local[n], mlp_out_local[n], d_out, is_final);
+        int is_final_PE = (n == MLP_BATCH - 1) ? 1 : 0;
+        MLP_PE<MLP_IN_DIM>(mlp_weight_fifo[n], mlp_weight_fifo[n+1], mlp_bias[d_out], mlp_in_local[n], mlp_out_local[n], d_out, is_final_PE, do_relu);
     }
 }
 
@@ -125,66 +125,42 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][MLP_IN_MAX], FM_TYPE mlp_out[MAX_NODE][MLP_OUT
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
 
-    FM_TYPE mlp_in_local[MLP_BATCH][MLP_IN_MAX];
-    FM_TYPE mlp_out_local[MLP_BATCH][MLP_OUT_MAX];
-    
+    FM_TYPE mlp_buf_1[MLP_BATCH][MLP_1_IN];
+    FM_TYPE mlp_buf_2[MLP_BATCH][MLP_1_OUT];
+    FM_TYPE mlp_buf_3[MLP_BATCH][1];
+  
     for(int nd = 0; nd < num_of_nodes; nd += MLP_BATCH) {
+
         for(int dim_out = 0; dim_out < MLP_1_OUT; dim_out++) {
 
             // Prepare MLP input by aggregating messages and self features
             for(int nn = 0; nn < MLP_BATCH; nn++) {
                 for(int dim = 0; dim < EMB_DIM; dim++) {
-                    mlp_in_local[nn][dim] = message[nd + nn][dim] + (1 + _eps) * h_node[nd + nn][dim];
+                    mlp_buf_1[nn][dim] = message[nd + nn][dim] + (1 + _eps) * h_node[nd + nn][dim];
                 }
             }
 
             /// MLP 1 (linear)
-            MLP_1_batch_nodes(mlp_in_local, mlp_out_local, mlp_1_weights, mlp_1_bias, dim_out, nd);
-
-            // for(int x = 0; x < MLP_BATCH; x++) {
-            //     mlp_out[x + nd][dim_out] = mlp_out_local[x];
-            // }
+            MLP_batch_nodes<MLP_1_IN, MLP_1_OUT>(mlp_buf_1, mlp_buf_2, mlp_1_weights, mlp_1_bias, dim_out, 1);
         }
 
-
-        for(int nn = 0; nn < MLP_BATCH; nn++) {
-            for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {
-                h_node[nd + nn][dim_out] = mlp_2_bias[dim_out];
-                for(int dim_in = 0; dim_in < MLP_2_IN; dim_in++) {
-                    h_node[nd + nn][dim_out] += mlp_out_local[nn][dim_in] * mlp_2_weights[dim_out][dim_in];
-                }
-                // Relu
-                if( h_node[nd + nn][dim_out] < 0 && layer != 4 ) {
-                    h_node[nd + nn][dim_out] = 0;
-                }
+        int do_relu = (layer == LAYER_NUM - 1) ? 0 : 1;        
+        for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {
+            /// MLP 2 (linear)
+            MLP_batch_nodes<MLP_2_IN, 1>(mlp_buf_2, mlp_buf_3, mlp_2_weights, mlp_2_bias, dim_out, do_relu);
+            
+            for(int nn = 0; nn < MLP_BATCH; nn++) {
+                h_node[nd + nn][dim_out] = mlp_buf_3[nn][dim_out];
             }
         }
-
     }
-
-    // /// MLP 2 (linear)
-    // for(int nd = 0; nd < num_of_nodes; nd++) {
-    //     for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {
-    //         mlp_in[nd][dim_out] = mlp_2_bias[dim_out];
-    //         for(int dim_in = 0; dim_in < MLP_2_IN; dim_in++) {
-    //             mlp_in[nd][dim_out] += mlp_out[nd][dim_in] * mlp_2_weights[dim_out][dim_in];
-    //         }
-    //         // Relu
-    //         if( mlp_in[nd][dim_out] < 0 && layer != 4 ) {
-    //             node_embedding[nd][dim_out] = 0;
-    //         }
-    //         else {
-    //             node_embedding[nd][dim_out] = mlp_in[nd][dim_out];
-    //         }
-    //     }
-    // }
 
 #ifdef _PRINT_
     printf("\nOutput of MLP\n");
     for(int nd = 0; nd < 5; nd++) {
         printf("Node %d: ", nd);
         for(int dim = 0; dim < 10; dim++) {
-            printf("%.5f ", node_embedding[nd][dim].to_float());
+            printf("%.5f ", h_node[nd][dim].to_float());
         }
         printf("...\n");
     }
