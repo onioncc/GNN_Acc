@@ -79,8 +79,8 @@ void load_mlp_weight_vector(WT_TYPE mlp_weights[MLP_OUT_DIM][MLP_IN_DIM], hls::s
 }
 
 
-template< int MLP_IN_DIM >
-void MLP_PE(hls::stream<WT_TYPE> &weights_in, hls::stream<WT_TYPE> &weights_out, WT_TYPE bias, FM_TYPE data_in[MLP_IN_DIM], FM_TYPE *data_out, int d_out, int is_final_PE, int do_relu)
+template< int MLP_IN_DIM, int MLP_OUT_DIM >
+void MLP_PE(hls::stream<WT_TYPE> &weights_in, hls::stream<WT_TYPE> &weights_out, WT_TYPE bias, FM_TYPE data_in[MLP_IN_DIM], FM_TYPE data_out[MLP_OUT_DIM], int d_out, int is_final_PE, int do_relu)
 {
 	data_out[d_out] = bias;
     for(int i = 0; i < MLP_IN_DIM; i++) {
@@ -110,7 +110,7 @@ void MLP_batch_nodes(FM_TYPE mlp_in_local[MLP_BATCH][MLP_IN_DIM], FM_TYPE mlp_ou
     for(int n = 0; n < MLP_BATCH; n++) {
 #pragma HLS unroll
         int is_final_PE = (n == MLP_BATCH - 1) ? 1 : 0;
-        MLP_PE<MLP_IN_DIM>(mlp_weight_fifo[n], mlp_weight_fifo[n+1], mlp_bias[d_out], mlp_in_local[n], mlp_out_local[n], d_out, is_final_PE, do_relu);
+        MLP_PE<MLP_IN_DIM, MLP_OUT_DIM>(mlp_weight_fifo[n], mlp_weight_fifo[n+1], mlp_bias[d_out], mlp_in_local[n], mlp_out_local[n], d_out, is_final_PE, do_relu);
     }
 }
 
@@ -127,8 +127,8 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][MLP_IN_MAX], FM_TYPE mlp_out[MAX_NODE][MLP_OUT
 
     FM_TYPE mlp_buf_1[MLP_BATCH][MLP_1_IN];
     FM_TYPE mlp_buf_2[MLP_BATCH][MLP_1_OUT];
-    FM_TYPE mlp_buf_3[MLP_BATCH][1];
-  
+    FM_TYPE mlp_buf_3[MLP_BATCH][MLP_2_OUT];
+
     for(int nd = 0; nd < num_of_nodes; nd += MLP_BATCH) {
 
         for(int dim_out = 0; dim_out < MLP_1_OUT; dim_out++) {
@@ -139,7 +139,7 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][MLP_IN_MAX], FM_TYPE mlp_out[MAX_NODE][MLP_OUT
                     mlp_buf_1[nn][dim] = message[nd + nn][dim] + (1 + _eps) * h_node[nd + nn][dim];
                 }
             }
-
+            
             /// MLP 1 (linear)
             MLP_batch_nodes<MLP_1_IN, MLP_1_OUT>(mlp_buf_1, mlp_buf_2, mlp_1_weights, mlp_1_bias, dim_out, 1);
         }
@@ -147,12 +147,13 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][MLP_IN_MAX], FM_TYPE mlp_out[MAX_NODE][MLP_OUT
         int do_relu = (layer == LAYER_NUM - 1) ? 0 : 1;        
         for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {
             /// MLP 2 (linear)
-            MLP_batch_nodes<MLP_2_IN, 1>(mlp_buf_2, mlp_buf_3, mlp_2_weights, mlp_2_bias, dim_out, do_relu);
+            MLP_batch_nodes<MLP_2_IN, MLP_2_OUT>(mlp_buf_2, mlp_buf_3, mlp_2_weights, mlp_2_bias, dim_out, do_relu);
             
             for(int nn = 0; nn < MLP_BATCH; nn++) {
                 h_node[nd + nn][dim_out] = mlp_buf_3[nn][dim_out];
             }
         }
+
     }
 
 #ifdef _PRINT_

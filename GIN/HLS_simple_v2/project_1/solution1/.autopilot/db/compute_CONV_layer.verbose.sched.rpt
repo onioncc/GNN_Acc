@@ -1,0 +1,159 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_CONV_layer'
+================================================================
+* Date:           Mon Apr 12 19:27:06 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        ?|        ?|         ?|         ?|    ?|    ?|     none|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 6
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 3.22>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%gnn_node_mlp_2_bias_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gnn_node_mlp_2_bias_fixed" [GIN_compute.cpp:309]   --->   Operation 7 'read' 'gnn_node_mlp_2_bias_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%gnn_node_mlp_2_weights_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gnn_node_mlp_2_weights_fixed" [GIN_compute.cpp:309]   --->   Operation 8 'read' 'gnn_node_mlp_2_weights_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%gnn_node_mlp_1_bias_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gnn_node_mlp_1_bias_fixed" [GIN_compute.cpp:309]   --->   Operation 9 'read' 'gnn_node_mlp_1_bias_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%gnn_node_mlp_1_weights_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gnn_node_mlp_1_weights_fixed" [GIN_compute.cpp:309]   --->   Operation 10 'read' 'gnn_node_mlp_1_weights_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%layer_read = read i3 @_ssdm_op_Read.ap_auto.i3, i3 %layer" [GIN_compute.cpp:309]   --->   Operation 11 'read' 'layer_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%num_of_edges_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %num_of_edges" [GIN_compute.cpp:309]   --->   Operation 12 'read' 'num_of_edges_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [2/2] (0.00ns)   --->   "%call_ln309 = call void @compute_edge_embedding, i32 %num_of_edges_read, i3 %layer_read, i32 %edge_embedding_V, i3 %ed_feature_table_1, i32 %edge_embedding_table_V, i32 %edge_attr" [GIN_compute.cpp:309]   --->   Operation 13 'call' 'call_ln309' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_1 : Operation 14 [2/2] (3.22ns)   --->   "%call_ln315 = call void @load_mlp_weights_one_layer, i32 %mem, i3 %layer_read, i64 %gnn_node_mlp_1_weights_fixed_read, i64 %gnn_node_mlp_1_bias_fixed_read, i64 %gnn_node_mlp_2_weights_fixed_read, i64 %gnn_node_mlp_2_bias_fixed_read, i32 %mlp_1_bias_V, i32 %mlp_1_weights_V, i32 %mlp_2_bias_V, i32 %mlp_2_weights_V" [GIN_compute.cpp:315]   --->   Operation 14 'call' 'call_ln315' <Predicate = true> <Delay = 3.22> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 2 <SV = 1> <Delay = 0.00>
+ST_2 : Operation 15 [1/2] (0.00ns)   --->   "%call_ln309 = call void @compute_edge_embedding, i32 %num_of_edges_read, i3 %layer_read, i32 %edge_embedding_V, i3 %ed_feature_table_1, i32 %edge_embedding_table_V, i32 %edge_attr" [GIN_compute.cpp:309]   --->   Operation 15 'call' 'call_ln309' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_2 : Operation 16 [1/2] (0.00ns)   --->   "%call_ln315 = call void @load_mlp_weights_one_layer, i32 %mem, i3 %layer_read, i64 %gnn_node_mlp_1_weights_fixed_read, i64 %gnn_node_mlp_1_bias_fixed_read, i64 %gnn_node_mlp_2_weights_fixed_read, i64 %gnn_node_mlp_2_bias_fixed_read, i32 %mlp_1_bias_V, i32 %mlp_1_weights_V, i32 %mlp_2_bias_V, i32 %mlp_2_weights_V" [GIN_compute.cpp:315]   --->   Operation 16 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 0.00>
+ST_3 : Operation 17 [2/2] (0.00ns)   --->   "%call_ln312 = call void @message_passing, i32 %num_of_edges_read, i32 %message_V, i32 %edge_list, i32 %edge_embedding_V, i32 %node_embedding_V" [GIN_compute.cpp:312]   --->   Operation 17 'call' 'call_ln312' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 0.00>
+ST_4 : Operation 18 [1/2] (0.00ns)   --->   "%call_ln312 = call void @message_passing, i32 %num_of_edges_read, i32 %message_V, i32 %edge_list, i32 %edge_embedding_V, i32 %node_embedding_V" [GIN_compute.cpp:312]   --->   Operation 18 'call' 'call_ln312' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 2.04>
+ST_5 : Operation 19 [1/1] (0.00ns)   --->   "%num_of_nodes_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %num_of_nodes" [GIN_compute.cpp:309]   --->   Operation 19 'read' 'num_of_nodes_read' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 20 [2/2] (2.04ns)   --->   "%call_ln318 = call void @MLP, i32 %num_of_nodes_read, i3 %layer_read, i32 %mlp_eps_V, i32 %node_embedding_V, i32 %message_V, i32 %mlp_1_weights_V, i32 %mlp_1_bias_V, i32 %mlp_2_weights_V, i32 %mlp_2_bias_V" [GIN_compute.cpp:318]   --->   Operation 20 'call' 'call_ln318' <Predicate = true> <Delay = 2.04> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 0.00>
+ST_6 : Operation 21 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mem, void @empty_30, i32 0, i32 0, void @empty_32, i32 0, i32 100000, void @empty_37, void @empty_7, void @empty_32, i32 16, i32 16, i32 16, i32 16, void @empty_32, void @empty_32"   --->   Operation 21 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 22 [1/2] (0.00ns)   --->   "%call_ln318 = call void @MLP, i32 %num_of_nodes_read, i3 %layer_read, i32 %mlp_eps_V, i32 %node_embedding_V, i32 %message_V, i32 %mlp_1_weights_V, i32 %mlp_1_bias_V, i32 %mlp_2_weights_V, i32 %mlp_2_bias_V" [GIN_compute.cpp:318]   --->   Operation 22 'call' 'call_ln318' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_6 : Operation 23 [1/1] (0.00ns)   --->   "%ret_ln331 = ret" [GIN_compute.cpp:331]   --->   Operation 23 'ret' 'ret_ln331' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 3.23ns
+The critical path consists of the following:
+	wire read on port 'gnn_node_mlp_2_bias_fixed' (GIN_compute.cpp:309) [32]  (0 ns)
+	'call' operation ('call_ln315', GIN_compute.cpp:315) to 'load_mlp_weights_one_layer' [41]  (3.23 ns)
+
+ <State 2>: 0ns
+The critical path consists of the following:
+
+ <State 3>: 0ns
+The critical path consists of the following:
+
+ <State 4>: 0ns
+The critical path consists of the following:
+
+ <State 5>: 2.04ns
+The critical path consists of the following:
+	wire read on port 'num_of_nodes' (GIN_compute.cpp:309) [38]  (0 ns)
+	'call' operation ('call_ln318', GIN_compute.cpp:318) to 'MLP' [42]  (2.04 ns)
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A
