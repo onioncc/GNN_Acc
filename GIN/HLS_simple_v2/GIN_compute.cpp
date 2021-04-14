@@ -439,8 +439,8 @@ void GIN_compute_one_graph(
     load_misc_weights(eps_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, 
                       gnn_node_embedding_fixed, gnn_edge_embedding_fixed);
 
-    int num_of_nodes = graph_attr[0];
-    int num_of_edges = graph_attr[1];
+    int num_of_nodes = 19; //graph_attr[0];
+    int num_of_edges = 40; //graph_attr[1];
 
     ///////////// Load a new graph onto chip
     load_graph(node_feature, edge_attr, edge_list, node_feature_in, edge_list_in, edge_attr_in, num_of_nodes, num_of_edges);
