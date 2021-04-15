@@ -1,0 +1,174 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_CONV_layer'
+================================================================
+* Date:           Wed Apr 14 23:05:21 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.008 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+--------+--------+---------+
+    |  Latency (cycles) |  Latency (absolute) |     Interval    | Pipeline|
+    |   min   |   max   |    min   |    max   |   min  |   max  |   Type  |
+    +---------+---------+----------+----------+--------+--------+---------+
+    |   100651|   100891|  1.007 ms|  1.009 ms|  100651|  100891|     none|
+    +---------+---------+----------+----------+--------+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        +------------------------------------+------------------------+---------+---------+----------+----------+-------+-------+---------+
+        |                                    |                        |  Latency (cycles) |  Latency (absolute) |    Interval   | Pipeline|
+        |              Instance              |         Module         |   min   |   max   |    min   |    max   |  min  |  max  |   Type  |
+        +------------------------------------+------------------------+---------+---------+----------+----------+-------+-------+---------+
+        |grp_MLP_fu_2428                     |MLP                     |    34215|    34215|  0.342 ms|  0.342 ms|  34215|  34215|     none|
+        |grp_compute_edge_embedding_fu_4837  |compute_edge_embedding  |    48723|    48963|  0.487 ms|  0.490 ms|  48723|  48963|     none|
+        |grp_message_passing_fu_4849         |message_passing         |    17708|    17708|  0.177 ms|  0.177 ms|  17708|  17708|     none|
+        +------------------------------------+------------------------+---------+---------+----------+----------+-------+-------+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        -|        -|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |      600|     5|    62715|    75383|  605|
+|Memory               |        -|     -|        8|      600|   24|
+|Multiplexer          |        -|     -|        -|      175|    -|
+|Register             |        -|     -|        9|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |      600|     5|    62732|    76158|  629|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |       44|    ~0|        7|       17|  196|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |       14|    ~0|        2|        5|   65|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +------------------------------------+------------------------+---------+----+-------+-------+-----+
+    |              Instance              |         Module         | BRAM_18K| DSP|   FF  |  LUT  | URAM|
+    +------------------------------------+------------------------+---------+----+-------+-------+-----+
+    |grp_MLP_fu_2428                     |MLP                     |      600|   2|  62338|  74089|  600|
+    |grp_compute_edge_embedding_fu_4837  |compute_edge_embedding  |        0|   0|    164|    823|    5|
+    |grp_message_passing_fu_4849         |message_passing         |        0|   3|    213|    471|    0|
+    +------------------------------------+------------------------+---------+----+-------+-------+-----+
+    |Total                               |                        |      600|   5|  62715|  75383|  605|
+    +------------------------------------+------------------------+---------+----+-------+-------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    +--------------------+-------------------------------------+---------+---+-----+-----+--------+-----+------+-------------+
+    |       Memory       |                Module               | BRAM_18K| FF| LUT | URAM|  Words | Bits| Banks| W*Bits*Banks|
+    +--------------------+-------------------------------------+---------+---+-----+-----+--------+-----+------+-------------+
+    |edge_embedding_V_U  |compute_CONV_layer_edge_embedding_V  |        0|  4|  300|   12|  150000|   32|     1|      4800000|
+    |message_V_U         |compute_CONV_layer_message_V         |        0|  4|  300|   12|   60000|   32|     1|      1920000|
+    +--------------------+-------------------------------------+---------+---+-----+-----+--------+-----+------+-------------+
+    |Total               |                                     |        0|  8|  600|   24|  210000|   64|     2|      6720000|
+    +--------------------+-------------------------------------+---------+---+-----+-----+--------+-----+------+-------------+
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +---------------------------+----+-----------+-----+-----------+
+    |            Name           | LUT| Input Size| Bits| Total Bits|
+    +---------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                  |  37|          7|    1|          7|
+    |edge_embedding_V_address0  |  14|          3|   18|         54|
+    |edge_embedding_V_ce0       |  14|          3|    1|          3|
+    |edge_embedding_V_ce1       |   9|          2|    1|          2|
+    |edge_embedding_V_we1       |   9|          2|    1|          2|
+    |message_V_address0         |  14|          3|   16|         48|
+    |message_V_ce0              |  14|          3|    1|          3|
+    |message_V_ce1              |   9|          2|    1|          2|
+    |message_V_we1              |   9|          2|    1|          2|
+    |node_embedding_V_address0  |  14|          3|   16|         48|
+    |node_embedding_V_ce0       |  14|          3|    1|          3|
+    |node_embedding_V_ce1       |   9|          2|    1|          2|
+    |node_embedding_V_we1       |   9|          2|    1|          2|
+    +---------------------------+----+-----------+-----+-----------+
+    |Total                      | 175|         37|   60|        178|
+    +---------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------------------------------+---+----+-----+-----------+
+    |                       Name                      | FF| LUT| Bits| Const Bits|
+    +-------------------------------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                                        |  6|   0|    6|          0|
+    |grp_MLP_fu_2428_ap_start_reg                     |  1|   0|    1|          0|
+    |grp_compute_edge_embedding_fu_4837_ap_start_reg  |  1|   0|    1|          0|
+    |grp_message_passing_fu_4849_ap_start_reg         |  1|   0|    1|          0|
+    +-------------------------------------------------+---+----+-----+-----------+
+    |Total                                            |  9|   0|    9|          0|
+    +-------------------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+--------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |    Source Object   |    C Type    |
++---------------------------+-----+-----+------------+--------------------+--------------+
+|ap_clk                     |   in|    1|  ap_ctrl_hs|  compute_CONV_layer|  return value|
+|ap_rst                     |   in|    1|  ap_ctrl_hs|  compute_CONV_layer|  return value|
+|ap_start                   |   in|    1|  ap_ctrl_hs|  compute_CONV_layer|  return value|
+|ap_done                    |  out|    1|  ap_ctrl_hs|  compute_CONV_layer|  return value|
+|ap_idle                    |  out|    1|  ap_ctrl_hs|  compute_CONV_layer|  return value|
+|ap_ready                   |  out|    1|  ap_ctrl_hs|  compute_CONV_layer|  return value|
+|layer                      |   in|    3|     ap_none|               layer|        scalar|
+|edge_attr_address0         |  out|   11|   ap_memory|           edge_attr|         array|
+|edge_attr_ce0              |  out|    1|   ap_memory|           edge_attr|         array|
+|edge_attr_q0               |   in|   32|   ap_memory|           edge_attr|         array|
+|edge_list_address0         |  out|   10|   ap_memory|           edge_list|         array|
+|edge_list_ce0              |  out|    1|   ap_memory|           edge_list|         array|
+|edge_list_q0               |   in|   32|   ap_memory|           edge_list|         array|
+|edge_list_address1         |  out|   10|   ap_memory|           edge_list|         array|
+|edge_list_ce1              |  out|    1|   ap_memory|           edge_list|         array|
+|edge_list_q1               |   in|   32|   ap_memory|           edge_list|         array|
+|node_embedding_V_address0  |  out|   16|   ap_memory|    node_embedding_V|         array|
+|node_embedding_V_ce0       |  out|    1|   ap_memory|    node_embedding_V|         array|
+|node_embedding_V_q0        |   in|   32|   ap_memory|    node_embedding_V|         array|
+|node_embedding_V_address1  |  out|   16|   ap_memory|    node_embedding_V|         array|
+|node_embedding_V_ce1       |  out|    1|   ap_memory|    node_embedding_V|         array|
+|node_embedding_V_we1       |  out|    1|   ap_memory|    node_embedding_V|         array|
+|node_embedding_V_d1        |  out|   32|   ap_memory|    node_embedding_V|         array|
++---------------------------+-----+-----+------------+--------------------+--------------+
+

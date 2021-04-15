@@ -1,0 +1,255 @@
+
+
+================================================================
+== Vitis HLS Report for 'GIN_compute_one_graph'
+================================================================
+* Date:           Wed Apr 14 23:05:55 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+--------+--------+---------+
+    |  Latency (cycles) |  Latency (absolute) |     Interval    | Pipeline|
+    |   min   |   max   |    min   |    max   |   min  |   max  |   Type  |
+    +---------+---------+----------+----------+--------+--------+---------+
+    |   564707|   567275|  5.647 ms|  5.673 ms|  564708|  567276|     none|
+    +---------+---------+----------+----------+--------+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        +-------------------------------------+-------------------------+---------+---------+-----------+-----------+--------+--------+---------+
+        |                                     |                         |  Latency (cycles) |   Latency (absolute)  |     Interval    | Pipeline|
+        |               Instance              |          Module         |   min   |   max   |    min    |    max    |   min  |   max  |   Type  |
+        +-------------------------------------+-------------------------+---------+---------+-----------+-----------+--------+--------+---------+
+        |grp_compute_CONV_layer_fu_2580       |compute_CONV_layer       |   100651|   100891|   1.007 ms|   1.009 ms|  100651|  100891|     none|
+        |grp_global_mean_pooling_fu_4998      |global_mean_pooling      |     3008|     3008|  30.080 us|  30.080 us|    3008|    3008|     none|
+        |grp_compute_node_embedding_fu_5006   |compute_node_embedding   |    58029|    59397|   0.580 ms|   0.594 ms|   58029|   59397|     none|
+        |grp_load_graph_fu_5018               |load_graph               |      398|      398|   3.980 us|   3.980 us|     398|     398|     none|
+        |grp_global_graph_prediction_fu_5033  |global_graph_prediction  |        6|        6|  60.000 ns|  60.000 ns|       6|       6|     none|
+        +-------------------------------------+-------------------------+---------+---------+-----------+-----------+--------+--------+---------+
+
+        * Loop: 
+        +--------------------+---------+---------+-----------------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) |    Iteration    |  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |     Latency     |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+-----------------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_450_2  |   503265|   504465|  100653 ~ 100893|          -|          -|     5|        no|
+        +--------------------+---------+---------+-----------------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       20|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |      603|     5|    64995|    81273|  641|
+|Memory               |       10|     -|        4|      300|   12|
+|Multiplexer          |        -|     -|        -|      316|    -|
+|Register             |        -|     -|      276|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |      613|     5|    65275|    81909|  653|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |       45|    ~0|        7|       18|  204|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |       15|    ~0|        2|        6|   68|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +-------------------------------------+-------------------------+---------+----+-------+-------+-----+
+    |               Instance              |          Module         | BRAM_18K| DSP|   FF  |  LUT  | URAM|
+    +-------------------------------------+-------------------------+---------+----+-------+-------+-----+
+    |grp_compute_CONV_layer_fu_2580       |compute_CONV_layer       |      600|   5|  62732|  76158|  629|
+    |grp_compute_node_embedding_fu_5006   |compute_node_embedding   |        0|   0|    149|    904|   12|
+    |control_s_axi_U                      |control_s_axi            |        0|   0|   1016|   1832|    0|
+    |grp_global_graph_prediction_fu_5033  |global_graph_prediction  |        0|   0|      7|     70|    0|
+    |grp_global_mean_pooling_fu_4998      |global_mean_pooling      |        1|   0|    377|   1336|    0|
+    |grp_load_graph_fu_5018               |load_graph               |        0|   0|    202|    393|    0|
+    |mem_m_axi_U                          |mem_m_axi                |        2|   0|    512|    580|    0|
+    +-------------------------------------+-------------------------+---------+----+-------+-------+-----+
+    |Total                                |                         |      603|   5|  64995|  81273|  641|
+    +-------------------------------------+-------------------------+---------+----+-------+-------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    +--------------------+------------------+---------+---+-----+-----+-------+-----+------+-------------+
+    |       Memory       |      Module      | BRAM_18K| FF| LUT | URAM| Words | Bits| Banks| W*Bits*Banks|
+    +--------------------+------------------+---------+---+-----+-----+-------+-----+------+-------------+
+    |edge_attr_U         |edge_attr         |        4|  0|    0|    0|   1500|   32|     1|        48000|
+    |edge_list_U         |edge_list         |        2|  0|    0|    0|   1000|   32|     1|        32000|
+    |node_embedding_V_U  |node_embedding_V  |        0|  4|  300|   12|  60000|   32|     1|      1920000|
+    |node_feature_U      |node_feature      |        4|  0|    0|    0|   1800|   32|     1|        57600|
+    +--------------------+------------------+---------+---+-----+-----+-------+-----+------+-------------+
+    |Total               |                  |       10|  4|  300|   12|  64300|  128|     4|      2057600|
+    +--------------------+------------------+---------+---+-----+-----+-------+-----+------+-------------+
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |          Variable Name          | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |layer_1_fu_5040_p2               |         +|   0|  0|  10|           3|           1|
+    |icmp_ln450_fu_5046_p2            |      icmp|   0|  0|   8|           3|           3|
+    |ap_block_state9_on_subcall_done  |        or|   0|  0|   2|           1|           1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |Total                            |          |   0|  0|  20|           7|           5|
+    +---------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------+----+-----------+-----+-----------+
+    |            Name           | LUT| Input Size| Bits| Total Bits|
+    +---------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                  |  54|         10|    1|         10|
+    |edge_attr_ce0              |   9|          2|    1|          2|
+    |edge_attr_ce1              |   9|          2|    1|          2|
+    |edge_attr_we1              |   9|          2|    1|          2|
+    |edge_list_address1         |  14|          3|   10|         30|
+    |edge_list_ce0              |   9|          2|    1|          2|
+    |edge_list_ce1              |  14|          3|    1|          3|
+    |edge_list_we1              |   9|          2|    1|          2|
+    |layer_reg_2568             |   9|          2|    3|          6|
+    |mem_ARVALID                |   9|          2|    1|          2|
+    |mem_AWVALID                |   9|          2|    1|          2|
+    |mem_BREADY                 |   9|          2|    1|          2|
+    |mem_RREADY                 |   9|          2|    1|          2|
+    |mem_WVALID                 |   9|          2|    1|          2|
+    |node_embedding_V_address0  |  20|          4|   16|         64|
+    |node_embedding_V_address1  |  20|          4|   16|         64|
+    |node_embedding_V_ce0       |  20|          4|    1|          4|
+    |node_embedding_V_ce1       |  20|          4|    1|          4|
+    |node_embedding_V_d1        |  14|          3|   32|         96|
+    |node_embedding_V_we1       |  14|          3|    1|          3|
+    |node_feature_ce0           |   9|          2|    1|          2|
+    |node_feature_ce1           |   9|          2|    1|          2|
+    |node_feature_we1           |   9|          2|    1|          2|
+    +---------------------------+----+-----------+-----+-----------+
+    |Total                      | 316|         66|   95|        310|
+    +---------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------------------------------+----+----+-----+-----------+
+    |                       Name                       | FF | LUT| Bits| Const Bits|
+    +--------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                         |   9|   0|    9|          0|
+    |edge_attr_in_read_reg_5057                        |  64|   0|   64|          0|
+    |edge_list_in_read_reg_5062                        |  64|   0|   64|          0|
+    |grp_compute_CONV_layer_fu_2580_ap_start_reg       |   1|   0|    1|          0|
+    |grp_compute_node_embedding_fu_5006_ap_start_reg   |   1|   0|    1|          0|
+    |grp_global_graph_prediction_fu_5033_ap_start_reg  |   1|   0|    1|          0|
+    |grp_global_mean_pooling_fu_4998_ap_start_reg      |   1|   0|    1|          0|
+    |grp_load_graph_fu_5018_ap_start_reg               |   1|   0|    1|          0|
+    |layer_1_reg_5072                                  |   3|   0|    3|          0|
+    |layer_reg_2568                                    |   3|   0|    3|          0|
+    |node_feature_in_read_reg_5067                     |  64|   0|   64|          0|
+    |task_read_reg_5052                                |  64|   0|   64|          0|
+    +--------------------------------------------------+----+----+-----+-----------+
+    |Total                                             | 276|   0|  276|          0|
+    +--------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------+-----+-----+------------+-----------------------+--------------+
+|       RTL Ports       | Dir | Bits|  Protocol  |     Source Object     |    C Type    |
++-----------------------+-----+-----+------------+-----------------------+--------------+
+|s_axi_control_AWVALID  |   in|    1|       s_axi|                control|        scalar|
+|s_axi_control_AWREADY  |  out|    1|       s_axi|                control|        scalar|
+|s_axi_control_AWADDR   |   in|    8|       s_axi|                control|        scalar|
+|s_axi_control_WVALID   |   in|    1|       s_axi|                control|        scalar|
+|s_axi_control_WREADY   |  out|    1|       s_axi|                control|        scalar|
+|s_axi_control_WDATA    |   in|   32|       s_axi|                control|        scalar|
+|s_axi_control_WSTRB    |   in|    4|       s_axi|                control|        scalar|
+|s_axi_control_ARVALID  |   in|    1|       s_axi|                control|        scalar|
+|s_axi_control_ARREADY  |  out|    1|       s_axi|                control|        scalar|
+|s_axi_control_ARADDR   |   in|    8|       s_axi|                control|        scalar|
+|s_axi_control_RVALID   |  out|    1|       s_axi|                control|        scalar|
+|s_axi_control_RREADY   |   in|    1|       s_axi|                control|        scalar|
+|s_axi_control_RDATA    |  out|   32|       s_axi|                control|        scalar|
+|s_axi_control_RRESP    |  out|    2|       s_axi|                control|        scalar|
+|s_axi_control_BVALID   |  out|    1|       s_axi|                control|        scalar|
+|s_axi_control_BREADY   |   in|    1|       s_axi|                control|        scalar|
+|s_axi_control_BRESP    |  out|    2|       s_axi|                control|        scalar|
+|ap_clk                 |   in|    1|  ap_ctrl_hs|  GIN_compute_one_graph|  return value|
+|ap_rst_n               |   in|    1|  ap_ctrl_hs|  GIN_compute_one_graph|  return value|
+|interrupt              |  out|    1|  ap_ctrl_hs|  GIN_compute_one_graph|  return value|
+|m_axi_mem_AWVALID      |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWREADY      |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWADDR       |  out|   64|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWID         |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWLEN        |  out|    8|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWSIZE       |  out|    3|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWBURST      |  out|    2|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWLOCK       |  out|    2|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWCACHE      |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWPROT       |  out|    3|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWQOS        |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWREGION     |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_AWUSER       |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_WVALID       |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_WREADY       |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_WDATA        |  out|   32|       m_axi|                    mem|       pointer|
+|m_axi_mem_WSTRB        |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_WLAST        |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_WID          |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_WUSER        |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARVALID      |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARREADY      |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARADDR       |  out|   64|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARID         |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARLEN        |  out|    8|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARSIZE       |  out|    3|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARBURST      |  out|    2|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARLOCK       |  out|    2|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARCACHE      |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARPROT       |  out|    3|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARQOS        |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARREGION     |  out|    4|       m_axi|                    mem|       pointer|
+|m_axi_mem_ARUSER       |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_RVALID       |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_RREADY       |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_RDATA        |   in|   32|       m_axi|                    mem|       pointer|
+|m_axi_mem_RLAST        |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_RID          |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_RUSER        |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_RRESP        |   in|    2|       m_axi|                    mem|       pointer|
+|m_axi_mem_BVALID       |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_BREADY       |  out|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_BRESP        |   in|    2|       m_axi|                    mem|       pointer|
+|m_axi_mem_BID          |   in|    1|       m_axi|                    mem|       pointer|
+|m_axi_mem_BUSER        |   in|    1|       m_axi|                    mem|       pointer|
++-----------------------+-----+-----+------------+-----------------------+--------------+
+

@@ -1,0 +1,809 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source /tools/reconfig/xilinx/Vitis_HLS/2020.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/tools/reconfig/xilinx/Vitis_HLS/2020.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'chao33' on host 'flubber1.crnch.gatech.edu' (Linux_x86_64 version 4.15.0-135-generic) on Thu Apr 15 01:14:10 EDT 2021
+INFO: [HLS 200-10] On os Ubuntu 18.04.5 LTS
+INFO: [HLS 200-10] In directory '/nethome/chao33/GNN_Acc/GIN/HLS_simple_v5'
+Sourcing Tcl script 'script.tcl'
+INFO: [HLS 200-1510] Running: open_project project_1 
+INFO: [HLS 200-10] Opening project '/nethome/chao33/GNN_Acc/GIN/HLS_simple_v5/project_1'.
+INFO: [HLS 200-1510] Running: set_top GIN_compute_one_graph 
+INFO: [HLS 200-1510] Running: add_files GIN_compute.cpp 
+INFO: [HLS 200-10] Adding design file 'GIN_compute.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files main.cpp 
+INFO: [HLS 200-10] Adding design file 'main.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution1 
+INFO: [HLS 200-10] Opening solution '/nethome/chao33/GNN_Acc/GIN/HLS_simple_v5/project_1/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2020.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.08 seconds; current allocated memory: 207.663 MB.
+INFO: [HLS 200-10] Analyzing design file 'main.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'GIN_compute.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 16.69 seconds. CPU system time: 1.52 seconds. Elapsed time: 23.03 seconds; current allocated memory: 209.210 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-178] Inlining function 'get_nd_emb_addr(int)' into 'compute_node_embedding(int, int*)' (GIN_compute.cpp:230:0)
+INFO: [HLS 214-178] Inlining function 'get_ed_emb_addr(int, int)' into 'compute_edge_embedding_and_message_passing(int, int, int (*) [3], int)' (GIN_compute.cpp:178:0)
+INFO: [HLS 214-178] Inlining function 'MLP_one_node_one_dim(int, int, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [300], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [300], int)' into 'MLP(ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [300], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [300], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [300], int, int)' (GIN_compute.cpp:107:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:410:0)
+INFO: [HLS 214-115] Multiple burst reads of length 171 and bit width 32 in loop 'VITIS_LOOP_347_1'(GIN_compute.cpp:347:20) has been inferred on port 'mem' (GIN_compute.cpp:347:20)
+INFO: [HLS 214-115] Multiple burst reads of length 120 and bit width 32 in loop 'VITIS_LOOP_351_2'(GIN_compute.cpp:351:23) has been inferred on port 'mem' (GIN_compute.cpp:351:23)
+INFO: [HLS 214-115] Multiple burst reads of length 80 and bit width 32 in loop 'VITIS_LOOP_357_4'(GIN_compute.cpp:357:23) has been inferred on port 'mem' (GIN_compute.cpp:357:23)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 5.77 seconds. CPU system time: 0.46 seconds. Elapsed time: 6.56 seconds; current allocated memory: 211.974 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 211.978 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.25 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.32 seconds; current allocated memory: 223.312 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.4 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.43 seconds; current allocated memory: 239.780 MB.
+INFO: [XFORM 203-510] Pipelining loop 'Loop-2' in function 'compute_edge_embedding_and_message_passing' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_114_2' (GIN_compute.cpp:114) in function 'MLP' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'Loop-3' in function 'MLP' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'Loop-2' in function 'compute_node_embedding' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_222_1' (GIN_compute.cpp:221) in function 'compute_node_embedding' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_337_2' (GIN_compute.cpp:337) in function 'global_graph_prediction' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_314_1' (GIN_compute.cpp:314) in function 'global_mean_pooling' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_347_1' (GIN_compute.cpp:347) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_352_3' (GIN_compute.cpp:352) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_357_4' (GIN_compute.cpp:357) in function 'load_graph' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_314_1' (GIN_compute.cpp:314) in function 'global_mean_pooling' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_199_2' (GIN_compute.cpp:199) in function 'compute_edge_embedding_and_message_passing' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_134_4' (GIN_compute.cpp:134) in function 'MLP' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_140_5' (GIN_compute.cpp:140) in function 'MLP' for pipelining.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_316_2' (GIN_compute.cpp:315) in function 'global_mean_pooling' completely with a factor of 19.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_202_3' (GIN_compute.cpp:201) in function 'compute_edge_embedding_and_message_passing' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_169_1' (GIN_compute.cpp:168) in function 'compute_edge_embedding_and_message_passing' completely with a factor of 0.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_92_1' (GIN_compute.cpp:91) in function 'MLP' completely with a factor of 300.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_99_2' (GIN_compute.cpp:99) in function 'MLP' completely with a factor of 300.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_142_6' (GIN_compute.cpp:142) in function 'MLP' completely with a factor of 300.
+INFO: [XFORM 203-101] Partitioning array 'edge_embedding_table.V'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'edge_attr'  in dimension 2 completely.
+WARNING: [HLS 200-914] Completely partitioning array 'mlp_in.V'  accessed through non-constant indices on dimension 2 (GIN_compute.cpp:116:13), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+Resolution: For help on HLS 200-914 see www.xilinx.com/cgi-bin/docs/rdoc?v=2020.2;t=hls+guidance;d=200-914.html
+INFO: [XFORM 203-101] Partitioning array 'mlp_in.V'  in dimension 2 completely.
+WARNING: [HLS 200-914] Completely partitioning array 'node_embedding.V'  accessed through non-constant indices on dimension 2, which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+Resolution: For help on HLS 200-914 see www.xilinx.com/cgi-bin/docs/rdoc?v=2020.2;t=hls+guidance;d=200-914.html
+INFO: [XFORM 203-101] Partitioning array 'node_embedding.V'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_1_weights.V'  in dimension 3 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_1_bias.V'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_2_weights.V'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_2_bias.V'  in dimension 2 completely.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'message.V' in function 'compute_edge_embedding_and_message_passing'.
+INFO: [XFORM 203-11] Balancing expressions in function 'global_mean_pooling' (GIN_compute.cpp:314:54)...18 expression(s) balanced.
+INFO: [XFORM 203-11] Balancing expressions in function 'MLP' (GIN_compute.cpp:82:59)...597 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 66.55 seconds. CPU system time: 0.16 seconds. Elapsed time: 66.82 seconds; current allocated memory: 327.083 MB.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_351_2' (GIN_compute.cpp:351:31) in function 'load_graph'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_195_1' (GIN_compute.cpp:195:31) in function 'compute_edge_embedding_and_message_passing'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_113_1' (GIN_compute.cpp:113:31) in function 'MLP'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_133_3' (GIN_compute.cpp:133:31) in function 'MLP'.
+INFO: [HLS 200-472] Inferring partial write operation for 'node_feature' (GIN_compute.cpp:348:25)
+INFO: [HLS 200-472] Inferring partial write operation for 'edge_list' (GIN_compute.cpp:358:22)
+INFO: [HLS 200-472] Inferring partial write operation for 'edge_attr.0' (GIN_compute.cpp:353:29)
+INFO: [HLS 200-472] Inferring partial write operation for 'graph_embedding.V' (GIN_compute.cpp:319:22)
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.1' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.2' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.3' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.4' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.5' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.6' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.7' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.8' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.9' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.10' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.11' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.12' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.13' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.14' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.15' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.16' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.17' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.18' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.19' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.20' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.21' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.22' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.23' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.24' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.25' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.26' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.27' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.28' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.29' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.30' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.31' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.32' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.33' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.34' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.35' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.36' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.37' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.38' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.39' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.40' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.41' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.42' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.43' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.44' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.45' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.46' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.47' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.48' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.49' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.50' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.51' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.52' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.53' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.54' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.55' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.56' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.57' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.58' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.59' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.60' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.61' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.62' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.63' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.64' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.65' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.66' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.67' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.68' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.69' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.70' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.71' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.72' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.73' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.74' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.75' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.76' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.77' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.78' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.79' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.80' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.81' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.82' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.83' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.84' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.85' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.86' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.87' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.88' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.89' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.90' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.91' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.92' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.93' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.94' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.95' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.96' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.97' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.98' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.99' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.100' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.101' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.102' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.103' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.104' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.105' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.106' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.107' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.108' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.109' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.110' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.111' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.112' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.113' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.114' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.115' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.116' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.117' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.118' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.119' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.120' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.121' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.122' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.123' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.124' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.125' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.126' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.127' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.128' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.129' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.130' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.131' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.132' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.133' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.134' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.135' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.136' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.137' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.138' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.139' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.140' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.141' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.142' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.143' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.144' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.145' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.146' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.147' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.148' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.149' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.150' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.151' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.152' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.153' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.154' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.155' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.156' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.157' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.158' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.159' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.160' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.161' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.162' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.163' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.164' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.165' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.166' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.167' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.168' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.169' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.170' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.171' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.172' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.173' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.174' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.175' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.176' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.177' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.178' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.179' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.180' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.181' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.182' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.183' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.184' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.185' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.186' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.187' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.188' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.189' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.190' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.191' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.192' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.193' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.194' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.195' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.196' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.197' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.198' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.199' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.200' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.201' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.202' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.203' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.204' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.205' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.206' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.207' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.208' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.209' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.210' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.211' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.212' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.213' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.214' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.215' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.216' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.217' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.218' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.219' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.220' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.221' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.222' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.223' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.224' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.225' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.226' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.227' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.228' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.229' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.230' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.231' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.232' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.233' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.234' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.235' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.236' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.237' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.238' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.239' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.240' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.241' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.242' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.243' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.244' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.245' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.246' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.247' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.248' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.249' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.250' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.251' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.252' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.253' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.254' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.255' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.256' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.257' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.258' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.259' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.260' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.261' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.262' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.263' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.264' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.265' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.266' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.267' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.268' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.269' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.270' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.271' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.272' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.273' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.274' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.275' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.276' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.277' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.278' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.279' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.280' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.281' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.282' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.283' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.284' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.285' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.286' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.287' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.288' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.289' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.290' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.291' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.292' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.293' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.294' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.295' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.296' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.297' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.298' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.299' 
+INFO: [HLS 200-472] Inferring partial write operation for 'message.V' 
+INFO: [HLS 200-472] Inferring partial write operation for 'message.V' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' (GIN_compute.cpp:144:41)
+INFO: [HLS 200-472] Inferring partial write operation for 'mlp_in.V.1' (GIN_compute.cpp:116:31)
+INFO: [HLS 200-472] Inferring partial write operation for 'mlp_in.V.0' (GIN_compute.cpp:115:29)
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.1' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.2' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.3' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.4' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.5' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.6' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.7' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.8' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.9' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.10' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.11' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.12' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.13' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.14' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.15' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.16' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.17' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.18' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.19' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.20' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.21' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.22' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.23' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.24' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.25' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.26' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.27' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.28' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.29' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.30' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.31' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.32' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.33' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.34' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.35' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.36' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.37' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.38' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.39' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.40' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.41' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.42' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.43' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.44' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.45' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.46' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.47' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.48' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.49' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.50' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.51' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.52' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.53' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.54' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.55' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.56' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.57' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.58' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.59' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.60' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.61' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.62' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.63' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.64' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.65' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.66' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.67' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.68' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.69' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.70' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.71' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.72' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.73' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.74' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.75' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.76' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.77' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.78' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.79' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.80' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.81' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.82' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.83' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.84' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.85' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.86' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.87' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.88' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.89' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.90' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.91' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.92' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.93' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.94' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.95' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.96' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.97' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.98' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.99' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.100' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.101' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.102' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.103' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.104' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.105' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.106' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.107' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.108' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.109' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.110' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.111' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.112' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.113' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.114' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.115' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.116' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.117' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.118' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.119' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.120' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.121' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.122' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.123' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.124' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.125' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.126' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.127' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.128' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.129' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.130' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.131' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.132' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.133' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.134' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.135' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.136' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.137' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.138' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.139' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.140' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.141' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.142' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.143' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.144' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.145' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.146' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.147' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.148' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.149' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.150' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.151' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.152' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.153' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.154' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.155' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.156' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.157' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.158' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.159' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.160' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.161' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.162' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.163' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.164' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.165' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.166' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.167' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.168' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.169' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.170' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.171' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.172' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.173' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.174' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.175' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.176' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.177' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.178' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.179' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.180' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.181' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.182' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.183' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.184' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.185' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.186' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.187' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.188' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.189' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.190' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.191' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.192' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.193' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.194' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.195' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.196' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.197' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.198' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.199' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.200' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.201' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.202' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.203' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.204' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.205' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.206' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.207' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.208' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.209' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.210' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.211' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.212' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.213' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.214' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.215' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.216' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.217' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.218' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.219' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.220' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.221' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.222' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.223' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.224' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.225' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.226' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.227' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.228' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.229' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.230' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.231' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.232' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.233' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.234' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.235' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.236' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.237' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.238' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.239' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.240' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.241' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.242' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.243' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.244' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.245' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.246' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.247' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.248' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.249' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.250' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.251' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.252' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.253' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.254' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.255' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.256' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.257' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.258' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.259' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.260' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.261' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.262' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.263' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.264' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.265' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.266' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.267' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.268' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.269' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.270' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.271' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.272' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.273' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.274' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.275' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.276' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.277' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.278' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.279' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.280' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.281' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.282' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.283' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.284' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.285' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.286' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.287' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.288' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.289' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.290' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.291' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.292' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.293' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.294' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.295' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.296' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.297' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.298' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.299' 
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 109.56 seconds. CPU system time: 0.41 seconds. Elapsed time: 111.21 seconds; current allocated memory: 569.947 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'GIN_compute_one_graph' ...
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM': 'node_feature' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM': 'edge_attr_0' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM': 'graph_embedding_V' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM' (GIN_compute.cpp:435): 'node_embedding_table_V' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM' (GIN_compute.cpp:436): 'edge_embedding_table_V_0' does not exist or is optimized away.
+WARNING: [SYN 201-107] Renaming port name 'GIN_compute_one_graph/task' to 'GIN_compute_one_graph/task_r' to avoid the conflict with HDL keywords or other object names.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'load_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_347_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_347_1'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_351_2_VITIS_LOOP_352_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_351_2_VITIS_LOOP_352_3'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_357_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_357_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 10.19 seconds. CPU system time: 0.04 seconds. Elapsed time: 10.29 seconds; current allocated memory: 581.375 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.28 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.31 seconds; current allocated memory: 581.774 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Loop 1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'Loop 1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 2.14 seconds. CPU system time: 0.01 seconds. Elapsed time: 2.16 seconds; current allocated memory: 584.333 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1.36 seconds. CPU system time: 0.01 seconds. Elapsed time: 1.41 seconds; current allocated memory: 596.266 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_edge_embedding_and_message_passing' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln703) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'Loop 1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'Loop 1'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_195_1_VITIS_LOOP_199_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 6, loop 'VITIS_LOOP_195_1_VITIS_LOOP_199_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 2.65 seconds. CPU system time: 0.02 seconds. Elapsed time: 2.74 seconds; current allocated memory: 599.075 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2.09 seconds. CPU system time: 0.01 seconds. Elapsed time: 2.14 seconds; current allocated memory: 602.945 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'MLP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_113_1_VITIS_LOOP_114_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'VITIS_LOOP_113_1_VITIS_LOOP_114_2'
+INFO: [SCHED 204-61] Pipelining loop 'Loop 2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'Loop 2'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_133_3_VITIS_LOOP_134_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 4, loop 'VITIS_LOOP_133_3_VITIS_LOOP_134_4'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_140_5'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'VITIS_LOOP_140_5'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 89.97 seconds. CPU system time: 0.52 seconds. Elapsed time: 90.58 seconds; current allocated memory: 640.250 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 42.57 seconds. CPU system time: 0.1 seconds. Elapsed time: 42.98 seconds; current allocated memory: 695.704 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_CONV_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 26.87 seconds. CPU system time: 0.09 seconds. Elapsed time: 27.56 seconds; current allocated memory: 697.199 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 9.89 seconds. CPU system time: 0 seconds. Elapsed time: 9.92 seconds; current allocated memory: 700.452 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'global_mean_pooling' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_314_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'VITIS_LOOP_314_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 41.95 seconds. CPU system time: 0.07 seconds. Elapsed time: 42.06 seconds; current allocated memory: 724.687 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.

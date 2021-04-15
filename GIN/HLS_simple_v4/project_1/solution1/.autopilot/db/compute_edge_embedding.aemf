@@ -1,0 +1,1233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1618455848282">
+  <ports id="1" name="layer" type="PortType" coreId="49" bitwidth="3">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="3" name="edge_embedding_V" type="PortType" coreName="RAM_2P_URAM" coreId="129" bitwidth="32" direction="DirInOut" iftype="IfTypeRegister" arraysize="150000">
+    <dataInputObjs>getelementptr</dataInputObjs>
+    <dataInputObjs>getelementptr</dataInputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <ports id="7" name="edge_attr" type="PortType" coreName="RAM_2P_BRAM" coreId="49" bitwidth="32" iftype="IfTypeRegister" arraysize="1500">
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <edges id="113" source_obj="//@ports.0" sink_obj="//@blocks.0/@node_objs.0"/>
+  <edges id="114" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="115" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="118" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="119" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="120" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="121" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="124" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="127" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="128" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="129" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="130" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="131" source_obj="//@ports.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="134" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="137" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="138" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="139" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="142" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.1/@node_objs.1"/>
+  <edges id="145" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="146" source_obj="//@blocks.2/@node_objs.3" sink_obj="//@blocks.2/@node_objs.0" is_back_edge="1"/>
+  <edges id="147" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@blocks.2/@node_objs.0" is_back_edge="1"/>
+  <edges id="150" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2/@node_objs.1"/>
+  <edges id="151" source_obj="//@blocks.3/@node_objs.3" sink_obj="//@blocks.2/@node_objs.1" is_back_edge="1"/>
+  <edges id="152" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@blocks.2/@node_objs.1" is_back_edge="1"/>
+  <edges id="155" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="156" source_obj="//@blocks.5/@node_objs.0" sink_obj="//@blocks.2/@node_objs.2" is_back_edge="1"/>
+  <edges id="157" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@blocks.2/@node_objs.2" is_back_edge="1"/>
+  <edges id="158" source_obj="//@blocks.2/@node_objs.0" sink_obj="//@blocks.2/@node_objs.3"/>
+  <edges id="161" source_obj="//@blocks.2/@node_objs.1" sink_obj="//@blocks.2/@node_objs.4"/>
+  <edges id="164" source_obj="//@blocks.2/@node_objs.1" sink_obj="//@blocks.2/@node_objs.5"/>
+  <edges id="166" source_obj="//@blocks.2/@node_objs.5" sink_obj="//@blocks.2/@node_objs.6"/>
+  <edges id="167" source_obj="//@blocks.2/@node_objs.6" sink_obj="//@blocks.2/@node_objs.7"/>
+  <edges id="168" source_obj="//@blocks.2/@node_objs.4" sink_obj="//@blocks.2/@node_objs.7"/>
+  <edges id="169" source_obj="//@blocks.2/@node_objs.0" sink_obj="//@blocks.2/@node_objs.8"/>
+  <edges id="172" source_obj="//@blocks.2/@node_objs.8" sink_obj="//@blocks.2/@node_objs.9"/>
+  <edges id="173" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.2/@node_objs.9"/>
+  <edges id="174" edge_type="CtrlEdge" source_obj="//@blocks.6" sink_obj="//@blocks.2/@node_objs.9"/>
+  <edges id="175" source_obj="//@regions.1/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="176" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="178" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0"/>
+  <edges id="179" source_obj="//@regions.1/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1" is_back_edge="1"/>
+  <edges id="180" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1" is_back_edge="1"/>
+  <edges id="182" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1"/>
+  <edges id="183" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="186" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.3"/>
+  <edges id="187" source_obj="//@blocks.3/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.3"/>
+  <edges id="188" source_obj="//@regions.1/@basic_blocks.0/@node_objs.3" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.4"/>
+  <edges id="189" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.4"/>
+  <edges id="190" edge_type="CtrlEdge" source_obj="//@blocks.4" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.4"/>
+  <edges id="191" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.0"/>
+  <edges id="192" source_obj="//@regions.1/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="202" source_obj="//@regions.1/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.2"/>
+  <edges id="203" source_obj="//@regions.1/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="204" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="205" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.4"/>
+  <edges id="206" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@blocks.4/@node_objs.0"/>
+  <edges id="207" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.4/@node_objs.1"/>
+  <edges id="208" source_obj="//@blocks.4/@node_objs.0" sink_obj="//@blocks.4/@node_objs.1"/>
+  <edges id="209" source_obj="//@blocks.4/@node_objs.1" sink_obj="//@blocks.4/@node_objs.2"/>
+  <edges id="210" source_obj="//@blocks.3/@node_objs.16" sink_obj="//@blocks.4/@node_objs.2"/>
+  <edges id="211" source_obj="//@blocks.4/@node_objs.2" sink_obj="//@blocks.4/@node_objs.3"/>
+  <edges id="212" source_obj="//@blocks.4/@node_objs.3" sink_obj="//@blocks.4/@node_objs.4"/>
+  <edges id="215" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@blocks.4/@node_objs.5"/>
+  <edges id="218" edge_type="CtrlEdge" source_obj="//@blocks.4" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0"/>
+  <edges id="219" source_obj="//@regions.2/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="220" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="221" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.1"/>
+  <edges id="224" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.2"/>
+  <edges id="227" source_obj="//@regions.2/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.3"/>
+  <edges id="228" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.3"/>
+  <edges id="229" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.3"/>
+  <edges id="230" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.0"/>
+  <edges id="231" source_obj="//@blocks.3/@node_objs.5" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="232" source_obj="//@regions.2/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="233" source_obj="//@regions.2/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.2"/>
+  <edges id="234" source_obj="//@ports.1" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.3"/>
+  <edges id="236" source_obj="//@regions.2/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.3"/>
+  <edges id="237" source_obj="//@blocks.4/@node_objs.4" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.4"/>
+  <edges id="238" source_obj="//@regions.2/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.4"/>
+  <edges id="239" source_obj="//@regions.2/@basic_blocks.1/@node_objs.4" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.5"/>
+  <edges id="240" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.6"/>
+  <edges id="242" source_obj="//@regions.2/@basic_blocks.1/@node_objs.5" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.6"/>
+  <edges id="243" source_obj="//@regions.2/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.7"/>
+  <edges id="244" source_obj="//@regions.2/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.8"/>
+  <edges id="245" source_obj="//@regions.2/@basic_blocks.1/@node_objs.8" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.9"/>
+  <edges id="246" source_obj="//@regions.2/@basic_blocks.1/@node_objs.7" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.9"/>
+  <edges id="247" source_obj="//@regions.2/@basic_blocks.1/@node_objs.9" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.10"/>
+  <edges id="248" source_obj="//@regions.2/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.10"/>
+  <edges id="249" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.11"/>
+  <edges id="250" source_obj="//@blocks.3/@node_objs.2" sink_obj="//@blocks.5/@node_objs.0"/>
+  <edges id="252" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.5/@node_objs.1"/>
+  <edges id="253" source_obj="//@blocks.2/@node_objs.1" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="256" source_obj="//@blocks.2/@node_objs.2" sink_obj="//@blocks.3/@node_objs.1"/>
+  <edges id="259" source_obj="//@blocks.3/@node_objs.1" sink_obj="//@blocks.3/@node_objs.2"/>
+  <edges id="261" source_obj="//@blocks.2/@node_objs.2" sink_obj="//@blocks.3/@node_objs.2"/>
+  <edges id="262" source_obj="//@blocks.3/@node_objs.1" sink_obj="//@blocks.3/@node_objs.3"/>
+  <edges id="263" source_obj="//@blocks.3/@node_objs.0" sink_obj="//@blocks.3/@node_objs.3"/>
+  <edges id="264" source_obj="//@blocks.2/@node_objs.1" sink_obj="//@blocks.3/@node_objs.3"/>
+  <edges id="265" source_obj="//@blocks.3/@node_objs.3" sink_obj="//@blocks.3/@node_objs.4"/>
+  <edges id="266" source_obj="//@blocks.3/@node_objs.4" sink_obj="//@blocks.3/@node_objs.5"/>
+  <edges id="268" source_obj="//@blocks.3/@node_objs.0" sink_obj="//@blocks.3/@node_objs.6"/>
+  <edges id="270" source_obj="//@blocks.3/@node_objs.0" sink_obj="//@blocks.3/@node_objs.7"/>
+  <edges id="272" source_obj="//@blocks.3/@node_objs.7" sink_obj="//@blocks.3/@node_objs.8"/>
+  <edges id="273" source_obj="//@blocks.3/@node_objs.8" sink_obj="//@blocks.3/@node_objs.9"/>
+  <edges id="274" source_obj="//@blocks.3/@node_objs.6" sink_obj="//@blocks.3/@node_objs.9"/>
+  <edges id="275" source_obj="//@blocks.3/@node_objs.1" sink_obj="//@blocks.3/@node_objs.10"/>
+  <edges id="276" source_obj="//@blocks.3/@node_objs.9" sink_obj="//@blocks.3/@node_objs.10"/>
+  <edges id="277" source_obj="//@blocks.2/@node_objs.7" sink_obj="//@blocks.3/@node_objs.10"/>
+  <edges id="278" source_obj="//@blocks.3/@node_objs.2" sink_obj="//@blocks.3/@node_objs.11"/>
+  <edges id="279" source_obj="//@blocks.3/@node_objs.11" sink_obj="//@blocks.3/@node_objs.12"/>
+  <edges id="280" source_obj="//@blocks.3/@node_objs.10" sink_obj="//@blocks.3/@node_objs.12"/>
+  <edges id="281" source_obj="//@blocks.3/@node_objs.12" sink_obj="//@blocks.3/@node_objs.13"/>
+  <edges id="282" source_obj="//@ports.2" sink_obj="//@blocks.3/@node_objs.14"/>
+  <edges id="284" source_obj="//@blocks.3/@node_objs.13" sink_obj="//@blocks.3/@node_objs.14"/>
+  <edges id="285" source_obj="//@blocks.3/@node_objs.14" sink_obj="//@blocks.3/@node_objs.15"/>
+  <edges id="286" source_obj="//@blocks.3/@node_objs.15" sink_obj="//@blocks.3/@node_objs.16"/>
+  <edges id="287" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.3/@node_objs.17"/>
+  <edges id="369" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="370" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="371" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="372" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="373" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2"/>
+  <edges id="374" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.6"/>
+  <edges id="375" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.3"/>
+  <edges id="376" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@regions.1/@basic_blocks.0"/>
+  <edges id="377" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.4"/>
+  <edges id="378" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1"/>
+  <edges id="379" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="380" edge_type="CtrlEdge" source_obj="//@blocks.4" sink_obj="//@regions.2/@basic_blocks.0"/>
+  <edges id="381" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@blocks.5"/>
+  <edges id="382" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.1"/>
+  <edges id="383" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="384" edge_type="CtrlEdge" source_obj="//@blocks.5" sink_obj="//@blocks.2" is_back_edge="1"/>
+  <edges id="385" edge_type="VirtEdge" source_obj="//@regions.2/@basic_blocks.1/@node_objs.8" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.10"/>
+  <edges id="-131" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@ports.1"/>
+  <edges id="-234" source_obj="//@regions.2/@basic_blocks.1/@node_objs.3" sink_obj="//@ports.1"/>
+  <blocks id="14" name="block_14" type="BlockType">
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>memset.loop</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="8" name="layer_read" coreId="0" bitwidth="3" opcode="read" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <dataInputObjs>layer</dataInputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="9" name="layer_cast" rtlName="layer_cast_fu_230_p1" coreId="4062598416" bitwidth="7" opcode="zext" m_display="0" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>mul</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="13" name="br_ln179" lineNumber="179" fileName="GIN_compute.cpp" fileDirectory=".." coreId="4294967295" contextFuncName="compute_edge_embedding" opcode="br" m_display="0" m_delay="0.38" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="179" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <controlInputObjs>memset.loop</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>179</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="29" name="split" type="BlockType">
+    <controlInputObjs>memset.loop</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_40</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="27" name="mul_i" rtlName="mul_3ns_5ns_7_1_1_U16" opType="mul" coreId="132" bitwidth="7" opcode="mul" nodeLabel="2.0" m_display="0" m_delay="0.91" m_topoIndex="12" m_clusterGroupNumber="-1">
+      <dataInputObjs>zext</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="28" name="br_ln180" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." coreId="4294967295" contextFuncName="compute_edge_embedding" opcode="br" nodeLabel="2.0" m_display="0" m_delay="0.38" m_topoIndex="13" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <controlInputObjs>block_40</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>180</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="40" name="block_40" type="BlockType">
+    <controlInputObjs>split</controlInputObjs>
+    <controlInputObjs>block_108</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>block_110</controlOutputObjs>
+    <controlOutputObjs>.split5</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="30" name="indvar_flatten" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." coreId="4062073744" contextFuncName="compute_edge_embedding" bitwidth="7" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="14" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <controlInputObjs>split</controlInputObjs>
+      <controlInputObjs>block_108</controlInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="31" name="e" lineNumber="180" originalName="e" fileName="GIN_compute.cpp" fileDirectory=".." coreId="7" contextFuncName="compute_edge_embedding" bitwidth="6" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="15" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>select</dataInputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+      <dataOutputObjs>bitconcatenate</dataOutputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+      <controlInputObjs>split</controlInputObjs>
+      <controlInputObjs>block_108</controlInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="32" name="ef" lineNumber="181" originalName="ef" fileName="GIN_compute.cpp" fileDirectory=".." coreId="4065117680" contextFuncName="compute_edge_embedding" bitwidth="2" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="16" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="181" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+      <controlInputObjs>split</controlInputObjs>
+      <controlInputObjs>block_108</controlInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="33" name="add_ln180_1" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln180_1_fu_256_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="7" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.7" m_topoIndex="17" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>phi</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="34" name="zext_ln180" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln180_fu_262_p1" coreId="4294967295" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="18" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>sub</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="35" name="p_shl" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="p_shl_fu_266_p3" coreId="132" contextFuncName="compute_edge_embedding" bitwidth="8" opcode="bitconcatenate" nodeLabel="3.0" m_display="0" m_topoIndex="19" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="36" name="p_shl_cast" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="p_shl_cast_fu_274_p1" coreId="0" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="20" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>bitconcatenate</dataInputObjs>
+      <dataOutputObjs>sub</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="37" name="empty_61" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="empty_61_fu_278_p2" coreName="Adder" implIndex="fabric" control="auto" opType="sub" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="sub" nodeLabel="3.0" m_display="0" m_delay="0.7" m_topoIndex="21" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="38" name="icmp_ln180" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln180_fu_284_p2" opType="icmp" coreId="132" contextFuncName="compute_edge_embedding" bitwidth="1" opcode="icmp" nodeLabel="3.0" m_display="0" m_delay="0.59" m_topoIndex="22" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>br</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="39" name="br_ln180" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." coreId="913" contextFuncName="compute_edge_embedding" opcode="br" nodeLabel="3.0" m_display="0" m_topoIndex="23" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <controlInputObjs>.split5</controlInputObjs>
+      <controlInputObjs>block_110</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>180</validLinenumbers>
+      <validLinenumbers>181</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="62" name=".split5" type="BlockType">
+    <controlInputObjs>block_40</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_70</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="41" name="add_ln180" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln180_fu_290_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="6" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.7" m_topoIndex="24" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+      <dataOutputObjs>bitconcatenate</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="44" name="icmp_ln181" lineNumber="181" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln181_fu_296_p2" opType="icmp" coreId="132" contextFuncName="compute_edge_embedding" bitwidth="1" opcode="icmp" nodeLabel="3.0" m_display="0" m_delay="0.34" m_topoIndex="25" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="181" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="45" name="select_ln180" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="select_ln180_fu_302_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="compute_edge_embedding" bitwidth="2" opcode="select" nodeLabel="3.0" m_display="0" m_delay="0.27" m_topoIndex="26" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="46" name="select_ln180_1" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="select_ln180_1_fu_310_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="compute_edge_embedding" bitwidth="6" opcode="select" nodeLabel="3.0" m_display="0" m_delay="0.29" m_topoIndex="27" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <dataInputObjs>add</dataInputObjs>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>phi</dataOutputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="47" name="zext_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mul_ln703_fu_366_p00" coreId="132" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="zext" nodeLabel="4.0" m_display="0" m_topoIndex="39" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>select</dataInputObjs>
+      <dataOutputObjs>mul</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="48" name="mul_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mul_6ns_10ns_15_1_1_U17" opType="mul" coreId="132" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="mul" nodeLabel="4.0" m_display="0" m_delay="1.7" m_topoIndex="40" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="49" name="zext_ln180_1" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln180_1_fu_318_p1" coreId="49" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="28" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>sub</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="50" name="p_shl_mid1" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="p_shl_mid1_fu_322_p3" coreId="402653312" contextFuncName="compute_edge_embedding" bitwidth="8" opcode="bitconcatenate" nodeLabel="3.0" m_display="0" m_topoIndex="29" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="51" name="p_shl_cast_mid1" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="p_shl_cast_mid1_fu_330_p1" coreId="132" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="30" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>bitconcatenate</dataInputObjs>
+      <dataOutputObjs>sub</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="52" name="p_mid1" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="p_mid1_fu_334_p2" coreName="Adder" implIndex="fabric" control="auto" opType="sub" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="sub" nodeLabel="3.0" m_display="0" m_delay="0.7" m_topoIndex="31" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataOutputObjs>select</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="53" name="select_ln180_2" lineNumber="180" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="select_ln180_2_fu_340_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="select" nodeLabel="3.0" m_display="0" m_topoIndex="32" m_clusterGroupNumber="1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="180" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <dataInputObjs>sub</dataInputObjs>
+      <dataInputObjs>sub</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="54" name="zext_ln181" lineNumber="181" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln181_fu_348_p1" coreId="4062794512" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="33" m_clusterGroupNumber="1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="181" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>select</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="56" name="add_ln182" lineNumber="182" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln182_fu_352_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.71" m_topoIndex="34" m_clusterGroupNumber="1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="182" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataInputObjs>select</dataInputObjs>
+      <dataOutputObjs>sext</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="57" name="sext_ln182" lineNumber="182" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="sext_ln182_fu_358_p1" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="64" opcode="sext" nodeLabel="3.0" m_display="0" m_topoIndex="35" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="182" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>getelementptr</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="58" name="edge_attr_addr" lineNumber="182" fileName="GIN_compute.cpp" fileDirectory=".." coreId="132" contextFuncName="compute_edge_embedding" bitwidth="11" opcode="getelementptr" nodeLabel="3.0" m_display="0" m_topoIndex="36" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="182" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>edge_attr</dataInputObjs>
+      <dataInputObjs>sext</dataInputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="59" name="e_f" lineNumber="182" originalName="e_f" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="auto" opType="ram_2p" coreId="94" contextFuncName="compute_edge_embedding" bitwidth="32" opcode="load" nodeLabel="3.0" nodeLatency="1" m_display="0" m_delay="1.2" m_topoIndex="37" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="182" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>getelementptr</dataInputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="60" name="trunc_ln182" lineNumber="182" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln182_fu_372_p1" coreId="1041" contextFuncName="compute_edge_embedding" bitwidth="7" opcode="trunc" nodeLabel="4.0" m_display="0" m_topoIndex="41" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="182" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>load</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="61" name="br_ln167" lineNumber="167" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="get_ed_emb_addr" opcode="br" nodeLabel="4.0" m_display="0" m_delay="0.38" m_topoIndex="42" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="167" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+      <controlInputObjs>block_70</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h">
+      <validLinenumbers>703</validLinenumbers>
+    </fileValidLineNumbers>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>180</validLinenumbers>
+      <validLinenumbers>181</validLinenumbers>
+      <validLinenumbers>182</validLinenumbers>
+      <validLinenumbers>167</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="84" name="_Z15get_ed_emb_addrii.exit.loopexit" type="BlockType">
+    <controlInputObjs>block_70</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="78" name="empty_63" lineNumber="168" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="empty_63_fu_415_p1" coreId="1089" contextFuncName="get_ed_emb_addr" bitwidth="7" opcode="trunc" nodeLabel="6.0" m_display="0" m_topoIndex="53" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="79" name="tmp" lineNumber="168" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="tmp_fu_419_p2" coreName="TAddSub" implIndex="tadder" control="auto" opType="add" coreId="10" contextFuncName="get_ed_emb_addr" bitwidth="7" opcode="add" nodeLabel="6.0" m_display="0" m_topoIndex="54" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+      <dataInputObjs>mul</dataInputObjs>
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="80" name="add5" lineNumber="168" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add5_fu_424_p2" coreName="TAddSub" implIndex="tadder" control="auto" opType="add" coreId="10" contextFuncName="get_ed_emb_addr" bitwidth="7" opcode="add" nodeLabel="6.0" m_display="0" m_delay="0.72" m_topoIndex="55" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="81" name="zext_ln183" lineNumber="183" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="mul_ln183_fu_433_p00" coreId="4062325001" contextFuncName="compute_edge_embedding" bitwidth="15" opcode="zext" nodeLabel="6.0" m_display="0" m_topoIndex="56" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>mul</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="82" name="mul_ln183" lineNumber="183" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="mul_7ns_10ns_15_1_1_U19" opType="mul" coreId="1089" contextFuncName="compute_edge_embedding" bitwidth="15" opcode="mul" nodeLabel="6.0" m_display="0" m_delay="1.7" m_topoIndex="57" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="83" name="br_ln183" lineNumber="183" fileName="GIN_compute.cpp" fileDirectory=".." coreId="4062324872" contextFuncName="compute_edge_embedding" opcode="br" nodeLabel="6.0" m_display="0" m_delay="0.38" m_topoIndex="58" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>168</validLinenumbers>
+      <validLinenumbers>183</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="108" name="block_108" type="BlockType">
+    <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit</controlInputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>block_40</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="106" name="add_ln181" lineNumber="181" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln181_fu_482_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="2" opcode="add" nodeLabel="9.0" m_display="0" m_delay="0.43" m_topoIndex="75" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="181" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+      <dataInputObjs>select</dataInputObjs>
+      <dataOutputObjs>phi</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="107" name="br_ln0" coreId="4063464152" opcode="br" nodeLabel="9.0" m_display="0" m_topoIndex="76" m_clusterGroupNumber="-1">
+      <controlInputObjs>block_40</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>181</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="110" name="block_110" type="BlockType">
+    <controlInputObjs>block_40</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="109" name="_ln201" lineNumber="201" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="compute_edge_embedding" opcode="ret" nodeLabel="3.0" m_display="0" m_topoIndex="38" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="201" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>201</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="409" pipe_depth="1" RegionName="Loop 1">
+    <basic_blocks id="21" name="memset.loop" type="BlockType">
+      <controlInputObjs>block_14</controlInputObjs>
+      <controlInputObjs>memset.loop.split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>split</controlOutputObjs>
+      <controlOutputObjs>memset.loop.split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="15" name="empty" coreId="481" bitwidth="14" opcode="phi" nodeLabel="1.0" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <controlInputObjs>block_14</controlInputObjs>
+        <controlInputObjs>memset.loop.split</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="16" name="empty_59" rtlName="empty_59_fu_234_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" bitwidth="14" opcode="add" nodeLabel="1.0" m_display="0" m_delay="0.76" m_topoIndex="5" m_clusterGroupNumber="-1">
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="18" name="exitcond537" rtlName="exitcond537_fu_240_p2" opType="icmp" coreId="132" bitwidth="1" opcode="icmp" nodeLabel="1.0" m_display="0" m_delay="0.65" m_topoIndex="6" m_clusterGroupNumber="-1">
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="20" name="br_ln0" coreId="4294967295" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="7" m_clusterGroupNumber="-1">
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>memset.loop.split</controlInputObjs>
+        <controlInputObjs>split</controlInputObjs>
+      </node_objs>
+    </basic_blocks>
+    <basic_blocks id="26" name="memset.loop.split" type="BlockType">
+      <controlInputObjs>memset.loop</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>memset.loop</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="22" name="p_cast" rtlName="p_cast_fu_246_p1" coreId="4063721088" bitwidth="64" opcode="zext" nodeLabel="1.0" m_display="0" m_topoIndex="8" m_clusterGroupNumber="-1">
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="23" name="edge_embedding_V_addr" coreId="1446736751" bitwidth="18" opcode="getelementptr" nodeLabel="1.0" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+        <dataInputObjs>edge_embedding_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>edge_embedding_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="24" name="edge_embedding_V_addr_write_ln0" coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" opcode="store" nodeLabel="1.0" m_display="0" m_delay="2.03" m_topoIndex="10" m_clusterGroupNumber="-1">
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="25" name="br_ln0" coreId="0" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="11" m_clusterGroupNumber="-1">
+        <controlInputObjs>memset.loop</controlInputObjs>
+      </node_objs>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="410" pipe_depth="1" RegionName="VITIS_LOOP_167_1">
+    <basic_blocks id="70" name="block_70" type="BlockType">
+      <controlInputObjs>.split5</controlInputObjs>
+      <controlInputObjs>.split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>_Z15get_ed_emb_addrii.exit.loopexit</controlOutputObjs>
+      <controlOutputObjs>.split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="63" name="i" lineNumber="167" originalName="i" fileName="GIN_compute.cpp" fileDirectory=".." coreId="1073" contextFuncName="get_ed_emb_addr" bitwidth="2" opcode="phi" nodeLabel="5.0" m_display="0" m_topoIndex="43" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="167" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+        <controlInputObjs>.split</controlInputObjs>
+        <controlInputObjs>.split5</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="64" name="addr" originalName="addr" coreId="543649385" bitwidth="32" opcode="phi" nodeLabel="5.0" m_display="0" m_topoIndex="44" m_clusterGroupNumber="-1">
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+        <controlInputObjs>.split</controlInputObjs>
+        <controlInputObjs>.split5</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="65" name="add_ln167" lineNumber="167" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln167_fu_376_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="get_ed_emb_addr" bitwidth="2" opcode="add" nodeLabel="5.0" m_display="0" m_delay="0.43" m_topoIndex="45" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="167" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="67" name="icmp_ln167" lineNumber="167" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln167_fu_382_p2" opType="icmp" coreId="892416301" contextFuncName="get_ed_emb_addr" bitwidth="1" opcode="icmp" nodeLabel="5.0" m_display="0" m_delay="0.34" m_topoIndex="46" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="167" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="69" name="br_ln167" lineNumber="167" fileName="GIN_compute.cpp" fileDirectory=".." coreId="1089" contextFuncName="get_ed_emb_addr" opcode="br" nodeLabel="5.0" m_display="0" m_topoIndex="47" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="167" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>.split</controlInputObjs>
+        <controlInputObjs>_Z15get_ed_emb_addrii.exit.loopexit</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>167</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="77" name=".split" type="BlockType">
+      <controlInputObjs>block_70</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_70</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="72" name="trunc_ln168" lineNumber="168" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="trunc_ln168_fu_387_p1" coreId="132" contextFuncName="get_ed_emb_addr" bitwidth="1" opcode="trunc" nodeLabel="5.0" m_display="0" m_topoIndex="48" m_clusterGroupNumber="2">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="73" name="zext_ln168" lineNumber="168" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="merge_i_fu_395_p5" coreId="0" contextFuncName="get_ed_emb_addr" bitwidth="2" opcode="zext" nodeLabel="5.0" m_display="0" m_topoIndex="49" m_clusterGroupNumber="2">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataOutputObjs>mux</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="74" name="merge_i" lineNumber="168" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="mux_42_32_1_1_U18" opType="mux" coreId="1089" contextFuncName="get_ed_emb_addr" bitwidth="32" opcode="mux" nodeLabel="5.0" m_display="0" m_topoIndex="50" m_clusterGroupNumber="2">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="75" name="addr_2" lineNumber="168" originalName="addr" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="addr_2_fu_409_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="get_ed_emb_addr" bitwidth="32" opcode="add" nodeLabel="5.0" m_display="0" m_delay="0.88" m_topoIndex="51" m_clusterGroupNumber="2">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="168" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="get_ed_emb_addr"/>
+        <dataInputObjs>mux</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="76" name="br_ln0" coreId="132" opcode="br" nodeLabel="5.0" m_display="0" m_topoIndex="52" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_70</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>168</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="411" pipe_depth="2" RegionName="VITIS_LOOP_183_3">
+    <basic_blocks id="91" name="_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit" type="BlockType">
+      <controlInputObjs>_Z15get_ed_emb_addrii.exit.loopexit</controlInputObjs>
+      <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_108</controlOutputObjs>
+      <controlOutputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="85" name="dim" lineNumber="183" originalName="dim" fileName="GIN_compute.cpp" fileDirectory=".." coreId="4063499384" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="phi" nodeLabel="7.0" m_display="0" m_topoIndex="59" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <controlInputObjs>_Z15get_ed_emb_addrii.exit.loopexit</controlInputObjs>
+        <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="86" name="add_ln183" lineNumber="183" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln183_fu_439_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="9" opcode="add" nodeLabel="7.0" m_display="0" m_delay="0.71" m_topoIndex="60" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="88" name="icmp_ln183" lineNumber="183" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln183_fu_445_p2" opType="icmp" coreId="1089" contextFuncName="compute_edge_embedding" bitwidth="1" opcode="icmp" nodeLabel="7.0" m_display="0" m_delay="0.59" m_topoIndex="61" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="90" name="br_ln183" lineNumber="183" fileName="GIN_compute.cpp" fileDirectory=".." coreId="1089" contextFuncName="compute_edge_embedding" opcode="br" nodeLabel="7.0" m_display="0" m_topoIndex="62" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="183" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split</controlInputObjs>
+        <controlInputObjs>block_108</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>183</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="105" name="_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split" type="BlockType">
+      <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="92" name="zext_ln703_30" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="zext_ln703_30_fu_451_p1" coreId="132" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="zext" nodeLabel="7.0" m_display="0" m_topoIndex="63" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="93" name="add_ln703_38" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="add_ln703_38_fu_455_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="add" nodeLabel="7.0" m_display="0" m_delay="0.77" m_topoIndex="64" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="94" name="zext_ln703_31" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="zext_ln703_31_fu_460_p1" coreId="132" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="64" opcode="zext" nodeLabel="7.0" m_display="0" m_topoIndex="65" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="95" name="edge_embedding_V_addr_1" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreId="1089" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="18" opcode="getelementptr" nodeLabel="7.0" m_display="0" m_topoIndex="66" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>edge_embedding_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>edge_embedding_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="96" name="add_ln186" lineNumber="186" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln186_fu_465_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="compute_edge_embedding" bitwidth="15" opcode="add" nodeLabel="7.0" m_display="0" m_delay="0.77" m_topoIndex="67" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="186" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="97" name="zext_ln186" lineNumber="186" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln186_fu_470_p1" coreId="4062095312" contextFuncName="compute_edge_embedding" bitwidth="64" opcode="zext" nodeLabel="7.0" m_display="0" m_topoIndex="68" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="186" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="98" name="edge_embedding_table_V_addr" lineNumber="186" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="compute_edge_embedding" bitwidth="15" opcode="getelementptr" nodeLabel="7.0" m_display="0" m_topoIndex="69" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="186" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="100" name="emb_value_V" lineNumber="186" originalName="emb_value.V" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="compute_edge_embedding" bitwidth="32" opcode="load" nodeLabel="7.0" nodeLatency="1" m_display="0" m_delay="1.86" m_topoIndex="70" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="186" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="compute_edge_embedding"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="101" name="edge_embedding_V_load" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="load" nodeLabel="7.0" nodeLatency="1" m_display="0" m_delay="2.03" m_topoIndex="71" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="102" name="add_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="add_ln703_fu_475_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="add" nodeLabel="8.0" m_display="0" m_delay="0.88" m_topoIndex="72" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="103" name="edge_embedding_V_addr_1_write_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" opcode="store" nodeLabel="8.0" m_display="0" m_delay="2.03" m_topoIndex="73" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="104" name="br_ln0" coreId="1217" opcode="br" nodeLabel="8.0" m_display="0" m_topoIndex="74" m_clusterGroupNumber="-1">
+        <controlInputObjs>_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h">
+        <validLinenumbers>703</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>186</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <ScheduleInfo time="8"/>
+  <ScheduleInfo time="9"/>
+  <regnodes realName="mul_ln183_reg_553">
+    <nodeIds>82</nodeIds>
+  </regnodes>
+  <regnodes realName="ef_reg_185">
+    <nodeIds>32</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_embedding_V_addr_1_reg_567">
+    <nodeIds>95</nodeIds>
+  </regnodes>
+  <regnodes realName="layer_cast_reg_487">
+    <nodeIds>9</nodeIds>
+  </regnodes>
+  <regnodes realName="dim_reg_219">
+    <nodeIds>85</nodeIds>
+  </regnodes>
+  <regnodes realName="addr_2_reg_548">
+    <nodeIds>75</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln167_reg_540">
+    <nodeIds>65</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln183_reg_558">
+    <nodeIds>86</nodeIds>
+  </regnodes>
+  <regnodes realName="mul_ln703_reg_530">
+    <nodeIds>48</nodeIds>
+  </regnodes>
+  <regnodes realName="e_reg_174">
+    <nodeIds>31</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_59_reg_492">
+    <nodeIds>16</nodeIds>
+  </regnodes>
+  <regnodes realName="i_reg_196">
+    <nodeIds>63</nodeIds>
+  </regnodes>
+  <regnodes realName="addr_reg_207">
+    <nodeIds>64</nodeIds>
+  </regnodes>
+  <regnodes realName="mul_i_reg_500">
+    <nodeIds>27</nodeIds>
+  </regnodes>
+  <regnodes realName="select_ln180_1_reg_519">
+    <nodeIds>46</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln181_reg_578">
+    <nodeIds>106</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_reg_152">
+    <nodeIds>15</nodeIds>
+  </regnodes>
+  <regnodes realName="trunc_ln182_reg_535">
+    <nodeIds>60</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_embedding_table_V_addr_reg_573">
+    <nodeIds>98</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln183_reg_563">
+    <nodeIds>88</nodeIds>
+  </regnodes>
+  <regnodes realName="indvar_flatten_reg_163">
+    <nodeIds>30</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln180_1_reg_505">
+    <nodeIds>33</nodeIds>
+  </regnodes>
+  <regnodes realName="select_ln180_reg_513">
+    <nodeIds>45</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_attr_addr_reg_525">
+    <nodeIds>58</nodeIds>
+  </regnodes>
+  <expressionNodes realName="add_ln167_fu_376">
+    <nodeIds>65</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln180_fu_290">
+    <nodeIds>41</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln181_fu_296">
+    <nodeIds>44</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_mid1_fu_334">
+    <nodeIds>52</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="addr_2_fu_409">
+    <nodeIds>75</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln168_fu_391">
+    <nodeIds>73</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln182_fu_372">
+    <nodeIds>60</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_30_fu_451">
+    <nodeIds>92</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mul_i_fu_251">
+    <nodeIds>27</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_cast_fu_246">
+    <nodeIds>22</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_attr_addr_gep_fu_118">
+    <nodeIds>58</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_embedding_table_V_addr_gep_fu_138">
+    <nodeIds>98</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln186_fu_470">
+    <nodeIds>97</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mul_ln703_fu_366">
+    <nodeIds>48</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_embedding_V_addr_1_gep_fu_131">
+    <nodeIds>95</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="tmp_fu_419">
+    <nodeIds>79</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln180_fu_284">
+    <nodeIds>38</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="indvar_flatten_phi_fu_167">
+    <nodeIds>30</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="exitcond537_fu_240">
+    <nodeIds>18</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln186_fu_465">
+    <nodeIds>96</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_63_fu_415">
+    <nodeIds>78</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="addr_phi_fu_211">
+    <nodeIds>64</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_31_fu_460">
+    <nodeIds>94</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln703_38_fu_455">
+    <nodeIds>93</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="mul_ln183_fu_433">
+    <nodeIds>82</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln183_fu_429">
+    <nodeIds>81</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln167_fu_382">
+    <nodeIds>67</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add5_fu_424">
+    <nodeIds>80</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln181_fu_482">
+    <nodeIds>106</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_shl_mid1_fu_322">
+    <nodeIds>50</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln180_2_fu_340">
+    <nodeIds>53</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln181_fu_348">
+    <nodeIds>54</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_fu_363">
+    <nodeIds>47</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="layer_cast_fu_230">
+    <nodeIds>9</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_shl_cast_fu_274">
+    <nodeIds>36</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_59_fu_234">
+    <nodeIds>16</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_shl_cast_mid1_fu_330">
+    <nodeIds>51</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_shl_fu_266">
+    <nodeIds>35</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln180_1_fu_318">
+    <nodeIds>49</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln182_fu_352">
+    <nodeIds>56</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_phi_fu_200">
+    <nodeIds>63</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="merge_i_fu_395">
+    <nodeIds>74</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln183_fu_439">
+    <nodeIds>86</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_embedding_V_addr_gep_fu_100">
+    <nodeIds>23</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="ef_phi_fu_189">
+    <nodeIds>32</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln180_1_fu_310">
+    <nodeIds>46</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="e_phi_fu_178">
+    <nodeIds>31</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln180_fu_302">
+    <nodeIds>45</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln703_fu_475">
+    <nodeIds>102</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln183_fu_445">
+    <nodeIds>88</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln168_fu_387">
+    <nodeIds>72</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln180_fu_262">
+    <nodeIds>34</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln180_1_fu_256">
+    <nodeIds>33</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="sext_ln182_fu_358">
+    <nodeIds>57</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="dim_phi_fu_223">
+    <nodeIds>85</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_phi_fu_156">
+    <nodeIds>15</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_61_fu_278">
+    <nodeIds>37</nodeIds>
+  </expressionNodes>
+  <ioNodes realName="layer_read_read_fu_94">
+    <nodeIds>8</nodeIds>
+  </ioNodes>
+  <memoryPorts dataString="edge_attr">
+    <nodeIds>59</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_embedding_V">
+    <nodeIds>101</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_embedding_V" portID="1">
+    <nodeIds>24</nodeIds>
+    <nodeIds>103</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_embedding_table_V">
+    <nodeIds>100</nodeIds>
+  </memoryPorts>
+  <ioPorts name="edge_attr(p0)">
+    <contents name="load">
+      <nodeIds>59</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_embedding_V(p0)">
+    <contents name="load">
+      <nodeIds>101</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_embedding_V(p1)">
+    <contents name="store">
+      <nodeIds>24</nodeIds>
+      <nodeIds>103</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="layer">
+    <contents name="read">
+      <nodeIds>8</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="8" stage="1" latency="1"/>
+      <operations id="9" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="1"/>
+      <operations id="11" stage="1" latency="1"/>
+      <operations id="12" stage="1" latency="1"/>
+      <operations id="13" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="20" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="24" stage="1" latency="1"/>
+      <operations id="25" stage="1" latency="1"/>
+    </states>
+    <states id="3">
+      <operations id="27" stage="1" latency="1"/>
+      <operations id="28" stage="1" latency="1"/>
+    </states>
+    <states id="4">
+      <operations id="30" stage="1" latency="1"/>
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="33" stage="1" latency="1"/>
+      <operations id="34" stage="1" latency="1"/>
+      <operations id="35" stage="1" latency="1"/>
+      <operations id="36" stage="1" latency="1"/>
+      <operations id="37" stage="1" latency="1"/>
+      <operations id="38" stage="1" latency="1"/>
+      <operations id="39" stage="1" latency="1"/>
+      <operations id="41" stage="1" latency="1"/>
+      <operations id="44" stage="1" latency="1"/>
+      <operations id="45" stage="1" latency="1"/>
+      <operations id="46" stage="1" latency="1"/>
+      <operations id="49" stage="1" latency="1"/>
+      <operations id="50" stage="1" latency="1"/>
+      <operations id="51" stage="1" latency="1"/>
+      <operations id="52" stage="1" latency="1"/>
+      <operations id="53" stage="1" latency="1"/>
+      <operations id="54" stage="1" latency="1"/>
+      <operations id="56" stage="1" latency="1"/>
+      <operations id="57" stage="1" latency="1"/>
+      <operations id="58" stage="1" latency="1"/>
+      <operations id="59" stage="2" latency="2"/>
+      <operations id="109" stage="1" latency="1"/>
+    </states>
+    <states id="5">
+      <operations id="42" stage="1" latency="1"/>
+      <operations id="43" stage="1" latency="1"/>
+      <operations id="47" stage="1" latency="1"/>
+      <operations id="48" stage="1" latency="1"/>
+      <operations id="55" stage="1" latency="1"/>
+      <operations id="59" stage="1" latency="2"/>
+      <operations id="60" stage="1" latency="1"/>
+      <operations id="61" stage="1" latency="1"/>
+    </states>
+    <states id="6">
+      <operations id="63" stage="1" latency="1"/>
+      <operations id="64" stage="1" latency="1"/>
+      <operations id="65" stage="1" latency="1"/>
+      <operations id="66" stage="1" latency="1"/>
+      <operations id="67" stage="1" latency="1"/>
+      <operations id="68" stage="1" latency="1"/>
+      <operations id="69" stage="1" latency="1"/>
+      <operations id="71" stage="1" latency="1"/>
+      <operations id="72" stage="1" latency="1"/>
+      <operations id="73" stage="1" latency="1"/>
+      <operations id="74" stage="1" latency="1"/>
+      <operations id="75" stage="1" latency="1"/>
+      <operations id="76" stage="1" latency="1"/>
+    </states>
+    <states id="7">
+      <operations id="78" stage="1" latency="1"/>
+      <operations id="79" stage="1" latency="1"/>
+      <operations id="80" stage="1" latency="1"/>
+      <operations id="81" stage="1" latency="1"/>
+      <operations id="82" stage="1" latency="1"/>
+      <operations id="83" stage="1" latency="1"/>
+    </states>
+    <states id="8">
+      <operations id="85" stage="1" latency="1"/>
+      <operations id="86" stage="1" latency="1"/>
+      <operations id="87" stage="1" latency="1"/>
+      <operations id="88" stage="1" latency="1"/>
+      <operations id="89" stage="1" latency="1"/>
+      <operations id="90" stage="1" latency="1"/>
+      <operations id="92" stage="1" latency="1"/>
+      <operations id="93" stage="1" latency="1"/>
+      <operations id="94" stage="1" latency="1"/>
+      <operations id="95" stage="1" latency="1"/>
+      <operations id="96" stage="1" latency="1"/>
+      <operations id="97" stage="1" latency="1"/>
+      <operations id="98" stage="1" latency="1"/>
+      <operations id="100" stage="2" latency="2"/>
+      <operations id="101" stage="2" latency="2"/>
+    </states>
+    <states id="9">
+      <operations id="99" stage="1" latency="1"/>
+      <operations id="100" stage="1" latency="2"/>
+      <operations id="101" stage="1" latency="2"/>
+      <operations id="102" stage="1" latency="1"/>
+      <operations id="103" stage="1" latency="1"/>
+      <operations id="104" stage="1" latency="1"/>
+    </states>
+    <states id="10">
+      <operations id="106" stage="1" latency="1"/>
+      <operations id="107" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="10" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="10">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="9">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="compute_edge_embedding" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="48723" mMaxLatency="48963">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <subRegions>5</subRegions>
+      <subRegions>11</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>14</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="Loop_1" mII="1" mDepth="1" mMinTripCount="12000" mMaxTripCount="12000" mMinLatency="12000" mMaxLatency="12000" mType="1">
+      <basicBlocks>21</basicBlocks>
+      <basicBlocks>26</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Region 1" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>29</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="5" mTag="VITIS_LOOP_180_1_VITIS_LOOP_181_2" mII="-1" mDepth="-1" mMinTripCount="120" mMaxTripCount="120" mMinLatency="36720" mMaxLatency="36960" mType="1">
+      <subRegions>6</subRegions>
+      <subRegions>7</subRegions>
+      <subRegions>8</subRegions>
+      <subRegions>9</subRegions>
+      <subRegions>10</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="6" mTag="Region 2" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMaxLatency="1">
+      <basicBlocks>40</basicBlocks>
+      <basicBlocks>62</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="7" mTag="VITIS_LOOP_167_1" mII="1" mDepth="1" mMaxTripCount="2" mMaxLatency="2" mType="1">
+      <basicBlocks>70</basicBlocks>
+      <basicBlocks>77</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="8" mTag="Region 3" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>84</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="9" mTag="VITIS_LOOP_183_3" mII="1" mDepth="2" mMinTripCount="300" mMaxTripCount="300" mMinLatency="300" mMaxLatency="300" mType="1">
+      <basicBlocks>91</basicBlocks>
+      <basicBlocks>105</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="10" mTag="Region 4" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>108</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="11" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>110</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

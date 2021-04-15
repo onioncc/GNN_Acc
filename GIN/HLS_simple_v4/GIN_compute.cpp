@@ -27,10 +27,10 @@ WT_TYPE edge_embedding_table[EG_FEATURE_TOTAL][EMB_DIM];
 
 /// MLP related weights
 WT_TYPE mlp_eps[LAYER_NUM];
-WT_TYPE mlp_1_weights[MLP_1_OUT][MLP_1_IN];
-WT_TYPE mlp_1_bias[MLP_1_OUT];
-WT_TYPE mlp_2_weights[MLP_2_OUT][MLP_2_IN];
-WT_TYPE mlp_2_bias[MLP_2_OUT];
+WT_TYPE mlp_1_weights[LAYER_NUM][MLP_1_OUT][MLP_1_IN];
+WT_TYPE mlp_1_bias[LAYER_NUM][MLP_1_OUT];
+WT_TYPE mlp_2_weights[LAYER_NUM][MLP_2_OUT][MLP_2_IN];
+WT_TYPE mlp_2_bias[LAYER_NUM][MLP_2_OUT];
 
 /// graph pred linear weights
 WT_TYPE graph_pred_weights[NUM_TASK][MLP_2_OUT];
@@ -76,23 +76,28 @@ void MLP_one_node_one_dim(int dim, int nd, FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM
 #pragma HLS array_partition variable=psum complete
 #pragma HLS array_partition variable=mlp_in dim=2 complete
 #pragma HLS array_partition variable=mlp_out dim=2 complete
-#pragma HLS array_partition variable=mlp_1_weights dim=2 complete
-#pragma HLS array_partition variable=mlp_1_bias complete
-#pragma HLS array_partition variable=mlp_2_weights dim=1 complete
-#pragma HLS array_partition variable=mlp_2_bias complete
+#pragma HLS array_partition variable=mlp_1_weights dim=3 complete
+#pragma HLS array_partition variable=mlp_1_bias dim=2 complete
+#pragma HLS array_partition variable=mlp_2_weights dim=2 complete
+#pragma HLS array_partition variable=mlp_2_bias dim=2 complete
 
+#pragma HLS bind_storage variable=mlp_1_weights type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=mlp_2_weights type=RAM_2P impl=uram
+
+// #pragma HLS array_partition variable=mlp_1_weights dim=1 complete
+// #pragma HLS array_partition variable=mlp_2_weights dim=1 complete
 
     // first layer of 300 x 300 VVM
-    FM_TYPE sum = mlp_1_bias[dim];
+    FM_TYPE sum = mlp_1_bias[layer][dim];
     for(int dim_in1 = 0; dim_in1 < MLP_1_IN; dim_in1++) {
-        psum[dim_in1] = mlp_1_weights[dim][dim_in1] * mlp_in[nd][dim_in1];
+        psum[dim_in1] = mlp_1_weights[layer][dim][dim_in1] * mlp_in[nd][dim_in1];
         sum += psum[dim_in1];
     }
     sum = sum < 0 ? (FM_TYPE)0 : sum;
 
     // second layer of 300 x 300 VVM
     for(int dim_out2 = 0; dim_out2 < MLP_2_OUT; dim_out2++) {
-        mlp_out[nd][dim_out2] += sum * mlp_2_weights[dim_out2][dim];
+        mlp_out[nd][dim_out2] += sum * mlp_2_weights[layer][dim_out2][dim];
     }
 
 }
@@ -133,10 +138,10 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE mlp_out[MAX_NODE][EMB_DIM], 
 
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim = 0; dim < EMB_DIM; dim++) {
-            if( mlp_out[nd][dim] + mlp_2_bias[dim] < 0 && layer != 4 ) {
+            if( mlp_out[nd][dim] + mlp_2_bias[layer][dim] < 0 && layer != 4 ) {
                 node_embedding[nd][dim] = 0;
             }
-            else node_embedding[nd][dim] = mlp_out[nd][dim] + mlp_2_bias[dim];
+            else node_embedding[nd][dim] = mlp_out[nd][dim] + mlp_2_bias[layer][dim];
         }
     }
 
@@ -243,24 +248,22 @@ void load_mlp_weights_one_layer(int layer, FM_TYPE* gnn_node_mlp_1_weights_fixed
 #pragma HLS inline off
 
     for(int dim_out = 0; dim_out < MLP_1_OUT; dim_out++) {
-        mlp_1_bias[dim_out] = gnn_node_mlp_1_bias_fixed[layer * MLP_1_OUT + dim_out];
+        mlp_1_bias[layer][dim_out] = gnn_node_mlp_1_bias_fixed[layer * MLP_1_OUT + dim_out];
         for(int dim_in = 0; dim_in < MLP_1_IN; dim_in++) {
-            mlp_1_weights[dim_out][dim_in] = gnn_node_mlp_1_weights_fixed[layer * MLP_1_OUT * MLP_1_IN + dim_out * MLP_1_IN + dim_in];
+            mlp_1_weights[layer][dim_out][dim_in] = gnn_node_mlp_1_weights_fixed[layer * MLP_1_OUT * MLP_1_IN + dim_out * MLP_1_IN + dim_in];
         }
     }        
     for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {
-        mlp_2_bias[dim_out] = gnn_node_mlp_2_bias_fixed[layer * MLP_2_OUT + dim_out];
+        mlp_2_bias[layer][dim_out] = gnn_node_mlp_2_bias_fixed[layer * MLP_2_OUT + dim_out];
         for(int dim_in = 0; dim_in < MLP_2_IN; dim_in++) {
-            mlp_2_weights[dim_out][dim_in] = gnn_node_mlp_2_weights_fixed[layer * MLP_2_OUT * MLP_2_IN + dim_out * MLP_2_IN + dim_in];
+            mlp_2_weights[layer][dim_out][dim_in] = gnn_node_mlp_2_weights_fixed[layer * MLP_2_OUT * MLP_2_IN + dim_out * MLP_2_IN + dim_in];
         }
     }
 
 }
 
 
-void compute_CONV_layer(FM_TYPE h_node[MAX_NODE][EMB_DIM], FM_TYPE e_edge[MAX_EDGE][EMB_DIM], int num_of_nodes, int num_of_edges, int layer,
-                        FM_TYPE* gnn_node_mlp_1_weights_fixed, FM_TYPE* gnn_node_mlp_1_bias_fixed,
-                        FM_TYPE* gnn_node_mlp_2_weights_fixed, FM_TYPE* gnn_node_mlp_2_bias_fixed)
+void compute_CONV_layer(FM_TYPE h_node[MAX_NODE][EMB_DIM], FM_TYPE e_edge[MAX_EDGE][EMB_DIM], int num_of_nodes, int num_of_edges, int layer)
 {
 #pragma HLS inline off
     //printf("\n---- Computing CONV 0 ----\n");
@@ -268,9 +271,6 @@ void compute_CONV_layer(FM_TYPE h_node[MAX_NODE][EMB_DIM], FM_TYPE e_edge[MAX_ED
 
     ////////////// Message Passing
     message_passing(e_edge, h_node, edge_list, num_of_nodes, num_of_edges);
-
-    ////////////// Load weights
-    load_mlp_weights_one_layer(layer, gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
 
     ////////////// MLP of Conv 0
     MLP(mlp_in, mlp_out, h_node, num_of_nodes, layer);
@@ -352,6 +352,7 @@ void load_misc_weights(
     WT_TYPE node_embedding_table_in[ND_FEATURE_TOTAL * EMB_DIM],
     WT_TYPE edge_embedding_table_in[EG_FEATURE_TOTAL * EMB_DIM])
 {
+#pragma HLS inline off
     for(int i = 0; i < LAYER_NUM; i++) {
         mlp_eps[i] = eps_in[i];
     }
@@ -421,11 +422,21 @@ void GIN_compute_one_graph(
 #pragma HLS bind_storage variable=message type=RAM_2P impl=uram
 
 
-    load_misc_weights(eps_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, 
-                      gnn_node_embedding_fixed, gnn_edge_embedding_fixed);
+    int num_of_nodes = 19; //graph_attr[0];
+    int num_of_edges = 40; //graph_attr[1];
+    int is_first = 0; // graph_attr[2]; is the first graph
 
-    int num_of_nodes = graph_attr[0];
-    int num_of_edges = graph_attr[1];
+
+    if( is_first == 1 ) {
+		////////////// Load weights
+		for(int layer = 0; layer < 5; layer++) {
+			load_mlp_weights_one_layer(layer, gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
+		}
+
+		load_misc_weights(eps_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed,
+						  gnn_node_embedding_fixed, gnn_edge_embedding_fixed);
+    }
+
 
     ///////////// Load a new graph onto chip
     load_graph(node_feature, edge_attr, edge_list, node_feature_in, edge_list_in, edge_attr_in, num_of_nodes, num_of_edges);
@@ -437,9 +448,7 @@ void GIN_compute_one_graph(
 
     ////////////// CONV layers //////////////////////////////////
     for(int layer = 0; layer < 5; layer++) {
-        compute_CONV_layer(node_embedding, edge_embedding, num_of_nodes, num_of_edges, layer,
-                           gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed,
-                           gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
+        compute_CONV_layer(node_embedding, edge_embedding, num_of_nodes, num_of_edges, layer);
     }
         
     ////////////// Global mean pooling //////////////////////

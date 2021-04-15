@@ -1,0 +1,51 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'GIN_compute_one_graph'" level="0">
+<item name = "Date">Wed Apr 14 23:03:55 2021
+</item>
+<item name = "Version">2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)</item>
+<item name = "Project">project_1</item>
+<item name = "Solution">solution1 (Vivado IP Flow Target)</item>
+<item name = "Product family">virtexuplus</item>
+<item name = "Target device">xcu280-fsvh2892-2L-e</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">564707, 567275, 5.647 ms, 5.673 ms, 564708, 567276, none</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+<column name="grp_compute_CONV_layer_fu_2580">compute_CONV_layer, 100651, 100891, 1.007 ms, 1.009 ms, 100651, 100891, none</column>
+<column name="grp_global_mean_pooling_fu_4998">global_mean_pooling, 3008, 3008, 30.080 us, 30.080 us, 3008, 3008, none</column>
+<column name="grp_compute_node_embedding_fu_5006">compute_node_embedding, 58029, 59397, 0.580 ms, 0.594 ms, 58029, 59397, none</column>
+<column name="grp_load_graph_fu_5018">load_graph, 398, 398, 3.980 us, 3.980 us, 398, 398, none</column>
+<column name="grp_global_graph_prediction_fu_5033">global_graph_prediction, 6, 6, 60.000 ns, 60.000 ns, 6, 6, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- VITIS_LOOP_450_2">503265, 504465, 100653 ~ 100893, -, -, 5, no</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+</profile>

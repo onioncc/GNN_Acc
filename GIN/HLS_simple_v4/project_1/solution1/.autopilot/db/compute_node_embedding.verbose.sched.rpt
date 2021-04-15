@@ -1,0 +1,304 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_node_embedding'
+================================================================
+* Date:           Wed Apr 14 23:01:05 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  4.954 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-------+-------+---------+
+    |  Latency (cycles) |  Latency (absolute) |    Interval   | Pipeline|
+    |   min   |   max   |    min   |    max   |  min  |  max  |   Type  |
+    +---------+---------+----------+----------+-------+-------+---------+
+    |    58029|    59397|  0.580 ms|  0.594 ms|  58029|  59397|     none|
+    +---------+---------+----------+----------+-------+-------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------------------------+---------+---------+-----------+-----------+-----------+-------+----------+
+        |                                     |  Latency (cycles) | Iteration |  Initiation Interval  |  Trip |          |
+        |              Loop Name              |   min   |   max   |  Latency  |  achieved |   target  | Count | Pipelined|
+        +-------------------------------------+---------+---------+-----------+-----------+-----------+-------+----------+
+        |- Loop 1                             |     5700|     5700|          1|          1|          1|   5700|       yes|
+        |- VITIS_LOOP_219_1_VITIS_LOOP_220_2  |    52326|    53694|  306 ~ 314|          -|          -|    171|        no|
+        | + VITIS_LOOP_207_1                  |        0|        8|          2|          1|          1|  0 ~ 8|       yes|
+        | + VITIS_LOOP_222_3                  |      300|      300|          2|          1|          1|    300|       yes|
+        +-------------------------------------+---------+---------+-----------+-----------+-----------+-------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 1
+  * Pipeline-1: initiation interval (II) = 1, depth = 2
+  * Pipeline-2: initiation interval (II) = 1, depth = 2
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 11
+* Pipeline : 3
+  Pipeline-0 : II = 1, D = 1, States = { 2 }
+  Pipeline-1 : II = 1, D = 2, States = { 6 7 }
+  Pipeline-2 : II = 1, D = 2, States = { 9 10 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 2 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 8 7 
+7 --> 6 
+8 --> 9 
+9 --> 11 10 
+10 --> 9 
+11 --> 4 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 0.38>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %node_embedding_table_V, i64 666, i64 24, i64 18446744073709551615"   --->   Operation 12 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %node_embedding_V, i64 666, i64 24, i64 18446744073709551615"   --->   Operation 13 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %node_feature, i64 666, i64 22, i64 18446744073709551615"   --->   Operation 14 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.38ns)   --->   "%br_ln218 = br void %memset.loop" [GIN_compute.cpp:218]   --->   Operation 15 'br' 'br_ln218' <Predicate = true> <Delay = 0.38>
+
+State 2 <SV = 1> <Delay = 2.67>
+ST_2 : Operation 16 [1/1] (0.00ns)   --->   "%empty = phi i13 0, void, i13 %empty_53, void %memset.loop.split"   --->   Operation 16 'phi' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 17 [1/1] (0.75ns)   --->   "%empty_53 = add i13 %empty, i13 1"   --->   Operation 17 'add' 'empty_53' <Predicate = true> <Delay = 0.75> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 18 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 1, i32 0, void @p_str"   --->   Operation 18 'specpipeline' 'specpipeline_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 19 [1/1] (0.64ns)   --->   "%exitcond537 = icmp_eq  i13 %empty, i13 5700"   --->   Operation 19 'icmp' 'exitcond537' <Predicate = true> <Delay = 0.64> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.65> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 20 [1/1] (0.00ns)   --->   "%empty_54 = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 5700, i64 5700, i64 5700"   --->   Operation 20 'speclooptripcount' 'empty_54' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 21 [1/1] (0.00ns)   --->   "%br_ln0 = br i1 %exitcond537, void %memset.loop.split, void %split.preheader.preheader"   --->   Operation 21 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 22 [1/1] (0.00ns)   --->   "%p_cast = zext i13 %empty"   --->   Operation 22 'zext' 'p_cast' <Predicate = (!exitcond537)> <Delay = 0.00>
+ST_2 : Operation 23 [1/1] (0.00ns)   --->   "%node_embedding_V_addr = getelementptr i32 %node_embedding_V, i64 0, i64 %p_cast"   --->   Operation 23 'getelementptr' 'node_embedding_V_addr' <Predicate = (!exitcond537)> <Delay = 0.00>
+ST_2 : Operation 24 [1/1] (2.03ns)   --->   "%store_ln0 = store i32 0, i16 %node_embedding_V_addr"   --->   Operation 24 'store' 'store_ln0' <Predicate = (!exitcond537)> <Delay = 2.03> <CoreInst = "RAM_2P_URAM">   --->   Core 95 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 2.03> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 60000> <RAM>
+ST_2 : Operation 25 [1/1] (0.00ns)   --->   "%br_ln0 = br void %memset.loop"   --->   Operation 25 'br' 'br_ln0' <Predicate = (!exitcond537)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 0.38>
+ST_3 : Operation 26 [1/1] (0.38ns)   --->   "%br_ln219 = br void %split.preheader" [GIN_compute.cpp:219]   --->   Operation 26 'br' 'br_ln219' <Predicate = true> <Delay = 0.38>
+
+State 4 <SV = 3> <Delay = 3.62>
+ST_4 : Operation 27 [1/1] (0.00ns)   --->   "%indvar_flatten = phi i8 %add_ln219_1, void, i8 0, void %split.preheader.preheader" [GIN_compute.cpp:219]   --->   Operation 27 'phi' 'indvar_flatten' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 28 [1/1] (0.00ns)   --->   "%nd = phi i5 %select_ln219_1, void, i5 0, void %split.preheader.preheader" [GIN_compute.cpp:219]   --->   Operation 28 'phi' 'nd' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 29 [1/1] (0.00ns)   --->   "%nf = phi i4 %add_ln220, void, i4 0, void %split.preheader.preheader" [GIN_compute.cpp:220]   --->   Operation 29 'phi' 'nf' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 30 [1/1] (0.70ns)   --->   "%add_ln219_1 = add i8 %indvar_flatten, i8 1" [GIN_compute.cpp:219]   --->   Operation 30 'add' 'add_ln219_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 31 [1/1] (0.58ns)   --->   "%icmp_ln219 = icmp_eq  i8 %indvar_flatten, i8 171" [GIN_compute.cpp:219]   --->   Operation 31 'icmp' 'icmp_ln219' <Predicate = true> <Delay = 0.58> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.65> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 32 [1/1] (0.00ns)   --->   "%br_ln219 = br i1 %icmp_ln219, void %split, void" [GIN_compute.cpp:219]   --->   Operation 32 'br' 'br_ln219' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 33 [1/1] (0.70ns)   --->   "%add_ln219 = add i5 %nd, i5 1" [GIN_compute.cpp:219]   --->   Operation 33 'add' 'add_ln219' <Predicate = (!icmp_ln219)> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 34 [1/1] (0.65ns)   --->   "%icmp_ln220 = icmp_eq  i4 %nf, i4 9" [GIN_compute.cpp:220]   --->   Operation 34 'icmp' 'icmp_ln220' <Predicate = (!icmp_ln219)> <Delay = 0.65> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.65> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 35 [1/1] (0.35ns)   --->   "%select_ln219 = select i1 %icmp_ln220, i4 0, i4 %nf" [GIN_compute.cpp:219]   --->   Operation 35 'select' 'select_ln219' <Predicate = (!icmp_ln219)> <Delay = 0.35> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.27> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_4 : Operation 36 [1/1] (0.27ns)   --->   "%select_ln219_1 = select i1 %icmp_ln220, i5 %add_ln219, i5 %nd" [GIN_compute.cpp:219]   --->   Operation 36 'select' 'select_ln219_1' <Predicate = (!icmp_ln219)> <Delay = 0.27> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.27> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_4 : Operation 37 [1/1] (0.00ns)   --->   "%p_shl_mid2 = bitconcatenate i8 @_ssdm_op_BitConcatenate.i8.i5.i3, i5 %select_ln219_1, i3 0" [GIN_compute.cpp:219]   --->   Operation 37 'bitconcatenate' 'p_shl_mid2' <Predicate = (!icmp_ln219)> <Delay = 0.00>
+ST_4 : Operation 38 [1/1] (0.00ns)   --->   "%zext_ln220 = zext i4 %select_ln219" [GIN_compute.cpp:220]   --->   Operation 38 'zext' 'zext_ln220' <Predicate = (!icmp_ln219)> <Delay = 0.00>
+ST_4 : Operation 39 [1/1] (0.70ns)   --->   "%add_ln221_1 = add i5 %select_ln219_1, i5 %zext_ln220" [GIN_compute.cpp:221]   --->   Operation 39 'add' 'add_ln221_1' <Predicate = (!icmp_ln219)> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 40 [1/1] (0.00ns)   --->   "%zext_ln221 = zext i5 %add_ln221_1" [GIN_compute.cpp:221]   --->   Operation 40 'zext' 'zext_ln221' <Predicate = (!icmp_ln219)> <Delay = 0.00>
+ST_4 : Operation 41 [1/1] (0.70ns)   --->   "%add_ln221 = add i8 %zext_ln221, i8 %p_shl_mid2" [GIN_compute.cpp:221]   --->   Operation 41 'add' 'add_ln221' <Predicate = (!icmp_ln219)> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 42 [1/1] (0.00ns)   --->   "%zext_ln221_1 = zext i8 %add_ln221" [GIN_compute.cpp:221]   --->   Operation 42 'zext' 'zext_ln221_1' <Predicate = (!icmp_ln219)> <Delay = 0.00>
+ST_4 : Operation 43 [1/1] (0.00ns)   --->   "%node_feature_addr = getelementptr i32 %node_feature, i64 0, i64 %zext_ln221_1" [GIN_compute.cpp:221]   --->   Operation 43 'getelementptr' 'node_feature_addr' <Predicate = (!icmp_ln219)> <Delay = 0.00>
+ST_4 : Operation 44 [2/2] (1.20ns)   --->   "%nd_f = load i11 %node_feature_addr" [GIN_compute.cpp:221]   --->   Operation 44 'load' 'nd_f' <Predicate = (!icmp_ln219)> <Delay = 1.20> <CoreInst = "RAM_2P_BRAM">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.20> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1800> <RAM>
+ST_4 : Operation 45 [1/1] (0.00ns)   --->   "%ret_ln241 = ret" [GIN_compute.cpp:241]   --->   Operation 45 'ret' 'ret_ln241' <Predicate = (icmp_ln219)> <Delay = 0.00>
+
+State 5 <SV = 4> <Delay = 1.70>
+ST_5 : Operation 46 [1/1] (0.00ns)   --->   "%specloopname_ln0 = specloopname void @_ssdm_op_SpecLoopName, void @VITIS_LOOP_219_1_VITIS_LOOP_220_2_str"   --->   Operation 46 'specloopname' 'specloopname_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 47 [1/1] (0.00ns)   --->   "%empty_58 = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 171, i64 171, i64 171"   --->   Operation 47 'speclooptripcount' 'empty_58' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 48 [1/1] (0.00ns)   --->   "%zext_ln703 = zext i5 %select_ln219_1"   --->   Operation 48 'zext' 'zext_ln703' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 49 [1/1] (1.70ns)   --->   "%mul_ln703 = mul i14 %zext_ln703, i14 300"   --->   Operation 49 'mul' 'mul_ln703' <Predicate = true> <Delay = 1.70> <CoreInst = "Multiplier">   --->   Core 3 'Multiplier' <Latency = 0> <II = 1> <Delay = 1.70> <FuncUnit> <Opcode : 'mul'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 50 [1/1] (0.00ns)   --->   "%specloopname_ln220 = specloopname void @_ssdm_op_SpecLoopName, void @empty" [GIN_compute.cpp:220]   --->   Operation 50 'specloopname' 'specloopname_ln220' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 51 [1/2] (1.20ns)   --->   "%nd_f = load i11 %node_feature_addr" [GIN_compute.cpp:221]   --->   Operation 51 'load' 'nd_f' <Predicate = true> <Delay = 1.20> <CoreInst = "RAM_2P_BRAM">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.20> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1800> <RAM>
+ST_5 : Operation 52 [1/1] (0.00ns)   --->   "%trunc_ln221 = trunc i32 %nd_f" [GIN_compute.cpp:221]   --->   Operation 52 'trunc' 'trunc_ln221' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 53 [1/1] (0.38ns)   --->   "%br_ln207 = br void" [GIN_compute.cpp:207]   --->   Operation 53 'br' 'br_ln207' <Predicate = true> <Delay = 0.38>
+
+State 6 <SV = 5> <Delay = 0.70>
+ST_6 : Operation 54 [1/1] (0.00ns)   --->   "%i = phi i4 %add_ln207, void %.split, i4 0, void %split" [GIN_compute.cpp:207]   --->   Operation 54 'phi' 'i' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 55 [1/1] (0.00ns)   --->   "%addr = phi i10 %addr_1, void %.split, i10 0, void %split"   --->   Operation 55 'phi' 'addr' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 56 [1/1] (0.70ns)   --->   "%add_ln207 = add i4 %i, i4 1" [GIN_compute.cpp:207]   --->   Operation 56 'add' 'add_ln207' <Predicate = true> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_6 : Operation 57 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 1, i32 0, void @p_str"   --->   Operation 57 'specpipeline' 'specpipeline_ln0' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 58 [1/1] (0.65ns)   --->   "%icmp_ln207 = icmp_eq  i4 %i, i4 %select_ln219" [GIN_compute.cpp:207]   --->   Operation 58 'icmp' 'icmp_ln207' <Predicate = true> <Delay = 0.65> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.65> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_6 : Operation 59 [1/1] (0.00ns)   --->   "%empty_55 = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 0, i64 8, i64 0"   --->   Operation 59 'speclooptripcount' 'empty_55' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 60 [1/1] (0.00ns)   --->   "%br_ln207 = br i1 %icmp_ln207, void %.split, void %_Z15get_nd_emb_addri.exit.loopexit" [GIN_compute.cpp:207]   --->   Operation 60 'br' 'br_ln207' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 61 [1/1] (0.00ns)   --->   "%i_cast = zext i4 %i" [GIN_compute.cpp:207]   --->   Operation 61 'zext' 'i_cast' <Predicate = (!icmp_ln207)> <Delay = 0.00>
+ST_6 : Operation 62 [1/1] (0.00ns)   --->   "%nd_feature_table_1_addr = getelementptr i5 %nd_feature_table_1, i64 0, i64 %i_cast" [GIN_compute.cpp:208]   --->   Operation 62 'getelementptr' 'nd_feature_table_1_addr' <Predicate = (!icmp_ln207)> <Delay = 0.00>
+ST_6 : Operation 63 [2/2] (0.66ns)   --->   "%nd_feature_table_1_load = load i4 %nd_feature_table_1_addr" [GIN_compute.cpp:208]   --->   Operation 63 'load' 'nd_feature_table_1_load' <Predicate = (!icmp_ln207)> <Delay = 0.66> <CoreInst = "ROM">   --->   Core 101 'ROM' <Latency = 1> <II = 1> <Delay = 0.66> <Storage> <Opcode : 'load'> <Ports = 0> <Width = 5> <Depth = 9> <ROM>
+
+State 7 <SV = 6> <Delay = 1.39>
+ST_7 : Operation 64 [1/1] (0.00ns)   --->   "%specloopname_ln206 = specloopname void @_ssdm_op_SpecLoopName, void @empty_1" [GIN_compute.cpp:206]   --->   Operation 64 'specloopname' 'specloopname_ln206' <Predicate = (!icmp_ln207)> <Delay = 0.00>
+ST_7 : Operation 65 [1/2] (0.66ns)   --->   "%nd_feature_table_1_load = load i4 %nd_feature_table_1_addr" [GIN_compute.cpp:208]   --->   Operation 65 'load' 'nd_feature_table_1_load' <Predicate = (!icmp_ln207)> <Delay = 0.66> <CoreInst = "ROM">   --->   Core 101 'ROM' <Latency = 1> <II = 1> <Delay = 0.66> <Storage> <Opcode : 'load'> <Ports = 0> <Width = 5> <Depth = 9> <ROM>
+ST_7 : Operation 66 [1/1] (0.00ns)   --->   "%sext_ln208 = sext i5 %nd_feature_table_1_load" [GIN_compute.cpp:208]   --->   Operation 66 'sext' 'sext_ln208' <Predicate = (!icmp_ln207)> <Delay = 0.00>
+ST_7 : Operation 67 [1/1] (0.00ns)   --->   "%zext_ln208 = zext i7 %sext_ln208" [GIN_compute.cpp:208]   --->   Operation 67 'zext' 'zext_ln208' <Predicate = (!icmp_ln207)> <Delay = 0.00>
+ST_7 : Operation 68 [1/1] (0.72ns)   --->   "%addr_1 = add i10 %zext_ln208, i10 %addr" [GIN_compute.cpp:208]   --->   Operation 68 'add' 'addr_1' <Predicate = (!icmp_ln207)> <Delay = 0.72> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_7 : Operation 69 [1/1] (0.00ns)   --->   "%br_ln0 = br void"   --->   Operation 69 'br' 'br_ln0' <Predicate = (!icmp_ln207)> <Delay = 0.00>
+
+State 8 <SV = 6> <Delay = 2.40>
+ST_8 : Operation 70 [1/1] (0.00ns)   --->   "%empty_56 = trunc i10 %addr" [GIN_compute.cpp:208]   --->   Operation 70 'trunc' 'empty_56' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 71 [1/1] (0.70ns)   --->   "%add5 = add i8 %trunc_ln221, i8 %empty_56" [GIN_compute.cpp:221]   --->   Operation 71 'add' 'add5' <Predicate = true> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 72 [1/1] (0.00ns)   --->   "%zext_ln222 = zext i8 %add5" [GIN_compute.cpp:222]   --->   Operation 72 'zext' 'zext_ln222' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 73 [1/1] (1.70ns)   --->   "%mul_ln222 = mul i16 %zext_ln222, i16 300" [GIN_compute.cpp:222]   --->   Operation 73 'mul' 'mul_ln222' <Predicate = true> <Delay = 1.70> <CoreInst = "Multiplier">   --->   Core 3 'Multiplier' <Latency = 0> <II = 1> <Delay = 1.70> <FuncUnit> <Opcode : 'mul'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 74 [1/1] (0.38ns)   --->   "%br_ln222 = br void %_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit" [GIN_compute.cpp:222]   --->   Operation 74 'br' 'br_ln222' <Predicate = true> <Delay = 0.38>
+
+State 9 <SV = 7> <Delay = 2.82>
+ST_9 : Operation 75 [1/1] (0.00ns)   --->   "%dim = phi i9 0, void %_Z15get_nd_emb_addri.exit.loopexit, i9 %add_ln222, void %_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split" [GIN_compute.cpp:222]   --->   Operation 75 'phi' 'dim' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 76 [1/1] (0.71ns)   --->   "%add_ln222 = add i9 %dim, i9 1" [GIN_compute.cpp:222]   --->   Operation 76 'add' 'add_ln222' <Predicate = true> <Delay = 0.71> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 77 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 1, i32 0, void @p_str"   --->   Operation 77 'specpipeline' 'specpipeline_ln0' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 78 [1/1] (0.59ns)   --->   "%icmp_ln222 = icmp_eq  i9 %dim, i9 300" [GIN_compute.cpp:222]   --->   Operation 78 'icmp' 'icmp_ln222' <Predicate = true> <Delay = 0.59> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.65> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 79 [1/1] (0.00ns)   --->   "%empty_57 = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 300, i64 300, i64 300"   --->   Operation 79 'speclooptripcount' 'empty_57' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 80 [1/1] (0.00ns)   --->   "%br_ln222 = br i1 %icmp_ln222, void %_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit.split, void" [GIN_compute.cpp:222]   --->   Operation 80 'br' 'br_ln222' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 81 [1/1] (0.00ns)   --->   "%zext_ln703_27 = zext i9 %dim"   --->   Operation 81 'zext' 'zext_ln703_27' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_9 : Operation 82 [1/1] (0.00ns)   --->   "%zext_ln703_28 = zext i9 %dim"   --->   Operation 82 'zext' 'zext_ln703_28' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_9 : Operation 83 [1/1] (0.76ns)   --->   "%add_ln703_37 = add i14 %mul_ln703, i14 %zext_ln703_28"   --->   Operation 83 'add' 'add_ln703_37' <Predicate = (!icmp_ln222)> <Delay = 0.76> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 84 [1/1] (0.00ns)   --->   "%zext_ln703_29 = zext i14 %add_ln703_37"   --->   Operation 84 'zext' 'zext_ln703_29' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_9 : Operation 85 [1/1] (0.00ns)   --->   "%node_embedding_V_addr_1 = getelementptr i32 %node_embedding_V, i64 0, i64 %zext_ln703_29"   --->   Operation 85 'getelementptr' 'node_embedding_V_addr_1' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_9 : Operation 86 [1/1] (0.78ns)   --->   "%add_ln225 = add i16 %mul_ln222, i16 %zext_ln703_27" [GIN_compute.cpp:225]   --->   Operation 86 'add' 'add_ln225' <Predicate = (!icmp_ln222)> <Delay = 0.78> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 87 [1/1] (0.00ns)   --->   "%zext_ln225 = zext i16 %add_ln225" [GIN_compute.cpp:225]   --->   Operation 87 'zext' 'zext_ln225' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_9 : Operation 88 [1/1] (0.00ns)   --->   "%node_embedding_table_V_addr = getelementptr i32 %node_embedding_table_V, i64 0, i64 %zext_ln225" [GIN_compute.cpp:225]   --->   Operation 88 'getelementptr' 'node_embedding_table_V_addr' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_9 : Operation 89 [2/2] (2.03ns)   --->   "%emb_value_V = load i16 %node_embedding_table_V_addr" [GIN_compute.cpp:225]   --->   Operation 89 'load' 'emb_value_V' <Predicate = (!icmp_ln222)> <Delay = 2.03> <CoreInst = "RAM_2P_URAM">   --->   Core 95 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 2.03> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 51900> <RAM>
+ST_9 : Operation 90 [2/2] (2.03ns)   --->   "%node_embedding_V_load = load i16 %node_embedding_V_addr_1"   --->   Operation 90 'load' 'node_embedding_V_load' <Predicate = (!icmp_ln222)> <Delay = 2.03> <CoreInst = "RAM_2P_URAM">   --->   Core 95 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 2.03> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 60000> <RAM>
+
+State 10 <SV = 8> <Delay = 4.95>
+ST_10 : Operation 91 [1/1] (0.00ns)   --->   "%specloopname_ln222 = specloopname void @_ssdm_op_SpecLoopName, void @empty_0" [GIN_compute.cpp:222]   --->   Operation 91 'specloopname' 'specloopname_ln222' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+ST_10 : Operation 92 [1/2] (2.03ns)   --->   "%emb_value_V = load i16 %node_embedding_table_V_addr" [GIN_compute.cpp:225]   --->   Operation 92 'load' 'emb_value_V' <Predicate = (!icmp_ln222)> <Delay = 2.03> <CoreInst = "RAM_2P_URAM">   --->   Core 95 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 2.03> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 51900> <RAM>
+ST_10 : Operation 93 [1/2] (2.03ns)   --->   "%node_embedding_V_load = load i16 %node_embedding_V_addr_1"   --->   Operation 93 'load' 'node_embedding_V_load' <Predicate = (!icmp_ln222)> <Delay = 2.03> <CoreInst = "RAM_2P_URAM">   --->   Core 95 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 2.03> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 60000> <RAM>
+ST_10 : Operation 94 [1/1] (0.88ns)   --->   "%add_ln703 = add i32 %node_embedding_V_load, i32 %emb_value_V"   --->   Operation 94 'add' 'add_ln703' <Predicate = (!icmp_ln222)> <Delay = 0.88> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 95 [1/1] (2.03ns)   --->   "%store_ln703 = store i32 %add_ln703, i16 %node_embedding_V_addr_1"   --->   Operation 95 'store' 'store_ln703' <Predicate = (!icmp_ln222)> <Delay = 2.03> <CoreInst = "RAM_2P_URAM">   --->   Core 95 'RAM_2P_URAM' <Latency = 1> <II = 1> <Delay = 2.03> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 60000> <RAM>
+ST_10 : Operation 96 [1/1] (0.00ns)   --->   "%br_ln0 = br void %_ZN8ap_fixedILi32ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit"   --->   Operation 96 'br' 'br_ln0' <Predicate = (!icmp_ln222)> <Delay = 0.00>
+
+State 11 <SV = 8> <Delay = 0.70>
+ST_11 : Operation 97 [1/1] (0.70ns)   --->   "%add_ln220 = add i4 %select_ln219, i4 1" [GIN_compute.cpp:220]   --->   Operation 97 'add' 'add_ln220' <Predicate = true> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 98 [1/1] (0.00ns)   --->   "%br_ln0 = br void %split.preheader"   --->   Operation 98 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 0.387ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('empty') with incoming values : ('empty_53') [14]  (0.387 ns)
+
+ <State 2>: 2.68ns
+The critical path consists of the following:
+	'phi' operation ('empty') with incoming values : ('empty_53') [14]  (0 ns)
+	'getelementptr' operation ('node_embedding_V_addr') [22]  (0 ns)
+	'store' operation ('store_ln0') of constant 0 on array 'node_embedding_V' [23]  (2.04 ns)
+	blocking operation 0.64 ns on control path)
+
+ <State 3>: 0.387ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('indvar_flatten', GIN_compute.cpp:219) with incoming values : ('add_ln219_1', GIN_compute.cpp:219) [28]  (0.387 ns)
+
+ <State 4>: 3.62ns
+The critical path consists of the following:
+	'phi' operation ('nf', GIN_compute.cpp:220) with incoming values : ('add_ln220', GIN_compute.cpp:220) [30]  (0 ns)
+	'icmp' operation ('icmp_ln220', GIN_compute.cpp:220) [38]  (0.656 ns)
+	'select' operation ('select_ln219', GIN_compute.cpp:219) [39]  (0.351 ns)
+	'add' operation ('add_ln221_1', GIN_compute.cpp:221) [46]  (0.707 ns)
+	'add' operation ('add_ln221', GIN_compute.cpp:221) [48]  (0.705 ns)
+	'getelementptr' operation ('node_feature_addr', GIN_compute.cpp:221) [50]  (0 ns)
+	'load' operation ('nd_f', GIN_compute.cpp:221) on array 'node_feature' [51]  (1.2 ns)
+
+ <State 5>: 1.7ns
+The critical path consists of the following:
+	'mul' operation ('mul_ln703') [42]  (1.7 ns)
+
+ <State 6>: 0.708ns
+The critical path consists of the following:
+	'phi' operation ('i', GIN_compute.cpp:207) with incoming values : ('add_ln207', GIN_compute.cpp:207) [55]  (0 ns)
+	'add' operation ('add_ln207', GIN_compute.cpp:207) [57]  (0.708 ns)
+
+ <State 7>: 1.39ns
+The critical path consists of the following:
+	'load' operation ('nd_feature_table_1_load', GIN_compute.cpp:208) on array 'nd_feature_table_1' [66]  (0.667 ns)
+	'add' operation ('addr', GIN_compute.cpp:208) [69]  (0.725 ns)
+
+ <State 8>: 2.4ns
+The critical path consists of the following:
+	'add' operation ('add5', GIN_compute.cpp:221) [73]  (0.705 ns)
+	'mul' operation ('mul_ln222', GIN_compute.cpp:222) [75]  (1.7 ns)
+
+ <State 9>: 2.82ns
+The critical path consists of the following:
+	'phi' operation ('dim', GIN_compute.cpp:222) with incoming values : ('add_ln222', GIN_compute.cpp:222) [78]  (0 ns)
+	'add' operation ('add_ln225', GIN_compute.cpp:225) [90]  (0.785 ns)
+	'getelementptr' operation ('node_embedding_table_V_addr', GIN_compute.cpp:225) [92]  (0 ns)
+	'load' operation ('emb_value.V', GIN_compute.cpp:225) on array 'node_embedding_table_V' [94]  (2.04 ns)
+
+ <State 10>: 4.95ns
+The critical path consists of the following:
+	'load' operation ('emb_value.V', GIN_compute.cpp:225) on array 'node_embedding_table_V' [94]  (2.04 ns)
+	'add' operation ('add_ln703') [96]  (0.88 ns)
+	'store' operation ('store_ln703') of variable 'add_ln703' on array 'node_embedding_V' [97]  (2.04 ns)
+
+ <State 11>: 0.708ns
+The critical path consists of the following:
+	'add' operation ('add_ln220', GIN_compute.cpp:220) [100]  (0.708 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A
