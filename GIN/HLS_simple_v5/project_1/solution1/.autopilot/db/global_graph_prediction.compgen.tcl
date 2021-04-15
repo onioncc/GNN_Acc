@@ -7,48 +7,10 @@ if {${::AESL::PGuard_autoexp_gen}} {
     AESL_LIB_XILADAPTER::native_axis_begin
 }
 
-# XIL_BRAM:
-if {${::AESL::PGuard_autoexp_gen}} {
-if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
-eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
-    id 7187 \
-    name graph_embedding_V \
-    reset_level 1 \
-    sync_rst true \
-    dir I \
-    corename graph_embedding_V \
-    op interface \
-    ports { graph_embedding_V_address0 { O 9 vector } graph_embedding_V_ce0 { O 1 bit } graph_embedding_V_q0 { I 32 vector } } \
-} "
-} else {
-puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'graph_embedding_V'"
-}
-}
-
-
-# XIL_BRAM:
-if {${::AESL::PGuard_autoexp_gen}} {
-if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
-eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
-    id 7188 \
-    name graph_pred_weights_V \
-    reset_level 1 \
-    sync_rst true \
-    dir I \
-    corename graph_pred_weights_V \
-    op interface \
-    ports { graph_pred_weights_V_address0 { O 9 vector } graph_pred_weights_V_ce0 { O 1 bit } graph_pred_weights_V_q0 { I 32 vector } } \
-} "
-} else {
-puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'graph_pred_weights_V'"
-}
-}
-
-
 # Direct connection:
 if {${::AESL::PGuard_autoexp_gen}} {
 eval "cg_default_interface_gen_dc { \
-    id 7184 \
+    id 2149 \
     name mem \
     type other \
     dir O \
@@ -63,7 +25,7 @@ eval "cg_default_interface_gen_dc { \
 # Direct connection:
 if {${::AESL::PGuard_autoexp_gen}} {
 eval "cg_default_interface_gen_dc { \
-    id 7185 \
+    id 2150 \
     name d_out \
     type other \
     dir I \
@@ -72,21 +34,6 @@ eval "cg_default_interface_gen_dc { \
     corename dc_d_out \
     op interface \
     ports { d_out { I 64 vector } } \
-} "
-}
-
-# Direct connection:
-if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id 7186 \
-    name graph_pred_bias_V_0 \
-    type other \
-    dir I \
-    reset_level 1 \
-    sync_rst true \
-    corename dc_graph_pred_bias_V_0 \
-    op interface \
-    ports { graph_pred_bias_V_0 { I 32 vector } } \
 } "
 }
 

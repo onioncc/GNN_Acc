@@ -438,7 +438,7 @@
     "Uncertainty": "2.7",
     "IsCombinational": "0",
     "II": "x",
-    "Latency": "2665460"
+    "Latency": "194479"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
   "Ipx": {
@@ -463,39 +463,26 @@
       "impl\/vhdl\/GIN_compute_one_graph_compute_CONV_layer_message_V.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_compute_edge_embedding_and_message_passing.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_compute_node_embedding.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_compute_node_embedding_nd_feature_table_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_control_s_axi.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_edge_attr.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_edge_embedding_table_V_0.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_edge_list.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_global_graph_prediction.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_global_mean_pooling.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_graph_embedding_V.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_graph_pred_weights_V.vhd",
+      "impl\/vhdl\/GIN_compute_one_graph_global_mean_pooling_graph_embedding_V.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_load_graph.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_load_misc_weights.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_load_mlp_weights_one_layer.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mac_muladd_8ns_10ns_9ns_16_4_1.vhd",
+      "impl\/vhdl\/GIN_compute_one_graph_load_graph_edge_attr_0.vhd",
+      "impl\/vhdl\/GIN_compute_one_graph_load_graph_node_feature.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mac_muladd_16s_10ns_9ns_16_4_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mem_m_axi.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_MLP.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mlp_1_bias_V_0.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mlp_1_weights_V_0.vhd",
+      "impl\/vhdl\/GIN_compute_one_graph_MLP_mlp_1_weights_V_0.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_MLP_mlp_in_V_0.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mul_3ns_5ns_7_1_1.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mul_3ns_10ns_11_1_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mul_3ns_11ns_12_1_1.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mul_3ns_19ns_20_1_1.vhd",
+      "impl\/vhdl\/GIN_compute_one_graph_mul_5ns_10ns_14_1_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mul_32s_31ns_54_1_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mul_32s_32s_54_1_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mul_32s_34ns_65_1_1.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mul_33s_32s_54_1_1.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mux_657_32_1_1.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_mux_3009_32_1_1.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_mux_60010_32_1_1.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_node_embedding_table_V.vhd",
       "impl\/vhdl\/GIN_compute_one_graph_node_embedding_V_0.vhd",
-      "impl\/vhdl\/GIN_compute_one_graph_node_feature.vhd",
       "impl\/vhdl\/GIN_compute_one_graph.vhd"
     ],
     "Verilog": [
@@ -504,51 +491,33 @@
       "impl\/verilog\/GIN_compute_one_graph_compute_CONV_layer_message_V_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph_compute_edge_embedding_and_message_passing.v",
       "impl\/verilog\/GIN_compute_one_graph_compute_node_embedding.v",
-      "impl\/verilog\/GIN_compute_one_graph_compute_node_embedding_nd_feature_table_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_compute_node_embedding_nd_feature_table_1_rom.dat",
       "impl\/verilog\/GIN_compute_one_graph_control_s_axi.v",
-      "impl\/verilog\/GIN_compute_one_graph_edge_attr.v",
-      "impl\/verilog\/GIN_compute_one_graph_edge_attr_ram.dat",
-      "impl\/verilog\/GIN_compute_one_graph_edge_embedding_table_V_0.v",
-      "impl\/verilog\/GIN_compute_one_graph_edge_embedding_table_V_0_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph_edge_list.v",
       "impl\/verilog\/GIN_compute_one_graph_edge_list_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph_global_graph_prediction.v",
       "impl\/verilog\/GIN_compute_one_graph_global_mean_pooling.v",
-      "impl\/verilog\/GIN_compute_one_graph_graph_embedding_V.v",
-      "impl\/verilog\/GIN_compute_one_graph_graph_embedding_V_ram.dat",
-      "impl\/verilog\/GIN_compute_one_graph_graph_pred_weights_V.v",
-      "impl\/verilog\/GIN_compute_one_graph_graph_pred_weights_V_ram.dat",
+      "impl\/verilog\/GIN_compute_one_graph_global_mean_pooling_graph_embedding_V.v",
+      "impl\/verilog\/GIN_compute_one_graph_global_mean_pooling_graph_embedding_V_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph_load_graph.v",
-      "impl\/verilog\/GIN_compute_one_graph_load_misc_weights.v",
-      "impl\/verilog\/GIN_compute_one_graph_load_mlp_weights_one_layer.v",
-      "impl\/verilog\/GIN_compute_one_graph_mac_muladd_8ns_10ns_9ns_16_4_1.v",
+      "impl\/verilog\/GIN_compute_one_graph_load_graph_edge_attr_0.v",
+      "impl\/verilog\/GIN_compute_one_graph_load_graph_edge_attr_0_ram.dat",
+      "impl\/verilog\/GIN_compute_one_graph_load_graph_node_feature.v",
+      "impl\/verilog\/GIN_compute_one_graph_load_graph_node_feature_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph_mac_muladd_16s_10ns_9ns_16_4_1.v",
       "impl\/verilog\/GIN_compute_one_graph_mem_m_axi.v",
       "impl\/verilog\/GIN_compute_one_graph_MLP.v",
-      "impl\/verilog\/GIN_compute_one_graph_mlp_1_bias_V_0.v",
-      "impl\/verilog\/GIN_compute_one_graph_mlp_1_bias_V_0_ram.dat",
-      "impl\/verilog\/GIN_compute_one_graph_mlp_1_weights_V_0.v",
-      "impl\/verilog\/GIN_compute_one_graph_mlp_1_weights_V_0_ram.dat",
+      "impl\/verilog\/GIN_compute_one_graph_MLP_mlp_1_weights_V_0.v",
+      "impl\/verilog\/GIN_compute_one_graph_MLP_mlp_1_weights_V_0_rom.dat",
       "impl\/verilog\/GIN_compute_one_graph_MLP_mlp_in_V_0.v",
       "impl\/verilog\/GIN_compute_one_graph_MLP_mlp_in_V_0_ram.dat",
-      "impl\/verilog\/GIN_compute_one_graph_mul_3ns_5ns_7_1_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_mul_3ns_10ns_11_1_1.v",
       "impl\/verilog\/GIN_compute_one_graph_mul_3ns_11ns_12_1_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_mul_3ns_19ns_20_1_1.v",
+      "impl\/verilog\/GIN_compute_one_graph_mul_5ns_10ns_14_1_1.v",
       "impl\/verilog\/GIN_compute_one_graph_mul_32s_31ns_54_1_1.v",
       "impl\/verilog\/GIN_compute_one_graph_mul_32s_32s_54_1_1.v",
       "impl\/verilog\/GIN_compute_one_graph_mul_32s_34ns_65_1_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_mul_33s_32s_54_1_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_mux_657_32_1_1.v",
       "impl\/verilog\/GIN_compute_one_graph_mux_3009_32_1_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_mux_60010_32_1_1.v",
-      "impl\/verilog\/GIN_compute_one_graph_node_embedding_table_V.v",
-      "impl\/verilog\/GIN_compute_one_graph_node_embedding_table_V_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph_node_embedding_V_0.v",
       "impl\/verilog\/GIN_compute_one_graph_node_embedding_V_0_ram.dat",
-      "impl\/verilog\/GIN_compute_one_graph_node_feature.v",
-      "impl\/verilog\/GIN_compute_one_graph_node_feature_ram.dat",
       "impl\/verilog\/GIN_compute_one_graph.v"
     ],
     "SwDriver": [
@@ -1614,60 +1583,38 @@
       "ModuleName": "GIN_compute_one_graph",
       "Instances": [
         {
+          "ModuleName": "global_mean_pooling",
+          "InstanceName": "grp_global_mean_pooling_fu_2706"
+        },
+        {
           "ModuleName": "compute_CONV_layer",
-          "InstanceName": "grp_compute_CONV_layer_fu_4582",
+          "InstanceName": "grp_compute_CONV_layer_fu_3312",
           "Instances": [
             {
               "ModuleName": "MLP",
-              "InstanceName": "grp_MLP_fu_4352"
+              "InstanceName": "grp_MLP_fu_2418"
             },
             {
               "ModuleName": "compute_edge_embedding_and_message_passing",
-              "InstanceName": "grp_compute_edge_embedding_and_message_passing_fu_8561"
+              "InstanceName": "grp_compute_edge_embedding_and_message_passing_fu_4826"
             }
           ]
         },
         {
-          "ModuleName": "global_mean_pooling",
-          "InstanceName": "grp_global_mean_pooling_fu_8926"
-        },
-        {
-          "ModuleName": "load_mlp_weights_one_layer",
-          "InstanceName": "grp_load_mlp_weights_one_layer_fu_9532"
+          "ModuleName": "load_graph",
+          "InstanceName": "grp_load_graph_fu_5722"
         },
         {
           "ModuleName": "compute_node_embedding",
-          "InstanceName": "grp_compute_node_embedding_fu_12544"
-        },
-        {
-          "ModuleName": "load_misc_weights",
-          "InstanceName": "grp_load_misc_weights_fu_13154"
-        },
-        {
-          "ModuleName": "load_graph",
-          "InstanceName": "grp_load_graph_fu_13303"
+          "InstanceName": "grp_compute_node_embedding_fu_5741"
         },
         {
           "ModuleName": "global_graph_prediction",
-          "InstanceName": "grp_global_graph_prediction_fu_13318"
+          "InstanceName": "grp_global_graph_prediction_fu_6345"
         }
       ]
     },
     "Info": {
-      "load_mlp_weights_one_layer": {
-        "FunctionProtocol": "ap_ctrl_hs",
-        "isTaskLevelControl": "0",
-        "isPipelined": "0",
-        "isCombinational": "0",
-        "isOneStateSeq": "0"
-      },
-      "load_misc_weights": {
-        "FunctionProtocol": "ap_ctrl_hs",
-        "isTaskLevelControl": "0",
-        "isPipelined": "0",
-        "isCombinational": "0",
-        "isOneStateSeq": "0"
-      },
       "load_graph": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
@@ -1726,130 +1673,6 @@
       }
     },
     "Metrics": {
-      "load_mlp_weights_one_layer": {
-        "Latency": {
-          "LatencyBest": "378602",
-          "LatencyAvg": "378602",
-          "LatencyWorst": "378602",
-          "PipelineII": "378602",
-          "PipelineDepth": "",
-          "PipelineType": "none"
-        },
-        "Timing": {
-          "Target": "10.00",
-          "Uncertainty": "2.70",
-          "Estimate": "7.300"
-        },
-        "Loops": [
-          {
-            "Name": "VITIS_LOOP_268_1",
-            "TripCount": "600",
-            "Latency": "192600",
-            "PipelineII": "",
-            "PipelineDepth": "321",
-            "Loops": [{
-                "Name": "VITIS_LOOP_270_2",
-                "TripCount": "300",
-                "Latency": "301",
-                "PipelineII": "1",
-                "PipelineDepth": "3"
-              }]
-          },
-          {
-            "Name": "VITIS_LOOP_274_3",
-            "TripCount": "300",
-            "Latency": "186000",
-            "PipelineII": "",
-            "PipelineDepth": "620",
-            "Loops": [{
-                "Name": "VITIS_LOOP_276_4",
-                "TripCount": "600",
-                "Latency": "601",
-                "PipelineII": "1",
-                "PipelineDepth": "3"
-              }]
-          }
-        ],
-        "Area": {
-          "DSP": "0",
-          "AVAIL_DSP": "9024",
-          "UTIL_DSP": "0",
-          "FF": "7210",
-          "AVAIL_FF": "2607360",
-          "UTIL_FF": "~0",
-          "LUT": "1198",
-          "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "~0",
-          "BRAM_18K": "0",
-          "AVAIL_BRAM": "4032",
-          "UTIL_BRAM": "0",
-          "URAM": "0",
-          "AVAIL_URAM": "960",
-          "UTIL_URAM": "0"
-        }
-      },
-      "load_misc_weights": {
-        "Latency": {
-          "LatencyBest": "71743",
-          "LatencyAvg": "71743",
-          "LatencyWorst": "71743",
-          "PipelineII": "71743",
-          "PipelineDepth": "",
-          "PipelineType": "none"
-        },
-        "Timing": {
-          "Target": "10.00",
-          "Uncertainty": "2.70",
-          "Estimate": "7.300"
-        },
-        "Loops": [
-          {
-            "Name": "VITIS_LOOP_369_1",
-            "TripCount": "5",
-            "Latency": "6",
-            "PipelineII": "1",
-            "PipelineDepth": "3"
-          },
-          {
-            "Name": "VITIS_LOOP_375_3",
-            "TripCount": "300",
-            "Latency": "301",
-            "PipelineII": "1",
-            "PipelineDepth": "3"
-          },
-          {
-            "Name": "VITIS_LOOP_380_4_VITIS_LOOP_381_5",
-            "TripCount": "51900",
-            "Latency": "51902",
-            "PipelineII": "1",
-            "PipelineDepth": "4"
-          },
-          {
-            "Name": "VITIS_LOOP_386_6_VITIS_LOOP_387_7",
-            "TripCount": "19500",
-            "Latency": "19501",
-            "PipelineII": "1",
-            "PipelineDepth": "3"
-          }
-        ],
-        "Area": {
-          "DSP": "1",
-          "AVAIL_DSP": "9024",
-          "UTIL_DSP": "~0",
-          "FF": "452",
-          "AVAIL_FF": "2607360",
-          "UTIL_FF": "~0",
-          "LUT": "717",
-          "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "~0",
-          "BRAM_18K": "0",
-          "AVAIL_BRAM": "4032",
-          "UTIL_BRAM": "0",
-          "URAM": "0",
-          "AVAIL_URAM": "960",
-          "UTIL_URAM": "0"
-        }
-      },
       "load_graph": {
         "Latency": {
           "LatencyBest": "398",
@@ -1866,21 +1689,21 @@
         },
         "Loops": [
           {
-            "Name": "VITIS_LOOP_346_1",
+            "Name": "VITIS_LOOP_347_1",
             "TripCount": "171",
             "Latency": "172",
             "PipelineII": "1",
             "PipelineDepth": "3"
           },
           {
-            "Name": "VITIS_LOOP_350_2",
+            "Name": "VITIS_LOOP_351_2_VITIS_LOOP_352_3",
             "TripCount": "120",
             "Latency": "121",
             "PipelineII": "1",
             "PipelineDepth": "3"
           },
           {
-            "Name": "VITIS_LOOP_354_3",
+            "Name": "VITIS_LOOP_357_4",
             "TripCount": "80",
             "Latency": "81",
             "PipelineII": "1",
@@ -1888,10 +1711,49 @@
           }
         ],
         "Area": {
-          "FF": "202",
+          "BRAM_18K": "7",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "~0",
+          "FF": "211",
           "AVAIL_FF": "2607360",
           "UTIL_FF": "~0",
-          "LUT": "393",
+          "LUT": "449",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "compute_node_embedding": {
+        "Latency": {
+          "LatencyBest": "5702",
+          "LatencyAvg": "5702",
+          "LatencyWorst": "5702",
+          "PipelineII": "5702",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "2.285"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "5700",
+            "Latency": "5700",
+            "PipelineII": "1",
+            "PipelineDepth": "1"
+          }],
+        "Area": {
+          "FF": "16",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "61",
           "AVAIL_LUT": "1303680",
           "UTIL_LUT": "~0",
           "BRAM_18K": "0",
@@ -1905,93 +1767,19 @@
           "UTIL_URAM": "0"
         }
       },
-      "compute_node_embedding": {
-        "Latency": {
-          "LatencyBest": "433203",
-          "LatencyAvg": "",
-          "LatencyWorst": "843603",
-          "PipelineIIMin": "433203",
-          "PipelineIIMax": "843603",
-          "PipelineII": "433203 ~ 843603",
-          "PipelineDepth": "",
-          "PipelineType": "none"
-        },
-        "Timing": {
-          "Target": "10.00",
-          "Uncertainty": "2.70",
-          "Estimate": "2.917"
-        },
-        "Loops": [
-          {
-            "Name": "Loop 1",
-            "TripCount": "5700",
-            "Latency": "5700",
-            "PipelineII": "1",
-            "PipelineDepth": "1"
-          },
-          {
-            "Name": "VITIS_LOOP_233_1_VITIS_LOOP_234_2",
-            "TripCount": "5700",
-            "LatencyMin": "427500",
-            "LatencyMax": "837900",
-            "Latency": "427500 ~ 837900",
-            "PipelineII": "",
-            "PipelineDepthMin": "75",
-            "PipelineDepthMax": "147",
-            "PipelineDepth": "75 ~ 147",
-            "Loops": [{
-                "Name": "VITIS_LOOP_237_3",
-                "TripCount": "9",
-                "LatencyMin": "72",
-                "LatencyMax": "144",
-                "Latency": "72 ~ 144",
-                "PipelineII": "",
-                "PipelineDepthMin": "8",
-                "PipelineDepthMax": "16",
-                "PipelineDepth": "8 ~ 16",
-                "Loops": [{
-                    "Name": "VITIS_LOOP_221_1",
-                    "TripCount": "",
-                    "LatencyMin": "0",
-                    "LatencyMax": "8",
-                    "Latency": "0 ~ 8",
-                    "PipelineII": "1",
-                    "PipelineDepth": "2"
-                  }]
-              }]
-          }
-        ],
-        "Area": {
-          "BRAM_18K": "0",
-          "AVAIL_BRAM": "4032",
-          "UTIL_BRAM": "0",
-          "DSP": "1",
-          "AVAIL_DSP": "9024",
-          "UTIL_DSP": "~0",
-          "FF": "172",
-          "AVAIL_FF": "2607360",
-          "UTIL_FF": "~0",
-          "LUT": "8821",
-          "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "~0",
-          "URAM": "0",
-          "AVAIL_URAM": "960",
-          "UTIL_URAM": "0"
-        }
-      },
       "compute_edge_embedding_and_message_passing": {
         "Latency": {
-          "LatencyBest": "29709",
-          "LatencyAvg": "29709",
-          "LatencyWorst": "29709",
-          "PipelineII": "29709",
+          "LatencyBest": "17708",
+          "LatencyAvg": "17708",
+          "LatencyWorst": "17708",
+          "PipelineII": "17708",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "7.293"
+          "Estimate": "5.682"
         },
         "Loops": [
           {
@@ -2002,10 +1790,10 @@
             "PipelineDepth": "1"
           },
           {
-            "Name": "VITIS_LOOP_194_1_VITIS_LOOP_198_2",
+            "Name": "VITIS_LOOP_195_1_VITIS_LOOP_199_2",
             "TripCount": "12000",
-            "Latency": "24005",
-            "PipelineII": "2",
+            "Latency": "12004",
+            "PipelineII": "1",
             "PipelineDepth": "6"
           }
         ],
@@ -2013,10 +1801,10 @@
           "DSP": "1",
           "AVAIL_DSP": "9024",
           "UTIL_DSP": "~0",
-          "FF": "388",
+          "FF": "412",
           "AVAIL_FF": "2607360",
           "UTIL_FF": "~0",
-          "LUT": "3403",
+          "LUT": "2096",
           "AVAIL_LUT": "1303680",
           "UTIL_LUT": "~0",
           "BRAM_18K": "0",
@@ -2029,25 +1817,25 @@
       },
       "MLP": {
         "Latency": {
-          "LatencyBest": "23579",
-          "LatencyAvg": "23579",
-          "LatencyWorst": "23579",
-          "PipelineII": "23579",
+          "LatencyBest": "19979",
+          "LatencyAvg": "19979",
+          "LatencyWorst": "19979",
+          "PipelineII": "19979",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "7.290"
+          "Estimate": "7.008"
         },
         "Loops": [
           {
-            "Name": "VITIS_LOOP_113_1",
-            "TripCount": "19",
+            "Name": "VITIS_LOOP_113_1_VITIS_LOOP_114_2",
+            "TripCount": "2850",
             "Latency": "2850",
-            "PipelineII": "150",
-            "PipelineDepth": "151"
+            "PipelineII": "1",
+            "PipelineDepth": "2"
           },
           {
             "Name": "Loop 2",
@@ -2057,18 +1845,11 @@
             "PipelineDepth": "1"
           },
           {
-            "Name": "VITIS_LOOP_133_3",
-            "TripCount": "600",
-            "Latency": "15000",
-            "PipelineII": "",
-            "PipelineDepth": "25",
-            "Loops": [{
-                "Name": "VITIS_LOOP_134_4",
-                "TripCount": "19",
-                "Latency": "21",
-                "PipelineII": "1",
-                "PipelineDepth": "4"
-              }]
+            "Name": "VITIS_LOOP_133_3_VITIS_LOOP_134_4",
+            "TripCount": "11400",
+            "Latency": "11402",
+            "PipelineII": "1",
+            "PipelineDepth": "4"
           },
           {
             "Name": "VITIS_LOOP_140_5",
@@ -2085,30 +1866,30 @@
           "DSP": "0",
           "AVAIL_DSP": "9024",
           "UTIL_DSP": "0",
-          "FF": "114309",
+          "FF": "63547",
           "AVAIL_FF": "2607360",
-          "UTIL_FF": "4",
-          "LUT": "147113",
+          "UTIL_FF": "2",
+          "LUT": "95505",
           "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "11",
-          "URAM": "0",
+          "UTIL_LUT": "7",
+          "URAM": "600",
           "AVAIL_URAM": "960",
-          "UTIL_URAM": "0"
+          "UTIL_URAM": "62"
         }
       },
       "compute_CONV_layer": {
         "Latency": {
-          "LatencyBest": "53291",
-          "LatencyAvg": "53291",
-          "LatencyWorst": "53291",
-          "PipelineII": "53291",
+          "LatencyBest": "37690",
+          "LatencyAvg": "37690",
+          "LatencyWorst": "37690",
+          "PipelineII": "37690",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "7.293"
+          "Estimate": "7.008"
         },
         "Area": {
           "BRAM_18K": "300",
@@ -2117,15 +1898,15 @@
           "DSP": "1",
           "AVAIL_DSP": "9024",
           "UTIL_DSP": "~0",
-          "FF": "114707",
+          "FF": "63969",
           "AVAIL_FF": "2607360",
-          "UTIL_FF": "4",
-          "LUT": "164707",
+          "UTIL_FF": "2",
+          "LUT": "111792",
           "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "12",
-          "URAM": "12",
+          "UTIL_LUT": "8",
+          "URAM": "612",
           "AVAIL_URAM": "960",
-          "UTIL_URAM": "1"
+          "UTIL_URAM": "63"
         }
       },
       "global_mean_pooling": {
@@ -2143,13 +1924,16 @@
           "Estimate": "6.600"
         },
         "Loops": [{
-            "Name": "VITIS_LOOP_313_1",
+            "Name": "VITIS_LOOP_314_1",
             "TripCount": "300",
             "Latency": "300",
             "PipelineII": "1",
             "PipelineDepth": "2"
           }],
         "Area": {
+          "BRAM_18K": "1",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "~0",
           "DSP": "0",
           "AVAIL_DSP": "9024",
           "UTIL_DSP": "0",
@@ -2159,9 +1943,6 @@
           "LUT": "65025",
           "AVAIL_LUT": "1303680",
           "UTIL_LUT": "4",
-          "BRAM_18K": "0",
-          "AVAIL_BRAM": "4032",
-          "UTIL_BRAM": "0",
           "URAM": "0",
           "AVAIL_URAM": "960",
           "UTIL_URAM": "0"
@@ -2169,10 +1950,42 @@
       },
       "global_graph_prediction": {
         "Latency": {
-          "LatencyBest": "308",
-          "LatencyAvg": "308",
-          "LatencyWorst": "308",
-          "PipelineII": "308",
+          "LatencyBest": "6",
+          "LatencyAvg": "6",
+          "LatencyWorst": "6",
+          "PipelineII": "6",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "7.300"
+        },
+        "Area": {
+          "FF": "7",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "70",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "GIN_compute_one_graph": {
+        "Latency": {
+          "LatencyBest": "194479",
+          "LatencyAvg": "194479",
+          "LatencyWorst": "194479",
+          "PipelineII": "194480",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
@@ -2182,78 +1995,28 @@
           "Estimate": "7.300"
         },
         "Loops": [{
-            "Name": "VITIS_LOOP_336_2",
-            "TripCount": "300",
-            "Latency": "300",
-            "PipelineII": "1",
-            "PipelineDepth": "2"
+            "Name": "VITIS_LOOP_466_2",
+            "TripCount": "5",
+            "Latency": "188460",
+            "PipelineII": "",
+            "PipelineDepth": "37692"
           }],
         "Area": {
-          "DSP": "0",
-          "AVAIL_DSP": "9024",
-          "UTIL_DSP": "0",
-          "FF": "117",
-          "AVAIL_FF": "2607360",
-          "UTIL_FF": "~0",
-          "LUT": "225",
-          "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "~0",
-          "BRAM_18K": "0",
-          "AVAIL_BRAM": "4032",
-          "UTIL_BRAM": "0",
-          "URAM": "0",
-          "AVAIL_URAM": "960",
-          "UTIL_URAM": "0"
-        }
-      },
-      "GIN_compute_one_graph": {
-        "Latency": {
-          "LatencyBest": "2665460",
-          "LatencyAvg": "",
-          "LatencyWorst": "3075860",
-          "PipelineIIMin": "2665461",
-          "PipelineIIMax": "3075861",
-          "PipelineII": "2665461 ~ 3075861",
-          "PipelineDepth": "",
-          "PipelineType": "none"
-        },
-        "Timing": {
-          "Target": "10.00",
-          "Uncertainty": "2.70",
-          "Estimate": "7.300"
-        },
-        "Loops": [
-          {
-            "Name": "VITIS_LOOP_445_1",
-            "TripCount": "5",
-            "Latency": "1893020",
-            "PipelineII": "",
-            "PipelineDepth": "378604"
-          },
-          {
-            "Name": "VITIS_LOOP_463_2",
-            "TripCount": "5",
-            "Latency": "266465",
-            "PipelineII": "",
-            "PipelineDepth": "53293"
-          }
-        ],
-        "Area": {
-          "BRAM_18K": "314",
+          "BRAM_18K": "312",
           "AVAIL_BRAM": "4032",
           "UTIL_BRAM": "7",
-          "DSP": "3",
+          "DSP": "1",
           "AVAIL_DSP": "9024",
           "UTIL_DSP": "~0",
-          "FF": "336588",
+          "FF": "248472",
           "AVAIL_FF": "2607360",
-          "UTIL_FF": "12",
-          "LUT": "354239",
+          "UTIL_FF": "9",
+          "LUT": "208774",
           "AVAIL_LUT": "1303680",
-          "UTIL_LUT": "27",
-          "URAM": "989",
+          "UTIL_LUT": "16",
+          "URAM": "912",
           "AVAIL_URAM": "960",
-          "UTIL_URAM": "103"
+          "UTIL_URAM": "95"
         }
       }
     }
@@ -2261,7 +2024,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2021-04-15 00:49:31 EDT",
+    "Time": "2021-04-15 01:27:06 EDT",
     "ToolName": "vivado_hls",
     "ToolVersion": "2020.2"
   }
