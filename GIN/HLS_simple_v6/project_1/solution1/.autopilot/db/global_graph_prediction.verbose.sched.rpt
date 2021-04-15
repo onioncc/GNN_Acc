@@ -1,0 +1,168 @@
+
+
+================================================================
+== Vitis HLS Report for 'global_graph_prediction'
+================================================================
+* Date:           Thu Apr 15 14:30:13 2021
+
+* Version:        2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        6|        6|  60.000 ns|  60.000 ns|    6|    6|     none|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 7
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 7.30>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%d_out_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %d_out" [GIN_compute.cpp:336]   --->   Operation 8 'read' 'd_out_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %d_out_read, i32 2, i32 63" [GIN_compute.cpp:336]   --->   Operation 9 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%sext_ln336 = sext i62 %trunc_ln" [GIN_compute.cpp:336]   --->   Operation 10 'sext' 'sext_ln336' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%mem_addr = getelementptr i32 %mem, i64 %sext_ln336" [GIN_compute.cpp:336]   --->   Operation 11 'getelementptr' 'mem_addr' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (7.30ns)   --->   "%mem_addr_req = writereq i1 @_ssdm_op_WriteReq.m_axi.i32P1A, i32 %mem_addr, i32 1"   --->   Operation 12 'writereq' 'mem_addr_req' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 2 <SV = 1> <Delay = 7.30>
+ST_2 : Operation 13 [1/1] (7.30ns)   --->   "%write_ln727 = write void @_ssdm_op_Write.m_axi.i32P1A, i32 %mem_addr, i32 0, i4 15"   --->   Operation 13 'write' 'write_ln727' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 3 <SV = 2> <Delay = 7.30>
+ST_3 : Operation 14 [5/5] (7.30ns)   --->   "%mem_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i32 %mem_addr"   --->   Operation 14 'writeresp' 'mem_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 4 <SV = 3> <Delay = 7.30>
+ST_4 : Operation 15 [4/5] (7.30ns)   --->   "%mem_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i32 %mem_addr"   --->   Operation 15 'writeresp' 'mem_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 5 <SV = 4> <Delay = 7.30>
+ST_5 : Operation 16 [3/5] (7.30ns)   --->   "%mem_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i32 %mem_addr"   --->   Operation 16 'writeresp' 'mem_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 6 <SV = 5> <Delay = 7.30>
+ST_6 : Operation 17 [2/5] (7.30ns)   --->   "%mem_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i32 %mem_addr"   --->   Operation 17 'writeresp' 'mem_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 7 <SV = 6> <Delay = 7.30>
+ST_7 : Operation 18 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, void @graph_embedding_V, i64 666, i64 22, i64 18446744073709551615"   --->   Operation 18 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 19 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mem, void @empty_5, i32 0, i32 0, void @empty_2, i32 0, i32 100000, void @empty_24, void @empty_6, void @empty_2, i32 16, i32 16, i32 16, i32 16, void @empty_2, void @empty_2"   --->   Operation 19 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 20 [1/5] (7.30ns)   --->   "%mem_addr_resp = writeresp i1 @_ssdm_op_WriteResp.m_axi.i32P1A, i32 %mem_addr"   --->   Operation 20 'writeresp' 'mem_addr_resp' <Predicate = true> <Delay = 7.30> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_7 : Operation 21 [1/1] (0.00ns)   --->   "%ret_ln341 = ret" [GIN_compute.cpp:341]   --->   Operation 21 'ret' 'ret_ln341' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 7.3ns
+The critical path consists of the following:
+	wire read on port 'd_out' (GIN_compute.cpp:336) [5]  (0 ns)
+	'getelementptr' operation ('mem_addr', GIN_compute.cpp:336) [8]  (0 ns)
+	bus request on port 'mem' [9]  (7.3 ns)
+
+ <State 2>: 7.3ns
+The critical path consists of the following:
+	bus write on port 'mem' [10]  (7.3 ns)
+
+ <State 3>: 7.3ns
+The critical path consists of the following:
+	bus response on port 'mem' [11]  (7.3 ns)
+
+ <State 4>: 7.3ns
+The critical path consists of the following:
+	bus response on port 'mem' [11]  (7.3 ns)
+
+ <State 5>: 7.3ns
+The critical path consists of the following:
+	bus response on port 'mem' [11]  (7.3 ns)
+
+ <State 6>: 7.3ns
+The critical path consists of the following:
+	bus response on port 'mem' [11]  (7.3 ns)
+
+ <State 7>: 7.3ns
+The critical path consists of the following:
+	bus response on port 'mem' [11]  (7.3 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

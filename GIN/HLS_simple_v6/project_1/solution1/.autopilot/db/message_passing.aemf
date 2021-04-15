@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1618440067549">
+  <ports id="2" name="message_V" type="PortType" coreName="RAM_2P_URAM" coreId="132" bitwidth="32" direction="DirInOut" iftype="IfTypeRegister" arraysize="60000">
+    <dataInputObjs>getelementptr</dataInputObjs>
+    <dataInputObjs>getelementptr</dataInputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <ports id="4" name="edge_list" type="PortType" coreName="RAM_2P_BRAM" coreId="49" bitwidth="32" iftype="IfTypeRegister" arraysize="1000">
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <ports id="6" name="edge_embedding_V" type="PortType" coreName="RAM_2P_URAM" coreId="318" bitwidth="32" iftype="IfTypeRegister" arraysize="150000">
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <ports id="7" name="node_embedding_V" type="PortType" coreName="RAM_2P_URAM" coreId="4294967295" bitwidth="32" iftype="IfTypeRegister" arraysize="60000">
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <edges id="88" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.0/@node_objs.0"/>
+  <edges id="91" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="92" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="93" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="94" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="97" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="100" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="101" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="102" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="103" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="104" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="105" source_obj="//@ports.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="108" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="111" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="112" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="113" source_obj="//@regions.1/@basic_blocks.0/@node_objs.3" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="114" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="117" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0"/>
+  <edges id="118" source_obj="//@regions.1/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1" is_back_edge="1"/>
+  <edges id="119" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1" is_back_edge="1"/>
+  <edges id="122" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1"/>
+  <edges id="123" source_obj="//@regions.1/@basic_blocks.1/@node_objs.43" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2" is_back_edge="1"/>
+  <edges id="124" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2" is_back_edge="1"/>
+  <edges id="127" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="128" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.3"/>
+  <edges id="131" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.4"/>
+  <edges id="134" source_obj="//@regions.1/@basic_blocks.0/@node_objs.4" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.5"/>
+  <edges id="135" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.5"/>
+  <edges id="136" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.5"/>
+  <edges id="137" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.0"/>
+  <edges id="140" source_obj="//@regions.1/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="143" source_obj="//@regions.1/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.2"/>
+  <edges id="145" source_obj="//@regions.1/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.2"/>
+  <edges id="146" source_obj="//@regions.1/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="147" source_obj="//@regions.1/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="148" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.3"/>
+  <edges id="149" source_obj="//@regions.1/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.4"/>
+  <edges id="150" source_obj="//@regions.1/@basic_blocks.1/@node_objs.4" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.5"/>
+  <edges id="155" source_obj="//@regions.1/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.6"/>
+  <edges id="159" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.7"/>
+  <edges id="161" source_obj="//@regions.1/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.8"/>
+  <edges id="162" source_obj="//@regions.1/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.8"/>
+  <edges id="163" source_obj="//@regions.1/@basic_blocks.1/@node_objs.7" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.8"/>
+  <edges id="164" source_obj="//@regions.1/@basic_blocks.1/@node_objs.8" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.9"/>
+  <edges id="165" source_obj="//@ports.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.10"/>
+  <edges id="167" source_obj="//@regions.1/@basic_blocks.1/@node_objs.9" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.10"/>
+  <edges id="168" source_obj="//@regions.1/@basic_blocks.1/@node_objs.10" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.11"/>
+  <edges id="169" source_obj="//@regions.1/@basic_blocks.1/@node_objs.11" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.12"/>
+  <edges id="170" source_obj="//@regions.1/@basic_blocks.1/@node_objs.12" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.13"/>
+  <edges id="173" source_obj="//@regions.1/@basic_blocks.1/@node_objs.8" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.14"/>
+  <edges id="176" source_obj="//@regions.1/@basic_blocks.1/@node_objs.14" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.15"/>
+  <edges id="177" source_obj="//@ports.1" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.16"/>
+  <edges id="179" source_obj="//@regions.1/@basic_blocks.1/@node_objs.15" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.16"/>
+  <edges id="180" source_obj="//@regions.1/@basic_blocks.1/@node_objs.16" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.17"/>
+  <edges id="181" source_obj="//@regions.1/@basic_blocks.1/@node_objs.17" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.18"/>
+  <edges id="182" source_obj="//@regions.1/@basic_blocks.1/@node_objs.18" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.19"/>
+  <edges id="184" source_obj="//@regions.1/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.20"/>
+  <edges id="185" source_obj="//@regions.1/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.21"/>
+  <edges id="186" source_obj="//@regions.1/@basic_blocks.1/@node_objs.5" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.22"/>
+  <edges id="187" source_obj="//@regions.1/@basic_blocks.1/@node_objs.21" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.22"/>
+  <edges id="188" source_obj="//@regions.1/@basic_blocks.1/@node_objs.22" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.23"/>
+  <edges id="189" source_obj="//@ports.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.24"/>
+  <edges id="191" source_obj="//@regions.1/@basic_blocks.1/@node_objs.23" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.24"/>
+  <edges id="192" source_obj="//@regions.1/@basic_blocks.1/@node_objs.19" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.25"/>
+  <edges id="193" source_obj="//@regions.1/@basic_blocks.1/@node_objs.20" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.25"/>
+  <edges id="194" source_obj="//@regions.1/@basic_blocks.1/@node_objs.25" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.26"/>
+  <edges id="195" source_obj="//@ports.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.27"/>
+  <edges id="197" source_obj="//@regions.1/@basic_blocks.1/@node_objs.26" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.27"/>
+  <edges id="198" source_obj="//@regions.1/@basic_blocks.1/@node_objs.13" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.28"/>
+  <edges id="199" source_obj="//@regions.1/@basic_blocks.1/@node_objs.20" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.28"/>
+  <edges id="200" source_obj="//@regions.1/@basic_blocks.1/@node_objs.28" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.29"/>
+  <edges id="201" source_obj="//@ports.3" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.30"/>
+  <edges id="203" source_obj="//@regions.1/@basic_blocks.1/@node_objs.29" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.30"/>
+  <edges id="204" source_obj="//@regions.1/@basic_blocks.1/@node_objs.24" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.31"/>
+  <edges id="205" source_obj="//@regions.1/@basic_blocks.1/@node_objs.30" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.32"/>
+  <edges id="206" source_obj="//@regions.1/@basic_blocks.1/@node_objs.31" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.33"/>
+  <edges id="207" source_obj="//@regions.1/@basic_blocks.1/@node_objs.32" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.34"/>
+  <edges id="208" source_obj="//@regions.1/@basic_blocks.1/@node_objs.32" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.35"/>
+  <edges id="209" source_obj="//@regions.1/@basic_blocks.1/@node_objs.31" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.35"/>
+  <edges id="210" source_obj="//@regions.1/@basic_blocks.1/@node_objs.34" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.36"/>
+  <edges id="211" source_obj="//@regions.1/@basic_blocks.1/@node_objs.33" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.36"/>
+  <edges id="214" source_obj="//@regions.1/@basic_blocks.1/@node_objs.35" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.37"/>
+  <edges id="217" source_obj="//@regions.1/@basic_blocks.1/@node_objs.37" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.38"/>
+  <edges id="220" source_obj="//@regions.1/@basic_blocks.1/@node_objs.36" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.38"/>
+  <edges id="221" source_obj="//@regions.1/@basic_blocks.1/@node_objs.38" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.39"/>
+  <edges id="222" source_obj="//@regions.1/@basic_blocks.1/@node_objs.27" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.40"/>
+  <edges id="223" source_obj="//@regions.1/@basic_blocks.1/@node_objs.40" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.41"/>
+  <edges id="224" source_obj="//@regions.1/@basic_blocks.1/@node_objs.39" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.41"/>
+  <edges id="225" source_obj="//@regions.1/@basic_blocks.1/@node_objs.41" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.42"/>
+  <edges id="226" source_obj="//@regions.1/@basic_blocks.1/@node_objs.27" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.42"/>
+  <edges id="227" source_obj="//@regions.1/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.43"/>
+  <edges id="230" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.44"/>
+  <edges id="299" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="300" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="301" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="302" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="303" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.1/@basic_blocks.0"/>
+  <edges id="304" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.2"/>
+  <edges id="305" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1"/>
+  <edges id="306" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="307" edge_type="VirtEdge" source_obj="//@regions.1/@basic_blocks.1/@node_objs.40" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.42"/>
+  <edges id="-105" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@ports.0"/>
+  <edges id="-195" source_obj="//@regions.1/@basic_blocks.1/@node_objs.27" sink_obj="//@ports.0"/>
+  <blocks id="13" name="block_13" type="BlockType">
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>memset.loop</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="12" name="br_ln46" lineNumber="46" fileName="GIN_compute.cpp" fileDirectory=".." coreId="16843009" contextFuncName="message_passing" opcode="br" m_display="0" m_delay="0.38" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="46" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+      <controlInputObjs>memset.loop</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>46</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="27" name="_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader" type="BlockType">
+    <controlInputObjs>memset.loop</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="26" name="br_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." coreId="481" contextFuncName="message_passing" opcode="br" nodeLabel="2.0" m_display="0" m_delay="0.38" m_topoIndex="10" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+      <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>47</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="87" name="block_87" type="BlockType">
+    <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="86" name="_ln69" lineNumber="69" fileName="GIN_compute.cpp" fileDirectory=".." coreId="785" contextFuncName="message_passing" opcode="ret" nodeLabel="9.0" m_display="0" m_topoIndex="62" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="69" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>69</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="337" pipe_depth="1" RegionName="Loop 1">
+    <basic_blocks id="20" name="memset.loop" type="BlockType">
+      <controlInputObjs>block_13</controlInputObjs>
+      <controlInputObjs>memset.loop.split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader</controlOutputObjs>
+      <controlOutputObjs>memset.loop.split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="14" name="empty" coreId="16843009" bitwidth="13" opcode="phi" nodeLabel="1.0" m_display="0" m_topoIndex="2" m_clusterGroupNumber="-1">
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <controlInputObjs>block_13</controlInputObjs>
+        <controlInputObjs>memset.loop.split</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="15" name="empty_56" rtlName="empty_56_fu_201_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" bitwidth="13" opcode="add" nodeLabel="1.0" m_display="0" m_delay="0.75" m_topoIndex="3" m_clusterGroupNumber="-1">
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="17" name="exitcond963" rtlName="exitcond963_fu_207_p2" opType="icmp" coreId="1735288172" bitwidth="1" opcode="icmp" nodeLabel="1.0" m_display="0" m_delay="0.64" m_topoIndex="4" m_clusterGroupNumber="-1">
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="19" name="br_ln0" coreId="2563760984" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="5" m_clusterGroupNumber="-1">
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>memset.loop.split</controlInputObjs>
+        <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader</controlInputObjs>
+      </node_objs>
+    </basic_blocks>
+    <basic_blocks id="25" name="memset.loop.split" type="BlockType">
+      <controlInputObjs>memset.loop</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>memset.loop</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="21" name="p_cast" rtlName="p_cast_fu_213_p1" coreId="481" bitwidth="64" opcode="zext" nodeLabel="1.0" m_display="0" m_topoIndex="6" m_clusterGroupNumber="-1">
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="22" name="message_V_addr" coreId="481" bitwidth="16" opcode="getelementptr" nodeLabel="1.0" m_display="0" m_topoIndex="7" m_clusterGroupNumber="-1">
+        <dataInputObjs>message_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>message_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="23" name="message_V_addr_write_ln0" coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" opcode="store" nodeLabel="1.0" m_display="0" m_delay="2.03" m_topoIndex="8" m_clusterGroupNumber="-1">
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="24" name="br_ln0" coreId="132" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+        <controlInputObjs>memset.loop</controlInputObjs>
+      </node_objs>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="338" pipe_depth="6" RegionName="VITIS_LOOP_47_1_VITIS_LOOP_51_2">
+    <basic_blocks id="35" name="_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i" type="BlockType">
+      <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader</controlInputObjs>
+      <controlInputObjs>split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_87</controlOutputObjs>
+      <controlOutputObjs>split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="28" name="indvar_flatten" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="message_passing" bitwidth="14" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="11" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <controlInputObjs>split</controlInputObjs>
+        <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="29" name="e" lineNumber="47" originalName="e" fileName="GIN_compute.cpp" fileDirectory=".." coreId="481" contextFuncName="message_passing" bitwidth="6" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="12" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>bitconcatenate</dataOutputObjs>
+        <controlInputObjs>split</controlInputObjs>
+        <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="30" name="dim" lineNumber="51" originalName="dim" fileName="GIN_compute.cpp" fileDirectory=".." coreId="481" contextFuncName="message_passing" bitwidth="9" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="13" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="51" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <controlInputObjs>split</controlInputObjs>
+        <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.preheader</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="31" name="add_ln47_1" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln47_1_fu_218_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="message_passing" bitwidth="14" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.76" m_topoIndex="14" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="33" name="icmp_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln47_fu_224_p2" opType="icmp" coreId="49" contextFuncName="message_passing" bitwidth="1" opcode="icmp" nodeLabel="3.0" m_display="0" m_delay="0.65" m_topoIndex="15" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="34" name="br_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="message_passing" opcode="br" nodeLabel="3.0" m_display="0" m_topoIndex="16" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>split</controlInputObjs>
+        <controlInputObjs>block_87</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>47</validLinenumbers>
+        <validLinenumbers>51</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="85" name="split" type="BlockType">
+      <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="36" name="add_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln47_fu_230_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="message_passing" bitwidth="6" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.7" m_topoIndex="17" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>bitconcatenate</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="39" name="icmp_ln51" lineNumber="51" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln51_fu_236_p2" opType="icmp" coreId="513" contextFuncName="message_passing" bitwidth="1" opcode="icmp" nodeLabel="3.0" m_display="0" m_delay="0.59" m_topoIndex="18" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="51" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="40" name="select_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="select_ln47_fu_242_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="message_passing" bitwidth="9" opcode="select" nodeLabel="3.0" m_display="0" m_delay="0.3" m_topoIndex="19" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="41" name="select_ln47_1" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="select_ln47_1_fu_250_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="message_passing" bitwidth="6" opcode="select" nodeLabel="3.0" m_display="0" m_delay="0.29" m_topoIndex="20" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="42" name="zext_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="grp_fu_380_p00" coreId="513" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="zext" nodeLabel="4.0" m_display="0" m_topoIndex="32" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>mul</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="43" name="mul_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mac_muladd_6ns_10ns_9ns_15_4_1_U1556" coreName="DSP48" implIndex="dsp" control="auto" opType="add" coreId="127" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="mul" nodeLabel="4.0" nodeLatency="2" m_display="0" m_delay="0.99" m_topoIndex="33" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="44" name="shl_ln48_mid1" lineNumber="48" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="shl_ln48_mid1_fu_258_p3" coreId="49" contextFuncName="message_passing" bitwidth="7" opcode="bitconcatenate" nodeLabel="3.0" m_display="0" m_topoIndex="21" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="48" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="45" name="shl_ln" lineNumber="48" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="shl_ln_fu_266_p3" coreId="132" contextFuncName="message_passing" bitwidth="7" opcode="bitconcatenate" nodeLabel="3.0" m_display="0" m_topoIndex="22" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="48" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="46" name="select_ln47_2" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="select_ln47_2_fu_274_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="message_passing" bitwidth="7" opcode="select" nodeLabel="3.0" m_display="0" m_delay="0.3" m_topoIndex="23" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>bitconcatenate</dataInputObjs>
+        <dataInputObjs>bitconcatenate</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <dataOutputObjs>or</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="47" name="zext_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln47_fu_282_p1" coreId="132" contextFuncName="message_passing" bitwidth="64" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="24" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="48" name="edge_list_addr" lineNumber="48" fileName="GIN_compute.cpp" fileDirectory=".." coreId="593" contextFuncName="message_passing" bitwidth="10" opcode="getelementptr" nodeLabel="3.0" m_display="0" m_topoIndex="25" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="48" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>edge_list</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="49" name="edge_list_load" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="auto" opType="ram_2p" coreId="94" contextFuncName="message_passing" bitwidth="32" opcode="load" nodeLabel="3.0" nodeLatency="1" m_display="0" m_delay="1.2" m_topoIndex="26" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="50" name="trunc_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="grp_fu_389_p0" coreId="593" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="trunc" nodeLabel="4.0" m_display="0" m_topoIndex="34" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>mul</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="51" name="mul_ln703_1" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mac_muladd_16s_10ns_9ns_16_4_1_U1557" coreName="DSP48" implIndex="dsp" control="auto" opType="add" coreId="127" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="mul" nodeLabel="4.0" nodeLatency="2" m_display="0" m_delay="0.99" m_topoIndex="35" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="52" name="or_ln47" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="or_ln47_fu_287_p2" coreId="0" contextFuncName="message_passing" bitwidth="7" opcode="or" nodeLabel="3.0" m_display="0" m_topoIndex="27" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="53" name="zext_ln47_1" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln47_1_fu_293_p1" coreId="49" contextFuncName="message_passing" bitwidth="64" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="28" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>or</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="54" name="edge_list_addr_1" lineNumber="49" fileName="GIN_compute.cpp" fileDirectory=".." coreId="609" contextFuncName="message_passing" bitwidth="10" opcode="getelementptr" nodeLabel="3.0" m_display="0" m_topoIndex="29" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="49" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>edge_list</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="55" name="edge_list_load_1" lineNumber="47" fileName="GIN_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="auto" opType="ram_2p" coreId="94" contextFuncName="message_passing" bitwidth="32" opcode="load" nodeLabel="3.0" nodeLatency="1" m_display="0" m_delay="1.2" m_topoIndex="30" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="47" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="56" name="trunc_ln703_1" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="grp_fu_398_p0" coreId="49" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="trunc" nodeLabel="4.0" m_display="0" m_topoIndex="36" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>mul</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="57" name="mul_ln703_2" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mac_muladd_16s_10ns_9ns_16_4_1_U1558" coreName="DSP48" implIndex="dsp" control="auto" opType="add" coreId="127" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="mul" nodeLabel="4.0" nodeLatency="2" m_display="0" m_delay="0.99" m_topoIndex="37" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="59" name="zext_ln703_1" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="zext_ln703_1_fu_315_p1" coreId="132" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="zext" nodeLabel="6.0" m_display="0" m_topoIndex="38" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="60" name="zext_ln703_2" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="grp_fu_380_p20" coreId="49" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="zext" nodeLabel="6.0" m_display="0" m_topoIndex="39" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="61" name="add_ln703_1" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mac_muladd_6ns_10ns_9ns_15_4_1_U1556" coreName="DSP48" implIndex="dsp" control="auto" opType="add" coreId="127" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="15" opcode="add" nodeLabel="6.0" nodeLatency="1" m_display="0" m_delay="0.64" m_topoIndex="40" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="62" name="zext_ln703_3" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="zext_ln703_3_fu_321_p1" coreId="49" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="64" opcode="zext" nodeLabel="7.0" m_display="0" m_topoIndex="43" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="63" name="edge_embedding_V_addr" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreId="49" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="18" opcode="getelementptr" nodeLabel="7.0" m_display="0" m_topoIndex="44" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>edge_embedding_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="64" name="add_ln703_2" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mac_muladd_16s_10ns_9ns_16_4_1_U1558" coreName="DSP48" implIndex="dsp" control="auto" opType="add" coreId="127" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="add" nodeLabel="6.0" nodeLatency="1" m_display="0" m_delay="0.64" m_topoIndex="41" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="65" name="zext_ln703_4" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="zext_ln703_4_fu_325_p1" coreId="0" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="64" opcode="zext" nodeLabel="7.0" m_display="0" m_topoIndex="45" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="66" name="message_V_addr_1" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreId="49" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="getelementptr" nodeLabel="7.0" m_display="0" m_topoIndex="46" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>message_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>message_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="67" name="add_ln703_3" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="mac_muladd_16s_10ns_9ns_16_4_1_U1557" coreName="DSP48" implIndex="dsp" control="auto" opType="add" coreId="127" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="add" nodeLabel="6.0" nodeLatency="1" m_display="0" m_delay="0.64" m_topoIndex="42" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="68" name="zext_ln703_5" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="zext_ln703_5_fu_329_p1" coreId="49" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="64" opcode="zext" nodeLabel="7.0" m_display="0" m_topoIndex="47" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="69" name="node_embedding_V_addr" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreId="657" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="16" opcode="getelementptr" nodeLabel="7.0" m_display="0" m_topoIndex="48" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>node_embedding_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="71" name="edge_embedding_V_load" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="load" nodeLabel="7.0" nodeLatency="1" m_display="0" m_delay="2.03" m_topoIndex="49" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="72" name="node_embedding_V_load" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="load" nodeLabel="7.0" nodeLatency="1" m_display="0" m_delay="2.03" m_topoIndex="50" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="73" name="trunc_ln703_2" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="trunc_ln703_2_fu_333_p1" coreId="49" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" bitwidth="31" opcode="trunc" nodeLabel="8.0" m_display="0" m_topoIndex="52" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="74" name="trunc_ln703_3" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="trunc_ln703_3_fu_337_p1" coreId="673" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" bitwidth="31" opcode="trunc" nodeLabel="8.0" m_display="0" m_topoIndex="53" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="75" name="msg_V" lineNumber="703" originalName="msg.V" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="msg_V_fu_341_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="add" nodeLabel="8.0" m_display="0" m_delay="0.88" m_topoIndex="54" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>bitselect</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="76" name="add_ln53" lineNumber="53" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln53_fu_347_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="message_passing" bitwidth="31" opcode="add" nodeLabel="8.0" m_display="0" m_delay="0.87" m_topoIndex="55" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="53" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="77" name="tmp" lineNumber="1495" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="tmp_fu_353_p3" coreId="2557438368" contextFuncName="operator_lt_32_32_true_AP_TRN_AP_WRAP_0" bitwidth="1" opcode="bitselect" nodeLabel="8.0" m_display="0" m_topoIndex="56" m_clusterGroupNumber="1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="1495" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator&amp;lt;&amp;lt;32, 32, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="78" name="msg_V_1" lineNumber="54" originalName="msg.V" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="msg_V_1_fu_361_p3" coreName="Sel" implIndex="auto_sel" control="auto" opType="select" coreId="73" contextFuncName="message_passing" bitwidth="31" opcode="select" nodeLabel="8.0" m_display="0" m_topoIndex="57" m_clusterGroupNumber="1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="54" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>bitselect</dataInputObjs>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="79" name="zext_ln53" lineNumber="53" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="zext_ln53_fu_369_p1" coreId="49" contextFuncName="message_passing" bitwidth="32" opcode="zext" nodeLabel="8.0" m_display="0" m_topoIndex="58" m_clusterGroupNumber="1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="53" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="80" name="message_V_load" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="operator_assign_32_10_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="load" nodeLabel="7.0" nodeLatency="1" m_display="0" m_delay="2.03" m_topoIndex="51" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;32, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="81" name="add_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="add_ln703_fu_373_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="add" nodeLabel="8.0" m_display="0" m_delay="0.88" m_topoIndex="59" m_clusterGroupNumber="1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="82" name="message_V_addr_1_write_ln703" lineNumber="703" fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." coreName="RAM_2P_URAM" implIndex="uram" control="auto" opType="ram_2p" coreId="95" contextFuncName="operator_assign_33_11_true_AP_TRN_AP_WRAP_0" opcode="store" nodeLabel="8.0" m_display="0" m_delay="2.03" m_topoIndex="60" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="operator=&amp;lt;33, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="83" name="add_ln51" lineNumber="51" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="add_ln51_fu_298_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="message_passing" bitwidth="9" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.71" m_topoIndex="31" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GIN_compute.cpp" linenumber="51" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_simple_v4" functionName="message_passing"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="84" name="br_ln0" coreId="0" opcode="br" nodeLabel="8.0" m_display="0" m_topoIndex="61" m_clusterGroupNumber="-1">
+        <controlInputObjs>_ZN13ap_fixed_baseILi33ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h">
+        <validLinenumbers>703</validLinenumbers>
+        <validLinenumbers>1495</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="GIN_compute.cpp">
+        <validLinenumbers>47</validLinenumbers>
+        <validLinenumbers>51</validLinenumbers>
+        <validLinenumbers>48</validLinenumbers>
+        <validLinenumbers>49</validLinenumbers>
+        <validLinenumbers>53</validLinenumbers>
+        <validLinenumbers>54</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <ScheduleInfo time="8"/>
+  <ScheduleInfo time="9"/>
+  <regnodes realName="edge_list_addr_reg_436">
+    <nodeIds>48</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_56_reg_407">
+    <nodeIds>15</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln703_1_reg_466">
+    <nodeIds>59</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln703_2_reg_472">
+    <nodeIds>60</nodeIds>
+  </regnodes>
+  <regnodes realName="e_reg_179">
+    <nodeIds>29</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_embedding_V_addr_reg_477">
+    <nodeIds>63</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln47_reg_420">
+    <nodeIds>33</nodeIds>
+  </regnodes>
+  <regnodes realName="select_ln47_1_reg_430">
+    <nodeIds>41</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln51_reg_446">
+    <nodeIds>83</nodeIds>
+  </regnodes>
+  <regnodes realName="message_V_addr_1_reg_482">
+    <nodeIds>66</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln703_reg_451">
+    <nodeIds>42</nodeIds>
+  </regnodes>
+  <regnodes realName="node_embedding_V_addr_reg_488">
+    <nodeIds>69</nodeIds>
+  </regnodes>
+  <regnodes realName="select_ln47_reg_424">
+    <nodeIds>40</nodeIds>
+  </regnodes>
+  <regnodes realName="trunc_ln703_1_reg_461">
+    <nodeIds>56</nodeIds>
+  </regnodes>
+  <regnodes realName="dim_reg_190">
+    <nodeIds>30</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_list_addr_1_reg_441">
+    <nodeIds>54</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln47_1_reg_415">
+    <nodeIds>31</nodeIds>
+  </regnodes>
+  <regnodes realName="indvar_flatten_reg_168">
+    <nodeIds>28</nodeIds>
+  </regnodes>
+  <regnodes realName="empty_reg_157">
+    <nodeIds>14</nodeIds>
+  </regnodes>
+  <regnodes realName="trunc_ln703_reg_456">
+    <nodeIds>50</nodeIds>
+  </regnodes>
+  <expressionNodes realName="node_embedding_V_addr_gep_fu_137">
+    <nodeIds>69</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="tmp_fu_353">
+    <nodeIds>77</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_3_fu_321">
+    <nodeIds>62</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="or_ln47_fu_287">
+    <nodeIds>52</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_fu_304">
+    <nodeIds>42</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="dim_phi_fu_194">
+    <nodeIds>30</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="message_V_addr_gep_fu_80">
+    <nodeIds>22</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln51_fu_298">
+    <nodeIds>83</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_embedding_V_addr_gep_fu_123">
+    <nodeIds>63</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln703_2_fu_333">
+    <nodeIds>73</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln47_fu_242">
+    <nodeIds>40</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln703_1_fu_311">
+    <nodeIds>56</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="msg_V_fu_341">
+    <nodeIds>75</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln703_3_fu_337">
+    <nodeIds>74</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln47_1_fu_293">
+    <nodeIds>53</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="exitcond963_fu_207">
+    <nodeIds>17</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln47_fu_282">
+    <nodeIds>47</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_5_fu_329">
+    <nodeIds>68</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_4_fu_325">
+    <nodeIds>65</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln47_1_fu_218">
+    <nodeIds>31</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_56_fu_201">
+    <nodeIds>15</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln51_fu_236">
+    <nodeIds>39</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln703_fu_373">
+    <nodeIds>81</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="message_V_addr_1_gep_fu_130">
+    <nodeIds>66</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_phi_fu_161">
+    <nodeIds>14</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="shl_ln48_mid1_fu_258">
+    <nodeIds>44</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="shl_ln_fu_266">
+    <nodeIds>45</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln53_fu_347">
+    <nodeIds>76</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln47_1_fu_250">
+    <nodeIds>41</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_list_addr_1_gep_fu_115">
+    <nodeIds>54</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="edge_list_addr_gep_fu_98">
+    <nodeIds>48</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln53_fu_369">
+    <nodeIds>79</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="p_cast_fu_213">
+    <nodeIds>21</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln47_2_fu_274">
+    <nodeIds>46</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln47_fu_224">
+    <nodeIds>33</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln47_fu_230">
+    <nodeIds>36</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_2_fu_318">
+    <nodeIds>60</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="msg_V_1_fu_361">
+    <nodeIds>78</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln703_fu_307">
+    <nodeIds>50</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="e_phi_fu_183">
+    <nodeIds>29</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="indvar_flatten_phi_fu_172">
+    <nodeIds>28</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln703_1_fu_315">
+    <nodeIds>59</nodeIds>
+  </expressionNodes>
+  <moduleNodes realName="grp_fu_380">
+    <nodeIds>43</nodeIds>
+    <nodeIds>61</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_fu_398">
+    <nodeIds>57</nodeIds>
+    <nodeIds>64</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_fu_389">
+    <nodeIds>51</nodeIds>
+    <nodeIds>67</nodeIds>
+  </moduleNodes>
+  <memoryPorts dataString="edge_embedding_V">
+    <nodeIds>71</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_list">
+    <nodeIds>55</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_list" portID="1">
+    <nodeIds>49</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="message_V">
+    <nodeIds>80</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="message_V" portID="1">
+    <nodeIds>23</nodeIds>
+    <nodeIds>82</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V">
+    <nodeIds>72</nodeIds>
+  </memoryPorts>
+  <ioPorts name="edge_embedding_V(p0)">
+    <contents name="load">
+      <nodeIds>71</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_list(p0)">
+    <contents name="load">
+      <nodeIds>55</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_list(p1)">
+    <contents name="load">
+      <nodeIds>49</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="message_V(p0)">
+    <contents name="load">
+      <nodeIds>80</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="message_V(p1)">
+    <contents name="store">
+      <nodeIds>23</nodeIds>
+      <nodeIds>82</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="node_embedding_V(p0)">
+    <contents name="load">
+      <nodeIds>72</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="8" stage="1" latency="1"/>
+      <operations id="9" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="1"/>
+      <operations id="11" stage="1" latency="1"/>
+      <operations id="12" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="14" stage="1" latency="1"/>
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="24" stage="1" latency="1"/>
+    </states>
+    <states id="3">
+      <operations id="26" stage="1" latency="1"/>
+    </states>
+    <states id="4">
+      <operations id="28" stage="1" latency="1"/>
+      <operations id="29" stage="1" latency="1"/>
+      <operations id="30" stage="1" latency="1"/>
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="33" stage="1" latency="1"/>
+      <operations id="34" stage="1" latency="1"/>
+      <operations id="36" stage="1" latency="1"/>
+      <operations id="39" stage="1" latency="1"/>
+      <operations id="40" stage="1" latency="1"/>
+      <operations id="41" stage="1" latency="1"/>
+      <operations id="44" stage="1" latency="1"/>
+      <operations id="45" stage="1" latency="1"/>
+      <operations id="46" stage="1" latency="1"/>
+      <operations id="47" stage="1" latency="1"/>
+      <operations id="48" stage="1" latency="1"/>
+      <operations id="49" stage="2" latency="2"/>
+      <operations id="52" stage="1" latency="1"/>
+      <operations id="53" stage="1" latency="1"/>
+      <operations id="54" stage="1" latency="1"/>
+      <operations id="55" stage="2" latency="2"/>
+      <operations id="83" stage="1" latency="1"/>
+    </states>
+    <states id="5">
+      <operations id="42" stage="1" latency="1"/>
+      <operations id="43" stage="3" latency="3"/>
+      <operations id="49" stage="1" latency="2"/>
+      <operations id="50" stage="1" latency="1"/>
+      <operations id="51" stage="3" latency="3"/>
+      <operations id="55" stage="1" latency="2"/>
+      <operations id="56" stage="1" latency="1"/>
+      <operations id="57" stage="3" latency="3"/>
+    </states>
+    <states id="6">
+      <operations id="43" stage="2" latency="3"/>
+      <operations id="51" stage="2" latency="3"/>
+      <operations id="57" stage="2" latency="3"/>
+    </states>
+    <states id="7">
+      <operations id="43" stage="1" latency="3"/>
+      <operations id="51" stage="1" latency="3"/>
+      <operations id="57" stage="1" latency="3"/>
+      <operations id="59" stage="1" latency="1"/>
+      <operations id="60" stage="1" latency="1"/>
+      <operations id="61" stage="2" latency="2"/>
+      <operations id="64" stage="2" latency="2"/>
+      <operations id="67" stage="2" latency="2"/>
+    </states>
+    <states id="8">
+      <operations id="61" stage="1" latency="2"/>
+      <operations id="62" stage="1" latency="1"/>
+      <operations id="63" stage="1" latency="1"/>
+      <operations id="64" stage="1" latency="2"/>
+      <operations id="65" stage="1" latency="1"/>
+      <operations id="66" stage="1" latency="1"/>
+      <operations id="67" stage="1" latency="2"/>
+      <operations id="68" stage="1" latency="1"/>
+      <operations id="69" stage="1" latency="1"/>
+      <operations id="71" stage="2" latency="2"/>
+      <operations id="72" stage="2" latency="2"/>
+      <operations id="80" stage="2" latency="2"/>
+    </states>
+    <states id="9">
+      <operations id="37" stage="1" latency="1"/>
+      <operations id="38" stage="1" latency="1"/>
+      <operations id="58" stage="1" latency="1"/>
+      <operations id="70" stage="1" latency="1"/>
+      <operations id="71" stage="1" latency="2"/>
+      <operations id="72" stage="1" latency="2"/>
+      <operations id="73" stage="1" latency="1"/>
+      <operations id="74" stage="1" latency="1"/>
+      <operations id="75" stage="1" latency="1"/>
+      <operations id="76" stage="1" latency="1"/>
+      <operations id="77" stage="1" latency="1"/>
+      <operations id="78" stage="1" latency="1"/>
+      <operations id="79" stage="1" latency="1"/>
+      <operations id="80" stage="1" latency="2"/>
+      <operations id="81" stage="1" latency="1"/>
+      <operations id="82" stage="1" latency="1"/>
+      <operations id="84" stage="1" latency="1"/>
+    </states>
+    <states id="10">
+      <operations id="86" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="10">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="message_passing" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="17708" mMaxLatency="17708">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <subRegions>5</subRegions>
+      <subRegions>6</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>13</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="Loop_1" mII="1" mDepth="1" mMinTripCount="5700" mMaxTripCount="5700" mMinLatency="5700" mMaxLatency="5700" mType="1">
+      <basicBlocks>20</basicBlocks>
+      <basicBlocks>25</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Region 1" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>27</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="5" mTag="VITIS_LOOP_47_1_VITIS_LOOP_51_2" mII="1" mDepth="6" mMinTripCount="12000" mMaxTripCount="12000" mMinLatency="12004" mMaxLatency="12004" mType="1">
+      <basicBlocks>35</basicBlocks>
+      <basicBlocks>85</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="6" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>87</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>
