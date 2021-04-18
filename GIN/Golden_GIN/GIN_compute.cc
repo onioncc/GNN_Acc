@@ -1,5 +1,5 @@
 #include "dcl.h"
-#define _PRINT_
+//#define _PRINT_
 
 /// h_x: node feature vectors
 /// e_x: edge attribute vectors

@@ -9,39 +9,39 @@ void load_weights()
 
     FILE* f;
 
-    f = fopen("gin_ep1_mlp_1_weights.bin", "r");
+    f = fopen("gin_ep1_mlp_1_weights_dim100.bin", "r");
 	fread(gnn_node_mlp_1_weights, sizeof(float), LAYER_NUM * MLP_1_OUT * MLP_1_IN, f);
 	fclose(f);
 
-    f = fopen("gin_ep1_mlp_1_bias.bin", "r");
+    f = fopen("gin_ep1_mlp_1_bias_dim100.bin", "r");
 	fread(gnn_node_mlp_1_bias, sizeof(float), LAYER_NUM * MLP_1_OUT, f);
 	fclose(f);
 
-	f = fopen("gin_ep1_mlp_2_weights.bin", "r");
+	f = fopen("gin_ep1_mlp_2_weights_dim100.bin", "r");
 	fread(gnn_node_mlp_2_weights, sizeof(float), LAYER_NUM * MLP_2_OUT * MLP_2_IN, f);
 	fclose(f);
 
-	f = fopen("gin_ep1_mlp_2_bias.bin", "r");
+	f = fopen("gin_ep1_mlp_2_bias_dim100.bin", "r");
 	fread(gnn_node_mlp_2_bias, sizeof(float), LAYER_NUM * MLP_2_OUT, f);
 	fclose(f);
 
-	f = fopen("gin_ep1_eps.bin", "r");
+	f = fopen("gin_ep1_eps_dim100.bin", "r");
 	fread(eps, sizeof(float), LAYER_NUM, f);
 	fclose(f);
 
-    f = fopen("gin_ep1_nd_embed.bin", "r");
+    f = fopen("gin_ep1_nd_embed_dim100.bin", "r");
 	fread(gnn_node_embedding_table, sizeof(float), ND_FEATURE_TOTAL * EMB_DIM, f);
 	fclose(f);
 
-	f = fopen("gin_ep1_ed_embed.bin", "r");
+	f = fopen("gin_ep1_ed_embed_dim100.bin", "r");
 	fread(gnn_edge_embedding_table, sizeof(float), EG_FEATURE_TOTAL * EMB_DIM, f);
 	fclose(f);
 
-	f = fopen("gin_ep1_pred_weights.bin", "r");
+	f = fopen("gin_ep1_pred_weights_dim100.bin", "r");
 	fread(graph_pred_linear_weight, sizeof(float), NUM_TASK * MLP_2_OUT, f);
 	fclose(f);
 
-	f = fopen("gin_ep1_pred_bias.bin", "r");
+	f = fopen("gin_ep1_pred_bias_dim100.bin", "r");
 	fread(graph_pred_linear_bias, sizeof(float), NUM_TASK, f);
 	fclose(f);
 

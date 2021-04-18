@@ -26,7 +26,7 @@ WT_TYPE eps_fixed[LAYER_NUM];
 
 int main()
 {
-    printf("\n******* This is the golden C file for GIN model *******\n");
+    printf("\n******* This is the simple HLS code for GIN model *******\n");
 
     load_weights();
 
@@ -39,9 +39,12 @@ int main()
         int num_of_edges;
 
         sprintf(info_file, "../../../graph_info/g%d_info.txt", g);
+        sprintf(graph_name, "../../../graph_bin/g%d", g);
+
         FILE* f_info = fopen(info_file, "r");
         fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
-        sprintf(graph_name, "../../../graph_bin/g%d", g);
+	fclose(f_info);
+
         printf("********** Computing Graph %s *************\n", graph_name);
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
@@ -63,17 +66,17 @@ int main()
                               gnn_node_embedding_table_fixed, gnn_edge_embedding_table_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, eps_fixed);
 
         
-        //all_results[g-1] = task[0];
+        all_results[g-1] = task_tb[0];
 
         free(node_feature);
         free(edge_list);
         free(edge_attr);
     }
 
-    // for(int g = 1; g <= 10; g++) {
-    //     fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
-    // }
-    // fclose(c_output);
+    for(int g = 1; g <= 10; g++) {
+        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
+    }
+    fclose(c_output);
     
     return 0;
 }

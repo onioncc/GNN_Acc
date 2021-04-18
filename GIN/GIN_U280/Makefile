@@ -33,9 +33,10 @@ COMMON_REPO = ../
 PWD = $(shell readlink -f .)
 ABS_COMMON_REPO = $(shell readlink -f $(COMMON_REPO))
 
-TARGET := hw
+TARGET := sw_emu
 HOST_ARCH := x86
 SYSROOT := 
+DEVICE := xilinx_u280_xdma_201920_3
 
 include ./utils.mk
 
@@ -67,7 +68,7 @@ ifneq ($(HOST_ARCH), x86)
 endif
 
 # Kernel compiler global settings
-CLFLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps
+CLFLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps --config config_slr.cfg --kernel_frequency 100
 ifneq ($(TARGET), hw)
 	CLFLAGS += -g
 endif

@@ -20,17 +20,17 @@ typedef ap_fixed<32, 10> WT_TYPE;
 
 
 /////////// Model Specific Configurations /////////////
-#define MAX_EDGE 2000
-#define MAX_NODE 1000
+#define MAX_EDGE 500
+#define MAX_NODE 200
 #define LAYER_NUM 5
-#define EMB_DIM 300
+#define EMB_DIM 100
 #define NUM_TASK 1
-#define MLP_1_IN 300
-#define MLP_1_OUT 600
-#define MLP_2_IN 600
-#define MLP_2_OUT 300
-#define MLP_IN_MAX 600
-#define MLP_OUT_MAX 600
+#define MLP_1_IN 100
+#define MLP_1_OUT 200
+#define MLP_2_IN 200
+#define MLP_2_OUT 100
+#define MLP_IN_MAX 200
+#define MLP_OUT_MAX 200
 #define E_EPS 0.00001
 
 #define ND_FEATURE 9
