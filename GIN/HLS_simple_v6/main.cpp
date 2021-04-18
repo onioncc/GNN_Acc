@@ -31,8 +31,9 @@ int main()
     load_weights();
 
     float all_results[4113];
+    int is_first = 1;
     FILE* c_output = fopen("HLS_output.txt", "w+");
-    for(int g = 1; g <= 10; g++ ) {
+    for(int g = 1; g <= 4112; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
@@ -46,11 +47,12 @@ int main()
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
         int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
-        int* edge_list = (int*)malloc(2 * num_of_edges * sizeof(int));
+        int* edge_list = (int*)malloc(3 * num_of_edges * sizeof(int));
         int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
-        int graph_attr[2];
+        int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
+        graph_attr[2] = is_first;
 
         FM_TYPE task_tb[NUM_TASK];
 
@@ -66,6 +68,8 @@ int main()
         free(node_feature);
         free(edge_list);
         free(edge_attr);
+
+        is_first = 0;
     }
 
     // for(int g = 1; g <= 10; g++) {

@@ -40,35 +40,6 @@ int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
 
 
-// void message_passing(FM_TYPE ed[MAX_EDGE][EMB_DIM], FM_TYPE h[MAX_NODE][EMB_DIM], int* edge_list, int num_of_nodes, int num_of_edges)
-// {
-// #pragma HLS inline off
-//     memset(message, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
-//     for(int e = 0; e < num_of_edges; e++) {
-//         int u = edge_list[e*2];     // source node id
-//         int v = edge_list[e*2+1];   // target node id
-
-//         for(int dim = 0; dim < EMB_DIM; dim++) {
-//             // accumulate the embedding vector for edge [u -> v]
-//             FM_TYPE msg = ed[e][dim] + h[u][dim];
-//             if(msg < 0) msg = 0.0;
-//             message[v][dim] += msg;            
-//         }
-//     }
-
-// #ifdef _PRINT_
-//     printf("\nMessage of Conv 0\n");
-//     for(int nd = 0; nd < num_of_nodes; nd++) {
-//         printf("Node %d: ", nd);
-//         for(int dim = 0; dim < 10; dim++) {
-//             printf("%.5f ", message[nd][dim].to_float());
-//         }
-//         printf("...\n");
-//     }
-// #endif
-// }
-
-
 void MLP_one_node_one_dim(int dim, int nd, FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE mlp_out[MAX_NODE][EMB_DIM], int layer)
 {
     FM_TYPE psum[MLP_1_OUT];
@@ -81,11 +52,6 @@ void MLP_one_node_one_dim(int dim, int nd, FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM
 #pragma HLS array_partition variable=mlp_2_weights dim=2 complete
 #pragma HLS array_partition variable=mlp_2_bias dim=2 complete
 
-#pragma HLS bind_storage variable=mlp_1_weights type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=mlp_2_weights type=RAM_2P impl=bram
-
-// #pragma HLS array_partition variable=mlp_1_weights dim=1 complete
-// #pragma HLS array_partition variable=mlp_2_weights dim=1 complete
 
     // first layer of 300 x 300 VVM
     FM_TYPE sum = mlp_1_bias[layer][dim];
@@ -129,7 +95,12 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE node_embedding[MAX_NODE][EMB
 #endif 
 
 
-    memset(node_embedding, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
+    //memset(node_embedding, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
+    for(int nd = 0; nd < num_of_nodes; nd++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {
+	    node_embedding[nd][dim] = 0;
+	}
+    }
     for(int dim = 0; dim < MLP_1_OUT; dim++) {
         for(int nd = 0; nd < num_of_nodes; nd++) {
 #pragma HLS pipeline
@@ -185,12 +156,6 @@ void compute_edge_embedding_and_message_passing(int num_of_nodes, int num_of_edg
 
     ////////////// Embedding: compute edge embedding
     memset(message, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
-//     for(int n = 0; n < num_of_nodes; n++) {
-// #pragma HLS pipeline
-//         for(int dim = 0; dim < EMB_DIM; dim++) {
-//             message[n][dim] = 0;
-//         }
-//     }
 
     for(int e = 0; e < num_of_edges; e++) {
         int u = edge_list[e*2];     // source node id
@@ -199,11 +164,11 @@ void compute_edge_embedding_and_message_passing(int num_of_nodes, int num_of_edg
         for(int dim = 0; dim < EMB_DIM; dim++) {
 #pragma HLS pipeline
             FM_TYPE edge_embed = 0;
+
             for(int ef = 0; ef < EDGE_ATTR; ef++) {
                 int e_f = edge_attr[e][ef];
-
+            	int addr = get_ed_emb_addr(ef, layer);
                 FM_TYPE emb_value = 0;
-                int addr = get_ed_emb_addr(ef, layer);
                 emb_value = edge_embedding_table[addr + e_f][dim];
                 edge_embed += emb_value;
 
@@ -230,7 +195,15 @@ void compute_node_embedding(int num_of_nodes, int* features)
 {
 #pragma HLS inline off
     ////////////// Embedding: compute input node embedding
-    memset(node_embedding, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
+//    memset(node_embedding, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
+
+    for(int nd = 0; nd < num_of_nodes; nd++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {
+	    node_embedding[nd][dim] = 0;
+	}
+    }
+
+
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int nf = 0; nf < ND_FEATURE; nf++) {
             int nd_f = features[nd * ND_FEATURE + nf];
@@ -432,7 +405,7 @@ void GIN_compute_one_graph(
 //#pragma HLS bind_storage variable=mlp_out type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=graph_embedding type=RAM_2P impl=bram
 //#pragma HLS bind_storage variable=edge_embedding type=RAM_2P impl=uram
-#pragma HLS bind_storage variable=node_embedding type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=node_embedding type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=node_embedding_table type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=edge_embedding_table type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=message type=RAM_2P impl=uram
@@ -440,10 +413,8 @@ void GIN_compute_one_graph(
 
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
-    int is_first = 0; // graph_attr[2]; is the first graph
+    int is_first = graph_attr[2]; //is the first graph
 
-    num_of_nodes = 19;
-    num_of_edges = 40;
 
     if( is_first == 1 ) {
 		////////////// Load weights
