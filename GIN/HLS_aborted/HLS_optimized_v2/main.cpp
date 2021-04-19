@@ -33,7 +33,7 @@ int main()
     float all_results[4113];
     int is_first = 1;
     FILE* c_output = fopen("HLS_optimized_output.txt", "w+");
-    for(int g = 1; g <= 1; g++ ) {
+    for(int g = 1; g <= 3; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;

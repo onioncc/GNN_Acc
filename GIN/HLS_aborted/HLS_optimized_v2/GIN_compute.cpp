@@ -2,6 +2,8 @@
 
 //#define _PRINT_
 
+#define NODE_BATCH 4
+
 /// graph information
 int node_feature[MAX_NODE * ND_FEATURE];
 int edge_attr[MAX_EDGE][EDGE_ATTR];
@@ -26,9 +28,9 @@ WT_TYPE edge_embedding_table[EG_FEATURE_TOTAL][EMB_DIM];
 /// MLP related weights
 WT_TYPE mlp_eps[LAYER_NUM];
 WT_TYPE mlp_1_weights[LAYER_NUM][MLP_1_OUT][MLP_1_IN];
-WT_TYPE mlp_1_bias[LAYER_NUM][MLP_1_OUT];
+WT_TYPE mlp_1_bias[LAYER_NUM][NODE_BATCH][MLP_1_OUT];
 WT_TYPE mlp_2_weights[LAYER_NUM][MLP_2_OUT][MLP_2_IN];
-WT_TYPE mlp_2_bias[LAYER_NUM][MLP_2_OUT];
+WT_TYPE mlp_2_bias[LAYER_NUM][NODE_BATCH][MLP_2_OUT];
 
 /// graph pred linear weights
 WT_TYPE graph_pred_weights[NUM_TASK][MLP_2_OUT];
@@ -38,38 +40,114 @@ int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
 
 
-void MLP_one_node_one_dim(int dim, int nd, FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE mlp_out[MAX_NODE][EMB_DIM], int layer)
+
+
+
+void MLP_one_node_one_dim(hls::stream<WT_TYPE> mlp_1_weight_in_vector[MLP_1_IN], hls::stream<WT_TYPE> mlp_1_weight_out_vector[MLP_1_IN], hls::stream<WT_TYPE> mlp_2_weight_in_vector[MLP_2_OUT], hls::stream<WT_TYPE> mlp_2_weight_out_vector[MLP_2_OUT], 
+                          int dim, int nn, int nd, FM_TYPE mlp_in[EMB_DIM], FM_TYPE mlp_out[EMB_DIM], int layer, int is_final_PE)
 {
     FM_TYPE psum[MLP_1_OUT];
 
 #pragma HLS array_partition variable=psum complete
-#pragma HLS array_partition variable=mlp_in dim=2 complete
-#pragma HLS array_partition variable=mlp_out dim=2 complete
-#pragma HLS array_partition variable=mlp_1_weights dim=3 complete
-#pragma HLS array_partition variable=mlp_1_bias dim=2 complete
-#pragma HLS array_partition variable=mlp_2_weights dim=2 complete
-#pragma HLS array_partition variable=mlp_2_bias dim=2 complete
+#pragma HLS array_partition variable=mlp_in dim=1 complete
+#pragma HLS array_partition variable=mlp_out dim=1 complete
 
 
-    // first layer of 300 x 300 VVM
-    FM_TYPE sum = mlp_1_bias[layer][dim];
+    // first layer of MLP_1_IN x MLP_1_OUT VVM
+    FM_TYPE sum = mlp_1_bias[layer][nn][dim];
     for(int dim_in1 = 0; dim_in1 < MLP_1_IN; dim_in1++) {
-        psum[dim_in1] = mlp_1_weights[layer][dim][dim_in1] * mlp_in[nd][dim_in1];
+        WT_TYPE w = mlp_1_weight_in_vector[dim_in1].read();
+        psum[dim_in1] = w * mlp_in[dim_in1];
         sum += psum[dim_in1];
+        if(is_final_PE != 1) mlp_1_weight_out_vector[dim_in1].write(w);
     }
     sum = sum < 0 ? (FM_TYPE)0 : sum;
 
-    // second layer of 300 x 300 VVM
+    // second layer of MLP_2_IN x MLP_2_OUT VVM
     for(int dim_out2 = 0; dim_out2 < MLP_2_OUT; dim_out2++) {
-        mlp_out[nd][dim_out2] += sum * mlp_2_weights[layer][dim_out2][dim];
+        WT_TYPE w = mlp_2_weight_in_vector[dim_out2].read();
+        mlp_out[dim_out2] = sum * w;
+
+        if(is_final_PE != 1) mlp_2_weight_out_vector[dim_out2].write(w);
     }
 
 }
 
+template<int MLP_IN_DIM, int MLP_OUT_DIM>
+void load_mlp_weight_vector_in_para(WT_TYPE mlp_weights[LAYER_NUM][MLP_OUT_DIM][MLP_IN_DIM], hls::stream<WT_TYPE> mlp_weight_vector[MLP_IN_DIM], int d_out, int layer) 
+{
+    for(int i = 0; i < MLP_IN_DIM; i++) {
+        mlp_weight_vector[i].write(mlp_weights[layer][d_out][i]);
+    }
+}
+
+template<int MLP_IN_DIM, int MLP_OUT_DIM>
+void load_mlp_weight_vector_out_para(WT_TYPE mlp_weights[LAYER_NUM][MLP_OUT_DIM][MLP_IN_DIM], hls::stream<WT_TYPE> mlp_weight_vector[MLP_OUT_DIM], int d_in, int layer) 
+{
+    for(int i = 0; i < MLP_OUT_DIM; i++) {
+        mlp_weight_vector[i].write(mlp_weights[layer][i][d_in]);
+    }
+}
+
+void MLP_node_batch(int dim, int nd, FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE mlp_out[NODE_BATCH][EMB_DIM], int layer)
+{
+#pragma HLS dataflow
+
+    hls::stream<WT_TYPE> mlp_weight_1_fifo[NODE_BATCH + 1][MLP_1_IN];
+    hls::stream<WT_TYPE> mlp_weight_2_fifo[NODE_BATCH + 1][MLP_2_OUT];
+
+    load_mlp_weight_vector_in_para<MLP_1_IN, MLP_1_OUT>(mlp_1_weights, mlp_weight_1_fifo[0], dim, layer);
+    load_mlp_weight_vector_out_para<MLP_2_IN, MLP_2_OUT>(mlp_2_weights, mlp_weight_2_fifo[0], dim, layer);
+
+    for(int nn = 0; nn < NODE_BATCH; nn++) {
+#pragma HLS unroll
+        int is_final_PE = (nn == NODE_BATCH - 1) ? 1 : 0;
+        MLP_one_node_one_dim(mlp_weight_1_fifo[nn], mlp_weight_1_fifo[nn + 1], mlp_weight_2_fifo[nn], mlp_weight_2_fifo[nn + 1], dim, nn, nd, mlp_in[nn], mlp_out[nn], layer, is_final_PE);
+    }
+}
+
+
+void Accumulate_MLP_buf_to_global_nd_emb(int nd, FM_TYPE mlp_out[NODE_BATCH][EMB_DIM], FM_TYPE node_embedding[MAX_NODE][EMB_DIM])
+{
+    for(int nn = 0; nn < NODE_BATCH; nn++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {
+            node_embedding[nd + nn][dim] += mlp_out[nn][dim];
+        }
+    }
+}
+
+
+void Copy_global_nd_emb_to_MLP_buf(int nd, FM_TYPE mlp_in_buf[NODE_BATCH][EMB_DIM], FM_TYPE node_embedding[MAX_NODE][EMB_DIM])
+{
+    for(int nn = 0; nn < NODE_BATCH; nn++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {
+            mlp_in_buf[nn][dim] = node_embedding[nd + nn][dim];
+        }
+    }
+}
+
+
+
+FM_TYPE mlp_out_buf[NODE_BATCH][EMB_DIM];
+FM_TYPE mlp_in_buf[NODE_BATCH][EMB_DIM];
 
 void MLP(FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE node_embedding[MAX_NODE][EMB_DIM], FM_TYPE h[MAX_NODE][EMB_DIM], int num_of_nodes, int layer)
 {
 #pragma HLS inline off
+
+#pragma HLS array_partition variable=mlp_in dim=1 cyclic factor=4
+#pragma HLS array_partition variable=mlp_in dim=2 complete
+
+#pragma HLS array_partition variable=node_embedding dim=1 cyclic factor=4
+#pragma HLS array_partition variable=node_embedding dim=2 complete
+
+
+#pragma HLS array_partition variable=mlp_out_buf dim=1 complete
+#pragma HLS array_partition variable=mlp_out_buf dim=2 complete
+#pragma HLS array_partition variable=mlp_in_buf dim=1 complete
+#pragma HLS array_partition variable=mlp_in_buf dim=2 complete
+
+
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
 
@@ -93,26 +171,32 @@ void MLP(FM_TYPE mlp_in[MAX_NODE][EMB_DIM], FM_TYPE node_embedding[MAX_NODE][EMB
 #endif 
 
 
-    //memset(node_embedding, 0, num_of_nodes * EMB_DIM * sizeof(FM_TYPE));
-    for(int nd = 0; nd < num_of_nodes; nd++) {
+    for(int nd = 0; nd < num_of_nodes; nd += NODE_BATCH) {
         for(int dim = 0; dim < EMB_DIM; dim++) {
-	    node_embedding[nd][dim] = 0;
-	}
+            for(int nn = 0; nn < NODE_BATCH; nn++) {
+                node_embedding[nd + nn][dim] = 0;
+            }
+	    }
     }
+
     for(int dim = 0; dim < MLP_1_OUT; dim++) {
-        for(int nd = 0; nd < num_of_nodes; nd++) {
+        for(int nd = 0; nd < num_of_nodes; nd += NODE_BATCH ) {
 #pragma HLS pipeline
-            MLP_one_node_one_dim(dim, nd, mlp_in, node_embedding, layer);
+            Copy_global_nd_emb_to_MLP_buf(nd, mlp_in_buf, mlp_in);
+            MLP_node_batch(dim, nd, mlp_in_buf, mlp_out_buf, layer);
+            Accumulate_MLP_buf_to_global_nd_emb(nd, mlp_out_buf, node_embedding);
         }
     }
 
-    for(int nd = 0; nd < num_of_nodes; nd++) {
+    for(int nd = 0; nd < num_of_nodes; nd += NODE_BATCH) {
+        for(int nn = 0; nn < NODE_BATCH; nn++) {
 #pragma HLS pipeline
-        for(int dim = 0; dim < EMB_DIM; dim++) {
-            if( node_embedding[nd][dim] + mlp_2_bias[layer][dim] < 0 && layer != 4 ) {
-                node_embedding[nd][dim] = 0;
+            for(int dim = 0; dim < EMB_DIM; dim++) {
+                if( node_embedding[nd + nn][dim] + mlp_2_bias[layer][nn][dim] < 0 && (layer != LAYER_NUM - 1) ) {
+                    node_embedding[nd + nn][dim] = 0;
+                }
+                else node_embedding[nd + nn][dim] = node_embedding[nd + nn][dim] + mlp_2_bias[layer][nn][dim];
             }
-            else node_embedding[nd][dim] = node_embedding[nd][dim] + mlp_2_bias[layer][dim];
         }
     }
 
@@ -237,14 +321,26 @@ void load_mlp_weights_one_layer(int layer, FM_TYPE* gnn_node_mlp_1_weights_fixed
 {
 #pragma HLS inline off
 
+#pragma HLS array_partition variable=mlp_1_weights dim=3 complete
+#pragma HLS array_partition variable=mlp_1_bias dim=2 complete
+#pragma HLS array_partition variable=mlp_1_bias dim=3 complete
+#pragma HLS array_partition variable=mlp_2_weights dim=2 complete
+#pragma HLS array_partition variable=mlp_2_bias dim=2 complete
+#pragma HLS array_partition variable=mlp_2_bias dim=3 complete
+
+
     for(int dim_out = 0; dim_out < MLP_1_OUT; dim_out++) {
-        mlp_1_bias[layer][dim_out] = gnn_node_mlp_1_bias_fixed[layer * MLP_1_OUT + dim_out];
+        for(int nn = 0; nn < NODE_BATCH; nn++) {
+            mlp_1_bias[layer][nn][dim_out] = gnn_node_mlp_1_bias_fixed[layer * MLP_1_OUT + dim_out];
+        }
         for(int dim_in = 0; dim_in < MLP_1_IN; dim_in++) {
             mlp_1_weights[layer][dim_out][dim_in] = gnn_node_mlp_1_weights_fixed[layer * MLP_1_OUT * MLP_1_IN + dim_out * MLP_1_IN + dim_in];
         }
     }        
     for(int dim_out = 0; dim_out < MLP_2_OUT; dim_out++) {
-        mlp_2_bias[layer][dim_out] = gnn_node_mlp_2_bias_fixed[layer * MLP_2_OUT + dim_out];
+        for(int nn = 0; nn < NODE_BATCH; nn++) {
+            mlp_2_bias[layer][nn][dim_out] = gnn_node_mlp_2_bias_fixed[layer * MLP_2_OUT + dim_out];
+        }
         for(int dim_in = 0; dim_in < MLP_2_IN; dim_in++) {
             mlp_2_weights[layer][dim_out][dim_in] = gnn_node_mlp_2_weights_fixed[layer * MLP_2_OUT * MLP_2_IN + dim_out * MLP_2_IN + dim_in];
         }
@@ -411,16 +507,15 @@ void GIN_compute_one_graph(
 
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
-    int is_first = graph_attr[2]; //is the first graph
+    int is_first = 1; //graph_attr[2]; //is the first graph
 
-//    num_of_nodes = 19;
-//    num_of_edges = 40;
-//    is_first = 0;
-
+    is_first = 0;
+    num_of_nodes = 19;
+    num_of_edges = 40;
 
     if( is_first == 1 ) {
 		////////////// Load weights
-		for(int layer = 0; layer < 5; layer++) {
+		for(int layer = 0; layer < LAYER_NUM; layer++) {
 			load_mlp_weights_one_layer(layer, gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
 		}
 
@@ -438,7 +533,7 @@ void GIN_compute_one_graph(
     compute_node_embedding(num_of_nodes, node_feature);
 
     ////////////// CONV layers //////////////////////////////////
-    for(int layer = 0; layer < 5; layer++) {
+    for(int layer = 0; layer < LAYER_NUM; layer++) {
         compute_CONV_layer(node_embedding, num_of_nodes, num_of_edges, layer);
     }
         
