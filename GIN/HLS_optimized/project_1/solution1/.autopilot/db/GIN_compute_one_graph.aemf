@@ -1,0 +1,1635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1619236954004">
+  <ports id="1" name="mem" type="PortType" coreId="0" bitwidth="32" direction="DirInOut" iftype="IfTypeFifo">
+    <dataInputObjs>call</dataInputObjs>
+    <dataInputObjs>call</dataInputObjs>
+    <dataOutputObjs>call</dataOutputObjs>
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="2" name="node_feature_in" type="PortType" originalName="node_feature_in" coreId="0" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="3" name="edge_list_in" type="PortType" originalName="edge_list_in" coreId="0" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="4" name="edge_attr_in" type="PortType" originalName="edge_attr_in" coreId="0" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="5" name="graph_attr" type="PortType" originalName="graph_attr" coreId="3292916944" bitwidth="64"/>
+  <ports id="6" name="task_r" type="PortType" originalName="task" coreId="0" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="7" name="gnn_node_mlp_1_weights_fixed" type="PortType" originalName="gnn_node_mlp_1_weights_fixed" coreId="0" bitwidth="64"/>
+  <ports id="8" name="gnn_node_mlp_1_bias_fixed" type="PortType" originalName="gnn_node_mlp_1_bias_fixed" coreId="0" bitwidth="64"/>
+  <ports id="9" name="gnn_node_mlp_2_weights_fixed" type="PortType" originalName="gnn_node_mlp_2_weights_fixed" coreId="0" bitwidth="64"/>
+  <ports id="10" name="gnn_node_mlp_2_bias_fixed" type="PortType" originalName="gnn_node_mlp_2_bias_fixed" coreId="3292890016" bitwidth="64"/>
+  <ports id="11" name="gnn_node_embedding_fixed" type="PortType" originalName="gnn_node_embedding_fixed" coreId="0" bitwidth="64"/>
+  <ports id="12" name="gnn_edge_embedding_fixed" type="PortType" originalName="gnn_edge_embedding_fixed" coreId="0" bitwidth="64"/>
+  <ports id="13" name="graph_pred_linear_weight_fixed" type="PortType" originalName="graph_pred_linear_weight_fixed" coreId="0" bitwidth="64"/>
+  <ports id="14" name="graph_pred_linear_bias_fixed" type="PortType" originalName="graph_pred_linear_bias_fixed" coreId="0" bitwidth="64"/>
+  <ports id="15" name="eps_fixed" type="PortType" originalName="eps_fixed" coreId="68" bitwidth="64"/>
+  <edges id="294" source_obj="//@ports.5" sink_obj="//@blocks.0/@node_objs.0"/>
+  <edges id="296" source_obj="//@ports.3" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="298" source_obj="//@ports.2" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="300" source_obj="//@ports.1" sink_obj="//@blocks.0/@node_objs.3"/>
+  <edges id="303" source_obj="//@ports.0" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="304" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="305" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="306" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="309" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.0/@node_objs.6"/>
+  <edges id="312" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="313" source_obj="//@blocks.1/@node_objs.1" sink_obj="//@blocks.1/@node_objs.0" is_back_edge="1"/>
+  <edges id="314" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.1/@node_objs.0" is_back_edge="1"/>
+  <edges id="315" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.1/@node_objs.1"/>
+  <edges id="318" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.1/@node_objs.2"/>
+  <edges id="321" source_obj="//@blocks.1/@node_objs.2" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="322" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="323" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="326" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="327" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2/@node_objs.1"/>
+  <edges id="332" source_obj="//@ports.0" sink_obj="//@blocks.3/@node_objs.1"/>
+  <edges id="333" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.3/@node_objs.1"/>
+  <edges id="334" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="335" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="336" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="337" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="338" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="339" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="340" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="341" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="342" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="343" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="344" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="345" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="346" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="347" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="348" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="349" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="350" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="351" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="352" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="353" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="354" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="355" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="356" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="357" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="358" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="359" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="360" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="361" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="362" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="363" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="364" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="365" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="366" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="367" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="368" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="369" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="370" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="371" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="372" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="373" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="374" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="375" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="376" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="377" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="378" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="379" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="380" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="381" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="382" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="383" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="384" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="385" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="386" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="387" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="388" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="389" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="390" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="391" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="392" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="393" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="394" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="395" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="396" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="397" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="398" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="399" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="400" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="401" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="402" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="403" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="404" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="405" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="406" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="407" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="408" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="409" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="410" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="411" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="412" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="413" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="414" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="415" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="416" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="417" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="418" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="419" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="420" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="421" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="422" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="423" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="424" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="425" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="426" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="427" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="428" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="429" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="430" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="431" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="432" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="433" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="434" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="435" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="436" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="437" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="438" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="439" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="440" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="441" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="442" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="443" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="444" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="445" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="446" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="447" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="448" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="449" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="450" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="451" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="452" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="453" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="454" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="455" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="456" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="457" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="458" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="459" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="460" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="461" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="462" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="463" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="464" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="465" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="466" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="467" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="468" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="469" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="470" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="471" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="472" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="473" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="474" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="475" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="476" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="477" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="478" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="479" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="480" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="481" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="482" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="483" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="484" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="485" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="486" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="487" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="488" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="489" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="490" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="491" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="492" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="493" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="494" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="495" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="496" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="497" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="498" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="499" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="500" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="501" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="502" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="503" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="504" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="505" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="506" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="507" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="508" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="509" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="510" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="511" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="512" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="513" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="514" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="515" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="516" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="517" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="518" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="519" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="520" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="521" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="522" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="523" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="524" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="525" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="526" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="527" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="528" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="529" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="530" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="531" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="532" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="533" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="534" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="535" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="536" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="537" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="538" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="539" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="540" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="541" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="542" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="543" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="544" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="545" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="546" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="547" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="548" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="549" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="550" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="551" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="552" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="553" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="554" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="555" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="556" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="557" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="558" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="559" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="560" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="561" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="562" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="563" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="564" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="565" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="566" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="567" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="568" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="569" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="570" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="571" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="572" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="573" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="574" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="575" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="576" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="577" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="578" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="579" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="580" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="581" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="582" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="583" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="584" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="585" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="586" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="587" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="588" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="589" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="590" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="591" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="592" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="593" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="594" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="595" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="596" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="597" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="598" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="599" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="600" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="601" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="602" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="603" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="604" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="605" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="606" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="607" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="608" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="609" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="610" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="611" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="612" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="613" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="614" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="615" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="616" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="617" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="618" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="619" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="620" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="621" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="622" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="623" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="624" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="625" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="626" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="627" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="628" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="629" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="630" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="631" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="632" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="633" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="634" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="635" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="636" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="637" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="638" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="639" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="640" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="641" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="642" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="643" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="644" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="645" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="646" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="647" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="648" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="649" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="650" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="651" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="652" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="653" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="654" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="655" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="656" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="657" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="658" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="659" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="660" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="661" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="662" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="663" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="664" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="665" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="666" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="667" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="668" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="669" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="670" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="671" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="672" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="673" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="674" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="675" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="676" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="677" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="678" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="679" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="680" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="681" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="682" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="683" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="684" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="685" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="686" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="687" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="688" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="689" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="690" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="691" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="692" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="693" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="694" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="695" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="696" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="697" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="698" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="699" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="700" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="701" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="702" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="703" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="704" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="705" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="706" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="707" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="708" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="709" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="710" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="711" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="712" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="713" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="714" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="715" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="716" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="717" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="718" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="719" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="720" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="721" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="722" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="723" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="724" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="725" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="726" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="727" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="728" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="729" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="730" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="731" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="732" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="733" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="734" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="735" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="736" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="737" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="738" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="739" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="740" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="741" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="1700" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="1701" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.3"/>
+  <edges id="1702" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2"/>
+  <edges id="1703" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.1" is_back_edge="1"/>
+  <edges id="1704" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="1705" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="1706" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="-303" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@ports.0"/>
+  <edges id="-332" source_obj="//@blocks.3/@node_objs.1" sink_obj="//@ports.0"/>
+  <blocks id="277" name="block_277" type="BlockType">
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_283</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="261" name="task_read" lineNumber="370" originalName="task" fileName="GIN_compute.cpp" fileDirectory=".." coreName="s_axilite" implIndex="UNSUPPORTED" control="auto" coreId="122" contextFuncName="GIN_compute_one_graph" bitwidth="64" opcode="read" m_display="0" m_delay="1.0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>task_r</dataInputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="262" name="edge_attr_in_read" lineNumber="370" originalName="edge_attr_in" fileName="GIN_compute.cpp" fileDirectory=".." coreName="s_axilite" implIndex="UNSUPPORTED" control="auto" coreId="122" contextFuncName="GIN_compute_one_graph" bitwidth="64" opcode="read" m_display="0" m_delay="1.0" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>edge_attr_in</dataInputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="263" name="edge_list_in_read" lineNumber="370" originalName="edge_list_in" fileName="GIN_compute.cpp" fileDirectory=".." coreName="s_axilite" implIndex="UNSUPPORTED" control="auto" coreId="122" contextFuncName="GIN_compute_one_graph" bitwidth="64" opcode="read" m_display="0" m_delay="1.0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>edge_list_in</dataInputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="264" name="node_feature_in_read" lineNumber="370" originalName="node_feature_in" fileName="GIN_compute.cpp" fileDirectory=".." coreName="s_axilite" implIndex="UNSUPPORTED" control="auto" coreId="122" contextFuncName="GIN_compute_one_graph" bitwidth="64" opcode="read" m_display="0" m_delay="1.0" m_topoIndex="4" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="370" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>node_feature_in</dataInputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="274" name="_ln433" lineNumber="433" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="grp_load_graph_fu_1322" coreId="127" contextFuncName="GIN_compute_one_graph" opcode="call" nodeLabel="1.0" nodeLatency="1" m_display="0" m_delay="7.3" m_topoIndex="5" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="433" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>mem</dataInputObjs>
+      <dataInputObjs>read</dataInputObjs>
+      <dataInputObjs>read</dataInputObjs>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>mem</dataOutputObjs>
+      <constName>load_graph</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="275" name="_ln438" lineNumber="438" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="grp_compute_node_embedding_fu_1341" coreId="4294967295" contextFuncName="GIN_compute_one_graph" opcode="call" nodeLabel="1.0" nodeLatency="1" m_display="0" m_topoIndex="6" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="438" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <constName>compute_node_embedding</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="276" name="br_ln441" lineNumber="441" fileName="GIN_compute.cpp" fileDirectory=".." coreId="106" contextFuncName="GIN_compute_one_graph" opcode="br" nodeLabel="2.0" m_display="0" m_delay="0.38" m_topoIndex="7" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="441" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <controlInputObjs>block_283</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>370</validLinenumbers>
+      <validLinenumbers>433</validLinenumbers>
+      <validLinenumbers>438</validLinenumbers>
+      <validLinenumbers>441</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="283" name="block_283" type="BlockType">
+    <controlInputObjs>block_277</controlInputObjs>
+    <controlInputObjs>.split</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>block_291</controlOutputObjs>
+    <controlOutputObjs>.split</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="278" name="layer" originalName="layer" coreId="0" bitwidth="3" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="8" m_clusterGroupNumber="-1">
+      <dataInputObjs>add</dataInputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+      <controlInputObjs>block_277</controlInputObjs>
+      <controlInputObjs>.split</controlInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="279" name="layer_1" lineNumber="441" originalName="layer" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="layer_1_fu_1552_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="GIN_compute_one_graph" bitwidth="3" opcode="add" nodeLabel="3.0" m_display="0" m_delay="0.57" m_topoIndex="9" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="441" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>phi</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="280" name="icmp_ln441" lineNumber="441" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="icmp_ln441_fu_1558_p2" opType="icmp" coreId="0" contextFuncName="GIN_compute_one_graph" bitwidth="1" opcode="icmp" nodeLabel="3.0" m_display="0" m_delay="0.49" m_topoIndex="10" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="441" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>br</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="282" name="br_ln441" lineNumber="441" fileName="GIN_compute.cpp" fileDirectory=".." coreId="0" contextFuncName="GIN_compute_one_graph" opcode="br" nodeLabel="3.0" m_display="0" m_topoIndex="11" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="441" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <controlInputObjs>.split</controlInputObjs>
+      <controlInputObjs>block_291</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>441</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="287" name=".split" type="BlockType">
+    <controlInputObjs>block_283</controlInputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>block_283</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="285" name="_ln442" lineNumber="442" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="grp_compute_CONV_layer_fu_912" coreId="0" contextFuncName="GIN_compute_one_graph" opcode="call" nodeLabel="3.0" nodeLatency="1" m_display="0" m_topoIndex="12" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="442" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <constName>compute_CONV_layer</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="286" name="br_ln0" coreId="0" opcode="br" nodeLabel="4.0" m_display="0" m_topoIndex="13" m_clusterGroupNumber="-1">
+      <controlInputObjs>block_283</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>442</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="291" name="block_291" type="BlockType">
+    <controlInputObjs>block_283</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="288" name="_ln446" lineNumber="446" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="grp_global_mean_pooling_fu_706" coreId="0" contextFuncName="GIN_compute_one_graph" opcode="call" nodeLabel="5.0" nodeLatency="1" m_display="0" m_topoIndex="14" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="446" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <constName>global_mean_pooling</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="289" name="_ln449" lineNumber="449" fileName="GIN_compute.cpp" fileDirectory=".." rtlName="grp_global_graph_prediction_fu_1545" coreId="0" contextFuncName="GIN_compute_one_graph" opcode="call" nodeLabel="5.0" nodeLatency="1" m_display="0" m_delay="7.3" m_topoIndex="15" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="449" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+      <dataInputObjs>mem</dataInputObjs>
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>mem</dataOutputObjs>
+      <constName>global_graph_prediction</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="290" name="_ln458" lineNumber="458" fileName="GIN_compute.cpp" fileDirectory=".." coreId="49" contextFuncName="GIN_compute_one_graph" opcode="ret" nodeLabel="6.0" m_display="0" m_topoIndex="16" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GIN_compute.cpp" linenumber="458" fileDirectory="/nethome/chao33/GNN_Acc/GIN/HLS_optimized" functionName="GIN_compute_one_graph"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GIN_compute.cpp">
+      <validLinenumbers>446</validLinenumbers>
+      <validLinenumbers>449</validLinenumbers>
+      <validLinenumbers>458</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <regnodes realName="edge_list_in_read_reg_1574">
+    <nodeIds>263</nodeIds>
+  </regnodes>
+  <regnodes realName="layer_reg_694">
+    <nodeIds>278</nodeIds>
+  </regnodes>
+  <regnodes realName="task_read_reg_1564">
+    <nodeIds>261</nodeIds>
+  </regnodes>
+  <regnodes realName="layer_1_reg_1584">
+    <nodeIds>279</nodeIds>
+  </regnodes>
+  <regnodes realName="node_feature_in_read_reg_1579">
+    <nodeIds>264</nodeIds>
+  </regnodes>
+  <regnodes realName="edge_attr_in_read_reg_1569">
+    <nodeIds>262</nodeIds>
+  </regnodes>
+  <expressionNodes realName="layer_phi_fu_698">
+    <nodeIds>278</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="layer_1_fu_1552">
+    <nodeIds>279</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln441_fu_1558">
+    <nodeIds>280</nodeIds>
+  </expressionNodes>
+  <moduleNodes realName="grp_compute_node_embedding_fu_1341">
+    <nodeIds>275</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_global_mean_pooling_fu_706">
+    <nodeIds>288</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_global_graph_prediction_fu_1545">
+    <nodeIds>289</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_compute_CONV_layer_fu_912">
+    <nodeIds>285</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_load_graph_fu_1322">
+    <nodeIds>274</nodeIds>
+  </moduleNodes>
+  <ioNodes realName="task_read_read_fu_670">
+    <nodeIds>261</nodeIds>
+  </ioNodes>
+  <ioNodes realName="edge_list_in_read_read_fu_682">
+    <nodeIds>263</nodeIds>
+  </ioNodes>
+  <ioNodes realName="edge_attr_in_read_read_fu_676">
+    <nodeIds>262</nodeIds>
+  </ioNodes>
+  <ioNodes realName="node_feature_in_read_read_fu_688">
+    <nodeIds>264</nodeIds>
+  </ioNodes>
+  <memoryPorts dataString="edge_attr_0" portID="100">
+    <nodeIds>274</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_attr_1" portID="100">
+    <nodeIds>274</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_attr_2" portID="100">
+    <nodeIds>274</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="edge_list" portID="100">
+    <nodeIds>274</nodeIds>
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="graph_embedding_V" portID="100">
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="message_V" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_0" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_1" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_10" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_11" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_12" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_13" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_14" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_15" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_16" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_17" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_18" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_19" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_2" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_20" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_21" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_22" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_23" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_24" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_25" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_26" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_27" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_28" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_29" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_3" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_30" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_31" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_32" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_33" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_34" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_35" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_36" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_37" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_38" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_39" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_4" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_40" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_41" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_42" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_43" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_44" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_45" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_46" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_47" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_48" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_49" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_5" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_50" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_51" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_52" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_53" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_54" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_55" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_56" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_57" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_58" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_59" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_6" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_60" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_61" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_62" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_63" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_64" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_65" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_66" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_67" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_68" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_69" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_7" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_70" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_71" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_72" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_73" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_74" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_75" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_76" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_77" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_78" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_79" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_8" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_80" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_81" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_82" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_83" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_84" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_85" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_86" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_87" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_88" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_89" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_9" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_90" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_91" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_92" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_93" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_94" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_95" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_96" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_97" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_98" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="mlp_in_V_99" portID="100">
+    <nodeIds>285</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_0" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_1" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_10" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_11" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_12" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_13" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_14" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_15" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_16" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_17" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_18" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_19" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_2" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_20" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_21" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_22" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_23" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_24" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_25" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_26" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_27" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_28" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_29" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_3" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_30" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_31" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_32" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_33" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_34" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_35" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_36" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_37" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_38" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_39" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_4" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_40" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_41" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_42" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_43" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_44" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_45" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_46" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_47" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_48" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_49" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_5" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_50" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_51" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_52" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_53" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_54" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_55" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_56" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_57" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_58" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_59" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_6" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_60" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_61" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_62" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_63" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_64" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_65" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_66" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_67" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_68" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_69" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_7" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_70" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_71" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_72" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_73" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_74" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_75" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_76" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_77" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_78" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_79" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_8" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_80" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_81" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_82" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_83" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_84" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_85" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_86" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_87" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_88" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_89" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_9" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_90" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_91" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_92" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_93" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_94" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_95" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_96" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_97" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_98" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_embedding_V_99" portID="100">
+    <nodeIds>275</nodeIds>
+    <nodeIds>285</nodeIds>
+    <nodeIds>288</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="node_feature" portID="100">
+    <nodeIds>274</nodeIds>
+  </memoryPorts>
+  <ioPorts name="edge_attr_in">
+    <contents name="read">
+      <nodeIds>262</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="edge_list_in">
+    <contents name="read">
+      <nodeIds>263</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="eps_fixed"/>
+  <ioPorts name="gnn_edge_embedding_fixed"/>
+  <ioPorts name="gnn_node_embedding_fixed"/>
+  <ioPorts name="gnn_node_mlp_1_bias_fixed"/>
+  <ioPorts name="gnn_node_mlp_1_weights_fixed"/>
+  <ioPorts name="gnn_node_mlp_2_bias_fixed"/>
+  <ioPorts name="gnn_node_mlp_2_weights_fixed"/>
+  <ioPorts name="graph_attr"/>
+  <ioPorts name="graph_pred_linear_bias_fixed"/>
+  <ioPorts name="graph_pred_linear_weight_fixed"/>
+  <ioPorts name="mem">
+    <contents name="call">
+      <nodeIds>274</nodeIds>
+      <nodeIds>289</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="node_feature_in">
+    <contents name="read">
+      <nodeIds>264</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="task_r">
+    <contents name="read">
+      <nodeIds>261</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="261" stage="1" latency="1"/>
+      <operations id="262" stage="1" latency="1"/>
+      <operations id="263" stage="1" latency="1"/>
+      <operations id="264" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="274" stage="2" latency="2"/>
+      <operations id="275" stage="2" latency="2"/>
+    </states>
+    <states id="3">
+      <operations id="229" stage="1" latency="1"/>
+      <operations id="230" stage="1" latency="1"/>
+      <operations id="231" stage="1" latency="1"/>
+      <operations id="232" stage="1" latency="1"/>
+      <operations id="233" stage="1" latency="1"/>
+      <operations id="234" stage="1" latency="1"/>
+      <operations id="235" stage="1" latency="1"/>
+      <operations id="236" stage="1" latency="1"/>
+      <operations id="237" stage="1" latency="1"/>
+      <operations id="238" stage="1" latency="1"/>
+      <operations id="239" stage="1" latency="1"/>
+      <operations id="240" stage="1" latency="1"/>
+      <operations id="241" stage="1" latency="1"/>
+      <operations id="242" stage="1" latency="1"/>
+      <operations id="243" stage="1" latency="1"/>
+      <operations id="244" stage="1" latency="1"/>
+      <operations id="245" stage="1" latency="1"/>
+      <operations id="246" stage="1" latency="1"/>
+      <operations id="247" stage="1" latency="1"/>
+      <operations id="248" stage="1" latency="1"/>
+      <operations id="249" stage="1" latency="1"/>
+      <operations id="250" stage="1" latency="1"/>
+      <operations id="251" stage="1" latency="1"/>
+      <operations id="252" stage="1" latency="1"/>
+      <operations id="253" stage="1" latency="1"/>
+      <operations id="254" stage="1" latency="1"/>
+      <operations id="255" stage="1" latency="1"/>
+      <operations id="256" stage="1" latency="1"/>
+      <operations id="257" stage="1" latency="1"/>
+      <operations id="258" stage="1" latency="1"/>
+      <operations id="259" stage="1" latency="1"/>
+      <operations id="260" stage="1" latency="1"/>
+      <operations id="265" stage="1" latency="1"/>
+      <operations id="266" stage="1" latency="1"/>
+      <operations id="267" stage="1" latency="1"/>
+      <operations id="268" stage="1" latency="1"/>
+      <operations id="269" stage="1" latency="1"/>
+      <operations id="270" stage="1" latency="1"/>
+      <operations id="271" stage="1" latency="1"/>
+      <operations id="272" stage="1" latency="1"/>
+      <operations id="273" stage="1" latency="1"/>
+      <operations id="274" stage="1" latency="2"/>
+      <operations id="275" stage="1" latency="2"/>
+      <operations id="276" stage="1" latency="1"/>
+    </states>
+    <states id="4">
+      <operations id="278" stage="1" latency="1"/>
+      <operations id="279" stage="1" latency="1"/>
+      <operations id="280" stage="1" latency="1"/>
+      <operations id="281" stage="1" latency="1"/>
+      <operations id="282" stage="1" latency="1"/>
+      <operations id="285" stage="2" latency="2"/>
+    </states>
+    <states id="5">
+      <operations id="284" stage="1" latency="1"/>
+      <operations id="285" stage="1" latency="2"/>
+      <operations id="286" stage="1" latency="1"/>
+    </states>
+    <states id="6">
+      <operations id="288" stage="2" latency="2"/>
+      <operations id="289" stage="2" latency="2"/>
+    </states>
+    <states id="7">
+      <operations id="288" stage="1" latency="2"/>
+      <operations id="289" stage="1" latency="2"/>
+      <operations id="290" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="GIN_compute_one_graph" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="45959" mMaxLatency="45959">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="1904" mMaxLatency="1904">
+      <basicBlocks>277</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="VITIS_LOOP_441_2" mII="-1" mDepth="-1" mMinTripCount="5" mMaxTripCount="5" mMinLatency="43940" mMaxLatency="43940" mType="1">
+      <basicBlocks>283</basicBlocks>
+      <basicBlocks>287</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="113" mMaxLatency="113">
+      <basicBlocks>291</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

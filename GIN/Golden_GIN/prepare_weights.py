@@ -69,7 +69,7 @@ print(auc)
 ########### Collect all the golden outputs from Pytorch ###########
 graph_id = 1
 all_result = {}
-f_txt = open('golden_output_dim100.txt', 'w+')
+f_txt = open('Pytorch_output_dim100.txt', 'w+')
 for yt, yp in zip(ytrue, ypred):
     #print(yt[0], yp[0])
     key = 'g' + str(graph_id)

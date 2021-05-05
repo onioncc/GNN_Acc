@@ -1,0 +1,495 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2020.2 (64-bit)
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-10] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 205.892 MB.
+INFO: [HLS 200-10] Analyzing design file 'main.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'GIN_compute.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 18.03 seconds. CPU system time: 1.55 seconds. Elapsed time: 23.68 seconds; current allocated memory: 208.012 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-178] Inlining function 'get_nd_emb_addr(int)' into 'compute_node_embedding(int, int*)' (GIN_compute.cpp:193:0)
+INFO: [HLS 214-178] Inlining function 'get_ed_emb_addr(int, int)' into 'compute_edge_embedding_and_message_passing(int, int, int (*) [3], int)' (GIN_compute.cpp:147:0)
+INFO: [HLS 214-178] Inlining function 'MLP_one_node_one_dim(int, int, ap_fixed<28, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<28, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], int)' into 'MLP(ap_fixed<28, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<28, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<28, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], int, int)' (GIN_compute.cpp:71:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+WARNING: [HLS 214-205] The INTERFACE pragma must have a max_widen_bitwidth setting that is both a power of 2 and in the range [0, 1024]. The current value of '0' will be ignored, in 'GIN_compute_one_graph' (GIN_compute.cpp:381:0)
+INFO: [HLS 214-115] Multiple burst reads of length 171 and bit width 32 in loop 'VITIS_LOOP_318_1'(GIN_compute.cpp:318:20) has been inferred on port 'mem' (GIN_compute.cpp:318:20)
+INFO: [HLS 214-115] Multiple burst reads of length 120 and bit width 32 in loop 'VITIS_LOOP_322_2'(GIN_compute.cpp:322:23) has been inferred on port 'mem' (GIN_compute.cpp:322:23)
+INFO: [HLS 214-115] Multiple burst reads of length 80 and bit width 32 in loop 'VITIS_LOOP_328_4'(GIN_compute.cpp:328:23) has been inferred on port 'mem' (GIN_compute.cpp:328:23)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 6.05 seconds. CPU system time: 0.67 seconds. Elapsed time: 7.07 seconds; current allocated memory: 209.694 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 209.697 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.27 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.35 seconds; current allocated memory: 221.724 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.48 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.52 seconds; current allocated memory: 237.852 MB.
+INFO: [XFORM 203-510] Pipelining loop 'Loop-2' in function 'compute_edge_embedding_and_message_passing' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_78_2' (GIN_compute.cpp:78) in function 'MLP' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_98_4' (GIN_compute.cpp:98) in function 'MLP' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_199_2' (GIN_compute.cpp:199) in function 'compute_node_embedding' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_185_1' (GIN_compute.cpp:184) in function 'compute_node_embedding' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_308_2' (GIN_compute.cpp:308) in function 'global_graph_prediction' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_285_1' (GIN_compute.cpp:285) in function 'global_mean_pooling' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_318_1' (GIN_compute.cpp:318) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_323_3' (GIN_compute.cpp:323) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_328_4' (GIN_compute.cpp:328) in function 'load_graph' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_285_1' (GIN_compute.cpp:285) in function 'global_mean_pooling' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_162_2' (GIN_compute.cpp:162) in function 'compute_edge_embedding_and_message_passing' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_103_6' (GIN_compute.cpp:103) in function 'MLP' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_109_7' (GIN_compute.cpp:109) in function 'MLP' for pipelining.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_287_2' (GIN_compute.cpp:286) in function 'global_mean_pooling' completely with a factor of 19.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_166_3' (GIN_compute.cpp:164) in function 'compute_edge_embedding_and_message_passing' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_138_1' (GIN_compute.cpp:137) in function 'compute_edge_embedding_and_message_passing' completely with a factor of 0.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_56_1' (GIN_compute.cpp:55) in function 'MLP' completely with a factor of 100.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_63_2' (GIN_compute.cpp:63) in function 'MLP' completely with a factor of 100.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_111_8' (GIN_compute.cpp:111) in function 'MLP' completely with a factor of 100.
+INFO: [XFORM 203-101] Partitioning array 'edge_embedding_table.V'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'edge_attr'  in dimension 2 completely.
+WARNING: [HLS 200-914] Completely partitioning array 'mlp_in.V'  accessed through non-constant indices on dimension 2 (GIN_compute.cpp:80:13), which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+INFO: [XFORM 203-101] Partitioning array 'mlp_in.V'  in dimension 2 completely.
+WARNING: [HLS 200-914] Completely partitioning array 'node_embedding.V'  accessed through non-constant indices on dimension 2, which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+INFO: [XFORM 203-101] Partitioning array 'node_embedding.V'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_1_weights.V'  in dimension 3 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_1_bias.V'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_2_weights.V'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'mlp_2_bias.V'  in dimension 2 completely.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'message.V' in function 'compute_edge_embedding_and_message_passing'.
+INFO: [XFORM 203-11] Balancing expressions in function 'global_mean_pooling' (GIN_compute.cpp:285:54)...18 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 11.83 seconds. CPU system time: 0.11 seconds. Elapsed time: 12.03 seconds; current allocated memory: 285.498 MB.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_322_2' (GIN_compute.cpp:322:31) in function 'load_graph'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_198_1' (GIN_compute.cpp:198:28) in function 'compute_node_embedding'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_158_1' (GIN_compute.cpp:158:31) in function 'compute_edge_embedding_and_message_passing'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_77_1' (GIN_compute.cpp:77:30) in function 'MLP'.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_97_3' (GIN_compute.cpp:97:30) in function 'MLP'.
+INFO: [HLS 200-472] Inferring partial write operation for 'node_feature' (GIN_compute.cpp:319:25)
+INFO: [HLS 200-472] Inferring partial write operation for 'edge_list' (GIN_compute.cpp:329:22)
+INFO: [HLS 200-472] Inferring partial write operation for 'edge_attr.0' (GIN_compute.cpp:324:29)
+INFO: [HLS 200-472] Inferring partial write operation for 'graph_embedding.V' (GIN_compute.cpp:290:22)
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' (GIN_compute.cpp:200:30)
+INFO: [HLS 200-472] Inferring partial write operation for 'message.V' 
+INFO: [HLS 200-472] Inferring partial write operation for 'message.V' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' (GIN_compute.cpp:113:41)
+INFO: [HLS 200-472] Inferring partial write operation for 'mlp_in.V.1' (GIN_compute.cpp:80:31)
+INFO: [HLS 200-472] Inferring partial write operation for 'mlp_in.V.0' (GIN_compute.cpp:79:29)
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' (GIN_compute.cpp:99:30)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 9.57 seconds. CPU system time: 0.1 seconds. Elapsed time: 9.71 seconds; current allocated memory: 406.352 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'GIN_compute_one_graph' ...
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM': 'node_feature' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM': 'edge_attr_0' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM': 'graph_embedding_V' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM' (GIN_compute.cpp:406): 'node_embedding_table_V' does not exist or is optimized away.
+WARNING: [SYN 201-303] Cannot apply memory assignment of 'RAM_2P_BRAM' (GIN_compute.cpp:407): 'edge_embedding_table_V_0' does not exist or is optimized away.
+WARNING: [SYN 201-107] Renaming port name 'GIN_compute_one_graph/task' to 'GIN_compute_one_graph/task_r' to avoid the conflict with HDL keywords or other object names.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'load_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_318_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_318_1'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_322_2_VITIS_LOOP_323_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_322_2_VITIS_LOOP_323_3'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_328_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_328_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.36 seconds. CPU system time: 0.04 seconds. Elapsed time: 1.44 seconds; current allocated memory: 411.322 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.25 seconds. CPU system time: 0 seconds. Elapsed time: 0.26 seconds; current allocated memory: 411.720 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_198_1_VITIS_LOOP_199_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'VITIS_LOOP_198_1_VITIS_LOOP_199_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.82 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.85 seconds; current allocated memory: 412.932 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.49 seconds. CPU system time: 0 seconds. Elapsed time: 0.5 seconds; current allocated memory: 414.700 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_edge_embedding_and_message_passing' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln703) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'Loop 1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'Loop 1'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_158_1_VITIS_LOOP_162_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 6, loop 'VITIS_LOOP_158_1_VITIS_LOOP_162_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.93 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.99 seconds; current allocated memory: 415.802 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.86 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.89 seconds; current allocated memory: 417.262 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'MLP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_77_1_VITIS_LOOP_78_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'VITIS_LOOP_77_1_VITIS_LOOP_78_2'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_97_3_VITIS_LOOP_98_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'VITIS_LOOP_97_3_VITIS_LOOP_98_4'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_109_7'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'VITIS_LOOP_109_7'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 4.27 seconds. CPU system time: 0.03 seconds. Elapsed time: 4.34 seconds; current allocated memory: 431.872 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 4.05 seconds. CPU system time: 0.01 seconds. Elapsed time: 4.13 seconds; current allocated memory: 440.578 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_CONV_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3.95 seconds. CPU system time: 0.04 seconds. Elapsed time: 4.06 seconds; current allocated memory: 440.826 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1.5 seconds. CPU system time: 0 seconds. Elapsed time: 1.52 seconds; current allocated memory: 441.466 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'global_mean_pooling' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_285_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'VITIS_LOOP_285_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 9.82 seconds. CPU system time: 0.04 seconds. Elapsed time: 9.87 seconds; current allocated memory: 449.662 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 12.73 seconds. CPU system time: 0.01 seconds. Elapsed time: 12.82 seconds; current allocated memory: 460.072 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'global_graph_prediction' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 11 seconds. CPU system time: 0.02 seconds. Elapsed time: 11.1 seconds; current allocated memory: 460.135 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.1 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.13 seconds; current allocated memory: 460.237 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'GIN_compute_one_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.08 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.1 seconds; current allocated memory: 460.415 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 4.22 seconds. CPU system time: 0.01 seconds. Elapsed time: 4.27 seconds; current allocated memory: 461.655 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'load_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'load_graph'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2.83 seconds. CPU system time: 0.01 seconds. Elapsed time: 2.87 seconds; current allocated memory: 462.545 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'compute_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'compute_node_embedding'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.88 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.91 seconds; current allocated memory: 465.800 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'compute_edge_embedding_and_message_passing' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_15s_8ns_7ns_15_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_1007_28_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'compute_edge_embedding_and_message_passing'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1.09 seconds. CPU system time: 0.01 seconds. Elapsed time: 1.18 seconds; current allocated memory: 473.681 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'MLP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mul_5ns_8ns_12_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_1287_28_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'MLP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 3.43 seconds. CPU system time: 0.04 seconds. Elapsed time: 3.53 seconds; current allocated memory: 487.849 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'compute_CONV_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'compute_CONV_layer'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 9.19 seconds. CPU system time: 0.07 seconds. Elapsed time: 9.36 seconds; current allocated memory: 520.110 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'global_mean_pooling' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-104] Estimated max fanout for 'global_mean_pooling' is 7200, found 8 HDL expressions with this fanout: (1'b1 == ap_CS_fsm_state3), (1'b1 == ap_CS_fsm_state4), (1'b1 == ap_CS_fsm_state5), (1'b1 == ap_CS_fsm_state6), (1'b1 == ap_CS_fsm_state7), (1'b1 == ap_CS_fsm_state8), (1'b1 == ap_CS_fsm_state9), (1'b1 == ap_CS_fsm_state10)
+INFO: [RTGEN 206-100] Generating core module 'mul_28s_30ns_57_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_1007_28_1_1': 19 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'global_mean_pooling'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1.88 seconds. CPU system time: 0.03 seconds. Elapsed time: 1.95 seconds; current allocated memory: 535.541 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'global_graph_prediction' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'global_graph_prediction'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 11.33 seconds. CPU system time: 0.14 seconds. Elapsed time: 11.61 seconds; current allocated memory: 579.527 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'GIN_compute_one_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/mem' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/node_feature_in' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/edge_list_in' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/edge_attr_in' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/graph_attr' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/task_r' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/gnn_node_mlp_1_weights_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/gnn_node_mlp_1_bias_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/gnn_node_mlp_2_weights_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/gnn_node_mlp_2_bias_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/gnn_node_embedding_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/gnn_edge_embedding_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/graph_pred_linear_weight_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/graph_pred_linear_bias_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GIN_compute_one_graph/eps_fixed' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'GIN_compute_one_graph' to 's_axilite & ap_ctrl_hs'.
+WARNING: [RTGEN 206-101] Global array 'node_feature' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'edge_list' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'edge_attr_0' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'edge_attr_1' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'edge_attr_2' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_0' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_1' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_2' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_3' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_4' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_5' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_6' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_7' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_8' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_9' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_10' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_11' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_12' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_13' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_14' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_15' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_16' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_17' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_18' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_19' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_20' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_21' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_22' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_23' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_24' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_25' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_26' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_27' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_28' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_29' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_30' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_31' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_32' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_33' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_34' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_35' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_36' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_37' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_38' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_39' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_40' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_41' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_42' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_43' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_44' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_45' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_46' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_47' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_48' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_49' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_50' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_51' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_52' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_53' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_54' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_55' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_56' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_57' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_58' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_59' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_60' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_61' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_62' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_63' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_64' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_65' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_66' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_67' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_68' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_69' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_70' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_71' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_72' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_73' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_74' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_75' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_76' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_77' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_78' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_79' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_80' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_81' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_82' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_83' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_84' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_85' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_86' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_87' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_88' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_89' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_90' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_91' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_92' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_93' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_94' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_95' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_96' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_97' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_98' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_99' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'message_V' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_1' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_3' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_5' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_7' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_9' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_11' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_13' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_15' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_17' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_19' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_21' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_23' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_25' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_27' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_29' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_31' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_33' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_35' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_37' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_39' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_41' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_43' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_45' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_47' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_49' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_51' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_53' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_55' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_57' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_59' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_61' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_63' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_65' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_67' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_69' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_71' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_73' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_75' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_77' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_79' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_81' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_83' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_85' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_87' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_89' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_91' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_93' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_95' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_97' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_99' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_0' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_2' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_4' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_6' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_8' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_10' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_12' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_14' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_16' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_18' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_20' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_22' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_24' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_26' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_28' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_30' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_32' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_34' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_36' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_38' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_40' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_42' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_44' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_46' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_48' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_50' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_52' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_54' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_56' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_58' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_60' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_62' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_64' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_66' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_68' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_70' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_72' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_74' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_76' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_78' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_80' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_82' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_84' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_86' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_88' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_90' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_92' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_94' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_96' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'mlp_in_V_98' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'graph_embedding_V' will not be exposed as RTL port.
+INFO: [RTGEN 206-100] Bundling port 'node_feature_in', 'edge_list_in', 'edge_attr_in', 'graph_attr', 'task_r', 'gnn_node_mlp_1_weights_fixed', 'gnn_node_mlp_1_bias_fixed', 'gnn_node_mlp_2_weights_fixed', 'gnn_node_mlp_2_bias_fixed', 'gnn_node_embedding_fixed', 'gnn_edge_embedding_fixed', 'graph_pred_linear_weight_fixed', 'graph_pred_linear_bias_fixed', 'eps_fixed' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'GIN_compute_one_graph'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2.48 seconds. CPU system time: 0.12 seconds. Elapsed time: 3.07 seconds; current allocated memory: 591.390 MB.
+INFO: [RTMG 210-278] Implementing memory 'GIN_compute_one_graph_load_graph_node_feature_ram (RAM_2P_BRAM)' using block RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GIN_compute_one_graph_load_graph_edge_attr_0_ram (RAM_2P_BRAM)' using block RAMs with power-on initialization.
+INFO: [RTMG 210-282] Generating pipelined core: 'GIN_compute_one_graph_mul_5ns_8ns_12_1_1_Multiplier_0'
+INFO: [RTMG 210-278] Implementing memory 'GIN_compute_one_graph_MLP_mlp_in_V_1_ram (RAM_2P_BRAM)' using block RAMs with power-on initialization.
+INFO: [RTMG 210-282] Generating pipelined core: 'GIN_compute_one_graph_mul_28s_30ns_57_1_1_Multiplier_1'
+INFO: [RTMG 210-278] Implementing memory 'GIN_compute_one_graph_global_mean_pooling_graph_embedding_V_ram (RAM_2P_BRAM)' using block RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GIN_compute_one_graph_edge_list_ram (RAM_2P_BRAM)' using block RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GIN_compute_one_graph_node_embedding_V_0_ram (RAM_2P_BRAM)' using block RAMs with power-on initialization.
