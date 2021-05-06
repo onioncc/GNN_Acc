@@ -4,4 +4,4 @@
 
 - Saves all the five-layer weights on-board.
 
-- Built a 16-depth node buffer but probably not the best choice
+- Trying to parallelize the MLP with message passing.. improved the latency from 0.91ms to 0.82ms, not sure how much contribution it has.

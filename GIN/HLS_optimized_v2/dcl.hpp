@@ -1,12 +1,12 @@
 #ifndef __DCL_H__
 #define __DCL_H__
 
+#include <cstddef>
+#include "/tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-
-#include <cstddef>
 #include <ap_fixed.h>
 #include "hls_stream.h"
 #include <iostream>
@@ -22,11 +22,10 @@ typedef ap_fixed<32, 10> WT_TYPE;
 
 
 /////////// Model Specific Configurations /////////////
+#define MAX_EDGE 500
+#define MAX_NODE 200
+#define MAX_DEGREE 20
 
-#define NODE_BATCH 1
-
-#define MAX_EDGE 5000
-#define MAX_NODE 1000
 #define LAYER_NUM 5
 #define EMB_DIM 100
 #define NUM_TASK 1
@@ -36,6 +35,7 @@ typedef ap_fixed<32, 10> WT_TYPE;
 #define MLP_2_OUT 100
 #define MLP_IN_MAX 200
 #define MLP_OUT_MAX 200
+
 #define E_EPS 0.00001
 
 #define ND_FEATURE 9
@@ -57,6 +57,17 @@ extern float gnn_edge_embedding_table[EG_FEATURE_TOTAL][EMB_DIM];
 extern float graph_pred_linear_weight[NUM_TASK][MLP_2_OUT];
 extern float graph_pred_linear_bias[NUM_TASK];
 extern float eps[LAYER_NUM];
+
+
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> gnn_node_mlp_1_weights_fixed(LAYER_NUM * MLP_1_OUT * MLP_1_IN);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> gnn_node_mlp_1_bias_fixed(LAYER_NUM * MLP_1_OUT);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> gnn_node_mlp_2_weights_fixed(LAYER_NUM * MLP_2_OUT * MLP_2_IN);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> gnn_node_mlp_2_bias_fixed(LAYER_NUM * MLP_2_OUT);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> gnn_node_embedding_table_fixed(ND_FEATURE_TOTAL * EMB_DIM);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> gnn_edge_embedding_table_fixed(EG_FEATURE_TOTAL * EMB_DIM);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> graph_pred_linear_weight_fixed(NUM_TASK * MLP_2_OUT);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> graph_pred_linear_bias_fixed(NUM_TASK);
+// extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> eps_fixed(LAYER_NUM);
 
 void load_weights();
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
