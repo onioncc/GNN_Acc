@@ -7,20 +7,18 @@ float message[MAX_NODE][EMB_DIM];
 float mlp_in[MAX_NODE][MLP_IN_MAX];
 float mlp_out[MAX_NODE][MLP_OUT_MAX];
 
+float adj_matrix[MAX_NODE][MAX_NODE];
+float normalized_adj_matrix[MAX_NODE][MAX_NODE];
+
 float h_0[MAX_NODE][EMB_DIM];
-float e_0[MAX_EDGE][EMB_DIM];
 
 float h_1[MAX_NODE][EMB_DIM];
-float e_1[MAX_EDGE][EMB_DIM];
 
 float h_2[MAX_NODE][EMB_DIM];
-float e_2[MAX_EDGE][EMB_DIM];
 
 float h_3[MAX_NODE][EMB_DIM];
-float e_3[MAX_EDGE][EMB_DIM];
 
 float h_4[MAX_NODE][EMB_DIM];
-float e_4[MAX_EDGE][EMB_DIM];
 
 float h_5[MAX_NODE][EMB_DIM];
 
@@ -34,7 +32,8 @@ void MLP(float mlp_in[MAX_NODE][MLP_IN_MAX], float mlp_out[MAX_NODE][MLP_OUT_MAX
          //float (*bn_weight), float (*bn_bias), float (*bn_running_mean), float (*bn_running_var), 
          )
 {
-    /// MLP input by aggregating messages and self features
+    // MLP input by aggregating messages and self features. Dot product between normalized adj matrix, previous node
+    // features, and MLP layer weights.
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim = 0; dim < EMB_DIM; dim++) {
             // put GCN aggregation here.
@@ -91,4 +90,32 @@ void MLP(float mlp_in[MAX_NODE][MLP_IN_MAX], float mlp_out[MAX_NODE][MLP_OUT_MAX
         printf("...\n");
     }
 #endif
+}
+
+// this function takes edge list and normalizes edge list to A hat.
+// https://www.geeksforgeeks.org/c-program-to-implement-adjacency-matrix-of-a-given-graph/
+void edge_to_adj(int* edge_list,, float adj[MAX_NODE][MAX_NODE], int num_of_nodes, int num_of_edges) {
+    // implement
+}
+
+
+void adj_self_loops(float adj[MAX_NODE][MAX_NODE], int num_of_edges, int num_of_nodes) {
+    // implement
+}
+
+// activation function used from python implementation
+void relu(/* ... */) {
+    // implement
+}
+
+void GCN_compute_one_graph(int* node_feature, int* edge_list, int* graph_attr)
+{
+    int num_of_nodes = graph_attr[0];
+    int num_of_edges = graph_attr[1];
+
+    // get adj matrix for edge list
+    edge_to_adj(edge_list, adj_matrix, num_of_nodes, num_of_edges);
+
+
+
 }
