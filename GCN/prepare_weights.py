@@ -58,8 +58,8 @@ if __name__ ==  '__main__':
 
     ########### Load the pre-trained GIN model ###########
     print('Load the pretrained GNN model')
-    model = torch.load('gin_ep1_dim100.pt')
-    """    # model = GNN(gnn_type = 'gin', num_tasks = 1, num_layer = 5, emb_dim = 300, drop_ratio = 0.5, virtual_node = False).to(device)
+    model = torch.load('gcn_ep1_dim100.pt')
+    """
         print('Evaluating...')
         auc, ytrue, ypred = eval(model, device, test_loader, evaluator)
         print('AUC of the original model:')
@@ -84,7 +84,7 @@ if __name__ ==  '__main__':
 
     print('Removing the BatchNorm in the model')
 
-    model_noBN = GNN_noBN(gnn_type='gin', num_tasks=1, num_layer=5, emb_dim=100, drop_ratio=0.5, virtual_node=False).to(
+    model_noBN = GNN_noBN(gnn_type='gcn', num_tasks=1, num_layer=5, emb_dim=100, drop_ratio=0.5, virtual_node=False).to(
         device)
 
     model_noBN.training = False
@@ -92,3 +92,128 @@ if __name__ ==  '__main__':
     model.training = False
     bn_eps = 0.00001
     print(model_noBN.state_dict().keys())
+    print('\n\n')
+    print(model.state_dict().keys())
+
+    for n in model_noBN.state_dict().keys():
+        print(n)
+    print()
+
+    for n in model.state_dict().keys():
+        print(n)
+
+
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.0.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.0.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.1.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.1.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.2.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.2.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.3.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.3.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.4.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.4.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.5.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.5.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.6.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.6.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.7.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.7.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.atom_encoder.atom_embedding_list.8.weight'].copy_(
+        model.state_dict()['gnn_node.atom_encoder.atom_embedding_list.8.weight'])
+
+
+    model_noBN.state_dict()['gnn_node_noBN.convs.0.root_emb.weight'].copy_(
+        model.state_dict()['gnn_node.convs.0.root_emb.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.1.root_emb.weight'].copy_(
+        model.state_dict()['gnn_node.convs.1.root_emb.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.2.root_emb.weight'].copy_(
+        model.state_dict()['gnn_node.convs.2.root_emb.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.3.root_emb.weight'].copy_(
+        model.state_dict()['gnn_node.convs.3.root_emb.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.4.root_emb.weight'].copy_(
+        model.state_dict()['gnn_node.convs.4.root_emb.weight'])
+
+
+
+    model_noBN.state_dict()['gnn_node_noBN.convs.0.bond_encoder.bond_embedding_list.0.weight'].copy_(
+        model.state_dict()['gnn_node.convs.0.bond_encoder.bond_embedding_list.0.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.0.bond_encoder.bond_embedding_list.1.weight'].copy_(
+        model.state_dict()['gnn_node.convs.0.bond_encoder.bond_embedding_list.1.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.0.bond_encoder.bond_embedding_list.2.weight'].copy_(
+        model.state_dict()['gnn_node.convs.0.bond_encoder.bond_embedding_list.2.weight'])
+
+
+    model_noBN.state_dict()['gnn_node_noBN.convs.1.bond_encoder.bond_embedding_list.0.weight'].copy_(
+        model.state_dict()['gnn_node.convs.1.bond_encoder.bond_embedding_list.0.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.1.bond_encoder.bond_embedding_list.1.weight'].copy_(
+        model.state_dict()['gnn_node.convs.1.bond_encoder.bond_embedding_list.1.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.1.bond_encoder.bond_embedding_list.2.weight'].copy_(
+        model.state_dict()['gnn_node.convs.1.bond_encoder.bond_embedding_list.2.weight'])
+
+    model_noBN.state_dict()['gnn_node_noBN.convs.2.bond_encoder.bond_embedding_list.0.weight'].copy_(
+        model.state_dict()['gnn_node.convs.2.bond_encoder.bond_embedding_list.0.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.2.bond_encoder.bond_embedding_list.1.weight'].copy_(
+        model.state_dict()['gnn_node.convs.2.bond_encoder.bond_embedding_list.1.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.2.bond_encoder.bond_embedding_list.2.weight'].copy_(
+        model.state_dict()['gnn_node.convs.2.bond_encoder.bond_embedding_list.2.weight'])
+
+    model_noBN.state_dict()['gnn_node_noBN.convs.3.bond_encoder.bond_embedding_list.0.weight'].copy_(
+        model.state_dict()['gnn_node.convs.3.bond_encoder.bond_embedding_list.0.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.3.bond_encoder.bond_embedding_list.1.weight'].copy_(
+        model.state_dict()['gnn_node.convs.3.bond_encoder.bond_embedding_list.1.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.3.bond_encoder.bond_embedding_list.2.weight'].copy_(
+        model.state_dict()['gnn_node.convs.3.bond_encoder.bond_embedding_list.2.weight'])
+
+    model_noBN.state_dict()['gnn_node_noBN.convs.4.bond_encoder.bond_embedding_list.0.weight'].copy_(
+        model.state_dict()['gnn_node.convs.4.bond_encoder.bond_embedding_list.0.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.4.bond_encoder.bond_embedding_list.1.weight'].copy_(
+        model.state_dict()['gnn_node.convs.4.bond_encoder.bond_embedding_list.1.weight'])
+    model_noBN.state_dict()['gnn_node_noBN.convs.4.bond_encoder.bond_embedding_list.2.weight'].copy_(
+        model.state_dict()['gnn_node.convs.4.bond_encoder.bond_embedding_list.2.weight'])
+
+    model_noBN.state_dict()['graph_pred_linear.weight'].copy_(model.state_dict()['graph_pred_linear.weight'])
+    model_noBN.state_dict()['graph_pred_linear.bias'].copy_(model.state_dict()['graph_pred_linear.bias'])
+
+    for n in range(5):
+        conv_weight = model.state_dict()['gnn_node.convs.{}.linear.weight'.format(n)]
+        conv_bias = model.state_dict()['gnn_node.convs.{}.linear.bias'.format(n)]
+        running_mean = model.state_dict()['gnn_node.batch_norms.{}.running_mean'.format(n)]
+        running_var = model.state_dict()['gnn_node.batch_norms.{}.running_var'.format(n)]
+        bn_weight = model.state_dict()['gnn_node.batch_norms.{}.weight'.format(n)]
+        bn_bias = model.state_dict()['gnn_node.batch_norms.{}.bias'.format(n)]
+
+        conv_weight = conv_weight.t()
+        conv_weight = (torch.div(conv_weight, torch.sqrt(running_var + bn_eps)) * bn_weight).t()
+        conv_bias = torch.div((conv_bias - running_mean), torch.sqrt(running_var + bn_eps)) * bn_weight + bn_bias
+
+        model_noBN.state_dict()['gnn_node_noBN.convs.{}.linear.weight'.format(n)].copy_(conv_weight)
+        model_noBN.state_dict()['gnn_node_noBN.convs.{}.linear.bias'.format(n)].copy_(conv_bias)
+
+    ############# Collect all the weights without BatchNorm for golden C ##############
+
+    print("collecting weights for the golden C")
+    weights_dict = {}
+    weights_data = []
+    offset = 0
+    for key in model_noBN.state_dict():
+        weights_dict[key] = {}
+        weights_dict[key]['shape'] = list(model_noBN.state_dict()[key].shape)
+        weights_dict[key]['key'] = key
+        weights_dict[key]['offset'] = offset
+        data = list(model_noBN.state_dict()[key].view(-1).numpy())
+        data_length = len(data)
+        weights_dict[key]['length'] = data_length
+        offset += data_length
+        weights_data += data
+
+    f = open('gcn_ep1_noBN_dim100.weights.dict.json', 'w')
+    json.dump(weights_dict, f)
+    f.close()
+
+    f = open('gcn_ep1_noBN_dim100.weights.all.bin', 'wb')
+    packed = struct.pack('f' * len(weights_data), *weights_data)
+    f.write(packed)
+    f.close()
+
+
