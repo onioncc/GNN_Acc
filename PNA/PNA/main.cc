@@ -25,25 +25,26 @@ float mlp_2_bias[20];
 float mlp_4_weight[1][20];
 float mlp_4_bias[1];
 // global weights
-
-extern float task[NUM_TASK];
+extern float final;
 
 int main()
 {
-    printf("\n******* This is the golden C file for GIN model *******\n");
+    printf("\n******* This is the golden C file for PNA model *******\n");
 
     load_weights();
 
     float all_results[4113];
-    FILE* c_output = fopen("Golden_C_output_txt", "w+");
-    for(int g = 1; g <= 10; g++ ) {
+    FILE* c_output = fopen("Golden_C_output.txt", "w+");
+    for(int g = 1; g <= 4113; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
         int num_of_edges;
 
-        sprintf(info_file, "__/__/__/graph_info/g%d_info_txt", g);
-        sprintf(graph_name, "__/__/__/graph_bin/g%d", g);
+
+        sprintf(info_file, "../../graphs/graph_info/g%d_info.txt", g);
+        sprintf(graph_name, "../../graphs/graph_bin/g%d", g);
+
 
         FILE* f_info = fopen(info_file, "r");
         fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
@@ -63,18 +64,18 @@ int main()
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
         PNA_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr);
-        
-        all_results[g-1] = task[0];
-
+        all_results[g - 1] = final;
         free(node_feature);
         free(edge_list);
         free(edge_attr);
     }
 
-    for(int g = 1; g <= 10; g++) {
-        fprintf(c_output, "g%d: %_8f\n", g, all_results[g-1]);
+    for(int g = 1; g <= 4113; g++) {
+        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
     }
     fclose(c_output);
+
+    
     
     return 0;
 }

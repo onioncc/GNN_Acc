@@ -27,6 +27,7 @@ class Net(torch.nn.Module):
 
         self.node_emb = AtomEncoder(emb_dim=80)
 
+
         aggregators = ['mean', 'min', 'max', 'std']
         scalers = ['identity', 'amplification', 'attenuation']
 
@@ -41,6 +42,8 @@ class Net(torch.nn.Module):
 
     def forward(self, x, edge_index, edge_attr, batch):
         x = self.node_emb(x)
+        ###print(self.state_dict())
+
         for conv, batch_norm in zip(self.convs, self.batch_norms):
             k = batch_norm(conv(x, edge_index, edge_attr))
             h = F.relu(k)
@@ -70,6 +73,10 @@ class Net_noBN(torch.nn.Module):
 
     def forward(self, x, edge_index, edge_attr, batch):
         x = self.node_emb(x)
+        ###it's ok above
+        ###print(self.state_dict())
+
+
         for conv in self.convs:
             k = conv(x, edge_index, edge_attr)
             h = F.relu(k)
@@ -109,6 +116,7 @@ if __name__ == '__main__':
     for data in dataset[split_idx['train']]:
         d = degree(data.edge_index[1], num_nodes=data.num_nodes, dtype=torch.long)
         deg += torch.bincount(d, minlength=deg.numel())
+
     #
     # ########### Load the pre-trained GIN model ###########
     print('Load the pretrained GNN model')
@@ -162,6 +170,7 @@ if __name__ == '__main__':
     model_noBN.state_dict()['node_emb.atom_embedding_list.6.weight'].copy_(model.state_dict()['node_emb.atom_embedding_list.6.weight'])
     model_noBN.state_dict()['node_emb.atom_embedding_list.7.weight'].copy_(model.state_dict()['node_emb.atom_embedding_list.7.weight'])
     model_noBN.state_dict()['node_emb.atom_embedding_list.8.weight'].copy_(model.state_dict()['node_emb.atom_embedding_list.8.weight'])
+    print(model_noBN.state_dict()['node_emb.atom_embedding_list.0.weight'])
 
 
     conv_weight = model.state_dict()['convs.0.post_nn.0.weight']
@@ -261,6 +270,7 @@ if __name__ == '__main__':
         weights_dict[key]['offset'] = offset
         data = list(model_noBN.state_dict()[key].view(-1).numpy())
         data_length = len(data)
+        print(data)
         weights_dict[key]['length'] = data_length
         offset += data_length
         weights_data += data

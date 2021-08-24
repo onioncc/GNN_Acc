@@ -7,11 +7,13 @@ from typing import Optional
 # For an example see https://github.com/rusty1s/pytorch_geometric/blob/master/examples/pna.py
 
 def aggregate_sum(src: Tensor, index: Tensor, dim_size: Optional[int]):
-    return scatter(src, index, 0, None, dim_size, reduce='sum')
+    ags = scatter(src, index, 0, None, dim_size, reduce='sum')
+    return ags
 
 
 def aggregate_mean(src: Tensor, index: Tensor, dim_size: Optional[int]):
-    return scatter(src, index, 0, None, dim_size, reduce='mean')
+    ags = scatter(src, index, 0, None, dim_size, reduce='mean')
+    return ags
 
 def aggregate_min(src: Tensor, index: Tensor, dim_size: Optional[int]):
     return scatter(src, index, 0, None, dim_size, reduce='min')

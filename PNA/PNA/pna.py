@@ -228,6 +228,7 @@ class PNAConvSimple(MessagePassing):
 
     def forward(self, x: Tensor, edge_index: Adj, edge_attr: OptTensor = None) -> Tensor:
         # propagate_type: (x: Tensor)
+        ### graph1: 19 nodes with 80 dims and 40 edges
         out = self.propagate(edge_index, x=x, size=None)
         return self.post_nn(out)
 
@@ -239,10 +240,14 @@ class PNAConvSimple(MessagePassing):
 
         outs = [aggr(inputs, index, dim_size) for aggr in self.aggregators]
         out = torch.cat(outs, dim=-1)
+        ### outs: 4x19(node_num)x80(dim) out: 19x320
 
         deg = degree(index, dim_size, dtype=inputs.dtype).view(-1, 1)
         outs = [scaler(out, deg, self.avg_deg) for scaler in self.scalers]
-        return torch.cat(outs, dim=-1)
+        ### outs: 3x19x320
+        fin = torch.cat(outs, dim=-1)
+        ### fin: 19x960
+        return fin
 
     def __repr__(self):
         return (f'{self.__class__.__name__}({self.in_channels}, '

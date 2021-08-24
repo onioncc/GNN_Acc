@@ -5,12 +5,11 @@
 
 void load_weights()
 {
-	printf("Loading weights for GIN ...\n");
+	printf("Loading weights for PNA ...\n");
 
     FILE* f;
-    f = fopen("gin_ep1_noBN_dim100.weights.all.bin", "r");
-		
-
+    f = fopen("pna_ep1_noBN_dim80.weights.all.bin", "rb");
+	//error begin from node 0 dim 22
 	fseek(f, 0*sizeof(float), SEEK_SET);
 	fread(node_emb_atom_embedding_list_0_weight, sizeof(float), 9520, f);
 
@@ -67,24 +66,24 @@ void load_weights()
 
 
     fseek(f, 321360*sizeof(float), SEEK_SET);
-	fread(mlp_0_weight, sizeof(float), 320, f);
+	fread(mlp_0_weight, sizeof(float), 3200, f);
 
-    fseek(f, 321680*sizeof(float), SEEK_SET);
+    fseek(f, 324560*sizeof(float), SEEK_SET);
 	fread(mlp_0_bias, sizeof(float), 40, f);
 
-    fseek(f, 321720*sizeof(float), SEEK_SET);
+    fseek(f, 324600*sizeof(float), SEEK_SET);
 	fread(mlp_2_weight, sizeof(float), 800, f);
 
     
-    fseek(f, 322520*sizeof(float), SEEK_SET);
+    fseek(f, 325400*sizeof(float), SEEK_SET);
 	fread(mlp_2_bias, sizeof(float), 20, f);
 
     
-    fseek(f, 322540*sizeof(float), SEEK_SET);
+    fseek(f, 325420*sizeof(float), SEEK_SET);
 	fread(mlp_4_weight, sizeof(float), 20, f);
 
     
-    fseek(f, 322560*sizeof(float), SEEK_SET);
+    fseek(f, 325440*sizeof(float), SEEK_SET);
 	fread(mlp_4_bias, sizeof(float), 1, f);
 
 	fclose(f);
@@ -105,17 +104,20 @@ void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* e
 	sprintf(f_edge_attr, "%s_edge_attr.bin", graph_name);
 	
 	
-    f = fopen(f_node_feature, "r");
+    f = fopen(f_node_feature, "rb");
 	fread(node_feature, sizeof(int), num_of_nodes * ND_FEATURE, f);
     fclose(f);
 
-    f = fopen(f_edge_list, "r");
+
+    f = fopen(f_edge_list, "rb");
     fread(edge_list, sizeof(int), 2 * num_of_edges, f);
     fclose(f);
 
-    f = fopen(f_edge_attr, "r");
+
+    f = fopen(f_edge_attr, "rb");
     fread(edge_attr, sizeof(int), EDGE_ATTR * num_of_edges, f);
     fclose(f);
+
 
 #ifdef _PRINT_
 		printf("Node features:\n");

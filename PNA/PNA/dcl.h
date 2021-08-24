@@ -6,23 +6,14 @@
 #include <string.h>
 #include <math.h>
 
-#define MAX_EDGE 300
-#define MAX_NODE 100
+#define MAX_EDGE 500
+#define MAX_NODE 500
 #define ND_FEATURE 9
 #define EDGE_ATTR 3
 #define EMB_DIM 80
 #define NUM_TASK 1
-
-#define MLP_0_IN 100
-#define MLP_0_OUT 200
-#define MLP_3_IN 200
-#define MLP_3_OUT 100
-#define MLP_IN_MAX 200
-#define MLP_OUT_MAX 200
-#define MLP_BN_DIM 200
-#define CONV_BN_DIM 200
-#define E_EPS 0.00001
-
+#define L_IN 960
+#define L_OUT 80
 
 extern float node_emb_atom_embedding_list_0_weight[119][80];
 extern float node_emb_atom_embedding_list_1_weight[4][80];
@@ -49,7 +40,7 @@ extern float mlp_4_weight[1][20];
 extern float mlp_4_bias[1];
 
 
-void GIN_compute_one_graph();
+void PNA_compute_one_graph();
 void load_weights();
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
 void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, int* graph_attr);
