@@ -1,6 +1,8 @@
 - Please find the models and graphs here:
 https://github.com/snap-stanford/ogb/tree/master/examples/graphproppred/mol
 
+- We're using ogbg-molhiv dataset so far.
+
 Currently I implemented the GIN; there are also other models (e.g., GCN).
 
 - The prepare_weight.py file is used to process the model and to organize the weights for FPGA accelerator.
