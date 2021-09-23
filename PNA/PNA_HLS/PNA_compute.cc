@@ -40,6 +40,8 @@ float avg_deg[2] = {
 
 void scatter_sum(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int index_i, int index_j)
 {
+	#pragma HLS inline off
+
     for (int i = 0; i < index_i; i++)
     {
         for (int j = 0; j < index_j; j++)
@@ -63,6 +65,8 @@ void scatter_sum(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int
 
 void aggr_mean(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
+	#pragma HLS inline off
+
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
 
     float count[MAX_NODE];
@@ -85,6 +89,7 @@ void aggr_mean(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int i
 
 void aggr_std(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int mean_index[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges)
 {
+#pragma HLS inline off
 
     memset(ssquare, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for (int i = 0; i < num_of_edges; i++)
@@ -108,6 +113,8 @@ void aggr_std(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int me
 
 void aggr_max(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
 {
+	#pragma HLS inline off
+
     for (int i = 0; i < dim_size; i++)
     {
         for (int j = 0; j < EMB_DIM; j++)
@@ -127,6 +134,8 @@ void aggr_max(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int in
 }
 void aggr_min(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
 {
+	#pragma HLS inline off
+
     for (int i = 0; i < dim_size; i++)
     {
         for (int j = 0; j < EMB_DIM; j++)
@@ -145,8 +154,10 @@ void aggr_min(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int in
     }
 }
 
-void scale(float **hout, float out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, int degree[MAX_NODE])
+void scale(float hout[4 * MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, int degree[MAX_NODE])
 {
+	#pragma HLS inline off
+
     for (int node = 0; node < num_of_nodes; node++)
     {
         float t = log(degree[node] + 1) / avg_deg[1];
@@ -170,8 +181,9 @@ void scale(float **hout, float out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, in
         }
     }
 }
-void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float **hout, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
+void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float hout[4 * MAX_NODE][EMB_DIM], int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
+#pragma HLS inline off
 
     memset(out_0, 0, MAX_NODE * EMB_DIM * sizeof(float));
     memset(out_1, 0, MAX_NODE * EMB_DIM * sizeof(float));
@@ -198,27 +210,32 @@ void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float
 
 // this function is problamatic because it uses "new" and "free"
 // needs to be chnaged to used fixed arrays declared ahead of time
+
+int index_buf[MAX_EDGE];
+int degree_buf[MAX_NODE];
+float aggrout[4 * MAX_NODE][EMB_DIM];
+
 void message_passing(float h[MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM], int *edge_list, int num_of_nodes, int num_of_edges)
 {
+	#pragma HLS inline off
+
     memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     memset(mean_index, 0, MAX_EDGE * EMB_DIM * sizeof(int));
-    int *index = new int[MAX_EDGE];
-    memset(index, 0, MAX_EDGE * sizeof(int));
+    memset(index_buf, 0, MAX_EDGE * sizeof(int));
 	
 	// this aggrout double pointer array is confusing to follow, maybe a fix to make it simpler
-    float **aggrout = new float *[4 * MAX_NODE];
-    for (int i = 0; i < 4 * MAX_NODE; i++)
-        aggrout[i] = new float[EMB_DIM];
+    // float **aggrout = new float *[4 * MAX_NODE];
+    // for (int i = 0; i < 4 * MAX_NODE; i++)
+    //     aggrout[i] = new float[EMB_DIM];
 
-    int *degree = new int[MAX_NODE];
-    memset(degree, 0, MAX_NODE * sizeof(int));
+    memset(degree_buf, 0, MAX_NODE * sizeof(int));
 
     for (int e = 0; e < num_of_edges; e++)
     {
         int u = edge_list[e * 2];     // source node id
         int v = edge_list[e * 2 + 1]; // target node id
-        index[e] = edge_list[e * 2 + 1];
-        degree[u] += 1;
+        index_buf[e] = edge_list[e * 2 + 1];
+        degree_buf[u] += 1;
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
             mean_index[e][dim] = edge_list[e * 2 + 1];
@@ -227,20 +244,19 @@ void message_passing(float h[MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DI
         };
     };
     //it's ok above
-    aggr(message, index, num_of_nodes, aggrout, num_of_edges, mean_index);
-    scale(aggrout, out, num_of_nodes, degree);
+    aggr(message, index_buf, num_of_nodes, aggrout, num_of_edges, mean_index);
+    scale(aggrout, out, num_of_nodes, degree_buf);
 
-    delete[] index;
-    delete[] degree;
+    // for (int i = 1; i < 3 * MAX_NODE; i++)
+    //     delete[] aggrout[i];
+    // delete[] aggrout;
 
-    for (int i = 1; i < 3 * MAX_NODE; i++)
-        delete[] aggrout[i];
-
-    delete[] aggrout;
 }
 
 void Linear_relu(float l_in[MAX_NODE][L_IN], float l_out[MAX_NODE][L_OUT], int num_of_nodes, float weight[80][960], float bias[80])
 {
+	#pragma HLS inline off
+
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
@@ -264,12 +280,14 @@ void Linear_relu(float l_in[MAX_NODE][L_IN], float l_out[MAX_NODE][L_OUT], int n
 
 void CONV_0(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
+	#pragma HLS inline off
     message_passing(h_0, m_0, edge_list, num_of_nodes, num_of_edges);
     Linear_relu(m_0, h_1, num_of_nodes, convs_0_post_nn_0_weight, convs_0_post_nn_0_bias);
 }
 
 void CONV_1(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
+	#pragma HLS inline off
     message_passing(h_1, m_1, edge_list, num_of_nodes, num_of_edges);
     Linear_relu(m_1, h_2, num_of_nodes, convs_1_post_nn_0_weight, convs_1_post_nn_0_bias);
     return;
@@ -277,17 +295,20 @@ void CONV_1(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 
 void CONV_2(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
+	#pragma HLS inline off
     message_passing(h_2, m_2, edge_list, num_of_nodes, num_of_edges);
     Linear_relu(m_2, h_3, num_of_nodes, convs_2_post_nn_0_weight, convs_2_post_nn_0_bias);
 }
 
 void CONV_3(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
+	#pragma HLS inline off
     message_passing(h_3, m_3, edge_list, num_of_nodes, num_of_edges);
     Linear_relu(m_3, h_4, num_of_nodes, convs_3_post_nn_0_weight, convs_3_post_nn_0_bias);
 }
 void GLOBAL_MEAN_POOL(float h[MAX_NODE][EMB_DIM], float f[EMB_DIM], int num_of_nodes)
 {
+	#pragma HLS inline off
     memset(f, 0, EMB_DIM * sizeof(float));
     for (int j = 0; j < EMB_DIM; j++)
     {
@@ -300,6 +321,7 @@ void GLOBAL_MEAN_POOL(float h[MAX_NODE][EMB_DIM], float f[EMB_DIM], int num_of_n
 
 void MLP(int num_of_nodes)
 {
+	#pragma HLS inline off
     float temp_0[40];
     float temp_1[20];
     for (int dim_out = 0; dim_out < 40; dim_out++)
@@ -331,6 +353,17 @@ void MLP(int num_of_nodes)
 
 void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, int* graph_attr)
 {
+	
+	
+#pragma HLS INTERFACE s_axilite port=return
+
+#pragma HLS INTERFACE m_axi depth=100000 port=node_feature offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=edge_list offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=edge_attr_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
+
+
+	
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     printf("Computing PNA ...\n");
