@@ -8,7 +8,7 @@ void load_weights()
 	printf("Loading weights for GAT ...\n");
 
     FILE* f;
-    f = fopen("gat_ep1_layer2.weights.all.bin", "r");
+    f = fopen("gat_ep1_layer5.weights.all.bin", "r");
 		
 	fseek(f, 0*sizeof(float), SEEK_SET);
 	fread(graph_pred_linear_weight, sizeof(float), 16, f);
@@ -23,29 +23,58 @@ void load_weights()
 	fread(gat_net_0_scoring_fn_source, sizeof(float), 64, f);
 
 	fseek(f, 145*sizeof(float), SEEK_SET);
-	fread(gat_net_0_bias, sizeof(float), 64, f);
-
-	fseek(f, 209*sizeof(float), SEEK_SET);
 	fread(gat_net_0_linear_proj_weight, sizeof(float), 576, f);
 
-	fseek(f, 785*sizeof(float), SEEK_SET);
+	fseek(f, 721*sizeof(float), SEEK_SET);
 	fread(gat_net_0_skip_proj_weight, sizeof(float), 576, f);
 
+	fseek(f, 1297*sizeof(float), SEEK_SET);
+	fread(gat_net_1_scoring_fn_target, sizeof(float), 64, f);
+
 	fseek(f, 1361*sizeof(float), SEEK_SET);
-	fread(gat_net_1_scoring_fn_target, sizeof(float), 96, f);
+	fread(gat_net_1_scoring_fn_source, sizeof(float), 64, f);
 
-	fseek(f, 1457*sizeof(float), SEEK_SET);
-	fread(gat_net_1_scoring_fn_source, sizeof(float), 96, f);
+	fseek(f, 1425*sizeof(float), SEEK_SET);
+	fread(gat_net_1_linear_proj_weight, sizeof(float), 4096, f);
 
-	fseek(f, 1553*sizeof(float), SEEK_SET);
-	fread(gat_net_1_bias, sizeof(float), 16, f);
+	fseek(f, 5521*sizeof(float), SEEK_SET);
+	fread(gat_net_1_skip_proj_weight, sizeof(float), 4096, f);
 
-	fseek(f, 1569*sizeof(float), SEEK_SET);
-	fread(gat_net_1_linear_proj_weight, sizeof(float), 6144, f);
+	fseek(f, 9617*sizeof(float), SEEK_SET);
+	fread(gat_net_2_scoring_fn_target, sizeof(float), 64, f);
 
-	fseek(f, 7713*sizeof(float), SEEK_SET);
-	fread(gat_net_1_skip_proj_weight, sizeof(float), 6144, f);
+	fseek(f, 9681*sizeof(float), SEEK_SET);
+	fread(gat_net_2_scoring_fn_source, sizeof(float), 64, f);
 
+	fseek(f, 9745*sizeof(float), SEEK_SET);
+	fread(gat_net_2_linear_proj_weight, sizeof(float), 4096, f);
+
+	fseek(f, 13841*sizeof(float), SEEK_SET);
+	fread(gat_net_2_skip_proj_weight, sizeof(float), 4096, f);
+
+	fseek(f, 17937*sizeof(float), SEEK_SET);
+	fread(gat_net_3_scoring_fn_target, sizeof(float), 64, f);
+
+	fseek(f, 18001*sizeof(float), SEEK_SET);
+	fread(gat_net_3_scoring_fn_source, sizeof(float), 64, f);
+
+	fseek(f, 18065*sizeof(float), SEEK_SET);
+	fread(gat_net_3_linear_proj_weight, sizeof(float), 4096, f);
+
+	fseek(f, 22161*sizeof(float), SEEK_SET);
+	fread(gat_net_3_skip_proj_weight, sizeof(float), 4096, f);
+
+	fseek(f, 26257*sizeof(float), SEEK_SET);
+	fread(gat_net_4_scoring_fn_target, sizeof(float), 64, f);
+
+	fseek(f, 26321*sizeof(float), SEEK_SET);
+	fread(gat_net_4_scoring_fn_source, sizeof(float), 64, f);
+
+	fseek(f, 26385*sizeof(float), SEEK_SET);
+	fread(gat_net_4_linear_proj_weight, sizeof(float), 4096, f);
+
+	fseek(f, 30481*sizeof(float), SEEK_SET);
+	fread(gat_net_4_skip_proj_weight, sizeof(float), 4096, f);
 	fclose(f);
 }
 

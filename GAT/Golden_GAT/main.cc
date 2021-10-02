@@ -7,14 +7,24 @@ float graph_pred_linear_weight[1][16];
 float graph_pred_linear_bias[1];
 float gat_net_0_scoring_fn_target[1][4][16];
 float gat_net_0_scoring_fn_source[1][4][16];
-float gat_net_0_bias[64];
 float gat_net_0_linear_proj_weight[64][9];
 float gat_net_0_skip_proj_weight[64][9];
-float gat_net_1_scoring_fn_target[1][6][16];
-float gat_net_1_scoring_fn_source[1][6][16];
-float gat_net_1_bias[16];
-float gat_net_1_linear_proj_weight[96][64];
-float gat_net_1_skip_proj_weight[96][64];
+float gat_net_1_scoring_fn_target[1][4][16];
+float gat_net_1_scoring_fn_source[1][4][16];
+float gat_net_1_linear_proj_weight[64][64];
+float gat_net_1_skip_proj_weight[64][64];
+float gat_net_2_scoring_fn_target[1][4][16];
+float gat_net_2_scoring_fn_source[1][4][16];
+float gat_net_2_linear_proj_weight[64][64];
+float gat_net_2_skip_proj_weight[64][64];
+float gat_net_3_scoring_fn_target[1][4][16];
+float gat_net_3_scoring_fn_source[1][4][16];
+float gat_net_3_linear_proj_weight[64][64];
+float gat_net_3_skip_proj_weight[64][64];
+float gat_net_4_scoring_fn_target[1][4][16];
+float gat_net_4_scoring_fn_source[1][4][16];
+float gat_net_4_linear_proj_weight[64][64];
+float gat_net_4_skip_proj_weight[64][64];
 
 extern float task[NUM_TASK];
 
@@ -47,8 +57,8 @@ int main()
         int graph_attr[2];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
-        int num_heads_per_layer[3] = {1, 4, 6};
-        int num_features_per_layer[3] = {9, 16, 16};
+        int num_heads_per_layer[6] = {1, 4, 4, 4, 4, 4};
+        int num_features_per_layer[6] = {9, 16, 16, 16, 16, 16};
 
         fetch_one_graph(graph_name, node_feature, edge_list, num_of_nodes, num_of_edges);
         

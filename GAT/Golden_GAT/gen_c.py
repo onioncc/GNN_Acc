@@ -1,11 +1,11 @@
 import json
 
-f = open('gat_ep1_layer2.weights.dict.json', 'r')
+f = open('gat_ep1_layer5.weights.dict.json', 'r')
 dic = json.load(f)
 
 ## generate global weights
 for key in dic:
-    print(key)
+    #print(key)
     name = key.replace('.', '_').replace('_noBN', '')
     line = 'float ' + name
     # skip the "num_batches_tracked"

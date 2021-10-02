@@ -26,7 +26,7 @@ class GAT(torch.nn.Module):
                 activation=nn.ELU() if i < num_layers - 1 else None,  # last layer just outputs raw scores
                 dropout_prob=drop_ratio,
                 add_skip_connection=add_skip_connection,
-                bias=bias,
+                bias=False,
                 log_attention_weights=log_attention_weights
             )
             gat_layers.append(layer)

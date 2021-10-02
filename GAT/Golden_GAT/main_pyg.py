@@ -87,8 +87,8 @@ def main():
                         help='which gpu to use if any (default: 0)')
     parser.add_argument('--drop_ratio', type=float, default=0.5,
                         help='dropout ratio (default: 0.5)')
-    parser.add_argument('--num_layers', type=int, default=2,
-                        help='number of GNN message passing layers (default: 2)')
+    parser.add_argument('--num_layers', type=int, default=5,
+                        help='number of GNN message passing layers (default: 5)')
     parser.add_argument('--batch_size', type=int, default=32,
                         help='input batch size for training (default: 32)')
     parser.add_argument('--epochs', type=int, default=2,
@@ -125,11 +125,11 @@ def main():
     valid_loader = DataLoader(dataset[split_idx["valid"]], batch_size=args.batch_size, shuffle=False, num_workers = args.num_workers)
     test_loader = DataLoader(dataset[split_idx["test"]], batch_size=1, shuffle=False, num_workers = args.num_workers)
 
-    model = GAT(num_tasks = dataset.num_tasks, num_layers = args.num_layers, num_heads_per_layer = [4, 6], num_features_per_layer = [9, 16, 16], drop_ratio = args.drop_ratio).to(device)
+    model = GAT(num_tasks = dataset.num_tasks, num_layers = args.num_layers, num_heads_per_layer = [4, 4, 4, 4, 4], num_features_per_layer = [9, 16, 16, 16, 16, 16], drop_ratio = args.drop_ratio).to(device)
 
     #model = torch.load('gin_ep1.pt')
 
-    optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=5e-4)
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     valid_curve = []
     test_curve = []
