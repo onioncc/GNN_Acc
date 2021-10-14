@@ -33,6 +33,8 @@ float h_4[MAX_NODE][EMB_DIM];
 float h_5[EMB_DIM];
 float final;
 
+
+
 float deg[10] = {2025, 170914, 384897, 253864, 19049, 50, 121, 3, 4, 9};
 float avg_deg[2] = {
     83093.6015625,
@@ -63,19 +65,27 @@ void scatter_sum(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int
     */
 }
 
+float count[MAX_NODE];
+
 void aggr_mean(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
 	#pragma HLS inline off
 
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
 
-    float count[MAX_NODE];
+    int t;
+    float count_temp;
+    float count_temp_inc;
     memset(count, 0, MAX_NODE * sizeof(float));
     //count on the nodes
     for (int j = 0; j < num_of_edges; j++)
     {
-        int t = index[j];
-        count[t] += 1;
+#pragma HLS PIPELINE II=5
+
+        t = index[j];
+        count_temp = count[t];
+        count_temp_inc = count_temp + 1;
+        count[t] = count_temp_inc;
     }
     ///dimsize:num of the nodes
     for (int i = 0; i < dim_size; i++)
@@ -166,6 +176,7 @@ void scale(float hout[4 * MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM],
             scale = 1;
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
+#pragma HLS PIPELINE II=14
             out[node][dim] = out_0[node][dim];
             out[node][dim + EMB_DIM] = out_1[node][dim];
             out[node][dim + 2 * EMB_DIM] = out_2[node][dim];
@@ -199,6 +210,7 @@ void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float
     {
         for (int j = 0; j < EMB_DIM; j++)
         {
+#pragma HLS PIPELINE II=4
             hout[4 * i][j] = out_0[i][j];
             hout[4 * i + 1][j] = out_1[i][j];
             hout[4 * i + 2][j] = out_2[i][j];
@@ -208,16 +220,22 @@ void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float
 }
 
 
-// this function is problamatic because it uses "new" and "free"
-// needs to be chnaged to used fixed arrays declared ahead of time
+// this function is problematic because it uses "new" and "free"
+// needs to be changed to used fixed arrays declared ahead of time
 
 int index_buf[MAX_EDGE];
 int degree_buf[MAX_NODE];
 float aggrout[4 * MAX_NODE][EMB_DIM];
 
+
+
+
+
 void message_passing(float h[MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM], int *edge_list, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
+
+
 
     memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     memset(mean_index, 0, MAX_EDGE * EMB_DIM * sizeof(int));
@@ -264,6 +282,7 @@ void Linear_relu(float l_in[MAX_NODE][L_IN], float l_out[MAX_NODE][L_OUT], int n
             l_out[nd][dim_out] = bias[dim_out];
             for (int dim_in = 0; dim_in < L_IN; dim_in++)
             {
+#pragma HLS PIPELINE II=4
                 l_out[nd][dim_out] += l_in[nd][dim_in] * weight[dim_out][dim_in];
             }
         }
@@ -313,6 +332,7 @@ void GLOBAL_MEAN_POOL(float h[MAX_NODE][EMB_DIM], float f[EMB_DIM], int num_of_n
     for (int j = 0; j < EMB_DIM; j++)
     {
         for (int i = 0; i < num_of_nodes; i++)
+			#pragma HLS pipeline II=4
             f[j] += h[i][j];
         f[j] /= num_of_nodes;
     }
@@ -324,6 +344,20 @@ void MLP(int num_of_nodes)
 	#pragma HLS inline off
     float temp_0[40];
     float temp_1[20];
+
+
+#pragma HLS array_partition variable=temp_0 complete
+#pragma HLS array_partition variable=temp_1 complete
+
+
+#pragma HLS array_partition variable=mlp_0_weight dim=1 complete
+#pragma HLS array_partition variable=mlp_0_bias dim=0 complete
+#pragma HLS array_partition variable=mlp_2_weight dim=1 complete
+#pragma HLS array_partition variable=mlp_2_bias dim=0 complete
+#pragma HLS array_partition variable=mlp_4_weight dim=1 complete
+#pragma HLS array_partition variable=mlp_4_bias dim=0 complete
+
+
     for (int dim_out = 0; dim_out < 40; dim_out++)
     {
         temp_0[dim_out] = mlp_0_bias[dim_out];
@@ -355,17 +389,50 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 {
 	
 	
-#pragma HLS INTERFACE s_axilite port=return
-
 #pragma HLS INTERFACE m_axi depth=100000 port=node_feature offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_list offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=edge_attr_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=edge_attr offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
+#pragma HLS INTERFACE s_axilite register port=return
+
+#pragma HLS bind_storage variable=message type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=mean_index type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=ssquare type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=out_0 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=out_1 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=out_2 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=out_3 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=h_0 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=m_0 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=h_1 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=m_1 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=h_2 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=m_2 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=h_3 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=m_3 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=h_4 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=h_5 type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=index_buf type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=degree_buf type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=aggrout type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=count type=RAM_2P impl=bram
 
 
 	
-    int num_of_nodes = graph_attr[0];
-    int num_of_edges = graph_attr[1];
+//    int num_of_nodes = graph_attr[0];
+//    int num_of_edges = graph_attr[1];
+    int num_of_nodes = 19;
+    int num_of_edges = 40;
+
     printf("Computing PNA ...\n");
     /*Embedding: compute input node embedding */
     memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(float));
