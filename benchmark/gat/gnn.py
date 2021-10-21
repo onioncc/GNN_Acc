@@ -45,8 +45,8 @@ class GAT(torch.nn.Module):
         # shape = (N, FIN), where N is the number of nodes and FIN is the number of input features
         node_features = batch.x.float()
         # shape = (2, E)
-        topology = torch_geometric.utils.to_dense_adj(batch.edge_index, max_num_nodes=batch.x.shape[0])[0].to("cuda")
-        topology += torch.eye(topology.shape[0]).to("cuda")  # add self connections
+        topology = torch_geometric.utils.to_dense_adj(batch.edge_index, max_num_nodes=batch.x.shape[0])[0].to(batch.x.device)
+        topology += torch.eye(topology.shape[0]).to(batch.x.device)  # add self connections
         topology[topology > 0] = 1  # multiple edges not allowed
         topology[topology == 0] = -np.inf  # make it a mask instead of adjacency matrix (used to mask softmax)
         topology[topology == 1] = 0

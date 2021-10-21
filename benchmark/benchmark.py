@@ -23,7 +23,7 @@ def make_ogb_graphproppred_dataset(dataset_name):
     dataset = PygGraphPropPredDataset(dataset_name)
     split_idx = dataset.get_idx_split()
     test_idx = split_idx['test']
-    test_loader = DataLoader(dataset[test_idx], batch_size=1, shuffle=False)
+    test_loader = DataLoader(dataset[test_idx], batch_size=128, shuffle=False)
     return Dataset(dataset=dataset, loader=test_loader)
 
 def make_dgn_hiv_dataset(dataset_name, pos_enc_dim=0, norm='none'):
@@ -36,9 +36,6 @@ def make_dgn_hiv_dataset(dataset_name, pos_enc_dim=0, norm='none'):
         pin_memory=True,
     )
     return Dataset(dataset=dataset, loader=test_loader)
-
-TRIALS = 5
-OUTPUT_CSV = 'output.csv'
 
 DATASETS = {
     'ogbg-molhiv': make_ogb_graphproppred_dataset('ogbg-molhiv'),
@@ -98,11 +95,12 @@ TEST_CASES = [
 ]
 
 @torch.no_grad()
-def measure(model, batches, desc=None):
+def measure(model, loader, device, desc=None):
     model.eval()
     total_time = 0.0
 
-    for batch in tqdm(batches, desc=desc):
+    for batch in tqdm(loader, desc=desc):
+        batch = batch.to(device)
         start = time()
         model(batch)
         end = time()
@@ -112,13 +110,15 @@ def measure(model, batches, desc=None):
 
 def main():
     parser = argparse.ArgumentParser(description='Run inference benchmarks')
-    parser.add_argument('--device', help='torch device to use (usually "cuda" or "cpu")',
-                        default='cuda' if torch.cuda.is_available() else 'cpu')
-    parser.add_argument('--output', help='output csv file to write')
+    parser.add_argument('-d', '--device',
+                        default='cuda' if torch.cuda.is_available() else 'cpu',
+                        help='torch device to use (usually "cuda" or "cpu")')
+    parser.add_argument('-o', '--output', help='output csv file to write')
+    parser.add_argument('-n', '--trials', default=5,
+                        help='number of trials per benchmark')
     args = parser.parse_args()
 
     device = torch.device(args.device)
-    batch_cache = {}
     print('Using device:', device)
     print()
 
@@ -139,20 +139,14 @@ def main():
             model = MODELS[model_name](dataset.dataset, device)
             total_time = 0.0
 
-            try:
-                batches = batch_cache[dataset_name]
-            except KeyError:
-                batches = [batch.to(device) for batch in tqdm(dataset.loader, desc=f'Preparing dataset {dataset_name}')]
-                batch_cache[dataset_name] = batches
-                print()
-
-            for i in range(1, TRIALS + 1):
-                run_time = measure(model, batches, desc=f'{model_name} on {dataset_name} ({i}/{TRIALS})')
+            for i in range(1, args.trials + 1):
+                run_time = measure(model, dataset.loader, device,
+                                   desc=f'{model_name} on {dataset_name} ({i}/{args.trials})')
                 total_time += run_time
                 if csv_writer is not None:
                     csv_writer.writerow([dataset_name, model_name, i, run_time])
 
-            average_time = total_time / TRIALS
+            average_time = total_time / args.trials
             if csv_writer is not None:
                 csv_writer.writerow([dataset_name, model_name, 'Average', average_time])
 
