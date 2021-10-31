@@ -28,7 +28,7 @@ int main()
 {
     printf("\n******* This is the optimized HLS code for GIN model *******\n");
 
-    //load_weights();
+    load_weights();
 
     float all_results[4113];
     int is_first = 1;
@@ -49,13 +49,13 @@ int main()
         printf("********** Computing Graph %s *************\n", graph_name);
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
-//        int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
-//        int* edge_list = (int*)malloc(3 * num_of_edges * sizeof(int));
-//        int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
+        int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
+        int* edge_list = (int*)malloc(3 * num_of_edges * sizeof(int));
+        int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
 
-        int node_feature[100000];
-        int edge_list[100000];
-        int edge_attr[100000];
+        // int node_feature[100000];
+        // int edge_list[100000];
+        // int edge_attr[100000];
 
         int graph_attr[3];
         graph_attr[0] = num_of_nodes;
@@ -66,18 +66,18 @@ int main()
 
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
 
-        GIN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr, task_tb);//,
-                              //gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed,
-                              //gnn_node_embedding_table_fixed, gnn_edge_embedding_table_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, eps_fixed);
+        GIN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr, task_tb,
+                              gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed,
+                              gnn_node_embedding_table_fixed, gnn_edge_embedding_table_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, eps_fixed);
 
         
-        // all_results[g-1] = task_tb[0];
+        all_results[g-1] = task_tb[0];
 
-        // free(node_feature);
-        // free(edge_list);
-        // free(edge_attr);
+        free(node_feature);
+        free(edge_list);
+        free(edge_attr);
 
-        // is_first = 0;
+        is_first = 0;
     }
 
 //    for(int g = 1; g <= 10; g++) {

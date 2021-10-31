@@ -190,6 +190,7 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 		for(int dim = 0; dim < EMB_DIM; dim++) {
 			FM_TYPE val = emb_vec.read();
 
+#pragma HLS pipeline
 			for(int i = 0; i < total_neigh; i++) {
 #pragma HLS loop_tripcount min=1 max=5 avg=3
 
@@ -198,6 +199,7 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 
 				FM_TYPE edge_embed = 0;
 				for(int ef = 0; ef < EDGE_ATTR; ef++) {
+
 					int e_f = edge_attr[e][ef];
 					int addr = get_ed_emb_addr(ef, layer);
 					FM_TYPE emb_value = 0;
@@ -214,12 +216,14 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 }
 
 
-void copy_message_table(FM_TYPE message_tb_dest[MAX_NODE][EMB_DIM], FM_TYPE message_tb_src[MAX_NODE][EMB_DIM], int num_of_nodes)
+void copy_and_clear_message_table(FM_TYPE message_tb_dest[MAX_NODE][EMB_DIM], FM_TYPE message_tb_src[MAX_NODE][EMB_DIM], int num_of_nodes)
 {
 //#pragma HLS inline off
     for(int n = 0; n < num_of_nodes; n++) {
         for(int dim = 0; dim < EMB_DIM; dim++) {
+#pragma HLS pipeline
             message_tb_dest[n][dim] = message_tb_src[n][dim];
+            message_tb_src[n][dim] = 0;
         }
     }
 }
@@ -364,11 +368,12 @@ void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
 
-    clear_message_table(message2, num_of_nodes);
+    if( layer == 0 )
+        clear_message_table(message2, num_of_nodes);
 
     compute_CONV_dataflow_region(message1, message2, num_of_nodes, num_of_edges, layer);
 
-    copy_message_table(message1, message2, num_of_nodes);
+    copy_and_clear_message_table(message1, message2, num_of_nodes);
     
 
 #ifdef _PRINT_
@@ -555,8 +560,8 @@ void prepare_degree_neighbor_table(int* edge_list, int num_of_nodes, int num_of_
 
 extern "C" {
 void GIN_compute_one_graph(
-    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, FM_TYPE* task
-    /*WT_TYPE gnn_node_mlp_1_weights_fixed[LAYER_NUM * MLP_1_OUT * MLP_1_IN],
+    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, FM_TYPE* task,
+    WT_TYPE gnn_node_mlp_1_weights_fixed[LAYER_NUM * MLP_1_OUT * MLP_1_IN],
     WT_TYPE gnn_node_mlp_1_bias_fixed[LAYER_NUM * MLP_1_OUT],
     WT_TYPE gnn_node_mlp_2_weights_fixed[LAYER_NUM * MLP_2_OUT * MLP_2_IN],
     WT_TYPE gnn_node_mlp_2_bias_fixed[LAYER_NUM * MLP_2_OUT],
@@ -564,7 +569,7 @@ void GIN_compute_one_graph(
     WT_TYPE gnn_edge_embedding_fixed[EG_FEATURE_TOTAL * EMB_DIM],
     WT_TYPE graph_pred_linear_weight_fixed[NUM_TASK * MLP_2_OUT],
     WT_TYPE graph_pred_linear_bias_fixed[NUM_TASK],
-    WT_TYPE eps_fixed[LAYER_NUM]*/
+    WT_TYPE eps_fixed[LAYER_NUM]
     )
 {
 #pragma HLS INTERFACE s_axilite port=return
@@ -599,20 +604,20 @@ void GIN_compute_one_graph(
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2]; //is the first graph
 
-    // num_of_nodes = 19;
-    // num_of_edges = 40;
-    // is_first = 0;
+     num_of_nodes = 19;
+     num_of_edges = 40;
+     is_first = 1;
 
 
-//    if( is_first == 1 ) {
-//		////////////// Load weights
-//		for(int layer = 0; layer < 5; layer++) {
-//			load_mlp_weights_one_layer(layer, gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
-//		}
-//
-//		load_misc_weights(eps_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed,
-//						  gnn_node_embedding_fixed, gnn_edge_embedding_fixed);
-//    }
+    if( is_first == 1 ) {
+		////////////// Load weights
+		for(int layer = 0; layer < 5; layer++) {
+			load_mlp_weights_one_layer(layer, gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
+		}
+
+		load_misc_weights(eps_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed,
+						  gnn_node_embedding_fixed, gnn_edge_embedding_fixed);
+    }
 
     ///////////// Load a new graph onto chip
     load_graph(node_feature, edge_attr, edge_list, node_feature_in, edge_list_in, edge_attr_in, num_of_nodes, num_of_edges);

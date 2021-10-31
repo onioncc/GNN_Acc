@@ -74,8 +74,8 @@ void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* e
 
 extern "C" {
 void GIN_compute_one_graph(
-    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, FM_TYPE* task
-    /*WT_TYPE gnn_node_mlp_1_weights_fixed[LAYER_NUM * MLP_1_OUT * MLP_1_IN],
+    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, FM_TYPE* task,
+    WT_TYPE gnn_node_mlp_1_weights_fixed[LAYER_NUM * MLP_1_OUT * MLP_1_IN],
     WT_TYPE gnn_node_mlp_1_bias_fixed[LAYER_NUM * MLP_1_OUT],
     WT_TYPE gnn_node_mlp_2_weights_fixed[LAYER_NUM * MLP_2_OUT * MLP_2_IN],
     WT_TYPE gnn_node_mlp_2_bias_fixed[LAYER_NUM * MLP_2_OUT],
@@ -83,7 +83,7 @@ void GIN_compute_one_graph(
     WT_TYPE gnn_edge_embedding_fixed[EG_FEATURE_TOTAL * EMB_DIM],
     WT_TYPE graph_pred_linear_weight_fixed[NUM_TASK * MLP_2_OUT],
     WT_TYPE graph_pred_linear_bias_fixed[NUM_TASK],
-    WT_TYPE eps_fixed[LAYER_NUM]*/
+    WT_TYPE eps_fixed[LAYER_NUM]
     );
 }
 
