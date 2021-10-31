@@ -50,11 +50,11 @@ void load_weights();
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
 
 void GCN_compute_one_graph(
-    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, float* task,
-    float convs_weight_in[LAYER_NUM][100][100], float convs_bias_in[LAYER_NUM][100], float convs_root_emb_weight_in[LAYER_NUM][100],
-    float bn_weigh_in[LAYER_NUM][100], float bn_bias_in[LAYER_NUM][100], float bn_mean_in[LAYER_NUM][100], float bn_var_in[LAYER_NUM][100],
-    float node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM], float edge_embedding_weight_in[EG_FEATURE_TOTAL][EMB_DIM],
-    float graph_pred_weights_in[NUM_TASK][MLP_0_OUT], float graph_pred_bias_in[NUM_TASK]
+    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, WT_TYPE* task,
+    WT_TYPE convs_weight_in[LAYER_NUM][100][100], WT_TYPE convs_bias_in[LAYER_NUM][100], WT_TYPE convs_root_emb_weight_in[LAYER_NUM][100],
+    WT_TYPE bn_weigh_in[LAYER_NUM][100], WT_TYPE bn_bias_in[LAYER_NUM][100], WT_TYPE bn_mean_in[LAYER_NUM][100], WT_TYPE bn_var_in[LAYER_NUM][100],
+    WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM], WT_TYPE edge_embedding_weight_in[EG_FEATURE_TOTAL][EMB_DIM],
+    WT_TYPE graph_pred_weights_in[NUM_TASK][MLP_0_OUT], WT_TYPE graph_pred_bias_in[NUM_TASK]
     );
 
 #endif

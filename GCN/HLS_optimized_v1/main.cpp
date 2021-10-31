@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include "dcl.h"
 
-extern float convs_weight_float[LAYER_NUM][100][100];
-extern float convs_bias_float[LAYER_NUM][100];
-extern float convs_root_emb_weight_float[LAYER_NUM][100];
+extern WT_TYPE node_embedding_weight_fixed[ND_FEATURE_TOTAL][EMB_DIM];
+extern WT_TYPE edge_embedding_weight_fixed[EG_FEATURE_TOTAL][EMB_DIM];
 
-extern float bn_weight_float[LAYER_NUM][100];
-extern float bn_bias_float[LAYER_NUM][100];
-extern float bn_mean_float[LAYER_NUM][100];
-extern float bn_var_float[LAYER_NUM][100];
+extern WT_TYPE convs_weight_fixed[LAYER_NUM][MLP_0_OUT][MLP_0_IN];
+extern WT_TYPE convs_bias_fixed[LAYER_NUM][MLP_0_OUT];
+extern WT_TYPE convs_root_emb_weight_fixed[LAYER_NUM][MLP_0_OUT];
 
-extern float node_embedding_weight_float[ND_FEATURE_TOTAL][EMB_DIM];
-extern float edge_embedding_weight_float[EG_FEATURE_TOTAL][EMB_DIM];
+extern WT_TYPE bn_weight_fixed[LAYER_NUM][EMB_DIM];
+extern WT_TYPE bn_bias_fixed[LAYER_NUM][EMB_DIM];
+extern WT_TYPE bn_mean_fixed[LAYER_NUM][EMB_DIM];
+extern WT_TYPE bn_var_fixed[LAYER_NUM][EMB_DIM];
 
-extern float graph_pred_linear_weight_float[NUM_TASK][100];
-extern float graph_pred_linear_bias_float[NUM_TASK];
+extern WT_TYPE graph_pred_linear_weight_fixed[NUM_TASK][EMB_DIM];
+extern WT_TYPE graph_pred_linear_bias_fixed[NUM_TASK];
 
 int main()
 {
@@ -51,17 +51,17 @@ int main()
         graph_attr[1] = num_of_edges;
         graph_attr[2] = is_first;
 
-        float task_tb[NUM_TASK];
+        WT_TYPE task_tb[NUM_TASK];
 
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
         GCN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr, task_tb, 
-                              convs_weight_float, convs_bias_float, convs_root_emb_weight_float, 
-                              bn_weight_float, bn_bias_float, bn_mean_float, bn_var_float,
-                              node_embedding_weight_float, edge_embedding_weight_float,
-                              graph_pred_linear_weight_float, graph_pred_linear_bias_float);
+                              convs_weight_fixed, convs_bias_fixed, convs_root_emb_weight_fixed, 
+                              bn_weight_fixed, bn_bias_fixed, bn_mean_fixed, bn_var_fixed,
+                              node_embedding_weight_fixed, edge_embedding_weight_fixed,
+                              graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed);
         
-        all_results[g-1] = task_tb[0];
+        all_results[g-1] = task_tb[0].to_float();
 
         free(node_feature);
         free(edge_list);

@@ -12,17 +12,34 @@ float edge_embedding_weight_float[EG_FEATURE_TOTAL][EMB_DIM];
 float node_embedding_weight_raw[ND_FEATURE_TOTAL * EMB_DIM];
 float edge_embedding_weight_raw[LAYER_NUM][EG_FEATURE_PER_LAYER * EMB_DIM];
 
-float convs_weight_float[LAYER_NUM][100][100];
-float convs_bias_float[LAYER_NUM][100];
-float convs_root_emb_weight_float[LAYER_NUM][100];
+float convs_weight_float[LAYER_NUM][MLP_0_OUT][MLP_0_IN];
+float convs_bias_float[LAYER_NUM][MLP_0_OUT];
+float convs_root_emb_weight_float[LAYER_NUM][MLP_0_OUT];
 
-float bn_weight_float[LAYER_NUM][100];
-float bn_bias_float[LAYER_NUM][100];
-float bn_mean_float[LAYER_NUM][100];
-float bn_var_float[LAYER_NUM][100];
+float bn_weight_float[LAYER_NUM][EMB_DIM];
+float bn_bias_float[LAYER_NUM][EMB_DIM];
+float bn_mean_float[LAYER_NUM][EMB_DIM];
+float bn_var_float[LAYER_NUM][EMB_DIM];
 
-float graph_pred_linear_weight_float[NUM_TASK][100];
+float graph_pred_linear_weight_float[NUM_TASK][EMB_DIM];
 float graph_pred_linear_bias_float[NUM_TASK];
+
+
+WT_TYPE node_embedding_weight_fixed[ND_FEATURE_TOTAL][EMB_DIM];
+WT_TYPE edge_embedding_weight_fixed[EG_FEATURE_TOTAL][EMB_DIM];
+
+WT_TYPE convs_weight_fixed[LAYER_NUM][MLP_0_OUT][MLP_0_IN];
+WT_TYPE convs_bias_fixed[LAYER_NUM][MLP_0_OUT];
+WT_TYPE convs_root_emb_weight_fixed[LAYER_NUM][MLP_0_OUT];
+
+WT_TYPE bn_weight_fixed[LAYER_NUM][EMB_DIM];
+WT_TYPE bn_bias_fixed[LAYER_NUM][EMB_DIM];
+WT_TYPE bn_mean_fixed[LAYER_NUM][EMB_DIM];
+WT_TYPE bn_var_fixed[LAYER_NUM][EMB_DIM];
+
+WT_TYPE graph_pred_linear_weight_fixed[NUM_TASK][EMB_DIM];
+WT_TYPE graph_pred_linear_bias_fixed[NUM_TASK];
+
 
 void load_weights()
 {
@@ -198,6 +215,49 @@ void load_weights()
 			idx2 += ed_f;
 		}
 	}
+
+
+	//////// Convert to fixed point
+	for (int i = 0; i < ND_FEATURE_TOTAL; i++) {
+		for(int j = 0; j < EMB_DIM; j++) {
+			node_embedding_weight_fixed[i][j] = (WT_TYPE)node_embedding_weight_float[i][j];
+		}
+	}
+	
+	for (int i = 0; i < EG_FEATURE_TOTAL; i++) {
+		for(int j = 0; j < EMB_DIM; j++) {
+			edge_embedding_weight_fixed[i][j] = (WT_TYPE)edge_embedding_weight_float[i][j];
+		}
+	}
+
+	for(int i = 0; i < LAYER_NUM; i++) {
+		for(int j = 0; j < MLP_0_OUT; j++) {
+			convs_bias_fixed[i][j] = (WT_TYPE)convs_bias_float[i][j];
+			convs_root_emb_weight_fixed[i][j] = (WT_TYPE)convs_root_emb_weight_float[i][j];
+
+			for(int k = 0; k < MLP_0_IN; k++) {
+				convs_weight_fixed[i][j][k] = (WT_TYPE)convs_weight_float[i][j][k];
+			}
+		}
+	}
+
+	for(int i = 0; i < LAYER_NUM; i++) {
+		for(int j = 0; j < EMB_DIM; j++) {
+			bn_weight_fixed[i][j] = (WT_TYPE)bn_weight_float[i][j];
+			bn_bias_fixed[i][j] = (WT_TYPE)bn_bias_float[i][j];
+			bn_mean_fixed[i][j] = (WT_TYPE)bn_mean_float[i][j];
+			bn_var_fixed[i][j] = (WT_TYPE)bn_var_float[i][j];
+		}
+	}
+		
+	for(int i = 0; i < NUM_TASK; i++) {
+		graph_pred_linear_bias_fixed[i] = (WT_TYPE)graph_pred_linear_bias_float[i];
+		for(int j = 0; j < EMB_DIM; j++) {
+			graph_pred_linear_weight_fixed[i][j] = (WT_TYPE)graph_pred_linear_weight_float[i][j];
+		}
+	}
+
+
 
 }
 
