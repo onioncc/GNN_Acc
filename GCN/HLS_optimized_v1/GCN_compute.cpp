@@ -1,7 +1,11 @@
 #include "dcl.h"
 
-/// h_x: node feature vectors
-/// e_x: edge attribute vectors
+
+/// graph information
+int node_feature[MAX_NODE * ND_FEATURE];
+int edge_attr[MAX_EDGE][EDGE_ATTR];
+int edge_list[MAX_EDGE * 2];
+
 /// message: received message of each node
 /// mlp_in/out: buffers for mlp
 
@@ -19,9 +23,9 @@ float conv_out[MAX_NODE][MLP_OUT_MAX];
 float h_graph[EMB_DIM];
 float task[NUM_TASK];
 
-/// embedding tables
-float node_embedding_table[ND_FEATURE_TOTAL][EMB_DIM];
-float edge_embedding_table[EG_FEATURE_TOTAL][EMB_DIM];
+/// embedding weights
+float node_embedding_weight[ND_FEATURE_TOTAL][EMB_DIM];
+float edge_embedding_weight[EG_FEATURE_TOTAL][EMB_DIM];
 
 int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
@@ -36,6 +40,8 @@ float bn_bias[LAYER_NUM][100];
 float bn_mean[LAYER_NUM][100];
 float bn_var[LAYER_NUM][100];
 
+float graph_pred_weights[NUM_TASK][MLP_0_OUT];
+float graph_pred_bias[NUM_TASK];
  
 
 
@@ -58,18 +64,18 @@ int get_ed_emb_addr(int ef, int layer)
 }
 
 
-void compute_edge_embedding(int num_of_edges, int* edge_attr, int layer)
+void compute_edge_embedding(int num_of_edges, int edge_attr[MAX_EDGE][EDGE_ATTR], int layer)
 {
 #pragma HLS inline off
     ////////////// Embedding: compute edge embedding
     memset(edge_embedding, 0, MAX_EDGE * EMB_DIM * sizeof(float));
     for(int e = 0; e < num_of_edges; e++) {
         for(int ef = 0; ef < EDGE_ATTR; ef++) {
-            int e_f = edge_attr[e * EDGE_ATTR + ef];
+            int e_f = edge_attr[e][ef];
             for(int dim = 0; dim < EMB_DIM; dim++) {
                 float emb_value = 0;
                 int addr = get_ed_emb_addr(ef, layer);
-                emb_value = edge_embedding_table[addr + e_f][dim];
+                emb_value = edge_embedding_weight[addr + e_f][dim];
                 edge_embedding[e][dim] += emb_value;
             }   
         }
@@ -143,7 +149,7 @@ void Conv_BatchNorm_Relu(float d_in[MAX_NODE][MLP_OUT_MAX], float d_out[MAX_NODE
 
 
 
-void CONV(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges, int layer)
+void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR], int num_of_nodes, int num_of_edges, int layer)
 {
     //printf("\n---- Computing CONV 0 ----\n");
     ////////////// Embedding: compute edge embedding
@@ -201,7 +207,7 @@ void one_node_embedding(int nd, int* node_features)
             int nd_f = node_features[nd * ND_FEATURE + nf];
             int emb_addr = get_nd_emb_addr(nf);
 
-            FM_TYPE emb_value = node_embedding_table[emb_addr + nd_f][dim]; 
+            FM_TYPE emb_value = node_embedding_weight[emb_addr + nd_f][dim]; 
             sum += emb_value;
         }  
         node_embedding[nd][dim] = sum;
@@ -234,10 +240,93 @@ void compute_node_embedding(int num_of_nodes, int num_of_edges, int* node_featur
 
 
 
-void GCN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, int* graph_attr)
+void load_graph(int* node_feature, int edge_attr[MAX_EDGE][EDGE_ATTR], int* edge_list, 
+                int* node_feature_in, int* edge_list_in, int* edge_attr_in, int num_of_nodes, int num_of_edges)
+{
+#pragma HLS inline off
+    for(int i = 0; i < num_of_nodes * ND_FEATURE; i++) {
+        node_feature[i] = node_feature_in[i];
+    }
+    
+    for(int e = 0; e < num_of_edges; e++) {
+        for(int i = 0; i < EDGE_ATTR; i++) {
+            edge_attr[e][i] = edge_attr_in[e * EDGE_ATTR + i];
+        }
+    }
+
+    for(int i = 0; i < num_of_edges * 2; i++) {
+        edge_list[i] = edge_list_in[i];
+    }
+}
+
+void load_layer_specific_weights(
+    float convs_weight_in[LAYER_NUM][100][100], float convs_bias_in[LAYER_NUM][100], float convs_root_emb_weight_in[LAYER_NUM][100],
+    float bn_weigh_in[LAYER_NUM][100], float bn_bias_in[LAYER_NUM][100], float bn_mean_in[LAYER_NUM][100], float bn_var_in[LAYER_NUM][100]
+)
+{
+    for(int l = 0; l < LAYER_NUM; l++) {
+        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+            convs_bias[l][dim_out] = convs_bias_in[l][dim_out];
+            convs_root_emb_weight[l][dim_out] = convs_root_emb_weight_in[l][dim_out];
+            bn_weight[l][dim_out] = bn_weigh_in[l][dim_out];
+            bn_bias[l][dim_out] = bn_bias_in[l][dim_out];
+            bn_mean[l][dim_out] = bn_mean_in[l][dim_out];
+            bn_var[l][dim_out] = bn_var_in[l][dim_out];
+
+            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
+                convs_weight[l][dim_out][dim_in] = convs_weight_in[l][dim_out][dim_in];
+            }
+        }        
+    }
+}
+
+void load_misc_weights(float node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM], float edge_embedding_weight_in[EG_FEATURE_TOTAL][EMB_DIM],
+                       float graph_pred_weights_in[NUM_TASK][MLP_0_OUT], float graph_pred_bias_in[NUM_TASK])
+{
+    for(int i = 0; i < ND_FEATURE_TOTAL; i++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {	
+			node_embedding_weight[i][dim] = node_embedding_weight_in[i][dim];
+		}
+    }
+
+    for(int i = 0; i < EG_FEATURE_TOTAL; i++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {
+			edge_embedding_weight[i][dim] = edge_embedding_weight_in[i][dim];
+		}
+	}
+
+    for(int t = 0; t < NUM_TASK; t++) {
+		graph_pred_bias[t] = graph_pred_bias_in[t];
+		for(int dim_in = 0; dim_in < MLP_0_OUT; dim_in++ ) {
+			graph_pred_weights[t][dim_in] = graph_pred_weights_in[t][dim_in];
+		}
+	}
+}
+
+
+void GCN_compute_one_graph(
+    int* node_feature_in, int* edge_list_in, int* edge_attr_in, int* graph_attr, float* task,
+    float convs_weight_in[LAYER_NUM][100][100], float convs_bias_in[LAYER_NUM][100], float convs_root_emb_weight_in[LAYER_NUM][100],
+    float bn_weigh_in[LAYER_NUM][100], float bn_bias_in[LAYER_NUM][100], float bn_mean_in[LAYER_NUM][100], float bn_var_in[LAYER_NUM][100],
+    float node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM], float edge_embedding_weight_in[EG_FEATURE_TOTAL][EMB_DIM],
+    float graph_pred_weights_in[NUM_TASK][MLP_0_OUT], float graph_pred_bias_in[NUM_TASK]
+    )
 {
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
+    int is_first = graph_attr[2];
+
+    if( is_first == 1 ) {
+        //////////////// Load weights
+        for(int layer = 0; layer < LAYER_NUM; layer++) {
+            load_layer_specific_weights(convs_weight_in, convs_bias_in, convs_root_emb_weight_in, 
+                                        bn_weigh_in, bn_bias_in, bn_mean_in, bn_var_in);
+        }
+        load_misc_weights(node_embedding_weight_in, edge_embedding_weight_in, graph_pred_weights_in, graph_pred_bias_in);
+    }
+
+    ///////////// Load a new graph onto chip
+    load_graph(node_feature, edge_attr, edge_list, node_feature_in, edge_list_in, edge_attr_in, num_of_nodes, num_of_edges);
 
 
     printf("Computing GCN ...\n");
@@ -273,9 +362,9 @@ void GCN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
     ////////////// Graph prediction linear ///////////////////
     memset(task, 0, NUM_TASK * sizeof(float));
     for(int tsk = 0; tsk < NUM_TASK; tsk++) {
-        task[tsk] = graph_pred_linear_bias[tsk];
+        task[tsk] = graph_pred_bias[tsk];
         for(int dim = 0; dim < EMB_DIM; dim++) {
-            task[tsk] += h_graph[dim] * graph_pred_linear_weight[tsk][dim];
+            task[tsk] += h_graph[dim] * graph_pred_weights[tsk][dim];
         }
     }
 
