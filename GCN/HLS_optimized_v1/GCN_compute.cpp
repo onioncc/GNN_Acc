@@ -16,23 +16,6 @@ float linear_out[MAX_NODE][MLP_OUT_MAX];
 float conv_out[MAX_NODE][MLP_OUT_MAX];
 
 
-float h_0[MAX_NODE][EMB_DIM];
-//float e_0[MAX_EDGE][EMB_DIM];
-
-float h_1[MAX_NODE][EMB_DIM];
-//float e_1[MAX_EDGE][EMB_DIM];
-
-float h_2[MAX_NODE][EMB_DIM];
-//float e_2[MAX_EDGE][EMB_DIM];
-
-float h_3[MAX_NODE][EMB_DIM];
-//float e_3[MAX_EDGE][EMB_DIM];
-
-float h_4[MAX_NODE][EMB_DIM];
-//float e_4[MAX_EDGE][EMB_DIM];
-
-float h_5[MAX_NODE][EMB_DIM];
-
 float h_graph[EMB_DIM];
 float task[NUM_TASK];
 
@@ -42,6 +25,19 @@ float edge_embedding_table[EG_FEATURE_TOTAL][EMB_DIM];
 
 int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
+
+
+float convs_weight[LAYER_NUM][100][100];
+float convs_bias[LAYER_NUM][100];
+float convs_root_emb_weight[LAYER_NUM][100];
+
+float bn_weight[LAYER_NUM][100];
+float bn_bias[LAYER_NUM][100];
+float bn_mean[LAYER_NUM][100];
+float bn_var[LAYER_NUM][100];
+
+ 
+
 
 int get_nd_emb_addr(int nf)
 {
@@ -147,19 +143,19 @@ void Conv_BatchNorm_Relu(float d_in[MAX_NODE][MLP_OUT_MAX], float d_out[MAX_NODE
 
 
 
-void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
+void CONV(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges, int layer)
 {
     //printf("\n---- Computing CONV 0 ----\n");
     ////////////// Embedding: compute edge embedding
-    compute_edge_embedding(num_of_edges, edge_attr, 0);
+    compute_edge_embedding(num_of_edges, edge_attr, layer);
 
     //linear,        x = self.linear(x)
     memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
-            linear_out[nd][dim_out] = gnn_node_convs_0_bias[dim_out];
+            linear_out[nd][dim_out] = convs_bias[layer][dim_out];
             for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
-                linear_out[nd][dim_out] += h_0[nd][dim_in] * gnn_node_convs_0_weight[dim_out][dim_in];
+                linear_out[nd][dim_out] += node_embedding[nd][dim_in] * convs_weight[layer][dim_out][dim_in];
             }
         }
     }
@@ -172,190 +168,21 @@ void CONV_0(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes,
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            if((linear_out[nd][dim] + gnn_node_convs_0_root_emb_weight[dim]) < 0)
+            if((linear_out[nd][dim] + convs_root_emb_weight[layer][dim]) < 0)
                 conv_out[nd][dim] = message[nd][dim];
             else
-                conv_out[nd][dim] = message[nd][dim] + (linear_out[nd][dim] + gnn_node_convs_0_root_emb_weight[dim]) / (deg[nd]+1);
+                conv_out[nd][dim] = message[nd][dim] + (linear_out[nd][dim] + convs_root_emb_weight[layer][dim]) / (deg[nd]+1);
 
         }
     }    
 
 
     ////////////// Batchnorm + Relu of Conv 0
-    Conv_BatchNorm_Relu(conv_out, h_1, 
-                    gnn_node_batch_norms_0_weight, gnn_node_batch_norms_0_bias,
-                    gnn_node_batch_norms_0_running_mean, gnn_node_batch_norms_0_running_var, 
-                    num_of_nodes);
-
-}
-
-
-
-
-void CONV_1(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
-{
-    //printf("\n---- Computing CONV 1 ----\n");
-    ////////////// Embedding: compute edge embedding
-    compute_edge_embedding(num_of_edges, edge_attr, 1);
-
-    //linear,        x = self.linear(x)
-    memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
-            linear_out[nd][dim_out] = gnn_node_convs_1_bias[dim_out];
-            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
-                linear_out[nd][dim_out] += h_1[nd][dim_in] * gnn_node_convs_1_weight[dim_out][dim_in];
-            }
-        }
-    }
-
-    ////////////// Message Passing
-    message_passing(edge_embedding, linear_out, edge_list, num_of_nodes, num_of_edges);
-
-    memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-
-    //return self.propagate(edge_index, x=x, edge_attr = edge_embedding, norm=norm) + F.relu(x + self.root_emb.weight) * 1./deg.view(-1,1)
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim = 0; dim < EMB_DIM; dim++) {
-            if((linear_out[nd][dim] + gnn_node_convs_1_root_emb_weight[dim]) < 0)
-                conv_out[nd][dim] = message[nd][dim];
-            else
-            conv_out[nd][dim] = message[nd][dim] +  (linear_out[nd][dim] + gnn_node_convs_1_root_emb_weight[dim])/(deg[nd]+1);
-        }
-    }   
-    ////////////// Batchnorm + Relu of Conv 1
-    Conv_BatchNorm_Relu(conv_out, h_2, 
-                    gnn_node_batch_norms_1_weight, gnn_node_batch_norms_1_bias,
-                    gnn_node_batch_norms_1_running_mean, gnn_node_batch_norms_1_running_var, 
-                    num_of_nodes);
-
-
-}
-
-
-
-
-void CONV_2(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
-{
-    //printf("\n---- Computing CONV 2 ----\n");
-    ////////////// Embedding: compute edge embedding
-    compute_edge_embedding(num_of_edges, edge_attr, 2);
-
-        //linear,        x = self.linear(x)
-    memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
-            linear_out[nd][dim_out] = gnn_node_convs_2_bias[dim_out];
-            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
-                linear_out[nd][dim_out] += h_2[nd][dim_in] * gnn_node_convs_2_weight[dim_out][dim_in];
-            }
-        }
-    }
-
-    ////////////// Message Passing
-    message_passing(edge_embedding, linear_out, edge_list, num_of_nodes, num_of_edges);
-
-        memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    //return self.propagate(edge_index, x=x, edge_attr = edge_embedding, norm=norm) + F.relu(x + self.root_emb.weight) * 1./deg.view(-1,1)
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim = 0; dim < EMB_DIM; dim++) {
-            if((linear_out[nd][dim] + gnn_node_convs_2_root_emb_weight[dim]) < 0)
-                conv_out[nd][dim] = message[nd][dim];
-            else
-            conv_out[nd][dim] = message[nd][dim] +  (linear_out[nd][dim] + gnn_node_convs_2_root_emb_weight[dim])/(deg[nd]+1);
-        }
-    }   
-    ////////////// Batchnorm + Relu of Conv 2
-    Conv_BatchNorm_Relu(conv_out, h_3, 
-                    gnn_node_batch_norms_2_weight, gnn_node_batch_norms_2_bias,
-                    gnn_node_batch_norms_2_running_mean, gnn_node_batch_norms_2_running_var, 
-                    num_of_nodes);
-
-
-}
-
-
-
-
-
-void CONV_3(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
-{
-    //printf("\n---- Computing CONV 3 ----\n");
-    ////////////// Embedding: compute edge embedding
-    compute_edge_embedding(num_of_edges, edge_attr, 3);
-
- 
-        //linear,        x = self.linear(x)
-    memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
-            linear_out[nd][dim_out] = gnn_node_convs_3_bias[dim_out];
-            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
-                linear_out[nd][dim_out] += h_3[nd][dim_in] * gnn_node_convs_3_weight[dim_out][dim_in];
-            }
-        }
-    }
-
-    ////////////// Message Passing
-    message_passing(edge_embedding, linear_out, edge_list, num_of_nodes, num_of_edges);
-    memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    //return self.propagate(edge_index, x=x, edge_attr = edge_embedding, norm=norm) + F.relu(x + self.root_emb.weight) * 1./deg.view(-1,1)
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim = 0; dim < EMB_DIM; dim++) {
-            if((linear_out[nd][dim] + gnn_node_convs_3_root_emb_weight[dim]) < 0)
-                conv_out[nd][dim] = message[nd][dim];
-            else
-            conv_out[nd][dim] = message[nd][dim] +  (linear_out[nd][dim] + gnn_node_convs_3_root_emb_weight[dim])/(deg[nd]+1);
-        }
-    }   
-    ////////////// Batchnorm + Relu of Conv 3
-    Conv_BatchNorm_Relu(conv_out, h_4, 
-                    gnn_node_batch_norms_3_weight, gnn_node_batch_norms_3_bias,
-                    gnn_node_batch_norms_3_running_mean, gnn_node_batch_norms_3_running_var, 
-                    num_of_nodes);
-
-
-}
-
-
-
-
-void CONV_4(int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
-{
-    //printf("\n---- Computing CONV 4 ----\n");
-    ////////////// Embedding: compute edge embedding
-    compute_edge_embedding(num_of_edges, edge_attr, 4);
-
-    //linear,        x = self.linear(x)
-    memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
-            linear_out[nd][dim_out] = gnn_node_convs_4_bias[dim_out];
-            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
-                linear_out[nd][dim_out] += h_4[nd][dim_in] * gnn_node_convs_4_weight[dim_out][dim_in];
-            }
-        }
-    }
-
-    ////////////// Message Passing
-    message_passing(edge_embedding, linear_out, edge_list, num_of_nodes, num_of_edges);
-        memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(float));
-
-    //return self.propagate(edge_index, x=x, edge_attr = edge_embedding, norm=norm) + F.relu(x + self.root_emb.weight) * 1./deg.view(-1,1)
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim = 0; dim < EMB_DIM; dim++) {
-            if((linear_out[nd][dim] + gnn_node_convs_4_root_emb_weight[dim]) < 0)
-                conv_out[nd][dim] = message[nd][dim];
-            else
-            conv_out[nd][dim] = message[nd][dim] +  (linear_out[nd][dim] + gnn_node_convs_4_root_emb_weight[dim])/(deg[nd]+1);
-        }
-    }   
-    ////////////// Batchnorm + Relu of Conv 4
-    Conv_BatchNorm_Relu(conv_out, h_5, 
-                    gnn_node_batch_norms_4_weight, gnn_node_batch_norms_4_bias,
-                    gnn_node_batch_norms_4_running_mean, gnn_node_batch_norms_4_running_var, 
-                    num_of_nodes, true);
-
+    bool is_last_layer = true ? (layer == LAYER_NUM - 1) : false;
+    Conv_BatchNorm_Relu(conv_out, node_embedding, 
+                    bn_weight[layer], bn_bias[layer],
+                    bn_mean[layer], bn_var[layer], 
+                    num_of_nodes, is_last_layer);
 
 }
 
@@ -377,7 +204,7 @@ void one_node_embedding(int nd, int* node_features)
             FM_TYPE emb_value = node_embedding_table[emb_addr + nd_f][dim]; 
             sum += emb_value;
         }  
-        h_0[nd][dim] = sum;
+        node_embedding[nd][dim] = sum;
     }
     
 }
@@ -426,24 +253,17 @@ void GCN_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
         deg[u]++;
     }
 
-    ////////////// CONV 0 //////////////////////////////////
-    CONV_0(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    ////////////// CONV 1 //////////////////////////////////
-    CONV_1(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    ////////////// CONV 2 //////////////////////////////////
-    CONV_2(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    ////////////// CONV 3 //////////////////////////////////
-    CONV_3(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    ////////////// CONV 4 //////////////////////////////////
-    CONV_4(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
 
+    for(int layer = 0; layer < LAYER_NUM; layer++) {
+        CONV(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges, layer);
+    }
     
     ////////////// Global mean pooling //////////////////////
     // node representation is h_5
     memset(h_graph, 0, EMB_DIM * sizeof(float));
     for(int dim = 0; dim < EMB_DIM; dim++) {
         for(int nd = 0; nd < num_of_nodes; nd++) {
-            h_graph[dim] += h_5[nd][dim];
+            h_graph[dim] += node_embedding[nd][dim];
         }
         h_graph[dim] = h_graph[dim] / num_of_nodes;
     }

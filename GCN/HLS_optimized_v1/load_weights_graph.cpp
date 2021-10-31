@@ -11,6 +11,15 @@ extern int ed_feature_table[EDGE_ATTR];
 float node_embedding_float[ND_FEATURE_TOTAL * EMB_DIM];
 float edge_embedding_float[LAYER_NUM][EG_FEATURE_PER_LAYER * EMB_DIM];
 
+extern float convs_weight[LAYER_NUM][100][100];
+extern float convs_bias[LAYER_NUM][100];
+extern float convs_root_emb_weight[LAYER_NUM][100];
+
+extern float bn_weight[LAYER_NUM][100];
+extern float bn_bias[LAYER_NUM][100];
+extern float bn_mean[LAYER_NUM][100];
+extern float bn_var[LAYER_NUM][100];
+
 void load_weights()
 {
 	printf("Loading weights for GCN ...\n");
@@ -23,186 +32,133 @@ void load_weights()
 	fread(node_embedding_float, sizeof(float), ND_FEATURE_TOTAL * EMB_DIM, f);
 
 	fseek(f, 17300*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_0_weight, sizeof(float), 10000, f);
+	fread(convs_weight[0], sizeof(float), 10000, f);
 
 	fseek(f, 27300*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_0_bias, sizeof(float), 100, f);
+	fread(convs_bias[0], sizeof(float), 100, f);
 
 	fseek(f, 27400*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_0_root_emb_weight, sizeof(float), 100, f);
+	fread(convs_root_emb_weight[0], sizeof(float), 100, f);
 
 	fseek(f, 27500*sizeof(float), SEEK_SET);
 	fread(edge_embedding_float[0], sizeof(float), EG_FEATURE_PER_LAYER * EMB_DIM, f);
 
-	// fseek(f, 27500*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_0_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 500, f);
-
-	// fseek(f, 28000*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_0_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 600, f);
-
-	// fseek(f, 28600*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_0_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 200, f);
 
 	fseek(f, 28800*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_1_weight, sizeof(float), 10000, f);
+	fread(convs_weight[1], sizeof(float), 10000, f);
 
 	fseek(f, 38800*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_1_bias, sizeof(float), 100, f);
+	fread(convs_bias[1], sizeof(float), 100, f);
 
 	fseek(f, 38900*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_1_root_emb_weight, sizeof(float), 100, f);
+	fread(convs_root_emb_weight[1], sizeof(float), 100, f);
 
 	fseek(f, 39000*sizeof(float), SEEK_SET);
 	fread(edge_embedding_float[1], sizeof(float), EG_FEATURE_PER_LAYER * EMB_DIM, f);
 
-	// fseek(f, 39000*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_1_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 500, f);
-
-	// fseek(f, 39500*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_1_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 600, f);
-
-	// fseek(f, 40100*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_1_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 200, f);
 
 	fseek(f, 40300*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_2_weight, sizeof(float), 10000, f);
+	fread(convs_weight[2], sizeof(float), 10000, f);
 
 	fseek(f, 50300*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_2_bias, sizeof(float), 100, f);
+	fread(convs_bias[2], sizeof(float), 100, f);
 
 	fseek(f, 50400*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_2_root_emb_weight, sizeof(float), 100, f);
+	fread(convs_root_emb_weight[2], sizeof(float), 100, f);
 
 	fseek(f, 50500*sizeof(float), SEEK_SET);
 	fread(edge_embedding_float[2], sizeof(float), EG_FEATURE_PER_LAYER * EMB_DIM, f);
 
-	// fseek(f, 50500*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_2_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 500, f);
-
-	// fseek(f, 51000*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_2_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 600, f);
-
-	// fseek(f, 51600*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_2_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 200, f);
-
 	fseek(f, 51800*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_3_weight, sizeof(float), 10000, f);
+	fread(convs_weight[3], sizeof(float), 10000, f);
 
 	fseek(f, 61800*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_3_bias, sizeof(float), 100, f);
+	fread(convs_bias[3], sizeof(float), 100, f);
 
 	fseek(f, 61900*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_3_root_emb_weight, sizeof(float), 100, f);
+	fread(convs_root_emb_weight[3], sizeof(float), 100, f);
 
 	fseek(f, 62000*sizeof(float), SEEK_SET);
 	fread(edge_embedding_float[3], sizeof(float), EG_FEATURE_PER_LAYER * EMB_DIM, f);
 
-	// fseek(f, 62000*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_3_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 500, f);
-
-	// fseek(f, 62500*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_3_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 600, f);
-
-	// fseek(f, 63100*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_3_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 200, f);
 
 	fseek(f, 63300*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_4_weight, sizeof(float), 10000, f);
+	fread(convs_weight[4], sizeof(float), 10000, f);
 
 	fseek(f, 73300*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_4_bias, sizeof(float), 100, f);
+	fread(convs_bias[4], sizeof(float), 100, f);
 
 	fseek(f, 73400*sizeof(float), SEEK_SET);
-	fread(gnn_node_convs_4_root_emb_weight, sizeof(float), 100, f);
+	fread(convs_root_emb_weight[4], sizeof(float), 100, f);
 
 	fseek(f, 73500*sizeof(float), SEEK_SET);
 	fread(edge_embedding_float[4], sizeof(float), EG_FEATURE_PER_LAYER * EMB_DIM, f);
 
-	// fseek(f, 73500*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_4_bond_encoder_bond_embedding_list_0_weight, sizeof(float), 500, f);
-
-	// fseek(f, 74000*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_4_bond_encoder_bond_embedding_list_1_weight, sizeof(float), 600, f);
-
-	// fseek(f, 74600*sizeof(float), SEEK_SET);
-	// fread(gnn_node_convs_4_bond_encoder_bond_embedding_list_2_weight, sizeof(float), 200, f);
 	
 	fseek(f, 74800*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_0_weight, sizeof(float), 100, f);
+	fread(bn_weight[0], sizeof(float), 100, f);
 
 	fseek(f, 74900*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_0_bias, sizeof(float), 100, f);
+	fread(bn_bias[0], sizeof(float), 100, f);
 
 	fseek(f, 75000*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_0_running_mean, sizeof(float), 100, f);
+	fread(bn_mean[0], sizeof(float), 100, f);
 
 	fseek(f, 75100*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_0_running_var, sizeof(float), 100, f);
+	fread(bn_var[0], sizeof(float), 100, f);
 
-	fseek(f, 75200*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_0_track, sizeof(float), 1, f);
 
 	fseek(f, 75201*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_1_weight, sizeof(float), 100, f);
+	fread(bn_weight[1], sizeof(float), 100, f);
 
 	fseek(f, 75301*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_1_bias, sizeof(float), 100, f);
+	fread(bn_bias[1], sizeof(float), 100, f);
 
 	fseek(f, 75401*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_1_running_mean, sizeof(float), 100, f);
+	fread(bn_mean[1], sizeof(float), 100, f);
 
 	fseek(f, 75501*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_1_running_var, sizeof(float), 100, f);
+	fread(bn_var[1], sizeof(float), 100, f);
 
-	
-	fseek(f, 75601*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_1_track, sizeof(float), 1, f);
 		
 	fseek(f, 75602*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_2_weight, sizeof(float), 100, f);
+	fread(bn_weight[2], sizeof(float), 100, f);
 
 	fseek(f, 75702*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_2_bias, sizeof(float), 100, f);
+	fread(bn_bias[2], sizeof(float), 100, f);
 
 	fseek(f, 75802*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_2_running_mean, sizeof(float), 100, f);
+	fread(bn_mean[2], sizeof(float), 100, f);
 
 	fseek(f, 75902*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_2_running_var, sizeof(float), 100, f);
+	fread(bn_var[2], sizeof(float), 100, f);
 
-	
-	fseek(f, 76002*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_2_track, sizeof(float), 1, f);
 
 	fseek(f, 76003*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_3_weight, sizeof(float), 100, f);
+	fread(bn_weight[3], sizeof(float), 100, f);
 
 	fseek(f, 76103*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_3_bias, sizeof(float), 100, f);
+	fread(bn_bias[3], sizeof(float), 100, f);
 
 	fseek(f, 76203*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_3_running_mean, sizeof(float), 100, f);
+	fread(bn_mean[3], sizeof(float), 100, f);
 
 	fseek(f, 76303*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_3_running_var, sizeof(float), 100, f);
+	fread(bn_var[3], sizeof(float), 100, f);
 	
-	fseek(f, 76403*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_3_track, sizeof(float), 1, f);
 
 	fseek(f, 76404*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_4_weight, sizeof(float), 100, f);
+	fread(bn_weight[4], sizeof(float), 100, f);
 
 	fseek(f, 76504*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_4_bias, sizeof(float), 100, f);
+	fread(bn_bias[4], sizeof(float), 100, f);
 
 	fseek(f, 76604*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_4_running_mean, sizeof(float), 100, f);
+	fread(bn_mean[4], sizeof(float), 100, f);
 
 	fseek(f, 76704*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_4_running_var, sizeof(float), 100, f);
+	fread(bn_var[4], sizeof(float), 100, f);
 	
-	fseek(f, 76804*sizeof(float), SEEK_SET);
-	fread(gnn_node_batch_norms_4_track, sizeof(float), 1, f);
 
 	fseek(f, 76805*sizeof(float), SEEK_SET);
 	fread(graph_pred_linear_weight, sizeof(float), 100, f);
