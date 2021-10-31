@@ -1,7 +1,3 @@
-*Optimizations:*
-
-- Fully parallelized the MLP\_1\_INPUT dimension and MLP\_2\_OUTPUT dimensions.
-
-- Saves all the five-layer weights on-board.
-
-- Successfully (probably) parallelized the MLP with message passing. Improved the latency from 0.91ms to 0.82ms to 0.55ms
+Tried HLS streaming but resulted in 5x slowdown.
+Now average runtime is 2.7ms. 
+Trying to figure out why.

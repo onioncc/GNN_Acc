@@ -1,0 +1,255 @@
+
+
+================================================================
+== Vitis HLS Report for 'GIN_compute_one_graph'
+================================================================
+* Date:           Sat Oct 30 13:58:08 2021
+
+* Version:        2020.2.2 (Build 3118627 on Tue Feb  9 05:13:49 MST 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.300 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-------+-------+---------+
+    |  Latency (cycles) |  Latency (absolute) |    Interval   | Pipeline|
+    |   min   |   max   |    min   |    max   |  min  |  max  |   Type  |
+    +---------+---------+----------+----------+-------+-------+---------+
+    |    16015|    71245|  0.160 ms|  0.712 ms|  16016|  71246|     none|
+    +---------+---------+----------+----------+-------+-------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+--------------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) |   Iteration  |  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |    Latency   |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+--------------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_629_2  |    10625|    58255|  2125 ~ 11651|          -|          -|     5|        no|
+        +--------------------+---------+---------+--------------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 11
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 8 
+8 --> 9 10 
+9 --> 8 
+10 --> 11 
+11 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.00>
+ST_1 : Operation 12 [1/1] (1.00ns)   --->   "%task_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %task_r" [GIN_compute.cpp:554]   --->   Operation 12 'read' 'task_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 122 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 13 [1/1] (1.00ns)   --->   "%edge_attr_in_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %edge_attr_in" [GIN_compute.cpp:554]   --->   Operation 13 'read' 'edge_attr_in_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 122 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 14 [1/1] (1.00ns)   --->   "%edge_list_in_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %edge_list_in" [GIN_compute.cpp:554]   --->   Operation 14 'read' 'edge_list_in_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 122 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+ST_1 : Operation 15 [1/1] (1.00ns)   --->   "%node_feature_in_read = read i64 @_ssdm_op_Read.s_axilite.i64, i64 %node_feature_in" [GIN_compute.cpp:554]   --->   Operation 15 'read' 'node_feature_in_read' <Predicate = true> <Delay = 1.00> <CoreInst = "s_axilite">   --->   Core 122 's_axilite' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write'>
+
+State 2 <SV = 1> <Delay = 7.30>
+ST_2 : Operation 16 [2/2] (7.30ns)   --->   "%call_ln614 = call void @load_graph, i32 %mem, i64 %node_feature_in_read, i64 %edge_list_in_read, i64 %edge_attr_in_read, i32 %node_feature, i32 %edge_list, i32 %edge_attr_0, i32 %edge_attr_1, i32 %edge_attr_2" [GIN_compute.cpp:614]   --->   Operation 16 'call' 'call_ln614' <Predicate = true> <Delay = 7.30> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_2 : Operation 17 [2/2] (0.38ns)   --->   "%call_ln622 = call void @clear_message_table, i32 %message1_V" [GIN_compute.cpp:622]   --->   Operation 17 'call' 'call_ln622' <Predicate = true> <Delay = 0.38> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_2 : Operation 18 [2/2] (0.38ns)   --->   "%call_ln623 = call void @clear_message_table, i32 %message2_V" [GIN_compute.cpp:623]   --->   Operation 18 'call' 'call_ln623' <Predicate = true> <Delay = 0.38> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 0.00>
+ST_3 : Operation 19 [1/2] (0.00ns)   --->   "%call_ln614 = call void @load_graph, i32 %mem, i64 %node_feature_in_read, i64 %edge_list_in_read, i64 %edge_attr_in_read, i32 %node_feature, i32 %edge_list, i32 %edge_attr_0, i32 %edge_attr_1, i32 %edge_attr_2" [GIN_compute.cpp:614]   --->   Operation 19 'call' 'call_ln614' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_3 : Operation 20 [1/2] (0.00ns)   --->   "%call_ln622 = call void @clear_message_table, i32 %message1_V" [GIN_compute.cpp:622]   --->   Operation 20 'call' 'call_ln622' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_3 : Operation 21 [1/2] (0.00ns)   --->   "%call_ln623 = call void @clear_message_table, i32 %message2_V" [GIN_compute.cpp:623]   --->   Operation 21 'call' 'call_ln623' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 0.00>
+ST_4 : Operation 22 [2/2] (0.00ns)   --->   "%call_ln619 = call void @prepare_degree_neighbor_table, i32 %degree_table, i32 %edge_list, i8 %neighbor_table" [GIN_compute.cpp:619]   --->   Operation 22 'call' 'call_ln619' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 0.00>
+ST_5 : Operation 23 [1/2] (0.00ns)   --->   "%call_ln619 = call void @prepare_degree_neighbor_table, i32 %degree_table, i32 %edge_list, i8 %neighbor_table" [GIN_compute.cpp:619]   --->   Operation 23 'call' 'call_ln619' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 0.00>
+ST_6 : Operation 24 [2/2] (0.00ns)   --->   "%call_ln626 = call void @compute_node_embedding, i32 %node_embedding_V, i32 %degree_table, i8 %neighbor_table, i32 %message1_V" [GIN_compute.cpp:626]   --->   Operation 24 'call' 'call_ln626' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 7 <SV = 6> <Delay = 0.38>
+ST_7 : Operation 25 [1/1] (0.00ns)   --->   "%spectopmodule_ln0 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_18"   --->   Operation 25 'spectopmodule' 'spectopmodule_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 26 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mem, void @empty_22, i32 0, i32 0, void @empty_13, i32 0, i32 100000, void @empty_11, void @empty_10, void @empty_13, i32 16, i32 16, i32 16, i32 16, void @empty_13, void @empty_13"   --->   Operation 26 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 27 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %mem"   --->   Operation 27 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 28 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %node_feature_in, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_6, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 28 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 29 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %node_feature_in, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 29 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 30 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %edge_list_in, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_36, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 30 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 31 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %edge_list_in, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 31 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 32 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %edge_attr_in, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_17, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 32 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 33 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %edge_attr_in, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 33 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %graph_attr, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_34, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 34 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 35 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %graph_attr, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 35 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 36 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %task_r, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_28, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 36 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 37 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %task_r, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 37 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 38 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_1_weights_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_14, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 38 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 39 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_1_weights_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 39 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 40 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_1_bias_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_23, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 40 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 41 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_1_bias_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 41 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 42 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_2_weights_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_39, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 42 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 43 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_2_weights_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 43 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 44 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_2_bias_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_26, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 44 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 45 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_mlp_2_bias_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 45 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_embedding_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_38, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 47 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_node_embedding_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 47 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 48 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_edge_embedding_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_20, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 48 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 49 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %gnn_edge_embedding_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 49 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 50 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %graph_pred_linear_weight_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_1, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 50 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 51 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %graph_pred_linear_weight_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 51 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 52 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %graph_pred_linear_bias_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_0, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 52 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 53 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %graph_pred_linear_bias_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 53 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 54 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %eps_fixed, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_29, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 54 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 55 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %eps_fixed, void @empty_35, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_13, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_5"   --->   Operation 55 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 56 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 0, void @empty_9, i32 0, i32 0, void @empty_13, i32 0, i32 0, void @empty_8, void @empty_13, void @empty_13, i32 0, i32 0, i32 0, i32 0, void @empty_13, void @empty_13"   --->   Operation 56 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 57 [1/1] (0.00ns)   --->   "%specmemcore_ln565 = specmemcore void @_ssdm_op_SpecMemCore, i32 %node_feature, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:565]   --->   Operation 57 'specmemcore' 'specmemcore_ln565' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 58 [1/1] (0.00ns)   --->   "%specmemcore_ln583 = specmemcore void @_ssdm_op_SpecMemCore, i32 %edge_attr_0, i32 %edge_attr_1, i32 %edge_attr_2, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:583]   --->   Operation 58 'specmemcore' 'specmemcore_ln583' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 59 [1/1] (0.00ns)   --->   "%specmemcore_ln584 = specmemcore void @_ssdm_op_SpecMemCore, i32 %edge_list, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:584]   --->   Operation 59 'specmemcore' 'specmemcore_ln584' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 60 [1/1] (0.00ns)   --->   "%specmemcore_ln585 = specmemcore void @_ssdm_op_SpecMemCore, i32 %graph_embedding_V, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:585]   --->   Operation 60 'specmemcore' 'specmemcore_ln585' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 61 [1/1] (0.00ns)   --->   "%specmemcore_ln586 = specmemcore void @_ssdm_op_SpecMemCore, i32 %node_embedding_V, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:586]   --->   Operation 61 'specmemcore' 'specmemcore_ln586' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 62 [1/1] (0.00ns)   --->   "%specmemcore_ln587 = specmemcore void @_ssdm_op_SpecMemCore, void @node_embedding_table_V_0, void @node_embedding_table_V_1, void @node_embedding_table_V_2, void @node_embedding_table_V_3, void @node_embedding_table_V_4, void @node_embedding_table_V_5, void @node_embedding_table_V_6, void @node_embedding_table_V_7, void @node_embedding_table_V_8, void @node_embedding_table_V_9, void @node_embedding_table_V_10, void @node_embedding_table_V_11, void @node_embedding_table_V_12, void @node_embedding_table_V_13, void @node_embedding_table_V_14, void @node_embedding_table_V_15, void @node_embedding_table_V_16, void @node_embedding_table_V_17, void @node_embedding_table_V_18, void @node_embedding_table_V_19, void @node_embedding_table_V_20, void @node_embedding_table_V_21, void @node_embedding_table_V_22, void @node_embedding_table_V_23, void @node_embedding_table_V_24, void @node_embedding_table_V_25, void @node_embedding_table_V_26, void @node_embedding_table_V_27, void @node_embedding_table_V_28, void @node_embedding_table_V_29, void @node_embedding_table_V_30, void @node_embedding_table_V_31, void @node_embedding_table_V_32, void @node_embedding_table_V_33, void @node_embedding_table_V_34, void @node_embedding_table_V_35, void @node_embedding_table_V_36, void @node_embedding_table_V_37, void @node_embedding_table_V_38, void @node_embedding_table_V_39, void @node_embedding_table_V_40, void @node_embedding_table_V_41, void @node_embedding_table_V_42, void @node_embedding_table_V_43, void @node_embedding_table_V_44, void @node_embedding_table_V_45, void @node_embedding_table_V_46, void @node_embedding_table_V_47, void @node_embedding_table_V_48, void @node_embedding_table_V_49, void @node_embedding_table_V_50, void @node_embedding_table_V_51, void @node_embedding_table_V_52, void @node_embedding_table_V_53, void @node_embedding_table_V_54, void @node_embedding_table_V_55, void @node_embedding_table_V_56, void @node_embedding_table_V_57, void @node_embedding_table_V_58, void @node_embedding_table_V_59, void @node_embedding_table_V_60, void @node_embedding_table_V_61, void @node_embedding_table_V_62, void @node_embedding_table_V_63, void @node_embedding_table_V_64, void @node_embedding_table_V_65, void @node_embedding_table_V_66, void @node_embedding_table_V_67, void @node_embedding_table_V_68, void @node_embedding_table_V_69, void @node_embedding_table_V_70, void @node_embedding_table_V_71, void @node_embedding_table_V_72, void @node_embedding_table_V_73, void @node_embedding_table_V_74, void @node_embedding_table_V_75, void @node_embedding_table_V_76, void @node_embedding_table_V_77, void @node_embedding_table_V_78, void @node_embedding_table_V_79, void @node_embedding_table_V_80, void @node_embedding_table_V_81, void @node_embedding_table_V_82, void @node_embedding_table_V_83, void @node_embedding_table_V_84, void @node_embedding_table_V_85, void @node_embedding_table_V_86, void @node_embedding_table_V_87, void @node_embedding_table_V_88, void @node_embedding_table_V_89, void @node_embedding_table_V_90, void @node_embedding_table_V_91, void @node_embedding_table_V_92, void @node_embedding_table_V_93, void @node_embedding_table_V_94, void @node_embedding_table_V_95, void @node_embedding_table_V_96, void @node_embedding_table_V_97, void @node_embedding_table_V_98, void @node_embedding_table_V_99, void @node_embedding_table_V_100, void @node_embedding_table_V_101, void @node_embedding_table_V_102, void @node_embedding_table_V_103, void @node_embedding_table_V_104, void @node_embedding_table_V_105, void @node_embedding_table_V_106, void @node_embedding_table_V_107, void @node_embedding_table_V_108, void @node_embedding_table_V_109, void @node_embedding_table_V_110, void @node_embedding_table_V_111, void @node_embedding_table_V_112, void @node_embedding_table_V_113, void @node_embedding_table_V_114, void @node_embedding_table_V_115, void @node_embedding_table_V_116, void @node_embedding_table_V_117, void @node_embedding_table_V_118, void @node_embedding_table_V_119, void @node_embedding_table_V_120, void @node_embedding_table_V_121, void @node_embedding_table_V_122, void @node_embedding_table_V_123, void @node_embedding_table_V_124, void @node_embedding_table_V_125, void @node_embedding_table_V_126, void @node_embedding_table_V_127, void @node_embedding_table_V_128, void @node_embedding_table_V_129, void @node_embedding_table_V_130, void @node_embedding_table_V_131, void @node_embedding_table_V_132, void @node_embedding_table_V_133, void @node_embedding_table_V_134, void @node_embedding_table_V_135, void @node_embedding_table_V_136, void @node_embedding_table_V_137, void @node_embedding_table_V_138, void @node_embedding_table_V_139, void @node_embedding_table_V_140, void @node_embedding_table_V_141, void @node_embedding_table_V_142, void @node_embedding_table_V_143, void @node_embedding_table_V_144, void @node_embedding_table_V_145, void @node_embedding_table_V_146, void @node_embedding_table_V_147, void @node_embedding_table_V_148, void @node_embedding_table_V_149, void @node_embedding_table_V_150, void @node_embedding_table_V_151, void @node_embedding_table_V_152, void @node_embedding_table_V_153, void @node_embedding_table_V_154, void @node_embedding_table_V_155, void @node_embedding_table_V_156, void @node_embedding_table_V_157, void @node_embedding_table_V_158, void @node_embedding_table_V_159, void @node_embedding_table_V_160, void @node_embedding_table_V_161, void @node_embedding_table_V_162, void @node_embedding_table_V_163, void @node_embedding_table_V_164, void @node_embedding_table_V_165, void @node_embedding_table_V_166, void @node_embedding_table_V_167, void @node_embedding_table_V_168, void @node_embedding_table_V_169, void @node_embedding_table_V_170, void @node_embedding_table_V_171, void @node_embedding_table_V_172, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:587]   --->   Operation 62 'specmemcore' 'specmemcore_ln587' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 63 [1/1] (0.00ns)   --->   "%specmemcore_ln588 = specmemcore void @_ssdm_op_SpecMemCore, void @edge_embedding_table_V_0, void @edge_embedding_table_V_1, void @edge_embedding_table_V_2, void @edge_embedding_table_V_3, void @edge_embedding_table_V_4, void @edge_embedding_table_V_5, void @edge_embedding_table_V_6, void @edge_embedding_table_V_7, void @edge_embedding_table_V_8, void @edge_embedding_table_V_9, void @edge_embedding_table_V_10, void @edge_embedding_table_V_11, void @edge_embedding_table_V_12, void @edge_embedding_table_V_13, void @edge_embedding_table_V_14, void @edge_embedding_table_V_15, void @edge_embedding_table_V_16, void @edge_embedding_table_V_17, void @edge_embedding_table_V_18, void @edge_embedding_table_V_19, void @edge_embedding_table_V_20, void @edge_embedding_table_V_21, void @edge_embedding_table_V_22, void @edge_embedding_table_V_23, void @edge_embedding_table_V_24, void @edge_embedding_table_V_25, void @edge_embedding_table_V_26, void @edge_embedding_table_V_27, void @edge_embedding_table_V_28, void @edge_embedding_table_V_29, void @edge_embedding_table_V_30, void @edge_embedding_table_V_31, void @edge_embedding_table_V_32, void @edge_embedding_table_V_33, void @edge_embedding_table_V_34, void @edge_embedding_table_V_35, void @edge_embedding_table_V_36, void @edge_embedding_table_V_37, void @edge_embedding_table_V_38, void @edge_embedding_table_V_39, void @edge_embedding_table_V_40, void @edge_embedding_table_V_41, void @edge_embedding_table_V_42, void @edge_embedding_table_V_43, void @edge_embedding_table_V_44, void @edge_embedding_table_V_45, void @edge_embedding_table_V_46, void @edge_embedding_table_V_47, void @edge_embedding_table_V_48, void @edge_embedding_table_V_49, void @edge_embedding_table_V_50, void @edge_embedding_table_V_51, void @edge_embedding_table_V_52, void @edge_embedding_table_V_53, void @edge_embedding_table_V_54, void @edge_embedding_table_V_55, void @edge_embedding_table_V_56, void @edge_embedding_table_V_57, void @edge_embedding_table_V_58, void @edge_embedding_table_V_59, void @edge_embedding_table_V_60, void @edge_embedding_table_V_61, void @edge_embedding_table_V_62, void @edge_embedding_table_V_63, void @edge_embedding_table_V_64, i64 666, i64 22, i64 18446744073709551615" [GIN_compute.cpp:588]   --->   Operation 63 'specmemcore' 'specmemcore_ln588' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 64 [1/1] (0.00ns)   --->   "%specmemcore_ln589 = specmemcore void @_ssdm_op_SpecMemCore, i32 %message1_V, i64 666, i64 24, i64 18446744073709551615" [GIN_compute.cpp:589]   --->   Operation 64 'specmemcore' 'specmemcore_ln589' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 65 [1/1] (0.00ns)   --->   "%specmemcore_ln590 = specmemcore void @_ssdm_op_SpecMemCore, i32 %message2_V, i64 666, i64 24, i64 18446744073709551615" [GIN_compute.cpp:590]   --->   Operation 65 'specmemcore' 'specmemcore_ln590' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 66 [1/2] (0.00ns)   --->   "%call_ln626 = call void @compute_node_embedding, i32 %node_embedding_V, i32 %degree_table, i8 %neighbor_table, i32 %message1_V" [GIN_compute.cpp:626]   --->   Operation 66 'call' 'call_ln626' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_7 : Operation 67 [1/1] (0.38ns)   --->   "%br_ln629 = br void" [GIN_compute.cpp:629]   --->   Operation 67 'br' 'br_ln629' <Predicate = true> <Delay = 0.38>
+
+State 8 <SV = 7> <Delay = 2.56>
+ST_8 : Operation 68 [1/1] (0.00ns)   --->   "%layer = phi i3 0, void, i3 %layer_1, void %.split"   --->   Operation 68 'phi' 'layer' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 69 [1/1] (0.57ns)   --->   "%layer_1 = add i3 %layer, i3 1" [GIN_compute.cpp:629]   --->   Operation 69 'add' 'layer_1' <Predicate = true> <Delay = 0.57> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.57> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 70 [1/1] (0.49ns)   --->   "%icmp_ln629 = icmp_eq  i3 %layer, i3 5" [GIN_compute.cpp:629]   --->   Operation 70 'icmp' 'icmp_ln629' <Predicate = true> <Delay = 0.49> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.49> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 71 [1/1] (0.00ns)   --->   "%speclooptripcount_ln0 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 5, i64 5, i64 5"   --->   Operation 71 'speclooptripcount' 'speclooptripcount_ln0' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 72 [1/1] (0.00ns)   --->   "%br_ln629 = br i1 %icmp_ln629, void %.split, void" [GIN_compute.cpp:629]   --->   Operation 72 'br' 'br_ln629' <Predicate = true> <Delay = 0.00>
+ST_8 : Operation 73 [2/2] (2.06ns)   --->   "%call_ln630 = call void @compute_CONV_layer, i3 %layer, i32 %message2_V, i32 %node_embedding_V, i32 %message1_V, i32 %degree_table, i8 %neighbor_table" [GIN_compute.cpp:630]   --->   Operation 73 'call' 'call_ln630' <Predicate = (!icmp_ln629)> <Delay = 2.06> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 0.00>
+ST_9 : Operation 74 [1/1] (0.00ns)   --->   "%specloopname_ln629 = specloopname void @_ssdm_op_SpecLoopName, void @empty_19" [GIN_compute.cpp:629]   --->   Operation 74 'specloopname' 'specloopname_ln629' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 75 [1/2] (0.00ns)   --->   "%call_ln630 = call void @compute_CONV_layer, i3 %layer, i32 %message2_V, i32 %node_embedding_V, i32 %message1_V, i32 %degree_table, i8 %neighbor_table" [GIN_compute.cpp:630]   --->   Operation 75 'call' 'call_ln630' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_9 : Operation 76 [1/1] (0.00ns)   --->   "%br_ln0 = br void"   --->   Operation 76 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+State 10 <SV = 8> <Delay = 7.30>
+ST_10 : Operation 77 [2/2] (0.00ns)   --->   "%call_ln634 = call void @global_mean_pooling, i32 %node_embedding_V, i32 %graph_embedding_V" [GIN_compute.cpp:634]   --->   Operation 77 'call' 'call_ln634' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_10 : Operation 78 [2/2] (7.30ns)   --->   "%call_ln637 = call void @global_graph_prediction, i32 %mem, i64 %task_read" [GIN_compute.cpp:637]   --->   Operation 78 'call' 'call_ln637' <Predicate = true> <Delay = 7.30> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 11 <SV = 9> <Delay = 0.00>
+ST_11 : Operation 79 [1/2] (0.00ns)   --->   "%call_ln634 = call void @global_mean_pooling, i32 %node_embedding_V, i32 %graph_embedding_V" [GIN_compute.cpp:634]   --->   Operation 79 'call' 'call_ln634' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_11 : Operation 80 [1/2] (0.00ns)   --->   "%call_ln637 = call void @global_graph_prediction, i32 %mem, i64 %task_read" [GIN_compute.cpp:637]   --->   Operation 80 'call' 'call_ln637' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_11 : Operation 81 [1/1] (0.00ns)   --->   "%ret_ln646 = ret" [GIN_compute.cpp:646]   --->   Operation 81 'ret' 'ret_ln646' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 1ns
+The critical path consists of the following:
+	s_axi read on port 'task_r' (GIN_compute.cpp:554) [66]  (1 ns)
+
+ <State 2>: 7.3ns
+The critical path consists of the following:
+	'call' operation ('call_ln614', GIN_compute.cpp:614) to 'load_graph' [79]  (7.3 ns)
+
+ <State 3>: 0ns
+The critical path consists of the following:
+
+ <State 4>: 0ns
+The critical path consists of the following:
+
+ <State 5>: 0ns
+The critical path consists of the following:
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+ <State 7>: 0.387ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('layer') with incoming values : ('layer', GIN_compute.cpp:629) [86]  (0.387 ns)
+
+ <State 8>: 2.57ns
+The critical path consists of the following:
+	'phi' operation ('layer') with incoming values : ('layer', GIN_compute.cpp:629) [86]  (0 ns)
+	'call' operation ('call_ln630', GIN_compute.cpp:630) to 'compute_CONV_layer' [93]  (2.07 ns)
+	blocking operation 0.499 ns on control path)
+
+ <State 9>: 0ns
+The critical path consists of the following:
+
+ <State 10>: 7.3ns
+The critical path consists of the following:
+	'call' operation ('call_ln637', GIN_compute.cpp:637) to 'global_graph_prediction' [97]  (7.3 ns)
+
+ <State 11>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

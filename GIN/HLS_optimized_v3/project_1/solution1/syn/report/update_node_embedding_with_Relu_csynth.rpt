@@ -1,0 +1,258 @@
+
+
+================================================================
+== Vitis HLS Report for 'update_node_embedding_with_Relu'
+================================================================
+* Date:           Sat Oct 30 13:58:19 2021
+
+* Version:        2020.2.2 (Build 3118627 on Tue Feb  9 05:13:49 MST 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  2.449 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |      102|      102|  1.020 us|  1.020 us|  102|  102|     none|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_101_1  |      100|      100|         1|          1|          1|   100|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       88|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     0|        0|      539|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|       29|    -|
+|Register             |        -|     -|       23|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       23|      656|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +-------------------------+--------------------+---------+----+---+-----+-----+
+    |         Instance        |       Module       | BRAM_18K| DSP| FF| LUT | URAM|
+    +-------------------------+--------------------+---------+----+---+-----+-----+
+    |mul_5ns_8ns_12_1_1_U238  |mul_5ns_8ns_12_1_1  |        0|   0|  0|   40|    0|
+    |mux_1007_32_1_1_U239     |mux_1007_32_1_1     |        0|   0|  0|  499|    0|
+    +-------------------------+--------------------+---------+----+---+-----+-----+
+    |Total                    |                    |        0|   0|  0|  539|    0|
+    +-------------------------+--------------------+---------+----+---+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-------------------------+----------+----+---+----+------------+------------+
+    |      Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |add_ln101_fu_929_p2      |         +|   0|  0|  14|           7|           1|
+    |empty_49_fu_950_p2       |         +|   0|  0|  19|          12|          12|
+    |cmp1_not_fu_923_p2       |      icmp|   0|  0|   9|           3|           4|
+    |icmp_ln101_fu_935_p2     |      icmp|   0|  0|  10|           7|           6|
+    |or_ln102_fu_1080_p2      |        or|   0|  0|   2|           1|           1|
+    |select_ln102_fu_1085_p3  |    select|   0|  0|  32|           1|          32|
+    |xor_ln102_fu_1074_p2     |       xor|   0|  0|   2|           1|           2|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |Total                    |          |   0|  0|  88|          32|          58|
+    +-------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------+----+-----------+-----+-----------+
+    |     Name    | LUT| Input Size| Bits| Total Bits|
+    +-------------+----+-----------+-----+-----------+
+    |ap_NS_fsm    |  20|          4|    1|          4|
+    |dim_reg_902  |   9|          2|    7|         14|
+    +-------------+----+-----------+-----+-----------+
+    |Total        |  29|          6|    8|         18|
+    +-------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------+----+----+-----+-----------+
+    |        Name       | FF | LUT| Bits| Const Bits|
+    +-------------------+----+----+-----+-----------+
+    |ap_CS_fsm          |   3|   0|    3|          0|
+    |cmp1_not_reg_1600  |   1|   0|    1|          0|
+    |dim_reg_902        |   7|   0|    7|          0|
+    |empty_reg_1595     |  12|   0|   12|          0|
+    +-------------------+----+----+-----+-----------+
+    |Total              |  23|   0|   23|          0|
+    +-------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+---------------------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |          Source Object          |    C Type    |
++---------------------------+-----+-----+------------+---------------------------------+--------------+
+|ap_clk                     |   in|    1|  ap_ctrl_hs|  update_node_embedding_with_Relu|  return value|
+|ap_rst                     |   in|    1|  ap_ctrl_hs|  update_node_embedding_with_Relu|  return value|
+|ap_start                   |   in|    1|  ap_ctrl_hs|  update_node_embedding_with_Relu|  return value|
+|ap_done                    |  out|    1|  ap_ctrl_hs|  update_node_embedding_with_Relu|  return value|
+|ap_idle                    |  out|    1|  ap_ctrl_hs|  update_node_embedding_with_Relu|  return value|
+|ap_ready                   |  out|    1|  ap_ctrl_hs|  update_node_embedding_with_Relu|  return value|
+|p_read                     |   in|   32|     ap_none|                           p_read|        scalar|
+|p_read1                    |   in|   32|     ap_none|                          p_read1|        scalar|
+|p_read2                    |   in|   32|     ap_none|                          p_read2|        scalar|
+|p_read3                    |   in|   32|     ap_none|                          p_read3|        scalar|
+|p_read4                    |   in|   32|     ap_none|                          p_read4|        scalar|
+|p_read5                    |   in|   32|     ap_none|                          p_read5|        scalar|
+|p_read6                    |   in|   32|     ap_none|                          p_read6|        scalar|
+|p_read7                    |   in|   32|     ap_none|                          p_read7|        scalar|
+|p_read8                    |   in|   32|     ap_none|                          p_read8|        scalar|
+|p_read9                    |   in|   32|     ap_none|                          p_read9|        scalar|
+|p_read10                   |   in|   32|     ap_none|                         p_read10|        scalar|
+|p_read11                   |   in|   32|     ap_none|                         p_read11|        scalar|
+|p_read12                   |   in|   32|     ap_none|                         p_read12|        scalar|
+|p_read13                   |   in|   32|     ap_none|                         p_read13|        scalar|
+|p_read14                   |   in|   32|     ap_none|                         p_read14|        scalar|
+|p_read15                   |   in|   32|     ap_none|                         p_read15|        scalar|
+|p_read16                   |   in|   32|     ap_none|                         p_read16|        scalar|
+|p_read17                   |   in|   32|     ap_none|                         p_read17|        scalar|
+|p_read18                   |   in|   32|     ap_none|                         p_read18|        scalar|
+|p_read19                   |   in|   32|     ap_none|                         p_read19|        scalar|
+|p_read20                   |   in|   32|     ap_none|                         p_read20|        scalar|
+|p_read21                   |   in|   32|     ap_none|                         p_read21|        scalar|
+|p_read22                   |   in|   32|     ap_none|                         p_read22|        scalar|
+|p_read23                   |   in|   32|     ap_none|                         p_read23|        scalar|
+|p_read24                   |   in|   32|     ap_none|                         p_read24|        scalar|
+|p_read25                   |   in|   32|     ap_none|                         p_read25|        scalar|
+|p_read26                   |   in|   32|     ap_none|                         p_read26|        scalar|
+|p_read27                   |   in|   32|     ap_none|                         p_read27|        scalar|
+|p_read28                   |   in|   32|     ap_none|                         p_read28|        scalar|
+|p_read29                   |   in|   32|     ap_none|                         p_read29|        scalar|
+|p_read30                   |   in|   32|     ap_none|                         p_read30|        scalar|
+|p_read31                   |   in|   32|     ap_none|                         p_read31|        scalar|
+|p_read32                   |   in|   32|     ap_none|                         p_read32|        scalar|
+|p_read33                   |   in|   32|     ap_none|                         p_read33|        scalar|
+|p_read34                   |   in|   32|     ap_none|                         p_read34|        scalar|
+|p_read35                   |   in|   32|     ap_none|                         p_read35|        scalar|
+|p_read36                   |   in|   32|     ap_none|                         p_read36|        scalar|
+|p_read37                   |   in|   32|     ap_none|                         p_read37|        scalar|
+|p_read38                   |   in|   32|     ap_none|                         p_read38|        scalar|
+|p_read39                   |   in|   32|     ap_none|                         p_read39|        scalar|
+|p_read40                   |   in|   32|     ap_none|                         p_read40|        scalar|
+|p_read41                   |   in|   32|     ap_none|                         p_read41|        scalar|
+|p_read42                   |   in|   32|     ap_none|                         p_read42|        scalar|
+|p_read43                   |   in|   32|     ap_none|                         p_read43|        scalar|
+|p_read44                   |   in|   32|     ap_none|                         p_read44|        scalar|
+|p_read45                   |   in|   32|     ap_none|                         p_read45|        scalar|
+|p_read46                   |   in|   32|     ap_none|                         p_read46|        scalar|
+|p_read47                   |   in|   32|     ap_none|                         p_read47|        scalar|
+|p_read48                   |   in|   32|     ap_none|                         p_read48|        scalar|
+|p_read49                   |   in|   32|     ap_none|                         p_read49|        scalar|
+|p_read50                   |   in|   32|     ap_none|                         p_read50|        scalar|
+|p_read51                   |   in|   32|     ap_none|                         p_read51|        scalar|
+|p_read52                   |   in|   32|     ap_none|                         p_read52|        scalar|
+|p_read53                   |   in|   32|     ap_none|                         p_read53|        scalar|
+|p_read54                   |   in|   32|     ap_none|                         p_read54|        scalar|
+|p_read55                   |   in|   32|     ap_none|                         p_read55|        scalar|
+|p_read56                   |   in|   32|     ap_none|                         p_read56|        scalar|
+|p_read57                   |   in|   32|     ap_none|                         p_read57|        scalar|
+|p_read58                   |   in|   32|     ap_none|                         p_read58|        scalar|
+|p_read59                   |   in|   32|     ap_none|                         p_read59|        scalar|
+|p_read60                   |   in|   32|     ap_none|                         p_read60|        scalar|
+|p_read61                   |   in|   32|     ap_none|                         p_read61|        scalar|
+|p_read62                   |   in|   32|     ap_none|                         p_read62|        scalar|
+|p_read63                   |   in|   32|     ap_none|                         p_read63|        scalar|
+|p_read64                   |   in|   32|     ap_none|                         p_read64|        scalar|
+|p_read65                   |   in|   32|     ap_none|                         p_read65|        scalar|
+|p_read66                   |   in|   32|     ap_none|                         p_read66|        scalar|
+|p_read67                   |   in|   32|     ap_none|                         p_read67|        scalar|
+|p_read68                   |   in|   32|     ap_none|                         p_read68|        scalar|
+|p_read69                   |   in|   32|     ap_none|                         p_read69|        scalar|
+|p_read70                   |   in|   32|     ap_none|                         p_read70|        scalar|
+|p_read71                   |   in|   32|     ap_none|                         p_read71|        scalar|
+|p_read72                   |   in|   32|     ap_none|                         p_read72|        scalar|
+|p_read73                   |   in|   32|     ap_none|                         p_read73|        scalar|
+|p_read74                   |   in|   32|     ap_none|                         p_read74|        scalar|
+|p_read75                   |   in|   32|     ap_none|                         p_read75|        scalar|
+|p_read76                   |   in|   32|     ap_none|                         p_read76|        scalar|
+|p_read77                   |   in|   32|     ap_none|                         p_read77|        scalar|
+|p_read78                   |   in|   32|     ap_none|                         p_read78|        scalar|
+|p_read79                   |   in|   32|     ap_none|                         p_read79|        scalar|
+|p_read80                   |   in|   32|     ap_none|                         p_read80|        scalar|
+|p_read81                   |   in|   32|     ap_none|                         p_read81|        scalar|
+|p_read82                   |   in|   32|     ap_none|                         p_read82|        scalar|
+|p_read83                   |   in|   32|     ap_none|                         p_read83|        scalar|
+|p_read84                   |   in|   32|     ap_none|                         p_read84|        scalar|
+|p_read85                   |   in|   32|     ap_none|                         p_read85|        scalar|
+|p_read86                   |   in|   32|     ap_none|                         p_read86|        scalar|
+|p_read87                   |   in|   32|     ap_none|                         p_read87|        scalar|
+|p_read88                   |   in|   32|     ap_none|                         p_read88|        scalar|
+|p_read89                   |   in|   32|     ap_none|                         p_read89|        scalar|
+|p_read90                   |   in|   32|     ap_none|                         p_read90|        scalar|
+|p_read91                   |   in|   32|     ap_none|                         p_read91|        scalar|
+|p_read92                   |   in|   32|     ap_none|                         p_read92|        scalar|
+|p_read93                   |   in|   32|     ap_none|                         p_read93|        scalar|
+|p_read94                   |   in|   32|     ap_none|                         p_read94|        scalar|
+|p_read95                   |   in|   32|     ap_none|                         p_read95|        scalar|
+|p_read96                   |   in|   32|     ap_none|                         p_read96|        scalar|
+|p_read97                   |   in|   32|     ap_none|                         p_read97|        scalar|
+|p_read98                   |   in|   32|     ap_none|                         p_read98|        scalar|
+|p_read99                   |   in|   32|     ap_none|                         p_read99|        scalar|
+|emb_vec_address0           |  out|    7|   ap_memory|                          emb_vec|         array|
+|emb_vec_ce0                |  out|    1|   ap_memory|                          emb_vec|         array|
+|emb_vec_we0                |  out|    1|   ap_memory|                          emb_vec|         array|
+|emb_vec_d0                 |  out|   32|   ap_memory|                          emb_vec|         array|
+|nd                         |   in|    5|     ap_none|                               nd|        scalar|
+|layer                      |   in|    3|     ap_none|                            layer|        scalar|
+|node_embedding_V_address1  |  out|   15|   ap_memory|                 node_embedding_V|         array|
+|node_embedding_V_ce1       |  out|    1|   ap_memory|                 node_embedding_V|         array|
+|node_embedding_V_we1       |  out|    1|   ap_memory|                 node_embedding_V|         array|
+|node_embedding_V_d1        |  out|   32|   ap_memory|                 node_embedding_V|         array|
++---------------------------+-----+-----+------------+---------------------------------+--------------+
+

@@ -190,6 +190,7 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 		for(int dim = 0; dim < EMB_DIM; dim++) {
 			FM_TYPE val = emb_vec.read();
 
+#pragma HLS pipeline
 			for(int i = 0; i < total_neigh; i++) {
 #pragma HLS loop_tripcount min=1 max=5 avg=3
 
@@ -214,12 +215,15 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 }
 
 
-void copy_message_table(FM_TYPE message_tb_dest[MAX_NODE][EMB_DIM], FM_TYPE message_tb_src[MAX_NODE][EMB_DIM], int num_of_nodes)
+
+void copy_and_clear_message_table(FM_TYPE message_tb_dest[MAX_NODE][EMB_DIM], FM_TYPE message_tb_src[MAX_NODE][EMB_DIM], int num_of_nodes)
 {
 //#pragma HLS inline off
     for(int n = 0; n < num_of_nodes; n++) {
         for(int dim = 0; dim < EMB_DIM; dim++) {
+#pragma HLS pipeline
             message_tb_dest[n][dim] = message_tb_src[n][dim];
+            message_tb_src[n][dim] = 0;
         }
     }
 }
@@ -338,7 +342,7 @@ void  compute_CONV_dataflow_region(FM_TYPE message1[MAX_NODE][EMB_DIM], FM_TYPE 
     FM_TYPE mlp_out[EMB_DIM];
 
     hls::stream<FM_TYPE> emb_vec;
-#pragma HLS STREAM variable=emb_vec depth=200
+#pragma HLS STREAM variable=emb_vec depth=2000
 
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
@@ -348,7 +352,6 @@ void  compute_CONV_dataflow_region(FM_TYPE message1[MAX_NODE][EMB_DIM], FM_TYPE 
 	message_passing_one_node_vec(emb_vec, message2, layer + 1, num_of_nodes);
 
 }
-
 
 void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
 {
@@ -364,11 +367,12 @@ void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
 
-    clear_message_table(message2, num_of_nodes);
+    if( layer == 0 )
+        clear_message_table(message2, num_of_nodes);
 
     compute_CONV_dataflow_region(message1, message2, num_of_nodes, num_of_edges, layer);
 
-    copy_message_table(message1, message2, num_of_nodes);
+    copy_and_clear_message_table(message1, message2, num_of_nodes);
     
 
 #ifdef _PRINT_
@@ -382,6 +386,7 @@ void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
     }
 #endif
 }
+
 
 
 void global_mean_pooling(FM_TYPE* h_graph, FM_TYPE h_node[MAX_NODE][EMB_DIM], int num_of_nodes)

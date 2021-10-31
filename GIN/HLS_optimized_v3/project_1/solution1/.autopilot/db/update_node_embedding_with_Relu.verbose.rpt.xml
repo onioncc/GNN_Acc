@@ -1,0 +1,234 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'update_node_embedding_with_Relu'" level="0">
+<item name = "Date">Sat Oct 30 13:58:19 2021
+</item>
+<item name = "Version">2020.2.2 (Build 3118627 on Tue Feb  9 05:13:49 MST 2021)</item>
+<item name = "Project">project_1</item>
+<item name = "Solution">solution1 (Vivado IP Flow Target)</item>
+<item name = "Product family">virtexuplus</item>
+<item name = "Target device">xcu280-fsvh2892-2L-e</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 2.449 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">102, 102, 1.020 us, 1.020 us, 102, 102, none</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- VITIS_LOOP_101_1">100, 100, 1, 1, 1, 100, yes</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="6">Name, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="DSP">-, -, -, -, -</column>
+<column name="Expression">-, -, 0, 88, -</column>
+<column name="FIFO">-, -, -, -, -</column>
+<column name="Instance">-, 0, 0, 539, -</column>
+<column name="Memory">-, -, -, -, -</column>
+<column name="Multiplexer">-, -, -, 29, -</column>
+<column name="Register">-, -, 23, -, -</column>
+<specialColumn name="Available SLR">1344, 3008, 869120, 434560, 320</specialColumn>
+<specialColumn name="Utilization SLR (%)">0, 0, ~0, ~0, 0</specialColumn>
+<specialColumn name="Available">4032, 9024, 2607360, 1303680, 960</specialColumn>
+<specialColumn name="Utilization (%)">0, 0, ~0, ~0, 0</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
+<column name="mul_5ns_8ns_12_1_1_U238">mul_5ns_8ns_12_1_1, 0, 0, 0, 40, 0</column>
+<column name="mux_1007_32_1_1_U239">mux_1007_32_1_1, 0, 0, 0, 499, 0</column>
+</table>
+</item>
+<item name = "DSP"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="10">Memory, Module, BRAM_18K, FF, LUT, URAM, Words, Bits, Banks, W*Bits*Banks</keys>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="8">Name, BRAM_18K, FF, LUT, URAM, Depth, Bits, Size:D*B</keys>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+<column name="add_ln101_fu_929_p2">+, 0, 0, 14, 7, 1</column>
+<column name="empty_49_fu_950_p2">+, 0, 0, 19, 12, 12</column>
+<column name="cmp1_not_fu_923_p2">icmp, 0, 0, 9, 3, 4</column>
+<column name="icmp_ln101_fu_935_p2">icmp, 0, 0, 10, 7, 6</column>
+<column name="or_ln102_fu_1080_p2">or, 0, 0, 2, 1, 1</column>
+<column name="select_ln102_fu_1085_p3">select, 0, 0, 32, 1, 32</column>
+<column name="xor_ln102_fu_1074_p2">xor, 0, 0, 2, 1, 2</column>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+<column name="ap_NS_fsm">20, 4, 1, 4</column>
+<column name="dim_reg_902">9, 2, 7, 14</column>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+<column name="ap_CS_fsm">3, 0, 3, 0</column>
+<column name="cmp1_not_reg_1600">1, 0, 1, 0</column>
+<column name="dim_reg_902">7, 0, 7, 0</column>
+<column name="empty_reg_1595">12, 0, 12, 0</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="ap_clk">in, 1, ap_ctrl_hs, update_node_embedding_with_Relu, return value</column>
+<column name="ap_rst">in, 1, ap_ctrl_hs, update_node_embedding_with_Relu, return value</column>
+<column name="ap_start">in, 1, ap_ctrl_hs, update_node_embedding_with_Relu, return value</column>
+<column name="ap_done">out, 1, ap_ctrl_hs, update_node_embedding_with_Relu, return value</column>
+<column name="ap_idle">out, 1, ap_ctrl_hs, update_node_embedding_with_Relu, return value</column>
+<column name="ap_ready">out, 1, ap_ctrl_hs, update_node_embedding_with_Relu, return value</column>
+<column name="p_read">in, 32, ap_none, p_read, scalar</column>
+<column name="p_read1">in, 32, ap_none, p_read1, scalar</column>
+<column name="p_read2">in, 32, ap_none, p_read2, scalar</column>
+<column name="p_read3">in, 32, ap_none, p_read3, scalar</column>
+<column name="p_read4">in, 32, ap_none, p_read4, scalar</column>
+<column name="p_read5">in, 32, ap_none, p_read5, scalar</column>
+<column name="p_read6">in, 32, ap_none, p_read6, scalar</column>
+<column name="p_read7">in, 32, ap_none, p_read7, scalar</column>
+<column name="p_read8">in, 32, ap_none, p_read8, scalar</column>
+<column name="p_read9">in, 32, ap_none, p_read9, scalar</column>
+<column name="p_read10">in, 32, ap_none, p_read10, scalar</column>
+<column name="p_read11">in, 32, ap_none, p_read11, scalar</column>
+<column name="p_read12">in, 32, ap_none, p_read12, scalar</column>
+<column name="p_read13">in, 32, ap_none, p_read13, scalar</column>
+<column name="p_read14">in, 32, ap_none, p_read14, scalar</column>
+<column name="p_read15">in, 32, ap_none, p_read15, scalar</column>
+<column name="p_read16">in, 32, ap_none, p_read16, scalar</column>
+<column name="p_read17">in, 32, ap_none, p_read17, scalar</column>
+<column name="p_read18">in, 32, ap_none, p_read18, scalar</column>
+<column name="p_read19">in, 32, ap_none, p_read19, scalar</column>
+<column name="p_read20">in, 32, ap_none, p_read20, scalar</column>
+<column name="p_read21">in, 32, ap_none, p_read21, scalar</column>
+<column name="p_read22">in, 32, ap_none, p_read22, scalar</column>
+<column name="p_read23">in, 32, ap_none, p_read23, scalar</column>
+<column name="p_read24">in, 32, ap_none, p_read24, scalar</column>
+<column name="p_read25">in, 32, ap_none, p_read25, scalar</column>
+<column name="p_read26">in, 32, ap_none, p_read26, scalar</column>
+<column name="p_read27">in, 32, ap_none, p_read27, scalar</column>
+<column name="p_read28">in, 32, ap_none, p_read28, scalar</column>
+<column name="p_read29">in, 32, ap_none, p_read29, scalar</column>
+<column name="p_read30">in, 32, ap_none, p_read30, scalar</column>
+<column name="p_read31">in, 32, ap_none, p_read31, scalar</column>
+<column name="p_read32">in, 32, ap_none, p_read32, scalar</column>
+<column name="p_read33">in, 32, ap_none, p_read33, scalar</column>
+<column name="p_read34">in, 32, ap_none, p_read34, scalar</column>
+<column name="p_read35">in, 32, ap_none, p_read35, scalar</column>
+<column name="p_read36">in, 32, ap_none, p_read36, scalar</column>
+<column name="p_read37">in, 32, ap_none, p_read37, scalar</column>
+<column name="p_read38">in, 32, ap_none, p_read38, scalar</column>
+<column name="p_read39">in, 32, ap_none, p_read39, scalar</column>
+<column name="p_read40">in, 32, ap_none, p_read40, scalar</column>
+<column name="p_read41">in, 32, ap_none, p_read41, scalar</column>
+<column name="p_read42">in, 32, ap_none, p_read42, scalar</column>
+<column name="p_read43">in, 32, ap_none, p_read43, scalar</column>
+<column name="p_read44">in, 32, ap_none, p_read44, scalar</column>
+<column name="p_read45">in, 32, ap_none, p_read45, scalar</column>
+<column name="p_read46">in, 32, ap_none, p_read46, scalar</column>
+<column name="p_read47">in, 32, ap_none, p_read47, scalar</column>
+<column name="p_read48">in, 32, ap_none, p_read48, scalar</column>
+<column name="p_read49">in, 32, ap_none, p_read49, scalar</column>
+<column name="p_read50">in, 32, ap_none, p_read50, scalar</column>
+<column name="p_read51">in, 32, ap_none, p_read51, scalar</column>
+<column name="p_read52">in, 32, ap_none, p_read52, scalar</column>
+<column name="p_read53">in, 32, ap_none, p_read53, scalar</column>
+<column name="p_read54">in, 32, ap_none, p_read54, scalar</column>
+<column name="p_read55">in, 32, ap_none, p_read55, scalar</column>
+<column name="p_read56">in, 32, ap_none, p_read56, scalar</column>
+<column name="p_read57">in, 32, ap_none, p_read57, scalar</column>
+<column name="p_read58">in, 32, ap_none, p_read58, scalar</column>
+<column name="p_read59">in, 32, ap_none, p_read59, scalar</column>
+<column name="p_read60">in, 32, ap_none, p_read60, scalar</column>
+<column name="p_read61">in, 32, ap_none, p_read61, scalar</column>
+<column name="p_read62">in, 32, ap_none, p_read62, scalar</column>
+<column name="p_read63">in, 32, ap_none, p_read63, scalar</column>
+<column name="p_read64">in, 32, ap_none, p_read64, scalar</column>
+<column name="p_read65">in, 32, ap_none, p_read65, scalar</column>
+<column name="p_read66">in, 32, ap_none, p_read66, scalar</column>
+<column name="p_read67">in, 32, ap_none, p_read67, scalar</column>
+<column name="p_read68">in, 32, ap_none, p_read68, scalar</column>
+<column name="p_read69">in, 32, ap_none, p_read69, scalar</column>
+<column name="p_read70">in, 32, ap_none, p_read70, scalar</column>
+<column name="p_read71">in, 32, ap_none, p_read71, scalar</column>
+<column name="p_read72">in, 32, ap_none, p_read72, scalar</column>
+<column name="p_read73">in, 32, ap_none, p_read73, scalar</column>
+<column name="p_read74">in, 32, ap_none, p_read74, scalar</column>
+<column name="p_read75">in, 32, ap_none, p_read75, scalar</column>
+<column name="p_read76">in, 32, ap_none, p_read76, scalar</column>
+<column name="p_read77">in, 32, ap_none, p_read77, scalar</column>
+<column name="p_read78">in, 32, ap_none, p_read78, scalar</column>
+<column name="p_read79">in, 32, ap_none, p_read79, scalar</column>
+<column name="p_read80">in, 32, ap_none, p_read80, scalar</column>
+<column name="p_read81">in, 32, ap_none, p_read81, scalar</column>
+<column name="p_read82">in, 32, ap_none, p_read82, scalar</column>
+<column name="p_read83">in, 32, ap_none, p_read83, scalar</column>
+<column name="p_read84">in, 32, ap_none, p_read84, scalar</column>
+<column name="p_read85">in, 32, ap_none, p_read85, scalar</column>
+<column name="p_read86">in, 32, ap_none, p_read86, scalar</column>
+<column name="p_read87">in, 32, ap_none, p_read87, scalar</column>
+<column name="p_read88">in, 32, ap_none, p_read88, scalar</column>
+<column name="p_read89">in, 32, ap_none, p_read89, scalar</column>
+<column name="p_read90">in, 32, ap_none, p_read90, scalar</column>
+<column name="p_read91">in, 32, ap_none, p_read91, scalar</column>
+<column name="p_read92">in, 32, ap_none, p_read92, scalar</column>
+<column name="p_read93">in, 32, ap_none, p_read93, scalar</column>
+<column name="p_read94">in, 32, ap_none, p_read94, scalar</column>
+<column name="p_read95">in, 32, ap_none, p_read95, scalar</column>
+<column name="p_read96">in, 32, ap_none, p_read96, scalar</column>
+<column name="p_read97">in, 32, ap_none, p_read97, scalar</column>
+<column name="p_read98">in, 32, ap_none, p_read98, scalar</column>
+<column name="p_read99">in, 32, ap_none, p_read99, scalar</column>
+<column name="emb_vec_address0">out, 7, ap_memory, emb_vec, array</column>
+<column name="emb_vec_ce0">out, 1, ap_memory, emb_vec, array</column>
+<column name="emb_vec_we0">out, 1, ap_memory, emb_vec, array</column>
+<column name="emb_vec_d0">out, 32, ap_memory, emb_vec, array</column>
+<column name="nd">in, 5, ap_none, nd, scalar</column>
+<column name="layer">in, 3, ap_none, layer, scalar</column>
+<column name="node_embedding_V_address1">out, 15, ap_memory, node_embedding_V, array</column>
+<column name="node_embedding_V_ce1">out, 1, ap_memory, node_embedding_V, array</column>
+<column name="node_embedding_V_we1">out, 1, ap_memory, node_embedding_V, array</column>
+<column name="node_embedding_V_d1">out, 32, ap_memory, node_embedding_V, array</column>
+</table>
+</item>
+</section>
+</profile>

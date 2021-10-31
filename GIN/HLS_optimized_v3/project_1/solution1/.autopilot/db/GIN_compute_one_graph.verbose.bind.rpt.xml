@@ -1,0 +1,54 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'GIN_compute_one_graph'" level="0">
+<item name = "Date">Sat Oct 30 13:58:10 2021
+</item>
+<item name = "Version">2020.2.2 (Build 3118627 on Tue Feb  9 05:13:49 MST 2021)</item>
+<item name = "Project">project_1</item>
+<item name = "Solution">solution1 (Vivado IP Flow Target)</item>
+<item name = "Product family">virtexuplus</item>
+<item name = "Target device">xcu280-fsvh2892-2L-e</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">16015, 71245, 0.160 ms, 0.712 ms, 16016, 71246, none</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+<column name="grp_compute_CONV_layer_fu_662">compute_CONV_layer, 2123, 11649, 21.230 us, 0.116 ms, 2123, 11649, none</column>
+<column name="grp_global_mean_pooling_fu_678">global_mean_pooling, 1007, 1007, 10.070 us, 10.070 us, 1007, 1007, none</column>
+<column name="grp_prepare_degree_neighbor_table_fu_686">prepare_degree_neighbor_table, 223, 223, 2.230 us, 2.230 us, 223, 223, none</column>
+<column name="grp_compute_node_embedding_fu_696">compute_node_embedding, 2174, 9774, 21.740 us, 97.740 us, 2174, 9774, none</column>
+<column name="grp_load_graph_fu_708">load_graph, 398, 398, 3.980 us, 3.980 us, 398, 398, none</column>
+<column name="grp_clear_message_table_fu_727">clear_message_table, 1977, 1977, 19.770 us, 19.770 us, 1977, 1977, none</column>
+<column name="grp_clear_message_table_fu_733">clear_message_table, 1977, 1977, 19.770 us, 19.770 us, 1977, 1977, none</column>
+<column name="grp_global_graph_prediction_fu_739">global_graph_prediction, 6, 6, 60.000 ns, 60.000 ns, 6, 6, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- VITIS_LOOP_629_2">10625, 58255, 2125 ~ 11651, -, -, 5, no</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+</profile>
