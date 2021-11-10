@@ -4,23 +4,9 @@
 
 //#define _PRINT_
 
-WT_TYPE embedding_h_atom_embedding_list_0_weight[119][100];
-WT_TYPE embedding_h_atom_embedding_list_1_weight[4][100];
-WT_TYPE embedding_h_atom_embedding_list_2_weight[12][100];
-WT_TYPE embedding_h_atom_embedding_list_3_weight[12][100];
-WT_TYPE embedding_h_atom_embedding_list_4_weight[10][100];
-WT_TYPE embedding_h_atom_embedding_list_5_weight[6][100];
-WT_TYPE embedding_h_atom_embedding_list_6_weight[6][100];
-WT_TYPE embedding_h_atom_embedding_list_7_weight[2][100];
-WT_TYPE embedding_h_atom_embedding_list_8_weight[2][100];
-WT_TYPE layers_0_posttrans_fully_connected_0_linear_weight[100][200];
-WT_TYPE layers_0_posttrans_fully_connected_0_linear_bias[100];
-WT_TYPE layers_1_posttrans_fully_connected_0_linear_weight[100][200];
-WT_TYPE layers_1_posttrans_fully_connected_0_linear_bias[100];
-WT_TYPE layers_2_posttrans_fully_connected_0_linear_weight[100][200];
-WT_TYPE layers_2_posttrans_fully_connected_0_linear_bias[100];
-WT_TYPE layers_3_posttrans_fully_connected_0_linear_weight[100][200];
-WT_TYPE layers_3_posttrans_fully_connected_0_linear_bias[100];
+WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][200];
+WT_TYPE layers_posttrans_fully_connected_0_linear_bias[4][100];
 WT_TYPE MLP_layer_FC_layers_0_weight[50][100];
 WT_TYPE MLP_layer_FC_layers_0_bias[50];
 WT_TYPE MLP_layer_FC_layers_1_weight[25][50];
@@ -28,31 +14,15 @@ WT_TYPE MLP_layer_FC_layers_1_bias[25];
 WT_TYPE MLP_layer_FC_layers_2_weight[1][25];
 WT_TYPE MLP_layer_FC_layers_2_bias[1];
 
-FM_TYPE out_0[MAX_EDGE][EMB_DIM];
-FM_TYPE out_1[MAX_EDGE][EMB_DIM];
-FM_TYPE out_2[MAX_EDGE][EMB_DIM];
-FM_TYPE out_3[MAX_EDGE][EMB_DIM];
-
 FM_TYPE h_0[MAX_NODE][EMB_DIM];
-FM_TYPE m_0[MAX_NODE][200];
-
 FM_TYPE h_1[MAX_NODE][EMB_DIM];
-FM_TYPE m_1[MAX_NODE][200];
-
-FM_TYPE h_2[MAX_NODE][EMB_DIM];
-FM_TYPE m_2[MAX_NODE][200];
-
-FM_TYPE h_3[MAX_NODE][EMB_DIM];
-FM_TYPE m_3[MAX_NODE][200];
-
-FM_TYPE h_4[MAX_NODE][EMB_DIM];
-
+FM_TYPE m[MAX_NODE][2 * EMB_DIM];
 FM_TYPE h_5[EMB_DIM];
 FM_TYPE final;
 
 
 
-void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][2 * EMB_DIM], WT_TYPE *node_eigen, int *edge_list, int num_of_nodes, int num_of_edges)
+void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], WT_TYPE *node_eigen, int *edge_list, int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
     int edge_list_len = num_of_edges * 2;
@@ -138,10 +108,10 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][2 * EMB
         }
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            out[n][dim] = mean_index[n][dim] / degree[n];
+            m[n][dim] = mean_index[n][dim] / degree[n];
             FM_TYPE temp = h_mod[n][dim] - eigwsum * h[n][dim];
             if (temp < 0) temp = -temp;
-            out[n][dim + EMB_DIM] = temp;
+            m[n][dim + EMB_DIM] = temp;
         }
         //printf("eigwsum:%.3f",eigwsum );
         //printf("\n");
@@ -150,63 +120,52 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][2 * EMB
 
 }
 
-void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], int num_of_nodes, WT_TYPE weight[100][200], WT_TYPE bias[100])
+void add_linear_relu(FM_TYPE h_in[MAX_NODE][EMB_DIM], FM_TYPE h_out[MAX_NODE][EMB_DIM], int num_of_nodes, int i)
 {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=l_in type=complete dim=2
+#pragma HLS ARRAY_PARTITION variable=m type=complete dim=2
 
-    Linear_relu_loop_nodes:
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
-        Linear_relu_loop_l_out:
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
         {
 #pragma HLS PIPELINE II=1
-            l_out[nd][dim_out] = bias[dim_out];
-            Linear_relu_loop_l_in:
+            FM_TYPE acc(layers_posttrans_fully_connected_0_linear_bias[i][dim_out]);
             for (int dim_in = 0; dim_in < L_IN; dim_in++)
             {
-                l_out[nd][dim_out] += l_in[nd][dim_in] * weight[dim_out][dim_in];
+                acc += m[nd][dim_in] * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
             }
-            if (l_out[nd][dim_out] < 0.0) l_out[nd][dim_out] = 0.0;
+            h_out[nd][dim_out] = (acc >= FM_TYPE(0.0)) ? FM_TYPE(h_in[nd][dim_out] + acc) : h_in[nd][dim_out];
         }
     }
     return;
 }
 
-void CONV_0(WT_TYPE *node_eigen, int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
+void compute_CONV_layer(int i, WT_TYPE *node_eigen, int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
-    message_passing(h_0, m_0, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_0, h_1, num_of_nodes, layers_0_posttrans_fully_connected_0_linear_weight, layers_0_posttrans_fully_connected_0_linear_bias);
+#pragma HLS INLINE off
+    // FIXME: need to double-buffer!
+    if (i % 2 == 0)
+    {
+        message_passing(h_0, node_eigen, edge_list, num_of_nodes, num_of_edges);
+        add_linear_relu(h_0, h_1, num_of_nodes, i);
+    }
+    else
+    {
+        message_passing(h_1, node_eigen, edge_list, num_of_nodes, num_of_edges);
+        add_linear_relu(h_1, h_0, num_of_nodes, i);
+    }
 }
 
-void CONV_1(WT_TYPE *node_eigen, int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-    message_passing(h_1, m_1, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_1, h_2, num_of_nodes, layers_1_posttrans_fully_connected_0_linear_weight, layers_1_posttrans_fully_connected_0_linear_bias);
-}
-
-void CONV_2(WT_TYPE *node_eigen, int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-    message_passing(h_2, m_2, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_2, h_3, num_of_nodes, layers_2_posttrans_fully_connected_0_linear_weight, layers_2_posttrans_fully_connected_0_linear_bias);
-}
-
-void CONV_3(WT_TYPE *node_eigen, int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-    message_passing(h_3, m_3, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_3, h_4, num_of_nodes, layers_3_posttrans_fully_connected_0_linear_weight, layers_3_posttrans_fully_connected_0_linear_bias);
-}
-void GLOBAL_MEAN_POOL(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE f[EMB_DIM], int num_of_nodes)
+void GLOBAL_MEAN_POOL(int num_of_nodes)
 {
     for (int j = 0; j < EMB_DIM; j++)
     {
-        f[j] = FM_TYPE(0);
+        h_5[j] = FM_TYPE(0);
         for (int i = 0; i < num_of_nodes; i++)
-            f[j] += h[i][j];
-        f[j] /= num_of_nodes;
+            h_5[j] += h_0[i][j];
+        h_5[j] /= num_of_nodes;
     }
-    return;
 }
 
 void MLP()
@@ -247,8 +206,10 @@ void DGN_compute_one_graph(int g, int* node_feature, WT_TYPE* node_eigen, int* e
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
 
-    // int num_of_nodes = 19;
-    // int num_of_edges = 40;
+#ifndef CSIM
+    num_of_nodes = 19;
+    num_of_edges = 40;
+#endif
 
     printf("Computing DGN ...\n");
     /*Embedding: compute input node embedding */
@@ -270,80 +231,17 @@ void DGN_compute_one_graph(int g, int* node_feature, WT_TYPE* node_eigen, int* e
             int nd_f = node_feature[nd * ND_FEATURE + nf];
             for (int dim = 0; dim < EMB_DIM; dim++)
             {
-                WT_TYPE emb_value = 0;
-                switch (nf)
-                {
-                case 0:
-                    emb_value = embedding_h_atom_embedding_list_0_weight[nd_f][dim];
-                    break;
-                case 1:
-                    emb_value = embedding_h_atom_embedding_list_1_weight[nd_f][dim];
-                    break;
-                case 2:
-                    emb_value = embedding_h_atom_embedding_list_2_weight[nd_f][dim];
-                    break;
-                case 3:
-                    emb_value = embedding_h_atom_embedding_list_3_weight[nd_f][dim];
-                    break;
-                case 4:
-                    emb_value = embedding_h_atom_embedding_list_4_weight[nd_f][dim];
-                    break;
-                case 5:
-                    emb_value = embedding_h_atom_embedding_list_5_weight[nd_f][dim];
-                    break;
-                case 6:
-                    emb_value = embedding_h_atom_embedding_list_6_weight[nd_f][dim];
-                    break;
-                case 7:
-                    emb_value = embedding_h_atom_embedding_list_7_weight[nd_f][dim];
-                    break;
-                case 8:
-                    emb_value = embedding_h_atom_embedding_list_8_weight[nd_f][dim];
-                    break;
-                }
-                h_0[nd][dim] += emb_value;
+                h_0[nd][dim] += embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
             }
         }
     }
 
-    ////////////// CONV 0 //////////////////////////////////
-    CONV_0(node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    for (int i = 0; i < num_of_nodes; i++)
+    for (int i = 0; i < 4; i++)
     {
-        for (int j = 0; j < 100; j++)
-        {
-            h_1[i][j] += h_0[i][j];
-        }
+        compute_CONV_layer(i, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
     }
 
-    ////////////// CONV 1 //////////////////////////////////
-    CONV_1(node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        for (int j = 0; j < 100; j++)
-        {
-            h_2[i][j] += h_1[i][j];
-        }
-    }
-    ////////////// CONV 2 //////////////////////////////////
-    CONV_2(node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        for (int j = 0; j < 100; j++)
-        {
-            h_3[i][j] += h_2[i][j];
-        }
-    }
-    ////////////// CONV 3 //////////////////////////////////
-    CONV_3(node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        for (int j = 0; j < 100; j++)
-        {
-            h_4[i][j] += h_3[i][j];
-        }
-    }
-    GLOBAL_MEAN_POOL(h_4, h_5, num_of_nodes);
+    GLOBAL_MEAN_POOL(num_of_nodes);
     MLP();
     printf("%.8f\n", double(final));
 

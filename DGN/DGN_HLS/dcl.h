@@ -19,23 +19,9 @@
 typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;
 
-extern WT_TYPE embedding_h_atom_embedding_list_0_weight[119][100];
-extern WT_TYPE embedding_h_atom_embedding_list_1_weight[4][100];
-extern WT_TYPE embedding_h_atom_embedding_list_2_weight[12][100];
-extern WT_TYPE embedding_h_atom_embedding_list_3_weight[12][100];
-extern WT_TYPE embedding_h_atom_embedding_list_4_weight[10][100];
-extern WT_TYPE embedding_h_atom_embedding_list_5_weight[6][100];
-extern WT_TYPE embedding_h_atom_embedding_list_6_weight[6][100];
-extern WT_TYPE embedding_h_atom_embedding_list_7_weight[2][100];
-extern WT_TYPE embedding_h_atom_embedding_list_8_weight[2][100];
-extern WT_TYPE layers_0_posttrans_fully_connected_0_linear_weight[100][200];
-extern WT_TYPE layers_0_posttrans_fully_connected_0_linear_bias[100];
-extern WT_TYPE layers_1_posttrans_fully_connected_0_linear_weight[100][200];
-extern WT_TYPE layers_1_posttrans_fully_connected_0_linear_bias[100];
-extern WT_TYPE layers_2_posttrans_fully_connected_0_linear_weight[100][200];
-extern WT_TYPE layers_2_posttrans_fully_connected_0_linear_bias[100];
-extern WT_TYPE layers_3_posttrans_fully_connected_0_linear_weight[100][200];
-extern WT_TYPE layers_3_posttrans_fully_connected_0_linear_bias[100];
+extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][200];
+extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight[50][100];
 extern WT_TYPE MLP_layer_FC_layers_0_bias[50];
 extern WT_TYPE MLP_layer_FC_layers_1_weight[25][50];
