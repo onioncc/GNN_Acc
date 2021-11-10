@@ -283,11 +283,11 @@ void GAT_compute_one_graph(int* node_feature, int* edge_list, int* graph_attr, i
     ////////////// CONV 1 //////////////////////////////////
     CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[1] * num_heads_per_layer[1], num_features_per_layer[2], num_heads_per_layer[2], 1);
     ////////////// CONV 2 //////////////////////////////////
-    CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[2] * num_heads_per_layer[2], num_features_per_layer[3], num_heads_per_layer[2], 2);
+    CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[2] * num_heads_per_layer[2], num_features_per_layer[3], num_heads_per_layer[3], 2);
     ////////////// CONV 3 //////////////////////////////////
-    CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[3] * num_heads_per_layer[3], num_features_per_layer[4], num_heads_per_layer[2], 3);
+    CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[3] * num_heads_per_layer[3], num_features_per_layer[4], num_heads_per_layer[4], 3);
     ////////////// CONV 4 //////////////////////////////////
-    CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[4] * num_heads_per_layer[4], num_features_per_layer[5], num_heads_per_layer[2], 4);
+    CONV(node_feature, num_of_nodes, num_of_edges, num_features_per_layer[4] * num_heads_per_layer[4], num_features_per_layer[5], num_heads_per_layer[5], 4);
     
     ////////////// Global mean pooling //////////////////////
     // node representation is out_nodes_features_skip_concat_bias
