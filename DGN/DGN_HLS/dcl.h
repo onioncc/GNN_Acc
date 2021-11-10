@@ -20,19 +20,37 @@ typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;
 
 extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][200];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias[4][100];
-extern WT_TYPE MLP_layer_FC_layers_0_weight[50][100];
-extern WT_TYPE MLP_layer_FC_layers_0_bias[50];
-extern WT_TYPE MLP_layer_FC_layers_1_weight[25][50];
-extern WT_TYPE MLP_layer_FC_layers_1_bias[25];
-extern WT_TYPE MLP_layer_FC_layers_2_weight[1][25];
-extern WT_TYPE MLP_layer_FC_layers_2_bias[1];
+extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
+extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
+extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
+extern WT_TYPE MLP_layer_FC_layers_0_bias_in[50];
+extern WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50];
+extern WT_TYPE MLP_layer_FC_layers_1_bias_in[25];
+extern WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25];
+extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
 
 
 void load_weights();
 void fetch_one_graph(int g, char* graph_name, int* node_feature, WT_TYPE* node_eigen, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
-void DGN_compute_one_graph(int g, int* node_feature, WT_TYPE* node_eigen, int* edge_list, int* edge_attr, int* graph_attr);
 bool Jacob(float *pMatrix, int nDim, float *pdblVects, float *pdbEigenValues, float dbEps, int nJt);
+extern "C" {
+float DGN_compute_one_graph(
+    // float* out,
+    int* node_feature_in,
+    WT_TYPE* node_eigen_in,
+    int* edge_list_in,
+    int* edge_attr_in,
+    int* graph_attr,
+    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
+    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
+    WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
+    WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
+    WT_TYPE MLP_layer_FC_layers_0_bias_in[50],
+    WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50],
+    WT_TYPE MLP_layer_FC_layers_1_bias_in[25],
+    WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25],
+    WT_TYPE MLP_layer_FC_layers_2_bias_in[1]
+);
+}
 
 #endif

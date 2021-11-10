@@ -3,7 +3,7 @@
 #include "dcl.h"
 
 // global weights
-extern float final;
+float result;
 
 int main()
 {
@@ -36,14 +36,16 @@ int main()
         WT_TYPE* node_eigen = (WT_TYPE*)malloc(4 * num_of_nodes * sizeof(WT_TYPE));
         int* edge_list = (int*)malloc(2 * num_of_edges * sizeof(int));
         int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
-        int graph_attr[2];
+        int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
+        graph_attr[2] = g == 1;
 
         fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
-        DGN_compute_one_graph(g, node_feature, node_eigen, edge_list, edge_attr, graph_attr);
-        all_results[g - 1] = float(final);
+        DGN_compute_one_graph(&result, node_feature, node_eigen, edge_list, edge_attr, graph_attr, embedding_h_atom_embedding_list_weights, layers_posttrans_fully_connected_0_linear_weight_in, layers_posttrans_fully_connected_0_linear_bias_in, MLP_layer_FC_layers_0_weight_in, MLP_layer_FC_layers_0_bias_in, MLP_layer_FC_layers_1_weight_in, MLP_layer_FC_layers_1_bias_in, MLP_layer_FC_layers_2_weight_in, MLP_layer_FC_layers_2_bias_in);
+        printf("%.8f\n", float(result));
+        all_results[g - 1] = float(result);
         free(node_feature);
         free(edge_list);
         free(edge_attr);
