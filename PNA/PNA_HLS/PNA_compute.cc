@@ -1,5 +1,5 @@
 #include "dcl.h"
-#include "math.h"
+//#include "math.h"
 //#define _PRINT_
 
 /// h_x: node feature vectors
@@ -7,40 +7,40 @@
 /// message: received message of each node
 /// mlp_in/out: buffers for mlp
 
-float message[MAX_EDGE][EMB_DIM];
+FM_TYPE message[MAX_EDGE][EMB_DIM];
 int mean_index[MAX_EDGE][EMB_DIM];
-float ssquare[MAX_EDGE][EMB_DIM];
+FM_TYPE ssquare[MAX_EDGE][EMB_DIM];
 
-float out_0[MAX_EDGE][EMB_DIM];
-float out_1[MAX_EDGE][EMB_DIM];
-float out_2[MAX_EDGE][EMB_DIM];
-float out_3[MAX_EDGE][EMB_DIM];
+FM_TYPE out_0[MAX_EDGE][EMB_DIM];
+FM_TYPE out_1[MAX_EDGE][EMB_DIM];
+FM_TYPE out_2[MAX_EDGE][EMB_DIM];
+FM_TYPE out_3[MAX_EDGE][EMB_DIM];
 
-float h_0[MAX_NODE][EMB_DIM];
-float m_0[MAX_NODE][960];
+FM_TYPE h_0[MAX_NODE][EMB_DIM];
+FM_TYPE m_0[MAX_NODE][960];
 
-float h_1[MAX_NODE][EMB_DIM];
-float m_1[MAX_NODE][960];
+FM_TYPE h_1[MAX_NODE][EMB_DIM];
+FM_TYPE m_1[MAX_NODE][960];
 
-float h_2[MAX_NODE][EMB_DIM];
-float m_2[MAX_NODE][960];
+FM_TYPE h_2[MAX_NODE][EMB_DIM];
+FM_TYPE m_2[MAX_NODE][960];
 
-float h_3[MAX_NODE][EMB_DIM];
-float m_3[MAX_NODE][960];
+FM_TYPE h_3[MAX_NODE][EMB_DIM];
+FM_TYPE m_3[MAX_NODE][960];
 
-float h_4[MAX_NODE][EMB_DIM];
+FM_TYPE h_4[MAX_NODE][EMB_DIM];
 
-float h_5[EMB_DIM];
-float final;
+FM_TYPE h_5[EMB_DIM];
+FM_TYPE final;
 
 
 
-float deg[10] = {2025, 170914, 384897, 253864, 19049, 50, 121, 3, 4, 9};
-float avg_deg[2] = {
+WT_TYPE deg[10] = {2025, 170914, 384897, 253864, 19049, 50, 121, 3, 4, 9};
+WT_TYPE avg_deg[2] = {
     83093.6015625,
     6.885701656341553};
 
-void scatter_sum(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int index_i, int index_j)
+void scatter_sum(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int index_i, int index_j)
 {
 	#pragma HLS inline off
 
@@ -65,23 +65,23 @@ void scatter_sum(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int
     */
 }
 
-float count[MAX_NODE];
+FM_TYPE count[MAX_NODE];
 
-void aggr_mean(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
+void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
 	#pragma HLS inline off
 
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
 
     int t;
-    float count_temp;
-    float count_temp_inc;
-    memset(count, 0, MAX_NODE * sizeof(float));
+    FM_TYPE count_temp;
+    FM_TYPE count_temp_inc;
+    memset(count, 0, MAX_NODE * sizeof(FM_TYPE));
     //count on the nodes
     for (int j = 0; j < num_of_edges; j++)
     {
-#pragma HLS PIPELINE II=5
 
+#pragma HLS PIPELINE II=3
         t = index[j];
         count_temp = count[t];
         count_temp_inc = count_temp + 1;
@@ -97,11 +97,12 @@ void aggr_mean(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int i
     }
 }
 
-void aggr_std(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int mean_index[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges)
+void aggr_std(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int mean_index[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges)
 {
 #pragma HLS inline off
+	const FM_TYPE epsilon = 1e-5;
 
-    memset(ssquare, 0, MAX_EDGE * EMB_DIM * sizeof(float));
+    memset(ssquare, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
     for (int i = 0; i < num_of_edges; i++)
     {
         for (int j = 0; j < EMB_DIM; j++)
@@ -113,15 +114,16 @@ void aggr_std(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int me
         for (int j = 0; j < EMB_DIM; j++)
         {
             out[i][j] -= out_0[i][j] * out_0[i][j];
-            out[i][j] = out[i][j] > 0 ? out[i][j] : 0.0;
-            out[i][j] += 1e-5;
-            out[i][j] = sqrt(out[i][j]);
+            out[i][j] = out[i][j] > 0 ? out[i][j] : (FM_TYPE)0;
+            //out[i][j] += 1e-5;
+            out[i][j] += epsilon;
+            out[i][j] = hls::sqrt(out[i][j]);
         }
     }
 }
 //dim_size:numofnodes
 
-void aggr_max(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
+void aggr_max(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
 {
 	#pragma HLS inline off
 
@@ -142,7 +144,7 @@ void aggr_max(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int in
         }
     }
 }
-void aggr_min(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
+void aggr_min(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
 {
 	#pragma HLS inline off
 
@@ -164,19 +166,20 @@ void aggr_min(float src[MAX_EDGE][EMB_DIM], float out[MAX_NODE][EMB_DIM], int in
     }
 }
 
-void scale(float hout[4 * MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, int degree[MAX_NODE])
+void scale(FM_TYPE hout[4 * MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, int degree[MAX_NODE])
 {
 	#pragma HLS inline off
+//	#pragma HLS ARRAY_PARTITION variable=out block dim=2 factor=12
 
     for (int node = 0; node < num_of_nodes; node++)
     {
-        float t = log(degree[node] + 1) / avg_deg[1];
-        float scale = avg_deg[1] / log(degree[node] + 1);
+    	FM_TYPE t = hls::log((FM_TYPE)(degree[node] + 1)) / avg_deg[1];
+    	FM_TYPE scale = avg_deg[1] / hls::log((FM_TYPE)(degree[node] + 1));
         if (scale == 0)
             scale = 1;
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-#pragma HLS PIPELINE II=14
+#pragma HLS PIPELINE II=3
             out[node][dim] = out_0[node][dim];
             out[node][dim + EMB_DIM] = out_1[node][dim];
             out[node][dim + 2 * EMB_DIM] = out_2[node][dim];
@@ -192,14 +195,16 @@ void scale(float hout[4 * MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM],
         }
     }
 }
-void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float hout[4 * MAX_NODE][EMB_DIM], int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
+void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_TYPE hout[4 * MAX_NODE][EMB_DIM], int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
 #pragma HLS inline off
+//#pragma HLS ARRAY_PARTITION variable=hout block dim=0 factor=4
 
-    memset(out_0, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    memset(out_1, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    memset(out_2, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    memset(out_3, 0, MAX_NODE * EMB_DIM * sizeof(float));
+
+    memset(out_0, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+    memset(out_1, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+    memset(out_2, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+    memset(out_3, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
     aggr_mean(hin, out_0, index, dim_size, num_of_edges, mean_index);
     // its ok above
     aggr_min(hin, out_1, mean_index, dim_size, num_of_edges);
@@ -210,7 +215,7 @@ void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float
     {
         for (int j = 0; j < EMB_DIM; j++)
         {
-#pragma HLS PIPELINE II=4
+#pragma HLS PIPELINE II=1
             hout[4 * i][j] = out_0[i][j];
             hout[4 * i + 1][j] = out_1[i][j];
             hout[4 * i + 2][j] = out_2[i][j];
@@ -225,19 +230,18 @@ void aggr(float hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, float
 
 int index_buf[MAX_EDGE];
 int degree_buf[MAX_NODE];
-float aggrout[4 * MAX_NODE][EMB_DIM];
+FM_TYPE aggrout[4 * MAX_NODE][EMB_DIM];
 
 
 
 
 
-void message_passing(float h[MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DIM], int *edge_list, int num_of_nodes, int num_of_edges)
+void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_DIM], int *edge_list, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
 
 
-
-    memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(float));
+    memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
     memset(mean_index, 0, MAX_EDGE * EMB_DIM * sizeof(int));
     memset(index_buf, 0, MAX_EDGE * sizeof(int));
 	
@@ -271,18 +275,25 @@ void message_passing(float h[MAX_NODE][EMB_DIM], float out[MAX_NODE][12 * EMB_DI
 
 }
 
-void Linear_relu(float l_in[MAX_NODE][L_IN], float l_out[MAX_NODE][L_OUT], int num_of_nodes, float weight[80][960], float bias[80])
+void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], int num_of_nodes, WT_TYPE weight[80][960], WT_TYPE bias[80])
 {
+#pragma HLS ARRAY_PARTITION variable=l_in complete dim=2
+#pragma HLS ARRAY_PARTITION variable=weight complete dim=2
+
 	#pragma HLS inline off
 
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
+
+
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
         {
             l_out[nd][dim_out] = bias[dim_out];
+
+            #pragma HLS PIPELINE II=1
+
             for (int dim_in = 0; dim_in < L_IN; dim_in++)
             {
-#pragma HLS PIPELINE II=4
                 l_out[nd][dim_out] += l_in[nd][dim_in] * weight[dim_out][dim_in];
             }
         }
@@ -291,7 +302,7 @@ void Linear_relu(float l_in[MAX_NODE][L_IN], float l_out[MAX_NODE][L_OUT], int n
     {
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
         {
-            l_out[nd][dim_out] = l_out[nd][dim_out] > 0 ? l_out[nd][dim_out] : 0.0;
+            l_out[nd][dim_out] = l_out[nd][dim_out] > 0 ? l_out[nd][dim_out] : (FM_TYPE)0;
         }
     }
     return;
@@ -301,14 +312,14 @@ void CONV_0(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
     message_passing(h_0, m_0, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_0, h_1, num_of_nodes, convs_0_post_nn_0_weight, convs_0_post_nn_0_bias);
+    Linear_relu(m_0, h_1, num_of_nodes, convs_0_post_nn_0_weight_fixed, convs_0_post_nn_0_bias_fixed);
 }
 
 void CONV_1(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
     message_passing(h_1, m_1, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_1, h_2, num_of_nodes, convs_1_post_nn_0_weight, convs_1_post_nn_0_bias);
+    Linear_relu(m_1, h_2, num_of_nodes, convs_1_post_nn_0_weight_fixed, convs_1_post_nn_0_bias_fixed);
     return;
 }
 
@@ -316,19 +327,19 @@ void CONV_2(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
     message_passing(h_2, m_2, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_2, h_3, num_of_nodes, convs_2_post_nn_0_weight, convs_2_post_nn_0_bias);
+    Linear_relu(m_2, h_3, num_of_nodes, convs_2_post_nn_0_weight_fixed, convs_2_post_nn_0_bias_fixed);
 }
 
 void CONV_3(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
     message_passing(h_3, m_3, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_3, h_4, num_of_nodes, convs_3_post_nn_0_weight, convs_3_post_nn_0_bias);
+    Linear_relu(m_3, h_4, num_of_nodes, convs_3_post_nn_0_weight_fixed, convs_3_post_nn_0_bias_fixed);
 }
-void GLOBAL_MEAN_POOL(float h[MAX_NODE][EMB_DIM], float f[EMB_DIM], int num_of_nodes)
+void GLOBAL_MEAN_POOL(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE f[EMB_DIM], int num_of_nodes)
 {
 	#pragma HLS inline off
-    memset(f, 0, EMB_DIM * sizeof(float));
+    memset(f, 0, EMB_DIM * sizeof(FM_TYPE));
     for (int j = 0; j < EMB_DIM; j++)
     {
         for (int i = 0; i < num_of_nodes; i++)
@@ -342,45 +353,45 @@ void GLOBAL_MEAN_POOL(float h[MAX_NODE][EMB_DIM], float f[EMB_DIM], int num_of_n
 void MLP(int num_of_nodes)
 {
 	#pragma HLS inline off
-    float temp_0[40];
-    float temp_1[20];
+	FM_TYPE temp_0[40];
+	FM_TYPE temp_1[20];
 
 
 #pragma HLS array_partition variable=temp_0 complete
 #pragma HLS array_partition variable=temp_1 complete
 
 
-#pragma HLS array_partition variable=mlp_0_weight dim=1 complete
-#pragma HLS array_partition variable=mlp_0_bias dim=0 complete
-#pragma HLS array_partition variable=mlp_2_weight dim=1 complete
-#pragma HLS array_partition variable=mlp_2_bias dim=0 complete
-#pragma HLS array_partition variable=mlp_4_weight dim=1 complete
-#pragma HLS array_partition variable=mlp_4_bias dim=0 complete
+#pragma HLS array_partition variable=mlp_0_weight_fixed dim=1 complete
+#pragma HLS array_partition variable=mlp_0_bias_fixed dim=0 complete
+#pragma HLS array_partition variable=mlp_2_weight_fixed dim=1 complete
+#pragma HLS array_partition variable=mlp_2_bias_fixed dim=0 complete
+#pragma HLS array_partition variable=mlp_4_weight_fixed dim=1 complete
+#pragma HLS array_partition variable=mlp_4_bias_fixed dim=0 complete
 
 
     for (int dim_out = 0; dim_out < 40; dim_out++)
     {
-        temp_0[dim_out] = mlp_0_bias[dim_out];
+        temp_0[dim_out] = mlp_0_bias_fixed[dim_out];
         for (int dim_in = 0; dim_in < 80; dim_in++)
         {
-            temp_0[dim_out] += h_5[dim_in] * mlp_0_weight[dim_out][dim_in];
+            temp_0[dim_out] += h_5[dim_in] * mlp_0_weight_fixed[dim_out][dim_in];
         }
-        temp_0[dim_out] = temp_0[dim_out] > 0 ? temp_0[dim_out] : 0.0;
+        temp_0[dim_out] = temp_0[dim_out] > 0 ? temp_0[dim_out] : (FM_TYPE)0;
     }
     for (int dim_out = 0; dim_out < 20; dim_out++)
     {
-        temp_1[dim_out] = mlp_2_bias[dim_out];
+        temp_1[dim_out] = mlp_2_bias_fixed[dim_out];
         for (int dim_in = 0; dim_in < 40; dim_in++)
         {
-            temp_1[dim_out] += temp_0[dim_in] * mlp_2_weight[dim_out][dim_in];
+            temp_1[dim_out] += temp_0[dim_in] * mlp_2_weight_fixed[dim_out][dim_in];
         }
-        temp_1[dim_out] = temp_1[dim_out] > 0 ? temp_1[dim_out] : 0.0;
+        temp_1[dim_out] = temp_1[dim_out] > 0 ? temp_1[dim_out] : (FM_TYPE)0;
     }
 
-    final = mlp_4_bias[0];
+    final = mlp_4_bias_fixed[0];
     for (int dim_in = 0; dim_in < 20; dim_in++)
     {
-        final += temp_1[dim_in] * mlp_4_weight[0][dim_in];
+        final += temp_1[dim_in] * mlp_4_weight_fixed[0][dim_in];
     }
     return;
 }
@@ -435,7 +446,7 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 
     printf("Computing PNA ...\n");
     /*Embedding: compute input node embedding */
-    memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(float));
+    memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
         for (int nf = 0; nf < ND_FEATURE; nf++)
@@ -443,35 +454,35 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
             int nd_f = node_feature[nd * ND_FEATURE + nf];
             for (int dim = 0; dim < EMB_DIM; dim++)
             {
-                float emb_value = 0;
+            	FM_TYPE emb_value = 0;
                 switch (nf)
                 {
                 case 0:
-                    emb_value = node_emb_atom_embedding_list_0_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_0_weight_fixed[nd_f][dim];
                     break;
                 case 1:
-                    emb_value = node_emb_atom_embedding_list_1_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_1_weight_fixed[nd_f][dim];
                     break;
                 case 2:
-                    emb_value = node_emb_atom_embedding_list_2_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_2_weight_fixed[nd_f][dim];
                     break;
                 case 3:
-                    emb_value = node_emb_atom_embedding_list_3_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_3_weight_fixed[nd_f][dim];
                     break;
                 case 4:
-                    emb_value = node_emb_atom_embedding_list_4_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_4_weight_fixed[nd_f][dim];
                     break;
                 case 5:
-                    emb_value = node_emb_atom_embedding_list_5_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_5_weight_fixed[nd_f][dim];
                     break;
                 case 6:
-                    emb_value = node_emb_atom_embedding_list_6_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_6_weight_fixed[nd_f][dim];
                     break;
                 case 7:
-                    emb_value = node_emb_atom_embedding_list_7_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_7_weight_fixed[nd_f][dim];
                     break;
                 case 8:
-                    emb_value = node_emb_atom_embedding_list_8_weight[nd_f][dim];
+                    emb_value = node_emb_atom_embedding_list_8_weight_fixed[nd_f][dim];
                     break;
                 }
                 h_0[nd][dim] += emb_value;

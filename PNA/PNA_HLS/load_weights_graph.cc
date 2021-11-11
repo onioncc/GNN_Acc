@@ -2,6 +2,21 @@
 #include <stdio.h>
 #include "dcl.h"
 
+template<const int M, typename T_out>
+void cast_1d(float in[M], T_out out[M]){
+	for(int i=0; i<M; i++){
+		out[i] = (T_out)in[i];
+	}
+}
+template<const int M, const int N, typename T_out>
+void cast_2d(float in[M][N], T_out out[M][N]){
+	for(int i=0; i<M; i++){
+		for(int j=0; i<N; i++){
+			out[i][j] = (T_out)in[i][j];
+		}
+	}
+}
+
 
 void load_weights()
 {
@@ -12,7 +27,6 @@ void load_weights()
 	//error begin from node 0 dim 22
 	fseek(f, 0*sizeof(float), SEEK_SET);
 	fread(node_emb_atom_embedding_list_0_weight, sizeof(float), 9520, f);
-
 
 	fseek(f, 9520*sizeof(float), SEEK_SET);
 	fread(node_emb_atom_embedding_list_1_weight, sizeof(float),320 , f);
@@ -87,6 +101,17 @@ void load_weights()
 	fread(mlp_4_bias, sizeof(float), 1, f);
 
 	fclose(f);
+
+//	cast_2d<119,80,WT_TYPE>(node_emb_atom_embedding_list_0_weight[119][80], node_emb_atom_embedding_list_0_weight_fixed[119][80]);
+//	cast_2d<4,80,WT_TYPE>(node_emb_atom_embedding_list_1_weight[4][80], node_emb_atom_embedding_list_1_weight_fixed[4][80]);
+//	cast_2d<21,80,WT_TYPE>(node_emb_atom_embedding_list_2_weight[12][80], node_emb_atom_embedding_list_2_weight_fixed[12][80]);
+//	cast_2d<21,80,WT_TYPE>(node_emb_atom_embedding_list_3_weight[12][80], node_emb_atom_embedding_list_3_weight_fixed[12][80]);
+//	cast_2d<10,80,WT_TYPE>(node_emb_atom_embedding_list_4_weight[10][80], node_emb_atom_embedding_list_4_weight_fixed[10][80]);
+//	cast_2d<>(node_emb_atom_embedding_list_5_weight[6][80], );
+//	cast_2d<>(node_emb_atom_embedding_list_6_weight[6][80], );
+//	cast_2d<>(node_emb_atom_embedding_list_7_weight[2][80], );
+//	cast_2d<>(node_emb_atom_embedding_list_8_weight[2][80], );
+
 
 }
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
