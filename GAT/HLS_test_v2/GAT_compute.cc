@@ -85,6 +85,7 @@ void compute_all_scores(int num_of_nodes, int num_of_edges, int num_in_features,
 #pragma HLS array_partition variable=scores_target dim=3 complete
 #pragma HLS array_partition variable=all_scores dim=3 complete
     // all_scores = self.leakyReLU(scores_source + scores_target)
+
     for (int nh = 0; nh < num_of_heads; nh++) {
         for (int n1 = 0; n1 < num_of_nodes; n1++) {
             for (int n2 = 0; n2 < num_of_nodes; n2++) {
@@ -121,6 +122,7 @@ void compute_all_attention_coefficients(int num_of_nodes, int num_of_edges, int 
 #pragma HLS inline off
 #pragma HLS array_partition variable=all_attention_coefficients dim=3 complete
     // softmax
+
     for (int nh = 0; nh < num_of_heads; nh++) {
         for (int n1 = 0; n1 < num_of_nodes; n1++) {
             for (int n2 = 0; n2 < num_of_nodes; n2++) {
@@ -431,8 +433,8 @@ void GAT_compute_one_graph(
     int is_first = graph_attr[2];
 	*/
 
-	int num_of_nodes = 19;
-	int num_of_edges = 40;
+	int num_of_nodes = 19; //19
+	int num_of_edges = 40; //40
 	int is_first = 1; 
 
     if (is_first) {
