@@ -445,16 +445,16 @@ void GAT_compute_one_graph(
 #pragma HLS bind_storage variable=out_nodes_features_skip_concat_bias type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=out_nodes_features_concat type=RAM_2P impl=bram
 
-	/*
+	
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
-	*/
-    
+	
+    /*
 	int num_of_nodes = 19;
 	int num_of_edges = 40;
 	int is_first = 1; 
-    
+    */
     if (is_first) {
         ////////////// Load weights
         load_weights_first_layer(0, gat_net_scoring_fn_target_fixed, gat_net_scoring_fn_source_fixed, gat_net_linear_proj_weight_fixed, gat_net_skip_proj_weight_fixed);

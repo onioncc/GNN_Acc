@@ -35,7 +35,7 @@ void compute_nodes_features_proj(int num_of_nodes, int num_of_edges, int num_in_
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < num_of_heads * num_out_features; dim_out++) {
             FM_TYPE sum = 0;
-            for(int dim_in = 0; dim_in < HEAD_NUM * FEATURE_OUT; dim_in++) {
+            for(int dim_in = 0; dim_in < num_of_heads * num_out_features; dim_in++) {
                 sum += out_nodes_features_skip_concat_bias[nd][dim_in] * linear_proj_weight[layer][dim_out][dim_in];
             }
             nodes_features_proj[nd][dim_out] = sum;
@@ -54,7 +54,7 @@ void compute_scores_source(int num_of_nodes, int num_of_edges, int num_in_featur
     for(int nh = 0; nh < num_of_heads; nh++) {
         for(int n = 0; n < num_of_nodes; n++) {
             FM_TYPE sum = 0;
-            for(int fout = 0; fout < num_out_features; fout++) {
+            for(int fout = 0; fout < FEATURE_OUT; fout++) {
                 sum += nodes_features_proj[n][nh * num_out_features + fout] * scoring_fn_source[layer][nh][fout];      
             }
             scores_source[nh][n][0] = sum;
@@ -71,7 +71,7 @@ void compute_scores_target(int num_of_nodes, int num_of_edges, int num_in_featur
     for(int nh = 0; nh < num_of_heads; nh++) {
         for(int n = 0; n < num_of_nodes; n++) {
             FM_TYPE sum = 0;
-            for(int fout = 0; fout < num_out_features; fout++) {
+            for(int fout = 0; fout < FEATURE_OUT; fout++) {
                 sum += nodes_features_proj[n][nh * num_out_features + fout] * scoring_fn_target[layer][nh][fout];
             }
             scores_target[nh][0][n] = sum;
@@ -82,12 +82,12 @@ void compute_scores_target(int num_of_nodes, int num_of_edges, int num_in_featur
 void compute_all_scores(int num_of_nodes, int num_of_edges, int num_in_features, int num_out_features, int num_of_heads, int layer) {
 
 #pragma HLS inline off
-#pragma HLS array_partition variable=scores_target dim=3 complete
-#pragma HLS array_partition variable=all_scores dim=3 complete
     // all_scores = self.leakyReLU(scores_source + scores_target)
+
     for (int nh = 0; nh < num_of_heads; nh++) {
         for (int n1 = 0; n1 < num_of_nodes; n1++) {
             for (int n2 = 0; n2 < num_of_nodes; n2++) {
+#pragma HLS PIPELINE
                 FM_TYPE temp = scores_source[nh][n1][0] + scores_target[nh][0][n2];
                 FM_TYPE max = ((FM_TYPE)0 < (FM_TYPE)temp) ? temp : (FM_TYPE)0;
                 FM_TYPE min = ((FM_TYPE)0 > (FM_TYPE)temp) ? temp : (FM_TYPE)0;
@@ -105,6 +105,7 @@ void compute_attention_coefficients_sum(int num_of_nodes, int num_of_edges, int 
         for (int n1 = 0; n1 < num_of_nodes; n1++) {
             FM_TYPE sum = 0;
             for (int n2 = 0; n2 < num_of_nodes; n2++) {
+#pragma HLS PIPELINE
                 if (connectivity_mask_final[n1][n2] == INT_MIN) {
                     all_scores[nh][n1][n2] = 0;
                 } else {
@@ -119,11 +120,13 @@ void compute_attention_coefficients_sum(int num_of_nodes, int num_of_edges, int 
 void compute_all_attention_coefficients(int num_of_nodes, int num_of_edges, int num_in_features, int num_out_features, int num_of_heads, int layer) {
 
 #pragma HLS inline off
-#pragma HLS array_partition variable=all_attention_coefficients dim=3 complete
+//#pragma HLS array_partition variable=all_attention_coefficients dim=3 complete
     // softmax
+
     for (int nh = 0; nh < num_of_heads; nh++) {
         for (int n1 = 0; n1 < num_of_nodes; n1++) {
             for (int n2 = 0; n2 < num_of_nodes; n2++) {
+#pragma HLS PIPELINE
                 if (all_scores[nh][n1][n2] != (FM_TYPE)0)
                     all_attention_coefficients[nh][n1][n2] = hls::exp(all_scores[nh][n1][n2]) / attention_coefficients_sum[nh][n1];
                 else
@@ -144,6 +147,7 @@ void compute_out_nodes_features(int num_of_nodes, int num_of_edges, int num_in_f
     for (int nh = 0; nh < num_of_heads; nh++) {
         for (int n1 = 0; n1 < num_of_nodes; n1++) {  
             for (int fout = 0; fout < num_out_features; fout++) {
+#pragma HLS PIPELINE
                 FM_TYPE sum = 0;
                 for (int n2 = 0; n2 < num_of_nodes; n2++) {
                     sum += all_attention_coefficients[nh][n1][n2] * nodes_features_proj[n2][nh * num_out_features + fout];
@@ -168,7 +172,7 @@ void prepare_out_nodes_features(int num_of_nodes, int num_of_edges, int num_in_f
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < num_of_heads * num_out_features; dim_out++) {
         	FM_TYPE sum = out_nodes_features_prep[nd][dim_out];
-            for(int dim_in = 0; dim_in < HEAD_NUM * FEATURE_OUT; dim_in++) {
+            for(int dim_in = 0; dim_in < num_of_heads * num_out_features; dim_in++) {
                 sum += out_nodes_features_skip_concat_bias[nd][dim_in] * skip_proj_weight[layer][dim_out][dim_in];
             }
             out_nodes_features[nd][dim_out] = sum;
@@ -179,12 +183,11 @@ void prepare_out_nodes_features(int num_of_nodes, int num_of_edges, int num_in_f
 void compute_not_concat(int num_of_nodes, int num_of_edges, int num_in_features, int num_out_features, int num_of_heads, int layer) {
 
 #pragma HLS inline off
-#pragma HLS array_partition variable=out_nodes_features dim=2 complete
     // not concat -> out_nodes_features = out_nodes_features.mean(dim=self.head_dim)
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int fout = 0; fout < num_out_features; fout++) {
             FM_TYPE sum = 0;
-            for (int nh = 0; nh < num_of_heads; nh++) {
+            for (int nh = 0; nh < HEAD_NUM; nh++) {
                 sum += out_nodes_features[nd][nh * num_out_features + fout];
             }
             out_nodes_features_skip_concat_bias[nd][fout] = sum / (FM_TYPE)num_of_heads;
@@ -195,10 +198,10 @@ void compute_not_concat(int num_of_nodes, int num_of_edges, int num_in_features,
 void compute_activation(int num_of_nodes, int num_of_edges, int num_in_features, int num_out_features, int num_of_heads, int layer) {
 
 #pragma HLS inline off
-#pragma HLS array_partition variable=out_nodes_features_skip_concat_bias dim=2 complete
     // self.activation(out_nodes_features)
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < num_of_heads * num_out_features; dim_out++) {
+#pragma HLS unroll factor=4
             if (out_nodes_features[nd][dim_out] <= 0) {
             	FM_TYPE sum = hls::exp(out_nodes_features[nd][dim_out]) - (FM_TYPE)1;
                 out_nodes_features_skip_concat_bias[nd][dim_out] = sum;
@@ -247,7 +250,7 @@ void global_graph_prediction(FM_TYPE* task)
 #pragma HLS inline off
     for(int tsk = 0; tsk < NUM_TASK; tsk++) {
         task[tsk] = pred_linear_bias[tsk];
-        for(int dim = 0; dim < num_features_per_layer[2]; dim++) {
+        for(int dim = 0; dim < num_features_per_layer[5]; dim++) {
             task[tsk] += h_graph[dim] * pred_linear_weight[tsk][dim];
         }
     }
@@ -353,7 +356,7 @@ void load_graph(int* node_feature_in, int* edge_list_in, int num_of_nodes, int n
 void compute_connectivity_mask(int *edge_list, int num_of_nodes, int num_of_edges)
 {
 #pragma HLS inline off
-#pragma HLS array_partition variable=connectivity_mask_final dim=2 complete
+//#pragma HLS array_partition variable=connectivity_mask_final dim=2 complete
     ////////////// Compute connectivity_mask (adjacency matrix)
 	memset(connectivity_mask, 0, num_of_nodes * num_of_nodes * sizeof(int));
 	/*
@@ -425,16 +428,16 @@ void GAT_compute_one_graph(
 #pragma HLS bind_storage variable=out_nodes_features type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=out_nodes_features_skip_concat_bias type=RAM_2P impl=bram
 
-	/*
+
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
-	*/
 
-	int num_of_nodes = 19;
-	int num_of_edges = 40;
+    /*
+	int num_of_nodes = 19; //19
+	int num_of_edges = 40; //40
 	int is_first = 1; 
-
+	*/
     if (is_first) {
         ////////////// Load weights
         load_weights_first_layer(0, gat_net_scoring_fn_target_fixed, gat_net_scoring_fn_source_fixed, gat_net_linear_proj_weight_fixed, gat_net_skip_proj_weight_fixed);

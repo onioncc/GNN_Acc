@@ -35,7 +35,7 @@ void compute_nodes_features_proj(int num_of_nodes, int num_of_edges, int num_in_
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < num_of_heads * num_out_features; dim_out++) {
             FM_TYPE sum = 0;
-            for(int dim_in = 0; dim_in < HEAD_NUM * FEATURE_OUT; dim_in++) {
+            for(int dim_in = 0; dim_in < num_of_heads * num_out_features; dim_in++) {
                 sum += out_nodes_features_skip_concat_bias[nd][dim_in] * linear_proj_weight[layer][dim_out][dim_in];
             }
             nodes_features_proj[nd][dim_out] = sum;
@@ -168,7 +168,7 @@ void prepare_out_nodes_features(int num_of_nodes, int num_of_edges, int num_in_f
     for(int nd = 0; nd < num_of_nodes; nd++) {
         for(int dim_out = 0; dim_out < num_of_heads * num_out_features; dim_out++) {
         	FM_TYPE sum = out_nodes_features_prep[nd][dim_out];
-            for(int dim_in = 0; dim_in < HEAD_NUM * FEATURE_OUT; dim_in++) {
+            for(int dim_in = 0; dim_in < num_of_heads * num_out_features; dim_in++) {
                 sum += out_nodes_features_skip_concat_bias[nd][dim_in] * skip_proj_weight[layer][dim_out][dim_in];
             }
             out_nodes_features[nd][dim_out] = sum;

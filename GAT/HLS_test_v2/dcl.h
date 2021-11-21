@@ -16,9 +16,9 @@ typedef ap_fixed<28, 10> WT_TYPE;
 #define MAX_EDGE 500
 #define MAX_NODE 100
 #define LAYER_NUM 5
-#define HEAD_NUM 4
+#define HEAD_NUM 4  // Max number of head
 #define FEATURE_IN 9
-#define FEATURE_OUT 16
+#define FEATURE_OUT 16  // Max number of feature
 #define NUM_TASK 1
 
 #define ND_FEATURE 9
