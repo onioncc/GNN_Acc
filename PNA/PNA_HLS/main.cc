@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dcl.h"
+
 float node_emb_atom_embedding_list_0_weight[119][80];
 float node_emb_atom_embedding_list_1_weight[4][80];
 float node_emb_atom_embedding_list_2_weight[12][80];
@@ -25,7 +26,8 @@ float mlp_2_bias[20];
 float mlp_4_weight[1][20];
 float mlp_4_bias[1];
 // global weights
-extern float final;
+//extern float final;
+extern FM_TYPE final;
 
 WT_TYPE node_emb_atom_embedding_list_0_weight_fixed[119][80];
 WT_TYPE node_emb_atom_embedding_list_1_weight_fixed[4][80];
@@ -75,7 +77,7 @@ int main()
 
 
         FILE* f_info = fopen(info_file, "r");
-        fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
+        fscanf(f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
         fclose(f_info);
         
 

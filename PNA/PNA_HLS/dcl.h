@@ -1,16 +1,13 @@
 #ifndef __DCL_H__
 #define __DCL_H__
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-//#include <math.h>
-#include "hls_math.h"
+#include "gmp.h"
+
 #include "ap_fixed.h"
+#include "hls_math.h"
 
-
-typedef ap_fixed<32, 16> FM_TYPE;
-typedef ap_fixed<32, 16> WT_TYPE;
+typedef ap_fixed<32, 10> FM_TYPE;
+typedef ap_fixed<32, 10> WT_TYPE;
 
 
 #define MAX_EDGE 500

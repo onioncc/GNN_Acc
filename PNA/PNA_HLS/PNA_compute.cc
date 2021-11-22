@@ -1,5 +1,4 @@
 #include "dcl.h"
-//#include "math.h"
 //#define _PRINT_
 
 /// h_x: node feature vectors
@@ -65,34 +64,39 @@ void scatter_sum(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM],
     */
 }
 
-FM_TYPE count[MAX_NODE];
 
 void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
 	#pragma HLS inline off
 
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
+    FM_TYPE count[MAX_NODE];
 
-    int t;
-    FM_TYPE count_temp;
-    FM_TYPE count_temp_inc;
+    //int t;
+    //FM_TYPE count_temp;
+    //FM_TYPE count_temp_inc;
     memset(count, 0, MAX_NODE * sizeof(FM_TYPE));
     //count on the nodes
     for (int j = 0; j < num_of_edges; j++)
     {
 
 #pragma HLS PIPELINE II=3
-        t = index[j];
-        count_temp = count[t];
-        count_temp_inc = count_temp + 1;
-        count[t] = count_temp_inc;
+        //t = index[j];
+        //count_temp = count[t];
+        //count_temp_inc = count_temp + (FM_TYPE)1;
+        //count[t] = count_temp_inc;
+        int t = index[j];
+        count[t] += (FM_TYPE)1;
     }
     ///dimsize:num of the nodes
     for (int i = 0; i < dim_size; i++)
     {
         for (int j = 0; j < EMB_DIM; j++)
         {
-            out[i][j] = out[i][j] / count[i];
+            //printf("%f \n", count[i].to_float());
+            if(count[i] != 0){
+                out[i][j] = out[i][j] / count[i];
+            }
         }
     }
 }
@@ -115,7 +119,7 @@ void aggr_std(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
         {
             out[i][j] -= out_0[i][j] * out_0[i][j];
             out[i][j] = out[i][j] > 0 ? out[i][j] : (FM_TYPE)0;
-            //out[i][j] += 1e-5;
+            // out[i][j] += (FM_TYPE)1e-5;
             out[i][j] += epsilon;
             out[i][j] = hls::sqrt(out[i][j]);
         }
@@ -173,10 +177,10 @@ void scale(FM_TYPE hout[4 * MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_D
 
     for (int node = 0; node < num_of_nodes; node++)
     {
-    	FM_TYPE t = hls::log((FM_TYPE)(degree[node] + 1)) / avg_deg[1];
-    	FM_TYPE scale = avg_deg[1] / hls::log((FM_TYPE)(degree[node] + 1));
+    	FM_TYPE t = hls::log(((FM_TYPE)degree[node] + (FM_TYPE)1)) / (FM_TYPE)avg_deg[1];
+    	FM_TYPE scale = (FM_TYPE)avg_deg[1] / hls::log((FM_TYPE)(degree[node] + (FM_TYPE)1));
         if (scale == 0)
-            scale = 1;
+            scale = (FM_TYPE)1;
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
 #pragma HLS PIPELINE II=3
@@ -439,10 +443,10 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 
 
 	
-//    int num_of_nodes = graph_attr[0];
-//    int num_of_edges = graph_attr[1];
-    int num_of_nodes = 19;
-    int num_of_edges = 40;
+   int num_of_nodes = graph_attr[0];
+   int num_of_edges = graph_attr[1];
+    // int num_of_nodes = 19;
+    // int num_of_edges = 40;
 
     printf("Computing PNA ...\n");
     /*Embedding: compute input node embedding */
@@ -529,7 +533,7 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
     }
     GLOBAL_MEAN_POOL(h_4, h_5, num_of_nodes);
     MLP( num_of_nodes);
-    printf("%.8f\n", final);
+    printf("%f \n", final.to_float());
 
     return;
 }

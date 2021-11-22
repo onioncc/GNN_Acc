@@ -2,17 +2,18 @@
 #include <stdio.h>
 #include "dcl.h"
 
-template<const int M, typename T_out>
-void cast_1d(float in[M], T_out out[M]){
+template<int M>
+void cast_1d(float in[M], WT_TYPE out[M]){
 	for(int i=0; i<M; i++){
-		out[i] = (T_out)in[i];
+		out[i] = (WT_TYPE)in[i];
 	}
 }
-template<const int M, const int N, typename T_out>
-void cast_2d(float in[M][N], T_out out[M][N]){
+
+template<int M, int N>
+void cast_2d(float in[M][N], WT_TYPE out[M][N]){
 	for(int i=0; i<M; i++){
-		for(int j=0; i<N; i++){
-			out[i][j] = (T_out)in[i][j];
+		for(int j=0; j<N; j++){
+			out[i][j] = (WT_TYPE)in[i][j];
 		}
 	}
 }
@@ -102,15 +103,38 @@ void load_weights()
 
 	fclose(f);
 
-//	cast_2d<119,80,WT_TYPE>(node_emb_atom_embedding_list_0_weight[119][80], node_emb_atom_embedding_list_0_weight_fixed[119][80]);
-//	cast_2d<4,80,WT_TYPE>(node_emb_atom_embedding_list_1_weight[4][80], node_emb_atom_embedding_list_1_weight_fixed[4][80]);
-//	cast_2d<21,80,WT_TYPE>(node_emb_atom_embedding_list_2_weight[12][80], node_emb_atom_embedding_list_2_weight_fixed[12][80]);
-//	cast_2d<21,80,WT_TYPE>(node_emb_atom_embedding_list_3_weight[12][80], node_emb_atom_embedding_list_3_weight_fixed[12][80]);
-//	cast_2d<10,80,WT_TYPE>(node_emb_atom_embedding_list_4_weight[10][80], node_emb_atom_embedding_list_4_weight_fixed[10][80]);
-//	cast_2d<>(node_emb_atom_embedding_list_5_weight[6][80], );
-//	cast_2d<>(node_emb_atom_embedding_list_6_weight[6][80], );
-//	cast_2d<>(node_emb_atom_embedding_list_7_weight[2][80], );
-//	cast_2d<>(node_emb_atom_embedding_list_8_weight[2][80], );
+	cast_2d<119,80>(node_emb_atom_embedding_list_0_weight, node_emb_atom_embedding_list_0_weight_fixed);
+	cast_2d<4,80>(node_emb_atom_embedding_list_1_weight, node_emb_atom_embedding_list_1_weight_fixed);
+	cast_2d<12,80>(node_emb_atom_embedding_list_2_weight, node_emb_atom_embedding_list_2_weight_fixed);
+	cast_2d<12,80>(node_emb_atom_embedding_list_3_weight, node_emb_atom_embedding_list_3_weight_fixed);
+	cast_2d<10,80>(node_emb_atom_embedding_list_4_weight, node_emb_atom_embedding_list_4_weight_fixed);
+	cast_2d<6,80>(node_emb_atom_embedding_list_5_weight, node_emb_atom_embedding_list_5_weight_fixed);
+	cast_2d<6,80>(node_emb_atom_embedding_list_6_weight, node_emb_atom_embedding_list_6_weight_fixed);
+	cast_2d<2,80>(node_emb_atom_embedding_list_7_weight, node_emb_atom_embedding_list_7_weight_fixed);
+	cast_2d<2,80>(node_emb_atom_embedding_list_8_weight, node_emb_atom_embedding_list_8_weight_fixed);
+	
+
+	cast_2d<80,960>(convs_0_post_nn_0_weight, convs_0_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_0_post_nn_0_bias, convs_0_post_nn_0_bias_fixed);
+
+	cast_2d<80,960>(convs_1_post_nn_0_weight, convs_1_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_1_post_nn_0_bias, convs_1_post_nn_0_bias_fixed);
+
+	cast_2d<80,960>(convs_2_post_nn_0_weight, convs_2_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_2_post_nn_0_bias, convs_2_post_nn_0_bias_fixed);
+
+	cast_2d<80,960>(convs_3_post_nn_0_weight, convs_3_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_3_post_nn_0_bias, convs_3_post_nn_0_bias_fixed);
+
+
+	cast_2d<40,80>(mlp_0_weight, mlp_0_weight_fixed);
+	cast_1d<40>(mlp_0_bias, mlp_0_bias_fixed);
+
+	cast_2d<20,40>(mlp_2_weight, mlp_2_weight_fixed);
+	cast_1d<20>(mlp_2_bias, mlp_2_bias_fixed);
+
+	cast_2d<1,20>(mlp_4_weight, mlp_4_weight_fixed);
+	cast_1d<1>(mlp_4_bias, mlp_4_bias_fixed);
 
 
 }
