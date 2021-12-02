@@ -27,6 +27,9 @@ FM_TYPE m_2[MAX_NODE][960];
 FM_TYPE h_3[MAX_NODE][EMB_DIM];
 FM_TYPE m_3[MAX_NODE][960];
 
+FM_TYPE h_combined[5][MAX_NODE][EMB_DIM];
+FM_TYPE m_combined[4][MAX_NODE][960];
+
 FM_TYPE h_4[MAX_NODE][EMB_DIM];
 
 FM_TYPE h_5[EMB_DIM];
@@ -312,34 +315,41 @@ void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], i
     return;
 }
 
-void CONV_0(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-	#pragma HLS inline off
-    message_passing(h_0, m_0, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_0, h_1, num_of_nodes, convs_0_post_nn_0_weight_fixed, convs_0_post_nn_0_bias_fixed);
+// void CONV_0(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
+// {
+// 	#pragma HLS inline off
+//     message_passing(h_0, m_0, edge_list, num_of_nodes, num_of_edges);
+//     Linear_relu(m_0, h_1, num_of_nodes, convs_0_post_nn_0_weight_fixed, convs_0_post_nn_0_bias_fixed);
+// }
+
+// void CONV_1(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
+// {
+// 	#pragma HLS inline off
+//     message_passing(h_1, m_1, edge_list, num_of_nodes, num_of_edges);
+//     Linear_relu(m_1, h_2, num_of_nodes, convs_1_post_nn_0_weight_fixed, convs_1_post_nn_0_bias_fixed);
+//     return;
+// }
+
+// void CONV_2(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
+// {
+// 	#pragma HLS inline off
+//     message_passing(h_2, m_2, edge_list, num_of_nodes, num_of_edges);
+//     Linear_relu(m_2, h_3, num_of_nodes, convs_2_post_nn_0_weight_fixed, convs_2_post_nn_0_bias_fixed);
+// }
+
+// void CONV_3(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
+// {
+// 	#pragma HLS inline off
+//     message_passing(h_3, m_3, edge_list, num_of_nodes, num_of_edges);
+//     Linear_relu(m_3, h_4, num_of_nodes, convs_3_post_nn_0_weight_fixed, convs_3_post_nn_0_bias_fixed);
+// }
+
+void CONV(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges, int layer) {
+    message_passing(h_combined[layer], m_combined[layer], edge_list, num_of_nodes, num_of_edges);
+    Linear_relu(m_combined[layer], h_combined[layer + 1], num_of_nodes, convs_ALL_post_nn_0_weight_fixed[layer], convs_ALL_post_nn_0_bias_fixed[layer]);
+
 }
 
-void CONV_1(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-	#pragma HLS inline off
-    message_passing(h_1, m_1, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_1, h_2, num_of_nodes, convs_1_post_nn_0_weight_fixed, convs_1_post_nn_0_bias_fixed);
-    return;
-}
-
-void CONV_2(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-	#pragma HLS inline off
-    message_passing(h_2, m_2, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_2, h_3, num_of_nodes, convs_2_post_nn_0_weight_fixed, convs_2_post_nn_0_bias_fixed);
-}
-
-void CONV_3(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges)
-{
-	#pragma HLS inline off
-    message_passing(h_3, m_3, edge_list, num_of_nodes, num_of_edges);
-    Linear_relu(m_3, h_4, num_of_nodes, convs_3_post_nn_0_weight_fixed, convs_3_post_nn_0_bias_fixed);
-}
 void GLOBAL_MEAN_POOL(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE f[EMB_DIM], int num_of_nodes)
 {
 	#pragma HLS inline off
@@ -450,7 +460,8 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 
     printf("Computing PNA ...\n");
     /*Embedding: compute input node embedding */
-    memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+    // memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+    memset(h_combined, 0, 5 * MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
         for (int nf = 0; nf < ND_FEATURE; nf++)
@@ -489,49 +500,57 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
                     emb_value = node_emb_atom_embedding_list_8_weight_fixed[nd_f][dim];
                     break;
                 }
-                h_0[nd][dim] += emb_value;
+                h_combined[0][nd][dim] += emb_value;
             }
         }
     }
 
     ////////////// CONV 0 //////////////////////////////////
-    CONV_0(edge_list, edge_attr, num_of_nodes, num_of_edges);
+    // CONV_0(edge_list, edge_attr, num_of_nodes, num_of_edges);
+    // for (int i = 0; i < num_of_nodes; i++)
+    // {
+    //     for (int j = 0; j < 80; j++)
+    //     {
+    //         h_1[i][j] += h_0[i][j];
+    //     }
+    // }
+    CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 0);
     for (int i = 0; i < num_of_nodes; i++)
     {
         for (int j = 0; j < 80; j++)
         {
-            h_1[i][j] += h_0[i][j];
+            h_combined[1][i][j] += h_combined[0][i][j];
         }
     }
 
     ////////////// CONV 1 //////////////////////////////////
-    CONV_1(edge_list, edge_attr, num_of_nodes, num_of_edges);
+    CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 1);
     for (int i = 0; i < num_of_nodes; i++)
     {
         for (int j = 0; j < 80; j++)
         {
-            h_2[i][j] += h_1[i][j];
+            h_combined[2][i][j] += h_combined[1][i][j];
         }
     }
     ////////////// CONV 2 //////////////////////////////////
-    CONV_2(edge_list, edge_attr, num_of_nodes, num_of_edges);
+    CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 2);
     for (int i = 0; i < num_of_nodes; i++)
     {
         for (int j = 0; j < 80; j++)
         {
-            h_3[i][j] += h_2[i][j];
+            h_combined[3][i][j] += h_combined[2][i][j];
         }
     }
     ////////////// CONV 3 //////////////////////////////////
-    CONV_3(edge_list, edge_attr, num_of_nodes, num_of_edges);
+    CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 3);
     for (int i = 0; i < num_of_nodes; i++)
     {
         for (int j = 0; j < 80; j++)
         {
-            h_4[i][j] += h_3[i][j];
+            h_combined[4][i][j] += h_combined[3][i][j];
         }
     }
-    GLOBAL_MEAN_POOL(h_4, h_5, num_of_nodes);
+    GLOBAL_MEAN_POOL(h_combined[4], h_5, num_of_nodes);
     MLP( num_of_nodes);
     printf("%f \n", final.to_float());
 

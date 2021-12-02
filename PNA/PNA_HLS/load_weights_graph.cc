@@ -18,6 +18,21 @@ void cast_2d(float in[M][N], WT_TYPE out[M][N]){
 	}
 }
 
+template <int M, int N, typename T>
+void copy_2d(T from[M][N], T to[M][N]) {
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            to[i][j] = from[i][j];
+        }
+    }
+}
+
+template <int M, typename T>
+void copy_1d(T from[M], T to[M]) {
+    for (int i = 0; i < M; i++) {
+        to[i] = from[i];
+    }
+}
 
 void load_weights()
 {
@@ -126,8 +141,17 @@ void load_weights()
 	cast_2d<80,960>(convs_3_post_nn_0_weight, convs_3_post_nn_0_weight_fixed);
 	cast_1d<80>(convs_3_post_nn_0_bias, convs_3_post_nn_0_bias_fixed);
 
+    copy_2d<80, 960, WT_TYPE>(convs_0_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[0]);
+    copy_2d<80, 960, WT_TYPE>(convs_1_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[1]);
+    copy_2d<80, 960, WT_TYPE>(convs_2_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[2]);
+    copy_2d<80, 960, WT_TYPE>(convs_3_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[3]);
 
-	cast_2d<40,80>(mlp_0_weight, mlp_0_weight_fixed);
+    copy_1d<80, WT_TYPE>(convs_0_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[0]);
+    copy_1d<80, WT_TYPE>(convs_1_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[1]);
+    copy_1d<80, WT_TYPE>(convs_2_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[2]);
+    copy_1d<80, WT_TYPE>(convs_3_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[3]);
+
+    cast_2d<40,80>(mlp_0_weight, mlp_0_weight_fixed);
 	cast_1d<40>(mlp_0_bias, mlp_0_bias_fixed);
 
 	cast_2d<20,40>(mlp_2_weight, mlp_2_weight_fixed);

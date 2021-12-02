@@ -67,6 +67,8 @@ extern WT_TYPE mlp_2_bias_fixed[20];
 extern WT_TYPE mlp_4_weight_fixed[1][20];
 extern WT_TYPE mlp_4_bias_fixed[1];
 
+extern WT_TYPE convs_ALL_post_nn_0_weight_fixed[4][80][960];
+extern WT_TYPE convs_ALL_post_nn_0_bias_fixed[4][80];
 
 void PNA_compute_one_graph();
 void load_weights();
