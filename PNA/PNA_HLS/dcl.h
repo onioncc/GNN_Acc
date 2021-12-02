@@ -3,6 +3,11 @@
 
 #include "gmp.h"
 
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "ap_fixed.h"
 #include "hls_math.h"
 

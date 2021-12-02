@@ -15,22 +15,23 @@ FM_TYPE out_1[MAX_EDGE][EMB_DIM];
 FM_TYPE out_2[MAX_EDGE][EMB_DIM];
 FM_TYPE out_3[MAX_EDGE][EMB_DIM];
 
-FM_TYPE h_0[MAX_NODE][EMB_DIM];
-FM_TYPE m_0[MAX_NODE][960];
+// FM_TYPE h_0[MAX_NODE][EMB_DIM];
+// FM_TYPE m_0[MAX_NODE][960];
 
-FM_TYPE h_1[MAX_NODE][EMB_DIM];
-FM_TYPE m_1[MAX_NODE][960];
+// FM_TYPE h_1[MAX_NODE][EMB_DIM];
+// FM_TYPE m_1[MAX_NODE][960];
 
-FM_TYPE h_2[MAX_NODE][EMB_DIM];
-FM_TYPE m_2[MAX_NODE][960];
+// FM_TYPE h_2[MAX_NODE][EMB_DIM];
+// FM_TYPE m_2[MAX_NODE][960];
 
-FM_TYPE h_3[MAX_NODE][EMB_DIM];
-FM_TYPE m_3[MAX_NODE][960];
+// FM_TYPE h_3[MAX_NODE][EMB_DIM];
+// FM_TYPE m_3[MAX_NODE][960];
+
+// FM_TYPE h_4[MAX_NODE][EMB_DIM];
 
 FM_TYPE h_combined[5][MAX_NODE][EMB_DIM];
 FM_TYPE m_combined[4][MAX_NODE][960];
 
-FM_TYPE h_4[MAX_NODE][EMB_DIM];
 
 FM_TYPE h_5[EMB_DIM];
 FM_TYPE final;
@@ -345,6 +346,7 @@ void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], i
 // }
 
 void CONV(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges, int layer) {
+#pragma HLS inline off
     message_passing(h_combined[layer], m_combined[layer], edge_list, num_of_nodes, num_of_edges);
     Linear_relu(m_combined[layer], h_combined[layer + 1], num_of_nodes, convs_ALL_post_nn_0_weight_fixed[layer], convs_ALL_post_nn_0_bias_fixed[layer]);
 
@@ -429,19 +431,8 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 #pragma HLS bind_storage variable=out_2 type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=out_3 type=RAM_2P impl=bram
 
-#pragma HLS bind_storage variable=h_0 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=m_0 type=RAM_2P impl=bram
-
-#pragma HLS bind_storage variable=h_1 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=m_1 type=RAM_2P impl=bram
-
-#pragma HLS bind_storage variable=h_2 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=m_2 type=RAM_2P impl=bram
-
-#pragma HLS bind_storage variable=h_3 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=m_3 type=RAM_2P impl=bram
-
-#pragma HLS bind_storage variable=h_4 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=h_combined type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=m_combined type=RAM_2P impl=bram
 
 #pragma HLS bind_storage variable=h_5 type=RAM_2P impl=bram
 
@@ -449,8 +440,7 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 #pragma HLS bind_storage variable=degree_buf type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=aggrout type=RAM_2P impl=bram
 
-#pragma HLS bind_storage variable=count type=RAM_2P impl=bram
-
+// #pragma HLS bind_storage variable=count type=RAM_2P impl=bram
 
 	
    int num_of_nodes = graph_attr[0];
