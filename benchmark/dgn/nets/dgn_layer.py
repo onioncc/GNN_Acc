@@ -220,8 +220,8 @@ class DGNLayerSimpleNB(nn.Module):
         return {'e': edges.src['h'], 'eig_s': edges.src['eig'], 'eig_d': edges.dst['eig']}
 
     def message_func(self, edges):
-        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'].to('cuda' if torch.cuda.is_available() else 'cpu'),
-                'eig_d': edges.data['eig_d'].to('cuda' if torch.cuda.is_available() else 'cpu')}
+        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'],
+                'eig_d': edges.data['eig_d']}
 
     def reduce_func(self, nodes):
         h_in = nodes.data['h']

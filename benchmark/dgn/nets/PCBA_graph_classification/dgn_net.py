@@ -1,7 +1,7 @@
 import torch.nn as nn
 import dgl
-from nets.dgn_layer import DGNLayer, VirtualNode
-from nets.mlp_readout_layer import MLPReadout
+from ...nets.dgn_layer import DGNLayer, VirtualNode
+from ...nets.mlp_readout_layer import MLPReadout
 import torch
 from ogb.graphproppred.mol_encoder import AtomEncoder, BondEncoder
 
@@ -17,8 +17,6 @@ class DGNNet(nn.Module):
         n_layers = net_params['L']
         self.type_net = net_params['type_net']
         self.readout = net_params['readout']
-        self.graph_norm = net_params['graph_norm']
-        self.batch_norm = net_params['batch_norm']
         self.aggregators = net_params['aggregators']
         self.scalers = net_params['scalers']
         self.avg_d = net_params['avg_d']
@@ -39,14 +37,12 @@ class DGNNet(nn.Module):
             self.embedding_e = BondEncoder(emb_dim=edge_dim)
 
         self.layers = nn.ModuleList(
-            [DGNLayer(in_dim=hidden_dim, out_dim=hidden_dim, dropout=dropout, graph_norm=self.graph_norm,
-                      batch_norm=self.batch_norm, residual=self.residual, aggregators=self.aggregators,
+            [DGNLayer(in_dim=hidden_dim, out_dim=hidden_dim, dropout=dropout, residual=self.residual, aggregators=self.aggregators,
                       scalers=self.scalers, avg_d=self.avg_d, type_net=self.type_net, edge_features=self.edge_feat,
                       edge_dim=edge_dim, pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers,
                       towers=self.towers).model for _
              in range(n_layers - 1)])
         self.layers.append(DGNLayer(in_dim=hidden_dim, out_dim=out_dim, dropout=dropout,
-                                    graph_norm=self.graph_norm, batch_norm=self.batch_norm,
                                     residual=self.residual, aggregators=self.aggregators, scalers=self.scalers,
                                     avg_d=self.avg_d, type_net=self.type_net, edge_features=self.edge_feat,
                                     edge_dim=edge_dim,

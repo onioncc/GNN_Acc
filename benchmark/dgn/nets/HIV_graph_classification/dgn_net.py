@@ -1,7 +1,7 @@
 import torch.nn as nn
 import dgl
-from nets.dgn_layer import DGNLayer
-from nets.mlp_readout_layer import MLPReadout
+from ..dgn_layer import DGNLayer
+from ..mlp_readout_layer import MLPReadout
 import torch
 from ogb.graphproppred.mol_encoder import AtomEncoder, BondEncoder
 
