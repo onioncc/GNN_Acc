@@ -43,7 +43,7 @@ int main()
 
         fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
-        DGN_compute_one_graph(&result, node_feature, node_eigen, edge_list, edge_attr, graph_attr, embedding_h_atom_embedding_list_weights, layers_posttrans_fully_connected_0_linear_weight_in, layers_posttrans_fully_connected_0_linear_bias_in, MLP_layer_FC_layers_0_weight_in, MLP_layer_FC_layers_0_bias_in, MLP_layer_FC_layers_1_weight_in, MLP_layer_FC_layers_1_bias_in, MLP_layer_FC_layers_2_weight_in, MLP_layer_FC_layers_2_bias_in);
+        result = DGN_compute_one_graph(node_feature, node_eigen, edge_list, edge_attr, graph_attr, embedding_h_atom_embedding_list_weights, layers_posttrans_fully_connected_0_linear_weight_in, layers_posttrans_fully_connected_0_linear_bias_in, MLP_layer_FC_layers_0_weight_in, MLP_layer_FC_layers_0_bias_in, MLP_layer_FC_layers_1_weight_in, MLP_layer_FC_layers_1_bias_in, MLP_layer_FC_layers_2_weight_in, MLP_layer_FC_layers_2_bias_in);
         printf("%.8f\n", float(result));
         all_results[g - 1] = float(result);
         free(node_feature);

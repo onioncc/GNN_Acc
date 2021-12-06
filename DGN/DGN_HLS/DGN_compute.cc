@@ -15,25 +15,23 @@ WT_TYPE MLP_layer_FC_layers_2_bias[1];
 
 int node_feature[MAX_NODE * ND_FEATURE];
 int edge_list[MAX_EDGE * 2];
+int degree_table[MAX_NODE][2];
+int neighbor_table[MAX_EDGE];
 WT_TYPE node_eigen[MAX_NODE * 4];
 
 FM_TYPE h_0[MAX_NODE][EMB_DIM];
-FM_TYPE h_1[MAX_NODE][EMB_DIM];
-FM_TYPE h_2[MAX_NODE][EMB_DIM];
-FM_TYPE h_3[MAX_NODE][EMB_DIM];
-FM_TYPE h_4[MAX_NODE][EMB_DIM];
+FM_TYPE message_1[MAX_NODE][EMB_DIM];
+FM_TYPE message_2[MAX_NODE][EMB_DIM];
 FM_TYPE h_5[EMB_DIM];
-FM_TYPE message[MAX_NODE][2 * EMB_DIM];
+
+// Internal buffers for message passing
+FM_TYPE mean_index[MAX_NODE][EMB_DIM];
+WT_TYPE eig_w[MAX_NODE][MAX_EDGE];
+FM_TYPE h_mod[MAX_NODE][EMB_DIM];
+WT_TYPE eig_abssums[MAX_NODE];
+WT_TYPE eigw_sums[MAX_NODE];
 
 void load_weights(
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][200],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_bias[4][100],
-    WT_TYPE MLP_layer_FC_layers_0_weight[50][100],
-    WT_TYPE MLP_layer_FC_layers_0_bias[50],
-    WT_TYPE MLP_layer_FC_layers_1_weight[25][50],
-    WT_TYPE MLP_layer_FC_layers_1_bias[25],
-    WT_TYPE MLP_layer_FC_layers_2_weight[1][25],
-    WT_TYPE MLP_layer_FC_layers_2_bias[1],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
     WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
     WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
@@ -53,6 +51,13 @@ void load_weights(
             {
                 layers_posttrans_fully_connected_0_linear_weight[i][j][k] = layers_posttrans_fully_connected_0_linear_weight_in[i][j][k];
             }
+        }
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 100; j++)
+        {
             layers_posttrans_fully_connected_0_linear_bias[i][j] = layers_posttrans_fully_connected_0_linear_bias_in[i][j];
         }
     }
@@ -63,6 +68,10 @@ void load_weights(
         {
             MLP_layer_FC_layers_0_weight[i][j] = MLP_layer_FC_layers_0_weight_in[i][j];
         }
+    }
+
+    for (int i = 0; i < 50; i++)
+    {
         MLP_layer_FC_layers_0_bias[i] = MLP_layer_FC_layers_0_bias_in[i];
     }
 
@@ -72,6 +81,10 @@ void load_weights(
         {
             MLP_layer_FC_layers_1_weight[i][j] = MLP_layer_FC_layers_1_weight_in[i][j];
         }
+    }
+
+    for (int i = 0; i < 25; i++)
+    {
         MLP_layer_FC_layers_1_bias[i] = MLP_layer_FC_layers_1_bias_in[i];
     }
 
@@ -79,10 +92,11 @@ void load_weights(
     {
         MLP_layer_FC_layers_2_weight[0][i] = MLP_layer_FC_layers_2_weight_in[0][i];
     }
+
     MLP_layer_FC_layers_2_bias[0] = MLP_layer_FC_layers_2_bias_in[0];
 }
 
-void load_graph(int *node_feature, int *edge_list, WT_TYPE *node_eigen, int *node_feature_in, int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int num_of_edges)
+void load_graph(int *node_feature_in, int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
     for (int i = 0; i < num_of_nodes * ND_FEATURE; i++)
@@ -101,136 +115,229 @@ void load_graph(int *node_feature, int *edge_list, WT_TYPE *node_eigen, int *nod
     }
 }
 
+void prepare_graph(int num_of_nodes, int num_of_edges)
+{
+#pragma HLS INLINE off
 
-void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE m[MAX_NODE][2 * EMB_DIM], int num_of_nodes, int num_of_edges)
+    int neighbor_table_idxs[MAX_NODE];
+    int edge_list_len = num_of_edges * 2;
+
+    for (int i = 0; i < num_of_nodes; i++)
+    {
+        degree_table[i][0] = 0;
+        neighbor_table_idxs[i] = 0;
+    }
+
+    for (int i = 1; i < edge_list_len; i += 2)
+    {
+        int v = edge_list[i];
+        degree_table[v][0]++;
+    }
+
+    int acc = 0;
+    for (int i = 0; i < num_of_nodes; i++)
+    {
+        int degree = degree_table[i][0];
+        degree_table[i][1] = acc;
+        acc += degree;
+    }
+
+    for (int i = 0; i < edge_list_len; i += 2)
+    {
+        int u = edge_list[i];
+        int v = edge_list[i + 1];
+        int row_idx = degree_table[v][1];
+        int col_idx = neighbor_table_idxs[v];
+        neighbor_table[row_idx + col_idx] = u;
+        neighbor_table_idxs[v] = col_idx + 1;
+    }
+}
+
+void message_passing_compute_embedding_first_half(int num_of_nodes)
+{
+#pragma HLS INLINE off
+
+    for (int n = 0; n < num_of_nodes; n++)
+    {
+        for (int dim = 0; dim < EMB_DIM; dim++)
+        {
+            message_1[n][dim] = mean_index[n][dim] / degree_table[n][0];
+        }
+        //printf("eigwsum:%.3f",double(eigwsum));
+        //printf("\n");
+    }
+}
+
+void message_passing_compute_embedding_second_half(int num_of_nodes)
+{
+#pragma HLS INLINE off
+
+    for (int n = 0; n < num_of_nodes; n++)
+    {
+        for (int dim = 0; dim < EMB_DIM; dim++)
+        {
+            FM_TYPE temp = h_mod[n][dim] - eigw_sums[n] * h_0[n][dim];
+            message_2[n][dim] = (temp >= 0) ? temp : FM_TYPE(-temp);
+        }
+    }
+}
+
+void message_passing(int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
 
     int edge_list_len = num_of_edges * 2;
-    FM_TYPE mean_index[MAX_NODE][EMB_DIM];
-    int degree[MAX_NODE];
-    WT_TYPE eig_w[MAX_NODE][MAX_EDGE];
-    FM_TYPE h_mod[MAX_NODE][EMB_DIM];
-    int curdegree[MAX_NODE];
 
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        degree[i] = 0;
-        curdegree[i] = 0;
-        for (int j = 0; j < EMB_DIM; j++)
-        {
-            mean_index[i][j] = FM_TYPE(0);
-            h_mod[i][j] = FM_TYPE(0);
-        }
-        for (int j = 0; j < num_of_edges; j++)
-        {
-            eig_w[i][j] = WT_TYPE(0);
-        }
-    }
+    int end_idx;
+    int start_idx;
+    int degree_v;
+    int v;
+    WT_TYPE v_eigen;
 
-    for (int e = 0; e < edge_list_len; e += 2)
+    v = -1;
+    end_idx = 0;
+    for (int e = 0; e < num_of_edges; e++)
     {
-        int u = edge_list[e];     // source node id
-        int v = edge_list[e + 1]; // target node id
-        //printf("e%d:%d->%d\n",e,u,v );
-        int d = degree[v];
-        degree[v] = d + 1;
-        eig_w[v][d] = node_eigen[(u * 4) + 1] - node_eigen[(v * 4) + 1];
+        if (e >= end_idx)
+        {
+            v++;
+            degree_v = degree_table[v][0];
+            start_idx = degree_table[v][1];
+            end_idx = start_idx + degree_v;
+            v_eigen = node_eigen[(v * 4) + 1];
+        }
+
+        int i = e - start_idx;
+        int u = neighbor_table[start_idx + i];
+        WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
+
+        WT_TYPE temp = u_eigen - v_eigen;
+        eig_w[v][i] = temp;
+        WT_TYPE abs_temp = (temp >= 0) ? temp : WT_TYPE(-temp);
+        eig_abssums[v] = (i == 0) ? abs_temp : WT_TYPE(eig_abssums[v] + abs_temp);
+
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            mean_index[v][dim] += h[u][dim];
+            FM_TYPE temp = h_0[u][dim];
+            mean_index[v][dim] = (i == 0) ? temp : FM_TYPE(mean_index[v][dim] + temp);
             // accumulate the embedding vector for edge [u -> v]
         }
     }
 
     for (int n = 0; n < num_of_nodes; n++)
     {
-        WT_TYPE eigsum = 0;
-        for (int i = 0; i < degree[n];i++)
+        WT_TYPE eig_abssum = eig_abssums[n];
+        if (eig_abssum != 0)
         {
-#pragma HLS LOOP_TRIPCOUNT avg=19 max=19
-            WT_TYPE temp = eig_w[n][i];
-            if (temp < 0) temp = -temp;
-            eigsum += temp;
-        }
-
-        if (eigsum != 0)
-        {
-            for (int d = 0; d < degree[n]; d++)
+            for (int d = 0; d < degree_table[n][0]; d++)
             {
 #pragma HLS LOOP_TRIPCOUNT avg=19 max=19
-                // eig_w[n][d] /= (eigsum + WT_TYPE(1e-8));
-                eig_w[n][d] /= eigsum;
+                WT_TYPE temp = eig_w[n][d] / eig_abssum;
+                eig_w[n][d] = temp;
+                eigw_sums[n] = (d == 0) ? temp : WT_TYPE(eigw_sums[n] + temp);
             }
         }
     }
 
-    for (int e = 0; e < edge_list_len; e += 2)
+    v = -1;
+    end_idx = 0;
+    for (int e = 0; e < num_of_edges; e++)
     {
-        int u = edge_list[e];     // source node id
-        int v = edge_list[e + 1]; // target node id
-        int d = curdegree[v];
-        curdegree[v] = d + 1;
-        for (int j = 0; j < EMB_DIM;j++)
+        if (e >= end_idx)
         {
-            h_mod[v][j] += h[u][j]*eig_w[v][d];
+            v++;
+            degree_v = degree_table[v][0];
+            start_idx = degree_table[v][1];
+            end_idx = start_idx + degree_v;
+        }
+
+        int i = e - start_idx;
+        int u = neighbor_table[start_idx + i];
+        WT_TYPE eig_w_v_i = eig_w[v][i];
+
+        for (int j = 0; j < EMB_DIM; j++)
+        {
+            FM_TYPE temp = h_0[u][j] * eig_w_v_i;
+            h_mod[v][j] = (i == 0) ? temp : FM_TYPE(h_mod[v][j] + temp);
         }
     }
 
-
-    for (int n = 0; n < num_of_nodes; n++)
-    {
-        WT_TYPE eigwsum = 0;
-        //printf("n%d:", n);
-        for (int deg = 0; deg < degree[n];deg++)
-        {
-#pragma HLS LOOP_TRIPCOUNT avg=19 max=19
-            eigwsum += eig_w[n][deg];
-        }
-        for (int dim = 0; dim < EMB_DIM; dim++)
-        {
-            m[n][dim] = mean_index[n][dim] / degree[n];
-            FM_TYPE temp = h_mod[n][dim] - eigwsum * h[n][dim];
-            if (temp < 0) temp = -temp;
-            m[n][dim + EMB_DIM] = temp;
-        }
-        //printf("eigwsum:%.3f",eigwsum );
-        //printf("\n");
-
-        }
-
+    message_passing_compute_embedding_first_half(num_of_nodes);
+    message_passing_compute_embedding_second_half(num_of_nodes);
 }
 
-void add_linear_relu(FM_TYPE h_in[MAX_NODE][EMB_DIM], FM_TYPE m[MAX_NODE][2 * EMB_DIM], FM_TYPE h_out[MAX_NODE][EMB_DIM], int num_of_nodes, int i)
+void copy_message_to_next_buffer(FM_TYPE to[], int nd, int num_of_nodes)
 {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=message type=complete dim=2
+    nd++;
+    if (nd < num_of_nodes)
+    {
+        for (int j = 0; j < EMB_DIM; j++)
+        {
+            to[j] = message_1[nd][j];
+        }
+        for (int j = 0; j < EMB_DIM; j++)
+        {
+            to[j + EMB_DIM] = message_2[nd][j];
+        }
+    }
+}
 
-    for (int nd = 0; nd < num_of_nodes; nd++)
+void add_linear_relu_acc(FM_TYPE from[], int i, int nd)
+{
+#pragma HLS INLINE off
+    if (nd >= 0)
     {
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
         {
-// #pragma HLS PIPELINE II=1
+#pragma HLS PIPELINE II=1
             FM_TYPE acc(layers_posttrans_fully_connected_0_linear_bias[i][dim_out]);
             for (int dim_in = 0; dim_in < L_IN; dim_in++)
             {
-                acc += m[nd][dim_in] * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
+                // from[dim_in] == message[nd][dim_in]
+                acc += from[dim_in] * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
             }
-            h_out[nd][dim_out] = (acc >= FM_TYPE(0.0)) ? FM_TYPE(h_in[nd][dim_out] + acc) : h_in[nd][dim_out];
+            if (acc > 0.0) h_0[nd][dim_out] += acc;
+        }
+    }
+}
+
+void add_linear_relu(int num_of_nodes, int i)
+{
+#pragma HLS INLINE off
+    // TODO: partition m in intermediate buffer; don't touch m
+    // #pragma HLS ARRAY_PARTITION variable=m cyclic factor=16 dim=1
+
+    FM_TYPE buffer1[L_IN];
+    FM_TYPE buffer2[L_IN];
+
+    for (int nd = -1; nd < num_of_nodes; nd++)
+    {
+        if (nd % 2 == 0)
+        {
+            copy_message_to_next_buffer(buffer2, nd, num_of_nodes);
+            add_linear_relu_acc(buffer1, i, nd);
+        }
+        else
+        {
+            copy_message_to_next_buffer(buffer1, nd, num_of_nodes);
+            add_linear_relu_acc(buffer2, i, nd);
         }
     }
     return;
 }
 
-void compute_CONV_layer(int i, WT_TYPE h_in[MAX_NODE][EMB_DIM], WT_TYPE h_out[MAX_NODE][EMB_DIM], WT_TYPE *node_eigen, int *edge_list, int num_of_nodes, int num_of_edges)
+void compute_CONV_layer(int i, int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
-    // FIXME: need to double-buffer!
-    message_passing(h_in, message, num_of_nodes, num_of_edges);
-    add_linear_relu(h_in, message, h_out, num_of_nodes, i);
+#pragma HLS bind_storage variable=message_1 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=message_2 type=RAM_2P impl=bram
+
+    message_passing(num_of_nodes, num_of_edges);
+    add_linear_relu(num_of_nodes, i);
 }
 
-void global_mean_pooling(FM_TYPE h_graph[EMB_DIM], FM_TYPE h_node[MAX_NODE][EMB_DIM], int num_of_nodes)
+void global_mean_pooling(int num_of_nodes)
 {
 #pragma HLS INLINE off
 
@@ -238,20 +345,21 @@ void global_mean_pooling(FM_TYPE h_graph[EMB_DIM], FM_TYPE h_node[MAX_NODE][EMB_
     {
         for (int j = 0; j < EMB_DIM; j++)
         {
-            FM_TYPE temp = h_node[i][j];
+            FM_TYPE temp = h_0[i][j];
             if (i == 0)
-                h_graph[j] = temp;
+                h_5[j] = temp;
             else if (i == num_of_nodes - 1)
-                h_graph[j] = (h_graph[j] + temp) / num_of_nodes;
+                h_5[j] = (h_5[j] + temp) / num_of_nodes;
             else
-                h_graph[j] += temp;
+                h_5[j] += temp;
         }
     }
 }
 
-float MLP(FM_TYPE h_graph[EMB_DIM])
+float MLP()
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=MLP_layer_FC_layers_1_weight type=complete dim=2
 
     FM_TYPE temp_0[50];
     FM_TYPE temp_1[25];
@@ -263,7 +371,7 @@ float MLP(FM_TYPE h_graph[EMB_DIM])
         temp_0[dim_out] = MLP_layer_FC_layers_0_bias[dim_out];
         for (int dim_in = 0; dim_in < 100; dim_in++)
         {
-            temp_0[dim_out] += h_graph[dim_in] * MLP_layer_FC_layers_0_weight[dim_out][dim_in];
+            temp_0[dim_out] += h_5[dim_in] * MLP_layer_FC_layers_0_weight[dim_out][dim_in];
         }
         if (temp_0[dim_out] < FM_TYPE(0.0)) temp_0[dim_out] = FM_TYPE(0.0);
     }
@@ -288,11 +396,30 @@ float MLP(FM_TYPE h_graph[EMB_DIM])
     return temp_2.to_float();
 }
 
-void my_print(FM_TYPE &result)
+void load_input_node_embeddings(WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100], int num_of_nodes)
 {
 #pragma HLS INLINE off
-    result = result + 5;
-    printf("%.8f\n", double(result));
+
+    /*Embedding: compute input node embedding */
+    for (int nf = 0; nf < ND_FEATURE; nf++)
+    {
+        for (int nd = 0; nd < num_of_nodes; nd++)
+        {
+            //if(ND_FEATURE < 4)
+            //{
+            //    node_eigen[nd][ND_FEATURE] ;
+            //}
+            int nd_f = node_feature[nd * ND_FEATURE + nf];
+            for (int dim = 0; dim < EMB_DIM; dim++)
+            {
+                WT_TYPE weight = embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
+                if (nf == 0)
+                    h_0[nd][dim] = weight;
+                else
+                    h_0[nd][dim] += weight;
+            }
+        }
+    }
 }
 
 extern "C" {
@@ -334,11 +461,9 @@ float DGN_compute_one_graph(
 #pragma HLS bind_storage variable=node_feature type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=edge_list type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=h_0 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=h_1 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=h_2 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=h_3 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=h_4 type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=h_5 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=degree_table type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=neighbor_table type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_0_weight type=RAM_2P impl=bram
@@ -346,30 +471,23 @@ float DGN_compute_one_graph(
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_1_weight type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_1_bias type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_2_weight type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=MLP_layer_FC_layers_2_bias type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=message type=RAM_2P impl=bram
+// #pragma HLS bind_storage variable=MLP_layer_FC_layers_2_bias type=RAM_2P impl=bram
+
+#pragma HLS array_partition variable=degree_table complete dim=2
 
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
 
-#ifndef CSIM
+#ifdef __SYNTHESIS__
     num_of_nodes = 19;
     num_of_edges = 40;
-    is_first = 0;
+    is_first = 1;
 #endif
 
     if (is_first)
     {
         load_weights(
-            layers_posttrans_fully_connected_0_linear_weight,
-            layers_posttrans_fully_connected_0_linear_bias,
-            MLP_layer_FC_layers_0_weight,
-            MLP_layer_FC_layers_0_bias,
-            MLP_layer_FC_layers_1_weight,
-            MLP_layer_FC_layers_1_bias,
-            MLP_layer_FC_layers_2_weight,
-            MLP_layer_FC_layers_2_bias,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,
             MLP_layer_FC_layers_0_weight_in,
@@ -382,44 +500,19 @@ float DGN_compute_one_graph(
     }
 
     // Load a new graph onto chip
-    load_graph(node_feature, edge_list, node_eigen, node_feature_in, edge_list_in, node_eigen_in, num_of_nodes, num_of_edges);
+    load_graph(node_feature_in, edge_list_in, node_eigen_in, num_of_nodes, num_of_edges);
+    prepare_graph(num_of_nodes, num_of_edges);
 
     printf("Computing DGN ...\n");
-    /*Embedding: compute input node embedding */
-    Init_h_0:
-    for (int nd = 0; nd < num_of_nodes; nd++)
+    load_input_node_embeddings(embedding_h_atom_embedding_list_weights, num_of_nodes);
+
+    for (int i = 0; i < 4; i++)
     {
-        for (int nf = 0; nf < ND_FEATURE; nf++)
-        {
-            //if(ND_FEATURE < 4)
-            //{
-            //    node_eigen[nd][ND_FEATURE] ;
-            //}
-            int nd_f = node_feature[nd * ND_FEATURE + nf];
-            for (int dim = 0; dim < EMB_DIM; dim++)
-            {
-                WT_TYPE weight = embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
-                if (nf == 0)
-                    h_0[nd][dim] = weight;
-                else
-                    h_0[nd][dim] += weight;
-            }
-        }
+        compute_CONV_layer(i, num_of_nodes, num_of_edges);
     }
 
-    compute_CONV_layer(0, h_0, h_1, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    compute_CONV_layer(1, h_1, h_2, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    compute_CONV_layer(2, h_2, h_3, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    compute_CONV_layer(3, h_3, h_4, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     if (i % 2 == 0)
-    //     else
-    //         compute_CONV_layer(i, h_1, h_0, node_eigen, edge_list, num_of_nodes, num_of_edges);
-    // }
-
-    global_mean_pooling(h_5, h_4, num_of_nodes);
-    return MLP(h_5);
+    global_mean_pooling(num_of_nodes);
+    return MLP();
     // my_print(result);
 
     // return;
