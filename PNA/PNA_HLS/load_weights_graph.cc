@@ -2,6 +2,37 @@
 #include <stdio.h>
 #include "dcl.h"
 
+template<int M>
+void cast_1d(float in[M], WT_TYPE out[M]){
+	for(int i=0; i<M; i++){
+		out[i] = (WT_TYPE)in[i];
+	}
+}
+
+template<int M, int N>
+void cast_2d(float in[M][N], WT_TYPE out[M][N]){
+	for(int i=0; i<M; i++){
+		for(int j=0; j<N; j++){
+			out[i][j] = (WT_TYPE)in[i][j];
+		}
+	}
+}
+
+template <int M, int N, typename T>
+void copy_2d(T from[M][N], T to[M][N]) {
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            to[i][j] = from[i][j];
+        }
+    }
+}
+
+template <int M, typename T>
+void copy_1d(T from[M], T to[M]) {
+    for (int i = 0; i < M; i++) {
+        to[i] = from[i];
+    }
+}
 
 void load_weights()
 {
@@ -12,7 +43,6 @@ void load_weights()
 	//error begin from node 0 dim 22
 	fseek(f, 0*sizeof(float), SEEK_SET);
 	fread(node_emb_atom_embedding_list_0_weight, sizeof(float), 9520, f);
-
 
 	fseek(f, 9520*sizeof(float), SEEK_SET);
 	fread(node_emb_atom_embedding_list_1_weight, sizeof(float),320 , f);
@@ -87,6 +117,49 @@ void load_weights()
 	fread(mlp_4_bias, sizeof(float), 1, f);
 
 	fclose(f);
+
+	cast_2d<119,80>(node_emb_atom_embedding_list_0_weight, node_emb_atom_embedding_list_0_weight_fixed);
+	cast_2d<4,80>(node_emb_atom_embedding_list_1_weight, node_emb_atom_embedding_list_1_weight_fixed);
+	cast_2d<12,80>(node_emb_atom_embedding_list_2_weight, node_emb_atom_embedding_list_2_weight_fixed);
+	cast_2d<12,80>(node_emb_atom_embedding_list_3_weight, node_emb_atom_embedding_list_3_weight_fixed);
+	cast_2d<10,80>(node_emb_atom_embedding_list_4_weight, node_emb_atom_embedding_list_4_weight_fixed);
+	cast_2d<6,80>(node_emb_atom_embedding_list_5_weight, node_emb_atom_embedding_list_5_weight_fixed);
+	cast_2d<6,80>(node_emb_atom_embedding_list_6_weight, node_emb_atom_embedding_list_6_weight_fixed);
+	cast_2d<2,80>(node_emb_atom_embedding_list_7_weight, node_emb_atom_embedding_list_7_weight_fixed);
+	cast_2d<2,80>(node_emb_atom_embedding_list_8_weight, node_emb_atom_embedding_list_8_weight_fixed);
+	
+
+	cast_2d<80,960>(convs_0_post_nn_0_weight, convs_0_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_0_post_nn_0_bias, convs_0_post_nn_0_bias_fixed);
+
+	cast_2d<80,960>(convs_1_post_nn_0_weight, convs_1_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_1_post_nn_0_bias, convs_1_post_nn_0_bias_fixed);
+
+	cast_2d<80,960>(convs_2_post_nn_0_weight, convs_2_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_2_post_nn_0_bias, convs_2_post_nn_0_bias_fixed);
+
+	cast_2d<80,960>(convs_3_post_nn_0_weight, convs_3_post_nn_0_weight_fixed);
+	cast_1d<80>(convs_3_post_nn_0_bias, convs_3_post_nn_0_bias_fixed);
+
+    copy_2d<80, 960, WT_TYPE>(convs_0_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[0]);
+    copy_2d<80, 960, WT_TYPE>(convs_1_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[1]);
+    copy_2d<80, 960, WT_TYPE>(convs_2_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[2]);
+    copy_2d<80, 960, WT_TYPE>(convs_3_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[3]);
+
+    copy_1d<80, WT_TYPE>(convs_0_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[0]);
+    copy_1d<80, WT_TYPE>(convs_1_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[1]);
+    copy_1d<80, WT_TYPE>(convs_2_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[2]);
+    copy_1d<80, WT_TYPE>(convs_3_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[3]);
+
+    cast_2d<40,80>(mlp_0_weight, mlp_0_weight_fixed);
+	cast_1d<40>(mlp_0_bias, mlp_0_bias_fixed);
+
+	cast_2d<20,40>(mlp_2_weight, mlp_2_weight_fixed);
+	cast_1d<20>(mlp_2_bias, mlp_2_bias_fixed);
+
+	cast_2d<1,20>(mlp_4_weight, mlp_4_weight_fixed);
+	cast_1d<1>(mlp_4_bias, mlp_4_bias_fixed);
+
 
 }
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
