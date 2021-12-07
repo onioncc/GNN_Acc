@@ -154,7 +154,8 @@ int main(int argc, char **argv) {
     float all_results[4113];
     FILE* c_output = fopen("HLS_output.txt", "w+");
     int is_first = 1;
-    for(int g = 1; g <= 4112; g++ ) {
+//for(int g = 3500; g <= 4112; g++ ) {
+    for(int g = 2890; g <= 2900; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
