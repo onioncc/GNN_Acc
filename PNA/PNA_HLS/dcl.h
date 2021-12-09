@@ -1,7 +1,7 @@
 #ifndef __DCL_H__
 #define __DCL_H__
 
-#include "gmp.h"
+// #include "gmp.h"
 
 #include <limits.h>
 #include <stdio.h>

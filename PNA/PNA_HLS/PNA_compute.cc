@@ -429,7 +429,7 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_list offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_attr offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
-#pragma HLS INTERFACE s_axilite register port=return
+// #pragma HLS INTERFACE s_axilite register port=return
 
 #pragma HLS bind_storage variable=message type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=mean_index type=RAM_2P impl=bram
