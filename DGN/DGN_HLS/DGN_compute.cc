@@ -1,5 +1,6 @@
 #include "dcl.h"
 #include "math.h"
+#include "hls_math.h"
 #include <stdio.h>
 
 //#define _PRINT_
@@ -139,90 +140,13 @@ void prepare_graph(int num_of_nodes, int num_of_edges)
         WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
         WT_TYPE v_eigen = node_eigen[(v * 4) + 1];
         WT_TYPE diff_eigen = u_eigen - v_eigen;
-        WT_TYPE abs_diff_eigen = (diff_eigen >= 0) ? diff_eigen : WT_TYPE(-diff_eigen);
         WT_TYPE eig_abssum = (col_idx != 0) ? eig_abssums[v] : WT_TYPE(0);
         WT_TYPE eigw_sum = (col_idx != 0) ? eigw_sums[v] : WT_TYPE(0);
         neighbor_table[e] = u;
         neighbor_table_idxs[v] = col_idx + 1;
         eig_w[e] = u_eigen - v_eigen;
-        eig_abssums[v] = eig_abssum + abs_diff_eigen;
+        eig_abssums[v] = eig_abssum + hls::abs(diff_eigen);
         eigw_sums[v] = eigw_sum + diff_eigen;
-    }
-}
-
-void message_passing_compute_message_1(int num_of_nodes, int num_of_edges)
-{
-#pragma HLS INLINE off
-
-    int v = -1;
-    int start_idx;
-    int end_idx = 0;
-    int degree_v;
-
-    for (int e = 0; e < num_of_edges; e++)
-    {
-        if (e >= end_idx)
-        {
-            v++;
-            degree_v = degree_table[v][0];
-            start_idx = degree_table[v][1];
-            end_idx = start_idx + degree_v;
-        }
-
-        int i = e - start_idx;
-        int u = neighbor_table[start_idx + i];
-
-        for (int dim = 0; dim < EMB_DIM; dim++)
-        {
-            FM_TYPE acc = (i != 0) ? mean_index[v][dim] : FM_TYPE(0);
-            acc += h_node[u][dim];
-            if (i != degree_v - 1)
-                mean_index[v][dim] = acc;
-            else
-                message_1[v][dim] = acc / degree_v;
-            // accumulate the embedding vector for edge [u -> v]
-        }
-    }
-}
-
-void message_passing_compute_message_2(int num_of_nodes, int num_of_edges)
-{
-#pragma HLS INLINE off
-
-    int v = -1;
-    int start_idx;
-    int end_idx = 0;
-    int degree_v;
-    WT_TYPE v_eigen;
-
-    for (int e = 0; e < num_of_edges; e++)
-    {
-        if (e >= end_idx)
-        {
-            v++;
-            degree_v = degree_table[v][0];
-            start_idx = degree_table[v][1];
-            end_idx = start_idx + degree_v;
-        }
-
-        int i = e - start_idx;
-        int u = neighbor_table[e];
-        WT_TYPE eig_w_e = eig_w[e];
-
-        for (int j = 0; j < EMB_DIM; j++)
-        {
-            FM_TYPE acc = (i != 0) ? h_mod[v][j] : FM_TYPE(0);
-            acc += h_node[u][j] * eig_w_e;
-            if (i != degree_v - 1)
-                h_mod[v][j] = acc;
-            else
-            {
-                WT_TYPE eig_abssum = eig_abssums[v];
-                if (eig_abssum == 0) eig_abssum = 1;
-                FM_TYPE temp = (acc - eigw_sums[v] * h_node[v][j]) / eig_abssum;
-                message_2[v][j] = (temp >= 0) ? temp : FM_TYPE(-temp);
-            }
-        }
     }
 }
 
@@ -230,8 +154,43 @@ void message_passing(int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
 
-    message_passing_compute_message_1(num_of_nodes, num_of_edges);
-    message_passing_compute_message_2(num_of_nodes, num_of_edges);
+    int v = -1;
+    int start_idx;
+    int end_idx = 0;
+    int degree_v;
+
+    for (int e = 0; e < num_of_edges; e++)
+    {
+        if (e >= end_idx)
+        {
+            v++;
+            degree_v = degree_table[v][0];
+            start_idx = degree_table[v][1];
+            end_idx = start_idx + degree_v;
+        }
+
+        int i = e - start_idx;
+        int i_last = degree_v - 1;
+        int u = neighbor_table[start_idx + i];
+        WT_TYPE eig_w_e = eig_w[e];
+        WT_TYPE eig_abssum = eig_abssums[v];
+        if (eig_abssum == 0) eig_abssum = 1;
+
+        for (int dim = 0; dim < EMB_DIM; dim++)
+        {
+            FM_TYPE h_node_u_dim = h_node[u][dim];
+            {
+                FM_TYPE acc = (i != 0) ? message_1[v][dim] : FM_TYPE(0);
+                acc += h_node_u_dim;
+                message_1[v][dim] = (i != i_last) ? acc : FM_TYPE(acc / degree_v);
+            }
+            {
+                FM_TYPE acc = (i != 0) ? message_2[v][dim] : FM_TYPE(-eigw_sums[v] * h_node[v][dim]);
+                acc += h_node_u_dim * eig_w_e;
+                message_2[v][dim] = (i != i_last) ? acc : FM_TYPE(hls::abs(acc / eig_abssum));
+            }
+        }
+    }
 }
 
 void copy_message_to_next_buffer(FM_TYPE to[], int nd, int num_of_nodes)
@@ -273,8 +232,6 @@ void add_linear_relu_acc(FM_TYPE from[], int i, int nd)
 void add_linear_relu(int num_of_nodes, int i)
 {
 #pragma HLS INLINE off
-    // TODO: partition m in intermediate buffer; don't touch m
-    // #pragma HLS ARRAY_PARTITION variable=m cyclic factor=16 dim=1
 
     FM_TYPE buffer1[L_IN];
     FM_TYPE buffer2[L_IN];
