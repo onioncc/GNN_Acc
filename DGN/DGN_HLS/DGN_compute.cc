@@ -26,7 +26,7 @@ FM_TYPE h_graph[EMB_DIM];
 
 // Internal buffers for message passing
 FM_TYPE mean_index[MAX_NODE][EMB_DIM];
-WT_TYPE eig_w[MAX_NODE][MAX_EDGE];
+WT_TYPE eig_w[MAX_EDGE];
 FM_TYPE h_mod[MAX_NODE][EMB_DIM];
 WT_TYPE eig_abssums[MAX_NODE];
 WT_TYPE eigw_sums[MAX_NODE];
@@ -135,8 +135,18 @@ void prepare_graph(int num_of_nodes, int num_of_edges)
         int v = edge_list[i + 1];
         int row_idx = degree_table[v][1];
         int col_idx = neighbor_table_idxs[v];
-        neighbor_table[row_idx + col_idx] = u;
+        int e = row_idx + col_idx;
+        WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
+        WT_TYPE v_eigen = node_eigen[(v * 4) + 1];
+        WT_TYPE diff_eigen = u_eigen - v_eigen;
+        WT_TYPE abs_diff_eigen = (diff_eigen >= 0) ? diff_eigen : WT_TYPE(-diff_eigen);
+        WT_TYPE eig_abssum = (col_idx != 0) ? eig_abssums[v] : WT_TYPE(0);
+        WT_TYPE eigw_sum = (col_idx != 0) ? eigw_sums[v] : WT_TYPE(0);
+        neighbor_table[e] = u;
         neighbor_table_idxs[v] = col_idx + 1;
+        eig_w[e] = u_eigen - v_eigen;
+        eig_abssums[v] = eig_abssum + abs_diff_eigen;
+        eigw_sums[v] = eigw_sum + diff_eigen;
     }
 }
 
@@ -179,78 +189,39 @@ void message_passing_compute_message_2(int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
 
+    int v = -1;
+    int start_idx;
+    int end_idx = 0;
+    int degree_v;
+    WT_TYPE v_eigen;
+
+    for (int e = 0; e < num_of_edges; e++)
     {
-        int v = -1;
-        int start_idx;
-        int end_idx = 0;
-        int degree_v;
-        WT_TYPE v_eigen;
-
-        for (int e = 0; e < num_of_edges; e++)
+        if (e >= end_idx)
         {
-            if (e >= end_idx)
-            {
-                v++;
-                degree_v = degree_table[v][0];
-                start_idx = degree_table[v][1];
-                end_idx = start_idx + degree_v;
-                v_eigen = node_eigen[(v * 4) + 1];
-            }
-
-            int i = e - start_idx;
-            int u = neighbor_table[start_idx + i];
-            WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
-
-            WT_TYPE diff_eigen = u_eigen - v_eigen;
-            eig_w[v][i] = diff_eigen;
-            WT_TYPE abs_diff_eigen = (diff_eigen >= 0) ? diff_eigen : WT_TYPE(-diff_eigen);
-            WT_TYPE eig_abssum = (i != 0) ? eig_abssums[v] : WT_TYPE(0);
-            eig_abssums[v] = eig_abssum + abs_diff_eigen;
-            WT_TYPE eigw_sum = (i != 0) ? eigw_sums[v] : WT_TYPE(0);
-            eigw_sums[v] = eigw_sum + diff_eigen;
+            v++;
+            degree_v = degree_table[v][0];
+            start_idx = degree_table[v][1];
+            end_idx = start_idx + degree_v;
         }
-    }
 
-    {
-        int v = -1;
-        int start_idx;
-        int end_idx = 0;
-        int degree_v;
-        WT_TYPE v_eigen;
+        int i = e - start_idx;
+        int u = neighbor_table[e];
+        WT_TYPE eig_w_e = eig_w[e];
 
-        for (int e = 0; e < num_of_edges; e++)
+        for (int j = 0; j < EMB_DIM; j++)
         {
-            if (e >= end_idx)
-            {
-                v++;
-                degree_v = degree_table[v][0];
-                start_idx = degree_table[v][1];
-                end_idx = start_idx + degree_v;
-            }
-
-            int i = e - start_idx;
-            int u = neighbor_table[start_idx + i];
-            WT_TYPE eig_abssum = eig_abssums[v];
-            if (eig_abssum == 0) eig_abssum = 1;
-            WT_TYPE eig_w_v_i = eig_w[v][i] / eig_abssum;
-
-            for (int j = 0; j < EMB_DIM; j++)
-            {
-                FM_TYPE acc = (i != 0) ? h_mod[v][j] : FM_TYPE(0);
-                acc += h_node[u][j] * eig_w_v_i;
+            FM_TYPE acc = (i != 0) ? h_mod[v][j] : FM_TYPE(0);
+            acc += h_node[u][j] * eig_w_e;
+            if (i != degree_v - 1)
                 h_mod[v][j] = acc;
+            else
+            {
+                WT_TYPE eig_abssum = eig_abssums[v];
+                if (eig_abssum == 0) eig_abssum = 1;
+                FM_TYPE temp = (acc - eigw_sums[v] * h_node[v][j]) / eig_abssum;
+                message_2[v][j] = (temp >= 0) ? temp : FM_TYPE(-temp);
             }
-        }
-    }
-
-    for (int n = 0; n < num_of_nodes; n++)
-    {
-        for (int dim = 0; dim < EMB_DIM; dim++)
-        {
-            WT_TYPE eig_abssum = eig_abssums[n];
-            if (eig_abssum == 0) eig_abssum = 1;
-            FM_TYPE temp = h_mod[n][dim] - eigw_sums[n] * h_node[n][dim] / eig_abssum;
-            message_2[n][dim] = (temp >= 0) ? temp : FM_TYPE(-temp);
         }
     }
 }
@@ -398,9 +369,9 @@ void load_input_node_embeddings(WT_TYPE embedding_h_atom_embedding_list_weights[
 #pragma HLS INLINE off
 
     /*Embedding: compute input node embedding */
-    for (int nf = 0; nf < ND_FEATURE; nf++)
+    for (int nd = 0; nd < num_of_nodes; nd++)
     {
-        for (int nd = 0; nd < num_of_nodes; nd++)
+        for (int nf = 0; nf < ND_FEATURE; nf++)
         {
             //if(ND_FEATURE < 4)
             //{
