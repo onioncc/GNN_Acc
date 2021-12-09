@@ -569,7 +569,7 @@ void GIN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_list_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_attr_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=tasks offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=task offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_weights_fixed offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_bias_fixed offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_2_weights_fixed offset=slave bundle=mem
