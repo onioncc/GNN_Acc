@@ -19,10 +19,10 @@ int degree_table[MAX_NODE][2];
 int neighbor_table[MAX_EDGE];
 WT_TYPE node_eigen[MAX_NODE * 4];
 
-FM_TYPE h_0[MAX_NODE][EMB_DIM];
+FM_TYPE h_node[MAX_NODE][EMB_DIM];
 FM_TYPE message_1[MAX_NODE][EMB_DIM];
 FM_TYPE message_2[MAX_NODE][EMB_DIM];
-FM_TYPE h_5[EMB_DIM];
+FM_TYPE h_graph[EMB_DIM];
 
 // Internal buffers for message passing
 FM_TYPE mean_index[MAX_NODE][EMB_DIM];
@@ -30,6 +30,36 @@ WT_TYPE eig_w[MAX_NODE][MAX_EDGE];
 FM_TYPE h_mod[MAX_NODE][EMB_DIM];
 WT_TYPE eig_abssums[MAX_NODE];
 WT_TYPE eigw_sums[MAX_NODE];
+
+template<typename T, int N>
+void load_array_1d(T to[N], T from[N]) {
+#pragma HLS INLINE off
+    for (int i = 0; i < N; i++) {
+        to[i] = from[i];
+    }
+}
+
+template<typename T, int R, int C>
+void load_array_2d(T to[R][C], T from[R][C]) {
+#pragma HLS INLINE off
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
+            to[i][j] = from[i][j];
+        }
+    }
+}
+
+template<typename T, int L, int R, int C>
+void load_array_3d(T to[L][R][C], T from[L][R][C]) {
+#pragma HLS INLINE off
+    for (int i = 0; i < L; i++) {
+        for (int j = 0; j < R; j++) {
+            for (int k = 0; k < C; k++) {
+                to[i][j][k] = from[i][j][k];
+            }
+        }
+    }
+}
 
 void load_weights(
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
@@ -43,57 +73,14 @@ void load_weights(
 )
 {
 #pragma HLS INLINE off
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 100; j++)
-        {
-            for (int k = 0; k < 200; k++)
-            {
-                layers_posttrans_fully_connected_0_linear_weight[i][j][k] = layers_posttrans_fully_connected_0_linear_weight_in[i][j][k];
-            }
-        }
-    }
-
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 100; j++)
-        {
-            layers_posttrans_fully_connected_0_linear_bias[i][j] = layers_posttrans_fully_connected_0_linear_bias_in[i][j];
-        }
-    }
-
-    for (int i = 0; i < 50; i++)
-    {
-        for (int j = 0; j < 100; j++)
-        {
-            MLP_layer_FC_layers_0_weight[i][j] = MLP_layer_FC_layers_0_weight_in[i][j];
-        }
-    }
-
-    for (int i = 0; i < 50; i++)
-    {
-        MLP_layer_FC_layers_0_bias[i] = MLP_layer_FC_layers_0_bias_in[i];
-    }
-
-    for (int i = 0; i < 25; i++)
-    {
-        for (int j = 0; j < 50; j++)
-        {
-            MLP_layer_FC_layers_1_weight[i][j] = MLP_layer_FC_layers_1_weight_in[i][j];
-        }
-    }
-
-    for (int i = 0; i < 25; i++)
-    {
-        MLP_layer_FC_layers_1_bias[i] = MLP_layer_FC_layers_1_bias_in[i];
-    }
-
-    for (int i = 0; i < 25; i++)
-    {
-        MLP_layer_FC_layers_2_weight[0][i] = MLP_layer_FC_layers_2_weight_in[0][i];
-    }
-
-    MLP_layer_FC_layers_2_bias[0] = MLP_layer_FC_layers_2_bias_in[0];
+    load_array_3d<WT_TYPE, 4, 100, 200>(layers_posttrans_fully_connected_0_linear_weight, layers_posttrans_fully_connected_0_linear_weight_in);
+    load_array_2d<WT_TYPE, 4, 100>(layers_posttrans_fully_connected_0_linear_bias, layers_posttrans_fully_connected_0_linear_bias_in);
+    load_array_2d<WT_TYPE, 50, 100>(MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_weight_in);
+    load_array_1d<WT_TYPE, 50>(MLP_layer_FC_layers_0_bias, MLP_layer_FC_layers_0_bias_in);
+    load_array_2d<WT_TYPE, 25, 50>(MLP_layer_FC_layers_1_weight, MLP_layer_FC_layers_1_weight_in);
+    load_array_1d<WT_TYPE, 25>(MLP_layer_FC_layers_1_bias, MLP_layer_FC_layers_1_bias_in);
+    load_array_2d<WT_TYPE, 1, 25>(MLP_layer_FC_layers_2_weight, MLP_layer_FC_layers_2_weight_in);
+    load_array_1d<WT_TYPE, 1>(MLP_layer_FC_layers_2_bias, MLP_layer_FC_layers_2_bias_in);
 }
 
 void load_graph(int *node_feature_in, int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int num_of_edges)
@@ -153,30 +140,116 @@ void prepare_graph(int num_of_nodes, int num_of_edges)
     }
 }
 
-void message_passing_compute_embedding_first_half(int num_of_nodes)
+void message_passing_compute_message_1(int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
 
-    for (int n = 0; n < num_of_nodes; n++)
+    int v = -1;
+    int start_idx;
+    int end_idx = 0;
+    int degree_v;
+
+    for (int e = 0; e < num_of_edges; e++)
     {
+        if (e >= end_idx)
+        {
+            v++;
+            degree_v = degree_table[v][0];
+            start_idx = degree_table[v][1];
+            end_idx = start_idx + degree_v;
+        }
+
+        int i = e - start_idx;
+        int u = neighbor_table[start_idx + i];
+
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            message_1[n][dim] = mean_index[n][dim] / degree_table[n][0];
+            FM_TYPE acc = (i != 0) ? mean_index[v][dim] : FM_TYPE(0);
+            acc += h_node[u][dim];
+            if (i != degree_v - 1)
+                mean_index[v][dim] = acc;
+            else
+                message_1[v][dim] = acc / degree_v;
+            // accumulate the embedding vector for edge [u -> v]
         }
-        //printf("eigwsum:%.3f",double(eigwsum));
-        //printf("\n");
     }
 }
 
-void message_passing_compute_embedding_second_half(int num_of_nodes)
+void message_passing_compute_message_2(int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
+
+    {
+        int v = -1;
+        int start_idx;
+        int end_idx = 0;
+        int degree_v;
+        WT_TYPE v_eigen;
+
+        for (int e = 0; e < num_of_edges; e++)
+        {
+            if (e >= end_idx)
+            {
+                v++;
+                degree_v = degree_table[v][0];
+                start_idx = degree_table[v][1];
+                end_idx = start_idx + degree_v;
+                v_eigen = node_eigen[(v * 4) + 1];
+            }
+
+            int i = e - start_idx;
+            int u = neighbor_table[start_idx + i];
+            WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
+
+            WT_TYPE diff_eigen = u_eigen - v_eigen;
+            eig_w[v][i] = diff_eigen;
+            WT_TYPE abs_diff_eigen = (diff_eigen >= 0) ? diff_eigen : WT_TYPE(-diff_eigen);
+            WT_TYPE eig_abssum = (i != 0) ? eig_abssums[v] : WT_TYPE(0);
+            eig_abssums[v] = eig_abssum + abs_diff_eigen;
+            WT_TYPE eigw_sum = (i != 0) ? eigw_sums[v] : WT_TYPE(0);
+            eigw_sums[v] = eigw_sum + diff_eigen;
+        }
+    }
+
+    {
+        int v = -1;
+        int start_idx;
+        int end_idx = 0;
+        int degree_v;
+        WT_TYPE v_eigen;
+
+        for (int e = 0; e < num_of_edges; e++)
+        {
+            if (e >= end_idx)
+            {
+                v++;
+                degree_v = degree_table[v][0];
+                start_idx = degree_table[v][1];
+                end_idx = start_idx + degree_v;
+            }
+
+            int i = e - start_idx;
+            int u = neighbor_table[start_idx + i];
+            WT_TYPE eig_abssum = eig_abssums[v];
+            if (eig_abssum == 0) eig_abssum = 1;
+            WT_TYPE eig_w_v_i = eig_w[v][i] / eig_abssum;
+
+            for (int j = 0; j < EMB_DIM; j++)
+            {
+                FM_TYPE acc = (i != 0) ? h_mod[v][j] : FM_TYPE(0);
+                acc += h_node[u][j] * eig_w_v_i;
+                h_mod[v][j] = acc;
+            }
+        }
+    }
 
     for (int n = 0; n < num_of_nodes; n++)
     {
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            FM_TYPE temp = h_mod[n][dim] - eigw_sums[n] * h_0[n][dim];
+            WT_TYPE eig_abssum = eig_abssums[n];
+            if (eig_abssum == 0) eig_abssum = 1;
+            FM_TYPE temp = h_mod[n][dim] - eigw_sums[n] * h_node[n][dim] / eig_abssum;
             message_2[n][dim] = (temp >= 0) ? temp : FM_TYPE(-temp);
         }
     }
@@ -186,84 +259,8 @@ void message_passing(int num_of_nodes, int num_of_edges)
 {
 #pragma HLS INLINE off
 
-    int edge_list_len = num_of_edges * 2;
-
-    int end_idx;
-    int start_idx;
-    int degree_v;
-    int v;
-    WT_TYPE v_eigen;
-
-    v = -1;
-    end_idx = 0;
-    for (int e = 0; e < num_of_edges; e++)
-    {
-        if (e >= end_idx)
-        {
-            v++;
-            degree_v = degree_table[v][0];
-            start_idx = degree_table[v][1];
-            end_idx = start_idx + degree_v;
-            v_eigen = node_eigen[(v * 4) + 1];
-        }
-
-        int i = e - start_idx;
-        int u = neighbor_table[start_idx + i];
-        WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
-
-        WT_TYPE temp = u_eigen - v_eigen;
-        eig_w[v][i] = temp;
-        WT_TYPE abs_temp = (temp >= 0) ? temp : WT_TYPE(-temp);
-        eig_abssums[v] = (i == 0) ? abs_temp : WT_TYPE(eig_abssums[v] + abs_temp);
-
-        for (int dim = 0; dim < EMB_DIM; dim++)
-        {
-            FM_TYPE temp = h_0[u][dim];
-            mean_index[v][dim] = (i == 0) ? temp : FM_TYPE(mean_index[v][dim] + temp);
-            // accumulate the embedding vector for edge [u -> v]
-        }
-    }
-
-    for (int n = 0; n < num_of_nodes; n++)
-    {
-        WT_TYPE eig_abssum = eig_abssums[n];
-        if (eig_abssum != 0)
-        {
-            for (int d = 0; d < degree_table[n][0]; d++)
-            {
-#pragma HLS LOOP_TRIPCOUNT avg=19 max=19
-                WT_TYPE temp = eig_w[n][d] / eig_abssum;
-                eig_w[n][d] = temp;
-                eigw_sums[n] = (d == 0) ? temp : WT_TYPE(eigw_sums[n] + temp);
-            }
-        }
-    }
-
-    v = -1;
-    end_idx = 0;
-    for (int e = 0; e < num_of_edges; e++)
-    {
-        if (e >= end_idx)
-        {
-            v++;
-            degree_v = degree_table[v][0];
-            start_idx = degree_table[v][1];
-            end_idx = start_idx + degree_v;
-        }
-
-        int i = e - start_idx;
-        int u = neighbor_table[start_idx + i];
-        WT_TYPE eig_w_v_i = eig_w[v][i];
-
-        for (int j = 0; j < EMB_DIM; j++)
-        {
-            FM_TYPE temp = h_0[u][j] * eig_w_v_i;
-            h_mod[v][j] = (i == 0) ? temp : FM_TYPE(h_mod[v][j] + temp);
-        }
-    }
-
-    message_passing_compute_embedding_first_half(num_of_nodes);
-    message_passing_compute_embedding_second_half(num_of_nodes);
+    message_passing_compute_message_1(num_of_nodes, num_of_edges);
+    message_passing_compute_message_2(num_of_nodes, num_of_edges);
 }
 
 void copy_message_to_next_buffer(FM_TYPE to[], int nd, int num_of_nodes)
@@ -297,7 +294,7 @@ void add_linear_relu_acc(FM_TYPE from[], int i, int nd)
                 // from[dim_in] == message[nd][dim_in]
                 acc += from[dim_in] * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
             }
-            if (acc > 0.0) h_0[nd][dim_out] += acc;
+            if (acc > 0.0) h_node[nd][dim_out] += acc;
         }
     }
 }
@@ -345,13 +342,13 @@ void global_mean_pooling(int num_of_nodes)
     {
         for (int j = 0; j < EMB_DIM; j++)
         {
-            FM_TYPE temp = h_0[i][j];
+            FM_TYPE temp = h_node[i][j];
             if (i == 0)
-                h_5[j] = temp;
+                h_graph[j] = temp;
             else if (i == num_of_nodes - 1)
-                h_5[j] = (h_5[j] + temp) / num_of_nodes;
+                h_graph[j] = (h_graph[j] + temp) / num_of_nodes;
             else
-                h_5[j] += temp;
+                h_graph[j] += temp;
         }
     }
 }
@@ -371,7 +368,7 @@ float MLP()
         temp_0[dim_out] = MLP_layer_FC_layers_0_bias[dim_out];
         for (int dim_in = 0; dim_in < 100; dim_in++)
         {
-            temp_0[dim_out] += h_5[dim_in] * MLP_layer_FC_layers_0_weight[dim_out][dim_in];
+            temp_0[dim_out] += h_graph[dim_in] * MLP_layer_FC_layers_0_weight[dim_out][dim_in];
         }
         if (temp_0[dim_out] < FM_TYPE(0.0)) temp_0[dim_out] = FM_TYPE(0.0);
     }
@@ -414,9 +411,9 @@ void load_input_node_embeddings(WT_TYPE embedding_h_atom_embedding_list_weights[
             {
                 WT_TYPE weight = embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
                 if (nf == 0)
-                    h_0[nd][dim] = weight;
+                    h_node[nd][dim] = weight;
                 else
-                    h_0[nd][dim] += weight;
+                    h_node[nd][dim] += weight;
             }
         }
     }
@@ -460,8 +457,8 @@ float DGN_compute_one_graph(
 
 #pragma HLS bind_storage variable=node_feature type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=edge_list type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=h_0 type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=h_5 type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=h_node type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=h_graph type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=degree_table type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=neighbor_table type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
