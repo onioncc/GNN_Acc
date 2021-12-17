@@ -25,10 +25,14 @@ add_files -tb gin_ep1_pred_bias_dim100.bin
 add_files -tb gin_ep1_pred_weights_dim100.bin
 add_files -tb load_weights_graph.cpp
 add_files -tb main.cpp
+add_files -tb gtest_edge_attr.bin
+add_files -tb gtest_edge_list.bin
+add_files -tb gtest_node_feature.bin
+add_files -tb gtest_info.txt
+
 open_solution "solution1" -flow_target vivado
 set_part {xcu280-fsvh2892-2L-e}
 create_clock -period 10ns -name default
-source "./project_1/solution1/directives.tcl"
 #csynth_design
 cosim_design -trace_level all
 exit

@@ -33,14 +33,17 @@ int main()
     float all_results[4113];
     int is_first = 1;
     FILE* c_output = fopen("HLS_optimized_output.txt", "w+");
-    for(int g = 1; g <= 3; g++ ) {
-        char graph_name[128];
+    for(int g = 1; g <= 1; g++ ) {
+        //char graph_name[128];
         char info_file[128];
         int num_of_nodes;
         int num_of_edges;
 
-        sprintf(info_file, "g%d_info.txt", g);
-        sprintf(graph_name, "g%d", g);
+        // sprintf(info_file, "g%d_info.txt", g);
+        // sprintf(graph_name, "g%d", g);
+
+        sprintf(info_file, "gtest_info.txt", g);
+        char graph_name[6] = "gtest";
 
         FILE* f_info = fopen(info_file, "r");
         fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
