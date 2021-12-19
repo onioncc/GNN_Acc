@@ -181,6 +181,7 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 #pragma HLS array_partition variable=edge_embedding_table complete
 #pragma HLS array_partition variable=edge_attr dim=2 complete
 
+	loopTop:
 	for(int nd = 0; nd < num_of_nodes; nd++) {
 
 		////////////// Embedding: compute edge embedding
@@ -191,20 +192,23 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 
         FM_TYPE node_emb_value[EMB_DIM];
 
+		loop1:
 		for(int dim = 0; dim < EMB_DIM; dim++) {
 			node_emb_value[dim] = emb_vec.read();
         }
 
-
+	loop2:
         for(int i = 0; i < total_neigh; i++) {
 #pragma HLS loop_tripcount min=1 max=5 avg=3
 
             int v = neighbor_table[start_idx + i * 2];
             int e = neighbor_table[start_idx + i * 2 + 1];
 
+		loop3:
             for(int dim = 0; dim < EMB_DIM; dim++) {
 #pragma HLS pipeline
 				FM_TYPE edge_embed = 0;
+				loop4:
 				for(int ef = 0; ef < EDGE_ATTR; ef++) {
 
 					int e_f = edge_attr[e][ef];

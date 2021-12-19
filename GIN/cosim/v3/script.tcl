@@ -33,6 +33,6 @@ add_files -tb gtest_info.txt
 open_solution "solution1" -flow_target vivado
 set_part {xcu280-fsvh2892-2L-e}
 create_clock -period 10ns -name default
-#csynth_design
+csynth_design
 cosim_design -trace_level all
 exit
