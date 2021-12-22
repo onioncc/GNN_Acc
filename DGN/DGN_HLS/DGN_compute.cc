@@ -213,21 +213,33 @@ void load_input_node_embeddings(int* node_feature, WT_TYPE embedding_h_atom_embe
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
         FM_TYPE h_node_nd[EMB_DIM];
-        for (int nf = 0; nf < ND_FEATURE + 1; nf++)
+        int nd_fs[ND_FEATURE];
+#pragma HLS ARRAY_PARTITION variable=nd_fs complete dim=1
+
+        for (int nf = 0; nf < ND_FEATURE; nf++)
         {
-            int nd_f = (nf < ND_FEATURE) ? node_feature[nd * ND_FEATURE + nf] : 0;
+            nd_fs[nf] = node_feature[nd * ND_FEATURE + nf];
+        }
+        {
+            int nd_f = nd_fs[0];
             for (int dim = 0; dim < EMB_DIM; dim++)
             {
-                if (nf == ND_FEATURE)
-                    h_node[nd][dim] = h_node_nd[dim];
-                else
-                {
-                    WT_TYPE weight = embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
-                    if (nf == 0)
-                        h_node_nd[dim] = weight;
-                    else
-                        h_node_nd[dim] += weight;
-                }
+                h_node_nd[dim] = embedding_h_atom_embedding_list_weights[0][nd_f][dim];
+            }
+        }
+        for (int nf = 1; nf < ND_FEATURE; nf++)
+        {
+#pragma HLS UNROLL
+            int nd_f = nd_fs[nf];
+            for (int dim = 0; dim < EMB_DIM; dim++)
+            {
+                h_node_nd[dim] += embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
+            }
+        }
+        {
+            for (int dim = 0; dim < EMB_DIM; dim++)
+            {
+                h_node[nd][dim] = h_node_nd[dim];
             }
         }
     }
