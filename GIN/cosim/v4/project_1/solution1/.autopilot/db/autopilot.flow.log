@@ -1,0 +1,68 @@
+INFO-FLOW: Workspace C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1/solution1 opened at Wed Dec 08 20:13:17 -0500 2021
+Execute       send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -default_interface 
+Execute       get_config_rtl -register_reset_num 
+Execute     set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+Execute       create_platform xcu280-fsvh2892-2L-e -board  
+DBG:HLSDevice: Trying to load device library: C:/Xilinx/Vitis_HLS/2021.1\lib\win64.o\librdi_hlsvwrap.dll
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: C:/Xilinx/Vivado/2021.1/data/parts/arch.xml
+DBG:HLSDevice: init success
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/virtexuplus_dsp48e2.hlp 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+Command       create_platform done; 0.6 sec.
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Execute       ap_part_info -name xcu280-fsvh2892-2L-e -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 0.71 sec.
+Execute     create_clock -period 10ns -name default 
+INFO: [HLS 200-1510] Running: create_clock -period 10ns -name default 
+Execute       ap_set_clock -name default -period 10 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute     csynth_design 
+INFO: [HLS 200-1510] Running: csynth_design 
+Execute       get_config_compile -effort 
+Execute       get_config_compile -enable_clang39 
+Execute       get_config_compile -g 
+Execute       get_config_compile -hw_syn 
+Execute       get_config_compile -ng 
+Execute       get_config_compile -opt_fp 
+Execute       get_config_compile -skip_cdt 
+Execute       get_config_compile -skip_syncheck 
+Execute       get_config_compile -skip_transform 
+Execute       get_config_compile -pre_tcl 
+Execute       get_config_compile -keep_printf 
+Execute       elaborate -effort=medium -skip_syncheck=0 -keep_printf=0 -skip_cdt=0 -skip_transform=0 -ng=0 -g=0 -opt_fp=0 -from_csynth_design=1 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.252 seconds; current allocated memory: 1017.824 MB.
+INFO: [HLS 200-10] Analyzing design file 'GIN_compute.cpp' ... 
+INFO-FLOW: Compiling one TU...
+Execute         get_config_compile -pragma_strict_mode 
+INFO-FLOW: Handling GIN_compute.cpp as C++
+Execute         ap_part_info -name xcu280-fsvh2892-2L-e -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang GIN_compute.cpp -foptimization-record-file=C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1/solution1/.autopilot/db/clang.GIN_compute.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info --sysroot C:/Xilinx/Vitis_HLS/2021.1/tps/mingw/6.2.0/win64.o/nt -fhls -fno-exceptions -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-mingw32 -fno-threadsafe-statics -fno-use-cxa-atexit -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/39 -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -I /usr/include/x86_64-linux-gnu -o C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1/solution1/.autopilot/db/GIN_compute.pp.0.cpp -hls-platform-db-name=C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=virtexuplus_medium > C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1/solution1/.autopilot/db/clang.GIN_compute.cpp.out.log 2> C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1/solution1/.autopilot/db/clang.GIN_compute.cpp.err.log 
+Command         ap_eval done; error code: 1; 0.377 sec.
+ERROR: [HLS 207-812] '/tools/xilinx/Vitis_HLS/2020.2/include/gmp.h' file not found: ./dcl.hpp:5:10
+Command       elaborate done; error code: 2; 0.649 sec.
+Command     csynth_design done; error code: 2; 0.659 sec.
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.672 seconds; current allocated memory: 1018.727 MB.
+Command   ap_source done; error code: 1; 1.541 sec.
+Execute   cleanup_all 

@@ -1,0 +1,86 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2021.1 (64-bit)
+  **** SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+  **** IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source C:/Xilinx/Vitis_HLS/2021.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running 'C:/Xilinx/Vitis_HLS/2021.1/bin/unwrapped/win64.o/vitis_hls.exe'
+INFO: [HLS 200-10] For user 'david' on host 'legion-5pro' (Windows NT_amd64 version 6.2) on Wed Dec 08 20:13:17 -0500 2021
+INFO: [HLS 200-10] In directory 'C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4'
+Sourcing Tcl script 'script.tcl'
+INFO: [HLS 200-1510] Running: open_project project_1 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1'.
+INFO: [HLS 200-1510] Running: set_top GIN_compute_one_graph 
+INFO: [HLS 200-1510] Running: add_files GIN_compute.cpp 
+INFO: [HLS 200-10] Adding design file 'GIN_compute.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files dcl.hpp 
+INFO: [HLS 200-10] Adding design file 'dcl.hpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g1_edge_attr.bin 
+INFO: [HLS 200-10] Adding test bench file 'g1_edge_attr.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g1_edge_list.bin 
+INFO: [HLS 200-10] Adding test bench file 'g1_edge_list.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g1_info.txt 
+INFO: [HLS 200-10] Adding test bench file 'g1_info.txt' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g1_node_feature.bin 
+INFO: [HLS 200-10] Adding test bench file 'g1_node_feature.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g2_edge_attr.bin 
+INFO: [HLS 200-10] Adding test bench file 'g2_edge_attr.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g2_edge_list.bin 
+INFO: [HLS 200-10] Adding test bench file 'g2_edge_list.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g2_info.txt 
+INFO: [HLS 200-10] Adding test bench file 'g2_info.txt' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g2_node_feature.bin 
+INFO: [HLS 200-10] Adding test bench file 'g2_node_feature.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g3_edge_attr.bin 
+INFO: [HLS 200-10] Adding test bench file 'g3_edge_attr.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g3_edge_list.bin 
+INFO: [HLS 200-10] Adding test bench file 'g3_edge_list.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g3_info.txt 
+INFO: [HLS 200-10] Adding test bench file 'g3_info.txt' to the project
+INFO: [HLS 200-1510] Running: add_files -tb g3_node_feature.bin 
+INFO: [HLS 200-10] Adding test bench file 'g3_node_feature.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_ed_embed_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_ed_embed_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_eps_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_eps_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_mlp_1_bias_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_mlp_1_bias_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_mlp_1_weights_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_mlp_1_weights_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_mlp_2_bias_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_mlp_2_bias_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_mlp_2_weights_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_mlp_2_weights_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_nd_embed_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_nd_embed_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_pred_bias_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_pred_bias_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gin_ep1_pred_weights_dim100.bin 
+INFO: [HLS 200-10] Adding test bench file 'gin_ep1_pred_weights_dim100.bin' to the project
+INFO: [HLS 200-1510] Running: add_files -tb load_weights_graph.cpp 
+INFO: [HLS 200-10] Adding test bench file 'load_weights_graph.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb main.cpp 
+INFO: [HLS 200-10] Adding test bench file 'main.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/david/Desktop/GNN_Acc/GIN/cosim/v4/project_1/solution1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2021.1;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10ns -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.252 seconds; current allocated memory: 1017.824 MB.
+INFO: [HLS 200-10] Analyzing design file 'GIN_compute.cpp' ... 
+ERROR: [HLS 207-812] '/tools/xilinx/Vitis_HLS/2020.2/include/gmp.h' file not found: ./dcl.hpp:5:10
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.672 seconds; current allocated memory: 1018.727 MB.
+command 'ap_source' returned error code
+    while executing
+"source script.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel \#0 [list source $arg] "
+
+INFO: [HLS 200-112] Total CPU user time: 2 seconds. Total CPU system time: 1 seconds. Total elapsed time: 1.907 seconds; peak allocated memory: 1018.421 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Wed Dec  8 20:13:18 2021...

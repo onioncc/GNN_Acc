@@ -454,7 +454,7 @@ void GAT_compute_one_graph(
     printf("Computing GAT ...\n");
 
     compute_connectivity_mask(edge_list, num_of_nodes, num_of_edges);
-
+    
     ////////////// CONV 0 //////////////////////////////////
     CONV(num_of_nodes, num_of_edges, num_features_per_layer[0] * num_heads_per_layer[0], num_features_per_layer[1], num_heads_per_layer[1], 0);
     ////////////// CONV 1 //////////////////////////////////

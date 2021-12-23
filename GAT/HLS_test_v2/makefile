@@ -16,7 +16,7 @@ CFLAG += -std=c++11 -Wno-unused-result
 
 
 all:
-	g++ *.cc -o result $(CFLAG) $(IFLAG)
+	g++ *.cpp -o result $(CFLAG) $(IFLAG)
 
 clean:
 	rm -f *.o result
