@@ -66,27 +66,23 @@ void scatter_sum(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM],
     */
 }
 
+FM_TYPE count[MAX_NODE];
 
 void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
 	#pragma HLS inline off
+#pragma HLS array_partition variable=count complete
+
+
+//#pragma HLS PIPELINE
 
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
-    FM_TYPE count[MAX_NODE];
 
-    //int t;
-    //FM_TYPE count_temp;
-    //FM_TYPE count_temp_inc;
     memset(count, 0, MAX_NODE * sizeof(FM_TYPE));
     //count on the nodes
     for (int j = 0; j < num_of_edges; j++)
     {
-
-#pragma HLS PIPELINE II=3
-        //t = index[j];
-        //count_temp = count[t];
-        //count_temp_inc = count_temp + (FM_TYPE)1;
-        //count[t] = count_temp_inc;
+// #pragma HLS PIPELINE
         int t = index[j];
         count[t] += (FM_TYPE)1;
     }
@@ -117,6 +113,8 @@ void aggr_std(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
     aggr_mean(ssquare, out, index, dim_size, EMB_DIM, mean_index);
     for (int i = 0; i < dim_size; i++)
     {
+//#pragma HLS PIPELINE
+
         for (int j = 0; j < EMB_DIM; j++)
         {
             out[i][j] -= out_0[i][j] * out_0[i][j];
@@ -135,6 +133,8 @@ void aggr_max(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
 
     for (int i = 0; i < dim_size; i++)
     {
+//#pragma HLS PIPELINE
+
         for (int j = 0; j < EMB_DIM; j++)
         {
             out_2[i][j] = -10;
@@ -142,6 +142,8 @@ void aggr_max(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
     }
     for (int i = 0; i < num_of_edges; i++)
     {
+//#pragma HLS PIPELINE
+
         for (int j = 0; j < EMB_DIM; j++)
         {
             int t = index[i][j];
@@ -153,9 +155,12 @@ void aggr_max(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
 void aggr_min(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE][EMB_DIM], int dim_size, int num_of_edges)
 {
 	#pragma HLS inline off
+//#pragma HLS PIPELINE
 
     for (int i = 0; i < dim_size; i++)
     {
+//#pragma HLS PIPELINE
+
         for (int j = 0; j < EMB_DIM; j++)
         {
             out[i][j] = 10;
@@ -163,6 +168,8 @@ void aggr_min(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
     }
     for (int i = 0; i < num_of_edges; i++)
     {
+//#pragma HLS PIPELINE
+
         for (int j = 0; j < EMB_DIM; j++)
         {
             int t = index[i][j];
@@ -175,17 +182,17 @@ void aggr_min(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
 void scale(FM_TYPE hout[4 * MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, int degree[MAX_NODE])
 {
 	#pragma HLS inline off
-	// #pragma HLS ARRAY_PARTITION variable=out block dim=2 factor=12
+	#pragma HLS ARRAY_PARTITION variable=out block dim=2 factor=12
 
     for (int node = 0; node < num_of_nodes; node++)
     {
+//#pragma HLS PIPELINE
     	FM_TYPE t = hls::log(((FM_TYPE)degree[node] + (FM_TYPE)1)) / (FM_TYPE)avg_deg[1];
     	FM_TYPE scale = (FM_TYPE)avg_deg[1] / hls::log((FM_TYPE)(degree[node] + (FM_TYPE)1));
         if (scale == 0)
             scale = (FM_TYPE)1;
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-// #pragma HLS PIPELINE II=3
             FM_TYPE out_0_buf = out_0[node][dim];
             FM_TYPE out_1_buf = out_1[node][dim];
             FM_TYPE out_2_buf = out_2[node][dim];
@@ -209,8 +216,8 @@ void scale(FM_TYPE hout[4 * MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_D
 void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_TYPE hout[4 * MAX_NODE][EMB_DIM], int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
 #pragma HLS inline off
-//#pragma HLS ARRAY_PARTITION variable=hout block dim=0 factor=4
-
+#pragma HLS ARRAY_PARTITION variable=hout block dim=0 factor=4
+//#pragma HLS PIPELINE
 
     memset(out_0, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
     memset(out_1, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
@@ -224,9 +231,10 @@ void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_
 
     for (int i = 0; i < dim_size; i++)
     {
+//#pragma HLS PIPELINE
+
         for (int j = 0; j < EMB_DIM; j++)
         {
-#pragma HLS PIPELINE II=1
             hout[4 * i][j] = out_0[i][j];
             hout[4 * i + 1][j] = out_1[i][j];
             hout[4 * i + 2][j] = out_2[i][j];
@@ -246,6 +254,7 @@ FM_TYPE aggrout[4 * MAX_NODE][EMB_DIM];
 void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_DIM], int *edge_list, int num_of_nodes, int num_of_edges)
 {
 	#pragma HLS inline off
+#pragma HLS array_partition variable=index_buf complete
 
 
     memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
@@ -284,8 +293,6 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EM
 
 void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], int num_of_nodes, WT_TYPE weight[80][960], WT_TYPE bias[80])
 {
-#pragma HLS ARRAY_PARTITION variable=l_in complete dim=2
-#pragma HLS ARRAY_PARTITION variable=weight complete dim=2
 
 	#pragma HLS inline off
 
@@ -297,7 +304,7 @@ void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], i
         {
             l_out[nd][dim_out] = bias[dim_out];
 
-            #pragma HLS PIPELINE II=1
+            // #pragma HLS PIPELINE II=1
 
             for (int dim_in = 0; dim_in < L_IN; dim_in++)
             {
@@ -368,7 +375,7 @@ void GLOBAL_MEAN_POOL(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE f[EMB_DIM], int num_
     for (int j = 0; j < EMB_DIM; j++)
     {
         for (int i = 0; i < num_of_nodes; i++)
-			#pragma HLS pipeline II=4
+//			#pragma HLS pipeline II=4
             f[j] += h[i][j];
         f[j] /= num_of_nodes;
     }
@@ -441,7 +448,7 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 #pragma HLS bind_storage variable=out_3 type=RAM_2P impl=bram
 
 #pragma HLS bind_storage variable=h_combined type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=m_single type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=m_single type=RAM_2P impl=URAM
 
 #pragma HLS bind_storage variable=h_5 type=RAM_2P impl=bram
 
@@ -453,10 +460,10 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 
 #pragma HLS ARRAY_PARTITION variable = h_combined dim = 1 complete
 
-int num_of_nodes = graph_attr[0];
-int num_of_edges = graph_attr[1];
-// int num_of_nodes = 19;
-// int num_of_edges = 40;
+//int num_of_nodes = graph_attr[0];
+//int num_of_edges = graph_attr[1];
+ int num_of_nodes = 19;
+ int num_of_edges = 40;
 
 printf("Computing PNA ...\n");
 /*Embedding: compute input node embedding */
