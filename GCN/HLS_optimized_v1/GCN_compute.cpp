@@ -45,7 +45,7 @@ WT_TYPE graph_pred_bias[NUM_TASK];
 int get_nd_emb_addr(int nf)
 {
     int addr = 0;
-    for(int i = 0; i < nf; i++) {
+    nd_emb_addr: for(int i = 0; i < nf; i++) {
         addr += nd_feature_table[i];
     }
     return addr;
@@ -54,7 +54,7 @@ int get_nd_emb_addr(int nf)
 int get_ed_emb_addr(int ef, int layer)
 {
     int addr = 0;
-    for(int i = 0; i < ef; i++) {
+    ed_emb_addr: for(int i = 0; i < ef; i++) {
         addr += ed_feature_table[i];
     }
     return addr + layer * (5+6+2);
@@ -66,10 +66,11 @@ void compute_edge_embedding(int num_of_edges, int edge_attr[MAX_EDGE][EDGE_ATTR]
 #pragma HLS inline off
     ////////////// Embedding: compute edge embedding
     memset(edge_embedding, 0, MAX_EDGE * EMB_DIM * sizeof(float));
-    for(int e = 0; e < num_of_edges; e++) {
-        for(int ef = 0; ef < EDGE_ATTR; ef++) {
+    edge_embedding: for(int e = 0; e < num_of_edges; e++) {
+#pragma HLS LOOP_TRIPCOUNT max=40 min=40
+        edge_embedding_attrs: for(int ef = 0; ef < EDGE_ATTR; ef++) {
             int e_f = edge_attr[e][ef];
-            for(int dim = 0; dim < EMB_DIM; dim++) {
+            edge_embedding_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
                 FM_TYPE emb_value = 0;
                 int addr = get_ed_emb_addr(ef, layer);
                 emb_value = edge_embedding_weight[addr + e_f][dim];
@@ -95,11 +96,12 @@ void message_passing(WT_TYPE ed[MAX_EDGE][EMB_DIM], WT_TYPE h[MAX_NODE][EMB_DIM]
 {
     memset(message, 0, MAX_NODE * EMB_DIM * sizeof(float));
     memset(edge_message, 0, MAX_EDGE * EMB_DIM * sizeof(float));
-    for (int e = 0; e < num_of_edges; e++)
+    edge_message: for (int e = 0; e < num_of_edges; e++)
     {
+#pragma HLS LOOP_TRIPCOUNT max=40 min=40
         int u = edge_list[e*2];     // source node id
         int v = edge_list[e*2+1];   // target node id
-        for (int dim = 0; dim < EMB_DIM; dim++)
+        edge_message_dim: for (int dim = 0; dim < EMB_DIM; dim++)
         {   
             // accumulate the embedding vector for edge [u -> v]
             WT_TYPE msg = ed[e][dim] + h[u][dim];
@@ -108,18 +110,19 @@ void message_passing(WT_TYPE ed[MAX_EDGE][EMB_DIM], WT_TYPE h[MAX_NODE][EMB_DIM]
         }
     }
     WT_TYPE degsqrt[num_of_nodes];
-    for (int n = 0; n < num_of_nodes; n++)
+    degsqrt: for (int n = 0; n < num_of_nodes; n++)
     {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         if(deg[n] != 0)
         degsqrt[n] = 1 / sqrt(deg[n]+1);
     }
     WT_TYPE norm[num_of_edges];
-    for (int e = 0; e < num_of_edges; e++)
+    node_message: for (int e = 0; e < num_of_edges; e++)
     {
         int u = edge_list[e*2];     // source node id
         int v = edge_list[e*2+1];   // target node id
         norm[e] = degsqrt[u] * degsqrt[v];
-        for (int dim = 0; dim < EMB_DIM;dim++)
+        node_message_dim: for (int dim = 0; dim < EMB_DIM;dim++)
         {
             message[v][dim] += norm[e] * edge_message[e][dim];
         }
@@ -134,10 +137,11 @@ void Conv_BatchNorm_Relu(WT_TYPE d_in[MAX_NODE][MLP_OUT_MAX], WT_TYPE d_out[MAX_
                     int num_of_nodes, bool last_layer = false)
 {
 
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim_out = 0; dim_out < 100; dim_out++) {
-                     d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / (FM_TYPE)sqrt((running_var[dim_out] + (WT_TYPE)E_EPS))
-                                    * weight[dim_out] + bias[dim_out];
+    batch_norm: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+        batch_norm_dim: for(int dim_out = 0; dim_out < 100; dim_out++) {
+                     float temp = (float) (running_var[dim_out] + (WT_TYPE)E_EPS);
+                     d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / (FM_TYPE)sqrt(temp)* weight[dim_out] + bias[dim_out];
         
             d_out[nd][dim_out] = (d_in[nd][dim_out] < 0 && !last_layer ) ? (WT_TYPE)0 : d_in[nd][dim_out];
         }
@@ -154,10 +158,13 @@ void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR],
 
     //linear,        x = self.linear(x)
     memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+    linear_layer: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+        linear_layer_dim_out: for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+#pragma HLS PIPELINE
             linear_out[nd][dim_out] = convs_bias[layer][dim_out];
-            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
+            linear_layer_dim_in: for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
+#pragma HLS PIPELINE
                 linear_out[nd][dim_out] += node_embedding[nd][dim_in] * convs_weight[layer][dim_out][dim_in];
             }
         }
@@ -168,8 +175,9 @@ void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR],
 
     memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
     //return self.propagate(edge_index, x=x, edge_attr = edge_embedding, norm=norm) + F.relu(x + self.root_emb.weight) * 1./deg.view(-1,1)
-    for(int nd = 0; nd < num_of_nodes; nd++) {
-        for (int dim = 0; dim < EMB_DIM; dim++)
+    aft_message: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+        aft_message_dim: for (int dim = 0; dim < EMB_DIM; dim++)
         {
             if((linear_out[nd][dim] + convs_root_emb_weight[layer][dim]) < 0)
                 conv_out[nd][dim] = message[nd][dim];
@@ -193,14 +201,14 @@ void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR],
 
 void one_node_embedding(int nd, int* node_features)
 {
-#pragma HLS inline off
-#pragma HLS array_partition variable=node_embedding_table dim=1 complete
+#pragma HLS INLINE off
+#pragma HLS array_partition variable=node_embedding_weight dim=1 complete
 
-    for(int dim = 0; dim < EMB_DIM; dim++) {
-#pragma HLS pipeline        
+    one_node_embdding: for(int dim = 0; dim < EMB_DIM; dim++) {
 
         FM_TYPE sum = 0;
-        for(int nf = 0; nf < ND_FEATURE; nf++) {
+        one_node_embedding_features: for(int nf = 0; nf < ND_FEATURE; nf++) {
+#pragma HLS UNROLL
             int nd_f = node_features[nd * ND_FEATURE + nf];
             int emb_addr = get_nd_emb_addr(nf);
 
@@ -218,7 +226,8 @@ void compute_node_embedding(int num_of_nodes, int num_of_edges, int* node_featur
 {
 #pragma HLS inline off
     ////////////// Embedding: compute input node embedding
-    loop_node_emb: for(int nd = 0; nd < num_of_nodes; nd++) {   
+    loop_node_emb: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         one_node_embedding(nd, node_features);
     }
 
@@ -241,17 +250,19 @@ void load_graph(int* node_feature, int edge_attr[MAX_EDGE][EDGE_ATTR], int* edge
                 int* node_feature_in, int* edge_list_in, int* edge_attr_in, int num_of_nodes, int num_of_edges)
 {
 #pragma HLS inline off
-    for(int i = 0; i < num_of_nodes * ND_FEATURE; i++) {
+    load_features: for(int i = 0; i < num_of_nodes * ND_FEATURE; i++) {
+#pragma HLS LOOP_TRIPCOUNT max=171 min=171
         node_feature[i] = node_feature_in[i];
     }
     
-    for(int e = 0; e < num_of_edges; e++) {
-        for(int i = 0; i < EDGE_ATTR; i++) {
+    load_edges: for(int e = 0; e < num_of_edges; e++) {
+        load_edge_attrs: for(int i = 0; i < EDGE_ATTR; i++) {
+#pragma HLS UNROLL
             edge_attr[e][i] = edge_attr_in[e * EDGE_ATTR + i];
         }
     }
 
-    for(int i = 0; i < num_of_edges * 2; i++) {
+    load_graph:for(int i = 0; i < num_of_edges * 2; i++) {
         edge_list[i] = edge_list_in[i];
     }
 }
@@ -261,8 +272,11 @@ void load_layer_specific_weights(
     WT_TYPE bn_weigh_in[LAYER_NUM][100], WT_TYPE bn_bias_in[LAYER_NUM][100], WT_TYPE bn_mean_in[LAYER_NUM][100], WT_TYPE bn_var_in[LAYER_NUM][100]
 )
 {
-    for(int l = 0; l < LAYER_NUM; l++) {
-        for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+#pragma HLS ARRAY_PARTITION dim=3 type=complete variable=convs_weight_in
+    load_layer_weights: for(int l = 0; l < LAYER_NUM; l++) {
+#pragma HLS UNROLL
+        load_layer_weights_dim_out:for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+#pragma HLS PIPELINE
             convs_bias[l][dim_out] = convs_bias_in[l][dim_out];
             convs_root_emb_weight[l][dim_out] = convs_root_emb_weight_in[l][dim_out];
             bn_weight[l][dim_out] = bn_weigh_in[l][dim_out];
@@ -270,7 +284,7 @@ void load_layer_specific_weights(
             bn_mean[l][dim_out] = bn_mean_in[l][dim_out];
             bn_var[l][dim_out] = bn_var_in[l][dim_out];
 
-            for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
+            load_layer_weights_dim_in: for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
                 convs_weight[l][dim_out][dim_in] = convs_weight_in[l][dim_out][dim_in];
             }
         }        
@@ -280,21 +294,21 @@ void load_layer_specific_weights(
 void load_misc_weights(WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM], WT_TYPE edge_embedding_weight_in[EG_FEATURE_TOTAL][EMB_DIM],
                        WT_TYPE graph_pred_weights_in[NUM_TASK][MLP_0_OUT], WT_TYPE graph_pred_bias_in[NUM_TASK])
 {
-    for(int i = 0; i < ND_FEATURE_TOTAL; i++) {
-        for(int dim = 0; dim < EMB_DIM; dim++) {	
+    load_node_emb_weights: for(int i = 0; i < ND_FEATURE_TOTAL; i++) {
+        load_node_emb_weights_dim: for(int dim = 0; dim < EMB_DIM; dim++) {	
 			node_embedding_weight[i][dim] = node_embedding_weight_in[i][dim];
 		}
     }
 
-    for(int i = 0; i < EG_FEATURE_TOTAL; i++) {
-        for(int dim = 0; dim < EMB_DIM; dim++) {
+    load_edge_emb_weigths: for(int i = 0; i < EG_FEATURE_TOTAL; i++) {
+         load_edge_emb_weigths_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
 			edge_embedding_weight[i][dim] = edge_embedding_weight_in[i][dim];
 		}
 	}
 
-    for(int t = 0; t < NUM_TASK; t++) {
+    load_prediction_layer_weights: for(int t = 0; t < NUM_TASK; t++) {
 		graph_pred_bias[t] = graph_pred_bias_in[t];
-		for(int dim_in = 0; dim_in < MLP_0_OUT; dim_in++ ) {
+		load_prediction_layer_weights_dim: for(int dim_in = 0; dim_in < MLP_0_OUT; dim_in++ ) {
 			graph_pred_weights[t][dim_in] = graph_pred_weights_in[t][dim_in];
 		}
 	}
@@ -309,13 +323,15 @@ void GCN_compute_one_graph(
     WT_TYPE graph_pred_weights_in[NUM_TASK][MLP_0_OUT], WT_TYPE graph_pred_bias_in[NUM_TASK]
     )
 {
+#pragma HLS TOP name=GCN_compute_one_graph
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
 
     if( is_first == 1 ) {
         //////////////// Load weights
-        for(int layer = 0; layer < LAYER_NUM; layer++) {
+        loading_weights: for(int layer = 0; layer < LAYER_NUM; layer++) {
+#pragma HLS UNROLL
             load_layer_specific_weights(convs_weight_in, convs_bias_in, convs_root_emb_weight_in, 
                                         bn_weigh_in, bn_bias_in, bn_mean_in, bn_var_in);
         }
@@ -333,34 +349,34 @@ void GCN_compute_one_graph(
     compute_node_embedding(num_of_nodes, num_of_edges, node_feature);
 
     memset(deg, 0, MAX_NODE * sizeof(int));
-    for (int e = 0; e < num_of_edges; e++)
+    calculate_degree: for (int e = 0; e < num_of_edges; e++)
     {
         int u = edge_list[e*2];
         deg[u]++;
     }
 
 
-    for(int layer = 0; layer < LAYER_NUM; layer++) {
+    gcn_layers: for(int layer = 0; layer < LAYER_NUM; layer++) {
         CONV(node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges, layer);
     }
     
     ////////////// Global mean pooling //////////////////////
     // node representation is h_5
     memset(h_graph, 0, EMB_DIM * sizeof(WT_TYPE));
-    for(int dim = 0; dim < EMB_DIM; dim++) {
-        for(int nd = 0; nd < num_of_nodes; nd++) {
+    mean_pooling_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
+        mean_pooling: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
             h_graph[dim] += node_embedding[nd][dim];
         }
-        h_graph[dim] = h_graph[dim] / num_of_nodes;
+    	h_graph[dim] = h_graph[dim] / num_of_nodes;
     }
 
 
-    
     ////////////// Graph prediction linear ///////////////////
     memset(task, 0, NUM_TASK * sizeof(WT_TYPE));
-    for(int tsk = 0; tsk < NUM_TASK; tsk++) {
+    prediction_layer: for(int tsk = 0; tsk < NUM_TASK; tsk++) {
         task[tsk] = graph_pred_bias[tsk];
-        for(int dim = 0; dim < EMB_DIM; dim++) {
+        prediction_layer_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
             task[tsk] += h_graph[dim] * graph_pred_weights[tsk][dim];
         }
     }
