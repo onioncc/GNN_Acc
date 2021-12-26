@@ -1,6 +1,7 @@
 #include "dcl.h"
 #include "math.h"
 #include "hls_math.h"
+#include "hls_stream.h"
 #include <stdio.h>
 
 //#define _PRINT_
@@ -68,6 +69,57 @@ void load_weights(
     load_array_1d<WT_TYPE, 1>(MLP_layer_FC_layers_2_bias, MLP_layer_FC_layers_2_bias_in);
 }
 
+void gather(
+    int u,
+    FM_TYPE node_acc[],
+    FM_TYPE h_node[][EMB_DIM],
+    WT_TYPE eig_w,
+    bool is_first
+)
+{
+#pragma HLS INLINE off
+    for (int dim = 0; dim < EMB_DIM; dim++)
+    {
+        FM_TYPE h_node_u_dim = h_node[u][dim];
+        {
+            FM_TYPE acc = (is_first) ? FM_TYPE(0) : node_acc[dim];
+            node_acc[dim] = acc + h_node_u_dim;
+        }
+        {
+            FM_TYPE acc = (is_first) ? FM_TYPE(0) : node_acc[dim + EMB_DIM];
+            node_acc[dim + EMB_DIM] = acc + h_node_u_dim * eig_w;
+        }
+    }
+}
+
+void apply(
+    int v,
+    FM_TYPE node_acc[],
+    FM_TYPE h_node[][EMB_DIM],
+    FM_TYPE next_h_node[][EMB_DIM],
+    int degree_v,
+    WT_TYPE eigw_sum,
+    WT_TYPE eig_abssum,
+    int i
+)
+{
+#pragma HLS INLINE off
+    for (int dim_out = 0; dim_out < L_OUT; dim_out++)
+    {
+#pragma HLS PIPELINE II=1
+        FM_TYPE acc(layers_posttrans_fully_connected_0_linear_bias[i][dim_out]);
+        for (int dim_in = 0; dim_in < L_IN; dim_in++)
+        {
+            if (dim_in < EMB_DIM)
+                acc += node_acc[dim_in] / degree_v * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
+            else
+                acc += hls::abs((node_acc[dim_in] - eigw_sum * h_node[v][dim_in - EMB_DIM]) / eig_abssum) * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
+        }
+        if (acc < 0.0) acc = 0.0;
+        next_h_node[v][dim_out] = h_node[v][dim_out] + acc;
+    }
+}
+
 void compute_CONV_layer(
     int i,
     FM_TYPE h_node[][EMB_DIM],
@@ -98,20 +150,7 @@ void compute_CONV_layer(
         bool is_end_of_row = (e >= end_idx);
         if (is_end_of_row)
         {
-            for (int dim_out = 0; dim_out < L_OUT; dim_out++)
-            {
-#pragma HLS PIPELINE II=1
-                FM_TYPE acc(layers_posttrans_fully_connected_0_linear_bias[i][dim_out]);
-                for (int dim_in = 0; dim_in < L_IN; dim_in++)
-                {
-                    if (dim_in < EMB_DIM)
-                        acc += node_acc[dim_in] / degree_v * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
-                    else
-                        acc += hls::abs((node_acc[dim_in] - eigw_sum * h_node[v][dim_in - EMB_DIM]) / eig_abssum) * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
-                }
-                if (acc < 0.0) acc = 0.0;
-                next_h_node[v][dim_out] = h_node[v][dim_out] + acc;
-            }
+            apply(v, node_acc, h_node, next_h_node, degree_v, eigw_sum, eig_abssum, i);
 
             v++;
             degree_v = degree_table[v][0];
@@ -126,21 +165,10 @@ void compute_CONV_layer(
             int u = neighbor_table[e];
             WT_TYPE u_eigen = node_eigen[(u * 4) + 1];
             WT_TYPE eig_w = u_eigen - v_eigen;
+            gather(u, node_acc, h_node, eig_w, e == start_idx);
+
             eigw_sum += eig_w;
             eig_abssum += hls::abs(eig_w);
-
-            for (int dim = 0; dim < EMB_DIM; dim++)
-            {
-                FM_TYPE h_node_u_dim = h_node[u][dim];
-                {
-                    FM_TYPE acc = (e != start_idx) ? node_acc[dim] : FM_TYPE(0);
-                    node_acc[dim] = acc + h_node_u_dim;
-                }
-                {
-                    FM_TYPE acc = (e != start_idx) ? node_acc[dim + EMB_DIM] : FM_TYPE(0);
-                    node_acc[dim + EMB_DIM] = acc + h_node_u_dim * eig_w;
-                }
-            }
             e++;
         }
     }
