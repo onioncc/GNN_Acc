@@ -45,27 +45,27 @@ WT_TYPE avg_deg[2] = {
 
 
 template <const int M, typename T>
-void set_1d(T out[M], T value, int a) {
+void zero_1d(T out[M], int a) {
     for (int i = 0; i < a; i++) {
-        out[i] = value;
+        out[i] = 0;
     }
 }
 
 template <const int M, const int N,  typename T>
-void set_2d(T out[M][N], T value, int a, int b) {
+void zero_2d(T out[M][N], int a, int b) {
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
-            out[i][j] = value;
+            out[i][j] = 0;
         }
     }
 }
 
 template <const int M, const int N, int O, typename T>
-void set_3d(T out[M][N][O], T value, int a, int b, int c) {
+void zero_3d(T out[M][N][O], int a, int b, int c) {
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
             for (int k = 0; k < c; k++) {
-                out[i][j][k] = value;
+                out[i][j][k] = 0;
             }
         }
     }
@@ -98,7 +98,7 @@ void scatter_sum(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM],
     */
 }
 
-FM_TYPE count[MAX_NODE];
+int count[MAX_NODE];
 
 void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM])
 {
@@ -110,13 +110,14 @@ void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], i
 
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
 
-    memset(count, 0, MAX_NODE * sizeof(FM_TYPE));
+    // memset(count, 0, MAX_NODE * sizeof(int));
+    zero_1d<MAX_NODE, int>(count, num_of_edges);
     //count on the nodes
     for (int j = 0; j < num_of_edges; j++)
     {
 // #pragma HLS PIPELINE
         int t = index[j];
-        count[t] += (FM_TYPE)1;
+        count[t] += 1;
     }
     ///dimsize:num of the nodes
     for (int i = 0; i < dim_size; i++)
@@ -125,7 +126,7 @@ void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], i
         {
             //printf("%f \n", count[i].to_float());
             if(count[i] != 0){
-                out[i][j] = out[i][j] / count[i];
+                out[i][j] = out[i][j] / (FM_TYPE)count[i];
             }
         }
     }
@@ -136,8 +137,8 @@ void aggr_std(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
 #pragma HLS inline off
 	const FM_TYPE epsilon = 1e-5;
 
-//    memset(ssquare, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
-    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(ssquare, (FM_TYPE)0, num_of_edges, EMB_DIM);
+   memset(ssquare, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
+    // zero_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(ssquare, num_of_edges+1, EMB_DIM);
 
     for (int i = 0; i < num_of_edges; i++)
     {
@@ -255,13 +256,13 @@ void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_
 
 //    memset(out_0, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
 //    memset(out_1, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
-//    memset(out_2, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+//    memset(out_2, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
 //    memset(out_3, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
 
-    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_0, (FM_TYPE)0, num_of_edges, EMB_DIM);
-    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_1, (FM_TYPE)0, num_of_edges, EMB_DIM);
-    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_2, (FM_TYPE)0, num_of_edges, EMB_DIM);
-    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_3, (FM_TYPE)0, num_of_edges, EMB_DIM);
+    zero_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_0, num_of_edges+1, EMB_DIM);
+    zero_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_1, num_of_edges+1, EMB_DIM);
+    zero_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_2, num_of_edges+1, EMB_DIM);
+    zero_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_3, num_of_edges+1, EMB_DIM);
 
     aggr_mean(hin, out_0, index, dim_size, num_of_edges, mean_index);
     // its ok above
@@ -297,13 +298,14 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EM
 #pragma HLS array_partition variable=index_buf complete
 
 
-    memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
-    memset(mean_index, 0, MAX_EDGE * EMB_DIM * sizeof(int));
+    // memset(message, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
+    // memset(mean_index, 0, MAX_EDGE * EMB_DIM * sizeof(int));
     memset(index_buf, 0, MAX_EDGE * sizeof(int));
 
-    // set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(message, (FM_TYPE)0);
-    // set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, int>(mean_index, (int)0);
-    // set_1d<MAX_EDGE, num_of_edges, int>(index_buf, (int)0);
+
+    zero_2d<MAX_EDGE, EMB_DIM , FM_TYPE>(message, num_of_edges, EMB_DIM);
+    zero_2d<MAX_EDGE, EMB_DIM , int>(mean_index, num_of_edges, EMB_DIM);
+    // zero_1d<MAX_EDGE , int>(index_buf, num_of_edges+1);
 	
 	// this aggrout double pointer array is confusing to follow, maybe a fix to make it simpler
     // float **aggrout = new float *[4 * MAX_NODE];
@@ -311,6 +313,7 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EM
     //     aggrout[i] = new float[EMB_DIM];
 
     memset(degree_buf, 0, MAX_NODE * sizeof(int));
+    // zero_1d<MAX_NODE, int>(degree_buf, num_of_nodes);
 
     for (int e = 0; e < num_of_edges; e++)
     {
@@ -416,6 +419,7 @@ void GLOBAL_MEAN_POOL(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE f[EMB_DIM], int num_
 {
 	#pragma HLS inline off
     memset(f, 0, EMB_DIM * sizeof(FM_TYPE));
+
     for (int j = 0; j < EMB_DIM; j++)
     {
         for (int i = 0; i < num_of_nodes; i++)
@@ -504,15 +508,18 @@ void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, in
 
 #pragma HLS ARRAY_PARTITION variable = h_combined dim = 1 complete
 
-//int num_of_nodes = graph_attr[0];
-//int num_of_edges = graph_attr[1];
- int num_of_nodes = 19;
- int num_of_edges = 40;
+int num_of_nodes = graph_attr[0];
+int num_of_edges = graph_attr[1];
+//  int num_of_nodes = 19;
+//  int num_of_edges = 40;
 
 printf("Computing PNA ...\n");
 /*Embedding: compute input node embedding */
 // memset(h_0, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
-memset(h_combined, 0, 5 * MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+// memset(h_combined, 0, 2 * MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
+zero_3d<2, MAX_NODE, EMB_DIM, FM_TYPE>(h_combined,2,num_of_nodes,EMB_DIM);
+
+
 for (int nd = 0; nd < num_of_nodes; nd++) {
     for (int nf = 0; nf < ND_FEATURE; nf++) {
         int nd_f = node_feature[nd * ND_FEATURE + nf];
