@@ -274,7 +274,7 @@ void load_input_node_embeddings(int* node_feature, WT_TYPE embedding_h_atom_embe
 }
 
 extern "C" {
-float DGN_compute_one_graph(
+void DGN_compute_one_graph(
     // float* out,
     int* node_feature_in,
     WT_TYPE* node_eigen_in,

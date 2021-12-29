@@ -23,7 +23,7 @@ void load_weights();
 void fetch_one_graph(int g, char* graph_name, int* node_feature, WT_TYPE* node_eigen, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
 bool Jacob(float *pMatrix, int nDim, float *pdblVects, float *pdbEigenValues, float dbEps, int nJt);
 extern "C" {
-float DGN_compute_one_graph(
+void DGN_compute_one_graph(
     // float* out,
     int* node_feature_in,
     WT_TYPE* node_eigen_in,
