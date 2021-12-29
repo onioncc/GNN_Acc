@@ -103,12 +103,13 @@ int main()
         FM_TYPE h_node_ping_dram[num_of_nodes][EMB_DIM];
         FM_TYPE h_node_pong_dram[num_of_nodes][EMB_DIM];
 
-        result = DGN_compute_one_graph(
+        DGN_compute_one_graph(
             node_feature,
             node_eigen,
             degree_table,
             neighbor_table,
             graph_attr,
+            &result,
             embedding_h_atom_embedding_list_weights,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,

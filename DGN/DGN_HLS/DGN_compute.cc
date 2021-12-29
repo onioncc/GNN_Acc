@@ -281,6 +281,7 @@ float DGN_compute_one_graph(
     int degree_table[][2],
     int neighbor_table[],
     int* graph_attr,
+    float* result,
     WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
     WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
@@ -361,7 +362,7 @@ float DGN_compute_one_graph(
     }
 
     global_mean_pooling(num_of_nodes, h_node_ping);
-    return MLP();
+    *result = MLP();
     // my_print(result);
 
     // return;
