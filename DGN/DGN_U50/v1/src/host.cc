@@ -1,23 +1,22 @@
-
 #include "dcl.h"
 #include "xcl2.hpp"
 
-extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
-extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
-extern WT_TYPE MLP_layer_FC_layers_0_bias_in[50];
-extern WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50];
-extern WT_TYPE MLP_layer_FC_layers_1_bias_in[25];
-extern WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25];
-extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
+aligned_vector<WT_TYPE> embedding_h_atom_embedding_list_weights(9 * 119 * 100);
+aligned_vector<WT_TYPE> layers_posttrans_fully_connected_0_linear_weight_in(4 * 100 * 200);
+aligned_vector<WT_TYPE> layers_posttrans_fully_connected_0_linear_bias_in(4 * 100);
+aligned_vector<WT_TYPE> MLP_layer_FC_layers_0_weight_in(50 * 100);
+aligned_vector<WT_TYPE> MLP_layer_FC_layers_0_bias_in(50);
+aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_weight_in(25 * 50);
+aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_bias_in(25);
+aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_weight_in(1 * 25);
+aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_bias_in(1);
 
 void prepare_graph(
     int num_of_nodes,
     int num_of_edges,
-    int *edge_list,
-    int degree_table[][2],
-    int neighbor_table[]
+    aligned_vector<int>& edge_list,
+    aligned_vector<int>& degree_table,
+    aligned_vector<int>& neighbor_table
 )
 {
     int neighbor_table_idxs[num_of_nodes];
@@ -25,21 +24,21 @@ void prepare_graph(
 
     for (int i = 0; i < num_of_nodes; i++)
     {
-        degree_table[i][0] = 0;
+        degree_table[i * 2] = 0;
         neighbor_table_idxs[i] = 0;
     }
 
     for (int i = 1; i < edge_list_len; i += 2)
     {
         int v = edge_list[i];
-        degree_table[v][0]++;
+        degree_table[v * 2]++;
     }
 
     int acc = 0;
     for (int i = 0; i < num_of_nodes; i++)
     {
-        int degree = degree_table[i][0];
-        degree_table[i][1] = acc;
+        int degree = degree_table[i * 2];
+        degree_table[i * 2 + 1] = acc;
         acc += degree;
     }
 
@@ -47,7 +46,7 @@ void prepare_graph(
     {
         int u = edge_list[i];
         int v = edge_list[i + 1];
-        int row_idx = degree_table[v][1];
+        int row_idx = degree_table[v * 2 + 1];
         int col_idx = neighbor_table_idxs[v];
         int e = row_idx + col_idx;
         neighbor_table[e] = u;
@@ -106,55 +105,55 @@ int main(int argc, char **argv) {
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         9 * 119 * 100 * sizeof(WT_TYPE),
-        embedding_h_atom_embedding_list_weights,
+        embedding_h_atom_embedding_list_weights.data(),
         &err);
     cl::Buffer layers_posttrans_fully_connected_0_linear_weight_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         4 * 100 * 200 * sizeof(WT_TYPE),
-        layers_posttrans_fully_connected_0_linear_weight_in,
+        layers_posttrans_fully_connected_0_linear_weight_in.data(),
         &err);
     cl::Buffer layers_posttrans_fully_connected_0_linear_bias_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         4 * 100 * sizeof(WT_TYPE),
-        layers_posttrans_fully_connected_0_linear_bias_in,
+        layers_posttrans_fully_connected_0_linear_bias_in.data(),
         &err);
     cl::Buffer MLP_layer_FC_layers_0_weight_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         50 * 100 * sizeof(WT_TYPE),
-        MLP_layer_FC_layers_0_weight_in,
+        MLP_layer_FC_layers_0_weight_in.data(),
         &err);
     cl::Buffer MLP_layer_FC_layers_0_bias_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         50 * sizeof(WT_TYPE),
-        MLP_layer_FC_layers_0_bias_in,
+        MLP_layer_FC_layers_0_bias_in.data(),
         &err);
     cl::Buffer MLP_layer_FC_layers_1_weight_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         25 * 50 * sizeof(WT_TYPE),
-        MLP_layer_FC_layers_1_weight_in,
+        MLP_layer_FC_layers_1_weight_in.data(),
         &err);
     cl::Buffer MLP_layer_FC_layers_1_bias_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         25 * sizeof(WT_TYPE),
-        MLP_layer_FC_layers_1_bias_in,
+        MLP_layer_FC_layers_1_bias_in.data(),
         &err);
     cl::Buffer MLP_layer_FC_layers_2_weight_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         1 * 25 * sizeof(WT_TYPE),
-        MLP_layer_FC_layers_2_weight_in,
+        MLP_layer_FC_layers_2_weight_in.data(),
         &err);
     cl::Buffer MLP_layer_FC_layers_2_bias_in_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
         1 * sizeof(WT_TYPE),
-        MLP_layer_FC_layers_2_bias_in,
+        MLP_layer_FC_layers_2_bias_in.data(),
         &err);
 
     int idx = 6;
@@ -177,8 +176,8 @@ int main(int argc, char **argv) {
         int num_of_edges;
 
 
-        sprintf(info_file, "../../graphs/graph_info/g%d_info.txt", g);
-        sprintf(graph_name, "../../graphs/graph_bin/g%d", g);
+        sprintf(info_file, "../../../graphs/graph_info/g%d_info.txt", g);
+        sprintf(graph_name, "../../../graphs/graph_bin/g%d", g);
 
 
         FILE* f_info = fopen(info_file, "r");
@@ -189,72 +188,72 @@ int main(int argc, char **argv) {
         printf("********** Computing Graph %s *************\n", graph_name);
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
-        int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
-        WT_TYPE* node_eigen = (WT_TYPE*)malloc(4 * num_of_nodes * sizeof(WT_TYPE));
-        int* edge_list = (int*)malloc(2 * num_of_edges * sizeof(int));
-        int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
-        int graph_attr[3];
+        aligned_vector<int> node_feature(ND_FEATURE * num_of_nodes);
+        aligned_vector<WT_TYPE> node_eigen(4 * num_of_nodes);
+        aligned_vector<int> edge_list(2 * num_of_edges);
+        aligned_vector<int> edge_attr(EDGE_ATTR * num_of_edges);
+        aligned_vector<int> graph_attr(3);
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
         graph_attr[2] = g == 1;
 
         fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
 
-        int degree_table[num_of_nodes][2];
-        int neighbor_table[num_of_edges];
+        aligned_vector<int> degree_table(num_of_nodes * 2);
+        aligned_vector<int> neighbor_table(num_of_edges);
         prepare_graph(num_of_nodes, num_of_edges, edge_list, degree_table, neighbor_table);
 
-        FM_TYPE h_node_ping_dram[num_of_nodes][EMB_DIM];
-        FM_TYPE h_node_pong_dram[num_of_nodes][EMB_DIM];
-        float result;
+        aligned_vector<FM_TYPE> h_node_ping_dram(num_of_nodes * EMB_DIM);
+        aligned_vector<FM_TYPE> h_node_pong_dram(num_of_nodes * EMB_DIM);
+        aligned_vector<float> result(1);
 
         cl::Buffer node_feature_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             ND_FEATURE * num_of_nodes * sizeof(int),
-            node_feature,
+            node_feature.data(),
             &err);
         cl::Buffer node_eigen_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             4 * num_of_nodes * sizeof(WT_TYPE),
-            node_eigen,
+            node_eigen.data(),
             &err);
         cl::Buffer degree_table_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             num_of_nodes * 2 * sizeof(int),
-            degree_table,
+            degree_table.data(),
             &err);
         cl::Buffer neighbor_table_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             num_of_edges * sizeof(int),
-            neighbor_table,
+            neighbor_table.data(),
             &err);
         cl::Buffer graph_attr_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             3 * sizeof(int),
-            graph_attr,
+            graph_attr.data(),
             &err);
         cl::Buffer h_node_ping_dram_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             num_of_nodes * EMB_DIM * sizeof(FM_TYPE),
-            h_node_ping_dram,
+            h_node_ping_dram.data(),
             &err);
         cl::Buffer h_node_pong_dram_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             num_of_nodes * EMB_DIM * sizeof(FM_TYPE),
-            h_node_pong_dram,
+            h_node_pong_dram.data(),
             &err);
         cl::Buffer result_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             sizeof(float),
-            &result,
+            result.data(),
             &err);
 
         krnl_DGN_compute_one_graph.setArg(0, node_feature_buf);
@@ -271,10 +270,9 @@ int main(int argc, char **argv) {
         q.finish();
 
         printf("Final graph prediction:\n");
-        printf("%.7f\n", result);
+        printf("%.7f\n", result[0]);
         printf("DGN computation done.\n");
     }
 
-    
     return 0;
 }
