@@ -44,15 +44,15 @@ WT_TYPE avg_deg[2] = {
 
 
 
-template <const int M, int a, typename T>
-void set_1d(T out[M], T value) {
+template <const int M, typename T>
+void set_1d(T out[M], T value, int a) {
     for (int i = 0; i < a; i++) {
         out[i] = value;
     }
 }
 
-template <const int M, const int N, int a, int b, typename T>
-void set_2d(T out[M][N], T value) {
+template <const int M, const int N,  typename T>
+void set_2d(T out[M][N], T value, int a, int b) {
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
             out[i][j] = value;
@@ -60,8 +60,8 @@ void set_2d(T out[M][N], T value) {
     }
 }
 
-template <const int M, const int N, int O, int a, int b, int c, typename T>
-void set_3d(T out[M][N][O], T value) {
+template <const int M, const int N, int O, typename T>
+void set_3d(T out[M][N][O], T value, int a, int b, int c) {
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
             for (int k = 0; k < c; k++) {
@@ -137,7 +137,7 @@ void aggr_std(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
 	const FM_TYPE epsilon = 1e-5;
 
 //    memset(ssquare, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(ssquare, 0);
+    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(ssquare, (FM_TYPE)0, num_of_edges, EMB_DIM);
 
     for (int i = 0; i < num_of_edges; i++)
     {
@@ -258,10 +258,10 @@ void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_
 //    memset(out_2, 0, MAX_NODE * EMB_DIM * sizeof(FM_TYPE));
 //    memset(out_3, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
 
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(out_0, 0);
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(out_1, 0);
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(out_2, 0);
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(out_3, 0);
+    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_0, (FM_TYPE)0, num_of_edges, EMB_DIM);
+    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_1, (FM_TYPE)0, num_of_edges, EMB_DIM);
+    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_2, (FM_TYPE)0, num_of_edges, EMB_DIM);
+    set_2d<MAX_EDGE, EMB_DIM, FM_TYPE>(out_3, (FM_TYPE)0, num_of_edges, EMB_DIM);
 
     aggr_mean(hin, out_0, index, dim_size, num_of_edges, mean_index);
     // its ok above
@@ -301,9 +301,9 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EM
     memset(mean_index, 0, MAX_EDGE * EMB_DIM * sizeof(int));
     memset(index_buf, 0, MAX_EDGE * sizeof(int));
 
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(message, 0);
-    set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, int>(mean_index, 0);
-    set_1d<MAX_EDGE, num_of_edges, FM_TYPE>(out_3, 0);
+    // set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, FM_TYPE>(message, (FM_TYPE)0);
+    // set_2d<MAX_EDGE, EMB_DIM, num_of_edges, EMB_DIM, int>(mean_index, (int)0);
+    // set_1d<MAX_EDGE, num_of_edges, int>(index_buf, (int)0);
 	
 	// this aggrout double pointer array is confusing to follow, maybe a fix to make it simpler
     // float **aggrout = new float *[4 * MAX_NODE];
