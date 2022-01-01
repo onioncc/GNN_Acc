@@ -88,9 +88,10 @@ int main()
         int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
         int* edge_list = (int*)malloc(2 * num_of_edges * sizeof(int));
         int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
-        int graph_attr[2];
+        int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
+        graph_attr[2] = g == 1;
 
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
