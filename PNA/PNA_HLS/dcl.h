@@ -1,16 +1,18 @@
 #ifndef __DCL_H__
 #define __DCL_H__
 
-#include <stdlib.h>
+// #include "gmp.h"
+
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-//#include <math.h>
-#include "hls_math.h"
+
 #include "ap_fixed.h"
+#include "hls_math.h"
 
-
-typedef ap_fixed<32, 16> FM_TYPE;
-typedef ap_fixed<32, 16> WT_TYPE;
+typedef ap_fixed<32, 10> FM_TYPE;
+typedef ap_fixed<32, 10> WT_TYPE;
 
 
 #define MAX_EDGE 500
@@ -70,6 +72,8 @@ extern WT_TYPE mlp_2_bias_fixed[20];
 extern WT_TYPE mlp_4_weight_fixed[1][20];
 extern WT_TYPE mlp_4_bias_fixed[1];
 
+extern WT_TYPE convs_ALL_post_nn_0_weight_fixed[4][80][960];
+extern WT_TYPE convs_ALL_post_nn_0_bias_fixed[4][80];
 
 void PNA_compute_one_graph();
 void load_weights();

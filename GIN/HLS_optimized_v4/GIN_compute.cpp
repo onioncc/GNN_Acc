@@ -187,16 +187,21 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 		int total_neigh = degree_table[u * 3];
 		int start_idx = degree_table[u * 3 + 1];
 
-		for(int dim = 0; dim < EMB_DIM; dim++) {
-			FM_TYPE val = emb_vec.read();
+        FM_TYPE node_emb_value[EMB_DIM];
 
-#pragma HLS pipeline
-			for(int i = 0; i < total_neigh; i++) {
+		for(int dim = 0; dim < EMB_DIM; dim++) {
+			node_emb_value[dim] = emb_vec.read();
+        }
+
+
+        for(int i = 0; i < total_neigh; i++) {
 #pragma HLS loop_tripcount min=1 max=5 avg=3
 
-				int v = neighbor_table[start_idx + i * 2];
-				int e = neighbor_table[start_idx + i * 2 + 1];
+            int v = neighbor_table[start_idx + i * 2];
+            int e = neighbor_table[start_idx + i * 2 + 1];
 
+            for(int dim = 0; dim < EMB_DIM; dim++) {
+#pragma HLS pipeline
 				FM_TYPE edge_embed = 0;
 				for(int ef = 0; ef < EDGE_ATTR; ef++) {
 
@@ -207,10 +212,10 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 					edge_embed += emb_value;
 
 				}
-				FM_TYPE msg = edge_embed + val;
+				FM_TYPE msg = edge_embed + node_emb_value[dim];
 				if(msg < 0) msg = 0.0;
 				message2[v][dim] += msg;
-			}
+            }
 		}
 	}
 }

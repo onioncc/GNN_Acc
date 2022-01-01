@@ -32,15 +32,15 @@ int main()
 
     float all_results[4113];
     int is_first = 1;
-    FILE* c_output = fopen("HLS_optimized_output.txt", "w+");
+    //FILE* c_output = fopen("HLS_optimized_output.txt", "w+");
     for(int g = 1; g <= 1; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
         int num_of_edges;
 
-        sprintf(info_file, "../../../graph_info/g%d_info.txt", g);
-        sprintf(graph_name, "../../../graph_bin/g%d", g);
+       sprintf(info_file, "g%d_info.txt", g);
+       sprintf(graph_name, "g%d", g);
 
         FILE* f_info = fopen(info_file, "r");
         fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
@@ -52,6 +52,11 @@ int main()
         int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
         int* edge_list = (int*)malloc(3 * num_of_edges * sizeof(int));
         int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
+
+        // int node_feature[100000];
+        // int edge_list[100000];
+        // int edge_attr[100000];
+
         int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
@@ -61,8 +66,8 @@ int main()
 
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
 
-        GIN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr, task_tb, 
-                              gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed, 
+        GIN_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr, task_tb,
+                              gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed,
                               gnn_node_embedding_table_fixed, gnn_edge_embedding_table_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed, eps_fixed);
 
         
@@ -75,10 +80,10 @@ int main()
         is_first = 0;
     }
 
-    for(int g = 1; g <= 10; g++) {
-        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
-    }
-    fclose(c_output);
+//    for(int g = 1; g <= 10; g++) {
+//        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
+//    }
+//    fclose(c_output);
     
     return 0;
 }
