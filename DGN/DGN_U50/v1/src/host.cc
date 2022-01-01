@@ -1,5 +1,5 @@
 #include "dcl.h"
-#include "xcl2.hpp"
+#include "host.h"
 
 aligned_vector<WT_TYPE> embedding_h_atom_embedding_list_weights(9 * 119 * 100);
 aligned_vector<WT_TYPE> layers_posttrans_fully_connected_0_linear_weight_in(4 * 100 * 200);
@@ -10,49 +10,6 @@ aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_weight_in(25 * 50);
 aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_bias_in(25);
 aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_weight_in(1 * 25);
 aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_bias_in(1);
-
-void prepare_graph(
-    int num_of_nodes,
-    int num_of_edges,
-    aligned_vector<int>& edge_list,
-    aligned_vector<int>& degree_table,
-    aligned_vector<int>& neighbor_table
-)
-{
-    int neighbor_table_idxs[num_of_nodes];
-    int edge_list_len = num_of_edges * 2;
-
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        degree_table[i * 2] = 0;
-        neighbor_table_idxs[i] = 0;
-    }
-
-    for (int i = 1; i < edge_list_len; i += 2)
-    {
-        int v = edge_list[i];
-        degree_table[v * 2]++;
-    }
-
-    int acc = 0;
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        int degree = degree_table[i * 2];
-        degree_table[i * 2 + 1] = acc;
-        acc += degree;
-    }
-
-    for (int i = 0; i < edge_list_len; i += 2)
-    {
-        int u = edge_list[i];
-        int v = edge_list[i + 1];
-        int row_idx = degree_table[v * 2 + 1];
-        int col_idx = neighbor_table_idxs[v];
-        int e = row_idx + col_idx;
-        neighbor_table[e] = u;
-        neighbor_table_idxs[v] = col_idx + 1;
-    }
-}
 
 int main(int argc, char **argv) {
     if (argc != 2) {
@@ -256,15 +213,16 @@ int main(int argc, char **argv) {
             result.data(),
             &err);
 
-        krnl_DGN_compute_one_graph.setArg(0, node_feature_buf);
-        krnl_DGN_compute_one_graph.setArg(1, node_eigen_buf);
-        krnl_DGN_compute_one_graph.setArg(2, degree_table_buf);
-        krnl_DGN_compute_one_graph.setArg(3, neighbor_table_buf);
-        krnl_DGN_compute_one_graph.setArg(4, graph_attr_buf);
-        krnl_DGN_compute_one_graph.setArg(5, result_buf);
+        krnl_DGN_compute_one_graph.setArg(0, result_buf);
+        krnl_DGN_compute_one_graph.setArg(1, node_feature_buf);
+        krnl_DGN_compute_one_graph.setArg(2, node_eigen_buf);
+        krnl_DGN_compute_one_graph.setArg(3, degree_table_buf);
+        krnl_DGN_compute_one_graph.setArg(4, neighbor_table_buf);
+        krnl_DGN_compute_one_graph.setArg(5, graph_attr_buf);
         krnl_DGN_compute_one_graph.setArg(15, h_node_ping_dram_buf);
         krnl_DGN_compute_one_graph.setArg(16, h_node_pong_dram_buf);
 
+        printf("Computing DGN ...\n");
         OCL_CHECK(err, err = q.enqueueTask(krnl_DGN_compute_one_graph));
         q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST);
         q.finish();

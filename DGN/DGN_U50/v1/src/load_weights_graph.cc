@@ -1,16 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "dcl.h"
-
-extern aligned_vector<WT_TYPE> embedding_h_atom_embedding_list_weights;
-extern aligned_vector<WT_TYPE> layers_posttrans_fully_connected_0_linear_weight_in;
-extern aligned_vector<WT_TYPE> layers_posttrans_fully_connected_0_linear_bias_in;
-extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_0_weight_in;
-extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_0_bias_in;
-extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_weight_in;
-extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_bias_in;
-extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_weight_in;
-extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_bias_in;
+#include "host.h"
 
 void load_weights()
 {
@@ -226,4 +217,49 @@ void fetch_one_graph(int g, char* graph_name, aligned_vector<int>& node_feature,
             printf("\n");
         }
 #endif
+}
+
+void prepare_graph(
+    int num_of_nodes,
+    int num_of_edges,
+    aligned_vector<int>& edge_list,
+    aligned_vector<int>& degree_table,
+    aligned_vector<int>& neighbor_table
+)
+{
+    printf("Preparing graph ...\n");
+
+    int neighbor_table_idxs[num_of_nodes];
+    int edge_list_len = num_of_edges * 2;
+
+    for (int i = 0; i < num_of_nodes; i++)
+    {
+        degree_table[i * 2] = 0;
+        neighbor_table_idxs[i] = 0;
+    }
+
+    for (int i = 1; i < edge_list_len; i += 2)
+    {
+        int v = edge_list[i];
+        degree_table[v * 2]++;
+    }
+
+    int acc = 0;
+    for (int i = 0; i < num_of_nodes; i++)
+    {
+        int degree = degree_table[i * 2];
+        degree_table[i * 2 + 1] = acc;
+        acc += degree;
+    }
+
+    for (int i = 0; i < edge_list_len; i += 2)
+    {
+        int u = edge_list[i];
+        int v = edge_list[i + 1];
+        int row_idx = degree_table[v * 2 + 1];
+        int col_idx = neighbor_table_idxs[v];
+        int e = row_idx + col_idx;
+        neighbor_table[e] = u;
+        neighbor_table_idxs[v] = col_idx + 1;
+    }
 }
