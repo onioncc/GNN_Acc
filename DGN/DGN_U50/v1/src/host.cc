@@ -229,6 +229,7 @@ int main(int argc, char **argv) {
 
         printf("Final graph prediction:\n");
         printf("%.7f\n", result[0]);
+        fprintf(c_output, "g%d: %.8f\n", g, result[0]);
         printf("DGN computation done.\n");
     }
 
