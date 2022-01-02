@@ -8,11 +8,9 @@ int edge_list[MAX_EDGE * 2];
 
 WT_TYPE message[MAX_NODE][EMB_DIM];
 WT_TYPE edge_message[MAX_EDGE][EMB_DIM];
-//int deg[MAX_NODE];
-
-WT_TYPE norm[MAX_EDGE];
-WT_TYPE deg[MAX_NODE];
+int deg[MAX_NODE];
 WT_TYPE degsqrt[MAX_NODE];
+WT_TYPE norm[MAX_EDGE];
 
 WT_TYPE edge_embedding[MAX_EDGE][EMB_DIM];
 WT_TYPE node_embedding[MAX_NODE][EMB_DIM];
@@ -69,8 +67,15 @@ void compute_edge_embedding(int num_of_edges, int edge_attr[MAX_EDGE][EDGE_ATTR]
 {
 #pragma HLS inline off
     ////////////// Embedding: compute edge embedding
-    memset(edge_embedding, 0, MAX_EDGE * EMB_DIM * sizeof(float));
+    //memset(edge_embedding, 0, MAX_EDGE * EMB_DIM * sizeof(WT_TYPE));
+    for(int i=0; i < num_of_edges; i++){
+#pragma HLS LOOP_TRIPCOUNT max=40 min=40
+    	for(int j=0; j < EMB_DIM; j++){
+    		edge_embedding[i][j]= 0;
+    	}
+    }
     edge_embedding: for(int e = 0; e < num_of_edges; e++) {
+#pragma HLS LOOP_TRIPCOUNT max=40 min=40
         edge_embedding_attrs: for(int ef = 0; ef < EDGE_ATTR; ef++) {
             int e_f = edge_attr[e][ef];
             edge_embedding_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
@@ -97,10 +102,23 @@ void compute_edge_embedding(int num_of_edges, int edge_attr[MAX_EDGE][EDGE_ATTR]
 
 void message_passing(WT_TYPE ed[MAX_EDGE][EMB_DIM], WT_TYPE h[MAX_NODE][EMB_DIM], int* edge_list, int num_of_nodes, int num_of_edges)
 {
-    memset(message, 0, MAX_NODE * EMB_DIM * sizeof(float));
-    memset(edge_message, 0, MAX_EDGE * EMB_DIM * sizeof(float));
+    //memset(message, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
+    for(int i=0; i < num_of_nodes; i++){
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+    	for(int j=0; j < EMB_DIM; j++){
+    	    		message[i][j]= 0;
+    	}
+    }
+    //memset(edge_message, 0, MAX_EDGE * EMB_DIM * sizeof(WT_TYPE));
+    for(int i=0; i < num_of_edges; i++){
+#pragma HLS LOOP_TRIPCOUNT max=40 min=40
+    	for(int j=0; j < EMB_DIM; j++){
+    	    		edge_message[i][j]= 0;
+    	}
+    }
     edge_message: for (int e = 0; e < num_of_edges; e++)
     {
+#pragma HLS LOOP_TRIPCOUNT max=40 min=40
         int u = edge_list[e*2];     // source node id
         int v = edge_list[e*2+1];   // target node id
         edge_message_dim: for (int dim = 0; dim < EMB_DIM; dim++)
@@ -114,8 +132,9 @@ void message_passing(WT_TYPE ed[MAX_EDGE][EMB_DIM], WT_TYPE h[MAX_NODE][EMB_DIM]
     //WT_TYPE degsqrt[num_of_nodes];
     degsqrt: for (int n = 0; n < num_of_nodes; n++)
     {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         if(deg[n] != 0)
-        degsqrt[n] = 1 / hls::sqrt(deg[n]+1);
+        degsqrt[n] = 1 / sqrt(deg[n]+1);
     }
     //WT_TYPE norm[num_of_edges];
     node_message: for (int e = 0; e < num_of_edges; e++)
@@ -139,9 +158,10 @@ void Conv_BatchNorm_Relu(WT_TYPE d_in[MAX_NODE][MLP_OUT_MAX], WT_TYPE d_out[MAX_
 {
 
     batch_norm: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         batch_norm_dim: for(int dim_out = 0; dim_out < 100; dim_out++) {
-                     float temp = (float) (running_var[dim_out] + (WT_TYPE)E_EPS);
-                     d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / (FM_TYPE)hls::sqrt(temp)* weight[dim_out] + bias[dim_out];
+                     WT_TYPE temp = (WT_TYPE) (running_var[dim_out] + (WT_TYPE)E_EPS);
+                     d_in[nd][dim_out] = (d_in[nd][dim_out] - running_mean[dim_out]) / (WT_TYPE)hls::sqrt(temp)* weight[dim_out] + bias[dim_out];
         
             d_out[nd][dim_out] = (d_in[nd][dim_out] < 0 && !last_layer ) ? (WT_TYPE)0 : d_in[nd][dim_out];
         }
@@ -157,9 +177,17 @@ void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR],
     compute_edge_embedding(num_of_edges, edge_attr, layer);
 
     //linear,        x = self.linear(x)
-    memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
+    //memset(linear_out, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
+    for(int i=0; i < num_of_nodes; i++){
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+    	for(int j=0; j < EMB_DIM; j++){
+    	    linear_out[i][j]= 0;
+    	}
+    }
     linear_layer: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         linear_layer_dim_out: for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+#pragma HLS PIPELINE
             linear_out[nd][dim_out] = convs_bias[layer][dim_out];
             linear_layer_dim_in: for(int dim_in = 0; dim_in < MLP_0_IN; dim_in++) {
                 linear_out[nd][dim_out] += node_embedding[nd][dim_in] * convs_weight[layer][dim_out][dim_in];
@@ -170,9 +198,16 @@ void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR],
     message_passing(edge_embedding, linear_out, edge_list, num_of_nodes, num_of_edges);
 
 
-    memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
+    //memset(conv_out, 0, MAX_NODE * EMB_DIM * sizeof(WT_TYPE));
+    for(int i=0; i < num_of_nodes; i++){
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+    	for(int j=0; j < EMB_DIM; j++){
+    	    		conv_out[i][j]= 0;
+    	}
+    }
     //return self.propagate(edge_index, x=x, edge_attr = edge_embedding, norm=norm) + F.relu(x + self.root_emb.weight) * 1./deg.view(-1,1)
     aft_message: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         aft_message_dim: for (int dim = 0; dim < EMB_DIM; dim++)
         {
             if((linear_out[nd][dim] + convs_root_emb_weight[layer][dim]) < 0)
@@ -197,13 +232,14 @@ void CONV(int* node_feature, int* edge_list, int edge_attr[MAX_EDGE][EDGE_ATTR],
 
 void one_node_embedding(int nd, int* node_features)
 {
-#pragma HLS inline off
+#pragma HLS INLINE off
 #pragma HLS array_partition variable=node_embedding_weight dim=1 complete
 
     one_node_embdding: for(int dim = 0; dim < EMB_DIM; dim++) {
 
         FM_TYPE sum = 0;
         one_node_embedding_features: for(int nf = 0; nf < ND_FEATURE; nf++) {
+#pragma HLS UNROLL
             int nd_f = node_features[nd * ND_FEATURE + nf];
             int emb_addr = get_nd_emb_addr(nf);
 
@@ -222,6 +258,7 @@ void compute_node_embedding(int num_of_nodes, int num_of_edges, int* node_featur
 #pragma HLS inline off
     ////////////// Embedding: compute input node embedding
     loop_node_emb: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
         one_node_embedding(nd, node_features);
     }
 
@@ -245,11 +282,13 @@ void load_graph(int* node_feature, int edge_attr[MAX_EDGE][EDGE_ATTR], int* edge
 {
 #pragma HLS inline off
     load_features: for(int i = 0; i < num_of_nodes * ND_FEATURE; i++) {
+#pragma HLS LOOP_TRIPCOUNT max=171 min=171
         node_feature[i] = node_feature_in[i];
     }
     
     load_edges: for(int e = 0; e < num_of_edges; e++) {
         load_edge_attrs: for(int i = 0; i < EDGE_ATTR; i++) {
+#pragma HLS UNROLL
             edge_attr[e][i] = edge_attr_in[e * EDGE_ATTR + i];
         }
     }
@@ -264,8 +303,11 @@ void load_layer_specific_weights(
     WT_TYPE bn_weigh_in[LAYER_NUM][100], WT_TYPE bn_bias_in[LAYER_NUM][100], WT_TYPE bn_mean_in[LAYER_NUM][100], WT_TYPE bn_var_in[LAYER_NUM][100]
 )
 {
+#pragma HLS ARRAY_PARTITION dim=3 type=complete variable=convs_weight_in
     load_layer_weights: for(int l = 0; l < LAYER_NUM; l++) {
+#pragma HLS UNROLL
         load_layer_weights_dim_out:for(int dim_out = 0; dim_out < MLP_0_OUT; dim_out++) {
+#pragma HLS PIPELINE
             convs_bias[l][dim_out] = convs_bias_in[l][dim_out];
             convs_root_emb_weight[l][dim_out] = convs_root_emb_weight_in[l][dim_out];
             bn_weight[l][dim_out] = bn_weigh_in[l][dim_out];
@@ -283,8 +325,9 @@ void load_layer_specific_weights(
 void load_misc_weights(WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM], WT_TYPE edge_embedding_weight_in[EG_FEATURE_TOTAL][EMB_DIM],
                        WT_TYPE graph_pred_weights_in[NUM_TASK][MLP_0_OUT], WT_TYPE graph_pred_bias_in[NUM_TASK])
 {
+
     load_node_emb_weights: for(int i = 0; i < ND_FEATURE_TOTAL; i++) {
-        load_node_emb_weights_dim: for(int dim = 0; dim < EMB_DIM; dim++) {	
+        load_node_emb_weights_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
 			node_embedding_weight[i][dim] = node_embedding_weight_in[i][dim];
 		}
     }
@@ -296,8 +339,11 @@ void load_misc_weights(WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DI
 	}
 
     load_prediction_layer_weights: for(int t = 0; t < NUM_TASK; t++) {
-		graph_pred_bias[t] = graph_pred_bias_in[t];
+		//graph_pred_bias[t] = graph_pred_bias_in[t];
 		load_prediction_layer_weights_dim: for(int dim_in = 0; dim_in < MLP_0_OUT; dim_in++ ) {
+			if(dim_in==0){
+				graph_pred_bias[t] = graph_pred_bias_in[t];
+			}
 			graph_pred_weights[t][dim_in] = graph_pred_weights_in[t][dim_in];
 		}
 	}
@@ -312,6 +358,7 @@ void GCN_compute_one_graph(
     WT_TYPE graph_pred_weights_in[NUM_TASK][MLP_0_OUT], WT_TYPE graph_pred_bias_in[NUM_TASK]
     )
 {
+#pragma HLS TOP name=GCN_compute_one_graph
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
@@ -319,6 +366,7 @@ void GCN_compute_one_graph(
     if( is_first == 1 ) {
         //////////////// Load weights
         loading_weights: for(int layer = 0; layer < LAYER_NUM; layer++) {
+#pragma HLS UNROLL
             load_layer_specific_weights(convs_weight_in, convs_bias_in, convs_root_emb_weight_in, 
                                         bn_weigh_in, bn_bias_in, bn_mean_in, bn_var_in);
         }
@@ -335,7 +383,11 @@ void GCN_compute_one_graph(
 
     compute_node_embedding(num_of_nodes, num_of_edges, node_feature);
 
-    memset(deg, 0, MAX_NODE * sizeof(int));
+    //memset(deg, 0, MAX_NODE * sizeof(WT_TYPE));
+    for(int i=0; i < num_of_nodes; i++){
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
+    	deg[i]=0;
+    }
     calculate_degree: for (int e = 0; e < num_of_edges; e++)
     {
         int u = edge_list[e*2];
@@ -349,24 +401,24 @@ void GCN_compute_one_graph(
     
     ////////////// Global mean pooling //////////////////////
     // node representation is h_5
-    memset(h_graph, 0, EMB_DIM * sizeof(WT_TYPE));
+    //memset(h_graph, 0, EMB_DIM * sizeof(WT_TYPE));
+    for(int i=0; i < EMB_DIM; i++){
+    	h_graph[i] = 0;
+    }
     mean_pooling_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
         mean_pooling: for(int nd = 0; nd < num_of_nodes; nd++) {
+#pragma HLS LOOP_TRIPCOUNT max=19 min=19
             h_graph[dim] += node_embedding[nd][dim];
         }
     	h_graph[dim] = h_graph[dim] / num_of_nodes;
     }
-    //mean_pooling: for(int nd = 0;nd < num_of_nodes; nd++){
-    //	mean_pooling_dim: for(int dim=0; dim < EMB_DIM; dim++){
-    //		h_graph[dim] += node_embedding[nd][dim];
-    //		h_graph[dim] = h_graph[dim] / num_of_nodes;
-    //	}
-    //}
 
 
-    
     ////////////// Graph prediction linear ///////////////////
-    memset(task, 0, NUM_TASK * sizeof(WT_TYPE));
+    //memset(task, 0, NUM_TASK * sizeof(WT_TYPE));
+    for(int i=0; i < NUM_TASK; i++){
+        	task[i]=0;
+    }
     prediction_layer: for(int tsk = 0; tsk < NUM_TASK; tsk++) {
         task[tsk] = graph_pred_bias[tsk];
         prediction_layer_dim: for(int dim = 0; dim < EMB_DIM; dim++) {
