@@ -83,6 +83,8 @@ void prepare_mlp_in(FM_TYPE mlp_in[EMB_DIM], int nd, FM_TYPE message_tb[MAX_NODE
 #pragma HLS inline off
     for(int dim = 0; dim < EMB_DIM; dim++) {
         mlp_in[dim] = message_tb[nd][dim] + (1 + _eps) * node_embedding[nd][dim];
+        // now we can safely clear the message table entry
+        message_tb[nd][dim] = 0;
     }
 }
 
@@ -95,15 +97,19 @@ void prepare_mlp_out(FM_TYPE mlp_out[EMB_DIM], int nd, WT_TYPE* bias)
 }
 
 
-void update_node_embedding_with_Relu(FM_TYPE mlp_out[EMB_DIM], FM_TYPE emb_vec[EMB_DIM], int nd, int layer)
+void update_node_embedding_with_Relu(FM_TYPE mlp_out[EMB_DIM], hls::stream<FM_TYPE> &emb_vec, int nd, int layer)
 {
 #pragma HLS inline off
     for(int dim = 0; dim < EMB_DIM; dim++) {
+        FM_TYPE val = 0;
         if( mlp_out[dim] < 0 && layer != LAYER_NUM - 1 ) {
             node_embedding[nd][dim] = 0;
         }
-        else node_embedding[nd][dim] = mlp_out[dim];
-        emb_vec[dim] = node_embedding[nd][dim];
+        else {
+            node_embedding[nd][dim] = mlp_out[dim];
+            val = mlp_out[dim];
+        }
+        emb_vec.write(val);
     }
 }
 
@@ -127,51 +133,9 @@ int get_ed_emb_addr(int ef, int layer)
 }
 
 
-void message_passing_one_node(int nd, FM_TYPE message_tb[MAX_NODE][EMB_DIM], int edge_attr[MAX_EDGE][EDGE_ATTR], int layer)
+void message_passing_one_node(FM_TYPE emb_vec[EMB_DIM], int nd, FM_TYPE message_tb[MAX_NODE][EMB_DIM], int edge_attr[MAX_EDGE][EDGE_ATTR], int layer)
 {
-#pragma HLS inline off
-
-#pragma HLS array_partition variable=edge_embedding_table complete
-#pragma HLS array_partition variable=edge_attr dim=2 complete
-
-
-    ////////////// Embedding: compute edge embedding
-
-    int u = nd;
-    int total_neigh = degree_table[u * 3];
-    int start_idx = degree_table[u * 3 + 1];        
-
-    for(int i = 0; i < total_neigh; i++) {
-#pragma HLS loop_tripcount min=1 max=5 avg=3
-
-        int v = neighbor_table[start_idx + i * 2];
-        int e = neighbor_table[start_idx + i * 2 + 1];
-
-        for(int dim = 0; dim < EMB_DIM; dim++) {
-#pragma HLS pipeline
-            FM_TYPE edge_embed = 0;
-
-            for(int ef = 0; ef < EDGE_ATTR; ef++) {
-                int e_f = edge_attr[e][ef];
-                int addr = get_ed_emb_addr(ef, layer);
-                FM_TYPE emb_value = 0;
-                emb_value = edge_embedding_table[addr + e_f][dim];
-                edge_embed += emb_value;
-
-            }   
-            FM_TYPE msg = edge_embed + node_embedding[u][dim];
-            if(msg < 0) msg = 0.0;
-            message_tb[v][dim] += msg;   
-        }
-    }   
-}
-
-
-
-
-void message_passing_one_node_vec(FM_TYPE emb_vec[EMB_DIM], int nd, FM_TYPE message_tb[MAX_NODE][EMB_DIM], int edge_attr[MAX_EDGE][EDGE_ATTR], int layer)
-{
-#pragma HLS inline off
+//#pragma HLS inline off
 
 #pragma HLS array_partition variable=edge_embedding_table complete
 #pragma HLS array_partition variable=edge_attr dim=2 complete
@@ -209,6 +173,71 @@ void message_passing_one_node_vec(FM_TYPE emb_vec[EMB_DIM], int nd, FM_TYPE mess
 }
 
 
+
+void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message2[MAX_NODE][EMB_DIM], int layer, int num_of_nodes)
+{
+#pragma HLS inline off
+
+#pragma HLS array_partition variable=edge_embedding_table complete
+#pragma HLS array_partition variable=edge_attr dim=2 complete
+
+	//for(int nd = 0; nd < num_of_nodes; nd++) {
+
+    // FOR VIRTUAL NODE SIMULATION
+    // compute the nodes in the reversed order, since the virtual node has largest node id
+    for(int nd =  num_of_nodes-1; nd >= 0; nd--) {
+
+		////////////// Embedding: compute edge embedding
+
+		int u = nd;
+		int total_neigh = degree_table[u * 3];
+		int start_idx = degree_table[u * 3 + 1];
+
+        FM_TYPE node_emb_value[EMB_DIM];
+
+		for(int dim = 0; dim < EMB_DIM; dim++) {
+			node_emb_value[dim] = emb_vec.read();
+        }
+
+
+        for(int i = 0; i < total_neigh; i++) {
+#pragma HLS loop_tripcount min=1 max=5 avg=3
+
+            int v = neighbor_table[start_idx + i * 2];
+            int e = neighbor_table[start_idx + i * 2 + 1];
+
+            for(int dim = 0; dim < EMB_DIM; dim++) {
+#pragma HLS pipeline
+				FM_TYPE edge_embed = 0;
+				for(int ef = 0; ef < EDGE_ATTR; ef++) {
+
+					int e_f = edge_attr[e][ef];
+					int addr = get_ed_emb_addr(ef, layer);
+					FM_TYPE emb_value = 0;
+					emb_value = edge_embedding_table[addr + e_f][dim];
+					edge_embed += emb_value;
+
+				}
+				FM_TYPE msg = edge_embed + node_emb_value[dim];
+				if(msg < 0) msg = 0.0;
+				message2[v][dim] += msg;
+            }
+		}
+	}
+}
+
+
+void copy_and_clear_message_table(FM_TYPE message_tb_dest[MAX_NODE][EMB_DIM], FM_TYPE message_tb_src[MAX_NODE][EMB_DIM], int num_of_nodes)
+{
+//#pragma HLS inline off
+    for(int n = 0; n < num_of_nodes; n++) {
+        for(int dim = 0; dim < EMB_DIM; dim++) {
+#pragma HLS pipeline
+            message_tb_dest[n][dim] = message_tb_src[n][dim];
+            message_tb_src[n][dim] = 0;
+        }
+    }
+}
 
 
 void clear_message_table_one_node(FM_TYPE message_tb[EMB_DIM], int nd)
@@ -277,18 +306,18 @@ void compute_node_embedding(int num_of_nodes, int num_of_edges, int* node_featur
     
     loop_node_emb: for(int nd = 1; nd < num_of_nodes; nd++) {
         if( nd % 2 == 1 ) {
-            message_passing_one_node_vec(emb_vec1, nd-1, message1, edge_attr, layer);
+            message_passing_one_node(emb_vec1, nd-1, message1, edge_attr, layer);
             one_node_embedding(nd, node_features, emb_vec2);
         }
         else {
-            message_passing_one_node_vec(emb_vec2, nd-1, message1, edge_attr, layer);
+            message_passing_one_node(emb_vec2, nd-1, message1, edge_attr, layer);
             one_node_embedding(nd, node_features, emb_vec1);
         }
     }
     if( (num_of_nodes-1) % 2 == 0 )
-        message_passing_one_node_vec(emb_vec1, num_of_nodes-1, message1, edge_attr, layer);
+        message_passing_one_node(emb_vec1, num_of_nodes-1, message1, edge_attr, layer);
     else
-        message_passing_one_node_vec(emb_vec2, num_of_nodes-1, message1, edge_attr, layer);
+        message_passing_one_node(emb_vec2, num_of_nodes-1, message1, edge_attr, layer);
 
 
 #ifdef _PRINT_
@@ -304,14 +333,39 @@ void compute_node_embedding(int num_of_nodes, int num_of_edges, int* node_featur
 }
 
 
-void MLP_wrapper(FM_TYPE mlp_in[EMB_DIM], FM_TYPE mlp_out[EMB_DIM], int nd, FM_TYPE emb_vec[EMB_DIM], FM_TYPE message_tb[MAX_NODE][EMB_DIM], FM_TYPE _eps, int layer)
+void MLP_wrapper(FM_TYPE mlp_in[EMB_DIM], FM_TYPE mlp_out[EMB_DIM], hls::stream<FM_TYPE> &emb_vec, FM_TYPE message_tb[MAX_NODE][EMB_DIM], FM_TYPE _eps, int layer, int num_of_nodes)
 {
 #pragma HLS inline off
 
-    prepare_mlp_in(mlp_in, nd, message_tb, _eps);
-    prepare_mlp_out(mlp_out, nd, mlp_2_bias[layer]);
-    MLP_one_node(nd, mlp_in, mlp_out, layer);
-    update_node_embedding_with_Relu(mlp_out, emb_vec, nd, layer);
+    //for(int nd =  0; nd < num_of_nodes; nd++) {
+    
+    // FOR VIRTUAL NODE SIMULATION
+    // compute the nodes in the reversed order, since the virtual node has largest node id
+    for(int nd =  num_of_nodes-1; nd >= 0; nd--) {
+        prepare_mlp_in(mlp_in, nd, message_tb, _eps);
+        prepare_mlp_out(mlp_out, nd, mlp_2_bias[layer]);
+        MLP_one_node(nd, mlp_in, mlp_out, layer);
+        update_node_embedding_with_Relu(mlp_out, emb_vec, nd, layer);
+    }
+}
+
+void  compute_CONV_dataflow_region(FM_TYPE message1[MAX_NODE][EMB_DIM], FM_TYPE message2[MAX_NODE][EMB_DIM], int num_of_nodes, int num_of_edges, int layer)
+{
+#pragma HLS dataflow
+
+    FM_TYPE mlp_in[EMB_DIM];
+    FM_TYPE mlp_out[EMB_DIM];
+
+    hls::stream<FM_TYPE> emb_vec;
+#pragma HLS STREAM variable=emb_vec depth=200
+
+    /// something special in GIN
+    WT_TYPE _eps = mlp_eps[layer];
+
+	MLP_wrapper(mlp_in, mlp_out, emb_vec, message1, _eps, layer, num_of_nodes);
+
+	message_passing_one_node_vec(emb_vec, message2, layer + 1, num_of_nodes);
+
 }
 
 
@@ -329,42 +383,17 @@ void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
 
-    if( layer % 2 == 0) {
-        clear_message_table(message2, num_of_nodes);
-        MLP_wrapper(mlp_in, mlp_out, 0, emb_vec1, message1, _eps, layer);
+    // if( layer == 0 )
+    //     clear_message_table(message2, num_of_nodes);
+
+    if( layer % 2 == 0 ) {
+        compute_CONV_dataflow_region(message1, message2, num_of_nodes, num_of_edges, layer);
     }
     else {
-        clear_message_table(message1, num_of_nodes);
-        MLP_wrapper(mlp_in, mlp_out, 0, emb_vec1, message2, _eps, layer);
+        compute_CONV_dataflow_region(message2, message1, num_of_nodes, num_of_edges, layer);
     }
 
-    loop_compute_conv: for(int nd = 1; nd < num_of_nodes; nd++) {
-        if( nd % 2 == 1 && layer % 2 == 0) {
-            message_passing_one_node_vec(emb_vec1, nd-1, message2, edge_attr, layer + 1);
-            MLP_wrapper(mlp_in, mlp_out, nd, emb_vec2, message1, _eps, layer);
-        }
-        else if(nd % 2 == 1 && layer % 2 == 1) {
-            message_passing_one_node_vec(emb_vec1, nd-1, message1, edge_attr, layer + 1);
-            MLP_wrapper(mlp_in, mlp_out, nd, emb_vec2, message2, _eps, layer);
-        }
-        else if(nd % 2 == 0 && layer % 2 == 0) {
-            message_passing_one_node_vec(emb_vec2, nd-1, message2, edge_attr, layer + 1);
-            MLP_wrapper(mlp_in, mlp_out, nd, emb_vec1, message1, _eps, layer);
-        }
-        else if(nd % 2 == 0 && layer % 2 == 1) {
-            message_passing_one_node_vec(emb_vec2, nd-1, message1, edge_attr, layer + 1);
-            MLP_wrapper(mlp_in, mlp_out, nd, emb_vec1, message2, _eps, layer);
-        }
-    }
-
-    if( (num_of_nodes-1) % 2 == 0 && layer % 2 == 0)
-        message_passing_one_node_vec(emb_vec1, num_of_nodes-1, message2, edge_attr, layer + 1);
-    else if( (num_of_nodes-1) % 2 == 0 && layer % 2 == 1)
-        message_passing_one_node_vec(emb_vec1, num_of_nodes-1, message1, edge_attr, layer + 1);
-    else if( (num_of_nodes-1) % 2 == 1 && layer % 2 == 0)
-        message_passing_one_node_vec(emb_vec2, num_of_nodes-1, message2, edge_attr, layer + 1);
-    else if( (num_of_nodes-1) % 2 == 1 && layer % 2 == 1)
-        message_passing_one_node_vec(emb_vec2, num_of_nodes-1, message1, edge_attr, layer + 1);
+    //copy_and_clear_message_table(message1, message2, num_of_nodes);
     
 
 #ifdef _PRINT_
@@ -420,7 +449,8 @@ void global_graph_prediction(FM_TYPE* d_out, FM_TYPE* d_in)
 
 void load_graph(int* node_feature, int edge_attr[MAX_EDGE][EDGE_ATTR], int* edge_list, int* node_feature_in, int* edge_list_in, int* edge_attr_in, int num_of_nodes, int num_of_edges)
 {
-#pragma HLS inline off
+#pragma HLS inline off  
+
     for(int i = 0; i < num_of_nodes * ND_FEATURE; i++) {
         node_feature[i] = node_feature_in[i];
     }
@@ -433,7 +463,25 @@ void load_graph(int* node_feature, int edge_attr[MAX_EDGE][EDGE_ATTR], int* edge
 
     for(int i = 0; i < num_of_edges * 2; i++) {
         edge_list[i] = edge_list_in[i];
+
     }
+
+
+    
+
+    // FOR VIRTUAL NODE SIMULATION
+    int node_id = 0;
+    for(int i = num_of_edges * 2; i < num_of_edges * 2 + num_of_nodes * 4; i += 4) {
+        // from virtual node to other nodes
+        edge_list[i] = num_of_nodes; // the virtual node ID
+        edge_list[i + 1] = node_id; // connect the virtual node to the node_id
+
+        // reversed edge: from other nodes to virtual node
+        edge_list[i + 2] = node_id; // connect the virtual node to the node_id
+        edge_list[i + 3] = num_of_nodes; // the virtual node ID
+    }
+
+    
 }
 
 
@@ -523,6 +571,7 @@ void prepare_degree_neighbor_table(int* edge_list, int num_of_nodes, int num_of_
         degree_table[u * 3 + 2] += 2;
     }
 
+
 #ifdef _PRINT_
     printf("Degree Table:\n");
     for(int n = 0; n < num_of_nodes; n++) {
@@ -568,8 +617,8 @@ void GIN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=100000 port=node_feature_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_list_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_attr_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=tasks offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=3 port=graph_attr offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=1 port=task offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_weights_fixed offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_bias_fixed offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_2_weights_fixed offset=slave bundle=mem
@@ -595,9 +644,9 @@ void GIN_compute_one_graph(
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2]; //is the first graph
 
-    // num_of_nodes = 19;
-    // num_of_edges = 40;
-    // is_first = 0;
+    //  num_of_nodes = 19;
+    //  num_of_edges = 40;
+    //  is_first = 1;
 
 
     if( is_first == 1 ) {
@@ -612,6 +661,13 @@ void GIN_compute_one_graph(
 
     ///////////// Load a new graph onto chip
     load_graph(node_feature, edge_attr, edge_list, node_feature_in, edge_list_in, edge_attr_in, num_of_nodes, num_of_edges);
+    
+    
+    // FOR VIRTUAL NODE SIMULATION
+    // pretend that the virtual node and its connections are loaded
+    num_of_edges = num_of_edges + num_of_nodes;
+    num_of_nodes = num_of_nodes + 1;
+
 
     printf("Computing GIN ...\n");
 

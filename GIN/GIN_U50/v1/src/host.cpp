@@ -1,7 +1,6 @@
 
 #include "dcl.hpp"
 #include "xcl2.hpp"
-#include <string>
 
 float gnn_node_mlp_1_weights[LAYER_NUM][MLP_1_OUT][MLP_1_IN];
 float gnn_node_mlp_1_bias[LAYER_NUM][MLP_1_OUT];
@@ -39,21 +38,8 @@ void fetch_one_graph(char* graph_name, std::vector<int, aligned_allocator<int>>*
 
 
 int main(int argc, char **argv) {
-    // if (argc != 2) {
-    //     std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
-    //     return EXIT_FAILURE;
-    // }
-
-    //// This is for temporary testing for random and power-law graphs
-    int degree = -1;
-    int percent = -1;
-    
-    if (argc > 2 ) {
-        degree = std::stoi(argv[2]);
-        percent = std::stoi(argv[3]);
-    }
-    if (degree == -1 || percent == -1) {
-        std::cout << "Please specify the degree and percentage" << std::endl;
+    if (argc != 2) {
+        std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -165,43 +151,23 @@ int main(int argc, char **argv) {
     krnl_GIN_compute_one_graph.setArg(idx++, eps_fixed_in);
     
 
-    //// This part is for random and power-law graph testing
-    //// Load graph id list
-
-    char list_file_name[1024];
-    sprintf(list_file_name, "/nethome/chao33/GNN_Acc/GIN/test_graphs/random_graphs/g_list_degree_%d_percent_%d.txt", degree, percent);
-    std::ifstream infile(list_file_name);
-    
+    float all_results[4113];
+    FILE* c_output = fopen("HLS_output.txt", "w+");
     int is_first = 1;
-    int gid;
-    while (infile >> gid)
-    {
-        
-    
-
-    //float all_results[4113];
-    //FILE* c_output = fopen("HLS_output.txt", "w+");
-    //int is_first = 1;
-    //for(int g = 1; g <= 1000; g++ ) {
+    for(int g = 1; g <= 4112; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
         int num_of_edges;
 
-	//sprintf(info_file, "../../../../graph_info/g%d_info.txt", g);
-	//sprintf(graph_name, "../../../../graph_bin/g%d", g);
-	//
+	sprintf(info_file, "../../../../graph_info/g%d_info.txt", g);
+	sprintf(graph_name, "../../../../graph_bin/g%d", g);
+	
 	//sprintf(info_file, "gtest_info.txt");
 	//sprintf(graph_name, "gtest");
 	
-	
-	//// This part is for random and power-law graph testing
-	sprintf(info_file, "/nethome/chao33/GNN_Acc/GIN/test_graphs/random_graphs/g_rand_%d_info.txt", gid);
-	sprintf(graph_name, "/nethome/chao33/GNN_Acc/GIN/test_graphs/random_graphs/g_rand_%d", gid);
-
-
-
-
+	//sprintf(info_file, "/nethome/chao33/test_graphs/random_graphs/g_rand_%d_info.txt", g);
+	//sprintf(graph_name, "/nethome/chao33/test_graphs/random_graphs/g_rand_%d", g);
 
         FILE* f_info = fopen(info_file, "r");
         fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
@@ -272,6 +238,7 @@ printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
 	is_first = 0;
     }
+
     
     return 0;
 }
