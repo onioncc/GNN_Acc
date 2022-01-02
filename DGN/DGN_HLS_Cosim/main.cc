@@ -13,7 +13,7 @@ extern WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25];
 extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
 
 // global weights
-float result[EMB_DIM * MAX_NODE];
+float result;
 
 void prepare_graph(
     int num_of_nodes,
@@ -64,6 +64,7 @@ int main()
 
     load_weights();
 
+    float all_results[4113];
     FILE* c_output = fopen("Cosim_output.txt", "w+");
     for(int g = 1; g <= 1; g++ ) {
         char graph_name[128];
@@ -101,7 +102,7 @@ int main()
 
         printf("Computing DGN ...\n");
         DGN_compute_one_graph(
-            result,
+            &result,
             node_feature,
             node_eigen,
             degree_table,
@@ -117,19 +118,16 @@ int main()
             MLP_layer_FC_layers_2_weight_in,
             MLP_layer_FC_layers_2_bias_in
         );
-        for (int i = 0; i < num_of_nodes; i++)
-        {
-            for (int j = 0; j < EMB_DIM; j++)
-            {
-                printf("out[%d][%d] = %.8f\n", i, j, result[i * EMB_DIM + j]);
-                fprintf(c_output, "out[%d][%d] = %.8f\n", i, j, result[i * EMB_DIM + j]);
-            }
-        }
+        printf("%.8f\n", float(result));
+        all_results[g - 1] = float(result);
     }
 
+    for(int g = 1; g <= 1; g++) {
+        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
+    }
     fclose(c_output);
 
     
     
-    return (abs(result[0] - (-0.64753222)) <= 0.05) ? 0 : 1;
+    return (abs(result - (-3.86696744)) <= 0.05) ? 0 : 1;
 }

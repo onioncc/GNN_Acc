@@ -95,8 +95,9 @@ void load_graph(WT_TYPE *node_eigen_in, int degree_table_in[][2], int neighbor_t
 }
 
 void gather(
-    // float* out,
     hls::stream<FM_TYPE>& message_1,
+    hls::stream<FM_TYPE>& message_2,
+    hls::stream<FM_TYPE>& h_node_v,
     FM_TYPE h_node[][EMB_DIM],
     int num_of_nodes,
     int num_of_edges
@@ -143,12 +144,9 @@ void gather(
 
             if (is_end_of_row)
             {
-                FM_TYPE message_1_el = (node_acc_1[dim] / cur_degree_v);
-                message_1.write(message_1_el);
-                message_2.write(hls::abs((node_acc_2[dim] - cur_eigw_sum * h_node_el) / cur_eig_abssum));
-                h_node_v.write(h_node_el);
-                // PASS HERE
-                // if (dim == 0) out[cur_v] = message_1_el.to_float();
+                message_1 << (node_acc_1[dim] / cur_degree_v);
+                message_2 << hls::abs((node_acc_2[dim] - cur_eigw_sum * h_node_el) / cur_eig_abssum);
+                h_node_v << h_node_el;
 
                 if (is_last_dim && !is_last_v)
                 {
@@ -184,8 +182,9 @@ void gather(
 }
 
 void apply(
-    float* out,
     hls::stream<FM_TYPE>& message_1,
+    hls::stream<FM_TYPE>& message_2,
+    hls::stream<FM_TYPE>& h_node_v,
     FM_TYPE next_h_node[][EMB_DIM],
     int i,
     int num_of_nodes
@@ -196,17 +195,16 @@ void apply(
     for (int v = 0; v < num_of_nodes; v++)
     {
         FM_TYPE accs[L_OUT];
-        FM_TYPE h_node_v_buf[EMB_DIM];
         for (int j = 0; j < EMB_DIM * 2; j++)
         {
 #pragma HLS PIPELINE II=1
             if (j < EMB_DIM)
             {
                 int dim_in = j;
-                FM_TYPE activation_1 = message_1.read();
-                FM_TYPE activation_2 = 0.0;
-                h_node_v_buf[dim_in] = 0.0;
-                out[v * EMB_DIM + j] = activation_1.to_float();
+                FM_TYPE activation_1;
+                message_1 >> activation_1;
+                FM_TYPE activation_2;
+                message_2 >> activation_2;
 
                 for (int dim_out = 0; dim_out < L_OUT; dim_out++)
                 {
@@ -223,7 +221,8 @@ void apply(
             else
             {
                 int dim_out = j - EMB_DIM;
-                FM_TYPE h_node_v_el = h_node_v_buf[dim_out];
+                FM_TYPE h_node_v_el;
+                h_node_v >> h_node_v_el;
                 FM_TYPE acc = accs[dim_out];
                 FM_TYPE abs_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
                 next_h_node[v][dim_out] = h_node_v_el + abs_acc;
@@ -233,7 +232,7 @@ void apply(
 }
 
 void compute_CONV_layer(
-    float* out,
+    int i,
     FM_TYPE h_node[][EMB_DIM],
     FM_TYPE next_h_node[][EMB_DIM],
     int num_of_nodes,
@@ -245,9 +244,13 @@ void compute_CONV_layer(
 
     hls::stream<FM_TYPE> message_1;
 #pragma HLS STREAM variable=message_1 depth=(100 * 10)
+    hls::stream<FM_TYPE> message_2;
+#pragma HLS STREAM variable=message_2 depth=(100 * 10)
+    hls::stream<FM_TYPE> h_node_v;
+#pragma HLS STREAM variable=h_node_v depth=(100 * 10)
 
-    gather(message_1, h_node, num_of_nodes, num_of_edges);
-    apply(out, message_1, next_h_node, 0, num_of_nodes);
+    gather(message_1, message_2, h_node_v, h_node, num_of_nodes, num_of_edges);
+    apply(message_1, message_2, h_node_v, next_h_node, i, num_of_nodes);
 }
 
 void global_mean_pooling(int num_of_nodes, FM_TYPE h_node[][EMB_DIM])
@@ -354,8 +357,8 @@ void DGN_compute_one_graph(
     float* out,
     int* node_feature_in,
     WT_TYPE* node_eigen_in,
-    int degree_table_in[][2],
-    int neighbor_table_in[],
+    int degree_table[][2],
+    int neighbor_table[],
     int* graph_attr,
     WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
@@ -370,11 +373,11 @@ void DGN_compute_one_graph(
 {
 #pragma HLS INTERFACE s_axilite port=return
 
-#pragma HLS INTERFACE m_axi depth=(500 * 100) port=out offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(1) port=out offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(9 * 500) port=node_feature_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(4 * 500) port=node_eigen_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500 * 2) port=degree_table_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=neighbor_table_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(500 * 2) port=degree_table offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(500) port=neighbor_table offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(3) port=graph_attr offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(9 * 119 * 100) port=embedding_h_atom_embedding_list_weights_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(4 * 100 * 200) port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
@@ -386,18 +389,14 @@ void DGN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=(1 * 25) port=MLP_layer_FC_layers_2_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=MLP_layer_FC_layers_2_bias_in offset=slave bundle=mem
 
-// #pragma HLS bind_storage variable=degree_table type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=neighbor_table type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=h_node_ping type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=h_node_pong type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=h_graph type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=MLP_layer_FC_layers_0_weight type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=MLP_layer_FC_layers_0_bias type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=MLP_layer_FC_layers_1_weight type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=MLP_layer_FC_layers_1_bias type=RAM_2P impl=bram
-// #pragma HLS bind_storage variable=MLP_layer_FC_layers_2_weight type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=h_graph type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=MLP_layer_FC_layers_0_weight type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=MLP_layer_FC_layers_0_bias type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=MLP_layer_FC_layers_1_weight type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=MLP_layer_FC_layers_1_bias type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=MLP_layer_FC_layers_2_weight type=RAM_2P impl=bram
 
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
@@ -423,19 +422,18 @@ void DGN_compute_one_graph(
         );
     }
 
-    load_graph(node_eigen_in, degree_table_in, neighbor_table_in, num_of_nodes, num_of_edges);
+    load_graph(node_eigen_in, degree_table, neighbor_table, num_of_nodes, num_of_edges);
     load_input_node_embeddings(node_feature_in, embedding_h_atom_embedding_list_weights_in, num_of_nodes, h_node_ping);
 
-    compute_CONV_layer(out, h_node_ping, h_node_pong, num_of_nodes, num_of_edges);
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     if (i % 2 == 0)
-    //         compute_CONV_layer(i, h_node_ping, h_node_pong, num_of_nodes, num_of_edges);
-    //     else
-    //         compute_CONV_layer(i, h_node_pong, h_node_ping, num_of_nodes, num_of_edges);
-    // }
+    for (int i = 0; i < 4; i++)
+    {
+        if (i % 2 == 0)
+            compute_CONV_layer(i, h_node_ping, h_node_pong, num_of_nodes, num_of_edges);
+        else
+            compute_CONV_layer(i, h_node_pong, h_node_ping, num_of_nodes, num_of_edges);
+    }
 
-    // global_mean_pooling(num_of_nodes, h_node_ping);
-    // *out = MLP();
+    global_mean_pooling(num_of_nodes, h_node_ping);
+    *out = MLP();
 }
 }
