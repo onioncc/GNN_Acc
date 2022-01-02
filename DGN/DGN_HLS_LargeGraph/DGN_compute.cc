@@ -101,19 +101,39 @@ void gather(
     {
         bool is_start_of_row = (e == start_idx);
         bool is_end_of_row = (e == end_idx);
-        int node_to_fetch = (is_end_of_row) ? v : neighbor_table[e];
-        int node_eigen_to_fetch = (is_end_of_row) ? (v + 1) : node_to_fetch;
-        WT_TYPE node_eigen_el = node_eigen[(node_eigen_to_fetch * 4) + 1];
-        WT_TYPE eig_w = node_eigen_el - v_eigen;
+        int next_v = v + 1;
+
+        int cur_v = v;
+        int cur_e = e;
+        int cur_degree_v = degree_v;
+        WT_TYPE cur_eigw_sum = eigw_sum;
+        WT_TYPE cur_eig_abssum = eig_abssum;
 
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
+            int u = neighbor_table[cur_e];
+            int node_to_fetch = (is_end_of_row) ? cur_v : u;
+            int node_eigen_to_fetch = (is_end_of_row) ? next_v : u;
+            WT_TYPE node_eigen_el = node_eigen[(node_eigen_to_fetch * 4) + 1];
+            WT_TYPE eig_w = node_eigen_el - v_eigen;
             FM_TYPE h_node_el = h_node[node_to_fetch][dim];
+
             if (is_end_of_row)
             {
-                message_1 << (node_acc_1[dim] / degree_v);
-                message_2 << hls::abs((node_acc_2[dim] - eigw_sum * h_node_el) / eig_abssum);
+                message_1 << (node_acc_1[dim] / cur_degree_v);
+                message_2 << hls::abs((node_acc_2[dim] - cur_eigw_sum * h_node_el) / cur_eig_abssum);
                 h_node_v << h_node_el;
+
+                if (dim == 0)
+                {
+                    v = next_v;
+                    degree_v = degree_table[next_v][0];
+                    start_idx = cur_e;
+                    end_idx = cur_e + degree_v;
+                    v_eigen = node_eigen_el;
+                    eigw_sum = 0;
+                    eig_abssum = 0;
+                }
             }
             else
             {
@@ -125,24 +145,14 @@ void gather(
                     FM_TYPE acc = (is_start_of_row) ? FM_TYPE(0) : node_acc_2[dim];
                     node_acc_2[dim] = acc + h_node_el * eig_w;
                 }
-            }
-        }
 
-        if (is_end_of_row)
-        {
-            v++;
-            degree_v = degree_table[v][0];
-            start_idx = e;
-            end_idx = start_idx + degree_v;
-            v_eigen = node_eigen_el;
-            eigw_sum = 0;
-            eig_abssum = 0;
-        }
-        else
-        {
-            eigw_sum += eig_w;
-            eig_abssum += hls::abs(eig_w);
-            e++;
+                if (dim == 0)
+                {
+                    eigw_sum = cur_eigw_sum + eig_w;
+                    eig_abssum = cur_eig_abssum + hls::abs(eig_w);
+                    e = cur_e + 1;
+                }
+            }
         }
     }
 }
@@ -161,31 +171,40 @@ void apply(
     for (int v = 0; v < num_of_nodes; v++)
     {
         FM_TYPE accs[L_OUT];
-
-        for (int dim_in = 0; dim_in < L_IN; dim_in++)
+        for (int j = 0; j < EMB_DIM * 2; j++)
         {
-    #pragma HLS PIPELINE II=1
-            FM_TYPE activation;
-            if (dim_in < EMB_DIM) message_1 >> activation;
-            else message_2 >> activation;
+#pragma HLS PIPELINE II=1
+            FM_TYPE h_node_v_el = 0.0;
+            int dim_out = (j < EMB_DIM) ? j : j - EMB_DIM;
+            FM_TYPE abs_acc = 0.0;
 
-            for (int dim_out = 0; dim_out < L_OUT; dim_out++)
+            if (j < EMB_DIM)
             {
-                FM_TYPE acc = (dim_in == 0)
-                    ? FM_TYPE(layers_posttrans_fully_connected_0_linear_bias[i][dim_out])
-                    : accs[dim_out];
-                acc += activation * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in];
-                accs[dim_out] = acc;
-            }
-        }
+                int dim_in = j;
+                FM_TYPE activation_1;
+                message_1 >> activation_1;
+                FM_TYPE activation_2;
+                message_2 >> activation_2;
 
-        for (int dim_out = 0; dim_out < L_OUT; dim_out++)
-        {
-            FM_TYPE h_node_v_el;
-            h_node_v >> h_node_v_el;
-            FM_TYPE acc = accs[dim_out];
-            if (acc < 0.0) acc = 0.0;
-            next_h_node[v][dim_out] = h_node_v_el + acc;
+                for (int dim_out = 0; dim_out < L_OUT; dim_out++)
+                {
+                    FM_TYPE acc = (dim_in == 0)
+                        ? FM_TYPE(layers_posttrans_fully_connected_0_linear_bias[i][dim_out])
+                        : accs[dim_out];
+                    acc += (
+                        activation_1 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in]
+                        + activation_2 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in + EMB_DIM]
+                    );
+                    accs[dim_out] = acc;
+                }
+            }
+            else
+            {
+                h_node_v >> h_node_v_el;
+                FM_TYPE acc = accs[dim_out];
+                abs_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
+            }
+            next_h_node[v][dim_out] = h_node_v_el + abs_acc;
         }
     }
 }
@@ -371,11 +390,11 @@ void DGN_compute_one_graph(
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
 
-// #ifdef __SYNTHESIS__
-//     num_of_nodes = 19;
-//     num_of_edges = 40;
-//     is_first = 1;
-// #endif
+#ifdef __SYNTHESIS__
+    num_of_nodes = 19;
+    num_of_edges = 40;
+    is_first = 1;
+#endif
 
     if (is_first)
     {
