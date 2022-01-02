@@ -1,4 +1,4 @@
-open_project project_1
+open_project project_2
 set_top DGN_compute_one_graph
 add_files DGN_compute.cc
 add_files dcl.h
@@ -17,6 +17,6 @@ add_files -tb eig_gtest.txt
 open_solution "solution1" -flow_target vivado
 set_part {xcu50-fsvh2104-2-e}
 create_clock -period 4ns -name default
-#csynth_design
+csynth_design
 cosim_design -trace_level all
 exit

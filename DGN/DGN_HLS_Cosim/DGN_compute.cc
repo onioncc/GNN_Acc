@@ -97,8 +97,6 @@ void load_graph(WT_TYPE *node_eigen_in, int degree_table_in[][2], int neighbor_t
 void gather(
     // float* out,
     hls::stream<FM_TYPE>& message_1,
-    hls::stream<FM_TYPE>& message_2,
-    hls::stream<FM_TYPE>& h_node_v,
     FM_TYPE h_node[][EMB_DIM],
     int num_of_nodes,
     int num_of_edges
@@ -135,6 +133,7 @@ void gather(
 
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
+            bool is_last_dim = (dim == EMB_DIM - 1);
             int u = neighbor_table[cur_e];
             int node_to_fetch = (is_end_of_row) ? cur_v : u;
             int node_eigen_to_fetch = (is_end_of_row) ? next_v : u;
@@ -151,7 +150,7 @@ void gather(
                 // PASS HERE
                 // if (dim == 0) out[cur_v] = message_1_el.to_float();
 
-                if (dim == 0 && !is_last_v)
+                if (is_last_dim && !is_last_v)
                 {
                     v = next_v;
                     degree_v = degree_table[next_v];
@@ -173,7 +172,7 @@ void gather(
                     node_acc_2[dim] = acc + h_node_el * eig_w;
                 }
 
-                if (dim == 0)
+                if (is_last_dim)
                 {
                     eigw_sum += eig_w;
                     eig_abssum += hls::abs(eig_w);
@@ -187,8 +186,6 @@ void gather(
 void apply(
     float* out,
     hls::stream<FM_TYPE>& message_1,
-    hls::stream<FM_TYPE>& message_2,
-    hls::stream<FM_TYPE>& h_node_v,
     FM_TYPE next_h_node[][EMB_DIM],
     int i,
     int num_of_nodes
@@ -199,6 +196,7 @@ void apply(
     for (int v = 0; v < num_of_nodes; v++)
     {
         FM_TYPE accs[L_OUT];
+        FM_TYPE h_node_v_buf[EMB_DIM];
         for (int j = 0; j < EMB_DIM * 2; j++)
         {
 #pragma HLS PIPELINE II=1
@@ -206,7 +204,8 @@ void apply(
             {
                 int dim_in = j;
                 FM_TYPE activation_1 = message_1.read();
-                FM_TYPE activation_2 = message_2.read();
+                FM_TYPE activation_2 = 0.0;
+                h_node_v_buf[dim_in] = 0.0;
                 out[v * EMB_DIM + j] = activation_1.to_float();
 
                 for (int dim_out = 0; dim_out < L_OUT; dim_out++)
@@ -224,7 +223,7 @@ void apply(
             else
             {
                 int dim_out = j - EMB_DIM;
-                FM_TYPE h_node_v_el = h_node_v.read();
+                FM_TYPE h_node_v_el = h_node_v_buf[dim_out];
                 FM_TYPE acc = accs[dim_out];
                 FM_TYPE abs_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
                 next_h_node[v][dim_out] = h_node_v_el + abs_acc;
@@ -246,13 +245,9 @@ void compute_CONV_layer(
 
     hls::stream<FM_TYPE> message_1;
 #pragma HLS STREAM variable=message_1 depth=(100 * 10)
-    hls::stream<FM_TYPE> message_2;
-#pragma HLS STREAM variable=message_2 depth=(100 * 10)
-    hls::stream<FM_TYPE> h_node_v;
-#pragma HLS STREAM variable=h_node_v depth=(100 * 10)
 
-    gather(message_1, message_2, h_node_v, h_node, num_of_nodes, num_of_edges);
-    apply(out, message_1, message_2, h_node_v, next_h_node, 0, num_of_nodes);
+    gather(message_1, h_node, num_of_nodes, num_of_edges);
+    apply(out, message_1, next_h_node, 0, num_of_nodes);
 }
 
 void global_mean_pooling(int num_of_nodes, FM_TYPE h_node[][EMB_DIM])

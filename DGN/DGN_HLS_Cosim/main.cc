@@ -122,6 +122,7 @@ int main()
             for (int j = 0; j < EMB_DIM; j++)
             {
                 printf("out[%d][%d] = %.8f\n", i, j, result[i * EMB_DIM + j]);
+                fprintf(c_output, "out[%d][%d] = %.8f\n", i, j, result[i * EMB_DIM + j]);
             }
         }
     }
