@@ -134,6 +134,7 @@ void gather(
 
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
+            bool is_last_dim = (dim == EMB_DIM - 1);
             int u = neighbor_table[cur_e];
             int node_to_fetch = (is_end_of_row) ? cur_v : u;
             int node_eigen_to_fetch = (is_end_of_row) ? next_v : u;
@@ -147,7 +148,7 @@ void gather(
                 message_2 << hls::abs((node_acc_2[dim] - cur_eigw_sum * h_node_el) / cur_eig_abssum);
                 h_node_v << h_node_el;
 
-                if (dim == 0 && !is_last_v)
+                if (is_last_dim && !is_last_v)
                 {
                     v = next_v;
                     degree_v = degree_table[next_v];
@@ -169,7 +170,7 @@ void gather(
                     node_acc_2[dim] = acc + h_node_el * eig_w;
                 }
 
-                if (dim == 0)
+                if (is_last_dim)
                 {
                     eigw_sum += eig_w;
                     eig_abssum += hls::abs(eig_w);
