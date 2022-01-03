@@ -3,7 +3,7 @@
 # be overridden through the make command line
 #+-------------------------------------------------------------------------------
 
-PROFILE := yes
+PROFILE := no
 
 #Generates profile summary report
 ifeq ($(PROFILE), yes)
