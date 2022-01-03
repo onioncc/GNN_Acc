@@ -2,7 +2,8 @@
 #define __DCL_H__
 
 #include <cstddef>
-#include "/tools/xilinx/Vitis_HLS/2020.2/include/gmp.h"
+//#include "/tools/xilinx/Vitis_HLS/2020.2/include/gmp.h"
+#include "/tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

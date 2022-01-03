@@ -46,7 +46,7 @@ void load_weights()
 	printf("Loading weights for GCN ...\n");
 
     FILE* f;
-    f = fopen("../gcn_ep1_dim100.weights.all.bin", "rb");
+    f = fopen("./gcn_ep1_dim100.weights.all.bin", "rb");
 
 
 	fseek(f, 0*sizeof(float), SEEK_SET);
@@ -273,9 +273,9 @@ void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* e
 	char f_edge_list[128];
 	char f_edge_attr[128];
 
-	sprintf(f_node_feature, "../graph_bin/%s_node_feature.bin", graph_name);
-	sprintf(f_edge_list, "../graph_bin/%s_edge_list.bin", graph_name);
-	sprintf(f_edge_attr, "../graph_bin/%s_edge_attr.bin", graph_name);
+	sprintf(f_node_feature, "%s_node_feature.bin", graph_name);
+	sprintf(f_edge_list, "%s_edge_list.bin", graph_name);
+	sprintf(f_edge_attr, "%s_edge_attr.bin", graph_name);
 	
 	
     f = fopen(f_node_feature, "rb");

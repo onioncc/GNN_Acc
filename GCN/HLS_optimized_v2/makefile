@@ -1,4 +1,5 @@
-AUTOPILOT_ROOT :=/tools/xilinx/Vitis_HLS/2020.2
+#AUTOPILOT_ROOT :=/tools/xilinx/Vitis_HLS/2020.2
+AUTOPILOT_ROOT :=/tools/reconfig/xilinx/Vitis_HLS/2020.2
 
 ASSEMBLE_SRC_ROOT := .
 IFLAG += -I "${AUTOPILOT_ROOT}/include"
@@ -11,7 +12,7 @@ IFLAG += -D__SIM_FPO__ -D__SIM_OPENCV__ -D__SIM_FFT__ -D__SIM_FIR__ -D__SIM_DDS_
 IFLAG += -g 
 #CFLAG += -fPIC -O3 #-fsanitize=address
 CFLAG += -lm
-CFLAG += -std=c++11 -Wno-unused-result
+CFLAG += -std=c++11 -Wno-unused-result -Wattributes
 
 
 all:

@@ -363,6 +363,11 @@ void GCN_compute_one_graph(
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
 
+    num_of_nodes = 19;
+    num_of_edges = 40;
+    is_first = 0;
+
+
     if( is_first == 1 ) {
         //////////////// Load weights
         loading_weights: for(int layer = 0; layer < LAYER_NUM; layer++) {
