@@ -99,7 +99,9 @@ void PNA_compute_one_graph();
 void load_weights();
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
 void PNA_compute_one_graph(
-    int* node_feature, int* edge_list, int* edge_attr, int* graph_attr,
+    int* node_feature_in,
+    int* edge_list_in,
+    int* graph_attr,
 
     WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80],
     WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80],

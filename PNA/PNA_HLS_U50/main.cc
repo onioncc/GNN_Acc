@@ -7,9 +7,6 @@
 extern FM_TYPE final;
 
 
-
-// this currently doesn't work as intented, all graphs are loaded with 0 vertices and 0 edges
-// needs to be debugged
 int main()
 {
     printf("\n******* This is the golden C file for PNA model *******\n");
@@ -48,7 +45,9 @@ int main()
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
         PNA_compute_one_graph(
-            node_feature, edge_list, edge_attr, graph_attr,
+            node_feature,
+            edge_list,
+            graph_attr,
 
             node_emb_atom_embedding_list_0_weight_fixed_in,
             node_emb_atom_embedding_list_1_weight_fixed_in,

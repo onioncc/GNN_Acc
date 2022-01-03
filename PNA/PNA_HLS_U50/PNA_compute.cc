@@ -23,6 +23,11 @@ WT_TYPE convs_ALL_post_nn_0_weight_fixed[4][80][960];
 WT_TYPE convs_ALL_post_nn_0_bias_fixed[4][80];
 
 
+int node_feature[ND_FEATURE * MAX_NODE];
+int edge_list[MAX_EDGE * 2];
+// int edge_attr[EDGE_ATTR * MAX_EDGE];
+
+
 
 /// h_x: node feature vectors
 /// e_x: edge attribute vectors
@@ -450,7 +455,7 @@ void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], i
 //     Linear_relu(m_3, h_4, num_of_nodes, convs_3_post_nn_0_weight_fixed, convs_3_post_nn_0_bias_fixed);
 // }
 
-void CONV(int *edge_list, int *edge_attr, int num_of_nodes, int num_of_edges, int layer) {
+void CONV(int *edge_list, int num_of_nodes, int num_of_edges, int layer) {
 #pragma HLS inline off
 
     if (layer%2 == 0){
@@ -530,7 +535,9 @@ void MLP(int num_of_nodes)
 }
 
 void PNA_compute_one_graph(
-    int* node_feature, int* edge_list, int* edge_attr, int* graph_attr,
+    int* node_feature_in,
+    int* edge_list_in,
+    int* graph_attr,
 
     WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80],
     WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80],
@@ -555,9 +562,8 @@ void PNA_compute_one_graph(
 {
 	
 	
-#pragma HLS INTERFACE m_axi depth=100000 port=node_feature offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=edge_list offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=edge_attr offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=node_feature_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=edge_list_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
 // #pragma HLS INTERFACE s_axilite register port=return
 
@@ -614,6 +620,17 @@ if (is_first)
 
     copy_3d<4,80,960>(convs_ALL_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed);
     copy_2d<4,80>(convs_ALL_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed);
+
+}
+
+for (int nd = 0; nd < num_of_nodes; nd++) {
+    for (int nf = 0; nf < ND_FEATURE; nf++) {
+        node_feature[nd * ND_FEATURE + nf] = node_feature_in[nd * ND_FEATURE + nf];
+    }
+}
+
+for(int i = 0; i < num_of_edges * 2; i++) {
+    edge_list[i] = edge_list_in[i];
 }
 
 printf("Computing PNA ...\n");
@@ -672,7 +689,7 @@ for (int nd = 0; nd < num_of_nodes; nd++) {
 //     }
 // }
 
-CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 0);
+CONV(edge_list, num_of_nodes, num_of_edges, 0);
 for (int i = 0; i < num_of_nodes; i++) {
     for (int j = 0; j < 80; j++) {
         h_combined[1][i][j] += h_combined[0][i][j];
@@ -680,21 +697,21 @@ for (int i = 0; i < num_of_nodes; i++) {
 }
 
 ////////////// CONV 1 //////////////////////////////////
-CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 1);
+CONV(edge_list, num_of_nodes, num_of_edges, 1);
 for (int i = 0; i < num_of_nodes; i++) {
     for (int j = 0; j < 80; j++) {
         h_combined[0][i][j] += h_combined[1][i][j];
     }
 }
 ////////////// CONV 2 //////////////////////////////////
-CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 2);
+CONV(edge_list, num_of_nodes, num_of_edges, 2);
 for (int i = 0; i < num_of_nodes; i++) {
     for (int j = 0; j < 80; j++) {
         h_combined[1][i][j] += h_combined[0][i][j];
     }
 }
 ////////////// CONV 3 //////////////////////////////////
-CONV(edge_list, edge_attr, num_of_nodes, num_of_edges, 3);
+CONV(edge_list, num_of_nodes, num_of_edges, 3);
 for (int i = 0; i < num_of_nodes; i++) {
     for (int j = 0; j < 80; j++) {
         h_combined[0][i][j] += h_combined[1][i][j];
