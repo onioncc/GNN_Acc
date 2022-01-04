@@ -1,0 +1,158 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2'
+================================================================
+* Date:           Mon Dec 20 18:44:49 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.128 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |       22|       22|  88.000 ns|  88.000 ns|   22|   22|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_428_2  |       20|       20|         3|          1|          1|    19|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 3
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 3
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 3, States = { 1 2 3 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.24>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%phi_mul = alloca i32 1"   --->   Operation 6 'alloca' 'phi_mul' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%i = alloca i32 1"   --->   Operation 7 'alloca' 'i' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %connectivity_mask, i64 666, i64 22, i64 18446744073709551615"   --->   Operation 8 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.38ns)   --->   "%store_ln0 = store i5 0, i5 %i"   --->   Operation 9 'store' 'store_ln0' <Predicate = true> <Delay = 0.38>
+ST_1 : Operation 10 [1/1] (0.38ns)   --->   "%store_ln0 = store i11 0, i11 %phi_mul"   --->   Operation 10 'store' 'store_ln0' <Predicate = true> <Delay = 0.38>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%br_ln0 = br void %.preheader1"   --->   Operation 11 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%phi_mul_load = load i11 %phi_mul" [GAT_compute.cpp:429]   --->   Operation 12 'load' 'phi_mul_load' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%i_7 = load i5 %i" [GAT_compute.cpp:428]   --->   Operation 13 'load' 'i_7' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%phi_mul_cast = zext i11 %phi_mul_load" [GAT_compute.cpp:429]   --->   Operation 14 'zext' 'phi_mul_cast' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 1, i32 0, void @p_str"   --->   Operation 15 'specpipeline' 'specpipeline_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.63ns)   --->   "%icmp_ln428 = icmp_eq  i5 %i_7, i5 19" [GAT_compute.cpp:428]   --->   Operation 16 'icmp' 'icmp_ln428' <Predicate = true> <Delay = 0.63> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.63> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%empty = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 19, i64 19, i64 19"   --->   Operation 17 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.70ns)   --->   "%add_ln428 = add i5 %i_7, i5 1" [GAT_compute.cpp:428]   --->   Operation 18 'add' 'add_ln428' <Predicate = true> <Delay = 0.70> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.88> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%br_ln428 = br i1 %icmp_ln428, void %.split4, void %.preheader.preheader.preheader.exitStub" [GAT_compute.cpp:428]   --->   Operation 19 'br' 'br_ln428' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.73ns)   --->   "%add_ln429_1 = add i11 %phi_mul_load, i11 101" [GAT_compute.cpp:429]   --->   Operation 20 'add' 'add_ln429_1' <Predicate = (!icmp_ln428)> <Delay = 0.73> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.88> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%connectivity_mask_addr = getelementptr i32 %connectivity_mask, i64 0, i64 %phi_mul_cast" [GAT_compute.cpp:429]   --->   Operation 21 'getelementptr' 'connectivity_mask_addr' <Predicate = (!icmp_ln428)> <Delay = 0.00>
+ST_1 : Operation 22 [2/2] (1.24ns)   --->   "%connectivity_mask_load = load i14 %connectivity_mask_addr" [GAT_compute.cpp:429]   --->   Operation 22 'load' 'connectivity_mask_load' <Predicate = (!icmp_ln428)> <Delay = 1.24> <CoreInst = "RAM_2P_BRAM">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 10000> <RAM>
+ST_1 : Operation 23 [1/1] (0.38ns)   --->   "%store_ln428 = store i5 %add_ln428, i5 %i" [GAT_compute.cpp:428]   --->   Operation 23 'store' 'store_ln428' <Predicate = (!icmp_ln428)> <Delay = 0.38>
+ST_1 : Operation 24 [1/1] (0.38ns)   --->   "%store_ln429 = store i11 %add_ln429_1, i11 %phi_mul" [GAT_compute.cpp:429]   --->   Operation 24 'store' 'store_ln429' <Predicate = (!icmp_ln428)> <Delay = 0.38>
+
+State 2 <SV = 1> <Delay = 1.24>
+ST_2 : Operation 25 [1/2] (1.24ns)   --->   "%connectivity_mask_load = load i14 %connectivity_mask_addr" [GAT_compute.cpp:429]   --->   Operation 25 'load' 'connectivity_mask_load' <Predicate = true> <Delay = 1.24> <CoreInst = "RAM_2P_BRAM">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 10000> <RAM>
+ST_2 : Operation 30 [1/1] (0.00ns)   --->   "%ret_ln0 = ret"   --->   Operation 30 'ret' 'ret_ln0' <Predicate = (icmp_ln428)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 2.12>
+ST_3 : Operation 26 [1/1] (0.00ns)   --->   "%specloopname_ln428 = specloopname void @_ssdm_op_SpecLoopName, void @empty_3" [GAT_compute.cpp:428]   --->   Operation 26 'specloopname' 'specloopname_ln428' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 27 [1/1] (0.88ns)   --->   "%add_ln429 = add i32 %connectivity_mask_load, i32 1" [GAT_compute.cpp:429]   --->   Operation 27 'add' 'add_ln429' <Predicate = true> <Delay = 0.88> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.88> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 28 [1/1] (1.24ns)   --->   "%store_ln429 = store i32 %add_ln429, i14 %connectivity_mask_addr" [GAT_compute.cpp:429]   --->   Operation 28 'store' 'store_ln429' <Predicate = true> <Delay = 1.24> <CoreInst = "RAM_2P_BRAM">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 10000> <RAM>
+ST_3 : Operation 29 [1/1] (0.00ns)   --->   "%br_ln0 = br void %.preheader1"   --->   Operation 29 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 4ns, clock uncertainty: 1.08ns.
+
+ <State 1>: 1.25ns
+The critical path consists of the following:
+	'alloca' operation ('phi_mul') [2]  (0 ns)
+	'load' operation ('phi_mul_load', GAT_compute.cpp:429) on local variable 'phi_mul' [9]  (0 ns)
+	'getelementptr' operation ('connectivity_mask_addr', GAT_compute.cpp:429) [19]  (0 ns)
+	'load' operation ('connectivity_mask_load', GAT_compute.cpp:429) on array 'connectivity_mask' [21]  (1.25 ns)
+
+ <State 2>: 1.25ns
+The critical path consists of the following:
+	'load' operation ('connectivity_mask_load', GAT_compute.cpp:429) on array 'connectivity_mask' [21]  (1.25 ns)
+
+ <State 3>: 2.13ns
+The critical path consists of the following:
+	'add' operation ('add_ln429', GAT_compute.cpp:429) [22]  (0.88 ns)
+	'store' operation ('store_ln429', GAT_compute.cpp:429) of variable 'add_ln429', GAT_compute.cpp:429 on array 'connectivity_mask' [23]  (1.25 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

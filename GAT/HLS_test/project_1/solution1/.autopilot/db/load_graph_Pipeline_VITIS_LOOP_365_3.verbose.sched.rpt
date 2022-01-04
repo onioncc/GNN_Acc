@@ -1,0 +1,156 @@
+
+
+================================================================
+== Vitis HLS Report for 'load_graph_Pipeline_VITIS_LOOP_365_3'
+================================================================
+* Date:           Wed Nov  3 22:44:38 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xczu3eg-sbva484-1-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.920 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       83|       83|  0.332 us|  0.332 us|   83|   83|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_365_3  |       81|       81|         3|          1|          1|    80|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 3
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 3
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 3, States = { 1 2 3 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.38>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%i = alloca i32 1"   --->   Operation 6 'alloca' 'i' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%sext_ln365_read = read i62 @_ssdm_op_Read.ap_auto.i62, i62 %sext_ln365"   --->   Operation 7 'read' 'sext_ln365_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%sext_ln365_cast = sext i62 %sext_ln365_read"   --->   Operation 8 'sext' 'sext_ln365_cast' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %edge_list, i64 666, i64 22, i64 18446744073709551615"   --->   Operation 9 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mem, void @empty_51, i32 0, i32 0, void @empty_50, i32 0, i32 100000, void @empty_24, void @empty_49, void @empty_50, i32 16, i32 16, i32 16, i32 16, void @empty_50, void @empty_50"   --->   Operation 10 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.48ns)   --->   "%store_ln0 = store i7 0, i7 %i"   --->   Operation 11 'store' 'store_ln0' <Predicate = true> <Delay = 0.48>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%br_ln0 = br void"   --->   Operation 12 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%i_4 = load i7 %i" [GAT_compute.cc:365]   --->   Operation 13 'load' 'i_4' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.86ns)   --->   "%icmp_ln365 = icmp_eq  i7 %i_4, i7 80" [GAT_compute.cc:365]   --->   Operation 14 'icmp' 'icmp_ln365' <Predicate = true> <Delay = 0.86> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.86> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 15 [1/1] (0.89ns)   --->   "%add_ln365 = add i7 %i_4, i7 1" [GAT_compute.cc:365]   --->   Operation 15 'add' 'add_ln365' <Predicate = true> <Delay = 0.89> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.89> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%br_ln365 = br i1 %icmp_ln365, void %.split, void %.exitStub" [GAT_compute.cc:365]   --->   Operation 16 'br' 'br_ln365' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.48ns)   --->   "%store_ln365 = store i7 %add_ln365, i7 %i" [GAT_compute.cc:365]   --->   Operation 17 'store' 'store_ln365' <Predicate = (!icmp_ln365)> <Delay = 0.48>
+
+State 2 <SV = 1> <Delay = 2.92>
+ST_2 : Operation 18 [1/1] (0.00ns)   --->   "%mem_addr = getelementptr i32 %mem, i64 %sext_ln365_cast" [GAT_compute.cc:365]   --->   Operation 18 'getelementptr' 'mem_addr' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 19 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 1, i32 0, void @p_str"   --->   Operation 19 'specpipeline' 'specpipeline_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 20 [1/1] (0.00ns)   --->   "%empty = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 80, i64 80, i64 80"   --->   Operation 20 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 21 [1/1] (2.92ns)   --->   "%mem_addr_read = read i32 @_ssdm_op_Read.m_axi.p1i32, i32 %mem_addr" [GAT_compute.cc:366]   --->   Operation 21 'read' 'mem_addr_read' <Predicate = (!icmp_ln365)> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 6> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+ST_2 : Operation 27 [1/1] (0.00ns)   --->   "%ret_ln0 = ret"   --->   Operation 27 'ret' 'ret_ln0' <Predicate = (icmp_ln365)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 1.35>
+ST_3 : Operation 22 [1/1] (0.00ns)   --->   "%i_cast = zext i7 %i_4" [GAT_compute.cc:365]   --->   Operation 22 'zext' 'i_cast' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 23 [1/1] (0.00ns)   --->   "%specloopname_ln365 = specloopname void @_ssdm_op_SpecLoopName, void @empty_25" [GAT_compute.cc:365]   --->   Operation 23 'specloopname' 'specloopname_ln365' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 24 [1/1] (0.00ns)   --->   "%edge_list_addr = getelementptr i32 %edge_list, i64 0, i64 %i_cast" [GAT_compute.cc:366]   --->   Operation 24 'getelementptr' 'edge_list_addr' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 25 [1/1] (1.35ns)   --->   "%store_ln366 = store i32 %mem_addr_read, i10 %edge_list_addr" [GAT_compute.cc:366]   --->   Operation 25 'store' 'store_ln366' <Predicate = true> <Delay = 1.35> <CoreInst = "RAM_2P_BRAM">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.35> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1000> <RAM>
+ST_3 : Operation 26 [1/1] (0.00ns)   --->   "%br_ln0 = br void"   --->   Operation 26 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 4ns, clock uncertainty: 1.08ns.
+
+ <State 1>: 1.39ns
+The critical path consists of the following:
+	'alloca' operation ('i') [4]  (0 ns)
+	'load' operation ('i', GAT_compute.cc:365) on local variable 'i' [12]  (0 ns)
+	'add' operation ('add_ln365', GAT_compute.cc:365) [17]  (0.897 ns)
+	'store' operation ('store_ln365', GAT_compute.cc:365) of variable 'add_ln365', GAT_compute.cc:365 on local variable 'i' [25]  (0.489 ns)
+
+ <State 2>: 2.92ns
+The critical path consists of the following:
+	'getelementptr' operation ('mem_addr', GAT_compute.cc:365) [13]  (0 ns)
+	bus read operation ('mem_addr_read', GAT_compute.cc:366) on port 'mem' (GAT_compute.cc:366) [22]  (2.92 ns)
+
+ <State 3>: 1.35ns
+The critical path consists of the following:
+	'getelementptr' operation ('edge_list_addr', GAT_compute.cc:366) [23]  (0 ns)
+	'store' operation ('store_ln366', GAT_compute.cc:366) of variable 'mem_addr_read', GAT_compute.cc:366 on array 'edge_list' [24]  (1.35 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

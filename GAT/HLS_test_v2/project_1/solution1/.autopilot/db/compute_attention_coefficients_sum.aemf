@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1640043992039">
+  <ports id="1" name="all_scores_V" type="PortType" coreName="RAM_2P_BRAM" coreId="1852402793" bitwidth="28" direction="DirInOut" iftype="IfTypeRegister" arraysize="40000">
+    <dataInputObjs>getelementptr</dataInputObjs>
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <ports id="7" name="attention_coefficients_sum_V" type="PortType" coreName="RAM_2P_BRAM" coreId="1852402793" bitwidth="28" direction="DirOut" iftype="IfTypeRegister" arraysize="400">
+    <dataInputObjs>getelementptr</dataInputObjs>
+  </ports>
+  <ports id="8" name="connectivity_mask_final" type="PortType" coreName="RAM_2P_BRAM" coreId="1601399156" bitwidth="32" iftype="IfTypeRegister" arraysize="10000">
+    <dataOutputObjs>getelementptr</dataOutputObjs>
+  </ports>
+  <edges id="114" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@blocks.0/@node_objs.6"/>
+  <edges id="117" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@blocks.0/@node_objs.7"/>
+  <edges id="120" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@blocks.0/@node_objs.8"/>
+  <edges id="123" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.0/@node_objs.9"/>
+  <edges id="125" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.10"/>
+  <edges id="128" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.11"/>
+  <edges id="129" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.0/@node_objs.12"/>
+  <edges id="130" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="131" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="134" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="137" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="138" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="139" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="141" source_obj="//@regions.0/@basic_blocks.1/@node_objs.31" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.0"/>
+  <edges id="142" source_obj="//@regions.0/@basic_blocks.1/@node_objs.17" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="143" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="144" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.2"/>
+  <edges id="145" source_obj="//@regions.0/@basic_blocks.1/@node_objs.31" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.0"/>
+  <edges id="148" source_obj="//@regions.0/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="149" source_obj="//@regions.0/@basic_blocks.2/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.2"/>
+  <edges id="150" source_obj="//@regions.0/@basic_blocks.1/@node_objs.17" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.2"/>
+  <edges id="151" source_obj="//@regions.0/@basic_blocks.2/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.3"/>
+  <edges id="152" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.3"/>
+  <edges id="153" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.4"/>
+  <edges id="154" source_obj="//@regions.0/@basic_blocks.1/@node_objs.16" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.0"/>
+  <edges id="157" source_obj="//@regions.0/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.1"/>
+  <edges id="160" source_obj="//@regions.0/@basic_blocks.4/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.2"/>
+  <edges id="161" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.6" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.2"/>
+  <edges id="162" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.5" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.2"/>
+  <edges id="163" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="164" source_obj="//@regions.0/@basic_blocks.5/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.1"/>
+  <edges id="165" source_obj="//@regions.0/@basic_blocks.1/@node_objs.25" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.1"/>
+  <edges id="166" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.6" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.2"/>
+  <edges id="167" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.0"/>
+  <edges id="168" source_obj="//@regions.0/@basic_blocks.6/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.1"/>
+  <edges id="171" source_obj="//@regions.0/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.2"/>
+  <edges id="173" source_obj="//@regions.0/@basic_blocks.6/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.2"/>
+  <edges id="174" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.3"/>
+  <edges id="175" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.3"/>
+  <edges id="176" source_obj="//@regions.0/@basic_blocks.1/@node_objs.8" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.4"/>
+  <edges id="177" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.4"/>
+  <edges id="178" source_obj="//@regions.0/@basic_blocks.6/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.5"/>
+  <edges id="179" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.5"/>
+  <edges id="180" source_obj="//@regions.0/@basic_blocks.1/@node_objs.18" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.6"/>
+  <edges id="181" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.6"/>
+  <edges id="182" source_obj="//@regions.0/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.7"/>
+  <edges id="183" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.7"/>
+  <edges id="184" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.8"/>
+  <edges id="185" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="186" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="187" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="188" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="189" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.4"/>
+  <edges id="190" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <edges id="193" source_obj="//@regions.0/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.6"/>
+  <edges id="196" source_obj="//@regions.0/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.7"/>
+  <edges id="198" source_obj="//@regions.0/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.7"/>
+  <edges id="199" source_obj="//@regions.0/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.8"/>
+  <edges id="200" source_obj="//@regions.0/@basic_blocks.1/@node_objs.5" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.8"/>
+  <edges id="201" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.8"/>
+  <edges id="202" source_obj="//@regions.0/@basic_blocks.1/@node_objs.8" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.9"/>
+  <edges id="203" source_obj="//@regions.0/@basic_blocks.1/@node_objs.9" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.10"/>
+  <edges id="206" source_obj="//@regions.0/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.11"/>
+  <edges id="209" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.12"/>
+  <edges id="211" source_obj="//@regions.0/@basic_blocks.1/@node_objs.12" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.13"/>
+  <edges id="212" source_obj="//@regions.0/@basic_blocks.1/@node_objs.11" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.13"/>
+  <edges id="213" source_obj="//@regions.0/@basic_blocks.1/@node_objs.7" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.14"/>
+  <edges id="215" source_obj="//@regions.0/@basic_blocks.1/@node_objs.13" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.15"/>
+  <edges id="216" source_obj="//@regions.0/@basic_blocks.1/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.15"/>
+  <edges id="217" source_obj="//@regions.0/@basic_blocks.1/@node_objs.15" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.16"/>
+  <edges id="219" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.16"/>
+  <edges id="220" source_obj="//@regions.0/@basic_blocks.1/@node_objs.15" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.17"/>
+  <edges id="222" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.17"/>
+  <edges id="223" source_obj="//@regions.0/@basic_blocks.1/@node_objs.13" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.18"/>
+  <edges id="224" source_obj="//@regions.0/@basic_blocks.1/@node_objs.14" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.18"/>
+  <edges id="225" source_obj="//@regions.0/@basic_blocks.1/@node_objs.7" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.18"/>
+  <edges id="226" source_obj="//@regions.0/@basic_blocks.1/@node_objs.18" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.19"/>
+  <edges id="227" source_obj="//@regions.0/@basic_blocks.1/@node_objs.18" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.20"/>
+  <edges id="228" source_obj="//@regions.0/@basic_blocks.1/@node_objs.10" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.21"/>
+  <edges id="229" source_obj="//@regions.0/@basic_blocks.1/@node_objs.20" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.21"/>
+  <edges id="230" source_obj="//@regions.0/@basic_blocks.1/@node_objs.21" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.22"/>
+  <edges id="231" source_obj="//@regions.0/@basic_blocks.1/@node_objs.21" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.23"/>
+  <edges id="232" source_obj="//@regions.0/@basic_blocks.1/@node_objs.23" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.24"/>
+  <edges id="235" source_obj="//@regions.0/@basic_blocks.1/@node_objs.25" sink_obj="//@ports.1"/>
+  <edges id="238" source_obj="//@regions.0/@basic_blocks.1/@node_objs.22" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.25"/>
+  <edges id="239" source_obj="//@regions.0/@basic_blocks.1/@node_objs.19" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.26"/>
+  <edges id="242" source_obj="//@regions.0/@basic_blocks.1/@node_objs.16" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.27"/>
+  <edges id="243" source_obj="//@regions.0/@basic_blocks.1/@node_objs.16" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.28"/>
+  <edges id="244" source_obj="//@regions.0/@basic_blocks.1/@node_objs.24" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.29"/>
+  <edges id="245" source_obj="//@regions.0/@basic_blocks.1/@node_objs.28" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.29"/>
+  <edges id="246" source_obj="//@regions.0/@basic_blocks.1/@node_objs.29" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.30"/>
+  <edges id="247" source_obj="//@ports.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.31"/>
+  <edges id="249" source_obj="//@regions.0/@basic_blocks.1/@node_objs.30" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.31"/>
+  <edges id="250" source_obj="//@regions.0/@basic_blocks.1/@node_objs.26" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.32"/>
+  <edges id="251" source_obj="//@regions.0/@basic_blocks.1/@node_objs.27" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.32"/>
+  <edges id="252" source_obj="//@regions.0/@basic_blocks.1/@node_objs.32" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.33"/>
+  <edges id="253" source_obj="//@ports.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.34"/>
+  <edges id="255" source_obj="//@regions.0/@basic_blocks.1/@node_objs.33" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.34"/>
+  <edges id="256" source_obj="//@regions.0/@basic_blocks.1/@node_objs.34" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.35"/>
+  <edges id="257" source_obj="//@regions.0/@basic_blocks.1/@node_objs.35" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.36"/>
+  <edges id="260" source_obj="//@regions.0/@basic_blocks.1/@node_objs.36" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.37"/>
+  <edges id="261" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.37"/>
+  <edges id="262" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.37"/>
+  <edges id="263" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="264" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="265" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="266" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="267" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="313" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="314" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="315" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="316" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.3"/>
+  <edges id="317" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.2"/>
+  <edges id="318" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.2" sink_obj="//@regions.0/@basic_blocks.4"/>
+  <edges id="319" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.3" sink_obj="//@regions.0/@basic_blocks.4"/>
+  <edges id="320" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.5"/>
+  <edges id="321" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.6"/>
+  <edges id="322" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.5" sink_obj="//@regions.0/@basic_blocks.6"/>
+  <edges id="323" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.6" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="324" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.6/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.5"/>
+  <edges id="325" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="326" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.7" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.4"/>
+  <edges id="327" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.8" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="328" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.9" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="329" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.10" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="330" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.11" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="331" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.11" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="332" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.11" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.3"/>
+  <edges id="333" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.11" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="334" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.6" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.3"/>
+  <edges id="335" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.7" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.4"/>
+  <edges id="336" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.8" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.0"/>
+  <edges id="337" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.8" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.5"/>
+  <edges id="338" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.9" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.6"/>
+  <edges id="339" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.10" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.7"/>
+  <edges id="340" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.3"/>
+  <edges id="341" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="342" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.3"/>
+  <edges id="343" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.7"/>
+  <edges id="344" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.6"/>
+  <edges id="345" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.5"/>
+  <edges id="346" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.4"/>
+  <edges id="347" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.2/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="348" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.3/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="-247" source_obj="//@regions.0/@basic_blocks.1/@node_objs.31" sink_obj="//@ports.0"/>
+  <blocks id="25" name="block_25" type="BlockType">
+    <controlOutputObjs>block_30</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="9" name="sum_V" originalName="sum.V" coreId="1633836900" bitwidth="28" opcode="alloca" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="10" name="n2" originalName="n2" coreId="1013281633" bitwidth="5" opcode="alloca" m_display="0" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="11" name="n1" originalName="n1" coreId="1633836900" bitwidth="5" opcode="alloca" m_display="0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="12" name="indvar_flatten" coreId="1633836900" bitwidth="10" opcode="alloca" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="13" name="nh" originalName="nh" coreId="1633836900" bitwidth="3" opcode="alloca" m_display="0" m_topoIndex="5" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="14" name="indvar_flatten14" coreId="741553980" bitwidth="11" opcode="alloca" m_display="0" m_topoIndex="6" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="18" name="indvar_flatten14_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741880380" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="7" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="19" name="nh_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741815356" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="8" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="20" name="indvar_flatten_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741487420" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="9" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="21" name="n1_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="10" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="22" name="n2_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741487420" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="11" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="23" name="sum_V_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.41" m_topoIndex="12" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="24" name="br_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="br" m_display="0" m_topoIndex="13" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+      <controlInputObjs>block_30</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>108</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="104" name="block_104" type="BlockType">
+    <controlInputObjs>block_30</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="103" name="_ln122" lineNumber="122" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="ret" nodeLabel="20.0" m_display="0" m_topoIndex="76" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="122" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>122</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" iiViolation="" id="450" pipe_depth="22" RegionName="VITIS_LOOP_108_1_VITIS_LOOP_109_2_VITIS_LOOP_111_3">
+    <basic_blocks id="30" name="block_30" type="BlockType">
+      <controlInputObjs>block_25</controlInputObjs>
+      <controlInputObjs>ifFalse</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_104</controlOutputObjs>
+      <controlOutputObjs>.split4</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="26" name="indvar_flatten14_load" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="11" opcode="load" m_display="0" m_topoIndex="14" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="27" name="icmp_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="icmp_ln108_fu_205_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="icmp" m_display="0" m_delay="0.61" m_topoIndex="15" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="28" name="add_ln108_1" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="add_ln108_1_fu_211_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="compute_attention_coefficients_sum" bitwidth="11" opcode="add" m_display="0" m_delay="0.73" m_topoIndex="16" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="29" name="br_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="br" m_display="0" m_topoIndex="17" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>.split4</controlInputObjs>
+        <controlInputObjs>block_104</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>108</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="74" name=".split4" type="BlockType">
+      <controlInputObjs>block_30</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>_ZN8ap_fixedILi28ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit20</controlOutputObjs>
+      <controlOutputObjs>_ZN13ap_fixed_baseILi29ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi28ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="31" name="sum_V_load" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" bitwidth="28" opcode="load" nodeLabel="20.0" m_display="0" m_topoIndex="69" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="32" name="n2_load" lineNumber="111" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741488444" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="load" nodeLabel="1.0" m_display="0" m_topoIndex="31" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="111" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="33" name="n1_load" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741684796" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="load" nodeLabel="1.0" m_display="0" m_topoIndex="32" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="34" name="indvar_flatten_load_1" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741749308" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="load" m_display="0" m_topoIndex="18" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="35" name="nh_load" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="3" opcode="load" m_display="0" m_topoIndex="19" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="36" name="add_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="add_ln108_fu_223_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="compute_attention_coefficients_sum" bitwidth="3" opcode="add" m_display="0" m_delay="0.57" m_topoIndex="20" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="39" name="icmp_ln109" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="icmp_ln109_fu_229_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="icmp" m_display="0" m_delay="0.6" m_topoIndex="21" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>xor</dataOutputObjs>
+        <dataOutputObjs>or</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="40" name="select_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="select_ln108_fu_285_p3" coreName="Sel" implIndex="auto_sel" control="no" opType="select" coreId="73" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="select" nodeLabel="1.0" m_display="0" m_delay="0.27" m_topoIndex="33" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="41" name="select_ln108_1" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="select_ln108_1_fu_235_p3" coreName="Sel" implIndex="auto_sel" control="no" opType="select" coreId="73" contextFuncName="compute_attention_coefficients_sum" bitwidth="3" opcode="select" m_display="0" m_delay="0.27" m_topoIndex="22" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="42" name="zext_ln116" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="grp_fu_421_p00" coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="zext" m_display="0" m_topoIndex="23" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>mul</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="43" name="mul_ln116" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="mac_muladd_3ns_7ns_5ns_10_4_1_U1917" coreName="DSP48" implIndex="dsp" control="no" opType="mul" coreId="127" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="mul" nodeLatency="2" m_display="0" m_delay="0.99" m_topoIndex="24" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="44" name="xor_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="xor_ln108_fu_292_p2" coreName="LogicGate" implIndex="auto" control="no" opType="xor" coreId="74" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="xor" nodeLabel="1.0" m_display="0" m_topoIndex="34" m_clusterGroupNumber="1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataOutputObjs>and</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="45" name="icmp_ln111" lineNumber="111" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="icmp_ln111_fu_297_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="icmp" nodeLabel="1.0" m_display="0" m_delay="0.63" m_topoIndex="35" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="111" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>and</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="46" name="and_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="and_ln108_fu_303_p2" coreName="LogicGate" implIndex="auto" control="no" opType="and" coreId="74" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="and" nodeLabel="1.0" m_display="0" m_delay="0.12" m_topoIndex="36" m_clusterGroupNumber="1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>xor</dataInputObjs>
+        <dataOutputObjs>or</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="47" name="add_ln109" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="add_ln109_fu_309_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="add" nodeLabel="1.0" m_display="0" m_delay="0.7" m_topoIndex="37" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="49" name="or_ln109" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="or_ln109_fu_315_p2" coreName="LogicGate" implIndex="auto" control="no" opType="or" coreId="74" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="or" nodeLabel="1.0" m_display="0" m_delay="0.12" m_topoIndex="38" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>and</dataInputObjs>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="50" name="select_ln109" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="select_ln109_fu_320_p3" coreName="Sel" implIndex="auto_sel" control="no" opType="select" coreId="73" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="select" nodeLabel="1.0" m_display="0" m_delay="0.27" m_topoIndex="39" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>or</dataInputObjs>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="51" name="select_ln109_1" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="select_ln109_1_fu_395_p3" coreName="Sel" implIndex="auto_sel" control="no" opType="select" coreId="73" contextFuncName="compute_attention_coefficients_sum" bitwidth="28" opcode="select" nodeLabel="20.0" m_display="0" m_delay="0.32" m_topoIndex="70" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>or</dataInputObjs>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="52" name="select_ln109_2" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="select_ln109_2_fu_328_p3" coreName="Sel" implIndex="auto_sel" control="no" opType="select" coreId="73" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="select" nodeLabel="1.0" m_display="0" m_delay="0.27" m_topoIndex="40" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>and</dataInputObjs>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="53" name="zext_ln116_1" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="grp_fu_431_p00" coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="12" opcode="zext" nodeLabel="1.0" m_display="0" m_topoIndex="41" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>mul</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="54" name="zext_ln116_2" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="grp_fu_421_p20" coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="zext" nodeLabel="2.0" m_display="0" m_topoIndex="49" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="55" name="add_ln116" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="mac_muladd_3ns_7ns_5ns_10_4_1_U1917" coreName="DSP48" implIndex="dsp" control="no" opType="add" coreId="127" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="add" nodeLabel="2.0" nodeLatency="1" m_display="0" m_delay="0.64" m_topoIndex="50" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="56" name="zext_ln116_3" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="zext_ln116_3_fu_365_p1" coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="64" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="51" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="57" name="zext_ln119" lineNumber="119" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="grp_fu_440_p00" coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" bitwidth="16" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="52" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="119" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>mul</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="58" name="mul_ln119" lineNumber="119" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="mac_muladd_10ns_7ns_5ns_16_4_1_U1919" coreName="DSP48" implIndex="dsp" control="no" opType="mul" coreId="127" contextFuncName="compute_attention_coefficients_sum" bitwidth="16" opcode="mul" nodeLabel="3.0" nodeLatency="2" m_display="0" m_delay="0.99" m_topoIndex="53" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="119" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="59" name="attention_coefficients_sum_V_addr" lineNumber="119" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741815356" contextFuncName="compute_attention_coefficients_sum" bitwidth="9" opcode="getelementptr" nodeLabel="3.0" m_display="0" m_topoIndex="54" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="119" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>attention_coefficients_sum_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="60" name="mul_ln113" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="mac_muladd_5ns_7ns_5ns_12_4_1_U1918" coreName="DSP48" implIndex="dsp" control="no" opType="mul" coreId="127" contextFuncName="compute_attention_coefficients_sum" bitwidth="12" opcode="mul" nodeLabel="1.0" nodeLatency="2" m_display="0" m_delay="0.99" m_topoIndex="42" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="61" name="zext_ln116_4" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="grp_fu_431_p20" coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" bitwidth="12" opcode="zext" nodeLabel="3.0" m_display="0" m_topoIndex="55" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="62" name="zext_ln116_5" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="grp_fu_440_p20" coreId="539768380" contextFuncName="compute_attention_coefficients_sum" bitwidth="16" opcode="zext" nodeLabel="5.0" m_display="0" m_topoIndex="60" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="63" name="add_ln116_1" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="mac_muladd_10ns_7ns_5ns_16_4_1_U1919" coreName="DSP48" implIndex="dsp" control="no" opType="add" coreId="127" contextFuncName="compute_attention_coefficients_sum" bitwidth="16" opcode="add" nodeLabel="5.0" nodeLatency="1" m_display="0" m_delay="0.64" m_topoIndex="61" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="64" name="zext_ln116_6" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="zext_ln116_6_fu_388_p1" coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="64" opcode="zext" nodeLabel="6.0" m_display="0" m_topoIndex="64" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="65" name="all_scores_V_addr" lineNumber="116" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="16" opcode="getelementptr" nodeLabel="6.0" m_display="0" m_topoIndex="65" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>all_scores_V</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <dataOutputObjs>all_scores_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="66" name="add_ln113" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="mac_muladd_5ns_7ns_5ns_12_4_1_U1918" coreName="DSP48" implIndex="dsp" control="no" opType="add" coreId="127" contextFuncName="compute_attention_coefficients_sum" bitwidth="12" opcode="add" nodeLabel="3.0" nodeLatency="1" m_display="0" m_delay="0.64" m_topoIndex="56" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>mul</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="67" name="zext_ln113" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="zext_ln113_fu_375_p1" coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="64" opcode="zext" nodeLabel="4.0" m_display="0" m_topoIndex="57" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="68" name="connectivity_mask_final_addr" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" bitwidth="14" opcode="getelementptr" nodeLabel="4.0" m_display="0" m_topoIndex="58" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>connectivity_mask_final</dataInputObjs>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>load</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="71" name="connectivity_mask_final_load" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="no" opType="ram_2p" coreId="94" contextFuncName="compute_attention_coefficients_sum" bitwidth="32" opcode="load" nodeLabel="4.0" nodeLatency="1" m_display="0" m_delay="1.24" m_topoIndex="59" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="72" name="icmp_ln113" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="icmp_ln113_fu_382_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="icmp" nodeLabel="5.0" m_display="0" m_delay="0.85" m_topoIndex="62" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="73" name="br_ln113" lineNumber="113" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="compute_attention_coefficients_sum" opcode="br" nodeLabel="5.0" m_display="0" m_topoIndex="63" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="113" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>_ZN13ap_fixed_baseILi29ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi28ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i</controlInputObjs>
+        <controlInputObjs>_ZN8ap_fixedILi28ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit20</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>109</validLinenumbers>
+        <validLinenumbers>111</validLinenumbers>
+        <validLinenumbers>108</validLinenumbers>
+        <validLinenumbers>116</validLinenumbers>
+        <validLinenumbers>119</validLinenumbers>
+        <validLinenumbers>113</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="80" name="_ZN13ap_fixed_baseILi29ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi28ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i" type="BlockType">
+      <controlInputObjs>.split4</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>ifBlock</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="75" name="x_V" lineNumber="116" originalName="x.V" fileName="GAT_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="no" opType="ram_2p" coreId="94" contextFuncName="compute_attention_coefficients_sum" bitwidth="28" opcode="load" nodeLabel="6.0" nodeLatency="1" m_display="0" m_delay="1.24" m_topoIndex="66" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="116" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <dataOutputObjs>call</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="76" name="op2_V" lineNumber="1190" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\hls_math.h" fileDirectory=".." coreId="1633836900" contextFuncName="exp_28_10_s" bitwidth="28" opcode="call" nodeLabel="7.0" nodeLatency="12" m_display="0" m_delay="0.87" m_topoIndex="68" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\hls_math.h" linenumber="1190" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="exp&amp;lt;28, 10&amp;gt;"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <constName>exp_28_10_s</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="77" name="sum_V_1" lineNumber="712" originalName="sum.V" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." rtlName="sum_V_1_fu_402_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="operator_assign_29_11_true_AP_TRN_AP_WRAP_0" bitwidth="28" opcode="add" nodeLabel="20.0" m_display="0" m_delay="0.85" m_topoIndex="71" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="712" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="operator=&amp;lt;29, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>call</dataInputObjs>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="78" name="sum_V_write_ln712" lineNumber="712" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." coreId="1013281633" contextFuncName="operator_assign_29_11_true_AP_TRN_AP_WRAP_0" opcode="store" nodeLabel="20.0" m_display="0" m_delay="0.41" m_topoIndex="72" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="712" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="operator=&amp;lt;29, 11, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="79" name="br_ln0" coreId="539768380" opcode="br" nodeLabel="20.0" m_display="0" m_topoIndex="73" m_clusterGroupNumber="-1">
+        <controlInputObjs>ifBlock</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h">
+        <validLinenumbers>712</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>116</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\hls_math.h">
+        <validLinenumbers>1190</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="84" name="_ZN8ap_fixedILi28ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit20" type="BlockType">
+      <controlInputObjs>.split4</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>ifBlock</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="81" name="all_scores_V_addr_write_ln114" lineNumber="114" fileName="GAT_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="no" opType="ram_2p" coreId="94" contextFuncName="compute_attention_coefficients_sum" opcode="store" nodeLabel="6.0" m_display="0" m_delay="1.24" m_topoIndex="67" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="114" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>getelementptr</dataInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="82" name="sum_V_write_ln115" lineNumber="115" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="store" nodeLabel="20.0" m_display="0" m_delay="0.41" m_topoIndex="74" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="115" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="83" name="br_ln115" lineNumber="115" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="br" nodeLabel="20.0" m_display="0" m_topoIndex="75" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="115" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <controlInputObjs>ifBlock</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>114</validLinenumbers>
+        <validLinenumbers>115</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="88" name="ifBlock" type="BlockType">
+      <controlInputObjs>_ZN13ap_fixed_baseILi29ELi11ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi28ELi10ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i.i</controlInputObjs>
+      <controlInputObjs>_ZN8ap_fixedILi28ELi10EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit20</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>ifTrue</controlOutputObjs>
+      <controlOutputObjs>ifFalse</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="85" name="add_ln111" lineNumber="111" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="add_ln111_fu_340_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="compute_attention_coefficients_sum" bitwidth="5" opcode="add" nodeLabel="1.0" m_display="0" m_delay="0.7" m_topoIndex="43" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="111" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="86" name="icmp_ln111_1" lineNumber="111" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="icmp_ln111_1_fu_346_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="compute_attention_coefficients_sum" bitwidth="1" opcode="icmp" nodeLabel="1.0" m_display="0" m_delay="0.63" m_topoIndex="44" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="111" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="87" name="br_ln111" lineNumber="111" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741880380" contextFuncName="compute_attention_coefficients_sum" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="45" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="111" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>ifFalse</controlInputObjs>
+        <controlInputObjs>ifTrue</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>111</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="92" name="ifTrue" type="BlockType">
+      <controlInputObjs>ifBlock</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>ifFalse</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="89" name="sum_V_load_1" lineNumber="119" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741486908" contextFuncName="compute_attention_coefficients_sum" bitwidth="28" opcode="load" nodeLabel="21.0" m_display="0" m_topoIndex="77" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="119" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="90" name="attention_coefficients_sum_V_addr_write_ln119" lineNumber="119" fileName="GAT_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="no" opType="ram_2p" coreId="94" contextFuncName="compute_attention_coefficients_sum" opcode="store" nodeLabel="21.0" m_display="0" m_delay="1.19" m_topoIndex="78" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="119" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="91" name="br_ln0" coreId="1633836900" opcode="br" nodeLabel="21.0" m_display="0" m_topoIndex="79" m_clusterGroupNumber="-1">
+        <controlInputObjs>ifFalse</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>119</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="102" name="ifFalse" type="BlockType">
+      <controlInputObjs>ifBlock</controlInputObjs>
+      <controlInputObjs>ifTrue</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_30</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="93" name="indvar_flatten_load" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741744684" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="load" m_display="0" m_topoIndex="25" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="94" name="add_ln109_1" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="add_ln109_1_fu_250_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="add" m_display="0" m_delay="0.72" m_topoIndex="26" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>select</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="95" name="select_ln109_3" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="select_ln109_3_fu_256_p3" coreName="Sel" implIndex="auto_sel" control="no" opType="select" coreId="73" contextFuncName="compute_attention_coefficients_sum" bitwidth="10" opcode="select" m_display="0" m_delay="0.3" m_topoIndex="27" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="96" name="indvar_flatten14_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741815612" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="28" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="97" name="nh_write_ln108" lineNumber="108" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="29" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="108" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="98" name="indvar_flatten_write_ln109" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741945916" contextFuncName="compute_attention_coefficients_sum" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="30" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="99" name="n1_write_ln109" lineNumber="109" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741486908" contextFuncName="compute_attention_coefficients_sum" opcode="store" nodeLabel="1.0" m_display="0" m_delay="0.38" m_topoIndex="46" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="109" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>select</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="100" name="n2_write_ln111" lineNumber="111" fileName="GAT_compute.cpp" fileDirectory=".." coreId="539767072" contextFuncName="compute_attention_coefficients_sum" opcode="store" nodeLabel="1.0" m_display="0" m_delay="0.38" m_topoIndex="47" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="GAT_compute.cpp" linenumber="111" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2" functionName="compute_attention_coefficients_sum"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="101" name="br_ln0" coreId="741355836" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="48" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_30</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="GAT_compute.cpp">
+        <validLinenumbers>109</validLinenumbers>
+        <validLinenumbers>108</validLinenumbers>
+        <validLinenumbers>111</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <ScheduleInfo time="8"/>
+  <ScheduleInfo time="9"/>
+  <ScheduleInfo time="10"/>
+  <ScheduleInfo time="11"/>
+  <ScheduleInfo time="12"/>
+  <ScheduleInfo time="13"/>
+  <ScheduleInfo time="14"/>
+  <ScheduleInfo time="15"/>
+  <ScheduleInfo time="16"/>
+  <ScheduleInfo time="17"/>
+  <ScheduleInfo time="18"/>
+  <ScheduleInfo time="19"/>
+  <ScheduleInfo time="20"/>
+  <ScheduleInfo time="21"/>
+  <regnodes realName="sum_V_reg_449">
+    <nodeIds>9</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln116_5_reg_560">
+    <nodeIds>62</nodeIds>
+  </regnodes>
+  <regnodes realName="n1_reg_465">
+    <nodeIds>11</nodeIds>
+  </regnodes>
+  <regnodes realName="n2_reg_458">
+    <nodeIds>10</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln116_4_reg_550">
+    <nodeIds>61</nodeIds>
+  </regnodes>
+  <regnodes realName="connectivity_mask_final_addr_reg_555">
+    <nodeIds>68</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln109_reg_498">
+    <nodeIds>39</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln111_1_reg_531">
+    <nodeIds>86</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln116_reg_505">
+    <nodeIds>42</nodeIds>
+  </regnodes>
+  <regnodes realName="op2_V_reg_574">
+    <nodeIds>76</nodeIds>
+  </regnodes>
+  <regnodes realName="or_ln109_reg_510">
+    <nodeIds>49</nodeIds>
+  </regnodes>
+  <regnodes realName="select_ln109_reg_515">
+    <nodeIds>50</nodeIds>
+  </regnodes>
+  <regnodes realName="attention_coefficients_sum_V_addr_reg_545">
+    <nodeIds>59</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln108_reg_494">
+    <nodeIds>27</nodeIds>
+  </regnodes>
+  <regnodes realName="indvar_flatten14_reg_487">
+    <nodeIds>14</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln113_reg_565">
+    <nodeIds>72</nodeIds>
+  </regnodes>
+  <regnodes realName="select_ln109_2_reg_521">
+    <nodeIds>52</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln116_2_reg_535">
+    <nodeIds>54</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln116_1_reg_526">
+    <nodeIds>53</nodeIds>
+  </regnodes>
+  <regnodes realName="indvar_flatten_reg_472">
+    <nodeIds>12</nodeIds>
+  </regnodes>
+  <regnodes realName="all_scores_V_addr_reg_569">
+    <nodeIds>65</nodeIds>
+  </regnodes>
+  <regnodes realName="nh_reg_480">
+    <nodeIds>13</nodeIds>
+  </regnodes>
+  <regnodes realName="zext_ln119_reg_540">
+    <nodeIds>57</nodeIds>
+  </regnodes>
+  <expressionNodes realName="add_ln111_fu_340">
+    <nodeIds>85</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln108_1_fu_235">
+    <nodeIds>41</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln109_fu_309">
+    <nodeIds>47</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="sum_V_fu_84">
+    <nodeIds>9</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_6_fu_388">
+    <nodeIds>64</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="indvar_flatten_fu_96">
+    <nodeIds>12</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln109_2_fu_328">
+    <nodeIds>52</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln109_1_fu_250">
+    <nodeIds>94</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_2_fu_362">
+    <nodeIds>54</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln108_fu_205">
+    <nodeIds>27</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="n1_fu_92">
+    <nodeIds>11</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="indvar_flatten14_fu_104">
+    <nodeIds>14</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln109_3_fu_256">
+    <nodeIds>95</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln113_fu_382">
+    <nodeIds>72</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln119_fu_369">
+    <nodeIds>57</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln108_fu_285">
+    <nodeIds>40</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln109_fu_320">
+    <nodeIds>50</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_3_fu_365">
+    <nodeIds>56</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_fu_243">
+    <nodeIds>42</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln108_fu_223">
+    <nodeIds>36</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="nh_fu_100">
+    <nodeIds>13</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="sum_V_1_fu_402">
+    <nodeIds>77</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="xor_ln108_fu_292">
+    <nodeIds>44</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="n2_fu_88">
+    <nodeIds>10</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="select_ln109_1_fu_395">
+    <nodeIds>51</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln108_1_fu_211">
+    <nodeIds>28</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln111_fu_297">
+    <nodeIds>45</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln113_fu_375">
+    <nodeIds>67</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_4_fu_372">
+    <nodeIds>61</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln111_1_fu_346">
+    <nodeIds>86</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="connectivity_mask_final_addr_gep_fu_115">
+    <nodeIds>68</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln109_fu_229">
+    <nodeIds>39</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="and_ln108_fu_303">
+    <nodeIds>46</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="or_ln109_fu_315">
+    <nodeIds>49</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_5_fu_379">
+    <nodeIds>62</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="zext_ln116_1_fu_336">
+    <nodeIds>53</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="all_scores_V_addr_gep_fu_128">
+    <nodeIds>65</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="attention_coefficients_sum_V_addr_gep_fu_108">
+    <nodeIds>59</nodeIds>
+  </expressionNodes>
+  <moduleNodes realName="grp_exp_28_10_s_fu_156">
+    <nodeIds>76</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_fu_431">
+    <nodeIds>60</nodeIds>
+    <nodeIds>66</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_fu_421">
+    <nodeIds>43</nodeIds>
+    <nodeIds>55</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_fu_440">
+    <nodeIds>58</nodeIds>
+    <nodeIds>63</nodeIds>
+  </moduleNodes>
+  <ioNodes realName="store_ln111_store_fu_357">
+    <nodeIds>100</nodeIds>
+  </ioNodes>
+  <ioNodes realName="indvar_flatten_load_load_fu_247">
+    <nodeIds>93</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_187">
+    <nodeIds>21</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_264">
+    <nodeIds>96</nodeIds>
+  </ioNodes>
+  <ioNodes realName="nh_load_load_fu_220">
+    <nodeIds>35</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_177">
+    <nodeIds>19</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_197">
+    <nodeIds>23</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln115_store_fu_412">
+    <nodeIds>82</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_172">
+    <nodeIds>18</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln109_store_fu_274">
+    <nodeIds>98</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln109_store_fu_352">
+    <nodeIds>99</nodeIds>
+  </ioNodes>
+  <ioNodes realName="indvar_flatten14_load_load_fu_202">
+    <nodeIds>26</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln712_store_fu_407">
+    <nodeIds>78</nodeIds>
+  </ioNodes>
+  <ioNodes realName="sum_V_load_1_load_fu_417">
+    <nodeIds>89</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_269">
+    <nodeIds>97</nodeIds>
+  </ioNodes>
+  <ioNodes realName="sum_V_load_load_fu_392">
+    <nodeIds>31</nodeIds>
+  </ioNodes>
+  <ioNodes realName="indvar_flatten_load_1_load_fu_217">
+    <nodeIds>34</nodeIds>
+  </ioNodes>
+  <ioNodes realName="n1_load_load_fu_282">
+    <nodeIds>33</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_192">
+    <nodeIds>22</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln108_store_fu_182">
+    <nodeIds>20</nodeIds>
+  </ioNodes>
+  <ioNodes realName="n2_load_load_fu_279">
+    <nodeIds>32</nodeIds>
+  </ioNodes>
+  <memoryPorts dataString="all_scores_V">
+    <nodeIds>75</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="all_scores_V" portID="1">
+    <nodeIds>81</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="attention_coefficients_sum_V" portID="1">
+    <nodeIds>90</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="connectivity_mask_final">
+    <nodeIds>71</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="exp_x_msb_1_table_V" portID="100">
+    <nodeIds>76</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="f_x_msb_2_table_V" portID="100">
+    <nodeIds>76</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="f_x_msb_3_table_V" portID="100">
+    <nodeIds>76</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="f_x_msb_4_h_table_V" portID="100">
+    <nodeIds>76</nodeIds>
+  </memoryPorts>
+  <memoryPorts dataString="f_x_msb_4_l_table_V" portID="100">
+    <nodeIds>76</nodeIds>
+  </memoryPorts>
+  <ioPorts name="all_scores_V(p0)">
+    <contents name="load">
+      <nodeIds>75</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="all_scores_V(p1)">
+    <contents name="store">
+      <nodeIds>81</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="attention_coefficients_sum_V(p1)">
+    <contents name="store">
+      <nodeIds>90</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="connectivity_mask_final(p0)">
+    <contents name="load">
+      <nodeIds>71</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="9" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="1"/>
+      <operations id="11" stage="1" latency="1"/>
+      <operations id="12" stage="1" latency="1"/>
+      <operations id="13" stage="1" latency="1"/>
+      <operations id="14" stage="1" latency="1"/>
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="20" stage="1" latency="1"/>
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="24" stage="1" latency="1"/>
+      <operations id="26" stage="1" latency="1"/>
+      <operations id="27" stage="1" latency="1"/>
+      <operations id="28" stage="1" latency="1"/>
+      <operations id="29" stage="1" latency="1"/>
+      <operations id="34" stage="1" latency="1"/>
+      <operations id="35" stage="1" latency="1"/>
+      <operations id="36" stage="1" latency="1"/>
+      <operations id="39" stage="1" latency="1"/>
+      <operations id="41" stage="1" latency="1"/>
+      <operations id="42" stage="1" latency="1"/>
+      <operations id="43" stage="3" latency="3"/>
+      <operations id="93" stage="1" latency="1"/>
+      <operations id="94" stage="1" latency="1"/>
+      <operations id="95" stage="1" latency="1"/>
+      <operations id="96" stage="1" latency="1"/>
+      <operations id="97" stage="1" latency="1"/>
+      <operations id="98" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="33" stage="1" latency="1"/>
+      <operations id="40" stage="1" latency="1"/>
+      <operations id="43" stage="2" latency="3"/>
+      <operations id="44" stage="1" latency="1"/>
+      <operations id="45" stage="1" latency="1"/>
+      <operations id="46" stage="1" latency="1"/>
+      <operations id="47" stage="1" latency="1"/>
+      <operations id="49" stage="1" latency="1"/>
+      <operations id="50" stage="1" latency="1"/>
+      <operations id="52" stage="1" latency="1"/>
+      <operations id="53" stage="1" latency="1"/>
+      <operations id="60" stage="3" latency="3"/>
+      <operations id="85" stage="1" latency="1"/>
+      <operations id="86" stage="1" latency="1"/>
+      <operations id="87" stage="1" latency="1"/>
+      <operations id="99" stage="1" latency="1"/>
+      <operations id="100" stage="1" latency="1"/>
+      <operations id="101" stage="1" latency="1"/>
+    </states>
+    <states id="3">
+      <operations id="43" stage="1" latency="3"/>
+      <operations id="54" stage="1" latency="1"/>
+      <operations id="55" stage="2" latency="2"/>
+      <operations id="60" stage="2" latency="3"/>
+    </states>
+    <states id="4">
+      <operations id="55" stage="1" latency="2"/>
+      <operations id="56" stage="1" latency="1"/>
+      <operations id="57" stage="1" latency="1"/>
+      <operations id="58" stage="3" latency="3"/>
+      <operations id="59" stage="1" latency="1"/>
+      <operations id="60" stage="1" latency="3"/>
+      <operations id="61" stage="1" latency="1"/>
+      <operations id="66" stage="2" latency="2"/>
+    </states>
+    <states id="5">
+      <operations id="58" stage="2" latency="3"/>
+      <operations id="66" stage="1" latency="2"/>
+      <operations id="67" stage="1" latency="1"/>
+      <operations id="68" stage="1" latency="1"/>
+      <operations id="71" stage="2" latency="2"/>
+    </states>
+    <states id="6">
+      <operations id="58" stage="1" latency="3"/>
+      <operations id="62" stage="1" latency="1"/>
+      <operations id="63" stage="2" latency="2"/>
+      <operations id="71" stage="1" latency="2"/>
+      <operations id="72" stage="1" latency="1"/>
+      <operations id="73" stage="1" latency="1"/>
+    </states>
+    <states id="7">
+      <operations id="63" stage="1" latency="2"/>
+      <operations id="64" stage="1" latency="1"/>
+      <operations id="65" stage="1" latency="1"/>
+      <operations id="75" stage="2" latency="2"/>
+      <operations id="81" stage="1" latency="1"/>
+    </states>
+    <states id="8">
+      <operations id="75" stage="1" latency="2"/>
+      <operations id="76" stage="13" latency="13"/>
+    </states>
+    <states id="9">
+      <operations id="76" stage="12" latency="13"/>
+    </states>
+    <states id="10">
+      <operations id="76" stage="11" latency="13"/>
+    </states>
+    <states id="11">
+      <operations id="76" stage="10" latency="13"/>
+    </states>
+    <states id="12">
+      <operations id="76" stage="9" latency="13"/>
+    </states>
+    <states id="13">
+      <operations id="76" stage="8" latency="13"/>
+    </states>
+    <states id="14">
+      <operations id="76" stage="7" latency="13"/>
+    </states>
+    <states id="15">
+      <operations id="76" stage="6" latency="13"/>
+    </states>
+    <states id="16">
+      <operations id="76" stage="5" latency="13"/>
+    </states>
+    <states id="17">
+      <operations id="76" stage="4" latency="13"/>
+    </states>
+    <states id="18">
+      <operations id="76" stage="3" latency="13"/>
+    </states>
+    <states id="19">
+      <operations id="76" stage="2" latency="13"/>
+    </states>
+    <states id="20">
+      <operations id="76" stage="1" latency="13"/>
+    </states>
+    <states id="21">
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="37" stage="1" latency="1"/>
+      <operations id="38" stage="1" latency="1"/>
+      <operations id="48" stage="1" latency="1"/>
+      <operations id="51" stage="1" latency="1"/>
+      <operations id="69" stage="1" latency="1"/>
+      <operations id="70" stage="1" latency="1"/>
+      <operations id="77" stage="1" latency="1"/>
+      <operations id="78" stage="1" latency="1"/>
+      <operations id="79" stage="1" latency="1"/>
+      <operations id="82" stage="1" latency="1"/>
+      <operations id="83" stage="1" latency="1"/>
+      <operations id="103" stage="1" latency="1"/>
+    </states>
+    <states id="22">
+      <operations id="89" stage="1" latency="1"/>
+      <operations id="90" stage="1" latency="1"/>
+      <operations id="91" stage="1" latency="1"/>
+    </states>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="10">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="10" outState="11">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="11" outState="12">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="12" outState="13">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="13" outState="14">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="14" outState="15">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="15" outState="16">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="16" outState="17">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="17" outState="18">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="18" outState="19">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="19" outState="20">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="20" outState="21">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="21" outState="22">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="compute_attention_coefficients_sum" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="1466" mMaxLatency="1466">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>25</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="VITIS_LOOP_108_1_VITIS_LOOP_109_2_VITIS_LOOP_111_3" mII="1" mDepth="22" mMinTripCount="1444" mMaxTripCount="1444" mMinLatency="1464" mMaxLatency="1464" mType="1">
+      <basicBlocks>30</basicBlocks>
+      <basicBlocks>74</basicBlocks>
+      <basicBlocks>80</basicBlocks>
+      <basicBlocks>84</basicBlocks>
+      <basicBlocks>88</basicBlocks>
+      <basicBlocks>92</basicBlocks>
+      <basicBlocks>102</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>104</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

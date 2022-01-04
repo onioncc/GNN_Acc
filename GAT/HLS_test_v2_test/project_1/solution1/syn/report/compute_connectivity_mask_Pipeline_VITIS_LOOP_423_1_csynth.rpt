@@ -1,0 +1,176 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1'
+================================================================
+* Date:           Mon Dec 20 19:04:38 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.515 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |      125|      125|  0.500 us|  0.500 us|  125|  125|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_423_1  |      123|      123|         7|          3|          3|    40|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     1|        -|        -|    -|
+|Expression           |        -|     -|        0|      132|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|      101|    -|
+|Register             |        -|     -|      172|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     1|      172|      233|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    +-------------------------------------+--------------------------------+--------------+
+    |               Instance              |             Module             |  Expression  |
+    +-------------------------------------+--------------------------------+--------------+
+    |mac_muladd_14s_7ns_14ns_14_4_1_U673  |mac_muladd_14s_7ns_14ns_14_4_1  |  i0 * i1 + i2|
+    +-------------------------------------+--------------------------------+--------------+
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +------------------------+----------+----+---+----+------------+------------+
+    |      Variable Name     | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +------------------------+----------+----+---+----+------------+------------+
+    |add_ln423_fu_124_p2     |         +|   0|  0|  13|           6|           1|
+    |add_ln425_fu_195_p2     |         +|   0|  0|  39|          32|           1|
+    |addr_cmp_fu_174_p2      |      icmp|   0|  0|  29|          64|          64|
+    |icmp_ln423_fu_118_p2    |      icmp|   0|  0|  10|           6|           6|
+    |or_ln425_fu_143_p2      |        or|   0|  0|   7|           7|           1|
+    |reuse_select_fu_188_p3  |    select|   0|  0|  32|           1|          32|
+    |ap_enable_pp0           |       xor|   0|  0|   2|           1|           2|
+    +------------------------+----------+----+---+----+------------+------------+
+    |Total                   |          |   0|  0| 132|         117|         107|
+    +------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------------+----+-----------+-----+-----------+
+    |               Name               | LUT| Input Size| Bits| Total Bits|
+    +----------------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                         |  20|          4|    1|          4|
+    |ap_done_int                       |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter0           |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1           |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter2           |   9|          2|    1|          2|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   9|          2|    1|          2|
+    |ap_sig_allocacmp_i_8              |   9|          2|    6|         12|
+    |i_fu_54                           |   9|          2|    6|         12|
+    |reuse_addr_reg_fu_46              |   9|          2|   64|        128|
+    |reuse_reg_fu_50                   |   9|          2|   32|         64|
+    +----------------------------------+----+-----------+-----+-----------+
+    |Total                             | 101|         22|  114|        230|
+    +----------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |add_ln425_reg_270                 |  32|   0|   32|          0|
+    |addr_cmp_reg_265                  |   1|   0|    1|          0|
+    |ap_CS_fsm                         |   3|   0|    3|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter0_reg       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |connectivity_mask_addr_reg_259    |  14|   0|   14|          0|
+    |i_fu_54                           |   6|   0|    6|          0|
+    |icmp_ln423_reg_235                |   1|   0|    1|          0|
+    |reuse_addr_reg_fu_46              |  64|   0|   64|          0|
+    |reuse_reg_fu_50                   |  32|   0|   32|          0|
+    |trunc_ln425_1_reg_254             |  14|   0|   14|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             | 172|   0|  172|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |                    Source Object                    |    C Type    |
++----------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+|ap_clk                      |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1|  return value|
+|ap_rst                      |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1|  return value|
+|ap_start                    |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1|  return value|
+|ap_done                     |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1|  return value|
+|ap_idle                     |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1|  return value|
+|ap_ready                    |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1|  return value|
+|edge_list_address0          |  out|   10|   ap_memory|                                            edge_list|         array|
+|edge_list_ce0               |  out|    1|   ap_memory|                                            edge_list|         array|
+|edge_list_q0                |   in|   32|   ap_memory|                                            edge_list|         array|
+|edge_list_address1          |  out|   10|   ap_memory|                                            edge_list|         array|
+|edge_list_ce1               |  out|    1|   ap_memory|                                            edge_list|         array|
+|edge_list_q1                |   in|   32|   ap_memory|                                            edge_list|         array|
+|connectivity_mask_address0  |  out|   14|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_ce0       |  out|    1|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_q0        |   in|   32|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_address1  |  out|   14|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_ce1       |  out|    1|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_we1       |  out|    1|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_d1        |  out|   32|   ap_memory|                                    connectivity_mask|         array|
++----------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+

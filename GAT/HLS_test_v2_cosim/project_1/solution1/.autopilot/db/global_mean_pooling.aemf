@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1639269078458">
+  <ports id="1" name="num_of_nodes" type="PortType" coreId="1767255928" bitwidth="32">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="2" name="out_nodes_features_skip_concat_bias_V_0" type="PortType" coreName="RAM_2P_BRAM" coreId="1852402793" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="3" name="out_nodes_features_skip_concat_bias_V_1" type="PortType" coreName="RAM_2P_BRAM" coreId="796421737" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="4" name="out_nodes_features_skip_concat_bias_V_2" type="PortType" coreName="RAM_2P_BRAM" coreId="793988168" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="5" name="out_nodes_features_skip_concat_bias_V_3" type="PortType" coreName="RAM_2P_BRAM" coreId="1852402793" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="6" name="out_nodes_features_skip_concat_bias_V_4" type="PortType" coreName="RAM_2P_BRAM" coreId="796421737" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="7" name="out_nodes_features_skip_concat_bias_V_5" type="PortType" coreName="RAM_2P_BRAM" coreId="792347432" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="8" name="out_nodes_features_skip_concat_bias_V_6" type="PortType" coreName="RAM_2P_BRAM" coreId="796421737" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="9" name="out_nodes_features_skip_concat_bias_V_7" type="PortType" coreName="RAM_2P_BRAM" coreId="793988168" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="10" name="out_nodes_features_skip_concat_bias_V_8" type="PortType" coreName="RAM_2P_BRAM" coreId="792347432" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="11" name="out_nodes_features_skip_concat_bias_V_9" type="PortType" coreName="RAM_2P_BRAM" coreId="796421737" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="12" name="out_nodes_features_skip_concat_bias_V_10" type="PortType" coreName="RAM_2P_BRAM" coreId="1601399156" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="13" name="out_nodes_features_skip_concat_bias_V_11" type="PortType" coreName="RAM_2P_BRAM" coreId="792347432" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="14" name="out_nodes_features_skip_concat_bias_V_12" type="PortType" coreName="RAM_2P_BRAM" coreId="2020501868" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="15" name="out_nodes_features_skip_concat_bias_V_13" type="PortType" coreName="RAM_2P_BRAM" coreId="1768712536" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="16" name="out_nodes_features_skip_concat_bias_V_14" type="PortType" coreName="RAM_2P_BRAM" coreId="1767255928" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="17" name="out_nodes_features_skip_concat_bias_V_15" type="PortType" coreName="RAM_2P_BRAM" coreId="1852402793" bitwidth="28" iftype="IfTypeRegister" arraysize="200">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="18" name="h_graph_V" type="PortType" coreName="RAM_2P_BRAM" coreId="1767255928" bitwidth="28" direction="DirOut" iftype="IfTypeRegister" arraysize="200">
+    <dataInputObjs>getelementptr</dataInputObjs>
+  </ports>
+  <edges id="55" source_obj="//@ports.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="58" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.3"/>
+  <edges id="61" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@blocks.0/@node_objs.4"/>
+  <edges id="64" source_obj="//@blocks.0/@node_objs.4" sink_obj="//@blocks.0/@node_objs.5"/>
+  <edges id="67" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.6"/>
+  <edges id="68" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.0/@node_objs.7"/>
+  <edges id="69" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="70" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.1/@node_objs.1"/>
+  <edges id="73" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.1/@node_objs.2"/>
+  <edges id="76" source_obj="//@blocks.1/@node_objs.1" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="77" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="78" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@blocks.1/@node_objs.3"/>
+  <edges id="79" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="80" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.2/@node_objs.1"/>
+  <edges id="83" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="84" source_obj="//@blocks.2/@node_objs.1" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="85" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="86" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.2/@node_objs.3"/>
+  <edges id="89" source_obj="//@blocks.2/@node_objs.3" sink_obj="//@blocks.2/@node_objs.4"/>
+  <edges id="91" source_obj="//@blocks.2/@node_objs.4" sink_obj="//@blocks.2/@node_objs.5"/>
+  <edges id="92" source_obj="//@blocks.0/@node_objs.5" sink_obj="//@blocks.2/@node_objs.5"/>
+  <edges id="93" source_obj="//@blocks.2/@node_objs.5" sink_obj="//@blocks.2/@node_objs.6"/>
+  <edges id="94" source_obj="//@blocks.2/@node_objs.7" sink_obj="//@ports.17"/>
+  <edges id="97" source_obj="//@blocks.2/@node_objs.0" sink_obj="//@blocks.2/@node_objs.7"/>
+  <edges id="98" source_obj="//@blocks.2/@node_objs.6" sink_obj="//@blocks.2/@node_objs.8"/>
+  <edges id="99" source_obj="//@blocks.2/@node_objs.7" sink_obj="//@blocks.2/@node_objs.8"/>
+  <edges id="100" source_obj="//@blocks.1/@node_objs.2" sink_obj="//@blocks.2/@node_objs.9"/>
+  <edges id="101" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.2/@node_objs.9"/>
+  <edges id="102" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2/@node_objs.10"/>
+  <edges id="103" source_obj="//@ports.1" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="104" source_obj="//@ports.2" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="105" source_obj="//@ports.3" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="106" source_obj="//@ports.4" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="107" source_obj="//@ports.5" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="108" source_obj="//@ports.6" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="109" source_obj="//@ports.7" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="110" source_obj="//@ports.8" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="111" source_obj="//@ports.9" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="112" source_obj="//@ports.10" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="113" source_obj="//@ports.11" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="114" source_obj="//@ports.12" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="115" source_obj="//@ports.13" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="116" source_obj="//@ports.14" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="117" source_obj="//@ports.15" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="118" source_obj="//@ports.16" sink_obj="//@blocks.2/@node_objs.2"/>
+  <edges id="254" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="255" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.3"/>
+  <edges id="256" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@blocks.2"/>
+  <edges id="257" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@blocks.1" is_back_edge="1"/>
+  <edges id="258" edge_type="VirtEdge" source_obj="//@blocks.2/@node_objs.2" sink_obj="//@blocks.2/@node_objs.3"/>
+  <edges id="259" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.6" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="260" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.6" sink_obj="//@blocks.2/@node_objs.9"/>
+  <edges id="261" edge_type="VirtEdge" source_obj="//@blocks.1/@node_objs.0" sink_obj="//@blocks.2/@node_objs.9"/>
+  <blocks id="29" name="block_29" type="BlockType">
+    <controlOutputObjs>block_35</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="19" name="dim" originalName="dim" coreId="1633836900" bitwidth="5" opcode="alloca" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="20" name="num_of_nodes_read" coreId="1013281633" bitwidth="32" opcode="read" m_display="0" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <dataInputObjs>num_of_nodes</dataInputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="21" name="sum_V_loc" coreId="741815356" bitwidth="28" opcode="alloca" m_display="0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <dataOutputObjs>call</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="24" name="empty" rtlName="empty_fu_240_p1" coreId="1633836900" bitwidth="10" opcode="trunc" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+      <dataInputObjs>read</dataInputObjs>
+      <dataOutputObjs>bitconcatenate</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="25" name="conv_i_i_i" rtlName="conv_i_i_i_fu_244_p3" coreId="1013281633" bitwidth="28" opcode="bitconcatenate" m_display="0" m_topoIndex="5" m_clusterGroupNumber="-1">
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataOutputObjs>sext</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="26" name="conv_i" rtlName="conv_i_fu_252_p1" coreId="1633836900" bitwidth="46" opcode="sext" m_display="0" m_topoIndex="6" m_clusterGroupNumber="-1">
+      <dataInputObjs>bitconcatenate</dataInputObjs>
+      <dataOutputObjs>sdiv</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="27" name="dim_write_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="global_mean_pooling" opcode="store" m_display="0" m_delay="0.38" m_topoIndex="7" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="28" name="br_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741486908" contextFuncName="global_mean_pooling" opcode="br" m_display="0" m_topoIndex="8" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <controlInputObjs>block_35</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>290</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="35" name="block_35" type="BlockType">
+    <controlInputObjs>block_29</controlInputObjs>
+    <controlInputObjs>.split</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>block_50</controlOutputObjs>
+    <controlOutputObjs>.split</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="30" name="dim_1" lineNumber="712" originalName="dim" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." coreId="1013281633" contextFuncName="operator_assign_28_10_true_AP_TRN_AP_WRAP_0" bitwidth="5" opcode="load" nodeLabel="1.0" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="712" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="operator=&amp;lt;28, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <dataOutputObjs>icmp</dataOutputObjs>
+      <dataOutputObjs>add</dataOutputObjs>
+      <dataOutputObjs>zext</dataOutputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="31" name="icmp_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="icmp_ln290_fu_264_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="global_mean_pooling" bitwidth="1" opcode="icmp" nodeLabel="1.0" m_display="0" m_delay="0.63" m_topoIndex="10" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>load</dataInputObjs>
+      <dataOutputObjs>br</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="33" name="add_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="add_ln290_fu_270_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="global_mean_pooling" bitwidth="5" opcode="add" nodeLabel="1.0" m_display="0" m_delay="0.7" m_topoIndex="11" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>load</dataInputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="34" name="br_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="global_mean_pooling" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="12" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>icmp</dataInputObjs>
+      <controlInputObjs>.split</controlInputObjs>
+      <controlInputObjs>block_50</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h">
+      <validLinenumbers>712</validLinenumbers>
+    </fileValidLineNumbers>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>290</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="48" name=".split" type="BlockType">
+    <controlInputObjs>block_35</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>block_35</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="36" name="zext_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." rtlName="zext_ln290_fu_302_p1" coreId="741815356" contextFuncName="global_mean_pooling" bitwidth="64" opcode="zext" nodeLabel="52.0" m_display="0" m_topoIndex="20" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>load</dataInputObjs>
+      <dataOutputObjs>getelementptr</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="38" name="trunc_ln712" lineNumber="712" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." rtlName="trunc_ln712_fu_276_p1" coreId="1633836900" contextFuncName="operator_assign_28_10_true_AP_TRN_AP_WRAP_0" bitwidth="4" opcode="trunc" nodeLabel="1.0" m_display="0" m_topoIndex="13" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="712" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="operator=&amp;lt;28, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>load</dataInputObjs>
+      <dataOutputObjs>call</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="39" name="_ln712" lineNumber="712" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." rtlName="grp_global_mean_pooling_Pipeline_VITIS_LOOP_292_2_fu_201" coreId="741552700" contextFuncName="operator_assign_28_10_true_AP_TRN_AP_WRAP_0" opcode="call" nodeLabel="1.0" nodeLatency="1" m_display="0" m_delay="1.24" m_topoIndex="14" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="712" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="operator=&amp;lt;28, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>read</dataInputObjs>
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataInputObjs>alloca</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_0</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_1</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_2</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_3</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_4</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_5</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_6</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_7</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_8</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_9</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_10</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_11</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_12</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_13</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_14</dataInputObjs>
+      <dataInputObjs>out_nodes_features_skip_concat_bias_V_15</dataInputObjs>
+      <constName>global_mean_pooling_Pipeline_VITIS_LOOP_292_2</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="40" name="sum_V_loc_load" coreId="1633836900" bitwidth="28" opcode="load" nodeLabel="3.0" m_display="0" m_topoIndex="17" m_clusterGroupNumber="-1">
+      <dataInputObjs>alloca</dataInputObjs>
+      <dataOutputObjs>bitconcatenate</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="41" name="t" lineNumber="737" originalName="t" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." rtlName="grp_fu_297_p0" coreId="741486908" contextFuncName="operator_assign_28_10_true_AP_TRN_AP_WRAP_0" bitwidth="46" opcode="bitconcatenate" nodeLabel="3.0" m_display="0" m_topoIndex="18" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="737" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="operator=&amp;lt;28, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>load</dataInputObjs>
+      <dataOutputObjs>sdiv</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="42" name="sdiv_ln1201" lineNumber="1201" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." rtlName="sdiv_46ns_28s_28_50_seq_1_U1989" coreName="DivnS_SEQ" implIndex="auto_seq" control="no" opType="sdiv" coreId="7" contextFuncName="operator_div_28_10_true_AP_TRN_AP_WRAP_0" bitwidth="28" opcode="sdiv" nodeLabel="3.0" nodeLatency="49" m_display="0" m_delay="1.22" m_topoIndex="19" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="1201" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="operator/&amp;lt;28, 10, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>bitconcatenate</dataInputObjs>
+      <dataInputObjs>sext</dataInputObjs>
+      <dataOutputObjs>trunc</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="43" name="trunc_ln712_1" lineNumber="712" fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" fileDirectory=".." rtlName="h_graph_V_d1" coreId="1633836900" contextFuncName="operator_assign_47_29_true_AP_TRN_AP_WRAP_0" bitwidth="28" opcode="trunc" nodeLabel="52.0" m_display="0" m_topoIndex="21" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h" linenumber="712" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="operator=&amp;lt;47, 29, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+      <dataInputObjs>sdiv</dataInputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="44" name="h_graph_V_addr" lineNumber="295" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="global_mean_pooling" bitwidth="8" opcode="getelementptr" nodeLabel="52.0" m_display="0" m_topoIndex="22" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="295" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>zext</dataInputObjs>
+      <dataOutputObjs>h_graph_V</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="45" name="h_graph_V_addr_write_ln295" lineNumber="295" fileName="GAT_compute.cpp" fileDirectory=".." coreName="RAM_2P_BRAM" implIndex="bram" control="no" opType="ram_2p" coreId="94" contextFuncName="global_mean_pooling" opcode="store" nodeLabel="52.0" m_display="0" m_delay="1.19" m_topoIndex="23" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="295" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>trunc</dataInputObjs>
+      <dataInputObjs>getelementptr</dataInputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="46" name="dim_write_ln290" lineNumber="290" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1013281633" contextFuncName="global_mean_pooling" opcode="store" nodeLabel="1.0" m_display="0" m_delay="0.38" m_topoIndex="15" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="290" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+      <dataInputObjs>add</dataInputObjs>
+      <dataInputObjs>alloca</dataInputObjs>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="47" name="br_ln0" coreId="1013281633" opcode="br" nodeLabel="52.0" m_display="0" m_topoIndex="24" m_clusterGroupNumber="-1">
+      <controlInputObjs>block_35</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_fixed_base.h">
+      <validLinenumbers>712</validLinenumbers>
+      <validLinenumbers>737</validLinenumbers>
+      <validLinenumbers>1201</validLinenumbers>
+    </fileValidLineNumbers>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>290</validLinenumbers>
+      <validLinenumbers>295</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="50" name="block_50" type="BlockType">
+    <controlInputObjs>block_35</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="49" name="_ln297" lineNumber="297" fileName="GAT_compute.cpp" fileDirectory=".." coreId="1633836900" contextFuncName="global_mean_pooling" opcode="ret" nodeLabel="1.0" m_display="0" m_topoIndex="16" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="297" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_cosim" functionName="global_mean_pooling"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>297</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <ScheduleInfo time="8"/>
+  <ScheduleInfo time="9"/>
+  <ScheduleInfo time="10"/>
+  <ScheduleInfo time="11"/>
+  <ScheduleInfo time="12"/>
+  <ScheduleInfo time="13"/>
+  <ScheduleInfo time="14"/>
+  <ScheduleInfo time="15"/>
+  <ScheduleInfo time="16"/>
+  <ScheduleInfo time="17"/>
+  <ScheduleInfo time="18"/>
+  <ScheduleInfo time="19"/>
+  <ScheduleInfo time="20"/>
+  <ScheduleInfo time="21"/>
+  <ScheduleInfo time="22"/>
+  <ScheduleInfo time="23"/>
+  <ScheduleInfo time="24"/>
+  <ScheduleInfo time="25"/>
+  <ScheduleInfo time="26"/>
+  <ScheduleInfo time="27"/>
+  <ScheduleInfo time="28"/>
+  <ScheduleInfo time="29"/>
+  <ScheduleInfo time="30"/>
+  <ScheduleInfo time="31"/>
+  <ScheduleInfo time="32"/>
+  <ScheduleInfo time="33"/>
+  <ScheduleInfo time="34"/>
+  <ScheduleInfo time="35"/>
+  <ScheduleInfo time="36"/>
+  <ScheduleInfo time="37"/>
+  <ScheduleInfo time="38"/>
+  <ScheduleInfo time="39"/>
+  <ScheduleInfo time="40"/>
+  <ScheduleInfo time="41"/>
+  <ScheduleInfo time="42"/>
+  <ScheduleInfo time="43"/>
+  <ScheduleInfo time="44"/>
+  <ScheduleInfo time="45"/>
+  <ScheduleInfo time="46"/>
+  <ScheduleInfo time="47"/>
+  <ScheduleInfo time="48"/>
+  <ScheduleInfo time="49"/>
+  <ScheduleInfo time="50"/>
+  <ScheduleInfo time="51"/>
+  <ScheduleInfo time="52"/>
+  <regnodes realName="conv_i_reg_329">
+    <nodeIds>26</nodeIds>
+  </regnodes>
+  <regnodes realName="dim_1_reg_334">
+    <nodeIds>30</nodeIds>
+  </regnodes>
+  <regnodes realName="sum_V_loc_reg_323">
+    <nodeIds>21</nodeIds>
+  </regnodes>
+  <regnodes realName="t_reg_347">
+    <nodeIds>41</nodeIds>
+  </regnodes>
+  <regnodes realName="dim_reg_311">
+    <nodeIds>19</nodeIds>
+  </regnodes>
+  <regnodes realName="num_of_nodes_read_reg_318">
+    <nodeIds>20</nodeIds>
+  </regnodes>
+  <regnodes realName="trunc_ln712_reg_342">
+    <nodeIds>38</nodeIds>
+  </regnodes>
+  <expressionNodes realName="zext_ln290_fu_302">
+    <nodeIds>36</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="empty_fu_240">
+    <nodeIds>24</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="sum_V_loc_fu_174">
+    <nodeIds>21</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="conv_i_i_i_fu_244">
+    <nodeIds>25</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln712_1_fu_306">
+    <nodeIds>43</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln290_fu_270">
+    <nodeIds>33</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="h_graph_V_addr_gep_fu_184">
+    <nodeIds>44</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="conv_i_fu_252">
+    <nodeIds>26</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="dim_fu_170">
+    <nodeIds>19</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln290_fu_264">
+    <nodeIds>31</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="t_fu_289">
+    <nodeIds>41</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln712_fu_276">
+    <nodeIds>38</nodeIds>
+  </expressionNodes>
+  <moduleNodes realName="grp_global_mean_pooling_Pipeline_VITIS_LOOP_292_2_fu_201">
+    <nodeIds>39</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_fu_297">
+    <nodeIds>42</nodeIds>
+  </moduleNodes>
+  <ioNodes realName="store_ln290_store_fu_256">
+    <nodeIds>27</nodeIds>
+  </ioNodes>
+  <ioNodes realName="dim_1_load_fu_261">
+    <nodeIds>30</nodeIds>
+  </ioNodes>
+  <ioNodes realName="num_of_nodes_read_read_fu_178">
+    <nodeIds>20</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln290_store_fu_281">
+    <nodeIds>46</nodeIds>
+  </ioNodes>
+  <ioNodes realName="sum_V_loc_load_load_fu_286">
+    <nodeIds>40</nodeIds>
+  </ioNodes>
+  <memoryPorts dataString="h_graph_V" portID="1">
+    <nodeIds>45</nodeIds>
+  </memoryPorts>
+  <ioPorts name="h_graph_V(p1)">
+    <contents name="store">
+      <nodeIds>45</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="num_of_nodes">
+    <contents name="read">
+      <nodeIds>20</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="20" stage="1" latency="1"/>
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="24" stage="1" latency="1"/>
+      <operations id="25" stage="1" latency="1"/>
+      <operations id="26" stage="1" latency="1"/>
+      <operations id="27" stage="1" latency="1"/>
+      <operations id="28" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="30" stage="1" latency="1"/>
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="33" stage="1" latency="1"/>
+      <operations id="34" stage="1" latency="1"/>
+      <operations id="38" stage="1" latency="1"/>
+      <operations id="39" stage="2" latency="2"/>
+      <operations id="46" stage="1" latency="1"/>
+      <operations id="49" stage="1" latency="1"/>
+    </states>
+    <states id="3">
+      <operations id="39" stage="1" latency="2"/>
+    </states>
+    <states id="4">
+      <operations id="40" stage="1" latency="1"/>
+      <operations id="41" stage="1" latency="1"/>
+      <operations id="42" stage="50" latency="50"/>
+    </states>
+    <states id="5">
+      <operations id="42" stage="49" latency="50"/>
+    </states>
+    <states id="6">
+      <operations id="42" stage="48" latency="50"/>
+    </states>
+    <states id="7">
+      <operations id="42" stage="47" latency="50"/>
+    </states>
+    <states id="8">
+      <operations id="42" stage="46" latency="50"/>
+    </states>
+    <states id="9">
+      <operations id="42" stage="45" latency="50"/>
+    </states>
+    <states id="10">
+      <operations id="42" stage="44" latency="50"/>
+    </states>
+    <states id="11">
+      <operations id="42" stage="43" latency="50"/>
+    </states>
+    <states id="12">
+      <operations id="42" stage="42" latency="50"/>
+    </states>
+    <states id="13">
+      <operations id="42" stage="41" latency="50"/>
+    </states>
+    <states id="14">
+      <operations id="42" stage="40" latency="50"/>
+    </states>
+    <states id="15">
+      <operations id="42" stage="39" latency="50"/>
+    </states>
+    <states id="16">
+      <operations id="42" stage="38" latency="50"/>
+    </states>
+    <states id="17">
+      <operations id="42" stage="37" latency="50"/>
+    </states>
+    <states id="18">
+      <operations id="42" stage="36" latency="50"/>
+    </states>
+    <states id="19">
+      <operations id="42" stage="35" latency="50"/>
+    </states>
+    <states id="20">
+      <operations id="42" stage="34" latency="50"/>
+    </states>
+    <states id="21">
+      <operations id="42" stage="33" latency="50"/>
+    </states>
+    <states id="22">
+      <operations id="42" stage="32" latency="50"/>
+    </states>
+    <states id="23">
+      <operations id="42" stage="31" latency="50"/>
+    </states>
+    <states id="24">
+      <operations id="42" stage="30" latency="50"/>
+    </states>
+    <states id="25">
+      <operations id="42" stage="29" latency="50"/>
+    </states>
+    <states id="26">
+      <operations id="42" stage="28" latency="50"/>
+    </states>
+    <states id="27">
+      <operations id="42" stage="27" latency="50"/>
+    </states>
+    <states id="28">
+      <operations id="42" stage="26" latency="50"/>
+    </states>
+    <states id="29">
+      <operations id="42" stage="25" latency="50"/>
+    </states>
+    <states id="30">
+      <operations id="42" stage="24" latency="50"/>
+    </states>
+    <states id="31">
+      <operations id="42" stage="23" latency="50"/>
+    </states>
+    <states id="32">
+      <operations id="42" stage="22" latency="50"/>
+    </states>
+    <states id="33">
+      <operations id="42" stage="21" latency="50"/>
+    </states>
+    <states id="34">
+      <operations id="42" stage="20" latency="50"/>
+    </states>
+    <states id="35">
+      <operations id="42" stage="19" latency="50"/>
+    </states>
+    <states id="36">
+      <operations id="42" stage="18" latency="50"/>
+    </states>
+    <states id="37">
+      <operations id="42" stage="17" latency="50"/>
+    </states>
+    <states id="38">
+      <operations id="42" stage="16" latency="50"/>
+    </states>
+    <states id="39">
+      <operations id="42" stage="15" latency="50"/>
+    </states>
+    <states id="40">
+      <operations id="42" stage="14" latency="50"/>
+    </states>
+    <states id="41">
+      <operations id="42" stage="13" latency="50"/>
+    </states>
+    <states id="42">
+      <operations id="42" stage="12" latency="50"/>
+    </states>
+    <states id="43">
+      <operations id="42" stage="11" latency="50"/>
+    </states>
+    <states id="44">
+      <operations id="42" stage="10" latency="50"/>
+    </states>
+    <states id="45">
+      <operations id="42" stage="9" latency="50"/>
+    </states>
+    <states id="46">
+      <operations id="42" stage="8" latency="50"/>
+    </states>
+    <states id="47">
+      <operations id="42" stage="7" latency="50"/>
+    </states>
+    <states id="48">
+      <operations id="42" stage="6" latency="50"/>
+    </states>
+    <states id="49">
+      <operations id="42" stage="5" latency="50"/>
+    </states>
+    <states id="50">
+      <operations id="42" stage="4" latency="50"/>
+    </states>
+    <states id="51">
+      <operations id="42" stage="3" latency="50"/>
+    </states>
+    <states id="52">
+      <operations id="42" stage="2" latency="50"/>
+    </states>
+    <states id="53">
+      <operations id="36" stage="1" latency="1"/>
+      <operations id="37" stage="1" latency="1"/>
+      <operations id="42" stage="1" latency="50"/>
+      <operations id="43" stage="1" latency="1"/>
+      <operations id="44" stage="1" latency="1"/>
+      <operations id="45" stage="1" latency="1"/>
+      <operations id="47" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="10">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="10" outState="11">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="11" outState="12">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="12" outState="13">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="13" outState="14">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="14" outState="15">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="15" outState="16">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="16" outState="17">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="17" outState="18">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="18" outState="19">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="19" outState="20">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="20" outState="21">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="21" outState="22">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="22" outState="23">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="23" outState="24">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="24" outState="25">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="25" outState="26">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="26" outState="27">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="27" outState="28">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="28" outState="29">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="29" outState="30">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="30" outState="31">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="31" outState="32">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="32" outState="33">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="33" outState="34">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="34" outState="35">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="35" outState="36">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="36" outState="37">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="37" outState="38">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="38" outState="39">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="39" outState="40">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="40" outState="41">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="41" outState="42">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="42" outState="43">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="43" outState="44">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="44" outState="45">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="45" outState="46">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="46" outState="47">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="47" outState="48">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="48" outState="49">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="49" outState="50">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="50" outState="51">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="51" outState="52">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="52" outState="53">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="53" outState="2">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="global_mean_pooling" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="-1" mMaxLatency="-1">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>29</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="VITIS_LOOP_290_1" mII="-1" mDepth="-1" mMinTripCount="16" mMaxTripCount="16" mMinLatency="-1" mMaxLatency="-1" mType="1">
+      <basicBlocks>35</basicBlocks>
+      <basicBlocks>48</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>50</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

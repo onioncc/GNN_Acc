@@ -1,0 +1,302 @@
+
+
+================================================================
+== Vitis HLS Report for 'load_weights_first_layer'
+================================================================
+* Date:           Sat Dec 11 19:29:27 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.920 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+------+------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |   Interval  | Pipeline|
+    |   min   |   max   |    min    |    max    |  min |  max |   Type  |
+    +---------+---------+-----------+-----------+------+------+---------+
+    |     8399|     8399|  33.596 us|  33.596 us|  8399|  8399|       no|
+    +---------+---------+-----------+-----------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 22
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 8 
+8 --> 9 
+9 --> 10 
+10 --> 11 
+11 --> 12 
+12 --> 13 
+13 --> 14 
+14 --> 15 
+15 --> 16 
+16 --> 17 
+17 --> 18 
+18 --> 19 
+19 --> 20 
+20 --> 21 
+21 --> 22 
+22 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 2.92>
+ST_1 : Operation 23 [1/1] (0.00ns)   --->   "%gat_net_scoring_fn_target_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gat_net_scoring_fn_target_fixed" [GAT_compute.cpp:315]   --->   Operation 23 'read' 'gat_net_scoring_fn_target_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %gat_net_scoring_fn_target_fixed_read, i32 2, i32 63" [GAT_compute.cpp:315]   --->   Operation 24 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%sext_ln315 = sext i62 %trunc_ln" [GAT_compute.cpp:315]   --->   Operation 25 'sext' 'sext_ln315' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%mem_addr = getelementptr i32 %mem, i64 %sext_ln315" [GAT_compute.cpp:315]   --->   Operation 26 'getelementptr' 'mem_addr' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 27 [7/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 27 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 2 <SV = 1> <Delay = 2.92>
+ST_2 : Operation 28 [6/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 28 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 3 <SV = 2> <Delay = 2.92>
+ST_3 : Operation 29 [5/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 29 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 4 <SV = 3> <Delay = 2.92>
+ST_4 : Operation 30 [4/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 30 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 5 <SV = 4> <Delay = 2.92>
+ST_5 : Operation 31 [3/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 31 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 6 <SV = 5> <Delay = 2.92>
+ST_6 : Operation 32 [2/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 32 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 7 <SV = 6> <Delay = 2.92>
+ST_7 : Operation 33 [1/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 64" [GAT_compute.cpp:315]   --->   Operation 33 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 8 <SV = 7> <Delay = 0.00>
+ST_8 : Operation 34 [2/2] (0.00ns)   --->   "%call_ln315 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_315_1_VITIS_LOOP_316_2, i32 %mem, i62 %trunc_ln, i28 %scoring_fn_target_V_0, i28 %scoring_fn_target_V_1, i28 %scoring_fn_target_V_2, i28 %scoring_fn_target_V_3, i28 %scoring_fn_target_V_4, i28 %scoring_fn_target_V_5, i28 %scoring_fn_target_V_6, i28 %scoring_fn_target_V_7, i28 %scoring_fn_target_V_8, i28 %scoring_fn_target_V_9, i28 %scoring_fn_target_V_10, i28 %scoring_fn_target_V_11, i28 %scoring_fn_target_V_12, i28 %scoring_fn_target_V_13, i28 %scoring_fn_target_V_14, i28 %scoring_fn_target_V_15" [GAT_compute.cpp:315]   --->   Operation 34 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 0.00>
+ST_9 : Operation 35 [1/2] (0.00ns)   --->   "%call_ln315 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_315_1_VITIS_LOOP_316_2, i32 %mem, i62 %trunc_ln, i28 %scoring_fn_target_V_0, i28 %scoring_fn_target_V_1, i28 %scoring_fn_target_V_2, i28 %scoring_fn_target_V_3, i28 %scoring_fn_target_V_4, i28 %scoring_fn_target_V_5, i28 %scoring_fn_target_V_6, i28 %scoring_fn_target_V_7, i28 %scoring_fn_target_V_8, i28 %scoring_fn_target_V_9, i28 %scoring_fn_target_V_10, i28 %scoring_fn_target_V_11, i28 %scoring_fn_target_V_12, i28 %scoring_fn_target_V_13, i28 %scoring_fn_target_V_14, i28 %scoring_fn_target_V_15" [GAT_compute.cpp:315]   --->   Operation 35 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 10 <SV = 9> <Delay = 2.92>
+ST_10 : Operation 36 [1/1] (0.00ns)   --->   "%gat_net_scoring_fn_source_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gat_net_scoring_fn_source_fixed" [GAT_compute.cpp:315]   --->   Operation 36 'read' 'gat_net_scoring_fn_source_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 37 [1/1] (0.00ns)   --->   "%trunc_ln8 = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %gat_net_scoring_fn_source_fixed_read, i32 2, i32 63" [GAT_compute.cpp:321]   --->   Operation 37 'partselect' 'trunc_ln8' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 38 [1/1] (0.00ns)   --->   "%sext_ln321 = sext i62 %trunc_ln8" [GAT_compute.cpp:321]   --->   Operation 38 'sext' 'sext_ln321' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 39 [1/1] (0.00ns)   --->   "%mem_addr_4 = getelementptr i32 %mem, i64 %sext_ln321" [GAT_compute.cpp:321]   --->   Operation 39 'getelementptr' 'mem_addr_4' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 40 [7/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 40 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 11 <SV = 10> <Delay = 2.92>
+ST_11 : Operation 41 [6/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 41 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 12 <SV = 11> <Delay = 2.92>
+ST_12 : Operation 42 [5/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 42 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 13 <SV = 12> <Delay = 2.92>
+ST_13 : Operation 43 [4/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 43 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 14 <SV = 13> <Delay = 2.92>
+ST_14 : Operation 44 [3/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 44 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 15 <SV = 14> <Delay = 2.92>
+ST_15 : Operation 45 [2/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 45 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 16 <SV = 15> <Delay = 2.92>
+ST_16 : Operation 46 [1/7] (2.92ns)   --->   "%empty_91 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_4, i32 64" [GAT_compute.cpp:321]   --->   Operation 46 'readreq' 'empty_91' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 17 <SV = 16> <Delay = 0.00>
+ST_17 : Operation 47 [2/2] (0.00ns)   --->   "%call_ln321 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_321_3_VITIS_LOOP_322_4, i32 %mem, i62 %trunc_ln8, i28 %scoring_fn_source_V_0, i28 %scoring_fn_source_V_1, i28 %scoring_fn_source_V_2, i28 %scoring_fn_source_V_3, i28 %scoring_fn_source_V_4, i28 %scoring_fn_source_V_5, i28 %scoring_fn_source_V_6, i28 %scoring_fn_source_V_7, i28 %scoring_fn_source_V_8, i28 %scoring_fn_source_V_9, i28 %scoring_fn_source_V_10, i28 %scoring_fn_source_V_11, i28 %scoring_fn_source_V_12, i28 %scoring_fn_source_V_13, i28 %scoring_fn_source_V_14, i28 %scoring_fn_source_V_15" [GAT_compute.cpp:321]   --->   Operation 47 'call' 'call_ln321' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 18 <SV = 17> <Delay = 0.00>
+ST_18 : Operation 48 [1/2] (0.00ns)   --->   "%call_ln321 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_321_3_VITIS_LOOP_322_4, i32 %mem, i62 %trunc_ln8, i28 %scoring_fn_source_V_0, i28 %scoring_fn_source_V_1, i28 %scoring_fn_source_V_2, i28 %scoring_fn_source_V_3, i28 %scoring_fn_source_V_4, i28 %scoring_fn_source_V_5, i28 %scoring_fn_source_V_6, i28 %scoring_fn_source_V_7, i28 %scoring_fn_source_V_8, i28 %scoring_fn_source_V_9, i28 %scoring_fn_source_V_10, i28 %scoring_fn_source_V_11, i28 %scoring_fn_source_V_12, i28 %scoring_fn_source_V_13, i28 %scoring_fn_source_V_14, i28 %scoring_fn_source_V_15" [GAT_compute.cpp:321]   --->   Operation 48 'call' 'call_ln321' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 19 <SV = 18> <Delay = 0.00>
+ST_19 : Operation 49 [1/1] (0.00ns)   --->   "%gat_net_linear_proj_weight_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gat_net_linear_proj_weight_fixed" [GAT_compute.cpp:315]   --->   Operation 49 'read' 'gat_net_linear_proj_weight_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_19 : Operation 50 [2/2] (0.00ns)   --->   "%call_ln315 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_327_5_VITIS_LOOP_328_6, i64 %gat_net_linear_proj_weight_fixed_read, i32 %mem, i28 %linear_proj_weight_V_0, i28 %linear_proj_weight_V_1, i28 %linear_proj_weight_V_2, i28 %linear_proj_weight_V_3, i28 %linear_proj_weight_V_4, i28 %linear_proj_weight_V_5, i28 %linear_proj_weight_V_6, i28 %linear_proj_weight_V_7, i28 %linear_proj_weight_V_8, i28 %linear_proj_weight_V_9, i28 %linear_proj_weight_V_10, i28 %linear_proj_weight_V_11, i28 %linear_proj_weight_V_12, i28 %linear_proj_weight_V_13, i28 %linear_proj_weight_V_14, i28 %linear_proj_weight_V_15, i28 %linear_proj_weight_V_16, i28 %linear_proj_weight_V_17, i28 %linear_proj_weight_V_18, i28 %linear_proj_weight_V_19, i28 %linear_proj_weight_V_20, i28 %linear_proj_weight_V_21, i28 %linear_proj_weight_V_22, i28 %linear_proj_weight_V_23, i28 %linear_proj_weight_V_24, i28 %linear_proj_weight_V_25, i28 %linear_proj_weight_V_26, i28 %linear_proj_weight_V_27, i28 %linear_proj_weight_V_28, i28 %linear_proj_weight_V_29, i28 %linear_proj_weight_V_30, i28 %linear_proj_weight_V_31, i28 %linear_proj_weight_V_32, i28 %linear_proj_weight_V_33, i28 %linear_proj_weight_V_34, i28 %linear_proj_weight_V_35, i28 %linear_proj_weight_V_36, i28 %linear_proj_weight_V_37, i28 %linear_proj_weight_V_38, i28 %linear_proj_weight_V_39, i28 %linear_proj_weight_V_40, i28 %linear_proj_weight_V_41, i28 %linear_proj_weight_V_42, i28 %linear_proj_weight_V_43, i28 %linear_proj_weight_V_44, i28 %linear_proj_weight_V_45, i28 %linear_proj_weight_V_46, i28 %linear_proj_weight_V_47, i28 %linear_proj_weight_V_48, i28 %linear_proj_weight_V_49, i28 %linear_proj_weight_V_50, i28 %linear_proj_weight_V_51, i28 %linear_proj_weight_V_52, i28 %linear_proj_weight_V_53, i28 %linear_proj_weight_V_54, i28 %linear_proj_weight_V_55, i28 %linear_proj_weight_V_56, i28 %linear_proj_weight_V_57, i28 %linear_proj_weight_V_58, i28 %linear_proj_weight_V_59, i28 %linear_proj_weight_V_60, i28 %linear_proj_weight_V_61, i28 %linear_proj_weight_V_62, i28 %linear_proj_weight_V_63" [GAT_compute.cpp:315]   --->   Operation 50 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 20 <SV = 19> <Delay = 0.00>
+ST_20 : Operation 51 [1/2] (0.00ns)   --->   "%call_ln315 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_327_5_VITIS_LOOP_328_6, i64 %gat_net_linear_proj_weight_fixed_read, i32 %mem, i28 %linear_proj_weight_V_0, i28 %linear_proj_weight_V_1, i28 %linear_proj_weight_V_2, i28 %linear_proj_weight_V_3, i28 %linear_proj_weight_V_4, i28 %linear_proj_weight_V_5, i28 %linear_proj_weight_V_6, i28 %linear_proj_weight_V_7, i28 %linear_proj_weight_V_8, i28 %linear_proj_weight_V_9, i28 %linear_proj_weight_V_10, i28 %linear_proj_weight_V_11, i28 %linear_proj_weight_V_12, i28 %linear_proj_weight_V_13, i28 %linear_proj_weight_V_14, i28 %linear_proj_weight_V_15, i28 %linear_proj_weight_V_16, i28 %linear_proj_weight_V_17, i28 %linear_proj_weight_V_18, i28 %linear_proj_weight_V_19, i28 %linear_proj_weight_V_20, i28 %linear_proj_weight_V_21, i28 %linear_proj_weight_V_22, i28 %linear_proj_weight_V_23, i28 %linear_proj_weight_V_24, i28 %linear_proj_weight_V_25, i28 %linear_proj_weight_V_26, i28 %linear_proj_weight_V_27, i28 %linear_proj_weight_V_28, i28 %linear_proj_weight_V_29, i28 %linear_proj_weight_V_30, i28 %linear_proj_weight_V_31, i28 %linear_proj_weight_V_32, i28 %linear_proj_weight_V_33, i28 %linear_proj_weight_V_34, i28 %linear_proj_weight_V_35, i28 %linear_proj_weight_V_36, i28 %linear_proj_weight_V_37, i28 %linear_proj_weight_V_38, i28 %linear_proj_weight_V_39, i28 %linear_proj_weight_V_40, i28 %linear_proj_weight_V_41, i28 %linear_proj_weight_V_42, i28 %linear_proj_weight_V_43, i28 %linear_proj_weight_V_44, i28 %linear_proj_weight_V_45, i28 %linear_proj_weight_V_46, i28 %linear_proj_weight_V_47, i28 %linear_proj_weight_V_48, i28 %linear_proj_weight_V_49, i28 %linear_proj_weight_V_50, i28 %linear_proj_weight_V_51, i28 %linear_proj_weight_V_52, i28 %linear_proj_weight_V_53, i28 %linear_proj_weight_V_54, i28 %linear_proj_weight_V_55, i28 %linear_proj_weight_V_56, i28 %linear_proj_weight_V_57, i28 %linear_proj_weight_V_58, i28 %linear_proj_weight_V_59, i28 %linear_proj_weight_V_60, i28 %linear_proj_weight_V_61, i28 %linear_proj_weight_V_62, i28 %linear_proj_weight_V_63" [GAT_compute.cpp:315]   --->   Operation 51 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 21 <SV = 20> <Delay = 0.00>
+ST_21 : Operation 52 [1/1] (0.00ns)   --->   "%gat_net_skip_proj_weight_fixed_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %gat_net_skip_proj_weight_fixed" [GAT_compute.cpp:315]   --->   Operation 52 'read' 'gat_net_skip_proj_weight_fixed_read' <Predicate = true> <Delay = 0.00>
+ST_21 : Operation 53 [2/2] (0.00ns)   --->   "%call_ln315 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_337_7_VITIS_LOOP_338_8, i64 %gat_net_skip_proj_weight_fixed_read, i32 %mem, i28 %skip_proj_weight_V_0, i28 %skip_proj_weight_V_1, i28 %skip_proj_weight_V_2, i28 %skip_proj_weight_V_3, i28 %skip_proj_weight_V_4, i28 %skip_proj_weight_V_5, i28 %skip_proj_weight_V_6, i28 %skip_proj_weight_V_7, i28 %skip_proj_weight_V_8, i28 %skip_proj_weight_V_9, i28 %skip_proj_weight_V_10, i28 %skip_proj_weight_V_11, i28 %skip_proj_weight_V_12, i28 %skip_proj_weight_V_13, i28 %skip_proj_weight_V_14, i28 %skip_proj_weight_V_15, i28 %skip_proj_weight_V_16, i28 %skip_proj_weight_V_17, i28 %skip_proj_weight_V_18, i28 %skip_proj_weight_V_19, i28 %skip_proj_weight_V_20, i28 %skip_proj_weight_V_21, i28 %skip_proj_weight_V_22, i28 %skip_proj_weight_V_23, i28 %skip_proj_weight_V_24, i28 %skip_proj_weight_V_25, i28 %skip_proj_weight_V_26, i28 %skip_proj_weight_V_27, i28 %skip_proj_weight_V_28, i28 %skip_proj_weight_V_29, i28 %skip_proj_weight_V_30, i28 %skip_proj_weight_V_31, i28 %skip_proj_weight_V_32, i28 %skip_proj_weight_V_33, i28 %skip_proj_weight_V_34, i28 %skip_proj_weight_V_35, i28 %skip_proj_weight_V_36, i28 %skip_proj_weight_V_37, i28 %skip_proj_weight_V_38, i28 %skip_proj_weight_V_39, i28 %skip_proj_weight_V_40, i28 %skip_proj_weight_V_41, i28 %skip_proj_weight_V_42, i28 %skip_proj_weight_V_43, i28 %skip_proj_weight_V_44, i28 %skip_proj_weight_V_45, i28 %skip_proj_weight_V_46, i28 %skip_proj_weight_V_47, i28 %skip_proj_weight_V_48, i28 %skip_proj_weight_V_49, i28 %skip_proj_weight_V_50, i28 %skip_proj_weight_V_51, i28 %skip_proj_weight_V_52, i28 %skip_proj_weight_V_53, i28 %skip_proj_weight_V_54, i28 %skip_proj_weight_V_55, i28 %skip_proj_weight_V_56, i28 %skip_proj_weight_V_57, i28 %skip_proj_weight_V_58, i28 %skip_proj_weight_V_59, i28 %skip_proj_weight_V_60, i28 %skip_proj_weight_V_61, i28 %skip_proj_weight_V_62, i28 %skip_proj_weight_V_63" [GAT_compute.cpp:315]   --->   Operation 53 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 22 <SV = 21> <Delay = 0.00>
+ST_22 : Operation 54 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mem, void @empty_1, i32 0, i32 0, void @empty_8, i32 0, i32 100000, void @empty, void @empty_0, void @empty_8, i32 16, i32 16, i32 16, i32 16, void @empty_8, void @empty_8"   --->   Operation 54 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_22 : Operation 55 [1/2] (0.00ns)   --->   "%call_ln315 = call void @load_weights_first_layer_Pipeline_VITIS_LOOP_337_7_VITIS_LOOP_338_8, i64 %gat_net_skip_proj_weight_fixed_read, i32 %mem, i28 %skip_proj_weight_V_0, i28 %skip_proj_weight_V_1, i28 %skip_proj_weight_V_2, i28 %skip_proj_weight_V_3, i28 %skip_proj_weight_V_4, i28 %skip_proj_weight_V_5, i28 %skip_proj_weight_V_6, i28 %skip_proj_weight_V_7, i28 %skip_proj_weight_V_8, i28 %skip_proj_weight_V_9, i28 %skip_proj_weight_V_10, i28 %skip_proj_weight_V_11, i28 %skip_proj_weight_V_12, i28 %skip_proj_weight_V_13, i28 %skip_proj_weight_V_14, i28 %skip_proj_weight_V_15, i28 %skip_proj_weight_V_16, i28 %skip_proj_weight_V_17, i28 %skip_proj_weight_V_18, i28 %skip_proj_weight_V_19, i28 %skip_proj_weight_V_20, i28 %skip_proj_weight_V_21, i28 %skip_proj_weight_V_22, i28 %skip_proj_weight_V_23, i28 %skip_proj_weight_V_24, i28 %skip_proj_weight_V_25, i28 %skip_proj_weight_V_26, i28 %skip_proj_weight_V_27, i28 %skip_proj_weight_V_28, i28 %skip_proj_weight_V_29, i28 %skip_proj_weight_V_30, i28 %skip_proj_weight_V_31, i28 %skip_proj_weight_V_32, i28 %skip_proj_weight_V_33, i28 %skip_proj_weight_V_34, i28 %skip_proj_weight_V_35, i28 %skip_proj_weight_V_36, i28 %skip_proj_weight_V_37, i28 %skip_proj_weight_V_38, i28 %skip_proj_weight_V_39, i28 %skip_proj_weight_V_40, i28 %skip_proj_weight_V_41, i28 %skip_proj_weight_V_42, i28 %skip_proj_weight_V_43, i28 %skip_proj_weight_V_44, i28 %skip_proj_weight_V_45, i28 %skip_proj_weight_V_46, i28 %skip_proj_weight_V_47, i28 %skip_proj_weight_V_48, i28 %skip_proj_weight_V_49, i28 %skip_proj_weight_V_50, i28 %skip_proj_weight_V_51, i28 %skip_proj_weight_V_52, i28 %skip_proj_weight_V_53, i28 %skip_proj_weight_V_54, i28 %skip_proj_weight_V_55, i28 %skip_proj_weight_V_56, i28 %skip_proj_weight_V_57, i28 %skip_proj_weight_V_58, i28 %skip_proj_weight_V_59, i28 %skip_proj_weight_V_60, i28 %skip_proj_weight_V_61, i28 %skip_proj_weight_V_62, i28 %skip_proj_weight_V_63" [GAT_compute.cpp:315]   --->   Operation 55 'call' 'call_ln315' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_22 : Operation 56 [1/1] (0.00ns)   --->   "%ret_ln347 = ret" [GAT_compute.cpp:347]   --->   Operation 56 'ret' 'ret_ln347' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 4ns, clock uncertainty: 1.08ns.
+
+ <State 1>: 2.92ns
+The critical path consists of the following:
+	wire read operation ('gat_net_scoring_fn_target_fixed_read', GAT_compute.cpp:315) on port 'gat_net_scoring_fn_target_fixed' (GAT_compute.cpp:315) [170]  (0 ns)
+	'getelementptr' operation ('mem_addr', GAT_compute.cpp:315) [173]  (0 ns)
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 2>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 3>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 4>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 5>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 6>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 7>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cpp:315) on port 'mem' (GAT_compute.cpp:315) [174]  (2.92 ns)
+
+ <State 8>: 0ns
+The critical path consists of the following:
+
+ <State 9>: 0ns
+The critical path consists of the following:
+
+ <State 10>: 2.92ns
+The critical path consists of the following:
+	wire read operation ('gat_net_scoring_fn_source_fixed_read', GAT_compute.cpp:315) on port 'gat_net_scoring_fn_source_fixed' (GAT_compute.cpp:315) [169]  (0 ns)
+	'getelementptr' operation ('mem_addr_4', GAT_compute.cpp:321) [178]  (0 ns)
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 11>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 12>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 13>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 14>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 15>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 16>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_91', GAT_compute.cpp:321) on port 'mem' (GAT_compute.cpp:321) [179]  (2.92 ns)
+
+ <State 17>: 0ns
+The critical path consists of the following:
+
+ <State 18>: 0ns
+The critical path consists of the following:
+
+ <State 19>: 0ns
+The critical path consists of the following:
+
+ <State 20>: 0ns
+The critical path consists of the following:
+
+ <State 21>: 0ns
+The critical path consists of the following:
+
+ <State 22>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1640045080233">
+  <ports id="2" name="edge_list" type="PortType" coreName="RAM_2P_BRAM" coreId="793988168" bitwidth="32" iftype="IfTypeRegister" arraysize="1000">
+    <dataOutputObjs>call</dataOutputObjs>
+  </ports>
+  <ports id="3" name="connectivity_mask_final" type="PortType" coreName="RAM_2P_BRAM" coreId="1769236822" bitwidth="32" direction="DirOut" iftype="IfTypeRegister" arraysize="10000">
+    <dataInputObjs>call</dataInputObjs>
+  </ports>
+  <edges id="21" sink_obj="//@blocks.0/@node_objs.0"/>
+  <edges id="22" source_obj="//@ports.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="23" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="24" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="25" source_obj="//@blocks.0/@node_objs.3" sink_obj="//@ports.1"/>
+  <edges id="26" sink_obj="//@blocks.0/@node_objs.3"/>
+  <edges id="46" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.0/@node_objs.3"/>
+  <edges id="47" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="48" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="49" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="50" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="51" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.2" sink_obj="//@blocks.0/@node_objs.3"/>
+  <blocks id="12" name="compute_connectivity_mask" type="BlockType">
+    <node_objs xsi:type="cdfg:CdfgNode" id="7" name="_ln0" rtlName="grp_compute_connectivity_mask_Pipeline_1_fu_22" coreId="1013281633" opcode="call" nodeLatency="1" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <constName>compute_connectivity_mask_Pipeline_1</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="8" name="_ln0" rtlName="grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1_fu_28" coreId="1633836900" opcode="call" nodeLabel="2.0" nodeLatency="1" m_display="0" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <dataInputObjs>edge_list</dataInputObjs>
+      <constName>compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="9" name="_ln0" rtlName="grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2_fu_36" coreId="1633836900" opcode="call" nodeLabel="4.0" nodeLatency="1" m_display="0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <constName>compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="10" name="_ln0" rtlName="grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_432_3_VITIS_LOOP_433_4_fu_42" coreId="539767072" opcode="call" nodeLabel="6.0" nodeLatency="1" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+      <dataOutputObjs>connectivity_mask_final</dataOutputObjs>
+      <constName>compute_connectivity_mask_Pipeline_VITIS_LOOP_432_3_VITIS_LOOP_433_4</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="11" name="_ln442" lineNumber="442" fileName="GAT_compute.cpp" fileDirectory=".." coreId="741880380" contextFuncName="compute_connectivity_mask" opcode="ret" nodeLabel="7.0" m_display="0" m_topoIndex="5" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="GAT_compute.cpp" linenumber="442" fileDirectory="C:\Users\david\Desktop\GNN_Acc\GAT\HLS_test_v2_test" functionName="compute_connectivity_mask"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="GAT_compute.cpp">
+      <validLinenumbers>442</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <moduleNodes realName="grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_423_1_fu_28">
+    <nodeIds>8</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_compute_connectivity_mask_Pipeline_1_fu_22">
+    <nodeIds>7</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_432_3_VITIS_LOOP_433_4_fu_42">
+    <nodeIds>10</nodeIds>
+  </moduleNodes>
+  <moduleNodes realName="grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2_fu_36">
+    <nodeIds>9</nodeIds>
+  </moduleNodes>
+  <memoryPorts dataString="connectivity_mask" portID="100">
+    <nodeIds>7</nodeIds>
+    <nodeIds>8</nodeIds>
+    <nodeIds>9</nodeIds>
+    <nodeIds>10</nodeIds>
+  </memoryPorts>
+  <fsm>
+    <states id="1">
+      <operations id="7" stage="2" latency="2"/>
+    </states>
+    <states id="2">
+      <operations id="7" stage="1" latency="2"/>
+    </states>
+    <states id="3">
+      <operations id="8" stage="2" latency="2"/>
+    </states>
+    <states id="4">
+      <operations id="8" stage="1" latency="2"/>
+    </states>
+    <states id="5">
+      <operations id="9" stage="2" latency="2"/>
+    </states>
+    <states id="6">
+      <operations id="9" stage="1" latency="2"/>
+    </states>
+    <states id="7">
+      <operations id="10" stage="2" latency="2"/>
+    </states>
+    <states id="8">
+      <operations id="4" stage="1" latency="1"/>
+      <operations id="5" stage="1" latency="1"/>
+      <operations id="6" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="2"/>
+      <operations id="11" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="compute_connectivity_mask" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="884" mMaxLatency="884">
+      <basicBlocks>12</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

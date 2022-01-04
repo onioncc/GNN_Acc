@@ -1,0 +1,213 @@
+
+
+================================================================
+== Synthesis Summary Report of 'GAT_compute_one_graph'
+================================================================
++ General Information: 
+    * Date:           Thu Nov  4 14:54:21 2021
+    * Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+    * Project:        project_1
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: zynquplus
+    * Target device:  xczu3eg-sbva484-1-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +---------------------------------------------------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+------------+------------+---------------+---------------+-----+
+    |                                                 Modules                                                 |  Issue |       | Latency |  Latency  | Iteration|         | Trip |          |            |            |               |               |     |
+    |                                                 & Loops                                                 |  Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|    BRAM    |     DSP    |       FF      |      LUT      | URAM|
+    +---------------------------------------------------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+------------+------------+---------------+---------------+-----+
+    |+ GAT_compute_one_graph                                                                                  |  Timing|  -0.00|    79241|  3.170e+05|         -|    79242|     -|        no|  663 (153%)|  667 (185%)|  158154 (112%)|  114358 (162%)|    -|
+    | + grp_load_weights_first_layer_fu_1834                                                                  |  Timing|  -0.00|     8399|  3.360e+04|         -|     8399|     -|        no|           -|           -|      3602 (2%)|      2390 (3%)|    -|
+    |  + grp_load_weights_first_layer_Pipeline_VITIS_LOOP_263_1_VITIS_LOOP_264_2_fu_404                       |  Timing|  -0.00|       67|    268.000|         -|       67|     -|        no|           -|           -|       49 (~0%)|      134 (~0%)|    -|
+    |   o VITIS_LOOP_263_1_VITIS_LOOP_264_2                                                                   |       -|   2.92|       65|    260.000|         3|        1|    64|       yes|           -|           -|              -|              -|    -|
+    |  + grp_load_weights_first_layer_Pipeline_VITIS_LOOP_269_3_VITIS_LOOP_270_4_fu_443                       |  Timing|  -0.00|       67|    268.000|         -|       67|     -|        no|           -|           -|       49 (~0%)|      134 (~0%)|    -|
+    |   o VITIS_LOOP_269_3_VITIS_LOOP_270_4                                                                   |       -|   2.92|       65|    260.000|         3|        1|    64|       yes|           -|           -|              -|              -|    -|
+    |  + grp_load_weights_first_layer_Pipeline_VITIS_LOOP_275_5_VITIS_LOOP_276_6_fu_482                       |  Timing|  -0.00|     4122|  1.649e+04|         -|     4122|     -|        no|           -|           -|      1677 (1%)|       819 (1%)|    -|
+    |   o VITIS_LOOP_275_5_VITIS_LOOP_276_6                                                                   |       -|   2.92|     4120|  1.648e+04|        26|        1|  4096|       yes|           -|           -|              -|              -|    -|
+    |  + grp_load_weights_first_layer_Pipeline_VITIS_LOOP_285_7_VITIS_LOOP_286_8_fu_618                       |  Timing|  -0.00|     4122|  1.649e+04|         -|     4122|     -|        no|           -|           -|      1677 (1%)|       819 (1%)|    -|
+    |   o VITIS_LOOP_285_7_VITIS_LOOP_286_8                                                                   |       -|   2.92|     4120|  1.648e+04|        26|        1|  4096|       yes|           -|           -|              -|              -|    -|
+    | + grp_load_weights_one_layer_fu_2164                                                                    |  Timing|  -0.00|     8760|  3.504e+04|         -|     8760|     -|        no|           -|           -|      714 (~0%)|      1215 (1%)|    -|
+    |  + grp_load_weights_one_layer_Pipeline_VITIS_LOOP_313_5_VITIS_LOOP_314_6_fu_930                         |  Timing|  -0.00|     4099|  1.640e+04|         -|     4099|     -|        no|           -|           -|       76 (~0%)|      170 (~0%)|    -|
+    |   o VITIS_LOOP_313_5_VITIS_LOOP_314_6                                                                   |       -|   2.92|     4097|  1.639e+04|         3|        1|  4096|       yes|           -|           -|              -|              -|    -|
+    |  + grp_load_weights_one_layer_Pipeline_VITIS_LOOP_319_7_VITIS_LOOP_320_8_fu_1066                        |  Timing|  -0.00|     4099|  1.640e+04|         -|     4099|     -|        no|           -|           -|       76 (~0%)|      170 (~0%)|    -|
+    |   o VITIS_LOOP_319_7_VITIS_LOOP_320_8                                                                   |       -|   2.92|     4097|  1.639e+04|         3|        1|  4096|       yes|           -|           -|              -|              -|    -|
+    |  o VITIS_LOOP_301_1                                                                                     |       -|   2.92|      264|  1.056e+03|        66|        -|     4|        no|           -|           -|              -|              -|    -|
+    |   o VITIS_LOOP_302_2                                                                                    |       -|   2.92|       64|    256.000|         4|        -|    16|        no|           -|           -|              -|              -|    -|
+    |  o VITIS_LOOP_307_3                                                                                     |       -|   2.92|      264|  1.056e+03|        66|        -|     4|        no|           -|           -|              -|              -|    -|
+    |   o VITIS_LOOP_308_4                                                                                    |       -|   2.92|       64|    256.000|         4|        -|    16|        no|           -|           -|              -|              -|    -|
+    | + grp_load_misc_weights_fu_2495                                                                         |  Timing|  -0.00|       28|    112.000|         -|       28|     -|        no|           -|           -|      122 (~0%)|      299 (~0%)|    -|
+    |  + grp_load_misc_weights_Pipeline_VITIS_LOOP_335_2_fu_75                                                |  Timing|  -0.00|       19|     76.000|         -|       19|     -|        no|           -|           -|       49 (~0%)|       73 (~0%)|    -|
+    |   o VITIS_LOOP_335_2                                                                                    |       -|   2.92|       17|     68.000|         3|        1|    16|       yes|           -|           -|              -|              -|    -|
+    | + grp_load_graph_fu_2507                                                                                |  Timing|  -0.00|      274|  1.096e+03|         -|      274|     -|        no|           -|           -|      236 (~0%)|      526 (~0%)|    -|
+    |  + grp_load_graph_Pipeline_VITIS_LOOP_345_1_VITIS_LOOP_346_2_fu_204                                     |  Timing|  -0.00|      174|    696.000|         -|      174|     -|        no|           -|           -|       33 (~0%)|      137 (~0%)|    -|
+    |   o VITIS_LOOP_345_1_VITIS_LOOP_346_2                                                                   |       -|   2.92|      172|    688.000|         3|        1|   171|       yes|           -|           -|              -|              -|    -|
+    |  + grp_load_graph_Pipeline_VITIS_LOOP_351_3_fu_229                                                      |  Timing|  -0.00|       83|    332.000|         -|       83|     -|        no|           -|           -|       59 (~0%)|       75 (~0%)|    -|
+    |   o VITIS_LOOP_351_3                                                                                    |       -|   2.92|       81|    324.000|         3|        1|    80|       yes|           -|           -|              -|              -|    -|
+    | + grp_compute_connectivity_mask_fu_2535                                                                 |       -|   0.20|      884|  3.536e+03|         -|      884|     -|        no|     19 (4%)|     2 (~0%)|      440 (~0%)|      1408 (1%)|    -|
+    |  + grp_compute_connectivity_mask_Pipeline_1_fu_220                                                      |       -|   0.71|      363|  1.452e+03|         -|      363|     -|        no|           -|           -|       11 (~0%)|       54 (~0%)|    -|
+    |   o Loop 1                                                                                              |       -|   2.92|      361|  1.444e+03|         1|        1|   361|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_371_1_fu_226                                       |       -|   0.36|      125|    500.000|         -|      125|     -|        no|           -|     1 (~0%)|      172 (~0%)|      233 (~0%)|    -|
+    |   o VITIS_LOOP_371_1                                                                                    |       -|   2.92|      123|    492.000|         7|        3|    40|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_376_2_fu_234                                       |       -|   0.36|       22|     88.000|         -|       22|     -|        no|           -|           -|       75 (~0%)|      134 (~0%)|    -|
+    |   o VITIS_LOOP_376_2                                                                                    |       -|   2.92|       20|     80.000|         3|        1|    19|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_connectivity_mask_Pipeline_VITIS_LOOP_380_3_VITIS_LOOP_381_4_fu_240                      |       -|   0.20|      367|  1.468e+03|         -|      367|     -|        no|           -|     1 (~0%)|      170 (~0%)|       818 (1%)|    -|
+    |   o VITIS_LOOP_380_3_VITIS_LOOP_381_4                                                                   |       -|   2.92|      365|  1.460e+03|         6|        1|   361|       yes|           -|           -|              -|              -|    -|
+    | + grp_CONV_fu_2581                                                                                      |  Timing|  -0.00|     6904|  2.762e+04|         -|     6904|     -|        no|  458 (106%)|  654 (181%)|   139562 (98%)|   84954 (120%)|    -|
+    |  + grp_compute_nodes_features_proj_fu_1030                                                              |       -|   0.21|     1254|  5.016e+03|         -|     1254|     -|        no|           -|           -|      7699 (5%)|      3594 (5%)|    -|
+    |   o VITIS_LOOP_35_1_VITIS_LOOP_36_2                                                                     |       -|   2.92|     1252|  5.008e+03|        38|        1|  1216|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_scores_source_fu_1420                                                                    |       -|   0.10|       89|    356.000|         -|       89|     -|        no|           -|     1 (~0%)|      4095 (2%)|      1554 (2%)|    -|
+    |   o VITIS_LOOP_54_1_VITIS_LOOP_55_2                                                                     |       -|   2.92|       87|    348.000|        13|        1|    76|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_scores_target_fu_1587                                                                    |       -|   0.10|       89|    356.000|         -|       89|     -|        no|           -|           -|      4094 (2%)|      1556 (2%)|    -|
+    |   o VITIS_LOOP_71_1_VITIS_LOOP_72_2                                                                     |       -|   2.92|       87|    348.000|        13|        1|    76|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_all_scores_fu_1790                                                                       |       -|   0.20|       86|    344.000|         -|       86|     -|        no|           -|     20 (5%)|      4231 (2%)|      5084 (7%)|    -|
+    |   o VITIS_LOOP_88_1_VITIS_LOOP_89_2                                                                     |       -|   2.92|       84|    336.000|        10|        1|    76|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_attention_coefficients_sum_fu_1872                                                       |  Timing|  -0.00|      112|    448.000|         -|      112|     -|        no|           -|     1 (~0%)|     14016 (9%)|      2631 (3%)|    -|
+    |   + grp_exp_28_10_s_fu_1290                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1306                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1321                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1336                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1351                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1366                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1381                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1396                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1411                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1426                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1441                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1456                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1471                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1486                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1501                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1516                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1531                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1546                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   + grp_exp_28_10_s_fu_1561                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   o VITIS_LOOP_104_1_VITIS_LOOP_105_2                                                                   |       -|   2.92|      110|    440.000|        36|        1|    76|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_all_attention_coefficients_fu_1964                                                       |       -|   0.18|     1519|  6.076e+03|         -|     1519|     -|        no|           -|     1 (~0%)|      5478 (3%)|      4512 (6%)|    -|
+    |   + grp_exp_28_10_s_fu_1176                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   o VITIS_LOOP_124_1_VITIS_LOOP_125_2_VITIS_LOOP_126_3                                                  |       -|   2.92|     1517|  6.068e+03|        75|        1|  1444|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_out_nodes_features_fu_2056                                                               |       -|   0.24|     1245|  4.980e+03|         -|     1245|     -|        no|           -|    59 (16%)|    40795 (28%)|    15322 (21%)|    -|
+    |   + grp_compute_out_nodes_features_Pipeline_VITIS_LOOP_144_1_VITIS_LOOP_145_2_VITIS_LOOP_146_3_fu_4690  |       -|   0.24|     1234|  4.936e+03|         -|     1234|     -|        no|           -|    59 (16%)|      6734 (4%)|     8025 (11%)|    -|
+    |    o VITIS_LOOP_144_1_VITIS_LOOP_145_2_VITIS_LOOP_146_3                                                 |       -|   2.92|     1232|  4.928e+03|        18|        1|  1216|       yes|           -|           -|              -|              -|    -|
+    |  + grp_prepare_out_nodes_features_fu_2354                                                               |       -|   0.21|     1255|  5.020e+03|         -|     1255|     -|        no|           -|           -|      7775 (5%)|      3920 (5%)|    -|
+    |   o VITIS_LOOP_167_1_VITIS_LOOP_168_2                                                                   |       -|   2.92|     1253|  5.012e+03|        39|        1|  1216|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_activation_fu_2871                                                                       |       -|   0.01|     1238|  4.952e+03|         -|     1238|     -|        no|           -|           -|      363 (~0%)|      2526 (3%)|    -|
+    |   + grp_exp_28_10_s_fu_2890                                                                             |      II|   0.18|       18|     72.000|         -|        1|     -|       yes|      5 (1%)|     20 (5%)|      2153 (1%)|      1099 (1%)|    -|
+    |   o VITIS_LOOP_199_1_VITIS_LOOP_200_2                                                                   |       -|   2.92|     1236|  4.944e+03|        22|        1|  1216|       yes|           -|           -|              -|              -|    -|
+    |  + grp_compute_not_concat_fu_3141                                                                       |       -|   0.02|      309|  1.236e+03|         -|      309|     -|        no|           -|           -|      479 (~0%)|      1345 (1%)|    -|
+    |   o VITIS_LOOP_183_1_VITIS_LOOP_184_2                                                                   |       -|   2.92|      307|  1.228e+03|         5|        1|   304|       yes|           -|           -|              -|              -|    -|
+    | + grp_global_mean_pooling_fu_3589                                                                       |       -|   0.04|       37|    148.000|         -|       37|     -|        no|           -|      8 (2%)|      9375 (6%)|     7762 (11%)|    -|
+    |  + grp_global_mean_pooling_Pipeline_VITIS_LOOP_234_1_fu_1196                                            |       -|   0.04|       25|    100.000|         -|       25|     -|        no|           -|      8 (2%)|      849 (~0%)|      5889 (8%)|    -|
+    |   o VITIS_LOOP_234_1                                                                                    |       -|   2.92|       23|     92.000|         9|        1|    16|       yes|           -|           -|              -|              -|    -|
+    | + grp_global_graph_prediction_fu_3627                                                                   |  Timing|  -0.00|       28|    112.000|         -|       28|     -|        no|           -|     3 (~0%)|      364 (~0%)|      237 (~0%)|    -|
+    |  o VITIS_LOOP_249_2                                                                                     |       -|   2.92|       20|     80.000|         6|        1|    16|       yes|           -|           -|              -|              -|    -|
+    | o VITIS_LOOP_444_1                                                                                      |       -|   2.92|    35048|  1.402e+05|      8762|        -|     4|        no|           -|           -|              -|              -|    -|
+    +---------------------------------------------------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+------------+------------+---------------+---------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* M_AXI
++-----------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+
+| Interface | Data Width | Address Width | Latency | Offset | Register | Max Widen | Max Read     | Max Write    | Num Read    | Num Write   |
+|           | (SW->HW)   |               |         |        |          | Bitwidth  | Burst Length | Burst Length | Outstanding | Outstanding |
++-----------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+
+| m_axi_mem | 32 -> 32   | 64            | 0       | slave  | 0        | 0         | 16           | 16           | 16          | 16          |
++-----------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+
+
+* S_AXILITE
++---------------+------------+---------------+--------+----------+
+| Interface     | Data Width | Address Width | Offset | Register |
++---------------+------------+---------------+--------+----------+
+| s_axi_control | 32         | 8             | 16     | 0        |
++---------------+------------+---------------+--------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------------------------------+-----------+---------------------------------------+
+| Argument                         | Direction | Datatype                              |
++----------------------------------+-----------+---------------------------------------+
+| node_feature_in                  | inout     | int*                                  |
+| edge_list_in                     | inout     | int*                                  |
+| graph_attr                       | inout     | int*                                  |
+| task_tb                          | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
+| graph_pred_linear_weight_fixed   | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
+| graph_pred_linear_bias_fixed     | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
+| gat_net_scoring_fn_target_fixed  | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
+| gat_net_scoring_fn_source_fixed  | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
+| gat_net_linear_proj_weight_fixed | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
+| gat_net_skip_proj_weight_fixed   | inout     | ap_fixed<28, 10, AP_TRN, AP_WRAP, 0>* |
++----------------------------------+-----------+---------------------------------------+
+
+* SW-to-HW Mapping
++----------------------------------+--------------------------------------------------+-----------+----------+-----------------------+
+| Argument                         | HW Name                                          | HW Type   | HW Usage | HW Info               |
++----------------------------------+--------------------------------------------------+-----------+----------+-----------------------+
+| node_feature_in                  | m_axi_mem                                        | interface |          |                       |
+| node_feature_in                  | s_axi_control node_feature_in_1                  | register  | offset   | offset=0x10, range=32 |
+| node_feature_in                  | s_axi_control node_feature_in_2                  | register  | offset   | offset=0x14, range=32 |
+| edge_list_in                     | m_axi_mem                                        | interface |          |                       |
+| edge_list_in                     | s_axi_control edge_list_in_1                     | register  | offset   | offset=0x1c, range=32 |
+| edge_list_in                     | s_axi_control edge_list_in_2                     | register  | offset   | offset=0x20, range=32 |
+| graph_attr                       | m_axi_mem                                        | interface |          |                       |
+| graph_attr                       | s_axi_control graph_attr_1                       | register  | offset   | offset=0x28, range=32 |
+| graph_attr                       | s_axi_control graph_attr_2                       | register  | offset   | offset=0x2c, range=32 |
+| task_tb                          | m_axi_mem                                        | interface |          |                       |
+| task_tb                          | s_axi_control task_tb_1                          | register  | offset   | offset=0x34, range=32 |
+| task_tb                          | s_axi_control task_tb_2                          | register  | offset   | offset=0x38, range=32 |
+| graph_pred_linear_weight_fixed   | m_axi_mem                                        | interface |          |                       |
+| graph_pred_linear_weight_fixed   | s_axi_control graph_pred_linear_weight_fixed_1   | register  | offset   | offset=0x40, range=32 |
+| graph_pred_linear_weight_fixed   | s_axi_control graph_pred_linear_weight_fixed_2   | register  | offset   | offset=0x44, range=32 |
+| graph_pred_linear_bias_fixed     | m_axi_mem                                        | interface |          |                       |
+| graph_pred_linear_bias_fixed     | s_axi_control graph_pred_linear_bias_fixed_1     | register  | offset   | offset=0x4c, range=32 |
+| graph_pred_linear_bias_fixed     | s_axi_control graph_pred_linear_bias_fixed_2     | register  | offset   | offset=0x50, range=32 |
+| gat_net_scoring_fn_target_fixed  | m_axi_mem                                        | interface |          |                       |
+| gat_net_scoring_fn_target_fixed  | s_axi_control gat_net_scoring_fn_target_fixed_1  | register  | offset   | offset=0x58, range=32 |
+| gat_net_scoring_fn_target_fixed  | s_axi_control gat_net_scoring_fn_target_fixed_2  | register  | offset   | offset=0x5c, range=32 |
+| gat_net_scoring_fn_source_fixed  | m_axi_mem                                        | interface |          |                       |
+| gat_net_scoring_fn_source_fixed  | s_axi_control gat_net_scoring_fn_source_fixed_1  | register  | offset   | offset=0x64, range=32 |
+| gat_net_scoring_fn_source_fixed  | s_axi_control gat_net_scoring_fn_source_fixed_2  | register  | offset   | offset=0x68, range=32 |
+| gat_net_linear_proj_weight_fixed | m_axi_mem                                        | interface |          |                       |
+| gat_net_linear_proj_weight_fixed | s_axi_control gat_net_linear_proj_weight_fixed_1 | register  | offset   | offset=0x70, range=32 |
+| gat_net_linear_proj_weight_fixed | s_axi_control gat_net_linear_proj_weight_fixed_2 | register  | offset   | offset=0x74, range=32 |
+| gat_net_skip_proj_weight_fixed   | m_axi_mem                                        | interface |          |                       |
+| gat_net_skip_proj_weight_fixed   | s_axi_control gat_net_skip_proj_weight_fixed_1   | register  | offset   | offset=0x7c, range=32 |
+| gat_net_skip_proj_weight_fixed   | s_axi_control gat_net_skip_proj_weight_fixed_2   | register  | offset   | offset=0x80, range=32 |
++----------------------------------+--------------------------------------------------+-----------+----------+-----------------------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+* Burst Summary
++--------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+
+| HW Interface | Loop             | Message                                                                                                                                                                                                                   | Location              |
++--------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+
+| m_axi_mem    | VITIS_LOOP_263_1 | Multiple burst reads of length 64 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.   | GAT_compute.cc:263:20 |
+| m_axi_mem    | VITIS_LOOP_269_3 | Multiple burst reads of length 64 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.   | GAT_compute.cc:269:23 |
+| m_axi_mem    | VITIS_LOOP_301_1 | Multiple burst reads of length 64 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.   | GAT_compute.cc:301:20 |
+| m_axi_mem    | VITIS_LOOP_307_3 | Multiple burst reads of length 64 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.   | GAT_compute.cc:307:23 |
+| m_axi_mem    | VITIS_LOOP_313_5 | Multiple burst reads of length 4096 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. | GAT_compute.cc:313:23 |
+| m_axi_mem    | VITIS_LOOP_319_7 | Multiple burst reads of length 4096 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. | GAT_compute.cc:319:23 |
+| m_axi_mem    | VITIS_LOOP_335_2 | Multiple burst reads of length 16 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.   | GAT_compute.cc:335:21 |
+| m_axi_mem    | VITIS_LOOP_345_1 | Multiple burst reads of length 171 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.  | GAT_compute.cc:345:20 |
+| m_axi_mem    | VITIS_LOOP_351_3 | Multiple burst reads of length 80 and bit width 32. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.   | GAT_compute.cc:351:23 |
++--------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+
+
+

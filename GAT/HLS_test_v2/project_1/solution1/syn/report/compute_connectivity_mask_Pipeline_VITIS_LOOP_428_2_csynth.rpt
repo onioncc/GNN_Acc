@@ -1,0 +1,156 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2'
+================================================================
+* Date:           Mon Dec 20 18:46:14 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.128 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |       22|       22|  88.000 ns|  88.000 ns|   22|   22|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_428_2  |       20|       20|         3|          1|          1|    19|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       80|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|       54|    -|
+|Register             |        -|     -|       75|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       75|      134|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln428_fu_92_p2    |         +|   0|  0|  12|           5|           1|
+    |add_ln429_1_fu_98_p2  |         +|   0|  0|  18|          11|           7|
+    |connectivity_mask_d1  |         +|   0|  0|  39|          32|           1|
+    |icmp_ln428_fu_86_p2   |      icmp|   0|  0|   9|           5|           5|
+    |ap_enable_pp0         |       xor|   0|  0|   2|           1|           2|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0|  80|          54|          16|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------------+----+-----------+-----+-----------+
+    |              Name             | LUT| Input Size| Bits| Total Bits|
+    +-------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                    |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1        |   9|          2|    1|          2|
+    |ap_sig_allocacmp_i_7           |   9|          2|    5|         10|
+    |ap_sig_allocacmp_phi_mul_load  |   9|          2|   11|         22|
+    |i_fu_44                        |   9|          2|    5|         10|
+    |phi_mul_fu_40                  |   9|          2|   11|         22|
+    +-------------------------------+----+-----------+-----+-----------+
+    |Total                          |  54|         12|   34|         68|
+    +-------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------------+----+----+-----+-----------+
+    |                     Name                     | FF | LUT| Bits| Const Bits|
+    +----------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                     |   1|   0|    1|          0|
+    |ap_done_reg                                   |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2                       |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg              |   1|   0|    1|          0|
+    |connectivity_mask_addr_reg_138                |  11|   0|   14|          3|
+    |connectivity_mask_addr_reg_138_pp0_iter1_reg  |  11|   0|   14|          3|
+    |connectivity_mask_load_reg_144                |  32|   0|   32|          0|
+    |i_fu_44                                       |   5|   0|    5|          0|
+    |phi_mul_fu_40                                 |  11|   0|   11|          0|
+    +----------------------------------------------+----+----+-----+-----------+
+    |Total                                         |  75|   0|   81|          6|
+    +----------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |                    Source Object                    |    C Type    |
++----------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+|ap_clk                      |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2|  return value|
+|ap_rst                      |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2|  return value|
+|ap_start                    |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2|  return value|
+|ap_done                     |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2|  return value|
+|ap_idle                     |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2|  return value|
+|ap_ready                    |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_428_2|  return value|
+|connectivity_mask_address0  |  out|   14|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_ce0       |  out|    1|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_q0        |   in|   32|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_address1  |  out|   14|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_ce1       |  out|    1|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_we1       |  out|    1|   ap_memory|                                    connectivity_mask|         array|
+|connectivity_mask_d1        |  out|   32|   ap_memory|                                    connectivity_mask|         array|
++----------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+

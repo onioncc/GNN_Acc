@@ -1,0 +1,317 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2'
+================================================================
+* Date:           Wed Nov  3 22:45:58 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xczu3eg-sbva484-1-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.555 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |       22|       22|  88.000 ns|  88.000 ns|   22|   22|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_390_2  |       20|       20|         3|          1|          1|    19|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       0|     66|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        -|    -|       -|      -|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       -|    136|    -|
+|Register         |        -|    -|     275|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|    0|     275|    202|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      432|  360|  141120|  70560|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|    0|      ~0|     ~0|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln390_fu_488_p2   |         +|   0|  0|  12|           5|           1|
+    |add_ln391_fu_522_p2   |         +|   0|  0|  39|          32|           1|
+    |ap_condition_334      |       and|   0|  0|   2|           1|           1|
+    |ap_condition_461      |       and|   0|  0|   2|           1|           1|
+    |icmp_ln390_fu_482_p2  |      icmp|   0|  0|   9|           5|           5|
+    |ap_enable_pp0         |       xor|   0|  0|   2|           1|           2|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0|  66|          45|          11|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------------------+-----+-----------+-----+-----------+
+    |                  Name                  | LUT | Input Size| Bits| Total Bits|
+    +----------------------------------------+-----+-----------+-----+-----------+
+    |ap_done_int                             |    9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1                 |    9|          2|    1|          2|
+    |ap_phi_reg_pp0_iter2_phi_ln391_reg_431  |  100|         20|   32|        640|
+    |ap_sig_allocacmp_i_5                    |    9|          2|    5|         10|
+    |i_fu_104                                |    9|          2|    5|         10|
+    +----------------------------------------+-----+-----------+-----+-----------+
+    |Total                                   |  136|         28|   44|        664|
+    +----------------------------------------+-----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------------------------------+----+----+-----+-----------+
+    |                       Name                      | FF | LUT| Bits| Const Bits|
+    +-------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                        |   1|   0|    1|          0|
+    |ap_done_reg                                      |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1                          |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2                          |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg                 |   1|   0|    1|          0|
+    |ap_phi_reg_pp0_iter1_phi_ln391_reg_431           |  32|   0|   32|          0|
+    |ap_phi_reg_pp0_iter2_phi_ln391_reg_431           |  32|   0|   32|          0|
+    |connectivity_mask_0_addr_reg_562                 |   5|   0|    7|          2|
+    |connectivity_mask_0_addr_reg_562_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_10_addr_reg_622                |   5|   0|    7|          2|
+    |connectivity_mask_10_addr_reg_622_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_11_addr_reg_628                |   5|   0|    7|          2|
+    |connectivity_mask_11_addr_reg_628_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_12_addr_reg_634                |   5|   0|    7|          2|
+    |connectivity_mask_12_addr_reg_634_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_13_addr_reg_640                |   5|   0|    7|          2|
+    |connectivity_mask_13_addr_reg_640_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_14_addr_reg_646                |   5|   0|    7|          2|
+    |connectivity_mask_14_addr_reg_646_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_15_addr_reg_652                |   5|   0|    7|          2|
+    |connectivity_mask_15_addr_reg_652_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_16_addr_reg_658                |   5|   0|    7|          2|
+    |connectivity_mask_16_addr_reg_658_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_17_addr_reg_664                |   5|   0|    7|          2|
+    |connectivity_mask_17_addr_reg_664_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_18_addr_reg_670                |   5|   0|    7|          2|
+    |connectivity_mask_18_addr_reg_670_pp0_iter1_reg  |   5|   0|    7|          2|
+    |connectivity_mask_1_addr_reg_568                 |   5|   0|    7|          2|
+    |connectivity_mask_1_addr_reg_568_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_2_addr_reg_574                 |   5|   0|    7|          2|
+    |connectivity_mask_2_addr_reg_574_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_3_addr_reg_580                 |   5|   0|    7|          2|
+    |connectivity_mask_3_addr_reg_580_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_4_addr_reg_586                 |   5|   0|    7|          2|
+    |connectivity_mask_4_addr_reg_586_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_5_addr_reg_592                 |   5|   0|    7|          2|
+    |connectivity_mask_5_addr_reg_592_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_6_addr_reg_598                 |   5|   0|    7|          2|
+    |connectivity_mask_6_addr_reg_598_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_7_addr_reg_604                 |   5|   0|    7|          2|
+    |connectivity_mask_7_addr_reg_604_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_8_addr_reg_610                 |   5|   0|    7|          2|
+    |connectivity_mask_8_addr_reg_610_pp0_iter1_reg   |   5|   0|    7|          2|
+    |connectivity_mask_9_addr_reg_616                 |   5|   0|    7|          2|
+    |connectivity_mask_9_addr_reg_616_pp0_iter1_reg   |   5|   0|    7|          2|
+    |i_5_reg_554                                      |   5|   0|    5|          0|
+    |i_5_reg_554_pp0_iter1_reg                        |   5|   0|    5|          0|
+    |i_fu_104                                         |   5|   0|    5|          0|
+    |icmp_ln390_reg_558                               |   1|   0|    1|          0|
+    +-------------------------------------------------+----+----+-----+-----------+
+    |Total                                            | 275|   0|  351|         76|
+    +-------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+|           RTL Ports           | Dir | Bits|  Protocol  |                    Source Object                    |    C Type    |
++-------------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+|ap_clk                         |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2|  return value|
+|ap_rst                         |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2|  return value|
+|ap_start                       |   in|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2|  return value|
+|ap_done                        |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2|  return value|
+|ap_idle                        |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2|  return value|
+|ap_ready                       |  out|    1|  ap_ctrl_hs|  compute_connectivity_mask_Pipeline_VITIS_LOOP_390_2|  return value|
+|connectivity_mask_0_address0   |  out|    7|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_0_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_0_q0         |   in|   32|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_0_address1   |  out|    7|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_0_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_0_we1        |  out|    1|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_0_d1         |  out|   32|   ap_memory|                                  connectivity_mask_0|         array|
+|connectivity_mask_1_address0   |  out|    7|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_1_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_1_q0         |   in|   32|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_1_address1   |  out|    7|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_1_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_1_we1        |  out|    1|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_1_d1         |  out|   32|   ap_memory|                                  connectivity_mask_1|         array|
+|connectivity_mask_2_address0   |  out|    7|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_2_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_2_q0         |   in|   32|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_2_address1   |  out|    7|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_2_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_2_we1        |  out|    1|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_2_d1         |  out|   32|   ap_memory|                                  connectivity_mask_2|         array|
+|connectivity_mask_3_address0   |  out|    7|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_3_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_3_q0         |   in|   32|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_3_address1   |  out|    7|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_3_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_3_we1        |  out|    1|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_3_d1         |  out|   32|   ap_memory|                                  connectivity_mask_3|         array|
+|connectivity_mask_4_address0   |  out|    7|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_4_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_4_q0         |   in|   32|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_4_address1   |  out|    7|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_4_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_4_we1        |  out|    1|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_4_d1         |  out|   32|   ap_memory|                                  connectivity_mask_4|         array|
+|connectivity_mask_5_address0   |  out|    7|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_5_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_5_q0         |   in|   32|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_5_address1   |  out|    7|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_5_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_5_we1        |  out|    1|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_5_d1         |  out|   32|   ap_memory|                                  connectivity_mask_5|         array|
+|connectivity_mask_6_address0   |  out|    7|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_6_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_6_q0         |   in|   32|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_6_address1   |  out|    7|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_6_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_6_we1        |  out|    1|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_6_d1         |  out|   32|   ap_memory|                                  connectivity_mask_6|         array|
+|connectivity_mask_7_address0   |  out|    7|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_7_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_7_q0         |   in|   32|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_7_address1   |  out|    7|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_7_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_7_we1        |  out|    1|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_7_d1         |  out|   32|   ap_memory|                                  connectivity_mask_7|         array|
+|connectivity_mask_8_address0   |  out|    7|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_8_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_8_q0         |   in|   32|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_8_address1   |  out|    7|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_8_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_8_we1        |  out|    1|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_8_d1         |  out|   32|   ap_memory|                                  connectivity_mask_8|         array|
+|connectivity_mask_9_address0   |  out|    7|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_9_ce0        |  out|    1|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_9_q0         |   in|   32|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_9_address1   |  out|    7|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_9_ce1        |  out|    1|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_9_we1        |  out|    1|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_9_d1         |  out|   32|   ap_memory|                                  connectivity_mask_9|         array|
+|connectivity_mask_10_address0  |  out|    7|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_10_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_10_q0        |   in|   32|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_10_address1  |  out|    7|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_10_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_10_we1       |  out|    1|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_10_d1        |  out|   32|   ap_memory|                                 connectivity_mask_10|         array|
+|connectivity_mask_11_address0  |  out|    7|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_11_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_11_q0        |   in|   32|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_11_address1  |  out|    7|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_11_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_11_we1       |  out|    1|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_11_d1        |  out|   32|   ap_memory|                                 connectivity_mask_11|         array|
+|connectivity_mask_12_address0  |  out|    7|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_12_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_12_q0        |   in|   32|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_12_address1  |  out|    7|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_12_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_12_we1       |  out|    1|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_12_d1        |  out|   32|   ap_memory|                                 connectivity_mask_12|         array|
+|connectivity_mask_13_address0  |  out|    7|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_13_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_13_q0        |   in|   32|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_13_address1  |  out|    7|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_13_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_13_we1       |  out|    1|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_13_d1        |  out|   32|   ap_memory|                                 connectivity_mask_13|         array|
+|connectivity_mask_14_address0  |  out|    7|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_14_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_14_q0        |   in|   32|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_14_address1  |  out|    7|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_14_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_14_we1       |  out|    1|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_14_d1        |  out|   32|   ap_memory|                                 connectivity_mask_14|         array|
+|connectivity_mask_15_address0  |  out|    7|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_15_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_15_q0        |   in|   32|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_15_address1  |  out|    7|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_15_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_15_we1       |  out|    1|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_15_d1        |  out|   32|   ap_memory|                                 connectivity_mask_15|         array|
+|connectivity_mask_16_address0  |  out|    7|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_16_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_16_q0        |   in|   32|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_16_address1  |  out|    7|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_16_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_16_we1       |  out|    1|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_16_d1        |  out|   32|   ap_memory|                                 connectivity_mask_16|         array|
+|connectivity_mask_17_address0  |  out|    7|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_17_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_17_q0        |   in|   32|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_17_address1  |  out|    7|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_17_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_17_we1       |  out|    1|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_17_d1        |  out|   32|   ap_memory|                                 connectivity_mask_17|         array|
+|connectivity_mask_18_address0  |  out|    7|   ap_memory|                                 connectivity_mask_18|         array|
+|connectivity_mask_18_ce0       |  out|    1|   ap_memory|                                 connectivity_mask_18|         array|
+|connectivity_mask_18_q0        |   in|   32|   ap_memory|                                 connectivity_mask_18|         array|
+|connectivity_mask_18_address1  |  out|    7|   ap_memory|                                 connectivity_mask_18|         array|
+|connectivity_mask_18_ce1       |  out|    1|   ap_memory|                                 connectivity_mask_18|         array|
+|connectivity_mask_18_we1       |  out|    1|   ap_memory|                                 connectivity_mask_18|         array|
+|connectivity_mask_18_d1        |  out|   32|   ap_memory|                                 connectivity_mask_18|         array|
++-------------------------------+-----+-----+------------+-----------------------------------------------------+--------------+
+

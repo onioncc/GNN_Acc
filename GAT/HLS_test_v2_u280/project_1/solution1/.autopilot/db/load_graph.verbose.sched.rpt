@@ -1,0 +1,270 @@
+
+
+================================================================
+== Vitis HLS Report for 'load_graph'
+================================================================
+* Date:           Thu Nov  4 14:51:46 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        project_1
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xczu3eg-sbva484-1-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.920 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |      274|      274|  1.096 us|  1.096 us|  274|  274|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 18
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 8 
+8 --> 9 
+9 --> 10 
+10 --> 11 
+11 --> 12 
+12 --> 13 
+13 --> 14 
+14 --> 15 
+15 --> 16 
+16 --> 17 
+17 --> 18 
+18 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 2.92>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%node_feature_in_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %node_feature_in" [GAT_compute.cc:345]   --->   Operation 19 'read' 'node_feature_in_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %node_feature_in_read, i32 2, i32 63" [GAT_compute.cc:345]   --->   Operation 20 'partselect' 'trunc_ln' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%sext_ln345 = sext i62 %trunc_ln" [GAT_compute.cc:345]   --->   Operation 21 'sext' 'sext_ln345' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%mem_addr = getelementptr i32 %mem, i64 %sext_ln345" [GAT_compute.cc:345]   --->   Operation 22 'getelementptr' 'mem_addr' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 23 [7/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 23 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 2 <SV = 1> <Delay = 2.92>
+ST_2 : Operation 24 [6/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 24 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 3 <SV = 2> <Delay = 2.92>
+ST_3 : Operation 25 [5/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 25 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 4 <SV = 3> <Delay = 2.92>
+ST_4 : Operation 26 [4/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 26 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 5 <SV = 4> <Delay = 2.92>
+ST_5 : Operation 27 [3/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 27 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 6 <SV = 5> <Delay = 2.92>
+ST_6 : Operation 28 [2/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 28 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 7 <SV = 6> <Delay = 2.92>
+ST_7 : Operation 29 [1/7] (2.92ns)   --->   "%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr, i32 171" [GAT_compute.cc:345]   --->   Operation 29 'readreq' 'empty' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 8 <SV = 7> <Delay = 0.00>
+ST_8 : Operation 30 [2/2] (0.00ns)   --->   "%call_ln345 = call void @load_graph_Pipeline_VITIS_LOOP_345_1_VITIS_LOOP_346_2, i32 %mem, i62 %trunc_ln, i28 %out_nodes_features_skip_concat_bias_V_0, i28 %out_nodes_features_skip_concat_bias_V_1, i28 %out_nodes_features_skip_concat_bias_V_2, i28 %out_nodes_features_skip_concat_bias_V_3, i28 %out_nodes_features_skip_concat_bias_V_4, i28 %out_nodes_features_skip_concat_bias_V_5, i28 %out_nodes_features_skip_concat_bias_V_6, i28 %out_nodes_features_skip_concat_bias_V_7, i28 %out_nodes_features_skip_concat_bias_V_8" [GAT_compute.cc:345]   --->   Operation 30 'call' 'call_ln345' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 0.00>
+ST_9 : Operation 31 [1/2] (0.00ns)   --->   "%call_ln345 = call void @load_graph_Pipeline_VITIS_LOOP_345_1_VITIS_LOOP_346_2, i32 %mem, i62 %trunc_ln, i28 %out_nodes_features_skip_concat_bias_V_0, i28 %out_nodes_features_skip_concat_bias_V_1, i28 %out_nodes_features_skip_concat_bias_V_2, i28 %out_nodes_features_skip_concat_bias_V_3, i28 %out_nodes_features_skip_concat_bias_V_4, i28 %out_nodes_features_skip_concat_bias_V_5, i28 %out_nodes_features_skip_concat_bias_V_6, i28 %out_nodes_features_skip_concat_bias_V_7, i28 %out_nodes_features_skip_concat_bias_V_8" [GAT_compute.cc:345]   --->   Operation 31 'call' 'call_ln345' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 10 <SV = 9> <Delay = 2.92>
+ST_10 : Operation 32 [1/1] (0.00ns)   --->   "%edge_list_in_read = read i64 @_ssdm_op_Read.ap_auto.i64, i64 %edge_list_in" [GAT_compute.cc:345]   --->   Operation 32 'read' 'edge_list_in_read' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 33 [1/1] (0.00ns)   --->   "%trunc_ln1 = partselect i62 @_ssdm_op_PartSelect.i62.i64.i32.i32, i64 %edge_list_in_read, i32 2, i32 63" [GAT_compute.cc:351]   --->   Operation 33 'partselect' 'trunc_ln1' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 34 [1/1] (0.00ns)   --->   "%sext_ln351 = sext i62 %trunc_ln1" [GAT_compute.cc:351]   --->   Operation 34 'sext' 'sext_ln351' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 35 [1/1] (0.00ns)   --->   "%mem_addr_6 = getelementptr i32 %mem, i64 %sext_ln351" [GAT_compute.cc:351]   --->   Operation 35 'getelementptr' 'mem_addr_6' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 36 [7/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 36 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 11 <SV = 10> <Delay = 2.92>
+ST_11 : Operation 37 [6/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 37 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 12 <SV = 11> <Delay = 2.92>
+ST_12 : Operation 38 [5/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 38 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 13 <SV = 12> <Delay = 2.92>
+ST_13 : Operation 39 [4/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 39 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 14 <SV = 13> <Delay = 2.92>
+ST_14 : Operation 40 [3/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 40 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 15 <SV = 14> <Delay = 2.92>
+ST_15 : Operation 41 [2/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 41 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 16 <SV = 15> <Delay = 2.92>
+ST_16 : Operation 42 [1/7] (2.92ns)   --->   "%empty_88 = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %mem_addr_6, i32 80" [GAT_compute.cc:351]   --->   Operation 42 'readreq' 'empty_88' <Predicate = true> <Delay = 2.92> <CoreInst = "m_axi">   --->   Core 121 'm_axi' <Latency = 5> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>
+
+State 17 <SV = 16> <Delay = 0.00>
+ST_17 : Operation 43 [2/2] (0.00ns)   --->   "%call_ln351 = call void @load_graph_Pipeline_VITIS_LOOP_351_3, i32 %mem, i62 %trunc_ln1, i32 %edge_list" [GAT_compute.cc:351]   --->   Operation 43 'call' 'call_ln351' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 18 <SV = 17> <Delay = 0.00>
+ST_18 : Operation 44 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i28 %out_nodes_features_skip_concat_bias_V_0, i28 %out_nodes_features_skip_concat_bias_V_1, i28 %out_nodes_features_skip_concat_bias_V_2, i28 %out_nodes_features_skip_concat_bias_V_3, i28 %out_nodes_features_skip_concat_bias_V_4, i28 %out_nodes_features_skip_concat_bias_V_5, i28 %out_nodes_features_skip_concat_bias_V_6, i28 %out_nodes_features_skip_concat_bias_V_7, i28 %out_nodes_features_skip_concat_bias_V_8, void @out_nodes_features_skip_concat_bias_V_9, void @out_nodes_features_skip_concat_bias_V_10, void @out_nodes_features_skip_concat_bias_V_11, void @out_nodes_features_skip_concat_bias_V_12, void @out_nodes_features_skip_concat_bias_V_13, void @out_nodes_features_skip_concat_bias_V_14, void @out_nodes_features_skip_concat_bias_V_15, void @out_nodes_features_skip_concat_bias_V_16, void @out_nodes_features_skip_concat_bias_V_17, void @out_nodes_features_skip_concat_bias_V_18, void @out_nodes_features_skip_concat_bias_V_19, void @out_nodes_features_skip_concat_bias_V_20, void @out_nodes_features_skip_concat_bias_V_21, void @out_nodes_features_skip_concat_bias_V_22, void @out_nodes_features_skip_concat_bias_V_23, void @out_nodes_features_skip_concat_bias_V_24, void @out_nodes_features_skip_concat_bias_V_25, void @out_nodes_features_skip_concat_bias_V_26, void @out_nodes_features_skip_concat_bias_V_27, void @out_nodes_features_skip_concat_bias_V_28, void @out_nodes_features_skip_concat_bias_V_29, void @out_nodes_features_skip_concat_bias_V_30, void @out_nodes_features_skip_concat_bias_V_31, void @out_nodes_features_skip_concat_bias_V_32, void @out_nodes_features_skip_concat_bias_V_33, void @out_nodes_features_skip_concat_bias_V_34, void @out_nodes_features_skip_concat_bias_V_35, void @out_nodes_features_skip_concat_bias_V_36, void @out_nodes_features_skip_concat_bias_V_37, void @out_nodes_features_skip_concat_bias_V_38, void @out_nodes_features_skip_concat_bias_V_39, void @out_nodes_features_skip_concat_bias_V_40, void @out_nodes_features_skip_concat_bias_V_41, void @out_nodes_features_skip_concat_bias_V_42, void @out_nodes_features_skip_concat_bias_V_43, void @out_nodes_features_skip_concat_bias_V_44, void @out_nodes_features_skip_concat_bias_V_45, void @out_nodes_features_skip_concat_bias_V_46, void @out_nodes_features_skip_concat_bias_V_47, void @out_nodes_features_skip_concat_bias_V_48, void @out_nodes_features_skip_concat_bias_V_49, void @out_nodes_features_skip_concat_bias_V_50, void @out_nodes_features_skip_concat_bias_V_51, void @out_nodes_features_skip_concat_bias_V_52, void @out_nodes_features_skip_concat_bias_V_53, void @out_nodes_features_skip_concat_bias_V_54, void @out_nodes_features_skip_concat_bias_V_55, void @out_nodes_features_skip_concat_bias_V_56, void @out_nodes_features_skip_concat_bias_V_57, void @out_nodes_features_skip_concat_bias_V_58, void @out_nodes_features_skip_concat_bias_V_59, void @out_nodes_features_skip_concat_bias_V_60, void @out_nodes_features_skip_concat_bias_V_61, void @out_nodes_features_skip_concat_bias_V_62, void @out_nodes_features_skip_concat_bias_V_63, i64 666, i64 22, i64 18446744073709551615"   --->   Operation 44 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 45 [1/1] (0.00ns)   --->   "%specmemcore_ln0 = specmemcore void @_ssdm_op_SpecMemCore, i32 %edge_list, i64 666, i64 22, i64 18446744073709551615"   --->   Operation 45 'specmemcore' 'specmemcore_ln0' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %mem, void @empty_36, i32 0, i32 0, void @empty_33, i32 0, i32 100000, void @empty_32, void @empty_31, void @empty_33, i32 16, i32 16, i32 16, i32 16, void @empty_33, void @empty_33"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 47 [1/2] (0.00ns)   --->   "%call_ln351 = call void @load_graph_Pipeline_VITIS_LOOP_351_3, i32 %mem, i62 %trunc_ln1, i32 %edge_list" [GAT_compute.cc:351]   --->   Operation 47 'call' 'call_ln351' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_18 : Operation 48 [1/1] (0.00ns)   --->   "%ret_ln354 = ret" [GAT_compute.cc:354]   --->   Operation 48 'ret' 'ret_ln354' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 4ns, clock uncertainty: 1.08ns.
+
+ <State 1>: 2.92ns
+The critical path consists of the following:
+	wire read operation ('node_feature_in_read', GAT_compute.cc:345) on port 'node_feature_in' (GAT_compute.cc:345) [18]  (0 ns)
+	'getelementptr' operation ('mem_addr', GAT_compute.cc:345) [21]  (0 ns)
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 2>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 3>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 4>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 5>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 6>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 7>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty', GAT_compute.cc:345) on port 'mem' (GAT_compute.cc:345) [22]  (2.92 ns)
+
+ <State 8>: 0ns
+The critical path consists of the following:
+
+ <State 9>: 0ns
+The critical path consists of the following:
+
+ <State 10>: 2.92ns
+The critical path consists of the following:
+	wire read operation ('edge_list_in_read', GAT_compute.cc:345) on port 'edge_list_in' (GAT_compute.cc:345) [17]  (0 ns)
+	'getelementptr' operation ('mem_addr_6', GAT_compute.cc:351) [26]  (0 ns)
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 11>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 12>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 13>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 14>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 15>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 16>: 2.92ns
+The critical path consists of the following:
+	bus request operation ('empty_88', GAT_compute.cc:351) on port 'mem' (GAT_compute.cc:351) [27]  (2.92 ns)
+
+ <State 17>: 0ns
+The critical path consists of the following:
+
+ <State 18>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A
