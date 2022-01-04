@@ -27,32 +27,32 @@ float mlp_2_bias[20];
 float mlp_4_weight[1][20];
 float mlp_4_bias[1];
 
-WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80];
-WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80];
-WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in[12][80];
-WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in[12][80];
-WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in[10][80];
-WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in[6][80];
-WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in[6][80];
-WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in[2][80];
-WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in[2][80];
-WT_TYPE convs_0_post_nn_0_weight_fixed_in[80][960];
-WT_TYPE convs_0_post_nn_0_bias_fixed_in[80];
-WT_TYPE convs_1_post_nn_0_weight_fixed_in[80][960];
-WT_TYPE convs_1_post_nn_0_bias_fixed_in[80];
-WT_TYPE convs_2_post_nn_0_weight_fixed_in[80][960];
-WT_TYPE convs_2_post_nn_0_bias_fixed_in[80];
-WT_TYPE convs_3_post_nn_0_weight_fixed_in[80][960];
-WT_TYPE convs_3_post_nn_0_bias_fixed_in[80];
-WT_TYPE mlp_0_weight_fixed_in[40][80];
-WT_TYPE mlp_0_bias_fixed_in[40];
-WT_TYPE mlp_2_weight_fixed_in[20][40];
-WT_TYPE mlp_2_bias_fixed_in[20];
-WT_TYPE mlp_4_weight_fixed_in[1][20];
-WT_TYPE mlp_4_bias_fixed_in[1];
+// WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80];
+// WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80];
+// WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in[12][80];
+// WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in[12][80];
+// WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in[10][80];
+// WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in[6][80];
+// WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in[6][80];
+// WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in[2][80];
+// WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in[2][80];
+// WT_TYPE convs_0_post_nn_0_weight_fixed_in[80][960];
+// WT_TYPE convs_0_post_nn_0_bias_fixed_in[80];
+// WT_TYPE convs_1_post_nn_0_weight_fixed_in[80][960];
+// WT_TYPE convs_1_post_nn_0_bias_fixed_in[80];
+// WT_TYPE convs_2_post_nn_0_weight_fixed_in[80][960];
+// WT_TYPE convs_2_post_nn_0_bias_fixed_in[80];
+// WT_TYPE convs_3_post_nn_0_weight_fixed_in[80][960];
+// WT_TYPE convs_3_post_nn_0_bias_fixed_in[80];
+// WT_TYPE mlp_0_weight_fixed_in[40][80];
+// WT_TYPE mlp_0_bias_fixed_in[40];
+// WT_TYPE mlp_2_weight_fixed_in[20][40];
+// WT_TYPE mlp_2_bias_fixed_in[20];
+// WT_TYPE mlp_4_weight_fixed_in[1][20];
+// WT_TYPE mlp_4_bias_fixed_in[1];
 
-WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960];
-WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80];
+// WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960];
+// WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80];
 
 template<int M>
 void cast_1d(float in[M], WT_TYPE out[M]){
@@ -214,8 +214,7 @@ void load_weights()
 
 
 }
-void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges)
-{
+void fetch_one_graph(char *graph_name, aligned_vector<int> &node_feature, aligned_vector<int> &edge_list, aligned_vector<int> &edge_attr, int num_of_nodes, int num_of_edges) {
     printf("Loading graph ...\n");
         
     FILE* f;
@@ -230,17 +229,17 @@ void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* e
 	
 	
     f = fopen(f_node_feature, "rb");
-	fread(node_feature, sizeof(int), num_of_nodes * ND_FEATURE, f);
+	fread(node_feature.data(), sizeof(int), num_of_nodes * ND_FEATURE, f);
     fclose(f);
 
 
     f = fopen(f_edge_list, "rb");
-    fread(edge_list, sizeof(int), 2 * num_of_edges, f);
+    fread(edge_list.data(), sizeof(int), 2 * num_of_edges, f);
     fclose(f);
 
 
     f = fopen(f_edge_attr, "rb");
-    fread(edge_attr, sizeof(int), EDGE_ATTR * num_of_edges, f);
+    fread(edge_attr.data(), sizeof(int), EDGE_ATTR * num_of_edges, f);
     fclose(f);
 
 

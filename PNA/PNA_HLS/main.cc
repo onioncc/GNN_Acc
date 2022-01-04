@@ -2,62 +2,10 @@
 // #include <stdlib.h>
 #include "dcl.h"
 
-float node_emb_atom_embedding_list_0_weight[119][80];
-float node_emb_atom_embedding_list_1_weight[4][80];
-float node_emb_atom_embedding_list_2_weight[12][80];
-float node_emb_atom_embedding_list_3_weight[12][80];
-float node_emb_atom_embedding_list_4_weight[10][80];
-float node_emb_atom_embedding_list_5_weight[6][80];
-float node_emb_atom_embedding_list_6_weight[6][80];
-float node_emb_atom_embedding_list_7_weight[2][80];
-float node_emb_atom_embedding_list_8_weight[2][80];
-float convs_0_post_nn_0_weight[80][960];
-float convs_0_post_nn_0_bias[80];
-float convs_1_post_nn_0_weight[80][960];
-float convs_1_post_nn_0_bias[80];
-float convs_2_post_nn_0_weight[80][960];
-float convs_2_post_nn_0_bias[80];
-float convs_3_post_nn_0_weight[80][960];
-float convs_3_post_nn_0_bias[80];
-float mlp_0_weight[40][80];
-float mlp_0_bias[40];
-float mlp_2_weight[20][40];
-float mlp_2_bias[20];
-float mlp_4_weight[1][20];
-float mlp_4_bias[1];
 // global weights
 //extern float final;
-extern FM_TYPE final;
 
-WT_TYPE node_emb_atom_embedding_list_0_weight_fixed[119][80];
-WT_TYPE node_emb_atom_embedding_list_1_weight_fixed[4][80];
-WT_TYPE node_emb_atom_embedding_list_2_weight_fixed[12][80];
-WT_TYPE node_emb_atom_embedding_list_3_weight_fixed[12][80];
-WT_TYPE node_emb_atom_embedding_list_4_weight_fixed[10][80];
-WT_TYPE node_emb_atom_embedding_list_5_weight_fixed[6][80];
-WT_TYPE node_emb_atom_embedding_list_6_weight_fixed[6][80];
-WT_TYPE node_emb_atom_embedding_list_7_weight_fixed[2][80];
-WT_TYPE node_emb_atom_embedding_list_8_weight_fixed[2][80];
-WT_TYPE convs_0_post_nn_0_weight_fixed[80][960];
-WT_TYPE convs_0_post_nn_0_bias_fixed[80];
-WT_TYPE convs_1_post_nn_0_weight_fixed[80][960];
-WT_TYPE convs_1_post_nn_0_bias_fixed[80];
-WT_TYPE convs_2_post_nn_0_weight_fixed[80][960];
-WT_TYPE convs_2_post_nn_0_bias_fixed[80];
-WT_TYPE convs_3_post_nn_0_weight_fixed[80][960];
-WT_TYPE convs_3_post_nn_0_bias_fixed[80];
-WT_TYPE mlp_0_weight_fixed[40][80];
-WT_TYPE mlp_0_bias_fixed[40];
-WT_TYPE mlp_2_weight_fixed[20][40];
-WT_TYPE mlp_2_bias_fixed[20];
-WT_TYPE mlp_4_weight_fixed[1][20];
-WT_TYPE mlp_4_bias_fixed[1];
 
-WT_TYPE convs_ALL_post_nn_0_weight_fixed[4][80][960];
-WT_TYPE convs_ALL_post_nn_0_bias_fixed[4][80];
-
-// this currently doesn't work as intented, all graphs are loaded with 0 vertices and 0 edges
-// needs to be debugged
 int main()
 {
     printf("\n******* This is the golden C file for PNA model *******\n");
@@ -93,10 +41,38 @@ int main()
         graph_attr[1] = num_of_edges;
         graph_attr[2] = g == 1;
 
+        FM_TYPE task_tb[NUM_TASK];
+
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
-        PNA_compute_one_graph(node_feature, edge_list, edge_attr, graph_attr);
-        all_results[g - 1] = final;
+        PNA_compute_one_graph(
+            task_tb,
+
+            node_feature,
+            edge_list,
+            graph_attr,
+
+            node_emb_atom_embedding_list_0_weight_fixed_in,
+            node_emb_atom_embedding_list_1_weight_fixed_in,
+            node_emb_atom_embedding_list_2_weight_fixed_in,
+            node_emb_atom_embedding_list_3_weight_fixed_in,
+            node_emb_atom_embedding_list_4_weight_fixed_in,
+            node_emb_atom_embedding_list_5_weight_fixed_in,
+            node_emb_atom_embedding_list_6_weight_fixed_in,
+            node_emb_atom_embedding_list_7_weight_fixed_in,
+            node_emb_atom_embedding_list_8_weight_fixed_in,
+
+            mlp_0_weight_fixed_in,
+            mlp_0_bias_fixed_in,
+            mlp_2_weight_fixed_in,
+            mlp_2_bias_fixed_in,
+            mlp_4_weight_fixed_in,
+            mlp_4_bias_fixed_in,
+
+            convs_ALL_post_nn_0_weight_fixed_in,
+            convs_ALL_post_nn_0_bias_fixed_in
+        );
+        all_results[g - 1] = task_tb[0].to_float();
         free(node_feature);
         free(edge_list);
         free(edge_attr);

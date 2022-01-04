@@ -75,9 +75,54 @@ extern WT_TYPE mlp_4_bias_fixed[1];
 extern WT_TYPE convs_ALL_post_nn_0_weight_fixed[4][80][960];
 extern WT_TYPE convs_ALL_post_nn_0_bias_fixed[4][80];
 
+extern WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80];
+extern WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80];
+extern WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in[12][80];
+extern WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in[12][80];
+extern WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in[10][80];
+extern WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in[6][80];
+extern WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in[6][80];
+extern WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in[2][80];
+extern WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in[2][80];
+
+extern WT_TYPE mlp_0_weight_fixed_in[40][80];
+extern WT_TYPE mlp_0_bias_fixed_in[40];
+extern WT_TYPE mlp_2_weight_fixed_in[20][40];
+extern WT_TYPE mlp_2_bias_fixed_in[20];
+extern WT_TYPE mlp_4_weight_fixed_in[1][20];
+extern WT_TYPE mlp_4_bias_fixed_in[1];
+
+extern WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960];
+extern WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80];
+
 void PNA_compute_one_graph();
 void load_weights();
 void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
-void PNA_compute_one_graph(int* node_feature, int* edge_list, int* edge_attr, int* graph_attr);
+void PNA_compute_one_graph(
+    FM_TYPE* result,
 
+    int* node_feature_in,
+    int* edge_list_in,
+    int* graph_attr,
+
+    WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80],
+    WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80],
+    WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in[12][80],
+    WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in[12][80],
+    WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in[10][80],
+    WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in[6][80],
+    WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in[6][80],
+    WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in[2][80],
+    WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in[2][80],
+
+    WT_TYPE mlp_0_weight_fixed_in[40][80],
+    WT_TYPE mlp_0_bias_fixed_in[40],
+    WT_TYPE mlp_2_weight_fixed_in[20][40],
+    WT_TYPE mlp_2_bias_fixed_in[20],
+    WT_TYPE mlp_4_weight_fixed_in[1][20],
+    WT_TYPE mlp_4_bias_fixed_in[1],
+
+    WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960],
+    WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80]
+    );
 #endif

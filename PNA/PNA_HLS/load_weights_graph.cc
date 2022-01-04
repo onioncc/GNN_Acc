@@ -2,6 +2,58 @@
 #include <stdio.h>
 #include "dcl.h"
 
+
+float node_emb_atom_embedding_list_0_weight[119][80];
+float node_emb_atom_embedding_list_1_weight[4][80];
+float node_emb_atom_embedding_list_2_weight[12][80];
+float node_emb_atom_embedding_list_3_weight[12][80];
+float node_emb_atom_embedding_list_4_weight[10][80];
+float node_emb_atom_embedding_list_5_weight[6][80];
+float node_emb_atom_embedding_list_6_weight[6][80];
+float node_emb_atom_embedding_list_7_weight[2][80];
+float node_emb_atom_embedding_list_8_weight[2][80];
+float convs_0_post_nn_0_weight[80][960];
+float convs_0_post_nn_0_bias[80];
+float convs_1_post_nn_0_weight[80][960];
+float convs_1_post_nn_0_bias[80];
+float convs_2_post_nn_0_weight[80][960];
+float convs_2_post_nn_0_bias[80];
+float convs_3_post_nn_0_weight[80][960];
+float convs_3_post_nn_0_bias[80];
+float mlp_0_weight[40][80];
+float mlp_0_bias[40];
+float mlp_2_weight[20][40];
+float mlp_2_bias[20];
+float mlp_4_weight[1][20];
+float mlp_4_bias[1];
+
+WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80];
+WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80];
+WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in[12][80];
+WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in[12][80];
+WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in[10][80];
+WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in[6][80];
+WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in[6][80];
+WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in[2][80];
+WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in[2][80];
+WT_TYPE convs_0_post_nn_0_weight_fixed_in[80][960];
+WT_TYPE convs_0_post_nn_0_bias_fixed_in[80];
+WT_TYPE convs_1_post_nn_0_weight_fixed_in[80][960];
+WT_TYPE convs_1_post_nn_0_bias_fixed_in[80];
+WT_TYPE convs_2_post_nn_0_weight_fixed_in[80][960];
+WT_TYPE convs_2_post_nn_0_bias_fixed_in[80];
+WT_TYPE convs_3_post_nn_0_weight_fixed_in[80][960];
+WT_TYPE convs_3_post_nn_0_bias_fixed_in[80];
+WT_TYPE mlp_0_weight_fixed_in[40][80];
+WT_TYPE mlp_0_bias_fixed_in[40];
+WT_TYPE mlp_2_weight_fixed_in[20][40];
+WT_TYPE mlp_2_bias_fixed_in[20];
+WT_TYPE mlp_4_weight_fixed_in[1][20];
+WT_TYPE mlp_4_bias_fixed_in[1];
+
+WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960];
+WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80];
+
 template<int M>
 void cast_1d(float in[M], WT_TYPE out[M]){
 	for(int i=0; i<M; i++){
@@ -118,47 +170,47 @@ void load_weights()
 
 	fclose(f);
 
-	cast_2d<119,80>(node_emb_atom_embedding_list_0_weight, node_emb_atom_embedding_list_0_weight_fixed);
-	cast_2d<4,80>(node_emb_atom_embedding_list_1_weight, node_emb_atom_embedding_list_1_weight_fixed);
-	cast_2d<12,80>(node_emb_atom_embedding_list_2_weight, node_emb_atom_embedding_list_2_weight_fixed);
-	cast_2d<12,80>(node_emb_atom_embedding_list_3_weight, node_emb_atom_embedding_list_3_weight_fixed);
-	cast_2d<10,80>(node_emb_atom_embedding_list_4_weight, node_emb_atom_embedding_list_4_weight_fixed);
-	cast_2d<6,80>(node_emb_atom_embedding_list_5_weight, node_emb_atom_embedding_list_5_weight_fixed);
-	cast_2d<6,80>(node_emb_atom_embedding_list_6_weight, node_emb_atom_embedding_list_6_weight_fixed);
-	cast_2d<2,80>(node_emb_atom_embedding_list_7_weight, node_emb_atom_embedding_list_7_weight_fixed);
-	cast_2d<2,80>(node_emb_atom_embedding_list_8_weight, node_emb_atom_embedding_list_8_weight_fixed);
+	cast_2d<119,80>(node_emb_atom_embedding_list_0_weight, node_emb_atom_embedding_list_0_weight_fixed_in);
+	cast_2d<4,80>(node_emb_atom_embedding_list_1_weight, node_emb_atom_embedding_list_1_weight_fixed_in);
+	cast_2d<12,80>(node_emb_atom_embedding_list_2_weight, node_emb_atom_embedding_list_2_weight_fixed_in);
+	cast_2d<12,80>(node_emb_atom_embedding_list_3_weight, node_emb_atom_embedding_list_3_weight_fixed_in);
+	cast_2d<10,80>(node_emb_atom_embedding_list_4_weight, node_emb_atom_embedding_list_4_weight_fixed_in);
+	cast_2d<6,80>(node_emb_atom_embedding_list_5_weight, node_emb_atom_embedding_list_5_weight_fixed_in);
+	cast_2d<6,80>(node_emb_atom_embedding_list_6_weight, node_emb_atom_embedding_list_6_weight_fixed_in);
+	cast_2d<2,80>(node_emb_atom_embedding_list_7_weight, node_emb_atom_embedding_list_7_weight_fixed_in);
+	cast_2d<2,80>(node_emb_atom_embedding_list_8_weight, node_emb_atom_embedding_list_8_weight_fixed_in);
 	
 
-	cast_2d<80,960>(convs_0_post_nn_0_weight, convs_0_post_nn_0_weight_fixed);
-	cast_1d<80>(convs_0_post_nn_0_bias, convs_0_post_nn_0_bias_fixed);
+	cast_2d<80,960>(convs_0_post_nn_0_weight, convs_0_post_nn_0_weight_fixed_in);
+	cast_1d<80>(convs_0_post_nn_0_bias, convs_0_post_nn_0_bias_fixed_in);
 
-	cast_2d<80,960>(convs_1_post_nn_0_weight, convs_1_post_nn_0_weight_fixed);
-	cast_1d<80>(convs_1_post_nn_0_bias, convs_1_post_nn_0_bias_fixed);
+	cast_2d<80,960>(convs_1_post_nn_0_weight, convs_1_post_nn_0_weight_fixed_in);
+	cast_1d<80>(convs_1_post_nn_0_bias, convs_1_post_nn_0_bias_fixed_in);
 
-	cast_2d<80,960>(convs_2_post_nn_0_weight, convs_2_post_nn_0_weight_fixed);
-	cast_1d<80>(convs_2_post_nn_0_bias, convs_2_post_nn_0_bias_fixed);
+	cast_2d<80,960>(convs_2_post_nn_0_weight, convs_2_post_nn_0_weight_fixed_in);
+	cast_1d<80>(convs_2_post_nn_0_bias, convs_2_post_nn_0_bias_fixed_in);
 
-	cast_2d<80,960>(convs_3_post_nn_0_weight, convs_3_post_nn_0_weight_fixed);
-	cast_1d<80>(convs_3_post_nn_0_bias, convs_3_post_nn_0_bias_fixed);
+	cast_2d<80,960>(convs_3_post_nn_0_weight, convs_3_post_nn_0_weight_fixed_in);
+	cast_1d<80>(convs_3_post_nn_0_bias, convs_3_post_nn_0_bias_fixed_in);
 
-    copy_2d<80, 960, WT_TYPE>(convs_0_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[0]);
-    copy_2d<80, 960, WT_TYPE>(convs_1_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[1]);
-    copy_2d<80, 960, WT_TYPE>(convs_2_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[2]);
-    copy_2d<80, 960, WT_TYPE>(convs_3_post_nn_0_weight_fixed, convs_ALL_post_nn_0_weight_fixed[3]);
+    copy_2d<80, 960, WT_TYPE>(convs_0_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed_in[0]);
+    copy_2d<80, 960, WT_TYPE>(convs_1_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed_in[1]);
+    copy_2d<80, 960, WT_TYPE>(convs_2_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed_in[2]);
+    copy_2d<80, 960, WT_TYPE>(convs_3_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed_in[3]);
 
-    copy_1d<80, WT_TYPE>(convs_0_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[0]);
-    copy_1d<80, WT_TYPE>(convs_1_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[1]);
-    copy_1d<80, WT_TYPE>(convs_2_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[2]);
-    copy_1d<80, WT_TYPE>(convs_3_post_nn_0_bias_fixed, convs_ALL_post_nn_0_bias_fixed[3]);
+    copy_1d<80, WT_TYPE>(convs_0_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed_in[0]);
+    copy_1d<80, WT_TYPE>(convs_1_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed_in[1]);
+    copy_1d<80, WT_TYPE>(convs_2_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed_in[2]);
+    copy_1d<80, WT_TYPE>(convs_3_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed_in[3]);
 
-    cast_2d<40,80>(mlp_0_weight, mlp_0_weight_fixed);
-	cast_1d<40>(mlp_0_bias, mlp_0_bias_fixed);
+    cast_2d<40,80>(mlp_0_weight, mlp_0_weight_fixed_in);
+	cast_1d<40>(mlp_0_bias, mlp_0_bias_fixed_in);
 
-	cast_2d<20,40>(mlp_2_weight, mlp_2_weight_fixed);
-	cast_1d<20>(mlp_2_bias, mlp_2_bias_fixed);
+	cast_2d<20,40>(mlp_2_weight, mlp_2_weight_fixed_in);
+	cast_1d<20>(mlp_2_bias, mlp_2_bias_fixed_in);
 
-	cast_2d<1,20>(mlp_4_weight, mlp_4_weight_fixed);
-	cast_1d<1>(mlp_4_bias, mlp_4_bias_fixed);
+	cast_2d<1,20>(mlp_4_weight, mlp_4_weight_fixed_in);
+	cast_1d<1>(mlp_4_bias, mlp_4_bias_fixed_in);
 
 
 }

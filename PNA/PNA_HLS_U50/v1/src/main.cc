@@ -4,7 +4,6 @@
 
 // global weights
 //extern float final;
-extern FM_TYPE final;
 
 
 int main()
@@ -42,9 +41,13 @@ int main()
         graph_attr[1] = num_of_edges;
         graph_attr[2] = g == 1;
 
+        FM_TYPE task_tb[NUM_TASK];
+
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
         
         PNA_compute_one_graph(
+            task_tb,
+
             node_feature,
             edge_list,
             graph_attr,
@@ -69,7 +72,7 @@ int main()
             convs_ALL_post_nn_0_weight_fixed_in,
             convs_ALL_post_nn_0_bias_fixed_in
         );
-        all_results[g - 1] = final;
+        all_results[g - 1] = task_tb[0].to_float();
         free(node_feature);
         free(edge_list);
         free(edge_attr);
