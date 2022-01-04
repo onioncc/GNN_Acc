@@ -204,10 +204,8 @@ void DGN_compute_one_graph(int g, int* node_feature, int* edge_list, int* edge_a
     char graph_n[30];
     memset(graph_n, 0, 30 * sizeof(char));
     sprintf(graph_n, "eig/g%d.txt", g);
-	FILE *eigfile;
-	int fileOK = 0;
 	double firstdata=0.0;
-	fileOK = fopen_s(&eigfile, graph_n, "r");
+	FILE *eigfile = fopen(graph_n, "r");
 	fscanf(eigfile, "tensor([[%e, %e,%e,%e],\n", &node_eig[0][0], &node_eig[0][1], &node_eig[0][2], &node_eig[0][3]);
     for (int nd = 1; nd < num_of_nodes - 1; nd++)
     {

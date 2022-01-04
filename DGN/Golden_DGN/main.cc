@@ -29,7 +29,7 @@ extern float final;
 
 int main()
 {
-    printf("\n******* This is the golden C file for PNA model *******\n");
+    printf("\n******* This is the golden C file for DGN model *******\n");
 
     load_weights();
 
