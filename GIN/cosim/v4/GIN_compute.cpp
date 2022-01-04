@@ -171,7 +171,6 @@ void message_passing_one_node(FM_TYPE emb_vec[EMB_DIM], int nd, FM_TYPE message_
 }
 
 
-
 void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message2[MAX_NODE][EMB_DIM], int layer, int num_of_nodes)
 {
 #pragma HLS inline off
@@ -187,16 +186,21 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 		int total_neigh = degree_table[u * 3];
 		int start_idx = degree_table[u * 3 + 1];
 
-		for(int dim = 0; dim < EMB_DIM; dim++) {
-			FM_TYPE val = emb_vec.read();
+        FM_TYPE node_emb_value[EMB_DIM];
 
-#pragma HLS pipeline
-			for(int i = 0; i < total_neigh; i++) {
+		for(int dim = 0; dim < EMB_DIM; dim++) {
+			node_emb_value[dim] = emb_vec.read();
+        }
+
+
+        for(int i = 0; i < total_neigh; i++) {
 #pragma HLS loop_tripcount min=1 max=5 avg=3
 
-				int v = neighbor_table[start_idx + i * 2];
-				int e = neighbor_table[start_idx + i * 2 + 1];
+            int v = neighbor_table[start_idx + i * 2];
+            int e = neighbor_table[start_idx + i * 2 + 1];
 
+            for(int dim = 0; dim < EMB_DIM; dim++) {
+#pragma HLS pipeline
 				FM_TYPE edge_embed = 0;
 				for(int ef = 0; ef < EDGE_ATTR; ef++) {
 
@@ -207,13 +211,14 @@ void message_passing_one_node_vec(hls::stream<FM_TYPE> &emb_vec, FM_TYPE message
 					edge_embed += emb_value;
 
 				}
-				FM_TYPE msg = edge_embed + val;
+				FM_TYPE msg = edge_embed + node_emb_value[dim];
 				if(msg < 0) msg = 0.0;
 				message2[v][dim] += msg;
-			}
+            }
 		}
 	}
 }
+
 
 
 void copy_and_clear_message_table(FM_TYPE message_tb_dest[MAX_NODE][EMB_DIM], FM_TYPE message_tb_src[MAX_NODE][EMB_DIM], int num_of_nodes)
@@ -342,7 +347,7 @@ void  compute_CONV_dataflow_region(FM_TYPE message1[MAX_NODE][EMB_DIM], FM_TYPE 
     FM_TYPE mlp_out[EMB_DIM];
 
     hls::stream<FM_TYPE> emb_vec;
-#pragma HLS STREAM variable=emb_vec depth=200
+#pragma HLS STREAM variable=emb_vec depth=2000
 
     /// something special in GIN
     WT_TYPE _eps = mlp_eps[layer];
@@ -352,7 +357,6 @@ void  compute_CONV_dataflow_region(FM_TYPE message1[MAX_NODE][EMB_DIM], FM_TYPE 
 	message_passing_one_node_vec(emb_vec, message2, layer + 1, num_of_nodes);
 
 }
-
 
 void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
 {
@@ -371,9 +375,14 @@ void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
     if( layer == 0 )
         clear_message_table(message2, num_of_nodes);
 
-    compute_CONV_dataflow_region(message1, message2, num_of_nodes, num_of_edges, layer);
+    if( layer % 2 == 0 ) {
+        compute_CONV_dataflow_region(message1, message2, num_of_nodes, num_of_edges, layer);
+    }
+    else {
+        compute_CONV_dataflow_region(message2, message1, num_of_nodes, num_of_edges, layer);
+    }
 
-    copy_and_clear_message_table(message1, message2, num_of_nodes);
+    //copy_and_clear_message_table(message1, message2, num_of_nodes);
     
 
 #ifdef _PRINT_
@@ -387,6 +396,7 @@ void compute_CONV_layer(int num_of_nodes, int num_of_edges, int layer)
     }
 #endif
 }
+
 
 
 void global_mean_pooling(FM_TYPE* h_graph, FM_TYPE h_node[MAX_NODE][EMB_DIM], int num_of_nodes)
@@ -579,15 +589,15 @@ void GIN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=100000 port=edge_attr_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=3 port=graph_attr offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=1 port=task offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_weights_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_bias_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_2_weights_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_2_bias_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_embedding_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=gnn_edge_embedding_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=graph_pred_linear_weight_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=graph_pred_linear_bias_fixed offset=slave bundle=mem
-//#pragma HLS INTERFACE m_axi depth=100000 port=eps_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_weights_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_1_bias_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_2_weights_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_mlp_2_bias_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=gnn_node_embedding_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=gnn_edge_embedding_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=graph_pred_linear_weight_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=graph_pred_linear_bias_fixed offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=eps_fixed offset=slave bundle=mem
 
 #pragma HLS bind_storage variable=node_feature type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=edge_attr type=RAM_2P impl=bram
@@ -604,12 +614,12 @@ void GIN_compute_one_graph(
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2]; //is the first graph
 
-     num_of_nodes = 19;
-     num_of_edges = 40;
-     is_first = 1;
+    // num_of_nodes = 19;
+    // num_of_edges = 40;
+    // is_first = 0;
 
 
-    if( is_first == 1 ) {
+   if( is_first == 1 ) {
 		////////////// Load weights
 		for(int layer = 0; layer < 5; layer++) {
 			load_mlp_weights_one_layer(layer, gnn_node_mlp_1_weights_fixed, gnn_node_mlp_1_bias_fixed, gnn_node_mlp_2_weights_fixed, gnn_node_mlp_2_bias_fixed);
@@ -617,7 +627,7 @@ void GIN_compute_one_graph(
 
 		load_misc_weights(eps_fixed, graph_pred_linear_weight_fixed, graph_pred_linear_bias_fixed,
 						  gnn_node_embedding_fixed, gnn_edge_embedding_fixed);
-    }
+   }
 
     ///////////// Load a new graph onto chip
     load_graph(node_feature, edge_attr, edge_list, node_feature_in, edge_list_in, edge_attr_in, num_of_nodes, num_of_edges);
