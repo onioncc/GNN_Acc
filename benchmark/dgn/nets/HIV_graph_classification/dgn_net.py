@@ -43,22 +43,22 @@ class DGNNet(nn.Module):
 
         self.layers = nn.ModuleList([DGNLayer(in_dim=hidden_dim, out_dim=hidden_dim, dropout=dropout, residual=self.residual, aggregators=self.aggregators,
                       scalers=self.scalers, avg_d=self.avg_d, type_net=self.type_net, edge_features=self.edge_feat,
-                      edge_dim=edge_dim, pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers).model for _
+                      edge_dim=edge_dim, pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers, device=device).model for _
              in range(n_layers - 1)])
         self.layers.append(DGNLayer(in_dim=hidden_dim, out_dim=out_dim, dropout=dropout,
                                     residual=self.residual, aggregators=self.aggregators, scalers=self.scalers,
                                     avg_d=self.avg_d, type_net=self.type_net, edge_features=self.edge_feat,
                                     edge_dim=edge_dim,
-                                    pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers).model)
+                                    pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers, device=device).model)
 
-        self.MLP_layer = MLPReadout(out_dim, 1)  # 1 out dim since regression problem
+        self.MLP_layer = MLPReadout(out_dim, 1, device=device)  # 1 out dim since regression problem
 
 
     def forward(self, g, h, e, snorm_n, snorm_e):
         h = self.embedding_h(h)
         h = self.in_feat_dropout(h)
         if self.pos_enc_dim > 0:
-            h_pos_enc = self.embedding_pos_enc(g.ndata['pos_enc'].to(self.device))
+            h_pos_enc = self.embedding_pos_enc(g.ndata['pos_enc'])
             h = h + h_pos_enc
         if self.edge_feat:
             e = self.embedding_e(e)

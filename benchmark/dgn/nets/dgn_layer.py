@@ -10,11 +10,12 @@ from dgl.nn.pytorch.glob import mean_nodes, sum_nodes
 
 
 class VirtualNode(nn.Module):
-    def __init__(self, dim, dropout, batch_norm=False, bias=True, residual=True, vn_type='mean'):
+    def __init__(self, dim, dropout, batch_norm=False, bias=True, residual=True, vn_type='mean', device=None):
         super().__init__()
+        assert device is not None
         self.vn_type = vn_type.lower()
         self.fc_layer = FCLayer(in_size=dim, out_size=dim, activation='relu', dropout=dropout,
-                                b_norm=batch_norm, bias=bias)
+                                b_norm=batch_norm, bias=bias, device=device)
         self.residual = residual
 
     def forward(self, g, h, vn_h):
@@ -51,8 +52,9 @@ class VirtualNode(nn.Module):
 
 class DGNLayerComplex(nn.Module):
     def __init__(self, in_dim, out_dim, dropout, graph_norm, batch_norm, aggregators, scalers, avg_d, residual,
-                 edge_features, edge_dim, pretrans_layers=1, posttrans_layers=1):
+                 edge_features, edge_dim, pretrans_layers=1, posttrans_layers=1, device=None):
         super().__init__()
+        assert device is not None
 
         self.dropout = dropout
         self.graph_norm = graph_norm
@@ -65,9 +67,11 @@ class DGNLayerComplex(nn.Module):
 
         self.batchnorm_h = nn.BatchNorm1d(out_dim)
         self.pretrans = MLP(in_size=2 * in_dim + (edge_dim if edge_features else 0), hidden_size=in_dim,
-                            out_size=in_dim, layers=pretrans_layers, mid_activation='relu', last_activation='none')
+                            out_size=in_dim, layers=pretrans_layers, mid_activation='relu', last_activation='none',
+                            device=device)
         self.posttrans = MLP(in_size=(len(aggregators) * len(scalers) + 1) * in_dim, hidden_size=out_dim,
-                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none')
+                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none',
+                             device=device)
         self.avg_d = avg_d
         if in_dim != out_dim:
             self.residual = False
@@ -80,8 +84,8 @@ class DGNLayerComplex(nn.Module):
         return {'e': self.pretrans(z2), 'eig_s': edges.src['eig'], 'eig_d': edges.dst['eig']}
 
     def message_func(self, edges):
-        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'].to('cuda' if torch.cuda.is_available() else 'cpu'),
-                'eig_d': edges.data['eig_d'].to('cuda' if torch.cuda.is_available() else 'cpu')}
+        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'],
+                'eig_d': edges.data['eig_d']}
 
     def reduce_func(self, nodes):
         h_in = nodes.data['h']
@@ -133,8 +137,9 @@ class DGNLayerComplex(nn.Module):
 
 class DGNLayerSimple(nn.Module):
     def __init__(self, in_dim, out_dim, dropout, graph_norm, batch_norm, aggregators, scalers, residual, avg_d,
-                 posttrans_layers=1):
+                 posttrans_layers=1, device=None):
         super().__init__()
+        assert device is not None
 
         self.dropout = dropout
         self.graph_norm = graph_norm
@@ -145,7 +150,8 @@ class DGNLayerSimple(nn.Module):
         self.batchnorm_h = nn.BatchNorm1d(out_dim)
 
         self.posttrans = MLP(in_size=(len(aggregators) * len(scalers)) * in_dim, hidden_size=out_dim,
-                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none')
+                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none',
+                             device=device)
         self.avg_d = avg_d
         if in_dim != out_dim:
             self.residual = False
@@ -154,8 +160,8 @@ class DGNLayerSimple(nn.Module):
         return {'e': edges.src['h'], 'eig_s': edges.src['eig'], 'eig_d': edges.dst['eig']}
 
     def message_func(self, edges):
-        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'].to('cuda' if torch.cuda.is_available() else 'cpu'),
-                'eig_d': edges.data['eig_d'].to('cuda' if torch.cuda.is_available() else 'cpu')}
+        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'],
+                'eig_d': edges.data['eig_d']}
 
     def reduce_func(self, nodes):
         h_in = nodes.data['h']
@@ -202,8 +208,9 @@ class DGNLayerSimple(nn.Module):
 
 class DGNLayerSimpleNB(nn.Module):
     def __init__(self, in_dim, out_dim, dropout,  aggregators, scalers, residual, avg_d,
-                 posttrans_layers=1):
+                 posttrans_layers=1, device=None):
         super().__init__()
+        assert device is not None
 
         self.dropout = dropout
         self.residual = residual
@@ -211,7 +218,8 @@ class DGNLayerSimpleNB(nn.Module):
         self.scalers = scalers
 
         self.posttrans = MLP(in_size=(len(aggregators) * len(scalers)) * in_dim, hidden_size=out_dim,
-                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none')
+                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none',
+                             device=device)
         self.avg_d = avg_d
         if in_dim != out_dim:
             self.residual = False
@@ -263,7 +271,7 @@ class DGNLayerSimpleNB(nn.Module):
 
 class DGNTower(nn.Module):
     def __init__(self, in_dim, out_dim, dropout, graph_norm, batch_norm, aggregators, scalers, avg_d,
-                 pretrans_layers, posttrans_layers, edge_features, edge_dim):
+                 pretrans_layers, posttrans_layers, edge_features, edge_dim, device):
         super().__init__()
         self.dropout = dropout
         self.graph_norm = graph_norm
@@ -276,10 +284,12 @@ class DGNTower(nn.Module):
         self.batchnorm_h = nn.BatchNorm1d(out_dim)
 
         self.pretrans = MLP(in_size=2 * in_dim + (edge_dim if edge_features else 0), hidden_size=in_dim,
-                            out_size=in_dim, layers=pretrans_layers, mid_activation='relu', last_activation='none')
+                            out_size=in_dim, layers=pretrans_layers, mid_activation='relu', last_activation='none',
+                            device=device)
 
         self.posttrans = MLP(in_size=(len(aggregators) * len(scalers) + 1) * in_dim, hidden_size=out_dim,
-                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none')
+                             out_size=out_dim, layers=posttrans_layers, mid_activation='relu', last_activation='none',
+                             device=device)
         self.avg_d = avg_d
 
     def pretrans_edges(self, edges):
@@ -290,8 +300,8 @@ class DGNTower(nn.Module):
         return {'e': self.pretrans(z2), 'eig_s': edges.src['eig'], 'eig_d': edges.dst['eig']}
 
     def message_func(self, edges):
-        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'].to('cuda' if torch.cuda.is_available() else 'cpu'),
-                'eig_d': edges.data['eig_d'].to('cuda' if torch.cuda.is_available() else 'cpu')}
+        return {'e': edges.data['e'], 'eig_s': edges.data['eig_s'],
+                'eig_d': edges.data['eig_d']}
 
     def reduce_func(self, nodes):
         h_in = nodes.data['h']
@@ -338,11 +348,12 @@ class DGNTower(nn.Module):
 class DGNLayerTower(nn.Module):
     def __init__(self, in_dim, out_dim, aggregators, scalers, avg_d, dropout, graph_norm, batch_norm, towers=5,
                  pretrans_layers=1, posttrans_layers=1, divide_input=True, residual=False, edge_features=False,
-                 edge_dim=0):
+                 edge_dim=0, device=None):
         super().__init__()
         assert ((not divide_input) or in_dim % towers == 0), "if divide_input is set the number of towers has to divide in_dim"
         assert (out_dim % towers == 0), "the number of towers has to divide the out_dim"
         assert avg_d is not None
+        assert device is not None
 
         self.divide_input = divide_input
         self.input_tower = in_dim // towers if divide_input else in_dim
@@ -387,8 +398,9 @@ class DGNLayerTower(nn.Module):
 class DGNLayer(nn.Module):
     def __init__(self, in_dim, out_dim, dropout,  aggregators, scalers, avg_d, type_net,
                  residual, towers=5, divide_input=True, edge_features=None, edge_dim=None, pretrans_layers=1,
-                 posttrans_layers=1):
+                 posttrans_layers=1, device=None):
         super().__init__()
+        assert device is not None
 
         # retrieve the aggregators and scalers functions
         aggregators = [AGGREGATORS[aggr] for aggr in aggregators.split()]
@@ -396,15 +408,15 @@ class DGNLayer(nn.Module):
 
         if type_net == 'simple':
             self.model = DGNLayerSimpleNB(in_dim=in_dim, out_dim=out_dim, dropout=dropout, residual=residual, aggregators=aggregators,
-                                        scalers=scalers, avg_d=avg_d, posttrans_layers=posttrans_layers)
+                                        scalers=scalers, avg_d=avg_d, posttrans_layers=posttrans_layers, device=device)
         elif type_net == 'complex':
             self.model = DGNLayerComplex(in_dim=in_dim, out_dim=out_dim, dropout=dropout, graph_norm=graph_norm,
                                          batch_norm=batch_norm, aggregators=aggregators, residual=residual,
                                          scalers=scalers, avg_d=avg_d, edge_features=edge_features, edge_dim=edge_dim,
-                                         pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers)
+                                         pretrans_layers=pretrans_layers, posttrans_layers=posttrans_layers, device=device)
         elif type_net == 'towers':
             self.model = DGNLayerTower(in_dim=in_dim, out_dim=out_dim, aggregators=aggregators, scalers=scalers,
                                        avg_d=avg_d, dropout=dropout, graph_norm=graph_norm,
                                        batch_norm=batch_norm, towers=towers, pretrans_layers=pretrans_layers,
                                        posttrans_layers=posttrans_layers, divide_input=divide_input,
-                                       residual=residual, edge_features=edge_features, edge_dim=edge_dim)
+                                       residual=residual, edge_features=edge_features, edge_dim=edge_dim, device=device)

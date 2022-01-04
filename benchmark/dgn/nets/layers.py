@@ -70,8 +70,9 @@ class FCLayer(nn.Module):
     """
 
     def __init__(self, in_size, out_size, activation='relu', dropout=0., b_norm=False, bias=True, init_fn=None,
-                 device='cpu'):
+                 device=None):
         super(FCLayer, self).__init__()
+        assert device is not None
 
         self.__params = locals()
         del self.__params['__class__']
@@ -123,8 +124,9 @@ class MLP(nn.Module):
     """
 
     def __init__(self, in_size, hidden_size, out_size, layers, mid_activation='relu', last_activation='none',
-                 dropout=0., mid_b_norm=False, last_b_norm=False, device='cpu'):
+                 dropout=0., mid_b_norm=False, last_b_norm=False, device=None):
         super(MLP, self).__init__()
+        assert device is not None
 
         self.in_size = in_size
         self.hidden_size = hidden_size
