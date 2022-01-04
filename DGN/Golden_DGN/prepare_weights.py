@@ -1,6 +1,8 @@
 from ogb.graphproppred import Evaluator
 
 import torch
+from math import inf
+torch.set_printoptions(threshold=inf)
 
 import torch.optim as optim
 from torch.utils.data import DataLoader
