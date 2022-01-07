@@ -466,7 +466,7 @@ FM_TYPE MLP(int num_of_nodes) {
     }
     return out;
 }
-
+extern "C" {
 void PNA_compute_one_graph(
     FM_TYPE *task,
 
@@ -673,4 +673,5 @@ void PNA_compute_one_graph(
     printf("%f \n", task[0].to_float());
 
     return;
+}
 }

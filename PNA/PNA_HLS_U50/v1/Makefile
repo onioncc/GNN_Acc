@@ -80,7 +80,7 @@ CMD_ARGS = $(BUILD_DIR)/PNA_compute_one_graph.xclbin
 SDCARD := sd_card
 
 include $(XF_PROJ_ROOT)/../common/includes/opencl/opencl.mk
-CXXFLAGS += $(opencl_CXXFLAGS) -Wall -O0 -g -std=c++1y
+CXXFLAGS += $(opencl_CXXFLAGS) -Wall -O0 -g -std=c++1y -Wno-unknown-pragmas
 LDFLAGS += $(opencl_LDFLAGS)
 
 ifeq ($(findstring nodma, $(DEVICE)), nodma)
@@ -104,7 +104,7 @@ endif
 
 ############################## Setting up Kernel Variables ##############################
 # Kernel compiler global settings
-VPP_FLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps 
+VPP_FLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps -j26
 ifneq ($(TARGET), hw)
 	VPP_FLAGS += -g
 endif
@@ -149,7 +149,7 @@ endif
 
 ############################## Setting Rules for Host (Building Host Executable) ##############################
 $(EXECUTABLE): $(HOST_SRCS) | check-xrt
-		$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
+		$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS) 
 
 emconfig:$(EMCONFIG_DIR)/emconfig.json
 $(EMCONFIG_DIR)/emconfig.json:

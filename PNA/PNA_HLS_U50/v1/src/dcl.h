@@ -48,37 +48,36 @@ extern float mlp_2_bias[20];
 extern float mlp_4_weight[1][20];
 extern float mlp_4_bias[1];
 
-// extern WT_TYPE node_emb_atom_embedding_list_0_weight_fixed[119][80];
-// extern WT_TYPE node_emb_atom_embedding_list_1_weight_fixed[4][80];
-// extern WT_TYPE node_emb_atom_embedding_list_2_weight_fixed[12][80];
-// extern WT_TYPE node_emb_atom_embedding_list_3_weight_fixed[12][80];
-// extern WT_TYPE node_emb_atom_embedding_list_4_weight_fixed[10][80];
-// extern WT_TYPE node_emb_atom_embedding_list_5_weight_fixed[6][80];
-// extern WT_TYPE node_emb_atom_embedding_list_6_weight_fixed[6][80];
-// extern WT_TYPE node_emb_atom_embedding_list_7_weight_fixed[2][80];
-// extern WT_TYPE node_emb_atom_embedding_list_8_weight_fixed[2][80];
-// extern WT_TYPE convs_0_post_nn_0_weight_fixed[80][960];
-// extern WT_TYPE convs_0_post_nn_0_bias_fixed[80];
-// extern WT_TYPE convs_1_post_nn_0_weight_fixed[80][960];
-// extern WT_TYPE convs_1_post_nn_0_bias_fixed[80];
-// extern WT_TYPE convs_2_post_nn_0_weight_fixed[80][960];
-// extern WT_TYPE convs_2_post_nn_0_bias_fixed[80];
-// extern WT_TYPE convs_3_post_nn_0_weight_fixed[80][960];
-// extern WT_TYPE convs_3_post_nn_0_bias_fixed[80];
-// extern WT_TYPE mlp_0_weight_fixed[40][80];
-// extern WT_TYPE mlp_0_bias_fixed[40];
-// extern WT_TYPE mlp_2_weight_fixed[20][40];
-// extern WT_TYPE mlp_2_bias_fixed[20];
-// extern WT_TYPE mlp_4_weight_fixed[1][20];
-// extern WT_TYPE mlp_4_bias_fixed[1];
+extern WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in_arr[119][80];
+extern WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in_arr[4][80];
+extern WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in_arr[12][80];
+extern WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in_arr[12][80];
+extern WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in_arr[10][80];
+extern WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in_arr[6][80];
+extern WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in_arr[6][80];
+extern WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in_arr[2][80];
+extern WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in_arr[2][80];
+extern WT_TYPE convs_0_post_nn_0_weight_fixed_in_arr[80][960];
+extern WT_TYPE convs_0_post_nn_0_bias_fixed_in_arr[80];
+extern WT_TYPE convs_1_post_nn_0_weight_fixed_in_arr[80][960];
+extern WT_TYPE convs_1_post_nn_0_bias_fixed_in_arr[80];
+extern WT_TYPE convs_2_post_nn_0_weight_fixed_in_arr[80][960];
+extern WT_TYPE convs_2_post_nn_0_bias_fixed_in_arr[80];
+extern WT_TYPE convs_3_post_nn_0_weight_fixed_in_arr[80][960];
+extern WT_TYPE convs_3_post_nn_0_bias_fixed_in_arr[80];
+extern WT_TYPE mlp_0_weight_fixed_in_arr[40][80];
+extern WT_TYPE mlp_0_bias_fixed_in_arr[40];
+extern WT_TYPE mlp_2_weight_fixed_in_arr[20][40];
+extern WT_TYPE mlp_2_bias_fixed_in_arr[20];
+extern WT_TYPE mlp_4_weight_fixed_in_arr[1][20];
+extern WT_TYPE mlp_4_bias_fixed_in_arr[1];
+ 
+extern WT_TYPE convs_ALL_post_nn_0_weight_fixed_in_arr[4][80][960];
+extern WT_TYPE convs_ALL_post_nn_0_bias_fixed_in_arr[4][80];
 
-// extern WT_TYPE convs_ALL_post_nn_0_weight_fixed[4][80][960];
-// extern WT_TYPE convs_ALL_post_nn_0_bias_fixed[4][80];
-
-
-
-void load_weights();
-void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
+// void load_weights();
+// void fetch_one_graph(char* graph_name, int* node_feature, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
+extern "C" {
 void PNA_compute_one_graph(
     FM_TYPE* result,
 
@@ -106,4 +105,5 @@ void PNA_compute_one_graph(
     WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960],
     WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80]
     );
+}
 #endif

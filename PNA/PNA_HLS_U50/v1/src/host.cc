@@ -65,6 +65,7 @@ int main(int argc, char **argv) {
     printf("\n******* This is the HLS for PNA model *******\n");
 
     load_weights();
+
     printf("\n******* Weights loading done *******\n");
 
     cl::Buffer node_emb_atom_embedding_list_0_weight_fixed_in_buf(
@@ -172,16 +173,26 @@ int main(int argc, char **argv) {
         convs_ALL_post_nn_0_bias_fixed_in.data(),
         &err);
 
-    int idx = 6;
-    krnl_PNA_compute_one_graph.setArg(idx++, embedding_h_atom_embedding_list_weights_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, layers_posttrans_fully_connected_0_linear_weight_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, layers_posttrans_fully_connected_0_linear_bias_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_0_weight_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_0_bias_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_1_weight_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_1_bias_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_2_weight_in_buf);
-    krnl_PNA_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_2_bias_in_buf);
+    int index = 4;
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_0_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_1_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_2_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_3_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_4_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_5_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_6_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_7_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, node_emb_atom_embedding_list_8_weight_fixed_in_buf);
+
+    krnl_PNA_compute_one_graph.setArg(index++, mlp_0_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, mlp_0_bias_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, mlp_2_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, mlp_2_bias_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, mlp_4_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, mlp_4_bias_fixed_in_buf);
+
+    krnl_PNA_compute_one_graph.setArg(index++, convs_ALL_post_nn_0_weight_fixed_in_buf);
+    krnl_PNA_compute_one_graph.setArg(index++, convs_ALL_post_nn_0_bias_fixed_in_buf);
 
     float all_results[4113];
     FILE *c_output = fopen("HLS_output.txt", "w+");
@@ -213,29 +224,23 @@ int main(int argc, char **argv) {
 
         fetch_one_graph(graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
 
+        cl::Buffer task_tb_buf(
+            context,
+            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+            NUM_TASK * sizeof(FM_TYPE),
+            task_tb.data(),
+            &err);
         cl::Buffer node_feature_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
             ND_FEATURE * num_of_nodes * sizeof(int),
             node_feature.data(),
             &err);
-        cl::Buffer node_eigen_buf(
+        cl::Buffer edge_list_buf(
             context,
             CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-            4 * num_of_nodes * sizeof(WT_TYPE),
-            node_eigen.data(),
-            &err);
-        cl::Buffer degree_table_buf(
-            context,
-            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-            num_of_nodes * 2 * sizeof(int),
-            degree_table.data(),
-            &err);
-        cl::Buffer neighbor_table_buf(
-            context,
-            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-            num_of_edges * sizeof(int),
-            neighbor_table.data(),
+            2 * num_of_edges * sizeof(int),
+            edge_list.data(),
             &err);
         cl::Buffer graph_attr_buf(
             context,
@@ -243,23 +248,15 @@ int main(int argc, char **argv) {
             3 * sizeof(int),
             graph_attr.data(),
             &err);
-        cl::Buffer result_buf(
-            context,
-            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-            sizeof(float),
-            result.data(),
-            &err);
 
-        krnl_PNA_compute_one_graph.setArg(0, result_buf);
+        krnl_PNA_compute_one_graph.setArg(0, task_tb_buf);
         krnl_PNA_compute_one_graph.setArg(1, node_feature_buf);
-        krnl_PNA_compute_one_graph.setArg(2, node_eigen_buf);
-        krnl_PNA_compute_one_graph.setArg(3, degree_table_buf);
-        krnl_PNA_compute_one_graph.setArg(4, neighbor_table_buf);
-        krnl_PNA_compute_one_graph.setArg(5, graph_attr_buf);
+        krnl_PNA_compute_one_graph.setArg(2, edge_list_buf);
+        krnl_PNA_compute_one_graph.setArg(3, graph_attr_buf);
 
         printf("Computing PNA ...\n");
         OCL_CHECK(err, err = q.enqueueTask(krnl_PNA_compute_one_graph));
-        q.enqueueMigrateMemObjects({task_tb}, CL_MIGRATE_MEM_OBJECT_HOST);
+        q.enqueueMigrateMemObjects({task_tb_buf}, CL_MIGRATE_MEM_OBJECT_HOST);
         q.finish();
 
         printf("Final graph prediction:\n");
