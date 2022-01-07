@@ -3,7 +3,6 @@ import dgl
 from nets.dgn_layer import DGNLayer
 from nets.mlp_readout_layer import MLPReadout
 import torch
-from ogb.graphproppred.mol_encoder import AtomEncoder, BondEncoder
 
 
 
@@ -13,6 +12,7 @@ from ogb.graphproppred.mol_encoder import AtomEncoder, BondEncoder
 class DGNNet(nn.Module):
     def __init__(self, net_params):
         super().__init__()
+        in_dim = net_params['in_dim']
         hidden_dim = net_params['hidden_dim']
         out_dim = net_params['out_dim']
         in_feat_dropout = net_params['in_feat_dropout']
@@ -34,12 +34,8 @@ class DGNNet(nn.Module):
         device = net_params['device']
         self.device = device
 
+        self.embedding_h = nn.Linear(in_dim, hidden_dim)
         self.in_feat_dropout = nn.Dropout(in_feat_dropout)
-
-        self.embedding_h = AtomEncoder(emb_dim=hidden_dim)
-
-        if self.edge_feat:
-            self.embedding_e = BondEncoder(emb_dim=edge_dim)
 
         self.layers = nn.ModuleList([DGNLayer(in_dim=hidden_dim, out_dim=hidden_dim, dropout=dropout, residual=self.residual, aggregators=self.aggregators,
                       scalers=self.scalers, avg_d=self.avg_d, type_net=self.type_net, edge_features=self.edge_feat,
@@ -53,6 +49,19 @@ class DGNNet(nn.Module):
 
         self.MLP_layer = MLPReadout(out_dim, 1)  # 1 out dim since regression problem
 
+        self.init_fn = nn.init.xavier_uniform_
+        self.reset_parameters()
+
+
+    def reset_parameters(self, init_fn=None):
+        init_fn = init_fn or self.init_fn
+        if init_fn is not None:
+            init_fn(self.embedding_h.weight, 1)
+            self.embedding_h.bias.data.zero_()
+        for layer in self.MLP_layer.FC_layers.children():
+            init_fn(layer.weight, 1)
+            layer.bias.data.zero_()
+
 
     def forward(self, g, h, e, snorm_n, snorm_e):
         h = self.embedding_h(h)
@@ -60,25 +69,12 @@ class DGNNet(nn.Module):
         if self.pos_enc_dim > 0:
             h_pos_enc = self.embedding_pos_enc(g.ndata['pos_enc'].to(self.device))
             h = h + h_pos_enc
-        if self.edge_feat:
-            e = self.embedding_e(e)
 
         for i, conv in enumerate(self.layers):
             h_t = conv(g, h, e, snorm_n)
             h = h_t
 
-        g.ndata['h'] = h
-
-        if self.readout == "sum":
-            hg = dgl.sum_nodes(g, 'h')
-        elif self.readout == "max":
-            hg = dgl.max_nodes(g, 'h')
-        elif self.readout == "mean":
-            hg = dgl.mean_nodes(g, 'h')
-        else:
-            hg = dgl.mean_nodes(g, 'h')  # default readout is mean nodes
-
-        return self.MLP_layer(hg)
+        return self.MLP_layer(h)
 
     def loss(self, scores, labels):
         unsqueezed_labels = labels.type(torch.FloatTensor).unsqueeze(-1).to(labels.device)

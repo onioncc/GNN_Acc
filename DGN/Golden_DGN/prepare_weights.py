@@ -7,7 +7,7 @@ torch.set_printoptions(threshold=inf)
 import torch.optim as optim
 from torch.utils.data import DataLoader
 
-from tensorboardX import SummaryWriter
+#from tensorboardX import SummaryWriter
 from tqdm import tqdm
 
 """
@@ -22,7 +22,7 @@ import numpy as np
 import json
 import struct
 
-from data.HIV import HIVDataset
+from data.planetoid import PlanetoidDataset
 from nets.HIV_graph_classification.dgn_net import DGNNet
 
 
@@ -58,17 +58,18 @@ def evaluate_network(model, device, data_loader, epoch):
 if __name__ == '__main__':
     ############ Device and test_loader #############
     device = torch.device("cpu")
-    DATASET_NAME = 'HIV'
-    dataset = HIVDataset(DATASET_NAME, pos_enc_dim=int(0), norm='none')
-    testset = dataset.test
-    test_loader = DataLoader(testset, batch_size=int(1), shuffle=False, collate_fn=dataset.collate, pin_memory=True)
-    gid = 1
-    for g in testset.graph_lists:
-        key = 'g' + str(gid)
+    for DATASET_NAME in ('Cora', 'CiteSeer', 'PubMed'):
+        dataset = PlanetoidDataset(DATASET_NAME, pos_enc_dim=int(0), norm='none')
+        testset = dataset.test
+        test_loader = DataLoader(testset, batch_size=int(1), shuffle=False, collate_fn=dataset.collate, pin_memory=True)
+        g, = testset.graph_lists
+        key = DATASET_NAME.lower()
         f_txt = open('eig/' + key + '.txt', 'w+')
-        gid += 1
         f_txt.write(str(g.ndata['eig']) + '\n')
         f_txt.close()
+    
+    import sys
+    sys.exit(0)
     #
     # ########### Load the pre-trained GIN model ###########
     print('Load the pretrained GNN model')
