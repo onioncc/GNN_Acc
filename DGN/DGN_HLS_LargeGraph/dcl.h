@@ -7,10 +7,18 @@
 #include <math.h>
 #include <ap_fixed.h>
 
-#define MAX_EDGE 500
-#define MAX_NODE 500
-#define ND_FEATURE 9
-#define EDGE_ATTR 3
+// Enables fixed num_of_nodes/edges in DGN_compute.cc for timing estimates
+#define __SYNTHESIS_DEBUG__
+
+// Cora
+#define ND_FEATURE 1433
+
+// CiteSeer
+// #define ND_FEATURE 3703
+
+// PubMed
+// #define ND_FEATURE 500
+
 #define EMB_DIM 100
 #define NUM_TASK 1
 #define L_IN 200
@@ -19,7 +27,8 @@
 typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;
 
-extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+extern WT_TYPE embedding_FC_weight_in[EMB_DIM][ND_FEATURE];
+extern WT_TYPE embedding_FC_bias_in[EMB_DIM];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
@@ -41,7 +50,8 @@ void DGN_compute_one_graph(
     int degree_table[][2],
     int neighbor_table[],
     int* graph_attr,
-    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
+    WT_TYPE embedding_FC_weights_in[EMB_DIM][ND_FEATURE],
+    WT_TYPE embedding_FC_bias_in[EMB_DIM],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
     WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
     WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],

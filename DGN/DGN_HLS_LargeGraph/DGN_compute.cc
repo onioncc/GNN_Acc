@@ -4,8 +4,8 @@
 #include "hls_stream.h"
 #include <stdio.h>
 
-//#define _PRINT_
-
+WT_TYPE embedding_FC_weight[EMB_DIM][ND_FEATURE];
+WT_TYPE embedding_FC_bias[EMB_DIM];
 WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][200];
 WT_TYPE layers_posttrans_fully_connected_0_linear_bias[4][100];
 WT_TYPE MLP_layer_FC_layers_0_weight[50][100];
@@ -48,6 +48,8 @@ void load_array_3d(T to[L][R][C], T from[L][R][C]) {
 }
 
 void load_weights(
+    WT_TYPE embedding_FC_weight_in[EMB_DIM][ND_FEATURE],
+    WT_TYPE embedding_FC_bias_in[EMB_DIM],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
     WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
     WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
@@ -59,6 +61,8 @@ void load_weights(
 )
 {
 #pragma HLS INLINE off
+    load_array_2d<WT_TYPE, EMB_DIM, ND_FEATURE>(embedding_FC_weight, embedding_FC_weight_in);
+    load_array_1d<WT_TYPE, EMB_DIM>(embedding_FC_bias, embedding_FC_bias_in);
     load_array_3d<WT_TYPE, 4, 100, 200>(layers_posttrans_fully_connected_0_linear_weight, layers_posttrans_fully_connected_0_linear_weight_in);
     load_array_2d<WT_TYPE, 4, 100>(layers_posttrans_fully_connected_0_linear_bias, layers_posttrans_fully_connected_0_linear_bias_in);
     load_array_2d<WT_TYPE, 50, 100>(MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_weight_in);
@@ -101,39 +105,19 @@ void gather(
     {
         bool is_start_of_row = (e == start_idx);
         bool is_end_of_row = (e == end_idx);
-        int next_v = v + 1;
-
-        int cur_v = v;
-        int cur_e = e;
-        int cur_degree_v = degree_v;
-        WT_TYPE cur_eigw_sum = eigw_sum;
-        WT_TYPE cur_eig_abssum = eig_abssum;
+        int node_to_fetch = (is_end_of_row) ? v : neighbor_table[e];
+        int node_eigen_to_fetch = (is_end_of_row) ? (v + 1) : node_to_fetch;
+        WT_TYPE node_eigen_el = node_eigen[(node_eigen_to_fetch * 4) + 1];
+        WT_TYPE eig_w = node_eigen_el - v_eigen;
 
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            int u = neighbor_table[cur_e];
-            int node_to_fetch = (is_end_of_row) ? cur_v : u;
-            int node_eigen_to_fetch = (is_end_of_row) ? next_v : u;
-            WT_TYPE node_eigen_el = node_eigen[(node_eigen_to_fetch * 4) + 1];
-            WT_TYPE eig_w = node_eigen_el - v_eigen;
             FM_TYPE h_node_el = h_node[node_to_fetch][dim];
-
             if (is_end_of_row)
             {
-                message_1 << (node_acc_1[dim] / cur_degree_v);
-                message_2 << hls::abs((node_acc_2[dim] - cur_eigw_sum * h_node_el) / cur_eig_abssum);
+                message_1 << (node_acc_1[dim] / degree_v);
+                message_2 << hls::abs((node_acc_2[dim] - eigw_sum * h_node_el) / eig_abssum);
                 h_node_v << h_node_el;
-
-                if (dim == 0)
-                {
-                    v = next_v;
-                    degree_v = degree_table[next_v][0];
-                    start_idx = cur_e;
-                    end_idx = cur_e + degree_v;
-                    v_eigen = node_eigen_el;
-                    eigw_sum = 0;
-                    eig_abssum = 0;
-                }
             }
             else
             {
@@ -145,14 +129,24 @@ void gather(
                     FM_TYPE acc = (is_start_of_row) ? FM_TYPE(0) : node_acc_2[dim];
                     node_acc_2[dim] = acc + h_node_el * eig_w;
                 }
-
-                if (dim == 0)
-                {
-                    eigw_sum = cur_eigw_sum + eig_w;
-                    eig_abssum = cur_eig_abssum + hls::abs(eig_w);
-                    e = cur_e + 1;
-                }
             }
+        }
+
+        if (is_end_of_row)
+        {
+            v++;
+            degree_v = degree_table[v][0];
+            start_idx = e;
+            end_idx = start_idx + degree_v;
+            v_eigen = node_eigen_el;
+            eigw_sum = 0;
+            eig_abssum = 0;
+        }
+        else
+        {
+            eigw_sum += eig_w;
+            eig_abssum += hls::abs(eig_w);
+            e++;
         }
     }
 }
@@ -174,9 +168,10 @@ void apply(
         for (int j = 0; j < EMB_DIM * 2; j++)
         {
 #pragma HLS PIPELINE II=1
-            FM_TYPE h_node_v_el = 0.0;
-            int dim_out = (j < EMB_DIM) ? j : j - EMB_DIM;
-            FM_TYPE abs_acc = 0.0;
+
+            // workaround for Xilinx bug: AXI write cannot be in conditional
+            int dim_out = 0;
+            FM_TYPE next_h_node_el = 0.0;
 
             if (j < EMB_DIM)
             {
@@ -200,11 +195,66 @@ void apply(
             }
             else
             {
+                dim_out = j - EMB_DIM;
+                FM_TYPE h_node_v_el;
                 h_node_v >> h_node_v_el;
                 FM_TYPE acc = accs[dim_out];
-                abs_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
+                FM_TYPE relu_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
+                next_h_node_el = h_node_v_el + relu_acc;
             }
-            next_h_node[v][dim_out] = h_node_v_el + abs_acc;
+
+            // workaround for Xilinx bug: AXI write cannot be in conditional
+            next_h_node[v][dim_out] = next_h_node_el;
+        }
+    }
+}
+
+void apply_last(
+    hls::stream<FM_TYPE>& message_1,
+    hls::stream<FM_TYPE>& message_2,
+    hls::stream<FM_TYPE>& h_node_v,
+    hls::stream<FM_TYPE>& output,
+    int i,
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE off
+
+    for (int v = 0; v < num_of_nodes; v++)
+    {
+        FM_TYPE accs[L_OUT];
+        for (int j = 0; j < EMB_DIM * 2; j++)
+        {
+#pragma HLS PIPELINE II=1
+            if (j < EMB_DIM)
+            {
+                int dim_in = j;
+                FM_TYPE activation_1;
+                message_1 >> activation_1;
+                FM_TYPE activation_2;
+                message_2 >> activation_2;
+
+                for (int dim_out = 0; dim_out < L_OUT; dim_out++)
+                {
+                    FM_TYPE acc = (dim_in == 0)
+                        ? FM_TYPE(layers_posttrans_fully_connected_0_linear_bias[i][dim_out])
+                        : accs[dim_out];
+                    acc += (
+                        activation_1 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in]
+                        + activation_2 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in + EMB_DIM]
+                    );
+                    accs[dim_out] = acc;
+                }
+            }
+            else
+            {
+                int dim_out = j - EMB_DIM;
+                FM_TYPE h_node_v_el;
+                h_node_v >> h_node_v_el;
+                FM_TYPE acc = accs[dim_out];
+                FM_TYPE relu_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
+                output << h_node_v_el + relu_acc;
+            }
         }
     }
 }
@@ -232,6 +282,118 @@ void compute_CONV_layer(
 
     gather(message_1, message_2, h_node_v, h_node, node_eigen, degree_table, neighbor_table, num_of_nodes, num_of_edges);
     apply(message_1, message_2, h_node_v, next_h_node, i, num_of_nodes);
+}
+
+template <int DIM_IN, int DIM_OUT>
+void compute_MLP_layer(
+    hls::stream<FM_TYPE>& input,
+    hls::stream<FM_TYPE>& output,
+    WT_TYPE weights[DIM_OUT][DIM_IN],
+    WT_TYPE bias[DIM_OUT],
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=weights type=complete dim=1
+#pragma HLS ARRAY_PARTITION variable=bias type=complete dim=1
+
+    for (int v = 0; v < num_of_nodes; v++)
+    {
+        FM_TYPE accs[DIM_OUT];
+        for (int j = 0; j < DIM_IN + DIM_OUT; j++)
+        {
+#pragma HLS PIPELINE II=1
+
+            if (j < DIM_IN)
+            {
+                int dim_in = j;
+                FM_TYPE activation;
+                input >> activation;
+
+                for (int dim_out = 0; dim_out < DIM_OUT; dim_out++)
+                {
+                    FM_TYPE acc = (dim_in == 0)
+                        ? FM_TYPE(bias[dim_out])
+                        : accs[dim_out];
+                    acc += activation * weights[dim_out][dim_in];
+                    accs[dim_out] = acc;
+                }
+            }
+            else
+            {
+                int dim_out = j - DIM_IN;
+                FM_TYPE acc = accs[dim_out];
+                FM_TYPE relu_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
+                output << relu_acc;
+            }
+        }
+    }
+}
+
+template <int DIM_IN>
+void compute_last_MLP_layer(
+    hls::stream<FM_TYPE>& input,
+    float* output,
+    WT_TYPE weights[1][DIM_IN],
+    WT_TYPE bias[1],
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE off
+
+    for (int v = 0; v < num_of_nodes; v++)
+    {
+        FM_TYPE acc;
+        for (int dim_in = 0; dim_in < DIM_IN; dim_in++)
+        {
+#pragma HLS PIPELINE II=1
+            FM_TYPE activation;
+            input >> activation;
+            FM_TYPE prev = (dim_in == 0) ? FM_TYPE(bias[0]) : acc;
+            acc = prev + activation * weights[0][dim_in];
+        }
+        output[v] = acc.to_float();
+    }
+}
+
+void compute_last_CONV_layer(
+    int i,
+    FM_TYPE h_node[][EMB_DIM],
+    float* output,
+    WT_TYPE node_eigen[],
+    int degree_table[][2],
+    int neighbor_table[],
+    WT_TYPE MLP_layer_FC_layers_0_weight[50][100],
+    WT_TYPE MLP_layer_FC_layers_0_bias[50],
+    WT_TYPE MLP_layer_FC_layers_1_weight[25][50],
+    WT_TYPE MLP_layer_FC_layers_1_bias[25],
+    WT_TYPE MLP_layer_FC_layers_2_weight[1][25],
+    WT_TYPE MLP_layer_FC_layers_2_bias[1],
+    int num_of_nodes,
+    int num_of_edges
+)
+{
+#pragma HLS INLINE off
+#pragma HLS DATAFLOW
+
+    hls::stream<FM_TYPE> message_1;
+#pragma HLS STREAM variable=message_1 depth=(100 * 10)
+    hls::stream<FM_TYPE> message_2;
+#pragma HLS STREAM variable=message_2 depth=(100 * 10)
+    hls::stream<FM_TYPE> h_node_v;
+#pragma HLS STREAM variable=h_node_v depth=(100 * 10)
+    hls::stream<FM_TYPE> mlp_layer_0_in;
+#pragma HLS STREAM variable=mlp_layer_0_in depth=(100 * 10)
+    hls::stream<FM_TYPE> mlp_layer_1_in;
+#pragma HLS STREAM variable=mlp_layer_1_in depth=(50 * 10)
+    hls::stream<FM_TYPE> mlp_layer_2_in;
+#pragma HLS STREAM variable=mlp_layer_2_in depth=(25 * 10)
+
+    gather(message_1, message_2, h_node_v, h_node, node_eigen, degree_table, neighbor_table, num_of_nodes, num_of_edges);
+    apply_last(message_1, message_2, h_node_v, mlp_layer_0_in, i, num_of_nodes);
+    compute_MLP_layer<L_OUT, 50>(mlp_layer_0_in, mlp_layer_1_in, MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_bias, num_of_nodes);
+    compute_MLP_layer<50, 25>(mlp_layer_1_in, mlp_layer_2_in, MLP_layer_FC_layers_1_weight, MLP_layer_FC_layers_1_bias, num_of_nodes);
+    compute_last_MLP_layer<25>(mlp_layer_2_in, output, MLP_layer_FC_layers_2_weight, MLP_layer_FC_layers_2_bias, num_of_nodes);
 }
 
 void global_mean_pooling(int num_of_nodes, FM_TYPE h_node[][EMB_DIM])
@@ -293,41 +455,41 @@ float MLP()
     return temp_2.to_float();
 }
 
-void load_input_node_embeddings(int* node_feature, WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100], int num_of_nodes, FM_TYPE h_node[][EMB_DIM])
+void load_input_node_embeddings(
+    int* node_feature,
+    int num_of_nodes,
+    FM_TYPE h_node[][EMB_DIM]
+)
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=embedding_FC_weight complete dim=1
+#pragma HLS ARRAY_PARTITION variable=embedding_FC_bias complete dim=1
 
-    /*Embedding: compute input node embedding */
-    for (int nd = 0; nd < num_of_nodes; nd++)
+    for (int v = 0; v < num_of_nodes; v++)
     {
-        FM_TYPE h_node_nd[EMB_DIM];
-        int nd_fs[ND_FEATURE];
-#pragma HLS ARRAY_PARTITION variable=nd_fs complete dim=1
+        FM_TYPE accs[EMB_DIM];
+        for (int j = 0; j < ND_FEATURE + EMB_DIM; j++)
+        {
+#pragma HLS PIPELINE II=1
 
-        for (int nf = 0; nf < ND_FEATURE; nf++)
-        {
-            nd_fs[nf] = node_feature[nd * ND_FEATURE + nf];
-        }
-        {
-            int nd_f = nd_fs[0];
-            for (int dim = 0; dim < EMB_DIM; dim++)
+            if (j < ND_FEATURE)
             {
-                h_node_nd[dim] = embedding_h_atom_embedding_list_weights[0][nd_f][dim];
+                int dim_in = j;
+                int activation = node_feature[v * ND_FEATURE + dim_in];
+
+                for (int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+                {
+                    FM_TYPE acc = (dim_in == 0)
+                        ? FM_TYPE(embedding_FC_bias[dim_out])
+                        : accs[dim_out];
+                    acc += activation * embedding_FC_weight[dim_out][dim_in];
+                    accs[dim_out] = acc;
+                }
             }
-        }
-        for (int nf = 1; nf < ND_FEATURE; nf++)
-        {
-#pragma HLS UNROLL
-            int nd_f = nd_fs[nf];
-            for (int dim = 0; dim < EMB_DIM; dim++)
+            else
             {
-                h_node_nd[dim] += embedding_h_atom_embedding_list_weights[nf][nd_f][dim];
-            }
-        }
-        {
-            for (int dim = 0; dim < EMB_DIM; dim++)
-            {
-                h_node[nd][dim] = h_node_nd[dim];
+                int dim_out = j - ND_FEATURE;
+                h_node[v][dim_out] = accs[dim_out];
             }
         }
     }
@@ -341,7 +503,8 @@ void DGN_compute_one_graph(
     int degree_table[][2],
     int neighbor_table[],
     int* graph_attr,
-    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
+    WT_TYPE embedding_FC_weight_in[EMB_DIM][ND_FEATURE],
+    WT_TYPE embedding_FC_bias_in[EMB_DIM],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
     WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
     WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
@@ -364,7 +527,8 @@ void DGN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=100000 port=degree_table offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=neighbor_table offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=embedding_h_atom_embedding_list_weights_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=embedding_FC_weight_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=100000 port=embedding_FC_bias_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=layers_posttrans_fully_connected_0_linear_bias_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_0_weight_in offset=slave bundle=mem
@@ -378,12 +542,11 @@ void DGN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=100000 port=h_node_pong offset=slave bundle=mem
 
 #pragma HLS bind_storage variable=h_graph type=RAM_2P impl=bram
+#pragma HLS bind_storage variable=embedding_FC_weight type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_0_weight type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=MLP_layer_FC_layers_0_bias type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_1_weight type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=MLP_layer_FC_layers_1_bias type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=MLP_layer_FC_layers_2_weight type=RAM_2P impl=bram
 
     int num_of_nodes = graph_attr[0];
@@ -391,14 +554,19 @@ void DGN_compute_one_graph(
     int is_first = graph_attr[2];
 
 #ifdef __SYNTHESIS__
-    num_of_nodes = 19;
-    num_of_edges = 40;
+#ifdef __SYNTHESIS_DEBUG__
+    // For Cora
+    num_of_nodes = 2708;
+    num_of_edges = 10556;
     is_first = 1;
+#endif
 #endif
 
     if (is_first)
     {
         load_weights(
+            embedding_FC_weight_in,
+            embedding_FC_bias_in,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,
             MLP_layer_FC_layers_0_weight_in,
@@ -410,17 +578,15 @@ void DGN_compute_one_graph(
         );
     }
 
-    load_input_node_embeddings(node_feature_in, embedding_h_atom_embedding_list_weights_in, num_of_nodes, h_node_ping);
+    load_input_node_embeddings(node_feature_in, num_of_nodes, h_node_ping);
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 3; i++)
     {
         if (i % 2 == 0)
             compute_CONV_layer(i, h_node_ping, h_node_pong, node_eigen_in, degree_table, neighbor_table, num_of_nodes, num_of_edges);
         else
             compute_CONV_layer(i, h_node_pong, h_node_ping, node_eigen_in, degree_table, neighbor_table, num_of_nodes, num_of_edges);
     }
-
-    global_mean_pooling(num_of_nodes, h_node_ping);
-    *out = MLP();
+    compute_last_CONV_layer(3, h_node_pong, out, node_eigen_in, degree_table, neighbor_table, MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_bias, MLP_layer_FC_layers_1_weight, MLP_layer_FC_layers_1_bias, MLP_layer_FC_layers_2_weight, MLP_layer_FC_layers_2_bias, num_of_nodes, num_of_edges);
 }
 }
