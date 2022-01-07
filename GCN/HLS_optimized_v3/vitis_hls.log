@@ -1,0 +1,716 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2020.2.2 (64-bit)
+  **** SW Build 3118627 on Tue Feb  9 05:13:49 MST 2021
+  **** IP Build 3115676 on Tue Feb  9 10:48:11 MST 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source /tools/reconfig/xilinx/Vitis_HLS/2020.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/tools/reconfig/xilinx/Vitis_HLS/2020.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'chao33' on host 'flubber1.crnch.gatech.edu' (Linux_x86_64 version 4.15.0-163-generic) on Sun Jan 02 19:28:59 EST 2022
+INFO: [HLS 200-10] On os Ubuntu 18.04.6 LTS
+INFO: [HLS 200-10] In directory '/nethome/chao33/GNN_Acc/GCN/HLS_optimized_v3'
+Sourcing Tcl script 'script.tcl'
+INFO: [HLS 200-1510] Running: open_project project_1 
+INFO: [HLS 200-10] Opening project '/nethome/chao33/GNN_Acc/GCN/HLS_optimized_v3/project_1'.
+INFO: [HLS 200-1510] Running: set_top GCN_compute_one_graph 
+INFO: [HLS 200-1510] Running: add_files GCN_compute.cpp 
+INFO: [HLS 200-10] Adding design file 'GCN_compute.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files main.cpp 
+INFO: [HLS 200-10] Adding design file 'main.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution1 
+INFO: [HLS 200-10] Opening solution '/nethome/chao33/GNN_Acc/GCN/HLS_optimized_v3/project_1/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2020.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.04 seconds; current allocated memory: 212.007 MB.
+INFO: [HLS 200-10] Analyzing design file 'main.cpp' ... 
+WARNING: [HLS 207-4827] equality comparison with extraneous parentheses: /tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h:2227:383
+INFO: [HLS 207-4181] remove extraneous parentheses around the comparison to silence this warning: /tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h:2227:383
+INFO: [HLS 207-4182] use '=' to turn this equality comparison into an assignment: /tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h:2227:383
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:117:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:118:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:119:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:120:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:121:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:151:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:152:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:153:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:154:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:155:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:156:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:157:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:158:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:159:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:160:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:210:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:211:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:212:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:239:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:240:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:241:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:242:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:243:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:244:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:280:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:281:9
+INFO: [HLS 200-10] Analyzing design file 'GCN_compute.cpp' ... 
+WARNING: [HLS 207-4827] equality comparison with extraneous parentheses: /tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h:2227:383
+INFO: [HLS 207-4181] remove extraneous parentheses around the comparison to silence this warning: /tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h:2227:383
+INFO: [HLS 207-4182] use '=' to turn this equality comparison into an assignment: /tools/reconfig/xilinx/Vitis_HLS/2020.2/include/gmp.h:2227:383
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:117:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:118:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:119:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:120:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:121:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:151:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:152:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:153:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:154:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:155:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:156:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:157:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:158:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:159:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:160:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:210:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:211:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:212:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:239:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:240:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:241:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:242:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:243:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:244:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:280:9
+WARNING: [HLS 207-5510] 'Resource pragma' is deprecated, and it will be removed in future release. It is suggested to replace it with 'bind_op/bind_storage pragma'.: /tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_hotbm_apfixed.h:281:9
+WARNING: [HLS 207-5301] unused parameter 'node_feature': GCN_compute.cpp:215:16
+WARNING: [HLS 207-5301] unused parameter 'edge_list': GCN_compute.cpp:215:35
+WARNING: [HLS 207-5301] unused parameter 'num_of_edges': GCN_compute.cpp:284:51
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 73.92 seconds. CPU system time: 3.66 seconds. Elapsed time: 82.59 seconds; current allocated memory: 215.251 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-186] Unrolling loop 'load_edge_attrs' (GCN_compute.cpp:316:26) in function 'load_graph' completely with a factor of 3 (GCN_compute.cpp:316:26)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_294_2' (/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_sqrt_apfixed.h:294:27) in function 'sqrt_fixed<32, 10>' completely with a factor of 23 (/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_sqrt_apfixed.h:294:27)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_266_1' (/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_sqrt_apfixed.h:266:27) in function 'sqrt_fixed<32, 10>' completely with a factor of 5 (/tools/reconfig/xilinx/Vitis_HLS/2020.2/common/technology/autopilot/hls_sqrt_apfixed.h:266:27)
+INFO: [HLS 214-186] Unrolling loop 'one_node_embedding_features' (GCN_compute.cpp:269:38) in function 'one_node_embedding' completely with a factor of 9 (GCN_compute.cpp:269:38)
+INFO: [HLS 214-178] Inlining function 'get_ed_emb_addr(int, int)' into 'compute_edge_embedding_and_message_passing(int, int, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], int (*) [3], int)' (GCN_compute.cpp:154:0)
+INFO: [HLS 214-178] Inlining function 'ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> hls::sqrt<32, 10>(ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>)' into 'Conv_BatchNorm_Relu(ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, int, bool)' (GCN_compute.cpp:200:0)
+INFO: [HLS 214-178] Inlining function 'Conv_BatchNorm_Relu(ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, int, bool)' into 'CONV(int*, int*, int (*) [3], int, int, int)' (GCN_compute.cpp:216:0)
+INFO: [HLS 214-178] Inlining function '__gnu_cxx::__enable_if<__is_integer<int>::__value, double>::__type std::sqrt<int>(int)' into 'GCN_compute_one_graph(int*, int*, int*, int*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100][100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [100], ap_fixed<32, 10, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (GCN_compute.cpp:385:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 8.33 seconds. CPU system time: 0.64 seconds. Elapsed time: 9.08 seconds; current allocated memory: 217.096 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 217.099 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.44 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.5 seconds; current allocated memory: 246.592 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 1.02 seconds. CPU system time: 0.04 seconds. Elapsed time: 1.06 seconds; current allocated memory: 290.475 MB.
+INFO: [XFORM 203-510] Pipelining loop 'one_node_embdding' (GCN_compute.cpp:266) in function 'one_node_embedding' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_164_2' (GCN_compute.cpp:164) in function 'compute_edge_embedding_and_message_passing' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'load_features' (GCN_compute.cpp:311) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'load_edges' (GCN_compute.cpp:315) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'load_graph' (GCN_compute.cpp:322) in function 'load_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'aft_message_dim' (GCN_compute.cpp:239) in function 'CONV' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'batch_norm_dim' (GCN_compute.cpp:204) in function 'CONV' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_417_1' (GCN_compute.cpp:417) in function 'GCN_compute_one_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'calculate_degree' (GCN_compute.cpp:420) in function 'GCN_compute_one_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'degsqrt' (GCN_compute.cpp:426) in function 'GCN_compute_one_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_440_2' (GCN_compute.cpp:440) in function 'GCN_compute_one_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'mean_pooling_dim' (GCN_compute.cpp:443) in function 'GCN_compute_one_graph' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'prediction_layer_dim' (GCN_compute.cpp:458) in function 'GCN_compute_one_graph' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'edge_embedding_dim' (GCN_compute.cpp:174) in function 'compute_edge_embedding_and_message_passing' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'mean_pooling_dim' (GCN_compute.cpp:443) in function 'GCN_compute_one_graph' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'linear_layer_dim_out' (GCN_compute.cpp:223) in function 'CONV' for pipelining.
+INFO: [HLS 200-489] Unrolling loop 'edge_embedding_attrs' (GCN_compute.cpp:176) in function 'compute_edge_embedding_and_message_passing' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'ed_emb_addr' (GCN_compute.cpp:58) in function 'compute_edge_embedding_and_message_passing' completely with a factor of 0.
+INFO: [HLS 200-489] Unrolling loop 'mean_pooling' (GCN_compute.cpp:444) in function 'GCN_compute_one_graph' completely with a factor of 19.
+INFO: [HLS 200-489] Unrolling loop 'linear_layer_dim_in' (GCN_compute.cpp:226) in function 'CONV' completely with a factor of 100.
+INFO: [XFORM 203-101] Partitioning array 'node_embedding_weight.V'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'edge_embedding_weight.V'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'edge_list'  in dimension 1 with a cyclic factor 2.
+INFO: [XFORM 203-101] Partitioning array 'edge_attr'  in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'convs_weight.V'  in dimension 2 completely.
+WARNING: [HLS 200-914] Completely partitioning array 'node_embedding.V'  accessed through non-constant indices on dimension 2, which may result in long runtime and suboptimal QoR due to large multiplexers. Please consider wrapping the array access into a function or using a register file core instead.
+Resolution: For help on HLS 200-914 see www.xilinx.com/cgi-bin/docs/rdoc?v=2020.2;t=hls+guidance;d=200-914.html
+INFO: [XFORM 203-101] Partitioning array 'node_embedding.V'  in dimension 2 completely.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (GCN_compute.cpp:429:37) to (GCN_compute.cpp:429:9) in function 'GCN_compute_one_graph'... converting 10 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'GCN_compute_one_graph' (GCN_compute.cpp:379)...19 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 19.14 seconds. CPU system time: 0.11 seconds. Elapsed time: 19.3 seconds; current allocated memory: 358.284 MB.
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_163_1' (GCN_compute.cpp:163:28) in function 'compute_edge_embedding_and_message_passing'.
+INFO: [XFORM 203-541] Flattening a loop nest 'edge_embedding' (GCN_compute.cpp:169:29) in function 'compute_edge_embedding_and_message_passing'.
+INFO: [XFORM 203-541] Flattening a loop nest 'linear_layer' (GCN_compute.cpp:222:24) in function 'CONV'.
+INFO: [XFORM 203-541] Flattening a loop nest 'batch_norm' (GCN_compute.cpp:202:25) in function 'CONV'.
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' (GCN_compute.cpp:277:33)
+INFO: [HLS 200-472] Inferring partial write operation for 'edge_list.0' (GCN_compute.cpp:323:22)
+INFO: [HLS 200-472] Inferring partial write operation for 'message.V' (GCN_compute.cpp:165:25)
+INFO: [HLS 200-472] Inferring partial write operation for 'message.V' 
+INFO: [HLS 200-472] Inferring partial write operation for 'deg' (GCN_compute.cpp:418:12)
+INFO: [HLS 200-472] Inferring partial write operation for 'deg' (GCN_compute.cpp:423:15)
+INFO: [HLS 200-472] Inferring partial write operation for 'degsqrt.V' (GCN_compute.cpp:429:20)
+INFO: [HLS 200-472] Inferring partial write operation for 'h_graph.V' (GCN_compute.cpp:441:17)
+INFO: [HLS 200-472] Inferring partial write operation for 'h_graph.V' (GCN_compute.cpp:447:19)
+INFO: [HLS 200-472] Inferring partial write operation for 'linear_out.V' 
+INFO: [HLS 200-472] Inferring partial write operation for 'node_embedding.V.0' (GCN_compute.cpp:208:32)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 6.5 seconds. CPU system time: 0.1 seconds. Elapsed time: 6.62 seconds; current allocated memory: 451.635 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'GCN_compute_one_graph' ...
+WARNING: [SYN 201-107] Renaming port name 'GCN_compute_one_graph/task' to 'GCN_compute_one_graph/task_r' to avoid the conflict with HDL keywords or other object names.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'load_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'load_graph'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'load_graph'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.15 seconds. CPU system time: 0.01 seconds. Elapsed time: 1.18 seconds; current allocated memory: 452.824 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.07 seconds; current allocated memory: 452.957 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'one_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'one_node_embdding'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'one_node_embdding'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.67 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.7 seconds; current allocated memory: 454.187 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.47 seconds. CPU system time: 0 seconds. Elapsed time: 0.5 seconds; current allocated memory: 455.975 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.37 seconds. CPU system time: 0 seconds. Elapsed time: 0.39 seconds; current allocated memory: 456.148 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.35 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.35 seconds; current allocated memory: 456.438 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'compute_edge_embedding_and_message_passing' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln165) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln727) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln703) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_163_1_VITIS_LOOP_164_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 4, loop 'VITIS_LOOP_163_1_VITIS_LOOP_164_2'
+INFO: [SCHED 204-61] Pipelining loop 'edge_embedding_edge_embedding_dim'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 6, loop 'edge_embedding_edge_embedding_dim'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.27 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.29 seconds; current allocated memory: 456.807 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.23 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.26 seconds; current allocated memory: 457.259 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'CONV' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln225) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'linear_layer_linear_layer_dim_out'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 4, loop 'linear_layer_linear_layer_dim_out'
+INFO: [SCHED 204-61] Pipelining loop 'batch_norm_batch_norm_dim'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'batch_norm_batch_norm_dim'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.94 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.97 seconds; current allocated memory: 458.588 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.62 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.66 seconds; current allocated memory: 460.378 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'GCN_compute_one_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_417_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'VITIS_LOOP_417_1'
+INFO: [SCHED 204-61] Pipelining loop 'calculate_degree'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'calculate_degree'
+INFO: [SCHED 204-61] Pipelining loop 'degsqrt'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 26, loop 'degsqrt'
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_440_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'VITIS_LOOP_440_2'
+INFO: [SCHED 204-61] Pipelining loop 'mean_pooling_dim'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'mean_pooling_dim'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 9.15 seconds. CPU system time: 0.03 seconds. Elapsed time: 9.21 seconds; current allocated memory: 469.108 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 12.78 seconds. CPU system time: 0.03 seconds. Elapsed time: 12.91 seconds; current allocated memory: 480.433 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'load_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'load_graph'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 9.86 seconds. CPU system time: 0.02 seconds. Elapsed time: 9.95 seconds; current allocated memory: 480.581 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'one_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'one_node_embedding'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.16 seconds. CPU system time: 0 seconds. Elapsed time: 0.18 seconds; current allocated memory: 483.013 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'compute_node_embedding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'compute_node_embedding'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.58 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.65 seconds; current allocated memory: 491.507 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'compute_edge_embedding_and_message_passing' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_5ns_8ns_7ns_12_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_7ns_8ns_7ns_14_4_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_32s_32s_54_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'compute_edge_embedding_and_message_passing'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.17 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.22 seconds; current allocated memory: 493.331 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'CONV' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_5ns_8ns_7ns_12_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'CONV'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.62 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.67 seconds; current allocated memory: 497.304 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'GCN_compute_one_graph' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/node_feature_in' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/edge_list_in' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/edge_attr_in' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/graph_attr' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/task_r' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/convs_weight_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/convs_bias_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/convs_root_emb_weight_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/bn_weigh_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/bn_bias_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/bn_mean_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/bn_var_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/node_embedding_weight_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/edge_embedding_weight_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/graph_pred_weights_in' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'GCN_compute_one_graph/graph_pred_bias_in' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'GCN_compute_one_graph' to 'ap_ctrl_hs'.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_0' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_1' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_2' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_3' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_4' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_5' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_6' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_7' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_8' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_9' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_10' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_11' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_12' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_13' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_14' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_15' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_16' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_17' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_18' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_19' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_20' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_21' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_22' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_23' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_24' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_25' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_26' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_27' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_28' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_29' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_30' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_31' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_32' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_33' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_34' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_35' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_36' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_37' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_38' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_39' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_40' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_41' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_42' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_43' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_44' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_45' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_46' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_47' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_48' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_49' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_50' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_51' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_52' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_53' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_54' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_55' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_56' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_57' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_58' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_59' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_60' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_61' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_62' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_63' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_64' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_65' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_66' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_67' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_68' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_69' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_70' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_71' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_72' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_73' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_74' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_75' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_76' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_77' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_78' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_79' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_80' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_81' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_82' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_83' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_84' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_85' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_86' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_87' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_88' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_89' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_90' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_91' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_92' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_93' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_94' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_95' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_96' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_97' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_98' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Global array 'node_embedding_V_99' will not be exposed as RTL port.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_feature_in' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_attr_in' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_attr' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_weight_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_weight_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_bias_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_bias_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/convs_root_emb_weight_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/convs_root_emb_weight_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_weigh_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_weigh_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_bias_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_bias_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_mean_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_mean_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/bn_var_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/bn_var_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/node_embedding_weight_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/node_embedding_weight_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/edge_embedding_weight_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/edge_embedding_weight_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_address0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_address0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_ce0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_ce0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_we0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_we0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_d0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_d0' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_q0' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_address1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_address1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_ce1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_ce1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_we1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_we1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_d1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Setting dangling out port 'GCN_compute_one_graph/graph_pred_weights_in_d1' to 0.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_weights_in_q1' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'GCN_compute_one_graph/graph_pred_bias_in' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+INFO: [RTGEN 206-104] Estimated max fanout for 'GCN_compute_one_graph' is 7800, found 8 HDL expressions with this fanout: (1'b1 == ap_CS_fsm_state43), (1'b1 == ap_CS_fsm_state44), (1'b1 == ap_CS_fsm_state45), (1'b1 == ap_CS_fsm_state46), (1'b1 == ap_CS_fsm_state47), (1'b1 == ap_CS_fsm_state48), (1'b1 == ap_CS_fsm_state41), (1'b1 == ap_CS_fsm_state42)
+INFO: [RTGEN 206-100] Generating core module 'ddiv_64ns_64ns_64_11_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'dsqrt_64ns_64ns_64_11_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_32s_34ns_65_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_1007_32_1_1': 19 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sitodp_32ns_64_2_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'GCN_compute_one_graph'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 4.91 seconds. CPU system time: 0.19 seconds. Elapsed time: 5.94 seconds; current allocated memory: 522.681 MB.
+INFO: [RTMG 210-282] Generating pipelined core: 'GCN_compute_one_graph_mul_32s_32s_54_1_1_Multiplier_0'
+INFO: [RTMG 210-278] Implementing memory 'GCN_compute_one_graph_compute_edge_embedding_and_message_passing_message_V_ram (RAM)' using auto RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GCN_compute_one_graph_CONV_linear_out_V_ram (RAM)' using auto RAMs with power-on initialization.
+INFO: [RTMG 210-282] Generating pipelined core: 'GCN_compute_one_graph_mul_32s_34ns_65_1_1_Multiplier_1'
+INFO: [RTMG 210-278] Implementing memory 'GCN_compute_one_graph_edge_list_0_ram (RAM)' using auto RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GCN_compute_one_graph_node_embedding_V_0_ram (RAM)' using auto RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GCN_compute_one_graph_deg_ram (RAM)' using auto RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'GCN_compute_one_graph_h_graph_V_ram (RAM)' using auto RAMs with power-on initialization.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 20.99 seconds. CPU system time: 0.53 seconds. Elapsed time: 22.57 seconds; current allocated memory: 579.762 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for GCN_compute_one_graph.
+INFO: [VLOG 209-307] Generating Verilog RTL for GCN_compute_one_graph.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 146.48 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 174.53 seconds. CPU system time: 5.62 seconds. Elapsed time: 187.81 seconds; current allocated memory: 584.732 MB.
+INFO: [HLS 200-112] Total CPU user time: 179.84 seconds. Total CPU system time: 6.92 seconds. Total elapsed time: 192.78 seconds; peak allocated memory: 579.762 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Sun Jan  2 19:32:11 2022...
