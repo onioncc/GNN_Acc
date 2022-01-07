@@ -98,6 +98,7 @@ if __name__ == '__main__':
             offset += data_length
             weights_data += data
 
+        key = DATASET_NAME.lower()
         f = open(f'dgn_{key}.weights.dict.json', 'w')
         json.dump(weights_dict, f)
         f.close()
