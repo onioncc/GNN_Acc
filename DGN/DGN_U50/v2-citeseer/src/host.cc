@@ -224,7 +224,7 @@ int main(int argc, char **argv) {
     cl::Buffer result_buf(
         context,
         CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-        sizeof(float),
+        num_of_nodes * sizeof(float),
         result.data(),
         &err);
 
