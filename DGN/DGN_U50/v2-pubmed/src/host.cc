@@ -242,6 +242,18 @@ int main(int argc, char **argv) {
     q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST);
     q.finish();
 
+    graph_attr[2] = false;
+    cl::Buffer graph_attr2_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        3 * sizeof(int),
+        graph_attr.data(),
+        &err);
+    krnl_DGN_compute_one_graph.setArg(5, graph_attr2_buf);
+    OCL_CHECK(err, err = q.enqueueTask(krnl_DGN_compute_one_graph));
+    q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST);
+    q.finish();
+
     printf("Final node predictions:\n");
     for (int nd = 0; nd < num_of_nodes; nd++) {
         printf("%.7f\n", result[nd]);

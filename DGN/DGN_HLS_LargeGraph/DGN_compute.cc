@@ -155,70 +155,14 @@ void apply(
     hls::stream<FM_TYPE>& message_1,
     hls::stream<FM_TYPE>& message_2,
     hls::stream<FM_TYPE>& h_node_v,
-    FM_TYPE next_h_node[][EMB_DIM],
-    int i,
-    int num_of_nodes
-)
-{
-#pragma HLS INLINE off
-
-    for (int v = 0; v < num_of_nodes; v++)
-    {
-        FM_TYPE accs[L_OUT];
-        for (int j = 0; j < EMB_DIM * 2; j++)
-        {
-#pragma HLS PIPELINE II=1
-
-            // workaround for Xilinx bug: AXI write cannot be in conditional
-            int dim_out = 0;
-            FM_TYPE next_h_node_el = 0.0;
-
-            if (j < EMB_DIM)
-            {
-                int dim_in = j;
-                FM_TYPE activation_1;
-                message_1 >> activation_1;
-                FM_TYPE activation_2;
-                message_2 >> activation_2;
-
-                for (int dim_out = 0; dim_out < L_OUT; dim_out++)
-                {
-                    FM_TYPE acc = (dim_in == 0)
-                        ? FM_TYPE(layers_posttrans_fully_connected_0_linear_bias[i][dim_out])
-                        : accs[dim_out];
-                    acc += (
-                        activation_1 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in]
-                        + activation_2 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][dim_in + EMB_DIM]
-                    );
-                    accs[dim_out] = acc;
-                }
-            }
-            else
-            {
-                dim_out = j - EMB_DIM;
-                FM_TYPE h_node_v_el;
-                h_node_v >> h_node_v_el;
-                FM_TYPE acc = accs[dim_out];
-                FM_TYPE relu_acc = (acc > 0.0) ? acc : FM_TYPE(0.0);
-                next_h_node_el = h_node_v_el + relu_acc;
-            }
-
-            // workaround for Xilinx bug: AXI write cannot be in conditional
-            next_h_node[v][dim_out] = next_h_node_el;
-        }
-    }
-}
-
-void apply_last(
-    hls::stream<FM_TYPE>& message_1,
-    hls::stream<FM_TYPE>& message_2,
-    hls::stream<FM_TYPE>& h_node_v,
     hls::stream<FM_TYPE>& output,
     int i,
     int num_of_nodes
 )
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weight complete dim=2
+#pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weight block factor=2 dim=3
 
     for (int v = 0; v < num_of_nodes; v++)
     {
@@ -259,6 +203,23 @@ void apply_last(
     }
 }
 
+void writeback(
+    hls::stream<FM_TYPE>& output,
+    FM_TYPE next_h_node[][EMB_DIM],
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE off
+
+    for (int v = 0; v < num_of_nodes; v++)
+    {
+        for (int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+        {
+            output >> next_h_node[v][dim_out];
+        }
+    }
+}
+
 void compute_CONV_layer(
     int i,
     FM_TYPE h_node[][EMB_DIM],
@@ -279,9 +240,12 @@ void compute_CONV_layer(
 #pragma HLS STREAM variable=message_2 depth=(100 * 10)
     hls::stream<FM_TYPE> h_node_v;
 #pragma HLS STREAM variable=h_node_v depth=(100 * 10)
+    hls::stream<FM_TYPE> output;
+#pragma HLS STREAM variable=output depth=(100 * 10)
 
     gather(message_1, message_2, h_node_v, h_node, node_eigen, degree_table, neighbor_table, num_of_nodes, num_of_edges);
-    apply(message_1, message_2, h_node_v, next_h_node, i, num_of_nodes);
+    apply(message_1, message_2, h_node_v, output, i, num_of_nodes);
+    writeback(output, next_h_node, num_of_nodes);
 }
 
 template <int DIM_IN, int DIM_OUT>
@@ -390,7 +354,7 @@ void compute_last_CONV_layer(
 #pragma HLS STREAM variable=mlp_layer_2_in depth=(25 * 10)
 
     gather(message_1, message_2, h_node_v, h_node, node_eigen, degree_table, neighbor_table, num_of_nodes, num_of_edges);
-    apply_last(message_1, message_2, h_node_v, mlp_layer_0_in, i, num_of_nodes);
+    apply(message_1, message_2, h_node_v, mlp_layer_0_in, i, num_of_nodes);
     compute_MLP_layer<L_OUT, 50>(mlp_layer_0_in, mlp_layer_1_in, MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_bias, num_of_nodes);
     compute_MLP_layer<50, 25>(mlp_layer_1_in, mlp_layer_2_in, MLP_layer_FC_layers_1_weight, MLP_layer_FC_layers_1_bias, num_of_nodes);
     compute_last_MLP_layer<25>(mlp_layer_2_in, output, MLP_layer_FC_layers_2_weight, MLP_layer_FC_layers_2_bias, num_of_nodes);
