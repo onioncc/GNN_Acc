@@ -5,31 +5,55 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <ap_int.h>
 #include <ap_fixed.h>
 
 // Enables fixed num_of_nodes/edges in DGN_compute.cc for timing estimates
 #define __SYNTHESIS_DEBUG__
 
-// Cora
+#define GRAPH_CORA
+// #define GRAPH_CITESEER
+// #define GRAPH_PUBMED
+
+#ifdef GRAPH_CORA
 #define ND_FEATURE 1433
+#endif
 
-// CiteSeer
-// #define ND_FEATURE 3703
+#ifdef GRAPH_CITESEER
+#define ND_FEATURE 3703
+#endif
 
-// PubMed
-// #define ND_FEATURE 500
+#ifdef GRAPH_PUBMED
+#define ND_FEATURE 500
+#endif
 
 #define EMB_DIM 100
 #define NUM_TASK 1
 #define L_IN 200
 #define L_OUT 100
 
-typedef ap_fixed<32, 10> FM_TYPE;
-typedef ap_fixed<32, 10> WT_TYPE;
+typedef ap_fixed<16, 5> FM_TYPE;
+typedef ap_fixed<16, 5> WT_TYPE;
+typedef ap_uint<128> INEMB_XFER_TYPE; // transfers for input node embedding
+typedef ap_uint<128> XFER_TYPE; // all other internal transfers
+
+#define CEILDIV(a, b) (((a) + (b) - 1) / (b))
+#define RANGEIDXAP(unit, index, type) ((unit).range(((index) + 1) * (type::width) - 1, (index) * (type::width)))
+#define RANGEIDXN(unit, index, type) ((unit).range(((index) + 1) * (sizeof(type) * 8) - 1, (index) * (sizeof(type) * 8)))
+
+#define XFER_PER_EMB (CEILDIV(EMB_DIM * FM_TYPE::width, XFER_TYPE::width))
+#define INEMB_XFER_PER_ND_FEATURE (CEILDIV(ND_FEATURE * sizeof(int) * 8, INEMB_XFER_TYPE::width))
+#define FM_PER_XFER (XFER_TYPE::width / FM_TYPE::width)
+#define INT_PER_INEMB_XFER (INEMB_XFER_TYPE::width / (sizeof(int) * 8))
+
+// Options affecting DSP utilization
+#define MAX_MUL_CYCLES_PER_NODE 25
+#define DIMS_PER_MUL_CYCLE(dim_in) (CEILDIV(dim_in, MAX_MUL_CYCLES_PER_NODE))
+#define MUL_CYCLES_PER_NODE(dim_in) (CEILDIV(dim_in, DIMS_PER_MUL_CYCLE(dim_in)))
 
 extern WT_TYPE embedding_FC_weight_in[EMB_DIM][ND_FEATURE];
 extern WT_TYPE embedding_FC_bias_in[EMB_DIM];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
+extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][2][100];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
 extern WT_TYPE MLP_layer_FC_layers_0_bias_in[50];
@@ -40,7 +64,7 @@ extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
 
 
 void load_weights();
-void fetch_one_graph(int g, char* graph_name, int* node_feature, WT_TYPE* node_eigen, int* edge_list, int* edge_attr, int num_of_nodes, int num_of_edges);
+void fetch_one_graph(int g, char* graph_name, int* node_feature, WT_TYPE* node_eigen, int* edge_list, int num_of_nodes, int num_of_edges);
 bool Jacob(float *pMatrix, int nDim, float *pdblVects, float *pdbEigenValues, float dbEps, int nJt);
 extern "C" {
 void DGN_compute_one_graph(
@@ -52,7 +76,7 @@ void DGN_compute_one_graph(
     int* graph_attr,
     WT_TYPE embedding_FC_weights_in[EMB_DIM][ND_FEATURE],
     WT_TYPE embedding_FC_bias_in[EMB_DIM],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
+    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][2][100],
     WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
     WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
     WT_TYPE MLP_layer_FC_layers_0_bias_in[50],
