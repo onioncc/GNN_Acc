@@ -1,6 +1,6 @@
 ## to build the bitstream:
-make all TARGET=hw
-# make all TARGET=sw_emu VPP=v++-1y
+# make all TARGET=hw
+make all TARGET=hw VPP=v++-1y
 
 ## to run on the board:
 # make run TARGET=sw_emu

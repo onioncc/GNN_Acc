@@ -104,7 +104,7 @@ endif
 
 ############################## Setting up Kernel Variables ##############################
 # Kernel compiler global settings
-VPP_FLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps -j26
+VPP_FLAGS += -t $(TARGET) --platform $(DEVICE) --save-temps -j32
 ifneq ($(TARGET), hw)
 	VPP_FLAGS += -g
 endif
