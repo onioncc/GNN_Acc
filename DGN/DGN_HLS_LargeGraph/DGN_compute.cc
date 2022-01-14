@@ -535,9 +535,9 @@ void node_MLP(
 #pragma HLS DATAFLOW
 
     hls::stream<XFER_TYPE> mlp_layer_1_in("mlp_layer_1_in");
-#pragma HLS STREAM variable=mlp_layer_1_in depth=10
+#pragma HLS STREAM variable=mlp_layer_1_in depth=200
     hls::stream<XFER_TYPE> mlp_layer_2_in("mlp_layer_2_in");
-#pragma HLS STREAM variable=mlp_layer_2_in depth=10
+#pragma HLS STREAM variable=mlp_layer_2_in depth=200
 
     compute_MLP_layer<L_OUT, 50>(in, mlp_layer_1_in, MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_bias, num_of_nodes);
     compute_MLP_layer<50, 25>(mlp_layer_1_in, mlp_layer_2_in, MLP_layer_FC_layers_1_weight, MLP_layer_FC_layers_1_bias, num_of_nodes);
@@ -591,15 +591,15 @@ void compute_CONV_layer(
 #pragma HLS DATAFLOW
 
     hls::stream<int> degree("degree");
-#pragma HLS STREAM variable=degree depth=20
+#pragma HLS STREAM variable=degree depth=200
     hls::stream<XFER_TYPE> message_1("message_1");
-#pragma HLS STREAM variable=message_1 depth=20
+#pragma HLS STREAM variable=message_1 depth=200
     hls::stream<XFER_TYPE> message_2("message_2");
-#pragma HLS STREAM variable=message_2 depth=20
+#pragma HLS STREAM variable=message_2 depth=200
     hls::stream<XFER_TYPE> h_node_v("h_node_v");
-#pragma HLS STREAM variable=h_node_v depth=20
+#pragma HLS STREAM variable=h_node_v depth=200
     hls::stream<XFER_TYPE> apply_out("apply_out");
-#pragma HLS STREAM variable=apply_out depth=20
+#pragma HLS STREAM variable=apply_out depth=200
 
     fetch_degree(degree, degree_table, num_of_nodes);
     gather(degree, message_1, message_2, h_node_v, h_node, node_eigen, neighbor_table, num_of_nodes, num_of_edges);
