@@ -1,0 +1,124 @@
+Profile Summary
+Generated on: 2022-01-14 05:31:25
+Msec since Epoch: 1642156285443
+Profiled application: host
+Target platform: Xilinx
+Tool version: 2021.1
+XRT build version: 2.11.634
+Build version branch: 2021.1
+Build version hash: 5ad5998d67080f00bca5bf15b3838cf35e0a7b26
+Build version date: N/A
+Target devices: 
+Flow mode: System Run
+
+OpenCL API Calls
+API Name,Number Of Calls,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),
+clCreateBuffer,19,1.95659,0.010623,0.102978,1.07244,
+clCreateCommandQueue,1,0.009795,0.009795,0.009795,0.009795,
+clCreateContext,1,40.8241,40.8241,40.8241,40.8241,
+clCreateKernel,1,47.2471,47.2471,47.2471,47.2471,
+clCreateProgramWithBinary,1,380.211,380.211,380.211,380.211,
+clEnqueueMigrateMemObjects,2,0.011246,0.005449,0.005623,0.005797,
+clEnqueueTask,2,40.1839,0.037568,20.0919,40.1463,
+clFinish,2,571.08,282.041,285.54,289.039,
+clGetDeviceIDs,5,0.068536,0.001087,0.0137072,0.056257,
+clGetDeviceInfo,2,17.412,0.00502,8.706,17.407,
+clGetExtensionFunctionAddress,2,0.02957,0.003502,0.014785,0.026068,
+clGetExtensionFunctionAddressForPlatform,2,0.013009,0.001399,0.0065045,0.01161,
+clGetPlatformInfo,6,0.014355,0.000726,0.0023925,0.008638,
+clReleaseCommandQueue,1,0.005713,0.005713,0.005713,0.005713,
+clReleaseContext,1,85.0781,85.0781,85.0781,85.0781,
+clReleaseDevice,5,0.013002,0.001255,0.0026004,0.004777,
+clReleaseKernel,1,5.20679,5.20679,5.20679,5.20679,
+clReleaseMemObject,23,0.044665,0.000769,0.00194196,0.014706,
+clReleaseProgram,1,0.009107,0.009107,0.009107,0.009107,
+clRetainDevice,5,0.017517,0.001602,0.0035034,0.008113,
+clRetainMemObject,4,0.009238,0.001449,0.0023095,0.003652,
+clSetKernelArg,19,0.047991,0.000954,0.00252584,0.016246,
+
+Kernel Execution
+Kernel,Number Of Enqueues,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),
+DGN_compute_one_graph,2,564.265,281.769,282.132,282.496,
+
+Top Kernel Execution
+Kernel Instance Address,Kernel,Context ID,Command Queue ID,Device,Start Time (ms),Duration (ms),Global Work Size,Local Work Size,
+94641978999008,DGN_compute_one_graph,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,1417.58,282.496,1:1:1,1:1:1,
+94641978999008,DGN_compute_one_graph,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,1700.45,281.769,1:1:1,1:1:1,
+
+Top Memory Writes: Host to Global Memory
+Buffer Address,Context ID,Command Queue ID,Start Time (ms),Duration (ms),Buffer Size (KB),Writing Rate(MB/s),
+44367872,0,0,1411.19,6.35155,48343.4,307056,
+48394240,0,0,1700.39,0.040371,0.012,0.000484452,
+
+Top Memory Reads: Host to Global Memory
+Buffer Address,Context ID,Command Queue ID,Start Time (ms),Duration (ms),Buffer Size (KB),Reading Rate(MB/s),
+48312320,0,0,1982.29,0.110043,78.868,8.67887,
+48312320,0,0,1700.17,0.067757,78.868,5.34386,
+
+
+
+Guidance Parameters
+Parameter,Element,Value,
+MIGRATE_MEM,host,2,
+PLRAM_DEVICE,all,0,
+HBM_DEVICE,all,0,
+KDMA_DEVICE,all,0,
+P2P_DEVICE,all,0,
+P2P_HOST_TRANSFERS,host,0,
+OBJECTS_RELEASED,all,1,
+CU_CONTEXT_EN,all,0,
+TRACE_MEMORY,all,FIFO,
+MAX_PARALLEL_KERNEL_ENQUEUES,DGN_compute_one_graph,1,
+COMMAND_QUEUE_OOO,94641970110832,0,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|out_r|HBM[0]|1,78868,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|node_feature_in|HBM[0]|1,39434000,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|node_eigen_in|HBM[0]|1,157736,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|degree_table_offset|HBM[0]|1,157736,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|neighbor_table_offset|HBM[0]|1,354592,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|graph_attr|HBM[0]|1,12,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|embedding_FC_weight_in|HBM[0]|1,100000,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|embedding_FC_bias_in|HBM[0]|1,200,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|layers_posttrans_fully_connected_0_linear_weight_in|HBM[0]|1,160000,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|layers_posttrans_fully_connected_0_linear_bias_in|HBM[0]|1,800,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|MLP_layer_FC_layers_0_weight_in|HBM[0]|1,10000,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|MLP_layer_FC_layers_0_bias_in|HBM[0]|1,100,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|MLP_layer_FC_layers_1_weight_in|HBM[0]|1,2500,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|MLP_layer_FC_layers_1_bias_in|HBM[0]|1,50,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|MLP_layer_FC_layers_2_weight_in|HBM[0]|1,50,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|MLP_layer_FC_layers_2_bias_in|HBM[0]|1,2,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|h_node_ping|HBM[0]|1,3943400,
+KERNEL_BUFFER_INFO,DGN_compute_one_graph|h_node_pong|HBM[0]|1,3943400,
+XRT_INI_SETTING,profile,0,
+XRT_INI_SETTING,opencl_summary,1,
+XRT_INI_SETTING,opencl_device_counter,0,
+XRT_INI_SETTING,timeline_trace,0,
+XRT_INI_SETTING,opencl_trace,1,
+XRT_INI_SETTING,xrt_trace,0,
+XRT_INI_SETTING,native_xrt_trace,0,
+XRT_INI_SETTING,xrt_profile,0,
+XRT_INI_SETTING,data_transfer_trace,off,
+XRT_INI_SETTING,power_profile,0,
+XRT_INI_SETTING,power_profile_interval_ms,20,
+XRT_INI_SETTING,stall_trace,off,
+XRT_INI_SETTING,trace_buffer_size,1M,
+XRT_INI_SETTING,verbosity,4,
+XRT_INI_SETTING,continuous_trace,0,
+XRT_INI_SETTING,continuous_trace_interval_ms,10,
+XRT_INI_SETTING,trace_buffer_offload_interval_ms,10,
+XRT_INI_SETTING,trace_file_dump_interval_s,5,
+XRT_INI_SETTING,lop_trace,0,
+XRT_INI_SETTING,debug_mode,batch,
+XRT_INI_SETTING,aie_trace,0,
+XRT_INI_SETTING,aie_trace_buffer_size,8M,
+XRT_INI_SETTING,aie_trace_metrics,functions,
+XRT_INI_SETTING,aie_profile,0,
+XRT_INI_SETTING,aie_profile_interval_us,1000,
+XRT_INI_SETTING,aie_profile_core_metrics,heat_map,
+XRT_INI_SETTING,aie_profile_memory_metrics,dma_locks,
+XRT_INI_SETTING,vitis_ai_profile,0,
+XRT_INI_SETTING,sc_profile,0,
+BUFFER_RD_ACTIVE_TIME_MS,all,0.1778,
+BUFFER_WR_ACTIVE_TIME_MS,all,6.39192,
+BUFFER_TX_ACTIVE_TIME_MS,all,571.205,
+APPLICATION_RUN_TIME_MS,all,2329.44,
+TOTAL_KERNEL_RUN_TIME_MS,all,0,
