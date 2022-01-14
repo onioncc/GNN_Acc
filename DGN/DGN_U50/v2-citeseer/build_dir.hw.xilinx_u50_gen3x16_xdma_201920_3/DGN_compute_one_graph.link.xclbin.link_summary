@@ -1,0 +1,1132 @@
+<ENTRY>
+{
+ "thisFile": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:21 2022",
+ "timestampMillis": "1642119501316",
+ "buildStep": {
+  "cmdId": "5dcd877a-166d-422a-b3bf-0094d004e659",
+  "name": "v++",
+  "logFile": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/software/xilinx/Vitis/2021.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -t hw --platform xilinx_u50_gen3x16_xdma_201920_3 --save-temps -l --temp_dir ./_x.hw.xilinx_u50_gen3x16_xdma_201920_3 -o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin _x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo ",
+  "args": [
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--save-temps",
+   "-l",
+   "--temp_dir",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_201920_3",
+   "-o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+   "_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:21 2022",
+ "timestampMillis": "1642119501317",
+ "status": {
+  "cmdId": "5dcd877a-166d-422a-b3bf-0094d004e659",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Thu Jan 13 19:18:28 2022",
+ "timestampMillis": "1642119508654",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/export/hdd/scratch/common/xilinx/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "DGN_compute_one_graph.link",
+    "file": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "DGN_compute_one_graph",
+     "file": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/DGN_compute_one_graph/DGN_compute_one_graph/cpu_sources/DGN_compute.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "DGN_compute_one_graph_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2021.1. SW Build 3246112 on 2021-06-09-14:19:56"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:29 2022",
+ "timestampMillis": "1642119509766",
+ "buildStep": {
+  "cmdId": "a6f2a599-9721-4777-b84a-718f997ee36c",
+  "name": "system_link",
+  "logFile": "",
+  "commandLine": "system_link --xo /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo -keep --xpfm /export/hdd/scratch/common/xilinx/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm --target hw --output_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --temp_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link",
+  "args": [
+   "--xo",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo",
+   "-keep",
+   "--xpfm",
+   "/export/hdd/scratch/common/xilinx/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+   "--target",
+   "hw",
+   "--output_dir",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--temp_dir",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:29 2022",
+ "timestampMillis": "1642119509766",
+ "status": {
+  "cmdId": "a6f2a599-9721-4777-b84a-718f997ee36c",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:44 2022",
+ "timestampMillis": "1642119524930",
+ "status": {
+  "cmdId": "a6f2a599-9721-4777-b84a-718f997ee36c",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:44 2022",
+ "timestampMillis": "1642119524932",
+ "buildStep": {
+  "cmdId": "b58d7dd8-d8fc-4cd5-9759-38846d9d1321",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -sdsl /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -rtd /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd -nofilter /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd -xclbin /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -o /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml",
+  "args": [
+   "-sdsl",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-rtd",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd",
+   "-nofilter",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd",
+   "-xclbin",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-o",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:44 2022",
+ "timestampMillis": "1642119524932",
+ "status": {
+  "cmdId": "b58d7dd8-d8fc-4cd5-9759-38846d9d1321",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:47 2022",
+ "timestampMillis": "1642119527611",
+ "status": {
+  "cmdId": "b58d7dd8-d8fc-4cd5-9759-38846d9d1321",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:47 2022",
+ "timestampMillis": "1642119527624",
+ "buildStep": {
+  "cmdId": "a51fc78f-7d16-4f94-a02c-669ff0d8c763",
+  "name": "rtd2_system_diagram",
+  "logFile": "",
+  "commandLine": "rtd2SystemDiagram",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:47 2022",
+ "timestampMillis": "1642119527624",
+ "status": {
+  "cmdId": "a51fc78f-7d16-4f94-a02c-669ff0d8c763",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 19:18:48 2022",
+ "timestampMillis": "1642119528414",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModel.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:48 2022",
+ "timestampMillis": "1642119528414",
+ "status": {
+  "cmdId": "a51fc78f-7d16-4f94-a02c-669ff0d8c763",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:48 2022",
+ "timestampMillis": "1642119528416",
+ "buildStep": {
+  "cmdId": "370d5a94-3e48-4971-a7fc-4aeb1ced78b1",
+  "name": "vpl",
+  "logFile": "",
+  "commandLine": "vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/.ipcache -s --output_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_DGN_compute_one_graph_1_0 --messageDb /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl",
+  "args": [
+   "-t",
+   "hw",
+   "-f",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--remote_ip_cache",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/.ipcache",
+   "-s",
+   "--output_dir",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--log_dir",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link",
+   "--report_dir",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link",
+   "--config",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+   "-k",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat",
+   "--webtalk_flag",
+   "Vitis",
+   "--temp_dir",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link",
+   "--no-info",
+   "--iprepo",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_DGN_compute_one_graph_1_0",
+   "--messageDb",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl"
+  ],
+  "iniFiles": [
+   {
+    "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+    "content": "[advanced]\nmisc=report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\nmisc=report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\nparam=compiler.enablePerformanceTrace=1\nparam=compiler.vppCurrentWorkingDir=/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer\nmisc=BinaryName=DGN_compute_one_graph.link\n\n[connectivity]\nnk=DGN_compute_one_graph:1:DGN_compute_one_graph_1\n\n[vivado]\nprop=run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\n\n"
+   }
+  ],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:48 2022",
+ "timestampMillis": "1642119528416",
+ "status": {
+  "cmdId": "370d5a94-3e48-4971-a7fc-4aeb1ced78b1",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:50 2022",
+ "timestampMillis": "1642119530172",
+ "buildStep": {
+  "cmdId": "62b138d6-1bca-4bde-adbd-139efe97f10d",
+  "name": "vpl",
+  "logFile": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/software/xilinx/Vitis/2021.1/bin/unwrapped/lnx64.o/vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/.ipcache -s --output_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_DGN_compute_one_graph_1_0 --messageDb /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl ",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:50 2022",
+ "timestampMillis": "1642119530173",
+ "status": {
+  "cmdId": "62b138d6-1bca-4bde-adbd-139efe97f10d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_VivadoProject",
+ "dateTimestamp": "Thu Jan 13 19:18:55 2022",
+ "timestampMillis": "1642119535532",
+ "vivadoProject": {
+  "openDir": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl",
+  "openScript": "openprj.tcl",
+  "relativeProject": "prj/prj.xpr"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 19:18:55 2022",
+ "timestampMillis": "1642119535534",
+ "buildStep": {
+  "cmdId": "5edb6f08-ef84-4116-bc43-4500f0dd55f1",
+  "name": "vivado",
+  "logFile": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/vivado.log",
+  "commandLine": "vivado -log vivado.log -applog -m64 -messageDb vivado.pb -mode batch -source vpl.tcl -notrace",
+  "args": [
+   "-log",
+   "vivado.log",
+   "-applog",
+   " -m64",
+   "-messageDb",
+   "vivado.pb",
+   "-mode",
+   "batch",
+   "-source",
+   "vpl.tcl",
+   "-notrace"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 19:18:55 2022",
+ "timestampMillis": "1642119535534",
+ "status": {
+  "cmdId": "5edb6f08-ef84-4116-bc43-4500f0dd55f1",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Thu Jan 13 20:40:08 2022",
+ "timestampMillis": "1642124408153",
+ "buildStep": {
+  "cmdId": "4f00edf9-0d46-4ac6-a527-e8100b571cd1",
+  "name": "vivado.impl",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 20:40:08 2022",
+ "timestampMillis": "1642124408153",
+ "status": {
+  "cmdId": "4f00edf9-0d46-4ac6-a527-e8100b571cd1",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Thu Jan 13 20:40:08 2022",
+ "timestampMillis": "1642124408153",
+ "buildStep": {
+  "cmdId": "92a4fa35-b342-48cc-9ebd-4df799739c74",
+  "name": "vivado.impl.impl_1",
+  "logFile": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/runme.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 20:40:08 2022",
+ "timestampMillis": "1642124408154",
+ "status": {
+  "cmdId": "92a4fa35-b342-48cc-9ebd-4df799739c74",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 22:56:34 2022",
+ "timestampMillis": "1642132594085",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 22:58:29 2022",
+ "timestampMillis": "1642132709124",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 22:58:29 2022",
+ "timestampMillis": "1642132709125",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470009",
+ "status": {
+  "cmdId": "5edb6f08-ef84-4116-bc43-4500f0dd55f1",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470100",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470101",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470101",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470101",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470101",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470102",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470102",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470102",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470103",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470103",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470103",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470103",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470104",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470104",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470108",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": "92a4fa35-b342-48cc-9ebd-4df799739c74"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470118",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "92a4fa35-b342-48cc-9ebd-4df799739c74"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470127",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "92a4fa35-b342-48cc-9ebd-4df799739c74"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470128",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "92a4fa35-b342-48cc-9ebd-4df799739c74"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470147",
+ "status": {
+  "cmdId": "62b138d6-1bca-4bde-adbd-139efe97f10d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470169",
+ "status": {
+  "cmdId": "370d5a94-3e48-4971-a7fc-4aeb1ced78b1",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470194",
+ "buildStep": {
+  "cmdId": "f35c4993-2da4-4395-a75c-f88a367f21e7",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470194",
+ "status": {
+  "cmdId": "f35c4993-2da4-4395-a75c-f88a367f21e7",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470265",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470268",
+ "buildStep": {
+  "cmdId": "0acfbcef-4aa3-44a9-8041-e4bdc4fc51bd",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml -sdsl /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -xclbin /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -rtd /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd -o /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml",
+  "args": [
+   "-a",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml",
+   "-sdsl",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-xclbin",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd",
+   "-o",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:10 2022",
+ "timestampMillis": "1642133470268",
+ "status": {
+  "cmdId": "0acfbcef-4aa3-44a9-8041-e4bdc4fc51bd",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472698",
+ "status": {
+  "cmdId": "0acfbcef-4aa3-44a9-8041-e4bdc4fc51bd",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472698",
+ "buildStep": {
+  "cmdId": "da872afc-2ad4-41e7-85e2-d5e6ef5d5267",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472698",
+ "status": {
+  "cmdId": "da872afc-2ad4-41e7-85e2-d5e6ef5d5267",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472701",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472701",
+ "status": {
+  "cmdId": "da872afc-2ad4-41e7-85e2-d5e6ef5d5267",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472702",
+ "status": {
+  "cmdId": "f35c4993-2da4-4395-a75c-f88a367f21e7",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472704",
+ "buildStep": {
+  "cmdId": "ff055902-c706-4154-ae1e-95d56c9e3795",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd --append-section :JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_xml.rtd --add-section BUILD_METADATA:JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_build.rtd --add-section EMBEDDED_METADATA:RAW:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml --add-section SYSTEM_METADATA:RAW:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3 --output /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd",
+   "--append-section",
+   ":JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3",
+   "--output",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472704",
+ "status": {
+  "cmdId": "ff055902-c706-4154-ae1e-95d56c9e3795",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472855",
+ "status": {
+  "cmdId": "ff055902-c706-4154-ae1e-95d56c9e3795",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472856",
+ "buildStep": {
+  "cmdId": "7aadf4ee-24ac-4c46-a91e-4e652d58a874",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin.info --input /export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin.info",
+   "--input",
+   "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:12 2022",
+ "timestampMillis": "1642133472857",
+ "status": {
+  "cmdId": "7aadf4ee-24ac-4c46-a91e-4e652d58a874",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473281",
+ "status": {
+  "cmdId": "7aadf4ee-24ac-4c46-a91e-4e652d58a874",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473298",
+ "buildStep": {
+  "cmdId": "a965a587-34b3-4bfe-8794-2ca651b2090c",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473298",
+ "status": {
+  "cmdId": "a965a587-34b3-4bfe-8794-2ca651b2090c",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473299",
+ "status": {
+  "cmdId": "a965a587-34b3-4bfe-8794-2ca651b2090c",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473623",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/system_estimate_DGN_compute_one_graph.link.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473714",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/v++_link_DGN_compute_one_graph.link_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473714",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/v++_link_DGN_compute_one_graph.link_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473719",
+ "report": {
+  "path": "/export/hdd/scratch/rsarkar30/GNN_Acc/DGN/DGN_U50/v2-citeseer/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Thu Jan 13 23:11:13 2022",
+ "timestampMillis": "1642133473719",
+ "status": {
+  "cmdId": "5dcd877a-166d-422a-b3bf-0094d004e659",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
