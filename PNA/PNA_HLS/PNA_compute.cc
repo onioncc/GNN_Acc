@@ -147,6 +147,7 @@ void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], i
 
 
     //#pragma HLS PIPELINE
+    // int count[MAX_NODE];
 
     scatter_sum(src, out, mean_index, num_of_edges, EMB_DIM);
 
@@ -158,6 +159,7 @@ void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], i
         int t = index[j];
         count[t] += 1;
     }
+    FM_TYPE count_temp; 
     /// dimsize:num of the nodes
     for (int i = 0; i < dim_size; i++) {
     	FM_TYPE temp_count = count[i];

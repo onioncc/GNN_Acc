@@ -1,7 +1,7 @@
 
-#AUTOPILOT_ROOT :=/tools/xilinx/latest/Vitis_HLS/2020.2
-# AUTOPILOT_ROOT :=/tools/software/xilinx/Vitis_HLS/2021.1
-AUTOPILOT_ROOT :=/tools/reconfig/xilinx/Vitis_HLS/2020.2/
+# AUTOPILOT_ROOT :=/tools/xilinx/latest/Vitis_HLS/2020.2
+AUTOPILOT_ROOT :=/tools/software/xilinx/Vitis_HLS/2021.2
+# AUTOPILOT_ROOT :=/tools/reconfig/xilinx/Vitis_HLS/2020.2/
 
 ASSEMBLE_SRC_ROOT := .
 IFLAG += -I "${AUTOPILOT_ROOT}/include"
