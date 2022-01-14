@@ -2,19 +2,6 @@
 #include <stdlib.h>
 #include "dcl.h"
 
-extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
-extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
-extern WT_TYPE MLP_layer_FC_layers_0_bias_in[50];
-extern WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50];
-extern WT_TYPE MLP_layer_FC_layers_1_bias_in[25];
-extern WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25];
-extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
-
-// global weights
-float result;
-
 void prepare_graph(
     int num_of_nodes,
     int num_of_edges,
@@ -64,7 +51,6 @@ int main()
 
     load_weights();
 
-    float all_results[4113];
     FILE* c_output = fopen("Cosim_output.txt", "w+");
     for(int g = 1; g <= 1; g++ ) {
         char graph_name[128];
@@ -85,30 +71,34 @@ int main()
         printf("********** Computing Graph %s *************\n", graph_name);
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
-        int node_feature[ND_FEATURE * MAX_NODE];
-        WT_TYPE node_eigen[4 * MAX_NODE];
-        int edge_list[2 * MAX_EDGE];
-        int edge_attr[EDGE_ATTR * MAX_EDGE];
+        int node_feature[ND_FEATURE * num_of_nodes];
+        WT_TYPE node_eigen[4 * num_of_nodes];
+        int edge_list[2 * num_of_edges];
         int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
         graph_attr[2] = g == 1;
 
-        fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
+        fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, num_of_nodes, num_of_edges);
 
-        int degree_table[MAX_NODE][2];
-        int neighbor_table[MAX_EDGE];
+        int degree_table[num_of_nodes][2];
+        int neighbor_table[num_of_edges];
         prepare_graph(num_of_nodes, num_of_edges, edge_list, degree_table, neighbor_table);
+
+        FM_TYPE h_node_ping_dram[num_of_nodes][EMB_DIM];
+        FM_TYPE h_node_pong_dram[num_of_nodes][EMB_DIM];
+        float result[num_of_nodes];
 
         printf("Computing DGN ...\n");
         DGN_compute_one_graph(
-            &result,
+            result,
             node_feature,
             node_eigen,
             degree_table,
             neighbor_table,
             graph_attr,
-            embedding_h_atom_embedding_list_weights,
+            embedding_FC_weight_in,
+            embedding_FC_bias_in,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,
             MLP_layer_FC_layers_0_weight_in,
@@ -116,18 +106,18 @@ int main()
             MLP_layer_FC_layers_1_weight_in,
             MLP_layer_FC_layers_1_bias_in,
             MLP_layer_FC_layers_2_weight_in,
-            MLP_layer_FC_layers_2_bias_in
+            MLP_layer_FC_layers_2_bias_in,
+
+            h_node_ping_dram,
+            h_node_pong_dram
         );
-        printf("%.8f\n", float(result));
-        all_results[g - 1] = float(result);
-    }
 
-    for(int g = 1; g <= 1; g++) {
-        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
+        for (int nd = 0; nd < num_of_nodes; nd++) {
+            printf("%.7f\n", result[nd]);
+        }
     }
-    fclose(c_output);
 
     
     
-    return (abs(result - (-3.86696744)) <= 0.05) ? 0 : 1;
+    return 0;
 }

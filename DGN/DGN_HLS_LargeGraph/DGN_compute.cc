@@ -17,50 +17,6 @@ WT_TYPE MLP_layer_FC_layers_2_bias[1];
 
 FM_TYPE h_graph[EMB_DIM];
 
-template<typename T, int N>
-void load_array_1d(T to[N], T from[N]) {
-#pragma HLS INLINE off
-    for (int i = 0; i < N; i++) {
-        to[i] = from[i];
-    }
-}
-
-template<typename T, int R, int C>
-void load_array_2d(T to[R][C], T from[R][C]) {
-#pragma HLS INLINE off
-    for (int i = 0; i < R; i++) {
-        for (int j = 0; j < C; j++) {
-            to[i][j] = from[i][j];
-        }
-    }
-}
-
-template<typename T, int L, int R, int C>
-void load_array_3d(T to[L][R][C], T from[L][R][C]) {
-#pragma HLS INLINE off
-    for (int i = 0; i < L; i++) {
-        for (int j = 0; j < R; j++) {
-            for (int k = 0; k < C; k++) {
-                to[i][j][k] = from[i][j][k];
-            }
-        }
-    }
-}
-
-template<typename T, int L, int R, int C, int D>
-void load_array_4d(T to[L][R][C][D], T from[L][R][C][D]) {
-#pragma HLS INLINE off
-    for (int i = 0; i < L; i++) {
-        for (int j = 0; j < R; j++) {
-            for (int k = 0; k < C; k++) {
-                for (int l = 0; l < D; l++) {
-                    to[i][j][k][l] = from[i][j][k][l];
-                }
-            }
-        }
-    }
-}
-
 void load_weights(
     WT_TYPE embedding_FC_weight_in[EMB_DIM][ND_FEATURE],
     WT_TYPE embedding_FC_bias_in[EMB_DIM],
@@ -787,25 +743,25 @@ void DGN_compute_one_graph(
 {
 #pragma HLS INTERFACE s_axilite port=return
 
-#pragma HLS INTERFACE m_axi depth=100000 port=out offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=node_feature_in offset=slave bundle=node_feature
-#pragma HLS INTERFACE m_axi depth=100000 port=node_eigen_in offset=slave bundle=node_eigen
-#pragma HLS INTERFACE m_axi depth=100000 port=degree_table offset=slave bundle=degree_table
-#pragma HLS INTERFACE m_axi depth=100000 port=neighbor_table offset=slave bundle=neighbor_table
-#pragma HLS INTERFACE m_axi depth=100000 port=graph_attr offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=embedding_FC_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=embedding_FC_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=layers_posttrans_fully_connected_0_linear_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_0_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_0_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_1_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_1_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_2_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=MLP_layer_FC_layers_2_bias_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(100000) port=out offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(50000000) port=node_feature_in offset=slave bundle=node_feature
+#pragma HLS INTERFACE m_axi depth=(400000) port=node_eigen_in offset=slave bundle=node_eigen
+#pragma HLS INTERFACE m_axi depth=(200000) port=degree_table offset=slave bundle=degree_table
+#pragma HLS INTERFACE m_axi depth=(1000000) port=neighbor_table offset=slave bundle=neighbor_table
+#pragma HLS INTERFACE m_axi depth=(3) port=graph_attr offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(500000) port=embedding_FC_weight_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(100) port=embedding_FC_bias_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(4 * 100 * 200) port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(4 * 100) port=layers_posttrans_fully_connected_0_linear_bias_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(50 * 100) port=MLP_layer_FC_layers_0_weight_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(50) port=MLP_layer_FC_layers_0_bias_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(25 * 50) port=MLP_layer_FC_layers_1_weight_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(25) port=MLP_layer_FC_layers_1_bias_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(1 * 25) port=MLP_layer_FC_layers_2_weight_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(1) port=MLP_layer_FC_layers_2_bias_in offset=slave bundle=mem
 
-#pragma HLS INTERFACE m_axi depth=100000 port=h_node_ping offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=100000 port=h_node_pong offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=10000000 port=h_node_ping offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=10000000 port=h_node_pong offset=slave bundle=mem
 
 #pragma HLS bind_storage variable=h_graph type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=embedding_FC_weight type=RAM_2P impl=bram
