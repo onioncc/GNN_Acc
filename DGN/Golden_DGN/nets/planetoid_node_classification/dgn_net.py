@@ -56,10 +56,10 @@ class DGNNet(nn.Module):
     def reset_parameters(self, init_fn=None):
         init_fn = init_fn or self.init_fn
         if init_fn is not None:
-            init_fn(self.embedding_h.weight, 1)
+            init_fn(self.embedding_h.weight, 2)
             self.embedding_h.bias.data.zero_()
         for layer in self.MLP_layer.FC_layers.children():
-            init_fn(layer.weight, 1)
+            init_fn(layer.weight, 2)
             layer.bias.data.zero_()
 
 

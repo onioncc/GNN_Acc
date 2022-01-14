@@ -49,7 +49,7 @@ def evaluate_network(model, device, data_loader, epoch):
 
 if __name__ == '__main__':
     ############ Device and test_loader #############
-    device = torch.device("cuda")
+    device = torch.device("cpu")
     for DATASET_NAME in ('Cora', 'CiteSeer', 'PubMed'):
         dataset = PlanetoidDataset(DATASET_NAME, pos_enc_dim=int(0), norm='none')
         testset = dataset.test
