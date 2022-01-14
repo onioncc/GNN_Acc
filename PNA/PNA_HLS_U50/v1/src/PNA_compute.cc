@@ -139,11 +139,12 @@ void scatter_sum(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM],
      */
 }
 
-int count[MAX_NODE];
 
 void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM]) {
 #pragma HLS inline off
-#pragma HLS array_partition variable = count complete
+// #pragma HLS array_partition variable = count complete
+    int count[MAX_NODE];
+
 
     //#pragma HLS PIPELINE
 
@@ -153,17 +154,20 @@ void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], i
     zero_1d<MAX_NODE, int>(count, num_of_edges);
     // count on the nodes
     for (int j = 0; j < num_of_edges; j++) {
-        // #pragma HLS PIPELINE
+         #pragma HLS PIPELINE II=3
         int t = index[j];
         count[t] += 1;
     }
     /// dimsize:num of the nodes
     for (int i = 0; i < dim_size; i++) {
+    	FM_TYPE temp_count = count[i];
         for (int j = 0; j < EMB_DIM; j++) {
             // printf("%f \n", count[i].to_float());
-            if (count[i] != 0) {
-                out[i][j] = out[i][j] / (FM_TYPE)count[i];
-            }
+//            if (count[i] != 0) {
+//                out[i][j] = out[i][j] / (FM_TYPE)count[i];
+//            }
+//			out[i][j] = out[i][j] / (FM_TYPE)count[i];
+        	out[i][j] = hls::divide(out[i][j], temp_count);
         }
     }
 }
@@ -466,7 +470,7 @@ FM_TYPE MLP(int num_of_nodes) {
     }
     return out;
 }
-extern "C" {
+
 void PNA_compute_one_graph(
     FM_TYPE *task,
 
@@ -673,5 +677,4 @@ void PNA_compute_one_graph(
     printf("%f \n", task[0].to_float());
 
     return;
-}
 }
