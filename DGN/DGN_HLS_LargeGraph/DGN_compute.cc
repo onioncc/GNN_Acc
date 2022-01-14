@@ -746,7 +746,7 @@ void DGN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=(100000) port=out offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(50000000) port=node_feature_in offset=slave bundle=node_feature
 #pragma HLS INTERFACE m_axi depth=(400000) port=node_eigen_in offset=slave bundle=node_eigen
-#pragma HLS INTERFACE m_axi depth=(200000) port=degree_table offset=slave bundle=degree_table
+#pragma HLS INTERFACE m_axi depth=(100000) port=degree_table offset=slave bundle=degree_table
 #pragma HLS INTERFACE m_axi depth=(1000000) port=neighbor_table offset=slave bundle=neighbor_table
 #pragma HLS INTERFACE m_axi depth=(3) port=graph_attr offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(500000) port=embedding_FC_weight_in offset=slave bundle=mem
@@ -760,8 +760,8 @@ void DGN_compute_one_graph(
 #pragma HLS INTERFACE m_axi depth=(1 * 25) port=MLP_layer_FC_layers_2_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=MLP_layer_FC_layers_2_bias_in offset=slave bundle=mem
 
-#pragma HLS INTERFACE m_axi depth=10000000 port=h_node_ping offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=10000000 port=h_node_pong offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(100000) port=h_node_ping offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(100000) port=h_node_pong offset=slave bundle=mem
 
 #pragma HLS bind_storage variable=h_graph type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=embedding_FC_weight type=RAM_2P impl=bram
