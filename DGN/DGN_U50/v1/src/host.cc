@@ -124,9 +124,9 @@ int main(int argc, char **argv) {
     krnl_DGN_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_2_weight_in_buf);
     krnl_DGN_compute_one_graph.setArg(idx++, MLP_layer_FC_layers_2_bias_in_buf);
 
-    float all_results[4113];
+    float all_results[43773];
     FILE* c_output = fopen("HLS_output.txt", "w+");
-    for(int g = 1; g <= 4113; g++ ) {
+    for(int g = 1; g <= 43773; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;

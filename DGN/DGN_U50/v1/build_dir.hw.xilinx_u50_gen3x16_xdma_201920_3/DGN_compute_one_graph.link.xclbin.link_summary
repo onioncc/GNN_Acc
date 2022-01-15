@@ -1,0 +1,1150 @@
+<ENTRY>
+{
+ "thisFile": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:06 2021",
+ "timestampMillis": "1609626846850",
+ "buildStep": {
+  "cmdId": "0f64125c-b530-42a8-a267-ffd1b5e81dc3",
+  "name": "v++",
+  "logFile": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -t hw --platform xilinx_u50_gen3x16_xdma_201920_3 --save-temps -l --profile.data all:all:all --temp_dir ./_x.hw.xilinx_u50_gen3x16_xdma_201920_3 -o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin _x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo ",
+  "args": [
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--save-temps",
+   "-l",
+   "--profile.data",
+   "all:all:all",
+   "--temp_dir",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_201920_3",
+   "-o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+   "_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:06 2021",
+ "timestampMillis": "1609626846851",
+ "status": {
+  "cmdId": "0f64125c-b530-42a8-a267-ffd1b5e81dc3",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Sat Jan  2 17:34:15 2021",
+ "timestampMillis": "1609626855423",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "DGN_compute_one_graph.link",
+    "file": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "DGN_compute_one_graph",
+     "file": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/DGN_compute_one_graph/DGN_compute_one_graph/cpu_sources/DGN_compute.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "DGN_compute_one_graph_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2021.1.1. SW Build 3278995 on 2021-07-20-20:33:48"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:16 2021",
+ "timestampMillis": "1609626856433",
+ "buildStep": {
+  "cmdId": "27cca2e5-e009-4883-8ae3-9c96381c1085",
+  "name": "system_link",
+  "logFile": "",
+  "commandLine": "system_link --xo /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo -keep --xpfm /opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm --target hw --output_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --temp_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link",
+  "args": [
+   "--xo",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.xo",
+   "-keep",
+   "--xpfm",
+   "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+   "--target",
+   "hw",
+   "--output_dir",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--temp_dir",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:16 2021",
+ "timestampMillis": "1609626856433",
+ "status": {
+  "cmdId": "27cca2e5-e009-4883-8ae3-9c96381c1085",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:36 2021",
+ "timestampMillis": "1609626876634",
+ "status": {
+  "cmdId": "27cca2e5-e009-4883-8ae3-9c96381c1085",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:36 2021",
+ "timestampMillis": "1609626876640",
+ "buildStep": {
+  "cmdId": "ec7c462c-3ddf-4750-b6f3-5faa2a0b4f0e",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -sdsl /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -rtd /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd -nofilter /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd -xclbin /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -o /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml",
+  "args": [
+   "-sdsl",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-rtd",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd",
+   "-nofilter",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd",
+   "-xclbin",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-o",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:36 2021",
+ "timestampMillis": "1609626876641",
+ "status": {
+  "cmdId": "ec7c462c-3ddf-4750-b6f3-5faa2a0b4f0e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:40 2021",
+ "timestampMillis": "1609626880640",
+ "status": {
+  "cmdId": "ec7c462c-3ddf-4750-b6f3-5faa2a0b4f0e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:40 2021",
+ "timestampMillis": "1609626880647",
+ "buildStep": {
+  "cmdId": "b661303e-4f15-4cfe-9848-06161ecff0f0",
+  "name": "rtd2_system_diagram",
+  "logFile": "",
+  "commandLine": "rtd2SystemDiagram",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:40 2021",
+ "timestampMillis": "1609626880648",
+ "status": {
+  "cmdId": "b661303e-4f15-4cfe-9848-06161ecff0f0",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 17:34:41 2021",
+ "timestampMillis": "1609626881508",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModel.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:41 2021",
+ "timestampMillis": "1609626881510",
+ "status": {
+  "cmdId": "b661303e-4f15-4cfe-9848-06161ecff0f0",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:41 2021",
+ "timestampMillis": "1609626881519",
+ "buildStep": {
+  "cmdId": "b3d141b4-a597-4757-be2c-1e9a20e2a9b4",
+  "name": "vpl",
+  "logFile": "",
+  "commandLine": "vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/.ipcache -s --output_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_DGN_compute_one_graph_1_0 --messageDb /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl",
+  "args": [
+   "-t",
+   "hw",
+   "-f",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--remote_ip_cache",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/.ipcache",
+   "-s",
+   "--output_dir",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--log_dir",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link",
+   "--report_dir",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link",
+   "--config",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+   "-k",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat",
+   "--webtalk_flag",
+   "Vitis",
+   "--temp_dir",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link",
+   "--no-info",
+   "--iprepo",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_DGN_compute_one_graph_1_0",
+   "--messageDb",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl"
+  ],
+  "iniFiles": [
+   {
+    "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+    "content": "[advanced]\nmisc=report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\nmisc=report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\nparam=compiler.enablePerformanceTrace=1\nparam=compiler.vppCurrentWorkingDir=/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1\nmisc=BinaryName=DGN_compute_one_graph.link\n\n[connectivity]\nnk=DGN_compute_one_graph:1:DGN_compute_one_graph_1\n\n[vivado]\nprop=run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\n\n"
+   }
+  ],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:41 2021",
+ "timestampMillis": "1609626881520",
+ "status": {
+  "cmdId": "b3d141b4-a597-4757-be2c-1e9a20e2a9b4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:44 2021",
+ "timestampMillis": "1609626884591",
+ "buildStep": {
+  "cmdId": "a1f15872-d125-4059-8cce-2d2cc3f3b857",
+  "name": "vpl",
+  "logFile": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/.ipcache -s --output_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_DGN_compute_one_graph_1_0 --messageDb /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl ",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:44 2021",
+ "timestampMillis": "1609626884592",
+ "status": {
+  "cmdId": "a1f15872-d125-4059-8cce-2d2cc3f3b857",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_VivadoProject",
+ "dateTimestamp": "Sat Jan  2 17:34:58 2021",
+ "timestampMillis": "1609626898875",
+ "vivadoProject": {
+  "openDir": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl",
+  "openScript": "openprj.tcl",
+  "relativeProject": "prj/prj.xpr"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 17:34:58 2021",
+ "timestampMillis": "1609626898877",
+ "buildStep": {
+  "cmdId": "1520d624-b8fc-4514-ad06-1dfc1540dee8",
+  "name": "vivado",
+  "logFile": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/vivado.log",
+  "commandLine": "vivado -log vivado.log -applog -m64 -messageDb vivado.pb -mode batch -source vpl.tcl -notrace",
+  "args": [
+   "-log",
+   "vivado.log",
+   "-applog",
+   " -m64",
+   "-messageDb",
+   "vivado.pb",
+   "-mode",
+   "batch",
+   "-source",
+   "vpl.tcl",
+   "-notrace"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 17:34:58 2021",
+ "timestampMillis": "1609626898878",
+ "status": {
+  "cmdId": "1520d624-b8fc-4514-ad06-1dfc1540dee8",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 17:36:38 2021",
+ "timestampMillis": "1609626998890",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/debug_ip_layout.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "DEBUG_IP_LAYOUT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sat Jan  2 18:30:57 2021",
+ "timestampMillis": "1609630257915",
+ "buildStep": {
+  "cmdId": "71670518-4c24-4006-b1ff-6aa47aba69c4",
+  "name": "vivado.impl",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 18:30:57 2021",
+ "timestampMillis": "1609630257916",
+ "status": {
+  "cmdId": "71670518-4c24-4006-b1ff-6aa47aba69c4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sat Jan  2 18:30:57 2021",
+ "timestampMillis": "1609630257918",
+ "buildStep": {
+  "cmdId": "3ebdffff-cfd9-46be-a56d-c85a2197caae",
+  "name": "vivado.impl.impl_1",
+  "logFile": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/runme.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 18:30:57 2021",
+ "timestampMillis": "1609630257919",
+ "status": {
+  "cmdId": "3ebdffff-cfd9-46be-a56d-c85a2197caae",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:38:59 2021",
+ "timestampMillis": "1609637939142",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:41:01 2021",
+ "timestampMillis": "1609638061536",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:41:01 2021",
+ "timestampMillis": "1609638061540",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:04 2021",
+ "timestampMillis": "1609639084941",
+ "status": {
+  "cmdId": "1520d624-b8fc-4514-ad06-1dfc1540dee8",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085289",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085292",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085295",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085301",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085303",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085306",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085308",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085311",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085314",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085319",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085321",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085324",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085327",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085330",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085958",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": "3ebdffff-cfd9-46be-a56d-c85a2197caae"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:05 2021",
+ "timestampMillis": "1609639085993",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3ebdffff-cfd9-46be-a56d-c85a2197caae"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086026",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3ebdffff-cfd9-46be-a56d-c85a2197caae"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086029",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "3ebdffff-cfd9-46be-a56d-c85a2197caae"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086056",
+ "status": {
+  "cmdId": "a1f15872-d125-4059-8cce-2d2cc3f3b857",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086086",
+ "status": {
+  "cmdId": "b3d141b4-a597-4757-be2c-1e9a20e2a9b4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086103",
+ "buildStep": {
+  "cmdId": "09f4c1bf-2416-43e5-bbab-1d43318cfa72",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086104",
+ "status": {
+  "cmdId": "09f4c1bf-2416-43e5-bbab-1d43318cfa72",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086165",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086176",
+ "buildStep": {
+  "cmdId": "0d8047f4-39ca-47d7-86ec-92f624ff6c9f",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml -sdsl /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -xclbin /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -rtd /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd -o /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml",
+  "args": [
+   "-a",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml",
+   "-sdsl",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-xclbin",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd",
+   "-o",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:06 2021",
+ "timestampMillis": "1609639086176",
+ "status": {
+  "cmdId": "0d8047f4-39ca-47d7-86ec-92f624ff6c9f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089667",
+ "status": {
+  "cmdId": "0d8047f4-39ca-47d7-86ec-92f624ff6c9f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089669",
+ "buildStep": {
+  "cmdId": "661484eb-ab56-4aae-92cf-4dc0395d1bdd",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089669",
+ "status": {
+  "cmdId": "661484eb-ab56-4aae-92cf-4dc0395d1bdd",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089677",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089679",
+ "status": {
+  "cmdId": "661484eb-ab56-4aae-92cf-4dc0395d1bdd",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089681",
+ "status": {
+  "cmdId": "09f4c1bf-2416-43e5-bbab-1d43318cfa72",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089691",
+ "buildStep": {
+  "cmdId": "a881781e-7313-4df0-b796-3ed6c1090197",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section DEBUG_IP_LAYOUT:JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/debug_ip_layout.rtd --add-section BITSTREAM:RAW:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd --append-section :JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_xml.rtd --add-section BUILD_METADATA:JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_build.rtd --add-section EMBEDDED_METADATA:RAW:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml --add-section SYSTEM_METADATA:RAW:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3 --output /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+  "args": [
+   "--add-section",
+   "DEBUG_IP_LAYOUT:JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/debug_ip_layout.rtd",
+   "--add-section",
+   "BITSTREAM:RAW:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.rtd",
+   "--append-section",
+   ":JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/DGN_compute_one_graph.link.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3",
+   "--output",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:09 2021",
+ "timestampMillis": "1609639089691",
+ "status": {
+  "cmdId": "a881781e-7313-4df0-b796-3ed6c1090197",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:10 2021",
+ "timestampMillis": "1609639090350",
+ "status": {
+  "cmdId": "a881781e-7313-4df0-b796-3ed6c1090197",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 20:58:10 2021",
+ "timestampMillis": "1609639090355",
+ "buildStep": {
+  "cmdId": "4eacdaa0-cb63-41c0-acc5-548b7441905d",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin.info --input /nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin.info",
+   "--input",
+   "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/DGN_compute_one_graph.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:10 2021",
+ "timestampMillis": "1609639090356",
+ "status": {
+  "cmdId": "4eacdaa0-cb63-41c0-acc5-548b7441905d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:11 2021",
+ "timestampMillis": "1609639091347",
+ "status": {
+  "cmdId": "4eacdaa0-cb63-41c0-acc5-548b7441905d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sat Jan  2 20:58:11 2021",
+ "timestampMillis": "1609639091354",
+ "buildStep": {
+  "cmdId": "e1e3fded-041d-499e-a560-ddfc7f7b88b6",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:11 2021",
+ "timestampMillis": "1609639091354",
+ "status": {
+  "cmdId": "e1e3fded-041d-499e-a560-ddfc7f7b88b6",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:11 2021",
+ "timestampMillis": "1609639091356",
+ "status": {
+  "cmdId": "e1e3fded-041d-499e-a560-ddfc7f7b88b6",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:11 2021",
+ "timestampMillis": "1609639091691",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/system_estimate_DGN_compute_one_graph.link.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:12 2021",
+ "timestampMillis": "1609639092215",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/v++_link_DGN_compute_one_graph.link_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:12 2021",
+ "timestampMillis": "1609639092216",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/v++_link_DGN_compute_one_graph.link_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sat Jan  2 20:58:12 2021",
+ "timestampMillis": "1609639092228",
+ "report": {
+  "path": "/nethome/rsarkar30/git/GNN_Acc/DGN/DGN_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sat Jan  2 20:58:12 2021",
+ "timestampMillis": "1609639092231",
+ "status": {
+  "cmdId": "0f64125c-b530-42a8-a267-ffd1b5e81dc3",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
