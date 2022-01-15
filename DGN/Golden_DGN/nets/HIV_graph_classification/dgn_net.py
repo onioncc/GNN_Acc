@@ -81,5 +81,6 @@ class DGNNet(nn.Module):
         return self.MLP_layer(hg)
 
     def loss(self, scores, labels):
-        loss = torch.nn.BCEWithLogitsLoss()(scores, labels.type(torch.FloatTensor).to('cpu').unsqueeze(-1))
+        unsqueezed_labels = labels.type(torch.FloatTensor).unsqueeze(-1).to(labels.device)
+        loss = torch.nn.BCEWithLogitsLoss()(scores, unsqueezed_labels)
         return loss

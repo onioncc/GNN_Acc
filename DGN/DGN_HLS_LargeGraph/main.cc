@@ -3,7 +3,7 @@
 #include "dcl.h"
 
 extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
-extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
+extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][2][100];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
 extern WT_TYPE MLP_layer_FC_layers_0_bias_in[50];
@@ -11,9 +11,6 @@ extern WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50];
 extern WT_TYPE MLP_layer_FC_layers_1_bias_in[25];
 extern WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25];
 extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
-
-// global weights
-float result;
 
 void prepare_graph(
     int num_of_nodes,
@@ -64,9 +61,8 @@ int main()
 
     load_weights();
 
-    float all_results[4113];
-    FILE* c_output = fopen("Golden_C_output.txt", "w+");
-    for(int g = 1; g <= 4113; g++ ) {
+    FILE* c_output = fopen("C_sim_output.txt", "w+");
+    for(int g = 1; g <= 1; g++ ) {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
@@ -88,13 +84,12 @@ int main()
         int* node_feature = (int*)malloc(ND_FEATURE * num_of_nodes * sizeof(int));
         WT_TYPE* node_eigen = (WT_TYPE*)malloc(4 * num_of_nodes * sizeof(WT_TYPE));
         int* edge_list = (int*)malloc(2 * num_of_edges * sizeof(int));
-        int* edge_attr = (int*)malloc(EDGE_ATTR * num_of_edges * sizeof(int));
         int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
         graph_attr[2] = g == 1;
 
-        fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
+        fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, num_of_nodes, num_of_edges);
 
         int degree_table[num_of_nodes][2];
         int neighbor_table[num_of_edges];
@@ -102,16 +97,18 @@ int main()
 
         FM_TYPE h_node_ping_dram[num_of_nodes][EMB_DIM];
         FM_TYPE h_node_pong_dram[num_of_nodes][EMB_DIM];
+        float result[num_of_nodes];
 
         printf("Computing DGN ...\n");
         DGN_compute_one_graph(
-            &result,
+            result,
             node_feature,
             node_eigen,
             degree_table,
             neighbor_table,
             graph_attr,
-            embedding_h_atom_embedding_list_weights,
+            embedding_FC_weight_in,
+            embedding_FC_bias_in,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,
             MLP_layer_FC_layers_0_weight_in,
@@ -124,15 +121,14 @@ int main()
             h_node_ping_dram,
             h_node_pong_dram
         );
-        printf("%.8f\n", float(result));
-        all_results[g - 1] = float(result);
+
+        for (int nd = 0; nd < num_of_nodes; nd++) {
+            printf("%.7f\n", result[nd]);
+            fprintf(c_output, "%.8f\n", result[nd]);
+        }
+
         free(node_feature);
         free(edge_list);
-        free(edge_attr);
-    }
-
-    for(int g = 1; g <= 4113; g++) {
-        fprintf(c_output, "g%d: %.8f\n", g, all_results[g-1]);
     }
     fclose(c_output);
 
