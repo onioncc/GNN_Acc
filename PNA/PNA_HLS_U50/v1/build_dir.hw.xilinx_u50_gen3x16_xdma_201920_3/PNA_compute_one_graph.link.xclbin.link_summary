@@ -1,0 +1,1133 @@
+<ENTRY>
+{
+ "thisFile": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Jan 13 16:13:18 2021",
+ "timestampMillis": "1610572398943",
+ "buildStep": {
+  "cmdId": "3eafebe8-8d2f-4b0e-81bb-b4767821e658",
+  "name": "v++",
+  "logFile": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -t hw --platform xilinx_u50_gen3x16_xdma_201920_3 --save-temps -j24 -l --temp_dir ./_x.hw.xilinx_u50_gen3x16_xdma_201920_3 -o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin _x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.xo ",
+  "args": [
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--save-temps",
+   "-j24",
+   "-l",
+   "--temp_dir",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_201920_3",
+   "-o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin",
+   "_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:18 2021",
+ "timestampMillis": "1610572398944",
+ "status": {
+  "cmdId": "3eafebe8-8d2f-4b0e-81bb-b4767821e658",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Wed Jan 13 16:13:27 2021",
+ "timestampMillis": "1610572407635",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "PNA_compute_one_graph.link",
+    "file": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "PNA_compute_one_graph",
+     "file": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_one_graph/PNA_compute_one_graph/cpu_sources/PNA_compute.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "PNA_compute_one_graph_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2021.1.1. SW Build 3278995 on 2021-07-20-20:33:48"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 16:13:28 2021",
+ "timestampMillis": "1610572408121",
+ "buildStep": {
+  "cmdId": "61593873-7a00-4137-b804-d65d601ddd41",
+  "name": "system_link",
+  "logFile": "",
+  "commandLine": "system_link --xo /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.xo -keep --xpfm /opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm --target hw --output_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --temp_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link",
+  "args": [
+   "--xo",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.xo",
+   "-keep",
+   "--xpfm",
+   "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+   "--target",
+   "hw",
+   "--output_dir",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--temp_dir",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:28 2021",
+ "timestampMillis": "1610572408121",
+ "status": {
+  "cmdId": "61593873-7a00-4137-b804-d65d601ddd41",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:48 2021",
+ "timestampMillis": "1610572428370",
+ "status": {
+  "cmdId": "61593873-7a00-4137-b804-d65d601ddd41",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 16:13:48 2021",
+ "timestampMillis": "1610572428379",
+ "buildStep": {
+  "cmdId": "464ba97d-be6d-4921-91a9-9edace6d3c8e",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -sdsl /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -rtd /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd -nofilter /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd -xclbin /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -o /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml",
+  "args": [
+   "-sdsl",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-rtd",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd",
+   "-nofilter",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd",
+   "-xclbin",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-o",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:48 2021",
+ "timestampMillis": "1610572428379",
+ "status": {
+  "cmdId": "464ba97d-be6d-4921-91a9-9edace6d3c8e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432162",
+ "status": {
+  "cmdId": "464ba97d-be6d-4921-91a9-9edace6d3c8e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432170",
+ "buildStep": {
+  "cmdId": "cddc9e35-e124-40ac-addc-655f71cf5732",
+  "name": "rtd2_system_diagram",
+  "logFile": "",
+  "commandLine": "rtd2SystemDiagram",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432170",
+ "status": {
+  "cmdId": "cddc9e35-e124-40ac-addc-655f71cf5732",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432657",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModel.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432660",
+ "status": {
+  "cmdId": "cddc9e35-e124-40ac-addc-655f71cf5732",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432669",
+ "buildStep": {
+  "cmdId": "9a8d3bbe-3b99-40cd-99be-18230382108f",
+  "name": "vpl",
+  "logFile": "",
+  "commandLine": "vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/.ipcache -s --output_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_PNA_compute_one_graph_1_0 --messageDb /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl",
+  "args": [
+   "-t",
+   "hw",
+   "-f",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--remote_ip_cache",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/.ipcache",
+   "-s",
+   "--output_dir",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--log_dir",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link",
+   "--report_dir",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link",
+   "--config",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+   "-k",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat",
+   "--webtalk_flag",
+   "Vitis",
+   "--temp_dir",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link",
+   "--no-info",
+   "--iprepo",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_PNA_compute_one_graph_1_0",
+   "--messageDb",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl"
+  ],
+  "iniFiles": [
+   {
+    "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+    "content": "[advanced]\nmisc=report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\nmisc=report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\nparam=compiler.enablePerformanceTrace=1\nparam=compiler.vppCurrentWorkingDir=/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1\nmisc=BinaryName=PNA_compute_one_graph.link\n\n[connectivity]\nnk=PNA_compute_one_graph:1:PNA_compute_one_graph_1\n\n[vivado]\nprop=run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\nsynth.jobs=24\n\n"
+   }
+  ],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:52 2021",
+ "timestampMillis": "1610572432670",
+ "status": {
+  "cmdId": "9a8d3bbe-3b99-40cd-99be-18230382108f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Jan 13 16:13:55 2021",
+ "timestampMillis": "1610572435867",
+ "buildStep": {
+  "cmdId": "fbecc330-636a-498d-bdc4-ca6abdd47d0f",
+  "name": "vpl",
+  "logFile": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/.ipcache -s --output_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_PNA_compute_one_graph_1_0 --messageDb /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl ",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:13:55 2021",
+ "timestampMillis": "1610572435868",
+ "status": {
+  "cmdId": "fbecc330-636a-498d-bdc4-ca6abdd47d0f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_VivadoProject",
+ "dateTimestamp": "Wed Jan 13 16:14:11 2021",
+ "timestampMillis": "1610572451809",
+ "vivadoProject": {
+  "openDir": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl",
+  "openScript": "openprj.tcl",
+  "relativeProject": "prj/prj.xpr"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 16:14:11 2021",
+ "timestampMillis": "1610572451813",
+ "buildStep": {
+  "cmdId": "37b0b850-ac04-47a9-931b-7e5aedd57017",
+  "name": "vivado",
+  "logFile": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/vivado.log",
+  "commandLine": "vivado -log vivado.log -applog -m64 -messageDb vivado.pb -mode batch -source vpl.tcl -notrace",
+  "args": [
+   "-log",
+   "vivado.log",
+   "-applog",
+   " -m64",
+   "-messageDb",
+   "vivado.pb",
+   "-mode",
+   "batch",
+   "-source",
+   "vpl.tcl",
+   "-notrace"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:14:11 2021",
+ "timestampMillis": "1610572451814",
+ "status": {
+  "cmdId": "37b0b850-ac04-47a9-931b-7e5aedd57017",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Jan 13 16:22:46 2021",
+ "timestampMillis": "1610572966295",
+ "buildStep": {
+  "cmdId": "bb3ea0bb-0a21-4012-b997-6271a413d387",
+  "name": "vivado.impl",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:22:46 2021",
+ "timestampMillis": "1610572966296",
+ "status": {
+  "cmdId": "bb3ea0bb-0a21-4012-b997-6271a413d387",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Jan 13 16:22:46 2021",
+ "timestampMillis": "1610572966298",
+ "buildStep": {
+  "cmdId": "c3a8825d-6e38-4012-804b-4e3a060d4268",
+  "name": "vivado.impl.impl_1",
+  "logFile": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/runme.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 16:22:46 2021",
+ "timestampMillis": "1610572966299",
+ "status": {
+  "cmdId": "c3a8825d-6e38-4012-804b-4e3a060d4268",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 17:53:41 2021",
+ "timestampMillis": "1610578421377",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 17:55:36 2021",
+ "timestampMillis": "1610578536952",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 17:55:36 2021",
+ "timestampMillis": "1610578536955",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362144",
+ "status": {
+  "cmdId": "37b0b850-ac04-47a9-931b-7e5aedd57017",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362399",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362402",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362405",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362409",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362412",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362416",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362418",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362421",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362423",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362426",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362428",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362430",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362433",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362435",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362948",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": "c3a8825d-6e38-4012-804b-4e3a060d4268"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:22 2021",
+ "timestampMillis": "1610579362985",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "c3a8825d-6e38-4012-804b-4e3a060d4268"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363021",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "c3a8825d-6e38-4012-804b-4e3a060d4268"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363024",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "c3a8825d-6e38-4012-804b-4e3a060d4268"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363063",
+ "status": {
+  "cmdId": "fbecc330-636a-498d-bdc4-ca6abdd47d0f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363102",
+ "status": {
+  "cmdId": "9a8d3bbe-3b99-40cd-99be-18230382108f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363132",
+ "buildStep": {
+  "cmdId": "977cc93f-0514-4c3e-8a70-3306a84bd12d",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363132",
+ "status": {
+  "cmdId": "977cc93f-0514-4c3e-8a70-3306a84bd12d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363168",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363175",
+ "buildStep": {
+  "cmdId": "7ea74ba8-14d9-468f-a694-2528fe6cc6a4",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml -sdsl /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -xclbin /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -rtd /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.rtd -o /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.xml",
+  "args": [
+   "-a",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml",
+   "-sdsl",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-xclbin",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.rtd",
+   "-o",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:23 2021",
+ "timestampMillis": "1610579363176",
+ "status": {
+  "cmdId": "7ea74ba8-14d9-468f-a694-2528fe6cc6a4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366786",
+ "status": {
+  "cmdId": "7ea74ba8-14d9-468f-a694-2528fe6cc6a4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366787",
+ "buildStep": {
+  "cmdId": "cd3721c3-1697-4c66-8f84-085eb1f3d59e",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.rtd",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366788",
+ "status": {
+  "cmdId": "cd3721c3-1697-4c66-8f84-085eb1f3d59e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366795",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366797",
+ "status": {
+  "cmdId": "cd3721c3-1697-4c66-8f84-085eb1f3d59e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366798",
+ "status": {
+  "cmdId": "977cc93f-0514-4c3e-8a70-3306a84bd12d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366806",
+ "buildStep": {
+  "cmdId": "1192b96d-f2b8-40d9-aee3-9677ace344b9",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.rtd --append-section :JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link_xml.rtd --add-section BUILD_METADATA:JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link_build.rtd --add-section EMBEDDED_METADATA:RAW:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.xml --add-section SYSTEM_METADATA:RAW:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3 --output /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.rtd",
+   "--append-section",
+   ":JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_one_graph.link.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3",
+   "--output",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:26 2021",
+ "timestampMillis": "1610579366807",
+ "status": {
+  "cmdId": "1192b96d-f2b8-40d9-aee3-9677ace344b9",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:27 2021",
+ "timestampMillis": "1610579367538",
+ "status": {
+  "cmdId": "1192b96d-f2b8-40d9-aee3-9677ace344b9",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 18:09:27 2021",
+ "timestampMillis": "1610579367543",
+ "buildStep": {
+  "cmdId": "68c7e93d-6760-4e89-81f8-468cffc7dd63",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin.info --input /nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin.info",
+   "--input",
+   "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_one_graph.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:27 2021",
+ "timestampMillis": "1610579367544",
+ "status": {
+  "cmdId": "68c7e93d-6760-4e89-81f8-468cffc7dd63",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:28 2021",
+ "timestampMillis": "1610579368523",
+ "status": {
+  "cmdId": "68c7e93d-6760-4e89-81f8-468cffc7dd63",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Jan 13 18:09:28 2021",
+ "timestampMillis": "1610579368530",
+ "buildStep": {
+  "cmdId": "0f848ab9-442d-47c8-a03d-58d2f35a8b97",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:28 2021",
+ "timestampMillis": "1610579368530",
+ "status": {
+  "cmdId": "0f848ab9-442d-47c8-a03d-58d2f35a8b97",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:28 2021",
+ "timestampMillis": "1610579368532",
+ "status": {
+  "cmdId": "0f848ab9-442d-47c8-a03d-58d2f35a8b97",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:28 2021",
+ "timestampMillis": "1610579368622",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/system_estimate_PNA_compute_one_graph.link.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:29 2021",
+ "timestampMillis": "1610579369114",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/v++_link_PNA_compute_one_graph.link_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:29 2021",
+ "timestampMillis": "1610579369116",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/v++_link_PNA_compute_one_graph.link_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Jan 13 18:09:29 2021",
+ "timestampMillis": "1610579369145",
+ "report": {
+  "path": "/nethome/skaram7/GNN_Acc/PNA/PNA_HLS_U50/v1/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Jan 13 18:09:29 2021",
+ "timestampMillis": "1610579369149",
+ "status": {
+  "cmdId": "3eafebe8-8d2f-4b0e-81bb-b4767821e658",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
