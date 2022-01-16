@@ -22,7 +22,6 @@ from gcn_gin.gnn import GNN as GCN, GNN as GIN
 from gat.gnn import GAT
 from pna.net import Net as PNA
 from dgn.nets.HIV_graph_classification.dgn_net import DGNNet as DGNHIVNet
-from dgn.nets.PCBA_graph_classification.dgn_net import DGNNet as DGNPCBANet
 
 Dataset = namedtuple('Dataset', ('dataset', 'loader', 'batch_size', 'count',
                                  'prepare_args'))
@@ -113,11 +112,11 @@ DATASETS = {
     # 'ogbg-molpcba-batch256': make_ogb_graphproppred_dataset('ogbg-molpcba', batch_size=256),
     # 'ogbg-ppa-batch256': make_ogb_graphproppred_dataset('ogbg-ppa', batch_size=256),
     # 'ogbg-code2-batch256': make_ogb_graphproppred_dataset('ogbg-code2', batch_size=256),
-    'dgn-hiv': make_dgn_dataset(DGNHIVDataset, 'HIV'),
-    # 'dgn-pcba': make_dgn_dataset(DGNPCBADataset, 'PCBA'),
-    'dgn-hiv-batch16': make_dgn_dataset(DGNHIVDataset, 'HIV', batch_size=16),
+    # 'dgn-hiv': make_dgn_dataset(DGNHIVDataset, 'HIV'),
+    'dgn-pcba': make_dgn_dataset(DGNPCBADataset, 'PCBA'),
+    # 'dgn-hiv-batch16': make_dgn_dataset(DGNHIVDataset, 'HIV', batch_size=16),
     # 'dgn-pcba-batch16': make_dgn_dataset(DGNPCBADataset, 'PCBA', batch_size=16),
-    'dgn-hiv-batch256': make_dgn_dataset(DGNHIVDataset, 'HIV', batch_size=256),
+    # 'dgn-hiv-batch256': make_dgn_dataset(DGNHIVDataset, 'HIV', batch_size=256),
     # 'dgn-pcba-batch256': make_dgn_dataset(DGNPCBADataset, 'PCBA', batch_size=256),
 }
 
@@ -165,7 +164,7 @@ MODELS = {
     'dgn-hiv': make_dgn_model(
         DGNHIVNet, 'molecules_graph_classification_DGN_HIV.json'),
     'dgn-pcba': make_dgn_model(
-        DGNPCBANet, 'molecules_graph_classification_DGN_PCBA.json'),
+        DGNHIVNet, 'molecules_graph_classification_DGN_PCBA.json'),
 }
 
 TEST_CASES = [
@@ -194,8 +193,8 @@ TEST_CASES = [
     # TestCase(model='gcn-virtual-node', dataset='ogbg-code2'),
     # TestCase(model='gat', dataset='ogbg-code2'),
     # TestCase(model='pna', dataset='ogbg-code2'),
-    TestCase(model='dgn-hiv', dataset='dgn-hiv'),
-    # TestCase(model='dgn-pcba', dataset='dgn-pcba'),
+    # TestCase(model='dgn-hiv', dataset='dgn-hiv'),
+    TestCase(model='dgn-pcba', dataset='dgn-pcba'),
     # batch size 16
     # TestCase(model='gin', dataset='ogbg-molhiv-batch16'),
     # TestCase(model='gin-virtual-node', dataset='ogbg-molhiv-batch16'),
@@ -221,7 +220,7 @@ TEST_CASES = [
     # TestCase(model='gcn-virtual-node', dataset='ogbg-code2-batch16'),
     # TestCase(model='gat', dataset='ogbg-code2-batch16'),
     # TestCase(model='pna', dataset='ogbg-code2-batch16'),
-    TestCase(model='dgn-hiv', dataset='dgn-hiv-batch16'),
+    # TestCase(model='dgn-hiv', dataset='dgn-hiv-batch16'),
     # TestCase(model='dgn-pcba', dataset='dgn-pcba-batch16'),
     # batch size 256
     # TestCase(model='gin', dataset='ogbg-molhiv-batch256'),
@@ -248,7 +247,7 @@ TEST_CASES = [
     # TestCase(model='gcn-virtual-node', dataset='ogbg-code2-batch256'),
     # TestCase(model='gat', dataset='ogbg-code2-batch256'),
     # TestCase(model='pna', dataset='ogbg-code2-batch256'),
-    TestCase(model='dgn-hiv', dataset='dgn-hiv-batch256'),
+    # TestCase(model='dgn-hiv', dataset='dgn-hiv-batch256'),
     # TestCase(model='dgn-pcba', dataset='dgn-pcba-batch256'),
 ]
 

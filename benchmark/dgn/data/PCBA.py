@@ -66,7 +66,10 @@ def positional_encoding(g, pos_enc_dim, norm):
 
     # Eigenvectors with scipy
     # EigVal, EigVec = sp.linalg.eigs(L, k=pos_enc_dim+1, which='SR')
-    EigVal, EigVec = sp.linalg.eigs(L, k=pos_enc_dim, which='SR', tol=1e-5)
+    if pos_enc_dim < L.shape[0] - 1:
+        EigVal, EigVec = sp.linalg.eigs(L, k=pos_enc_dim, which='SR', tol=1e-5)
+    else:
+        EigVal, EigVec = sp.linalg.eigs(L.toarray(), k=pos_enc_dim, which='SR', tol=1e-5)
     EigVec = EigVec[:, EigVal.argsort()]  # increasing order
     g.ndata['eig'] = torch.from_numpy(np.real(EigVec[:, :pos_enc_dim])).float()
     # g.ndata['eig'] = torch.from_numpy(np.random.rand(g.number_of_nodes(), pos_enc_dim)).float()
@@ -128,8 +131,8 @@ class DownloadPCBA(object):
         additional_edge_files = []
 
         graphs = read_graph_dgl(raw_dir, add_inverse_edge=add_inverse_edge,
-                                additional_node_files=additional_node_files,
-                                additional_edge_files=additional_edge_files)
+                                    additional_node_files=additional_node_files,
+                                    additional_edge_files=additional_edge_files, binary=False)
 
         labels = pd.read_csv(osp.join(raw_dir, "graph-label.csv.gz"), compression="gzip", header=None).values
 
@@ -209,7 +212,47 @@ class PCBADGL(torch.utils.data.Dataset):
         print('Computing Eigenvectors...')
         with tqdm(range(len(self.graph_lists)), unit='Graph') as t:
             for ii in t:
-                self.graph_lists[ii] = positional_encoding(self.graph_lists[ii], 3, norm=norm)
+                self.graph_lists[ii] = positional_encoding(self.graph_lists[ii], 4, norm=norm)
+
+    def __len__(self):
+        """Return the number of graphs in the dataset."""
+        return self.n_samples
+
+    def __getitem__(self, idx):
+        """
+            Get the idx^th sample.
+            Parameters
+            ---------
+            idx : int
+                The sample index.
+            Returns
+            -------
+            (dgl.DGLGraph, int)
+                DGLGraph with node feature stored in `feat` field
+                And its label.
+        """
+        return self.graph_lists[idx], self.graph_labels[idx]
+
+
+class PCBATestDGL(torch.utils.data.Dataset):
+    def __init__(self, data, split, norm='none', pos_enc_dim=0):
+        self.split = split
+        self.data = [g for g in data[self.split]]
+        self.graph_lists = []
+        self.graph_labels = []
+        for i, g in enumerate(self.data):
+            if g[0].number_of_nodes() <= 200 and g[0].number_of_edges() <= 500:
+                self.graph_lists.append(g[0])
+                self.graph_labels.append(g[1])
+        self.n_samples = len(self.graph_lists)
+        del self.data
+
+    def get_eig(self, norm):
+
+        print('Computing Eigenvectors...')
+        with tqdm(range(len(self.graph_lists)), unit='Graph') as t:
+            for ii in t:
+                self.graph_lists[ii] = positional_encoding(self.graph_lists[ii], 4, norm=norm)
 
     def __len__(self):
         """Return the number of graphs in the dataset."""
@@ -242,7 +285,7 @@ class PCBADataset(Dataset):
         split_idx = dataset.get_idx_split()
         self.train = PCBADGL(dataset, split_idx['train'], norm=norm, pos_enc_dim=pos_enc_dim)
         self.val = PCBADGL(dataset, split_idx['valid'], norm=norm, pos_enc_dim=pos_enc_dim)
-        self.test = PCBADGL(dataset, split_idx['test'], norm=norm, pos_enc_dim=pos_enc_dim)
+        self.test = PCBATestDGL(dataset, split_idx['test'], norm=norm, pos_enc_dim=pos_enc_dim)
         del dataset
         del split_idx
 
@@ -252,6 +295,8 @@ class PCBADataset(Dataset):
             print('train, test, val sizes :', len(self.train), len(self.test), len(self.val))
             print("[I] Finished loading.")
             print("[I] Data load time: {:.4f}s".format(time.time() - start))
+
+        self.get_eig_test()
 
     def get_eig_train(self):
         self.train.get_eig(norm=self.norm)

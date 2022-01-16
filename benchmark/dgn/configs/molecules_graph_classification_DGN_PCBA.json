@@ -9,7 +9,7 @@
   "params": {
     "seed": 41,
     "epochs": 200,
-    "batch_size": 2048,
+    "batch_size": 1,
     "init_lr": 0.01,
     "lr_reduce_factor": 0.5,
     "lr_schedule_patience": 20,
@@ -20,8 +20,8 @@
   },
   "net_params": {
     "L": 4,
-    "hidden_dim": 70,
-    "out_dim": 70,
+    "hidden_dim": 100,
+    "out_dim": 100,
     "type_net": "simple",
     "residual": true,
     "edge_feat": false,
@@ -30,7 +30,7 @@
     "dropout": 0.3,
     "graph_norm": false,
     "batch_norm": true,
-    "aggregators": "mean max min dir1-dx dir1-av",
+    "aggregators": "mean dir1-dx",
     "scalers": "identity",
     "towers": 5,
     "divide_input_first": false,
