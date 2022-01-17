@@ -550,11 +550,18 @@ void PNA_compute_one_graph(
 
 #pragma HLS ARRAY_PARTITION variable = h_combined dim = 1 complete
 
-    int num_of_nodes = graph_attr[0];
-    int num_of_edges = graph_attr[1];
-    int is_first = graph_attr[2];
-    //  int num_of_nodes = 19;
-    //  int num_of_edges = 40;
+    //int num_of_nodes = graph_attr[0];
+    //int num_of_edges = graph_attr[1];
+    //int is_first = graph_attr[2];
+    // molhiv
+    // int num_of_nodes = 26; 
+    // int num_of_edges = 56;
+    
+    //pcba
+    int num_of_nodes = 27; 
+    int num_of_edges = 60;
+    
+    int is_first = 0;
 
     if (is_first) {
         copy_2d<119, 80>(node_emb_atom_embedding_list_0_weight_fixed_in, node_emb_atom_embedding_list_0_weight_fixed);

@@ -1,0 +1,174 @@
+
+
+================================================================
+== Vitis HLS Report for 'CONV'
+================================================================
+* Date:           Mon Jan 17 10:40:25 2022
+
+* Version:        2021.1.1 (Build 3286242 on Wed Jul 28 13:09:46 MDT 2021)
+* Project:        PNA_HLS_proj
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu50-fsvh2104-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  3.33 ns|  2.992 ns|     0.90 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-------+-------+---------+
+    |  Latency (cycles) |  Latency (absolute) |    Interval   | Pipeline|
+    |   min   |   max   |    min   |    max   |  min  |  max  |   Type  |
+    +---------+---------+----------+----------+-------+-------+---------+
+    |    93452|    97436|  0.311 ms|  0.325 ms|  93452|  97436|       no|
+    +---------+---------+----------+----------+-------+-------+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------+-----------------+---------+---------+-----------+-----------+-------+-------+---------+
+        |                           |                 |  Latency (cycles) |   Latency (absolute)  |    Interval   | Pipeline|
+        |          Instance         |      Module     |   min   |   max   |    min    |    max    |  min  |  max  |   Type  |
+        +---------------------------+-----------------+---------+---------+-----------+-----------+-------+-------+---------+
+        |grp_message_passing_fu_86  |message_passing  |    93451|    97435|   0.311 ms|   0.325 ms|  93451|  97435|       no|
+        |grp_Linear_relu_fu_153     |Linear_relu      |     4218|     4218|  14.059 us|  14.059 us|   4218|   4218|       no|
+        +---------------------------+-----------------+---------+---------+-----------+-----------+-------+-------+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+--------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++---------------------+---------+------+---------+--------+-----+
+|DSP                  |        -|     -|        -|       -|    -|
+|Expression           |        -|     -|        0|       2|    -|
+|FIFO                 |        -|     -|        -|       -|    -|
+|Instance             |      180|    47|    30936|   33628|  144|
+|Memory               |        -|     -|        -|       -|    -|
+|Multiplexer          |        -|     -|        -|     152|    -|
+|Register             |        -|     -|        4|       -|    -|
++---------------------+---------+------+---------+--------+-----+
+|Total                |      180|    47|    30940|   33782|  144|
++---------------------+---------+------+---------+--------+-----+
+|Available SLR        |     1344|  2976|   871680|  435840|  320|
++---------------------+---------+------+---------+--------+-----+
+|Utilization SLR (%)  |       13|     1|        3|       7|   45|
++---------------------+---------+------+---------+--------+-----+
+|Available            |     2688|  5952|  1743360|  871680|  640|
++---------------------+---------+------+---------+--------+-----+
+|Utilization (%)      |        6|    ~0|        1|       3|   22|
++---------------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------+-----------------+---------+----+-------+-------+-----+
+    |          Instance         |      Module     | BRAM_18K| DSP|   FF  |  LUT  | URAM|
+    +---------------------------+-----------------+---------+----+-------+-------+-----+
+    |grp_Linear_relu_fu_153     |Linear_relu      |        0|   0|    128|    430|    0|
+    |grp_message_passing_fu_86  |message_passing  |      180|  47|  30808|  33198|  144|
+    +---------------------------+-----------------+---------+----+-------+-------+-----+
+    |Total                      |                 |      180|  47|  30936|  33628|  144|
+    +---------------------------+-----------------+---------+----+-------+-------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |          Variable Name          | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |ap_block_state2_on_subcall_done  |        or|   0|  0|   2|           1|           1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |Total                            |          |   0|  0|   2|           1|           1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------------+----+-----------+-----+-----------+
+    |               Name              | LUT| Input Size| Bits| Total Bits|
+    +---------------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                        |  14|          3|    1|          3|
+    |edge_list_ce0                    |   9|          2|    1|          2|
+    |edge_list_ce1                    |   9|          2|    1|          2|
+    |grp_Linear_relu_fu_153_l_out_q0  |  14|          3|   32|         96|
+    |grp_message_passing_fu_86_h_q0   |  14|          3|   32|         96|
+    |h_combined_V_0_address0          |  14|          3|   16|         48|
+    |h_combined_V_0_ce0               |  14|          3|    1|          3|
+    |h_combined_V_0_ce1               |   9|          2|    1|          2|
+    |h_combined_V_0_we1               |   9|          2|    1|          2|
+    |h_combined_V_1_address0          |  14|          3|   16|         48|
+    |h_combined_V_1_ce0               |  14|          3|    1|          3|
+    |h_combined_V_1_ce1               |   9|          2|    1|          2|
+    |h_combined_V_1_we1               |   9|          2|    1|          2|
+    +---------------------------------+----+-----------+-----+-----------+
+    |Total                            | 152|         33|  105|        309|
+    +---------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------+---+----+-----+-----------+
+    |                  Name                  | FF| LUT| Bits| Const Bits|
+    +----------------------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                               |  2|   0|    2|          0|
+    |grp_Linear_relu_fu_153_ap_start_reg     |  1|   0|    1|          0|
+    |grp_message_passing_fu_86_ap_start_reg  |  1|   0|    1|          0|
+    +----------------------------------------+---+----+-----+-----------+
+    |Total                                   |  4|   0|    4|          0|
+    +----------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------+-----+-----+------------+----------------+--------------+
+|        RTL Ports        | Dir | Bits|  Protocol  |  Source Object |    C Type    |
++-------------------------+-----+-----+------------+----------------+--------------+
+|ap_clk                   |   in|    1|  ap_ctrl_hs|            CONV|  return value|
+|ap_rst                   |   in|    1|  ap_ctrl_hs|            CONV|  return value|
+|ap_start                 |   in|    1|  ap_ctrl_hs|            CONV|  return value|
+|ap_done                  |  out|    1|  ap_ctrl_hs|            CONV|  return value|
+|ap_idle                  |  out|    1|  ap_ctrl_hs|            CONV|  return value|
+|ap_ready                 |  out|    1|  ap_ctrl_hs|            CONV|  return value|
+|layer                    |   in|    1|     ap_none|           layer|        scalar|
+|edge_list_address0       |  out|   10|   ap_memory|       edge_list|         array|
+|edge_list_ce0            |  out|    1|   ap_memory|       edge_list|         array|
+|edge_list_q0             |   in|   32|   ap_memory|       edge_list|         array|
+|edge_list_address1       |  out|   10|   ap_memory|       edge_list|         array|
+|edge_list_ce1            |  out|    1|   ap_memory|       edge_list|         array|
+|edge_list_q1             |   in|   32|   ap_memory|       edge_list|         array|
+|h_combined_V_0_address0  |  out|   16|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_0_ce0       |  out|    1|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_0_q0        |   in|   32|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_0_address1  |  out|   16|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_0_ce1       |  out|    1|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_0_we1       |  out|    1|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_0_d1        |  out|   32|   ap_memory|  h_combined_V_0|         array|
+|h_combined_V_1_address0  |  out|   16|   ap_memory|  h_combined_V_1|         array|
+|h_combined_V_1_ce0       |  out|    1|   ap_memory|  h_combined_V_1|         array|
+|h_combined_V_1_q0        |   in|   32|   ap_memory|  h_combined_V_1|         array|
+|h_combined_V_1_address1  |  out|   16|   ap_memory|  h_combined_V_1|         array|
+|h_combined_V_1_ce1       |  out|    1|   ap_memory|  h_combined_V_1|         array|
+|h_combined_V_1_we1       |  out|    1|   ap_memory|  h_combined_V_1|         array|
+|h_combined_V_1_d1        |  out|   32|   ap_memory|  h_combined_V_1|         array|
++-------------------------+-----+-----+------------+----------------+--------------+
+
