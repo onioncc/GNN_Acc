@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include "dcl.h"
 
-WT_TYPE embedding_FC_weight_in[EMB_DIM][ND_FEATURE];
-WT_TYPE embedding_FC_bias_in[EMB_DIM];
-WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][2][100];
+WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
 WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
 WT_TYPE MLP_layer_FC_layers_0_bias_in[50];
@@ -18,91 +17,123 @@ void load_weights()
     printf("Loading weights for DGN ...\n");
 
     FILE* f;
-    int nmemb;
     f = fopen("dgn_ep1_noBN_dim100.weights.all.bin", "rb");
+    fseek(f, 0*sizeof(float), SEEK_SET);	fseek(f, 0*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_0_weight_float[11900];
+    fread(embedding_h_atom_embedding_list_0_weight_float, sizeof(float), 11900, f);
+    for (int i = 0; i < 11900; i++) embedding_h_atom_embedding_list_weights[0][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_0_weight_float[i]);
 
-    float embedding_FC_weight_float[100 * ND_FEATURE];
-    nmemb = fread(embedding_FC_weight_float, sizeof(float), 100 * ND_FEATURE, f);
-    assert(nmemb == 100 * ND_FEATURE);
-    for (int i = 0; i < 100 * ND_FEATURE; i++) embedding_FC_weight_in[i / ND_FEATURE][i % ND_FEATURE] = WT_TYPE(embedding_FC_weight_float[i]);
+    fseek(f, 11900*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_1_weight_float[400];
+    fread(embedding_h_atom_embedding_list_1_weight_float, sizeof(float), 400, f);
+    for (int i = 0; i < 400; i++) embedding_h_atom_embedding_list_weights[1][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_1_weight_float[i]);
 
-    float embedding_FC_bias_float[100];
-    nmemb = fread(embedding_FC_bias_float, sizeof(float), 100, f);
-    assert(nmemb == 100);
-    for (int i = 0; i < 100; i++) embedding_FC_bias_in[i] = WT_TYPE(embedding_FC_bias_float[i]);
+    fseek(f, 12300*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_2_weight_float[1200];
+    fread(embedding_h_atom_embedding_list_2_weight_float, sizeof(float), 1200, f);
+    for (int i = 0; i < 1200; i++) embedding_h_atom_embedding_list_weights[2][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_2_weight_float[i]);
 
+    fseek(f, 13500*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_3_weight_float[1200];
+    fread(embedding_h_atom_embedding_list_3_weight_float, sizeof(float), 1200, f);
+    for (int i = 0; i < 1200; i++) embedding_h_atom_embedding_list_weights[3][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_3_weight_float[i]);
+
+    fseek(f, 14700*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_4_weight_float[1000];
+    fread(embedding_h_atom_embedding_list_4_weight_float, sizeof(float), 1000, f);
+    for (int i = 0; i < 1000; i++) embedding_h_atom_embedding_list_weights[4][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_4_weight_float[i]);
+
+    fseek(f, 15700*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_5_weight_float[600];
+    fread(embedding_h_atom_embedding_list_5_weight_float, sizeof(float), 600, f);
+    for (int i = 0; i < 600; i++) embedding_h_atom_embedding_list_weights[5][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_5_weight_float[i]);
+
+    fseek(f, 16300*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_6_weight_float[600];
+    fread(embedding_h_atom_embedding_list_6_weight_float, sizeof(float), 600, f);
+    for (int i = 0; i < 600; i++) embedding_h_atom_embedding_list_weights[6][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_6_weight_float[i]);
+
+    fseek(f, 16900*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_7_weight_float[200];
+    fread(embedding_h_atom_embedding_list_7_weight_float, sizeof(float), 200, f);
+    for (int i = 0; i < 200; i++) embedding_h_atom_embedding_list_weights[7][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_7_weight_float[i]);
+
+    fseek(f, 17100*sizeof(float), SEEK_SET);
+    float embedding_h_atom_embedding_list_8_weight_float[200];
+    fread(embedding_h_atom_embedding_list_8_weight_float, sizeof(float), 200, f);
+    for (int i = 0; i < 200; i++) embedding_h_atom_embedding_list_weights[8][i / 100][i % 100] = WT_TYPE(embedding_h_atom_embedding_list_8_weight_float[i]);
+
+    fseek(f, 17300*sizeof(float), SEEK_SET);
     float layers_0_posttrans_fully_connected_0_linear_weight_float[20000];
-    nmemb = fread(layers_0_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
-    assert(nmemb == 20000);
-    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[0][i / 200][(i % 200) / 100][i % 100] = WT_TYPE(layers_0_posttrans_fully_connected_0_linear_weight_float[i]);
+    fread(layers_0_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[0][i / 200][i % 200] = WT_TYPE(layers_0_posttrans_fully_connected_0_linear_weight_float[i]);
 
+    fseek(f, 37300*sizeof(float), SEEK_SET);
     float layers_0_posttrans_fully_connected_0_linear_bias_float[100];
-    nmemb = fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
-    assert(nmemb == 100);
+    fread(layers_0_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
     for (int i = 0; i < 100; i++) layers_posttrans_fully_connected_0_linear_bias_in[0][i] = WT_TYPE(layers_0_posttrans_fully_connected_0_linear_bias_float[i]);
 
     
+    fseek(f, 37400*sizeof(float), SEEK_SET);
     float layers_1_posttrans_fully_connected_0_linear_weight_float[20000];
-    nmemb = fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
-    assert(nmemb == 20000);
-    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[1][i / 200][(i % 200) / 100][i % 100] = WT_TYPE(layers_1_posttrans_fully_connected_0_linear_weight_float[i]);
+    fread(layers_1_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[1][i / 200][i % 200] = WT_TYPE(layers_1_posttrans_fully_connected_0_linear_weight_float[i]);
 
+    fseek(f, 57400*sizeof(float), SEEK_SET);
     float layers_1_posttrans_fully_connected_0_linear_bias_float[100];
-    nmemb = fread(layers_1_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
-    assert(nmemb == 100);
+    fread(layers_1_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
     for (int i = 0; i < 100; i++) layers_posttrans_fully_connected_0_linear_bias_in[1][i] = WT_TYPE(layers_1_posttrans_fully_connected_0_linear_bias_float[i]);
     
+    fseek(f, 57500*sizeof(float), SEEK_SET);
     float layers_2_posttrans_fully_connected_0_linear_weight_float[20000];
-    nmemb = fread(layers_2_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
-    assert(nmemb == 20000);
-    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[2][i / 200][(i % 200) / 100][i % 100] = WT_TYPE(layers_2_posttrans_fully_connected_0_linear_weight_float[i]);
+    fread(layers_2_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[2][i / 200][i % 200] = WT_TYPE(layers_2_posttrans_fully_connected_0_linear_weight_float[i]);
 
+    fseek(f, 77500*sizeof(float), SEEK_SET);
     float layers_2_posttrans_fully_connected_0_linear_bias_float[100];
-    nmemb = fread(layers_2_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
-    assert(nmemb == 100);
+    fread(layers_2_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
     for (int i = 0; i < 100; i++) layers_posttrans_fully_connected_0_linear_bias_in[2][i] = WT_TYPE(layers_2_posttrans_fully_connected_0_linear_bias_float[i]);
     
+    fseek(f, 77600*sizeof(float), SEEK_SET);
     float layers_3_posttrans_fully_connected_0_linear_weight_float[20000];
-    nmemb = fread(layers_3_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
-    assert(nmemb == 20000);
-    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[3][i / 200][(i % 200) / 100][i % 100] = WT_TYPE(layers_3_posttrans_fully_connected_0_linear_weight_float[i]);
+    fread(layers_3_posttrans_fully_connected_0_linear_weight_float, sizeof(float), 20000, f);
+    for (int i = 0; i < 20000; i++) layers_posttrans_fully_connected_0_linear_weight_in[3][i / 200][i % 200] = WT_TYPE(layers_3_posttrans_fully_connected_0_linear_weight_float[i]);
 
+    fseek(f, 97600*sizeof(float), SEEK_SET);
     float layers_3_posttrans_fully_connected_0_linear_bias_float[100];
-    nmemb = fread(layers_3_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
-    assert(nmemb == 100);
+    fread(layers_3_posttrans_fully_connected_0_linear_bias_float, sizeof(float), 100, f);
     for (int i = 0; i < 100; i++) layers_posttrans_fully_connected_0_linear_bias_in[3][i] = WT_TYPE(layers_3_posttrans_fully_connected_0_linear_bias_float[i]);
 
+    fseek(f, 97700*sizeof(float), SEEK_SET);
     float MLP_layer_FC_layers_0_weight_float[5000];
-    nmemb = fread(MLP_layer_FC_layers_0_weight_float, sizeof(float), 5000, f);
-    assert(nmemb == 5000);
+    fread(MLP_layer_FC_layers_0_weight_float, sizeof(float), 5000, f);
     for (int i = 0; i < 5000; i++) MLP_layer_FC_layers_0_weight_in[i / 100][i % 100] = WT_TYPE(MLP_layer_FC_layers_0_weight_float[i]);
 
+    fseek(f, 102700*sizeof(float), SEEK_SET);
     float MLP_layer_FC_layers_0_bias_float[50];
-    nmemb = fread(MLP_layer_FC_layers_0_bias_float, sizeof(float), 50, f);
-    assert(nmemb == 50);
+    fread(MLP_layer_FC_layers_0_bias_float, sizeof(float), 50, f);
     for (int i = 0; i < 50; i++) MLP_layer_FC_layers_0_bias_in[i] = WT_TYPE(MLP_layer_FC_layers_0_bias_float[i]);
     
+    fseek(f, 102750*sizeof(float), SEEK_SET);
     float MLP_layer_FC_layers_1_weight_float[1250];
-    nmemb = fread(MLP_layer_FC_layers_1_weight_float, sizeof(float), 1250, f);
-    assert(nmemb == 1250);
+    fread(MLP_layer_FC_layers_1_weight_float, sizeof(float), 1250, f);
     for (int i = 0; i < 1250; i++) MLP_layer_FC_layers_1_weight_in[i / 50][i % 50] = WT_TYPE(MLP_layer_FC_layers_1_weight_float[i]);
 
+    fseek(f, 104000*sizeof(float), SEEK_SET);
     float MLP_layer_FC_layers_1_bias_float[25];
-    nmemb = fread(MLP_layer_FC_layers_1_bias_float, sizeof(float), 25, f);
-    assert(nmemb == 25);
+    fread(MLP_layer_FC_layers_1_bias_float, sizeof(float), 25, f);
     for (int i = 0; i < 25; i++) MLP_layer_FC_layers_1_bias_in[i] = WT_TYPE(MLP_layer_FC_layers_1_bias_float[i]);
 
+    fseek(f, 104025*sizeof(float), SEEK_SET);
     float MLP_layer_FC_layers_2_weight_float[25];
-    nmemb = fread(MLP_layer_FC_layers_2_weight_float, sizeof(float), 25, f);
-    assert(nmemb == 25);
-    for (int i = 0; i < 25; i++) MLP_layer_FC_layers_2_weight_in[0][i] = WT_TYPE(MLP_layer_FC_layers_2_weight_float[i]);
+    fread(MLP_layer_FC_layers_2_weight_float, sizeof(float), 25, f);
+    for (int i = 0; i < 25; i++) MLP_layer_FC_layers_2_weight_in[i / 25][i % 25] = WT_TYPE(MLP_layer_FC_layers_2_weight_float[i]);
 
+    fseek(f, 104050*sizeof(float), SEEK_SET);
     float MLP_layer_FC_layers_2_bias_float[1];
-    nmemb = fread(MLP_layer_FC_layers_2_bias_float, sizeof(float), 1, f);
-    assert(nmemb == 1);
+    fread(MLP_layer_FC_layers_2_bias_float, sizeof(float), 1, f);
     for (int i = 0; i < 1; i++) MLP_layer_FC_layers_2_bias_in[i] = WT_TYPE(MLP_layer_FC_layers_2_bias_float[i]);
 
-    assert(fgetc(f) == EOF);
     fclose(f);
 
 }

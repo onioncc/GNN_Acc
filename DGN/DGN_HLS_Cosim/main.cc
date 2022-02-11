@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "dcl.h"
 
+// global weights
+float result;
+
 void prepare_graph(
     int num_of_nodes,
     int num_of_edges,
@@ -85,20 +88,15 @@ int main()
         int neighbor_table[num_of_edges];
         prepare_graph(num_of_nodes, num_of_edges, edge_list, degree_table, neighbor_table);
 
-        FM_TYPE h_node_ping_dram[num_of_nodes][EMB_DIM];
-        FM_TYPE h_node_pong_dram[num_of_nodes][EMB_DIM];
-        float result[num_of_nodes];
-
         printf("Computing DGN ...\n");
         DGN_compute_one_graph(
-            result,
+            &result,
             node_feature,
             node_eigen,
             degree_table,
             neighbor_table,
             graph_attr,
-            embedding_FC_weight_in,
-            embedding_FC_bias_in,
+            embedding_h_atom_embedding_list_weights,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,
             MLP_layer_FC_layers_0_weight_in,
@@ -106,15 +104,9 @@ int main()
             MLP_layer_FC_layers_1_weight_in,
             MLP_layer_FC_layers_1_bias_in,
             MLP_layer_FC_layers_2_weight_in,
-            MLP_layer_FC_layers_2_bias_in,
-
-            h_node_ping_dram,
-            h_node_pong_dram
+            MLP_layer_FC_layers_2_bias_in
         );
-
-        for (int nd = 0; nd < num_of_nodes; nd++) {
-            printf("%.7f\n", result[nd]);
-        }
+        printf("%.8f\n", float(result));
     }
 
     
