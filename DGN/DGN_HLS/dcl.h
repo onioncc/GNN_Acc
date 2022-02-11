@@ -7,6 +7,9 @@
 #include <math.h>
 #include <ap_fixed.h>
 
+// Enables fixed num_of_nodes/edges in DGN_compute.cc for timing estimates
+#define __SYNTHESIS_DEBUG__
+
 #define MAX_EDGE 500
 #define MAX_NODE 500
 #define ND_FEATURE 9
@@ -15,9 +18,25 @@
 #define NUM_TASK 1
 #define L_IN 200
 #define L_OUT 100
+#define NUM_LAYERS 4
+
+constexpr int LOAD_IN_EMB_PARALLEL = 2;
+constexpr int GATHER_PARALLEL = 8;
+constexpr int APPLY_PARALLEL = 2;
+constexpr int EDGE_PARALLEL = 4;
 
 typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;
+
+typedef struct {
+    int degree;
+    FM_TYPE embedding[EMB_DIM];
+} node_t;
+
+typedef struct {
+    int u;
+    int v;
+} edge_t;
 
 extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
@@ -38,8 +57,7 @@ void DGN_compute_one_graph(
     float* out,
     int* node_feature_in,
     WT_TYPE* node_eigen_in,
-    int degree_table[][2],
-    int neighbor_table[],
+    int* edge_list_in,
     int* graph_attr,
     WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
     WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],

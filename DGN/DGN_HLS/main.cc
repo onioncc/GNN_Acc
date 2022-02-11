@@ -15,49 +15,6 @@ extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
 // global weights
 float result;
 
-void prepare_graph(
-    int num_of_nodes,
-    int num_of_edges,
-    int *edge_list,
-    int degree_table[][2],
-    int neighbor_table[]
-)
-{
-    int neighbor_table_idxs[num_of_nodes];
-    int edge_list_len = num_of_edges * 2;
-
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        degree_table[i][0] = 0;
-        neighbor_table_idxs[i] = 0;
-    }
-
-    for (int i = 1; i < edge_list_len; i += 2)
-    {
-        int v = edge_list[i];
-        degree_table[v][0]++;
-    }
-
-    int acc = 0;
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        int degree = degree_table[i][0];
-        degree_table[i][1] = acc;
-        acc += degree;
-    }
-
-    for (int i = 0; i < edge_list_len; i += 2)
-    {
-        int u = edge_list[i];
-        int v = edge_list[i + 1];
-        int row_idx = degree_table[v][1];
-        int col_idx = neighbor_table_idxs[v];
-        int e = row_idx + col_idx;
-        neighbor_table[e] = u;
-        neighbor_table_idxs[v] = col_idx + 1;
-    }
-}
-
 int main()
 {
     printf("\n******* This is the golden C file for DGN model *******\n");
@@ -96,17 +53,12 @@ int main()
 
         fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
 
-        int degree_table[num_of_nodes][2];
-        int neighbor_table[num_of_edges];
-        prepare_graph(num_of_nodes, num_of_edges, edge_list, degree_table, neighbor_table);
-
         printf("Computing DGN ...\n");
         DGN_compute_one_graph(
             &result,
             node_feature,
             node_eigen,
-            degree_table,
-            neighbor_table,
+            edge_list,
             graph_attr,
             embedding_h_atom_embedding_list_weights,
             layers_posttrans_fully_connected_0_linear_weight_in,
