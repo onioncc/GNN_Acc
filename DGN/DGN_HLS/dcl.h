@@ -6,33 +6,30 @@
 #include <string.h>
 #include <math.h>
 #include <ap_fixed.h>
+#include <array>
 
 // Enables fixed num_of_nodes/edges in DGN_compute.cc for timing estimates
 #define __SYNTHESIS_DEBUG__
 
-#define MAX_EDGE 500
-#define MAX_NODE 500
-#define ND_FEATURE 9
-#define EDGE_ATTR 3
-#define EMB_DIM 100
-#define NUM_TASK 1
-#define L_IN 200
-#define L_OUT 100
-#define NUM_LAYERS 4
+constexpr int MAX_EDGE = 500;
+constexpr int MAX_NODE = 500;
+constexpr int ND_FEATURE = 9;
+constexpr int EDGE_ATTR = 3;
+constexpr int EMB_DIM = 100;
+constexpr int NUM_TASK = 1;
+constexpr int L_IN = 200;
+constexpr int L_OUT = 100;
+constexpr int NUM_LAYERS = 4;
 
 constexpr int LOAD_IN_EMB_PARALLEL = 2;
-constexpr int GATHER_PARALLEL = 8;
+constexpr int SCATTER_PARALLEL = 8;
 constexpr int APPLY_PARALLEL = 2;
 constexpr int EDGE_PARALLEL = 4;
 
 typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;
 
-typedef struct {
-    int degree;
-    FM_TYPE embedding[EMB_DIM];
-} node_t;
-
+typedef std::array<FM_TYPE, SCATTER_PARALLEL> mp_in_t;
 typedef struct {
     int u;
     int v;
