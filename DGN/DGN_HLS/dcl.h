@@ -24,6 +24,7 @@ constexpr int NUM_LAYERS = 4;
 constexpr int LOAD_IN_EMB_PARALLEL = 2;
 constexpr int SCATTER_PARALLEL = 8;
 constexpr int APPLY_PARALLEL = 2;
+constexpr int NODE_PARALLEL = 2;
 constexpr int EDGE_PARALLEL = 4;
 
 typedef ap_fixed<32, 10> FM_TYPE;

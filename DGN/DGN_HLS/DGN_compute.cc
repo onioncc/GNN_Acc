@@ -112,19 +112,6 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
     }
 }
 
-void fetch_degree(
-    hls::stream<int> &degree,
-    int degree_table[],
-    int num_of_nodes
-)
-{
-#pragma HLS INLINE off
-    for (int nd = 0; nd < num_of_nodes; nd++)
-    {
-        degree << degree_table[nd];
-    }
-}
-
 void scatter(
     hls::stream<int>& degrees,
     hls::stream<mp_in_t>& embeddings,
@@ -263,6 +250,7 @@ void apply(
 )
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=NODE_PARALLEL dim=1
 #pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=APPLY_PARALLEL dim=2
 
     FM_TYPE accs_ping[L_OUT];
@@ -316,7 +304,16 @@ void apply(
     }
 }
 
-void read_embeddings(hls::stream<int>& degrees, hls::stream<mp_in_t>& embeddings, int num_of_nodes)
+void read_degrees(hls::stream<int> &degrees, int num_of_nodes)
+{
+#pragma HLS INLINE off
+    for (int nd = 0; nd < num_of_nodes; nd++)
+    {
+        degrees << degree_table[nd];
+    }
+}
+
+void read_embeddings(hls::stream<mp_in_t>& embeddings, int num_of_nodes)
 {
 #pragma HLS INLINE off
 
@@ -327,11 +324,6 @@ void read_embeddings(hls::stream<int>& degrees, hls::stream<mp_in_t>& embeddings
     {
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
-            if (dim_base == 0)
-            {
-                degrees << degree_table[v];
-            }
-
             for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
             {
 #pragma HLS UNROLL
@@ -347,31 +339,21 @@ void read_embeddings(hls::stream<int>& degrees, hls::stream<mp_in_t>& embeddings
     }
 }
 
-void discard_degrees(
-    hls::stream<int>& degrees,
-    int num_of_nodes
-)
+void discard_degrees(hls::stream<int>& degrees, int num_of_nodes)
 {
 #pragma HLS INLINE off
-
     int degree;
-
     for (int v = 0; v < num_of_nodes; v++)
     {
         degrees >> degree;
     }
 }
 
-void discard_embeddings(
-    hls::stream<mp_in_t>& embeddings,
-    int num_of_nodes
-)
+void discard_embeddings(hls::stream<mp_in_t>& embeddings, int num_of_nodes)
 {
 #pragma HLS INLINE off
-
     mp_in_t embedding;
 #pragma HLS AGGREGATE variable=embedding
-
     for (int v = 0; v < num_of_nodes; v++)
     {
         for (int i = 0; i < EMB_DIM; i += SCATTER_PARALLEL)
@@ -393,7 +375,8 @@ void check_apply(
 
     if (i == 0)
     {
-        read_embeddings(degrees, embeddings, num_of_nodes);
+        read_degrees(degrees, num_of_nodes);
+        read_embeddings(embeddings, num_of_nodes);
     }
     else
     {
