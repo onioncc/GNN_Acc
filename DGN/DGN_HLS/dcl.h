@@ -30,7 +30,7 @@ constexpr int EDGE_PARALLEL = 4;
 typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;
 
-typedef std::array<FM_TYPE, SCATTER_PARALLEL> mp_in_t;
+typedef std::array<FM_TYPE, APPLY_PARALLEL> ne_out_t;
 typedef struct {
     int u;
     int v;
