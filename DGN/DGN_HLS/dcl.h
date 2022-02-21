@@ -22,10 +22,10 @@ constexpr int L_OUT = 100;
 constexpr int NUM_LAYERS = 4;
 
 constexpr int LOAD_IN_EMB_PARALLEL = 2;
-constexpr int SCATTER_PARALLEL = 8;
-constexpr int APPLY_PARALLEL = 2;
-constexpr int NODE_PARALLEL = 2;
-constexpr int EDGE_PARALLEL = 4;
+constexpr int SCATTER_PARALLEL = 8; // how many dimensions of EMB_DIM should a message passing PE process each cycle?
+constexpr int APPLY_PARALLEL = 2; // how many dimensions of EMB_DIM should the node embedding PE process each cycle?
+constexpr int NODE_PARALLEL = 2; // how many nodes should the node embedding PE process simultaneously?
+constexpr int EDGE_PARALLEL = 4; // how many message passing PEs are there?
 
 typedef ap_fixed<32, 10> FM_TYPE;
 typedef ap_fixed<32, 10> WT_TYPE;

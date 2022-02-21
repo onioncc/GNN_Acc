@@ -40,8 +40,8 @@ WT_TYPE eigw_sums[MAX_NODE];
 int num_of_edges_per_pe[EDGE_PARALLEL];
 
 // BRAM for intermediate storage
-FM_TYPE message_ping[MAX_NODE][2][EMB_DIM];
-FM_TYPE message_pong[MAX_NODE][2][EMB_DIM];
+FM_TYPE messages_ping[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM];
+FM_TYPE messages_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM];
 
 FM_TYPE h_node[MAX_NODE][EMB_DIM];
 FM_TYPE h_graph[EMB_DIM];
@@ -81,6 +81,7 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=3
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables complete dim=1
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables_offsets complete dim=1
+#pragma HLS ARRAY_PARTITION variable=eig_w complete dim=1
 #pragma HLS ARRAY_PARTITION variable=num_of_edges_per_pe complete dim=1
 
     for (int i = 0; i < num_of_nodes; i++)
@@ -154,14 +155,14 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
 void message_passing_sub(
     int pe_id,
     hls::stream<mp_in_t>& embeddings_per_edge,
-    FM_TYPE message[MAX_NODE][2][EMB_DIM],
-    int num_of_edges
+    FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM]
 )
 {
 #pragma HLS INLINE off
 
     mp_in_t embedding;
 #pragma HLS AGGREGATE variable=embedding
+    int num_of_edges = num_of_edges_per_pe[pe_id];
 
     for (int e = 0; e < num_of_edges; e++)
     {
@@ -170,7 +171,7 @@ void message_passing_sub(
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += SCATTER_PARALLEL)
         {
             WT_TYPE eig_w_e = eig_w[pe_id][e];
-            int v = neighbor_tables[pe_id][e] * EDGE_PARALLEL + pe_id;
+            int v = neighbor_tables[pe_id][e];
             embeddings_per_edge >> embedding;
 
             for (int dim_offset = 0; dim_offset < SCATTER_PARALLEL; dim_offset++)
@@ -188,7 +189,7 @@ void message_passing_sub(
 }
 
 void ne_to_mp_adapter(
-    hls::stream<ne_out_t>& ne_out,
+    hls::stream<ne_out_t> ne_out[NODE_PARALLEL],
     hls::stream<mp_in_t> mp_in[EDGE_PARALLEL],
     int num_of_nodes
 )
@@ -204,7 +205,7 @@ void ne_to_mp_adapter(
     {
         for (int ne_dim_base = 0; ne_dim_base < EMB_DIM; ne_dim_base += APPLY_PARALLEL)
         {
-            ne_out >> ne_out_struct;
+            ne_out[nd % NODE_PARALLEL] >> ne_out_struct;
             for (int ne_dim_offset = 0; ne_dim_offset < APPLY_PARALLEL; ne_dim_offset++)
             {
 #pragma HLS UNROLL
@@ -259,10 +260,10 @@ void filter_embeddings_from_stream(
 }
 
 void duplicate_embeddings_from_stream(
+    int pe_id,
     hls::stream<int>& degrees,
     hls::stream<mp_in_t>& embeddings_per_node,
-    hls::stream<mp_in_t>& embeddings_per_edge,
-    int num_of_edges
+    hls::stream<mp_in_t>& embeddings_per_edge
 )
 {
 #pragma HLS INLINE off
@@ -270,6 +271,7 @@ void duplicate_embeddings_from_stream(
     mp_in_t mp_ins[ceildiv(EMB_DIM, SCATTER_PARALLEL)];
     int e_start = 0;
     int e_end = 0;
+    int num_of_edges = num_of_edges_per_pe[pe_id];
 
     for (int e = 0; e < num_of_edges; e++)
     {
@@ -302,9 +304,8 @@ void duplicate_embeddings_from_stream(
 void message_passing_pe(
     int pe_id,
     hls::stream<mp_in_t>& embeddings_per_node,
-    FM_TYPE message[MAX_NODE][2][EMB_DIM],
-    int num_of_nodes,
-    int num_of_edges
+    FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
+    int num_of_nodes
 )
 {
 #pragma HLS INLINE off
@@ -318,8 +319,8 @@ void message_passing_pe(
 #pragma HLS STREAM variable=embeddings_per_edge depth=(20 * ceildiv(EMB_DIM, SCATTER_PARALLEL))
 
     filter_embeddings_from_stream(pe_id, embeddings_per_node, degrees, filtered_embeddings_per_node, num_of_nodes);
-    duplicate_embeddings_from_stream(degrees, filtered_embeddings_per_node, embeddings_per_edge, num_of_edges);
-    message_passing_sub(pe_id, embeddings_per_edge, message, num_of_edges);
+    duplicate_embeddings_from_stream(pe_id, degrees, filtered_embeddings_per_node, embeddings_per_edge);
+    message_passing_sub(pe_id, embeddings_per_edge, message);
 }
 
 void apply_accumulate_one_batch(
@@ -345,11 +346,18 @@ void apply_accumulate_one_batch(
 #pragma HLS UNROLL
         int dim_in = dim_base + dim_offset;
 
+        FM_TYPE message_1 = message[0][dim_in];
+        FM_TYPE message_2 = message[1][dim_in];
+
+        // clear message table in preparation for next round of message passing
+        message[0][dim_in] = 0;
+        message[1][dim_in] = 0;
+
         FM_TYPE h_node_el = h_node_v[dim_in];
         h_node_buf[dim_in] = h_node_el;
 
-        FM_TYPE activation_1 = message[0][dim_in] / degree;
-        FM_TYPE activation_2 = hls::abs(FM_TYPE((message[1][dim_in] - eigw_sum * h_node_el) / eig_abssum));
+        FM_TYPE activation_1 = message_1 / degree;
+        FM_TYPE activation_2 = hls::abs(FM_TYPE((message_2 - eigw_sum * h_node_el) / eig_abssum));
 
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
         {
@@ -362,10 +370,6 @@ void apply_accumulate_one_batch(
                     : accs[dim_out])
             );
         }
-
-        // clear message table in preparation for next round of message passing
-        message[0][dim_in] = 0;
-        message[1][dim_in] = 0;
     }
 }
 
@@ -394,77 +398,112 @@ void apply_output_one_batch(
 }
 
 void apply(
-    hls::stream<ne_out_t>& embeddings,
-    FM_TYPE message[][2][EMB_DIM],
-    int i,
+    hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
+    int layer_num,
     int num_of_nodes
 )
 {
 #pragma HLS INLINE off
-// #pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=NODE_PARALLEL dim=1
+#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=NODE_PARALLEL dim=1
 #pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=APPLY_PARALLEL dim=2
 
-    FM_TYPE accs_ping[L_OUT];
+    FM_TYPE accs_ping[NODE_PARALLEL][L_OUT];
 #pragma HLS ARRAY_PARTITION variable=accs_ping complete dim=1
-    FM_TYPE accs_pong[L_OUT];
+#pragma HLS ARRAY_PARTITION variable=accs_ping complete dim=2
+    FM_TYPE accs_pong[NODE_PARALLEL][L_OUT];
 #pragma HLS ARRAY_PARTITION variable=accs_pong complete dim=1
-    FM_TYPE h_node_ping[EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=h_node_ping cyclic factor=APPLY_PARALLEL dim=1
-    FM_TYPE h_node_pong[EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=h_node_pong cyclic factor=APPLY_PARALLEL dim=1
+#pragma HLS ARRAY_PARTITION variable=accs_pong complete dim=2
+    FM_TYPE h_node_ping[NODE_PARALLEL][EMB_DIM];
+#pragma HLS ARRAY_PARTITION variable=h_node_ping complete dim=1
+#pragma HLS ARRAY_PARTITION variable=h_node_ping cyclic factor=APPLY_PARALLEL dim=2
+    FM_TYPE h_node_pong[NODE_PARALLEL][EMB_DIM];
+#pragma HLS ARRAY_PARTITION variable=h_node_pong complete dim=1
+#pragma HLS ARRAY_PARTITION variable=h_node_pong cyclic factor=APPLY_PARALLEL dim=2
 
-    for (int v = 0; v <= num_of_nodes; v++)
+    int num_iters = ceildiv(num_of_nodes, NODE_PARALLEL) + 1;
+    for (
+        int i = 0, acc_v_base = 0, out_v_base = -NODE_PARALLEL;
+        i < num_iters;
+        i++, acc_v_base += NODE_PARALLEL, out_v_base += NODE_PARALLEL
+    )
     {
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
 #pragma HLS PIPELINE II=1
-            if (v != 0)
+#pragma HLS DEPENDENCE variable=message inter false
+
+            if (i != 0)
             {
-                apply_output_one_batch(
-                    h_node[v - 1],
-                    (v % 2 == 0) ? accs_pong : accs_ping,
-                    (v % 2 == 0) ? h_node_pong : h_node_ping,
-                    embeddings,
-                    dim_base
-                );
+                for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+                {
+#pragma HLS UNROLL
+                    int v = out_v_base + v_offset;
+                    if (v < num_of_nodes)
+                    {
+                        apply_output_one_batch(
+                            h_node[v],
+                            (i % 2 == 0) ? accs_pong[v_offset] : accs_ping[v_offset],
+                            (i % 2 == 0) ? h_node_pong[v_offset] : h_node_ping[v_offset],
+                            embeddings[v_offset],
+                            dim_base
+                        );
+                    }
+                }
             }
 
-            if (v != num_of_nodes)
+            if (i != num_iters - 1)
             {
-                apply_accumulate_one_batch(
-                    message[v],
-                    h_node[v],
-                    (v % 2 == 0) ? accs_ping : accs_pong,
-                    (v % 2 == 0) ? h_node_ping : h_node_pong,
-                    degree_table[v],
-                    eigw_sums[v],
-                    eig_abssums[v],
-                    i,
-                    dim_base
-                );
+                for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+                {
+#pragma HLS UNROLL
+                    int v = acc_v_base + v_offset;
+                    if (v < num_of_nodes)
+                    {
+                        apply_accumulate_one_batch(
+                            message[v % EDGE_PARALLEL][v / EDGE_PARALLEL],
+                            h_node[v],
+                            (i % 2 == 0) ? accs_ping[v_offset] : accs_pong[v_offset],
+                            (i % 2 == 0) ? h_node_ping[v_offset] : h_node_pong[v_offset],
+                            degree_table[v],
+                            eigw_sums[v],
+                            eig_abssums[v],
+                            layer_num,
+                            dim_base
+                        );
+                    }
+                }
             }
         }
     }
 }
 
-void read_embeddings(hls::stream<ne_out_t>& embeddings, int num_of_nodes)
+void read_embeddings(hls::stream<ne_out_t> embeddings[NODE_PARALLEL], int num_of_nodes)
 {
 #pragma HLS INLINE off
 
     ne_out_t embedding;
 #pragma HLS AGGREGATE variable=embedding
 
-    for (int v = 0; v < num_of_nodes; v++)
+    for (int v_base = 0; v_base < num_of_nodes; v_base += NODE_PARALLEL)
     {
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
-            for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
+            for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
             {
 #pragma HLS UNROLL
-                int dim = dim_base + dim_offset;
-                embedding[dim_offset] = h_node[v][dim];
+                int v = v_base + v_offset;
+                if (v < num_of_nodes)
+                {
+                    for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
+                    {
+#pragma HLS UNROLL
+                        int dim = dim_base + dim_offset;
+                        embedding[dim_offset] = h_node[v][dim];
+                    }
+                    embeddings[v_offset] << embedding;
+                }
             }
-            embeddings << embedding;
         }
     }
 }
@@ -483,9 +522,9 @@ void discard_embeddings(hls::stream<mp_in_t>& embeddings, int num_of_nodes)
     }
 }
 
-void check_apply(
-    hls::stream<ne_out_t>& embeddings,
-    FM_TYPE message[][2][EMB_DIM],
+void node_embedding(
+    hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int i,
     int num_of_nodes
 )
@@ -502,56 +541,72 @@ void check_apply(
     }
 }
 
-void message_passing(
+void message_passing_all_pes(
     hls::stream<mp_in_t> embeddings[EDGE_PARALLEL],
-    FM_TYPE message[MAX_NODE][2][EMB_DIM],
-    int layer_num,
-    int num_of_nodes
-)
-{
-#pragma HLS INLINE off
-
-    for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
-    {
-#pragma HLS UNROLL
-        if (layer_num == NUM_LAYERS)
-        {
-            discard_embeddings(embeddings[pe_id], num_of_nodes);
-        }
-        else
-        {
-            message_passing_pe(
-                pe_id,
-                embeddings[pe_id],
-                message,
-                num_of_nodes,
-                num_of_edges_per_pe[pe_id]
-            );
-        }
-    }
-}
-
-void compute_CONV_layer(
-    int layer_num,
-    FM_TYPE message[][2][EMB_DIM],
-    FM_TYPE next_message[][2][EMB_DIM],
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int num_of_nodes
 )
 {
 #pragma HLS INLINE off
 #pragma HLS DATAFLOW
 
-#pragma HLS ARRAY_PARTITION variable=message complete dim=2
-#pragma HLS ARRAY_PARTITION variable=message cyclic factor=SCATTER_PARALLEL dim=3
-#pragma HLS ARRAY_PARTITION variable=next_message complete dim=2
-#pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=3
+    for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+    {
+#pragma HLS UNROLL
+        message_passing_pe(
+            pe_id,
+            embeddings[pe_id],
+            message[pe_id],
+            num_of_nodes
+        );
+    }
+}
 
-    hls::stream<ne_out_t> ne_out("ne_out");
-#pragma HLS STREAM variable=ne_out depth=20
+void message_passing(
+    hls::stream<mp_in_t> embeddings[EDGE_PARALLEL],
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
+    int layer_num,
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=message complete dim=1
+
+    if (layer_num == NUM_LAYERS)
+    {
+        for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+        {
+#pragma HLS UNROLL
+            discard_embeddings(embeddings[pe_id], num_of_nodes);
+        }
+    }
+    else
+    {
+        message_passing_all_pes(embeddings, message, num_of_nodes);
+    }
+}
+
+void compute_CONV_layer(
+    int layer_num,
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
+    FM_TYPE next_message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE off
+#pragma HLS DATAFLOW
+
+#pragma HLS ARRAY_PARTITION variable=message complete dim=3
+#pragma HLS ARRAY_PARTITION variable=message cyclic factor=SCATTER_PARALLEL dim=4
+#pragma HLS ARRAY_PARTITION variable=next_message complete dim=3
+#pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=4
+
+    hls::stream<ne_out_t> ne_out[NODE_PARALLEL];
+#pragma HLS STREAM variable=ne_out depth=200
     hls::stream<mp_in_t> mp_in[EDGE_PARALLEL];
-#pragma HLS STREAM variable=mp_in depth=20
+#pragma HLS STREAM variable=mp_in depth=40
 
-    check_apply(ne_out, message, layer_num, num_of_nodes);
+    node_embedding(ne_out, message, layer_num, num_of_nodes);
     ne_to_mp_adapter(ne_out, mp_in, num_of_nodes);
     message_passing(mp_in, next_message, layer_num, num_of_nodes);
 }
@@ -636,7 +691,7 @@ void load_input_node_embeddings(int* node_feature, WT_TYPE embedding_h_atom_embe
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += LOAD_IN_EMB_PARALLEL)
         {
 // Commented out since we are pipelining the outer loop:
-// #pragma HLS PIPELINE II=1
+#pragma HLS PIPELINE II=1
             for (int dim_offset = 0; dim_offset < LOAD_IN_EMB_PARALLEL; dim_offset++)
             {
                 int dim = dim_base + dim_offset;
@@ -725,9 +780,9 @@ void DGN_compute_one_graph(
     for (int i = 0; i <= NUM_LAYERS; i++)
     {
         if (i % 2 == 0)
-            compute_CONV_layer(i, message_ping, message_pong, num_of_nodes);
+            compute_CONV_layer(i, messages_ping, messages_pong, num_of_nodes);
         else
-            compute_CONV_layer(i, message_pong, message_ping, num_of_nodes);
+            compute_CONV_layer(i, messages_pong, messages_ping, num_of_nodes);
     }
 
     global_mean_pooling(num_of_nodes, h_node);
