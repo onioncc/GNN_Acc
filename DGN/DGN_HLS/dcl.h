@@ -27,8 +27,8 @@ constexpr int APPLY_PARALLEL = 2; // how many dimensions of EMB_DIM should the n
 constexpr int NODE_PARALLEL = 2; // how many nodes should the node embedding PE process simultaneously?
 constexpr int EDGE_PARALLEL = 4; // how many message passing PEs are there?
 
-typedef ap_fixed<32, 10> FM_TYPE;
-typedef ap_fixed<32, 10> WT_TYPE;
+typedef ap_fixed<16, 3> FM_TYPE;
+typedef ap_fixed<16, 3> WT_TYPE;
 
 typedef std::array<FM_TYPE, APPLY_PARALLEL> ne_out_t;
 typedef std::array<FM_TYPE, SCATTER_PARALLEL> mp_in_t;

@@ -190,7 +190,7 @@ void message_passing_sub(
 
 void ne_to_mp_adapter(
     hls::stream<ne_out_t> ne_out[NODE_PARALLEL],
-    hls::stream<mp_in_t> mp_in[EDGE_PARALLEL],
+    hls::stream<mp_in_t> mp_in[EDGE_PARALLEL][NODE_PARALLEL],
     int num_of_nodes
 )
 {
@@ -198,28 +198,37 @@ void ne_to_mp_adapter(
 
     ne_out_t ne_out_struct;
 #pragma HLS AGGREGATE variable=ne_out_struct
-    mp_in_t mp_in_struct;
+    mp_in_t mp_in_struct[NODE_PARALLEL];
 #pragma HLS AGGREGATE variable=mp_in_struct
 
-    for (int nd = 0; nd < num_of_nodes; nd++)
+    for (int nd_base = 0; nd_base < num_of_nodes; nd_base += NODE_PARALLEL)
     {
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, APPLY_PARALLEL)
         for (int ne_dim_base = 0; ne_dim_base < EMB_DIM; ne_dim_base += APPLY_PARALLEL)
         {
-            ne_out[nd % NODE_PARALLEL] >> ne_out_struct;
-            for (int ne_dim_offset = 0; ne_dim_offset < APPLY_PARALLEL; ne_dim_offset++)
+            for (int nd_offset = 0; nd_offset < NODE_PARALLEL; nd_offset++)
             {
 #pragma HLS UNROLL
-                int dim = ne_dim_base + ne_dim_offset;
-                if (dim < EMB_DIM)
+                int nd = nd_base + nd_offset;
+                if (nd < num_of_nodes)
                 {
-                    int mp_dim_offset = dim % SCATTER_PARALLEL;
-                    mp_in_struct[mp_dim_offset] = ne_out_struct[ne_dim_offset];
-                    if (dim == EMB_DIM - 1 || mp_dim_offset == SCATTER_PARALLEL - 1)
+                    ne_out[nd % NODE_PARALLEL] >> ne_out_struct;
+                    for (int ne_dim_offset = 0; ne_dim_offset < APPLY_PARALLEL; ne_dim_offset++)
                     {
-                        for (int i = 0; i < EDGE_PARALLEL; i++)
-                        {
 #pragma HLS UNROLL
-                            mp_in[i] << mp_in_struct;
+                        int dim = ne_dim_base + ne_dim_offset;
+                        if (dim < EMB_DIM)
+                        {
+                            int mp_dim_offset = dim % SCATTER_PARALLEL;
+                            mp_in_struct[nd_offset][mp_dim_offset] = ne_out_struct[ne_dim_offset];
+                            if (dim == EMB_DIM - 1 || mp_dim_offset == SCATTER_PARALLEL - 1)
+                            {
+                                for (int i = 0; i < EDGE_PARALLEL; i++)
+                                {
+#pragma HLS UNROLL
+                                    mp_in[i][nd_offset] << mp_in_struct[nd_offset];
+                                }
+                            }
                         }
                     }
                 }
@@ -230,7 +239,7 @@ void ne_to_mp_adapter(
 
 void filter_embeddings_from_stream(
     int pe_id,
-    hls::stream<mp_in_t>& unfiltered_embeddings_per_node,
+    hls::stream<mp_in_t> unfiltered_embeddings_per_node[NODE_PARALLEL],
     hls::stream<int>& degrees,
     hls::stream<mp_in_t>& filtered_embeddings_per_node,
     int num_of_nodes
@@ -250,7 +259,7 @@ void filter_embeddings_from_stream(
             }
 
             mp_in_t embedding;
-            unfiltered_embeddings_per_node >> embedding;
+            unfiltered_embeddings_per_node[nd % NODE_PARALLEL] >> embedding;
             if (degree != 0)
             {
                 filtered_embeddings_per_node << embedding;
@@ -303,7 +312,7 @@ void duplicate_embeddings_from_stream(
 
 void message_passing_pe(
     int pe_id,
-    hls::stream<mp_in_t>& embeddings_per_node,
+    hls::stream<mp_in_t> embeddings_per_node[NODE_PARALLEL],
     FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int num_of_nodes
 )
@@ -331,7 +340,7 @@ void apply_accumulate_one_batch(
     int degree,
     WT_TYPE eigw_sum,
     WT_TYPE eig_abssum,
-    int i,
+    int layer_num,
     int dim_base
 )
 {
@@ -362,13 +371,12 @@ void apply_accumulate_one_batch(
         for (int dim_out = 0; dim_out < L_OUT; dim_out++)
         {
 #pragma HLS UNROLL
-            accs[dim_out] = (
-                activation_1 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][0][dim_in]
-                + activation_2 * layers_posttrans_fully_connected_0_linear_weight[i][dim_out][1][dim_in]
-                + ((dim_in == 0)
-                    ? FM_TYPE(layers_posttrans_fully_connected_0_linear_bias[i][dim_out])
-                    : accs[dim_out])
+            FM_TYPE addend = (
+                activation_1 * layers_posttrans_fully_connected_0_linear_weight[layer_num][dim_out][0][dim_in]
+                + activation_2 * layers_posttrans_fully_connected_0_linear_weight[layer_num][dim_out][1][dim_in]
             );
+            FM_TYPE bias = layers_posttrans_fully_connected_0_linear_bias[layer_num][dim_out];
+            accs[dim_out] = addend + ((dim_in == 0) ? bias : accs[dim_out]);
         }
     }
 }
@@ -508,16 +516,25 @@ void read_embeddings(hls::stream<ne_out_t> embeddings[NODE_PARALLEL], int num_of
     }
 }
 
-void discard_embeddings(hls::stream<mp_in_t>& embeddings, int num_of_nodes)
+void discard_embeddings(hls::stream<mp_in_t> embeddings[NODE_PARALLEL], int num_of_nodes)
 {
 #pragma HLS INLINE off
     mp_in_t embedding;
 #pragma HLS AGGREGATE variable=embedding
-    for (int v = 0; v < num_of_nodes; v++)
+    for (int nd_base = 0; nd_base < num_of_nodes; nd_base += NODE_PARALLEL)
     {
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, SCATTER_PARALLEL)
         for (int i = 0; i < EMB_DIM; i += SCATTER_PARALLEL)
         {
-            embeddings >> embedding;
+            for (int nd_offset = 0; nd_offset < NODE_PARALLEL; nd_offset++)
+            {
+#pragma HLS UNROLL
+                int nd = nd_base + nd_offset;
+                if (nd < num_of_nodes)
+                {
+                    embeddings[nd_offset] >> embedding;
+                }
+            }
         }
     }
 }
@@ -542,7 +559,7 @@ void node_embedding(
 }
 
 void message_passing_all_pes(
-    hls::stream<mp_in_t> embeddings[EDGE_PARALLEL],
+    hls::stream<mp_in_t> embeddings[EDGE_PARALLEL][NODE_PARALLEL],
     FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int num_of_nodes
 )
@@ -563,7 +580,7 @@ void message_passing_all_pes(
 }
 
 void message_passing(
-    hls::stream<mp_in_t> embeddings[EDGE_PARALLEL],
+    hls::stream<mp_in_t> embeddings[EDGE_PARALLEL][NODE_PARALLEL],
     FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     int layer_num,
     int num_of_nodes
@@ -603,7 +620,7 @@ void compute_CONV_layer(
 
     hls::stream<ne_out_t> ne_out[NODE_PARALLEL];
 #pragma HLS STREAM variable=ne_out depth=200
-    hls::stream<mp_in_t> mp_in[EDGE_PARALLEL];
+    hls::stream<mp_in_t> mp_in[EDGE_PARALLEL][NODE_PARALLEL];
 #pragma HLS STREAM variable=mp_in depth=40
 
     node_embedding(ne_out, message, layer_num, num_of_nodes);
@@ -678,7 +695,7 @@ void load_input_node_embeddings(int* node_feature, WT_TYPE embedding_h_atom_embe
     for (int nd = 0, node_feature_base = 0; nd < num_of_nodes; nd++, node_feature_base += ND_FEATURE)
     {
 // I wouldn't pipeline this loop, myself, but Vitis wanted to, so:
-#pragma HLS PIPELINE II=111
+#pragma HLS PIPELINE II=51
 
         array<WT_TYPE, EMB_DIM> weights[ND_FEATURE];
         for (int nf = 0; nf < ND_FEATURE; nf++)
@@ -691,7 +708,7 @@ void load_input_node_embeddings(int* node_feature, WT_TYPE embedding_h_atom_embe
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += LOAD_IN_EMB_PARALLEL)
         {
 // Commented out since we are pipelining the outer loop:
-#pragma HLS PIPELINE II=1
+// #pragma HLS PIPELINE II=1
             for (int dim_offset = 0; dim_offset < LOAD_IN_EMB_PARALLEL; dim_offset++)
             {
                 int dim = dim_base + dim_offset;
