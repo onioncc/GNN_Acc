@@ -3,50 +3,7 @@
 #include "dcl.h"
 
 // global weights
-float result;
-
-void prepare_graph(
-    int num_of_nodes,
-    int num_of_edges,
-    int *edge_list,
-    int degree_table[][2],
-    int neighbor_table[]
-)
-{
-    int neighbor_table_idxs[num_of_nodes];
-    int edge_list_len = num_of_edges * 2;
-
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        degree_table[i][0] = 0;
-        neighbor_table_idxs[i] = 0;
-    }
-
-    for (int i = 1; i < edge_list_len; i += 2)
-    {
-        int v = edge_list[i];
-        degree_table[v][0]++;
-    }
-
-    int acc = 0;
-    for (int i = 0; i < num_of_nodes; i++)
-    {
-        int degree = degree_table[i][0];
-        degree_table[i][1] = acc;
-        acc += degree;
-    }
-
-    for (int i = 0; i < edge_list_len; i += 2)
-    {
-        int u = edge_list[i];
-        int v = edge_list[i + 1];
-        int row_idx = degree_table[v][1];
-        int col_idx = neighbor_table_idxs[v];
-        int e = row_idx + col_idx;
-        neighbor_table[e] = u;
-        neighbor_table_idxs[v] = col_idx + 1;
-    }
-}
+FM_TYPE result;
 
 int main()
 {
@@ -74,9 +31,9 @@ int main()
         printf("********** Computing Graph %s *************\n", graph_name);
         printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
 
-        int node_feature[ND_FEATURE * num_of_nodes];
-        WT_TYPE node_eigen[4 * num_of_nodes];
-        int edge_list[2 * num_of_edges];
+        int node_feature[ND_FEATURE * MAX_NODE];
+        WT_TYPE node_eigen[4 * MAX_NODE];
+        int edge_list[2 * MAX_EDGE];
         int graph_attr[3];
         graph_attr[0] = num_of_nodes;
         graph_attr[1] = num_of_edges;
@@ -84,17 +41,12 @@ int main()
 
         fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, num_of_nodes, num_of_edges);
 
-        int degree_table[num_of_nodes][2];
-        int neighbor_table[num_of_edges];
-        prepare_graph(num_of_nodes, num_of_edges, edge_list, degree_table, neighbor_table);
-
         printf("Computing DGN ...\n");
         DGN_compute_one_graph(
             &result,
             node_feature,
             node_eigen,
-            degree_table,
-            neighbor_table,
+            edge_list,
             graph_attr,
             embedding_h_atom_embedding_list_weights,
             layers_posttrans_fully_connected_0_linear_weight_in,

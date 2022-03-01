@@ -13,7 +13,7 @@ extern WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25];
 extern WT_TYPE MLP_layer_FC_layers_2_bias_in[1];
 
 // global weights
-float result;
+FM_TYPE result;
 
 int main()
 {
