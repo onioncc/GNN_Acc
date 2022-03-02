@@ -19,6 +19,12 @@ static constexpr T roundup(T dividend, T divisor)
     return ceildiv(dividend, divisor) * divisor;
 }
 
+template <typename T>
+static constexpr T ap_fixed_epsilon()
+{
+    return T(1.0 / (1 << (T::width - T::iwidth)));
+}
+
 //#define _PRINT_
 
 WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][2][100];
@@ -352,6 +358,11 @@ void apply_accumulate_one_batch(
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weight complete dim=3
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_weight cyclic factor=APPLY_PARALLEL dim=4
 #pragma HLS ARRAY_PARTITION variable=layers_posttrans_fully_connected_0_linear_bias complete dim=2
+
+    if (eig_abssum == 0.0)
+    {
+        eig_abssum = ap_fixed_epsilon<WT_TYPE>();
+    }
 
     for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
     {
