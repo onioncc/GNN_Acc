@@ -11,8 +11,8 @@
 #include "ap_fixed.h"
 #include "hls_math.h"
 
-typedef ap_fixed<32, 10> FM_TYPE;
-typedef ap_fixed<32, 10> WT_TYPE;
+typedef ap_fixed<32, 8> FM_TYPE;
+typedef ap_fixed<32, 8> WT_TYPE;
 
 
 #define MAX_EDGE 500

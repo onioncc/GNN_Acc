@@ -139,6 +139,68 @@ void scatter_sum(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM],
      */
 }
 
+// linear layer
+template <const int in_size, const int out_size>
+void linear(FM_TYPE input[in_size],
+            FM_TYPE output[out_size],
+            WT_TYPE weight[out_size][in_size],
+            WT_TYPE bias[out_size]) {
+#pragma HLS INLINE off
+
+    const int BLOCK_SIZE_OUT = 10;
+    const int BLOCK_SIZE_IN = 48;
+
+#pragma HLS ARRAY_PARTITION variable = input cyclic factor = BLOCK_SIZE_IN dim = 1
+#pragma HLS ARRAY_PARTITION variable = output cyclic factor = BLOCK_SIZE_OUT dim = 1
+
+#pragma HLS ARRAY_PARTITION variable = weight cyclic factor = BLOCK_SIZE_OUT dim = 1
+#pragma HLS ARRAY_PARTITION variable = weight cyclic factor = BLOCK_SIZE_IN dim = 2
+
+#pragma HLS ARRAY_PARTITION variable = bias cyclic factor = BLOCK_SIZE_OUT dim = 1
+
+    // block parallel linear layer
+    // use temp sum
+    FM_TYPE temp_sum[BLOCK_SIZE_OUT];
+#pragma HLS ARRAY_PARTITION variable = temp_sum complete
+
+BLOCK_OUT:
+    for (int i = 0; i < out_size; i += BLOCK_SIZE_OUT) {
+    BLOCK_IN:
+        for (int j = 0; j < in_size; j += BLOCK_SIZE_IN) {
+
+#pragma HLS PIPELINE
+        // zero temp sum
+            TEMP_SUM_ZERO_LOOP:
+            for (int k = 0; k < BLOCK_SIZE_OUT; k++) {
+                temp_sum[k] = 0;
+            }
+        // compute temp sum
+            SUM_OUTER:
+            for (int k = 0; k < BLOCK_SIZE_OUT; k++) {
+                SUM_INNER:
+                for (int l = 0; l < BLOCK_SIZE_IN; l++) {
+                    temp_sum[k] += weight[i + k][j + l] * input[j + l];
+                }
+            }
+
+        // write temp sum to output
+        // aslo add bias to output
+            WRITE_LOOP:
+            for (int k = 0; k < BLOCK_SIZE_OUT; k++) {
+                if (j == 0) {
+                    output[i + k] = bias[i + k];
+                }
+                output[i + k] += temp_sum[k];
+                if(j == in_size-BLOCK_SIZE_IN){
+                    // relu activation
+                    if(output[i + k] < 0){
+                        output[i + k] = 0;
+                    }
+                }
+            }
+        }
+    }
+}
 
 void aggr_mean(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], int index[MAX_EDGE], int dim_size, int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM]) {
 #pragma HLS inline off
@@ -244,7 +306,7 @@ void aggr_min(FM_TYPE src[MAX_EDGE][EMB_DIM], FM_TYPE out[MAX_NODE][EMB_DIM], in
 
 void scale(FM_TYPE hout[4 * MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_DIM], int num_of_nodes, int degree[MAX_NODE]) {
 #pragma HLS inline off
-#pragma HLS ARRAY_PARTITION variable = out block dim = 2 factor = 12
+// #pragma HLS ARRAY_PARTITION variable = out block dim = 2 factor = 12
 
     for (int node = 0; node < num_of_nodes; node++) {
         //#pragma HLS PIPELINE
@@ -258,24 +320,35 @@ void scale(FM_TYPE hout[4 * MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EMB_D
             FM_TYPE out_2_buf = out_2[node][dim];
             FM_TYPE out_3_buf = out_3[node][dim];
 
+            FM_TYPE out_0_buf_t_ = out_0_buf * t;
+            FM_TYPE out_1_buf_t_ = out_1_buf * t;
+            FM_TYPE out_2_buf_t_ = out_2_buf * t;
+            FM_TYPE out_3_buf_t_ = out_3_buf * t;
+
+            FM_TYPE out_0_buf_scale = out_0_buf * scale;
+            FM_TYPE out_1_buf_scale = out_1_buf * scale;
+            FM_TYPE out_2_buf_scale = out_2_buf * scale;
+            FM_TYPE out_3_buf_scale = out_3_buf * scale;
+
             out[node][dim] = out_0_buf;
             out[node][dim + EMB_DIM] = out_1_buf;
             out[node][dim + 2 * EMB_DIM] = out_2_buf;
             out[node][dim + 3 * EMB_DIM] = out_3_buf;
-            out[node][dim + 4 * EMB_DIM] = out_0_buf * t;
-            out[node][dim + 5 * EMB_DIM] = out_1_buf * t;
-            out[node][dim + 6 * EMB_DIM] = out_2_buf * t;
-            out[node][dim + 7 * EMB_DIM] = out_3_buf * t;
-            out[node][dim + 8 * EMB_DIM] = out_0_buf * scale;
-            out[node][dim + 9 * EMB_DIM] = out_1_buf * scale;
-            out[node][dim + 10 * EMB_DIM] = out_2_buf * scale;
-            out[node][dim + 11 * EMB_DIM] = out_3_buf * scale;
+            out[node][dim + 4 * EMB_DIM] = out_0_buf_t_;
+            out[node][dim + 5 * EMB_DIM] = out_1_buf_t_;
+            out[node][dim + 6 * EMB_DIM] = out_2_buf_t_;
+            out[node][dim + 7 * EMB_DIM] = out_3_buf_t_;
+            out[node][dim + 8 * EMB_DIM] = out_0_buf_scale;
+            out[node][dim + 9 * EMB_DIM] = out_1_buf_scale;
+            out[node][dim + 10 * EMB_DIM] = out_2_buf_scale;
+            out[node][dim + 11 * EMB_DIM] = out_3_buf_scale;
         }
     }
 }
 void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_TYPE hout[4 * MAX_NODE][EMB_DIM], int num_of_edges, int mean_index[MAX_EDGE][EMB_DIM]) {
 #pragma HLS inline off
 #pragma HLS ARRAY_PARTITION variable = hout cyclic dim = 1 factor = 4
+
     //#pragma HLS PIPELINE
 
     //    memset(out_0, 0, MAX_EDGE * EMB_DIM * sizeof(FM_TYPE));
@@ -295,9 +368,9 @@ void aggr(FM_TYPE hin[MAX_EDGE][EMB_DIM], int index[MAX_EDGE], int dim_size, FM_
     aggr_std(hin, out_3, mean_index, index, dim_size, num_of_edges);
 
     for (int i = 0; i < dim_size; i++) {
-        //#pragma HLS PIPELINE
 
         for (int j = 0; j < EMB_DIM; j++) {
+            #pragma HLS PIPELINE
             hout[4 * i][j] = out_0[i][j];
             hout[4 * i + 1][j] = out_1[i][j];
             hout[4 * i + 2][j] = out_2[i][j];
@@ -353,27 +426,38 @@ void message_passing(FM_TYPE h[MAX_NODE][EMB_DIM], FM_TYPE out[MAX_NODE][12 * EM
     // delete[] aggrout;
 }
 
+FM_TYPE linear_in_buf[L_IN];
+FM_TYPE linear_out_buf[L_OUT];
+
 void Linear_relu(FM_TYPE l_in[MAX_NODE][L_IN], FM_TYPE l_out[MAX_NODE][L_OUT], int num_of_nodes, WT_TYPE weight[80][960], WT_TYPE bias[80]) {
 
 #pragma HLS inline off
 
+
     for (int nd = 0; nd < num_of_nodes; nd++) {
+        // read in the embedding vector
+        for (int i = 0; i < L_IN; i++) {
+            linear_in_buf[i] = l_in[nd][i];
+        }
 
-        for (int dim_out = 0; dim_out < L_OUT; dim_out++) {
-            l_out[nd][dim_out] = bias[dim_out];
+        // for (int dim_out = 0; dim_out < L_OUT; dim_out++) {
+        //     l_out[nd][dim_out] = bias[dim_out];
+        //     // #pragma HLS PIPELINE
 
-            // #pragma HLS PIPELINE II=1
+        //     for (int dim_in = 0; dim_in < L_IN; dim_in++) {
+        //         #pragma HLS unroll factor = 8
+        //         l_out[nd][dim_out] += l_in[nd][dim_in] * weight[dim_out][dim_in];
+        //     }
+        // }
 
-            for (int dim_in = 0; dim_in < L_IN; dim_in++) {
-                l_out[nd][dim_out] += l_in[nd][dim_in] * weight[dim_out][dim_in];
-            }
+        linear<L_IN, L_OUT>(linear_in_buf, linear_out_buf, weight, bias);
+
+        // write out the embedding vector
+        for (int i = 0; i < L_OUT; i++) {
+            l_out[nd][i] = linear_out_buf[i];
         }
     }
-    for (int nd = 0; nd < num_of_nodes; nd++) {
-        for (int dim_out = 0; dim_out < L_OUT; dim_out++) {
-            l_out[nd][dim_out] = l_out[nd][dim_out] > 0 ? l_out[nd][dim_out] : (FM_TYPE)0;
-        }
-    }
+
     return;
 }
 
@@ -473,6 +557,51 @@ FM_TYPE MLP(int num_of_nodes) {
     return out;
 }
 
+// load weights
+void load_weights(
+    WT_TYPE node_emb_atom_embedding_list_0_weight_fixed_in[119][80],
+    WT_TYPE node_emb_atom_embedding_list_1_weight_fixed_in[4][80],
+    WT_TYPE node_emb_atom_embedding_list_2_weight_fixed_in[12][80],
+    WT_TYPE node_emb_atom_embedding_list_3_weight_fixed_in[12][80],
+    WT_TYPE node_emb_atom_embedding_list_4_weight_fixed_in[10][80],
+    WT_TYPE node_emb_atom_embedding_list_5_weight_fixed_in[6][80],
+    WT_TYPE node_emb_atom_embedding_list_6_weight_fixed_in[6][80],
+    WT_TYPE node_emb_atom_embedding_list_7_weight_fixed_in[2][80],
+    WT_TYPE node_emb_atom_embedding_list_8_weight_fixed_in[2][80],
+
+    WT_TYPE mlp_0_weight_fixed_in[40][80],
+    WT_TYPE mlp_0_bias_fixed_in[40],
+    WT_TYPE mlp_2_weight_fixed_in[20][40],
+    WT_TYPE mlp_2_bias_fixed_in[20],
+    WT_TYPE mlp_4_weight_fixed_in[1][20],
+    WT_TYPE mlp_4_bias_fixed_in[1],
+
+    WT_TYPE convs_ALL_post_nn_0_weight_fixed_in[4][80][960],
+    WT_TYPE convs_ALL_post_nn_0_bias_fixed_in[4][80]
+) {
+    copy_2d<119, 80>(node_emb_atom_embedding_list_0_weight_fixed_in, node_emb_atom_embedding_list_0_weight_fixed);
+    copy_2d<4, 80>(node_emb_atom_embedding_list_1_weight_fixed_in, node_emb_atom_embedding_list_1_weight_fixed);
+    copy_2d<12, 80>(node_emb_atom_embedding_list_2_weight_fixed_in, node_emb_atom_embedding_list_2_weight_fixed);
+    copy_2d<12, 80>(node_emb_atom_embedding_list_3_weight_fixed_in, node_emb_atom_embedding_list_3_weight_fixed);
+    copy_2d<10, 80>(node_emb_atom_embedding_list_4_weight_fixed_in, node_emb_atom_embedding_list_4_weight_fixed);
+    copy_2d<6, 80>(node_emb_atom_embedding_list_5_weight_fixed_in, node_emb_atom_embedding_list_5_weight_fixed);
+    copy_2d<6, 80>(node_emb_atom_embedding_list_6_weight_fixed_in, node_emb_atom_embedding_list_6_weight_fixed);
+    copy_2d<2, 80>(node_emb_atom_embedding_list_7_weight_fixed_in, node_emb_atom_embedding_list_7_weight_fixed);
+    copy_2d<2, 80>(node_emb_atom_embedding_list_8_weight_fixed_in, node_emb_atom_embedding_list_8_weight_fixed);
+
+    copy_2d<40, 80>(mlp_0_weight_fixed_in, mlp_0_weight_fixed);
+    copy_1d<40>(mlp_0_bias_fixed_in, mlp_0_bias_fixed);
+
+    copy_2d<20, 40>(mlp_2_weight_fixed_in, mlp_2_weight_fixed);
+    copy_1d<20>(mlp_2_bias_fixed_in, mlp_2_bias_fixed);
+
+    copy_2d<1, 20>(mlp_4_weight_fixed_in, mlp_4_weight_fixed);
+    copy_1d<1>(mlp_4_bias_fixed_in, mlp_4_bias_fixed);
+
+    copy_3d<4, 80, 960>(convs_ALL_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed);
+    copy_2d<4, 80>(convs_ALL_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed);
+}
+
 void PNA_compute_one_graph(
     FM_TYPE *task,
 
@@ -553,31 +682,62 @@ void PNA_compute_one_graph(
     int num_of_nodes = graph_attr[0];
     int num_of_edges = graph_attr[1];
     int is_first = graph_attr[2];
-    //  int num_of_nodes = 19;
-    //  int num_of_edges = 40;
+
+    // molhiv
+    // int num_of_nodes = 26; 
+    // int num_of_edges = 56;
+    
+    //pcba
+    //int num_of_nodes = 27; 
+    //int num_of_edges = 60;
+
+    // molhiv first graph
+    // int num_of_nodes = 19;
+    // int num_of_edges = 40;
+    
+    // int is_first = 1;
 
     if (is_first) {
-        copy_2d<119, 80>(node_emb_atom_embedding_list_0_weight_fixed_in, node_emb_atom_embedding_list_0_weight_fixed);
-        copy_2d<4, 80>(node_emb_atom_embedding_list_1_weight_fixed_in, node_emb_atom_embedding_list_1_weight_fixed);
-        copy_2d<12, 80>(node_emb_atom_embedding_list_2_weight_fixed_in, node_emb_atom_embedding_list_2_weight_fixed);
-        copy_2d<12, 80>(node_emb_atom_embedding_list_3_weight_fixed_in, node_emb_atom_embedding_list_3_weight_fixed);
-        copy_2d<10, 80>(node_emb_atom_embedding_list_4_weight_fixed_in, node_emb_atom_embedding_list_4_weight_fixed);
-        copy_2d<6, 80>(node_emb_atom_embedding_list_5_weight_fixed_in, node_emb_atom_embedding_list_5_weight_fixed);
-        copy_2d<6, 80>(node_emb_atom_embedding_list_6_weight_fixed_in, node_emb_atom_embedding_list_6_weight_fixed);
-        copy_2d<2, 80>(node_emb_atom_embedding_list_7_weight_fixed_in, node_emb_atom_embedding_list_7_weight_fixed);
-        copy_2d<2, 80>(node_emb_atom_embedding_list_8_weight_fixed_in, node_emb_atom_embedding_list_8_weight_fixed);
+        // copy_2d<119, 80>(node_emb_atom_embedding_list_0_weight_fixed_in, node_emb_atom_embedding_list_0_weight_fixed);
+        // copy_2d<4, 80>(node_emb_atom_embedding_list_1_weight_fixed_in, node_emb_atom_embedding_list_1_weight_fixed);
+        // copy_2d<12, 80>(node_emb_atom_embedding_list_2_weight_fixed_in, node_emb_atom_embedding_list_2_weight_fixed);
+        // copy_2d<12, 80>(node_emb_atom_embedding_list_3_weight_fixed_in, node_emb_atom_embedding_list_3_weight_fixed);
+        // copy_2d<10, 80>(node_emb_atom_embedding_list_4_weight_fixed_in, node_emb_atom_embedding_list_4_weight_fixed);
+        // copy_2d<6, 80>(node_emb_atom_embedding_list_5_weight_fixed_in, node_emb_atom_embedding_list_5_weight_fixed);
+        // copy_2d<6, 80>(node_emb_atom_embedding_list_6_weight_fixed_in, node_emb_atom_embedding_list_6_weight_fixed);
+        // copy_2d<2, 80>(node_emb_atom_embedding_list_7_weight_fixed_in, node_emb_atom_embedding_list_7_weight_fixed);
+        // copy_2d<2, 80>(node_emb_atom_embedding_list_8_weight_fixed_in, node_emb_atom_embedding_list_8_weight_fixed);
 
-        copy_2d<40, 80>(mlp_0_weight_fixed_in, mlp_0_weight_fixed);
-        copy_1d<40>(mlp_0_bias_fixed_in, mlp_0_bias_fixed);
+        // copy_2d<40, 80>(mlp_0_weight_fixed_in, mlp_0_weight_fixed);
+        // copy_1d<40>(mlp_0_bias_fixed_in, mlp_0_bias_fixed);
 
-        copy_2d<20, 40>(mlp_2_weight_fixed_in, mlp_2_weight_fixed);
-        copy_1d<20>(mlp_2_bias_fixed_in, mlp_2_bias_fixed);
+        // copy_2d<20, 40>(mlp_2_weight_fixed_in, mlp_2_weight_fixed);
+        // copy_1d<20>(mlp_2_bias_fixed_in, mlp_2_bias_fixed);
 
-        copy_2d<1, 20>(mlp_4_weight_fixed_in, mlp_4_weight_fixed);
-        copy_1d<1>(mlp_4_bias_fixed_in, mlp_4_bias_fixed);
+        // copy_2d<1, 20>(mlp_4_weight_fixed_in, mlp_4_weight_fixed);
+        // copy_1d<1>(mlp_4_bias_fixed_in, mlp_4_bias_fixed);
 
-        copy_3d<4, 80, 960>(convs_ALL_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed);
-        copy_2d<4, 80>(convs_ALL_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed);
+        // copy_3d<4, 80, 960>(convs_ALL_post_nn_0_weight_fixed_in, convs_ALL_post_nn_0_weight_fixed);
+        // copy_2d<4, 80>(convs_ALL_post_nn_0_bias_fixed_in, convs_ALL_post_nn_0_bias_fixed);
+        load_weights(node_emb_atom_embedding_list_0_weight_fixed_in,
+             node_emb_atom_embedding_list_1_weight_fixed_in,
+             node_emb_atom_embedding_list_2_weight_fixed_in,
+             node_emb_atom_embedding_list_3_weight_fixed_in,
+             node_emb_atom_embedding_list_4_weight_fixed_in,
+             node_emb_atom_embedding_list_5_weight_fixed_in,
+             node_emb_atom_embedding_list_6_weight_fixed_in,
+             node_emb_atom_embedding_list_7_weight_fixed_in,
+             node_emb_atom_embedding_list_8_weight_fixed_in,
+
+             mlp_0_weight_fixed_in,
+             mlp_0_bias_fixed_in,
+             mlp_2_weight_fixed_in,
+             mlp_2_bias_fixed_in,
+             mlp_4_weight_fixed_in,
+             mlp_4_bias_fixed_in,
+
+             convs_ALL_post_nn_0_weight_fixed_in,
+             convs_ALL_post_nn_0_bias_fixed_in);
     }
 
     for (int nd = 0; nd < num_of_nodes; nd++) {
