@@ -6,6 +6,8 @@
 #include <string.h>
 #include <math.h>
 #include <ap_fixed.h>
+#include <ap_axi_sdata.h>
+#include <hls_stream.h>
 #include <array>
 
 // Enables fixed num_of_nodes/edges in DGN_compute.cc for timing estimates
@@ -40,7 +42,7 @@ typedef struct {
     int v;
 } edge_t;
 
-extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+extern WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
@@ -56,20 +58,13 @@ void fetch_one_graph(int g, char* graph_name, int* node_feature, WT_TYPE* node_e
 bool Jacob(float *pMatrix, int nDim, float *pdblVects, float *pdbEigenValues, float dbEps, int nJt);
 extern "C" {
 void DGN_compute_one_graph(
-    FM_TYPE* out,
-    int* node_feature_in,
-    WT_TYPE* node_eigen_in,
-    int* edge_list_in,
-    int* graph_attr,
-    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
-    WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
-    WT_TYPE MLP_layer_FC_layers_0_bias_in[50],
-    WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50],
-    WT_TYPE MLP_layer_FC_layers_1_bias_in[25],
-    WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25],
-    WT_TYPE MLP_layer_FC_layers_2_bias_in[1]
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& output_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& node_feature_stream,
+    hls::stream<qdma_axis<4 * WT_TYPE::width, 0, 0, 0>>& node_eigen_stream,
+    hls::stream<qdma_axis<2 * 32, 0, 0, 0>>& edge_list_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& num_of_nodes_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& num_of_edges_stream,
+    hls::stream<qdma_axis<WT_TYPE::width, 0, 0, 0>>& weights_stream
 );
 }
 

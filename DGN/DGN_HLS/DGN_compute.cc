@@ -1,7 +1,6 @@
 #include "dcl.h"
 #include "math.h"
 #include "hls_math.h"
-#include "hls_stream.h"
 #include <stdio.h>
 #include <array>
 
@@ -27,6 +26,7 @@ static constexpr T ap_fixed_epsilon()
 
 //#define _PRINT_
 
+WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
 WT_TYPE layers_posttrans_fully_connected_0_linear_weight[4][100][2][100];
 WT_TYPE layers_posttrans_fully_connected_0_linear_bias[4][100];
 WT_TYPE MLP_layer_FC_layers_0_weight[50][100];
@@ -51,36 +51,99 @@ FM_TYPE messages_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DI
 
 FM_TYPE h_node[MAX_NODE][EMB_DIM];
 
-void load_weights(
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
-    WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
-    WT_TYPE MLP_layer_FC_layers_0_bias_in[50],
-    WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50],
-    WT_TYPE MLP_layer_FC_layers_1_bias_in[25],
-    WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25],
-    WT_TYPE MLP_layer_FC_layers_2_bias_in[1]
-)
+template<typename T, int DIM_1>
+void load_array_1d(T dst[DIM_1], hls::stream<qdma_axis<T::width, 0, 0, 0>>& src)
 {
-#pragma HLS INLINE off
-    memcpy(layers_posttrans_fully_connected_0_linear_weight, layers_posttrans_fully_connected_0_linear_weight_in, sizeof(WT_TYPE) * 4 * 100 * 2 * 100);
-    memcpy(layers_posttrans_fully_connected_0_linear_bias, layers_posttrans_fully_connected_0_linear_bias_in, sizeof(WT_TYPE) * 4 * 100);
-    memcpy(MLP_layer_FC_layers_0_weight, MLP_layer_FC_layers_0_weight_in, sizeof(WT_TYPE) * 50 * 100);
-    memcpy(MLP_layer_FC_layers_0_bias, MLP_layer_FC_layers_0_bias_in, sizeof(WT_TYPE) * 50);
-    memcpy(MLP_layer_FC_layers_1_weight, MLP_layer_FC_layers_1_weight_in, sizeof(WT_TYPE) * 25 * 50);
-    memcpy(MLP_layer_FC_layers_1_bias, MLP_layer_FC_layers_1_bias_in, sizeof(WT_TYPE) * 25);
-    memcpy(MLP_layer_FC_layers_2_weight, MLP_layer_FC_layers_2_weight_in, sizeof(WT_TYPE) * 1 * 25);
-    memcpy(MLP_layer_FC_layers_2_bias, MLP_layer_FC_layers_2_bias_in, sizeof(WT_TYPE) * 1);
+#pragma HLS INLINE
+    for (int i = 0; i < DIM_1; i++)
+    {
+        qdma_axis<T::width, 0, 0, 0> pkt;
+        src >> pkt;
+        dst[i].range() = pkt.data.range();
+    }
 }
 
-void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int num_of_edges)
+template<typename T, int DIM_1, int DIM_2>
+void load_array_2d(T dst[DIM_1][DIM_2], hls::stream<qdma_axis<T::width, 0, 0, 0>>& src)
+{
+#pragma HLS INLINE
+    for (int i = 0; i < DIM_1; i++)
+    {
+        for (int j = 0; j < DIM_2; j++)
+        {
+            qdma_axis<T::width, 0, 0, 0> pkt;
+            src >> pkt;
+            dst[i][j].range() = pkt.data.range();
+        }
+    }
+}
+
+template<typename T, int DIM_1, int DIM_2, int DIM_3>
+void load_array_3d(T dst[DIM_1][DIM_2][DIM_3], hls::stream<qdma_axis<T::width, 0, 0, 0>>& src)
+{
+#pragma HLS INLINE
+    for (int i = 0; i < DIM_1; i++)
+    {
+        for (int j = 0; j < DIM_2; j++)
+        {
+            for (int k = 0; k < DIM_3; k++)
+            {
+                qdma_axis<T::width, 0, 0, 0> pkt;
+                src >> pkt;
+                dst[i][j][k].range() = pkt.data.range();
+            }
+        }
+    }
+}
+
+template<typename T, int DIM_1, int DIM_2, int DIM_3, int DIM_4>
+void load_array_4d(T dst[DIM_1][DIM_2][DIM_3][DIM_4], hls::stream<qdma_axis<T::width, 0, 0, 0>>& src)
+{
+#pragma HLS INLINE
+    for (int i = 0; i < DIM_1; i++)
+    {
+        for (int j = 0; j < DIM_2; j++)
+        {
+            for (int k = 0; k < DIM_3; k++)
+            {
+                for (int l = 0; l < DIM_4; l++)
+                {
+                    qdma_axis<T::width, 0, 0, 0> pkt;
+                    src >> pkt;
+                    dst[i][j][k][l].range() = pkt.data.range();
+                }
+            }
+        }
+    }
+}
+
+void load_weights(hls::stream<qdma_axis<WT_TYPE::width, 0, 0, 0>>& weights)
+{
+#pragma HLS INLINE off
+    load_array_3d<WT_TYPE, 9, 119, 100>(embedding_h_atom_embedding_list_weights, weights);
+    load_array_4d<WT_TYPE, 4, 100, 2, 100>(layers_posttrans_fully_connected_0_linear_weight, weights);
+    load_array_2d<WT_TYPE, 4, 100>(layers_posttrans_fully_connected_0_linear_bias, weights);
+    load_array_2d<WT_TYPE, 50, 100>(MLP_layer_FC_layers_0_weight, weights);
+    load_array_1d<WT_TYPE, 50>(MLP_layer_FC_layers_0_bias, weights);
+    load_array_2d<WT_TYPE, 25, 50>(MLP_layer_FC_layers_1_weight, weights);
+    load_array_1d<WT_TYPE, 25>(MLP_layer_FC_layers_1_bias, weights);
+    load_array_2d<WT_TYPE, 1, 25>(MLP_layer_FC_layers_2_weight, weights);
+    load_array_1d<WT_TYPE, 1>(MLP_layer_FC_layers_2_bias, weights);
+}
+
+void load_graph(
+    hls::stream<qdma_axis<2 * 32, 0, 0, 0>>& edge_list_stream,
+    hls::stream<qdma_axis<4 * WT_TYPE::width, 0, 0, 0>>& node_eigen_stream,
+    int num_of_nodes,
+    int num_of_edges
+)
 {
 #pragma HLS INLINE off
 
     int neighbor_table_offsets[MAX_NODE];
     int neighbor_tables_offsets[EDGE_PARALLEL][MAX_NODE];
-    int edge_list_len = num_of_edges * 2;
-    edge_t *edge_list_structs = (edge_t*)edge_list_in;
+    edge_t edge_cache[MAX_EDGE];
+    ap_uint<4 * WT_TYPE::width> node_eigen_cache[MAX_NODE];
 
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=1
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=3
@@ -91,6 +154,7 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
 
     for (int i = 0; i < num_of_nodes; i++)
     {
+#pragma HLS LOOP_TRIPCOUNT min=19 max=19 avg=19
         degree_table[i] = 0;
         eig_abssums[i] = 0;
         eigw_sums[i] = 0;
@@ -102,16 +166,28 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
         }
     }
 
+    for (int i = 0; i < num_of_nodes; i++)
+    {
+#pragma HLS LOOP_TRIPCOUNT min=19 max=19 avg=19
+        qdma_axis<4 * WT_TYPE::width, 0, 0, 0> node_eigen_pkt;
+        node_eigen_stream >> node_eigen_pkt;
+        node_eigen_cache[i] = node_eigen_pkt.data;
+    }
+
     for (int i = 0; i < num_of_edges; i++)
     {
+#pragma HLS LOOP_TRIPCOUNT min=40 max=40 avg=40
         // TODO: can we make this II=1?
-#pragma HLS PIPELINE II=3
-        edge_t edge = edge_list_structs[i];
-        int u = edge.u;
-        int v = edge.v;
+#pragma HLS PIPELINE II=2
+        qdma_axis<2 * 32, 0, 0, 0> edge_pkt;
+        edge_list_stream >> edge_pkt;
+        ap_uint<64> edge_data = edge_pkt.data;
+        int u = edge_data(31, 0);
+        int v = edge_data(63, 32);
         int pe_id = v % EDGE_PARALLEL;
         degree_table[u]++;
         degree_tables[pe_id][u][0]++;
+        edge_cache[i] = {u, v};
     }
 
     int acc = 0;
@@ -123,6 +199,7 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
 
     for (int i = 0; i < num_of_nodes; i++)
     {
+#pragma HLS LOOP_TRIPCOUNT min=19 max=19 avg=19
         int degree = degree_table[i];
         neighbor_table_offsets[i] = acc;
         acc += degree;
@@ -139,9 +216,10 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
 
     for (int i = 0; i < num_of_edges; i++)
     {
+#pragma HLS LOOP_TRIPCOUNT min=40 max=40 avg=40
         // TODO: can we make this II=1?
-#pragma HLS PIPELINE II=3
-        edge_t edge = edge_list_structs[i];
+#pragma HLS PIPELINE II=2
+        edge_t edge = edge_cache[i];
         int u = edge.u;
         int v = edge.v;
         int pe_id = v % EDGE_PARALLEL;
@@ -152,8 +230,10 @@ void load_graph(int *edge_list_in, WT_TYPE *node_eigen_in, int num_of_nodes, int
         neighbor_tables[pe_id][e_pe] = v / EDGE_PARALLEL;
         neighbor_tables_offsets[pe_id][u] = e_pe + 1;
 
-        WT_TYPE u_eigen = node_eigen_in[(u * 4) + 1];
-        WT_TYPE v_eigen = node_eigen_in[(v * 4) + 1];
+        WT_TYPE u_eigen;
+        u_eigen.range() = node_eigen_cache[u](2 * WT_TYPE::width - 1, 1 * WT_TYPE::width);
+        WT_TYPE v_eigen;
+        v_eigen.range() = node_eigen_cache[v](2 * WT_TYPE::width - 1, 1 * WT_TYPE::width);
         WT_TYPE diff_eigen = u_eigen - v_eigen;
         eig_w[pe_id][e_pe] = diff_eigen;
         eig_abssums[v] += hls::abs(diff_eigen);
@@ -210,9 +290,11 @@ void ne_to_mp_adapter(
     mp_in_t mp_in_struct[NODE_PARALLEL];
 #pragma HLS AGGREGATE variable=mp_in_struct
 
-    for (int nd_base = 0; nd_base < num_of_nodes; nd_base += NODE_PARALLEL)
+    int num_iters = ceildiv(num_of_nodes, NODE_PARALLEL);
+    for (int i = 0, nd_base = 0; i < num_iters; i++, nd_base += NODE_PARALLEL)
     {
 #pragma HLS PIPELINE II=ceildiv(EMB_DIM, APPLY_PARALLEL)
+#pragma HLS LOOP_TRIPCOUNT min=ceildiv(19, NODE_PARALLEL) max=ceildiv(19, NODE_PARALLEL) avg=ceildiv(19, NODE_PARALLEL)
         for (int ne_dim_base = 0; ne_dim_base < EMB_DIM; ne_dim_base += APPLY_PARALLEL)
         {
             for (int nd_offset = 0; nd_offset < NODE_PARALLEL; nd_offset++)
@@ -259,6 +341,7 @@ void filter_embeddings_from_stream(
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
 #pragma HLS PIPELINE II=ceildiv(EMB_DIM, SCATTER_PARALLEL)
+#pragma HLS LOOP_TRIPCOUNT min=19 max=19 avg=19
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += SCATTER_PARALLEL)
         {
             int degree = degree_tables[pe_id][nd][0];
@@ -450,6 +533,7 @@ void apply(
         i++, acc_v_base += NODE_PARALLEL, out_v_base += NODE_PARALLEL
     )
     {
+#pragma HLS LOOP_TRIPCOUNT min=(ceildiv(19, NODE_PARALLEL) + 1) max=(ceildiv(19, NODE_PARALLEL) + 1) avg=(ceildiv(19, NODE_PARALLEL) + 1)
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
 #pragma HLS PIPELINE II=1
@@ -502,25 +586,28 @@ void apply(
 
 void load_input_node_embeddings(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    int* node_feature,
-    WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100],
+    hls::stream<qdma_axis<32, 0, 0, 0>>& node_feature_stream,
     int num_of_nodes
 )
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=embedding_h_atom_embedding_list_weights complete dim=1
+#pragma HLS ARRAY_PARTITION variable=embedding_h_atom_embedding_list_weights cyclic factor=LOAD_IN_EMB_PARALLEL dim=3
 
     /*Embedding: compute input node embedding */
-    for (int nd = 0, node_feature_base = 0; nd < num_of_nodes; nd++, node_feature_base += ND_FEATURE)
+    for (int nd = 0; nd < num_of_nodes; nd++)
     {
 // I wouldn't pipeline this loop, myself, but Vitis wanted to, so:
-#pragma HLS PIPELINE II=51
+#pragma HLS PIPELINE II=50
+#pragma HLS LOOP_TRIPCOUNT min=19 max=19 avg=19
 
-        array<WT_TYPE, EMB_DIM> weights[ND_FEATURE];
+        int nd_f[ND_FEATURE];
         for (int nf = 0; nf < ND_FEATURE; nf++)
         {
 #pragma HLS UNROLL
-            int nd_f = node_feature[node_feature_base + nf];
-            weights[nf] = *((array<WT_TYPE, EMB_DIM>*)embedding_h_atom_embedding_list_weights[nf][nd_f]);
+            qdma_axis<32, 0, 0, 0> node_feature_pkt;
+            node_feature_stream >> node_feature_pkt;
+            nd_f[nf] = node_feature_pkt.data;
         }
 
         ne_out_t embedding;
@@ -535,7 +622,7 @@ void load_input_node_embeddings(
                 FM_TYPE h_node_nd_dim = 0;
                 for (int nf = 0; nf < ND_FEATURE; nf++)
                 {
-                    h_node_nd_dim += weights[nf][dim];
+                    h_node_nd_dim += embedding_h_atom_embedding_list_weights[nf][nd_f[nf]][dim];
                 }
                 h_node[nd][dim] = h_node_nd_dim;
 
@@ -557,8 +644,7 @@ void load_input_node_embeddings(
 void node_embedding(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
-    int* node_feature_in,
-    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
+    hls::stream<qdma_axis<32, 0, 0, 0>>& node_feature_stream,
     int i,
     int num_of_nodes
 )
@@ -567,7 +653,7 @@ void node_embedding(
 
     if (i == 0)
     {
-        load_input_node_embeddings(embeddings, node_feature_in, embedding_h_atom_embedding_list_weights_in, num_of_nodes);
+        load_input_node_embeddings(embeddings, node_feature_stream, num_of_nodes);
     }
     else
     {
@@ -611,8 +697,10 @@ void global_mean_pooling(
     FM_TYPE sums[EMB_DIM];
 #pragma HLS ARRAY_PARTITION variable=sums cyclic factor=APPLY_PARALLEL dim=1
 
-    for (int nd_base = 0; nd_base < num_of_nodes; nd_base += NODE_PARALLEL)
+    int num_iters = ceildiv(num_of_nodes, NODE_PARALLEL);
+    for (int i = 0, nd_base = 0; i < num_iters; i++, nd_base += NODE_PARALLEL)
     {
+#pragma HLS LOOP_TRIPCOUNT min=ceildiv(19, NODE_PARALLEL) max=ceildiv(19, NODE_PARALLEL) avg=ceildiv(19, NODE_PARALLEL)
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
 #pragma HLS PIPELINE II=1
@@ -796,6 +884,16 @@ void linear_relu_input_stationary(
     }
 }
 
+void write_result(
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& result_stream,
+    FM_TYPE* result
+)
+{
+    qdma_axis<FM_TYPE::width, 0, 0, 0> result_pkt;
+    result_pkt.data.range() = result->range();
+    result_stream << result_pkt;
+}
+
 void finalize(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     WT_TYPE MLP_layer_FC_layers_0_weight[50][100],
@@ -804,7 +902,7 @@ void finalize(
     WT_TYPE MLP_layer_FC_layers_1_bias[25],
     WT_TYPE MLP_layer_FC_layers_2_weight[1][25],
     WT_TYPE MLP_layer_FC_layers_2_bias[1],
-    FM_TYPE* result,
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& result_stream,
     int num_of_nodes
 )
 {
@@ -815,6 +913,7 @@ void finalize(
     hls::stream<mlp_xfer_t> mlp_0_out("mlp_0_out");
 #pragma HLS STREAM variable=mlp_0_out depth=50
     FM_TYPE mlp_1_out[25];
+    FM_TYPE result[1];
 
     global_mean_pooling(embeddings, h_graph, num_of_nodes);
     linear_relu_output_stationary<100, 50, 2>(
@@ -835,12 +934,13 @@ void finalize(
         MLP_layer_FC_layers_2_bias,
         result
     );
+    write_result(result_stream, result);
 }
 
 void message_passing(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
-    FM_TYPE* result,
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& result_stream,
     int layer_num,
     int num_of_nodes
 )
@@ -858,7 +958,7 @@ void message_passing(
             MLP_layer_FC_layers_1_bias,
             MLP_layer_FC_layers_2_weight,
             MLP_layer_FC_layers_2_bias,
-            result,
+            result_stream,
             num_of_nodes
         );
     }
@@ -872,9 +972,8 @@ void compute_CONV_layer(
     int layer_num,
     FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
     FM_TYPE next_message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][2][EMB_DIM],
-    int* node_feature_in,
-    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
-    FM_TYPE* result,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& node_feature_stream,
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& result_stream,
     int num_of_nodes
 )
 {
@@ -889,79 +988,74 @@ void compute_CONV_layer(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL];
 #pragma HLS STREAM variable=embeddings depth=200
 
-    node_embedding(embeddings, message, node_feature_in, embedding_h_atom_embedding_list_weights_in, layer_num, num_of_nodes);
-    message_passing(embeddings, next_message, result, layer_num, num_of_nodes);
+    node_embedding(embeddings, message, node_feature_stream, layer_num, num_of_nodes);
+    message_passing(embeddings, next_message, result_stream, layer_num, num_of_nodes);
+}
+
+void compute_CONV_layers(
+    hls::stream<qdma_axis<32, 0, 0, 0>>& node_feature_stream,
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& output_stream,
+    int num_of_nodes
+)
+{
+#pragma HLS INLINE
+    for (int i = 0; i <= NUM_LAYERS; i++)
+    {
+        if (i % 2 == 0)
+            compute_CONV_layer(i, messages_ping, messages_pong, node_feature_stream, output_stream, num_of_nodes);
+        else
+            compute_CONV_layer(i, messages_pong, messages_ping, node_feature_stream, output_stream, num_of_nodes);
+    }
+}
+
+void read_graph_metadata(
+    int* num_of_nodes,
+    int* num_of_edges,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& num_of_nodes_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& num_of_edges_stream
+)
+{
+#pragma HLS INLINE
+        qdma_axis<32, 0, 0, 0> num_of_nodes_pkt;
+        num_of_nodes_stream >> num_of_nodes_pkt;
+        *num_of_nodes = num_of_nodes_pkt.data;
+
+        qdma_axis<32, 0, 0, 0> num_of_edges_pkt;
+        num_of_edges_stream >> num_of_edges_pkt;
+        *num_of_edges = num_of_edges_pkt.data;
 }
 
 extern "C" {
 void DGN_compute_one_graph(
-    FM_TYPE* out,
-    int* node_feature_in,
-    WT_TYPE* node_eigen_in,
-    int* edge_list_in,
-    int* graph_attr,
-    WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200],
-    WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100],
-    WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100],
-    WT_TYPE MLP_layer_FC_layers_0_bias_in[50],
-    WT_TYPE MLP_layer_FC_layers_1_weight_in[25][50],
-    WT_TYPE MLP_layer_FC_layers_1_bias_in[25],
-    WT_TYPE MLP_layer_FC_layers_2_weight_in[1][25],
-    WT_TYPE MLP_layer_FC_layers_2_bias_in[1]
+    hls::stream<qdma_axis<FM_TYPE::width, 0, 0, 0>>& output_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& node_feature_stream,
+    hls::stream<qdma_axis<4 * WT_TYPE::width, 0, 0, 0>>& node_eigen_stream,
+    hls::stream<qdma_axis<2 * 32, 0, 0, 0>>& edge_list_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& num_of_nodes_stream,
+    hls::stream<qdma_axis<32, 0, 0, 0>>& num_of_edges_stream,
+    hls::stream<qdma_axis<WT_TYPE::width, 0, 0, 0>>& weights_stream
 )
 {
-#pragma HLS INTERFACE s_axilite port=return
+#pragma HLS INTERFACE ap_ctrl_none port=return
 
-#pragma HLS INTERFACE m_axi depth=(1) port=out offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(9 * 500) port=node_feature_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(4 * 500) port=node_eigen_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=edge_list_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(3) port=graph_attr offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(9 * 119 * 100) port=embedding_h_atom_embedding_list_weights_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(4 * 100 * 200) port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(4 * 100) port=layers_posttrans_fully_connected_0_linear_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(50 * 100) port=MLP_layer_FC_layers_0_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(50) port=MLP_layer_FC_layers_0_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(25 * 50) port=MLP_layer_FC_layers_1_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(25) port=MLP_layer_FC_layers_1_bias_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(1 * 25) port=MLP_layer_FC_layers_2_weight_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(1) port=MLP_layer_FC_layers_2_bias_in offset=slave bundle=mem
+#pragma HLS INTERFACE axis port=output_stream depth=1
+#pragma HLS INTERFACE axis port=node_feature_stream depth=(ND_FEATURE * MAX_NODE)
+#pragma HLS INTERFACE axis port=node_eigen_stream depth=MAX_NODE
+#pragma HLS INTERFACE axis port=edge_list_stream depth=MAX_EDGE
+#pragma HLS INTERFACE axis port=num_of_nodes_stream depth=1
+#pragma HLS INTERFACE axis port=num_of_edges_stream depth=1
+#pragma HLS INTERFACE axis port=weights_stream depth=((9 * 119 * 100) + (4 * 100 * 200) + (4 * 100) + (50 * 100) + (50) + (25 * 50) + (25) + (1 * 25) + (1))
 
-#pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
+    load_weights(weights_stream);
 
-    int num_of_nodes = graph_attr[0];
-    int num_of_edges = graph_attr[1];
-    int is_first = graph_attr[2];
-
-#ifdef __SYNTHESIS_DEBUG__
-    num_of_nodes = 19;
-    num_of_edges = 40;
-    is_first = 1;
-#endif
-
-    if (is_first)
+    while (1)
     {
-        load_weights(
-            layers_posttrans_fully_connected_0_linear_weight_in,
-            layers_posttrans_fully_connected_0_linear_bias_in,
-            MLP_layer_FC_layers_0_weight_in,
-            MLP_layer_FC_layers_0_bias_in,
-            MLP_layer_FC_layers_1_weight_in,
-            MLP_layer_FC_layers_1_bias_in,
-            MLP_layer_FC_layers_2_weight_in,
-            MLP_layer_FC_layers_2_bias_in
-        );
-    }
-    load_graph(edge_list_in, node_eigen_in, num_of_nodes, num_of_edges);
+        int num_of_nodes;
+        int num_of_edges;
 
-    for (int i = 0; i <= NUM_LAYERS; i++)
-    {
-        if (i % 2 == 0)
-            compute_CONV_layer(i, messages_ping, messages_pong, node_feature_in, embedding_h_atom_embedding_list_weights_in, out, num_of_nodes);
-        else
-            compute_CONV_layer(i, messages_pong, messages_ping, node_feature_in, embedding_h_atom_embedding_list_weights_in, out, num_of_nodes);
+        read_graph_metadata(&num_of_nodes, &num_of_edges, num_of_nodes_stream, num_of_edges_stream);
+        load_graph(edge_list_stream, node_eigen_stream, num_of_nodes, num_of_edges);
+        compute_CONV_layers(node_feature_stream, output_stream, num_of_nodes);
     }
 }
 }
