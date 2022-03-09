@@ -40,7 +40,7 @@ typedef struct {
     int v;
 } edge_t;
 
-extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+extern WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];

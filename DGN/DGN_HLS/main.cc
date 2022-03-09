@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "dcl.h"
 
-extern WT_TYPE embedding_h_atom_embedding_list_weights[9][119][100];
+extern WT_TYPE embedding_h_atom_embedding_list_weights_in[9][119][100];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_weight_in[4][100][200];
 extern WT_TYPE layers_posttrans_fully_connected_0_linear_bias_in[4][100];
 extern WT_TYPE MLP_layer_FC_layers_0_weight_in[50][100];
@@ -60,7 +60,7 @@ int main()
             node_eigen,
             edge_list,
             graph_attr,
-            embedding_h_atom_embedding_list_weights,
+            embedding_h_atom_embedding_list_weights_in,
             layers_posttrans_fully_connected_0_linear_weight_in,
             layers_posttrans_fully_connected_0_linear_bias_in,
             MLP_layer_FC_layers_0_weight_in,
