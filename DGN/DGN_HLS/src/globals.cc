@@ -11,7 +11,6 @@ WT_TYPE MLP_layer_FC_layers_2_bias[1];
 
 int degree_table[MAX_NODE];
 int degree_tables[EDGE_PARALLEL][MAX_NODE][2];
-int neighbor_table[MAX_EDGE];
 int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
 WT_TYPE eig_w[EDGE_PARALLEL][MAX_EDGE];
 WT_TYPE eig_abssums[MAX_NODE];

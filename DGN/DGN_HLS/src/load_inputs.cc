@@ -34,9 +34,7 @@ void load_graph(
 {
 #pragma HLS INLINE off
 
-    int neighbor_table_offsets[MAX_NODE];
     int neighbor_tables_offsets[EDGE_PARALLEL][MAX_NODE];
-
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=1
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=3
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables complete dim=1
@@ -81,10 +79,6 @@ void load_graph(
     for (int i = 0; i < num_of_nodes; i++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_NODES max=ANALYSIS_MAX_NODES avg=ANALYSIS_AVG_NODES
-        int degree = degree_table[i];
-        neighbor_table_offsets[i] = acc;
-        acc += degree;
-
         for (int j = 0; j < EDGE_PARALLEL; j++)
         {
 #pragma HLS UNROLL
@@ -104,10 +98,7 @@ void load_graph(
         int u = edge.u;
         int v = edge.v;
         int pe_id = v % EDGE_PARALLEL;
-        int e = neighbor_table_offsets[u];
         int e_pe = neighbor_tables_offsets[pe_id][u];
-        neighbor_table[e] = v;
-        neighbor_table_offsets[u] = e + 1;
         neighbor_tables[pe_id][e_pe] = v / EDGE_PARALLEL;
         neighbor_tables_offsets[pe_id][u] = e_pe + 1;
 

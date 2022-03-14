@@ -103,7 +103,6 @@ extern WT_TYPE MLP_layer_FC_layers_2_bias[1];
 
 extern int degree_table[MAX_NODE];
 extern int degree_tables[EDGE_PARALLEL][MAX_NODE][2];
-extern int neighbor_table[MAX_EDGE];
 extern int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
 extern WT_TYPE eig_w[EDGE_PARALLEL][MAX_EDGE];
 extern WT_TYPE eig_abssums[MAX_NODE];
