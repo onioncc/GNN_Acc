@@ -4,6 +4,8 @@
 #include "dcl.h"
 #include "xcl2.hpp"
 
+constexpr int NUM_GRAPHS = 4113;
+
 template <typename T>
 using aligned_vector = std::vector<T, aligned_allocator<T>>;
 
@@ -18,6 +20,15 @@ extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_weight_in;
 extern aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_bias_in;
 
 void load_weights();
-void fetch_one_graph(int g, char* graph_name, aligned_vector<int>& node_feature, aligned_vector<WT_TYPE>& node_eigen, aligned_vector<int>& edge_list, aligned_vector<int>& edge_attr, int num_of_nodes, int num_of_edges);
+void fetch_one_graph(
+    int g,
+    char* graph_name,
+    aligned_vector<node_feature_t>& node_feature,
+    aligned_vector<node_eigen_t>& node_eigen,
+    aligned_vector<edge_t>& edge_list,
+    aligned_vector<int>& edge_attr,
+    int num_of_nodes,
+    int num_of_edges
+);
 
 #endif
