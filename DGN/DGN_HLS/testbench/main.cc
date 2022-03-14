@@ -14,7 +14,7 @@ int main()
     FM_TYPE all_results[NUM_GRAPHS];
     int nums_of_nodes[NUM_GRAPHS];
     int nums_of_edges[NUM_GRAPHS];
-    bool reload_weights[NUM_GRAPHS];
+    int reload_weights[NUM_GRAPHS];
     int total_nodes = 0;
     int total_edges = 0;
 
