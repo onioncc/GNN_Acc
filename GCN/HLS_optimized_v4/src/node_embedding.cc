@@ -1,5 +1,4 @@
 #include "node_embedding.h"
-#include "hls_math.h"
 
 // #region Internal Function Declarations
 static void accumulate(

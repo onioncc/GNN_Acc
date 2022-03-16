@@ -47,9 +47,6 @@ void GCN_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_weights_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_bias_in offset=slave bundle=mem
 
-#pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
-#pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
-
     for (int graph = 0, weights_ndx = -1, nodes_offset = 0, edges_offset = 0; graph < num_graphs; graph++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_NUM_GRAPHS max=ANALYSIS_NUM_GRAPHS avg=ANALYSIS_NUM_GRAPHS
@@ -96,9 +93,9 @@ void GCN_compute_graphs(
         }
 
         if (NUM_LAYERS % 2 == 0)
-            finalize(messages_ping, graph_pred_weights, graph_pred_bias, &out[graph], num_of_nodes);
+            finalize(h_node, messages_ping, graph_pred_weights, graph_pred_bias, &out[graph], num_of_nodes);
         else
-            finalize(messages_pong, graph_pred_weights, graph_pred_bias, &out[graph], num_of_nodes);
+            finalize(h_node, messages_pong, graph_pred_weights, graph_pred_bias, &out[graph], num_of_nodes);
 
         nodes_offset += num_of_nodes;
         edges_offset += num_of_edges;

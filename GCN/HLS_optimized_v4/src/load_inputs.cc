@@ -1,10 +1,8 @@
 #include "load_inputs.h"
-#include "hls_math.h"
 
 using std::array;
 
 static const int nd_feature_offsets[ND_FEATURE] = {0, 119, 123, 135, 147, 157, 163, 169, 171};
-#pragma HLS ARRAY_PARTITION variable=nd_feature_offsets complete dim=1
 
 void load_weights(
     WT_TYPE convs_weight_in[NUM_LAYERS][100][100],
@@ -163,6 +161,7 @@ void load_input_node_embeddings(
 )
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=nd_feature_offsets complete dim=1
 
     /*Embedding: compute input node embedding */
     for (int nd = 0; nd < num_of_nodes; nd++)

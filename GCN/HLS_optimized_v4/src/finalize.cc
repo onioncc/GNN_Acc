@@ -13,6 +13,7 @@ static void post_mp_then_global_mean_pooling(
 // #endregion
 
 void finalize(
+    FM_TYPE h_node[MAX_NODE][EMB_DIM],
     FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     WT_TYPE graph_pred_weights[NUM_TASK][EMB_DIM],
     WT_TYPE graph_pred_bias[NUM_TASK],
@@ -24,6 +25,7 @@ void finalize(
 #pragma HLS DATAFLOW
 
     hls::stream<ne_out_t> h_graph;
+#pragma HLS STREAM variable=h_graph depth=ceildiv(EMB_DIM, APPLY_PARALLEL)
 
     post_mp_then_global_mean_pooling(h_node, message, h_graph, num_of_nodes);
     linear_input_stationary<EMB_DIM, NUM_TASK, APPLY_PARALLEL, false>(

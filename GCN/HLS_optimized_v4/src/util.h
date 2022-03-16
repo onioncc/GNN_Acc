@@ -1,6 +1,8 @@
 #ifndef __UTIL_H__
 #define __UTIL_H__
 
+#include "hls_math.h"
+
 template <typename T>
 static constexpr T ceildiv(T dividend, T divisor)
 {

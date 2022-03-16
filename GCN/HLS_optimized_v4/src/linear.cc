@@ -1,5 +1,4 @@
 #include "linear.h"
-#include "hls_math.h"
 
 using std::array;
 

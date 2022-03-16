@@ -6,7 +6,8 @@
 
 void message_passing_pe(
     int pe_id,
-    hls::stream<mp_in_t> embeddings_per_node[NODE_PARALLEL],
+    hls::stream<mp_in_t> node_embeddings[NODE_PARALLEL],
+    hls::stream<mp_in_t>& edge_embeddings,
     FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
