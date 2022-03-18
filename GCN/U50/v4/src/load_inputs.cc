@@ -23,6 +23,7 @@ void load_weights(
     {
         load_layer_weights_dim: for (int dim = 0; dim < EMB_DIM; dim++)
         {
+#pragma HLS PIPELINE II=6
             convs_bias[l][dim] = convs_bias_in[l][dim];
             convs_root_emb_weight[l][dim] = convs_root_emb_weight_in[l][dim];
             bn_weight[l][dim] = bn_weight_in[l][dim];
