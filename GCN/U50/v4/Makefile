@@ -81,7 +81,7 @@ SDCARD := sd_card
 
 include $(XF_PROJ_ROOT)/../common/includes/opencl/opencl.mk
 CXXFLAGS += $(opencl_CXXFLAGS) -Wall -O0 -g -std=c++1y
-LDFLAGS += $(opencl_LDFLAGS)
+LDFLAGS += $(opencl_LDFLAGS) -Wl,--no-as-needed
 
 ifeq ($(findstring nodma, $(DEVICE)), nodma)
 $(error [ERROR]: This example is not supported for $(DEVICE).)
@@ -96,7 +96,7 @@ HOST_SRCS += ./src/load_weights_graph.cc
 
 # Host compiler global settings
 CXXFLAGS += -fmessage-length=0 -Wno-int-in-bool-context -Wno-unused-result -Wno-unused-variable -Wno-unknown-pragmas
-LDFLAGS += -lrt -lstdc++ 
+LDFLAGS += -lrt -lstdc++
 
 ifneq ($(HOST_ARCH), x86)
 	LDFLAGS += --sysroot=$(SYSROOT)
@@ -135,9 +135,9 @@ build: check-vitis $(BINARY_CONTAINERS)
 xclbin: build
 
 ############################## Setting Rules for Binary Containers (Building Kernels) ##############################
-$(TEMP_DIR)/GCN_compute_graphs.xo: src/conv_layer.cc src/finalize.cc src/GCN_compute.cc src/globals.cc src/linear.cc src/load_inputs.cc src/message_passing.cc src/node_embedding.cc
+$(TEMP_DIR)/GCN_compute_graphs.xo: src/GCN_compute.cc src/conv_layer.cc src/finalize.cc src/globals.cc src/linear.cc src/load_inputs.cc src/message_passing.cc src/node_embedding.cc
 	mkdir -p $(TEMP_DIR)
-	$(VPP) $(VPP_FLAGS) -c -k GCN_compute_graphs --temp_dir $(TEMP_DIR)  -I'$(<D)' -o'$@' '$^'
+	$(VPP) $(VPP_FLAGS) -c -k GCN_compute_graphs --temp_dir $(TEMP_DIR)  -I'$(<D)' -o'$@' $^
 $(BUILD_DIR)/GCN_compute_graphs.xclbin: $(BINARY_CONTAINER_OBJS)
 	mkdir -p $(BUILD_DIR)
 ifeq ($(HOST_ARCH), x86)
