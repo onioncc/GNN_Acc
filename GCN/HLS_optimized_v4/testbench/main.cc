@@ -2,12 +2,18 @@
 #include <stdlib.h>
 #include "testbench.h"
 
+// static const char* GRAPH_NAME_FORMAT = "g%d";
+// static const char* GRAPH_INFO_FORMAT = "g%d_info.txt";
 static const char* GRAPH_NAME_FORMAT = "../../graphs/graph_bin/g%d";
 static const char* GRAPH_INFO_FORMAT = "../../graphs/graph_info/g%d_info.txt";
 
+static node_feature_t node_feature[MAX_NODE * NUM_GRAPHS];
+static edge_t edge_list[MAX_EDGE * NUM_GRAPHS];
+static edge_attr_t edge_attr[MAX_EDGE * NUM_GRAPHS];
+
 int main()
 {
-    printf("\n******* This is the golden C file for DGN model *******\n");
+    printf("\n******* This is the C testbench for DGN model *******\n");
 
     load_weights();
 
@@ -36,9 +42,6 @@ int main()
         total_edges += num_of_edges;
     }
 
-    node_feature_t* node_feature = (node_feature_t*)malloc(total_nodes * sizeof(node_feature_t));
-    edge_t* edge_list = (edge_t*)malloc(total_edges * sizeof(edge_t));
-    edge_attr_t* edge_attr = (edge_attr_t*)malloc(total_edges * sizeof(edge_attr_t));
     int nodes_offset = 0;
     int edges_offset = 0;
 
@@ -84,11 +87,8 @@ int main()
         &graph_pred_linear_weight_fixed,
         &graph_pred_linear_bias_fixed
     );
-    free(node_feature);
-    free(edge_list);
-    free(edge_attr);
 
-    FILE* c_output = fopen("Golden_C_output.txt", "w+");
+    FILE* c_output = fopen("C_sim_output.txt", "w+");
     for (int g = 1; g <= NUM_GRAPHS; g++) {
         int num_of_nodes = nums_of_nodes[g - 1];
         int num_of_edges = nums_of_edges[g - 1];

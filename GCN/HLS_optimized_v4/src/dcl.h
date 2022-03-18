@@ -1,6 +1,10 @@
 #ifndef __DCL_H__
 #define __DCL_H__
 
+// https://support.xilinx.com/s/question/0D52E00006iHkfp/vivado-20153-hls-bug-gmph?language=en_US
+#include <gmp.h>
+#define __gmp_const const
+
 #include "util.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -51,8 +55,8 @@ constexpr int ANALYSIS_MAX_EDGES = 40;
 // #endregion
 
 // #region Data Types
-typedef ap_fixed<16, 3> FM_TYPE;
-typedef ap_fixed<16, 3> WT_TYPE;
+typedef ap_fixed<16, 6> FM_TYPE;
+typedef ap_fixed<16, 6> WT_TYPE;
 
 typedef std::array<FM_TYPE, APPLY_PARALLEL> ne_out_t;
 typedef std::array<FM_TYPE, SCATTER_PARALLEL> mp_in_t;
@@ -103,7 +107,7 @@ extern WT_TYPE bn_bias[NUM_LAYERS][100];
 extern WT_TYPE bn_mean[NUM_LAYERS][100];
 extern WT_TYPE bn_sqrt_var[NUM_LAYERS][100];
 
-extern WT_TYPE edge_embedding_weight[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
+extern WT_TYPE edge_embedding_weights[EDGE_PARALLEL][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
 extern WT_TYPE graph_pred_weights[NUM_TASK][EMB_DIM];
 extern WT_TYPE graph_pred_bias[NUM_TASK];
 

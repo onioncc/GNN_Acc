@@ -12,7 +12,7 @@ LDLIBS += -L"${AUTOPILOT_ROOT}/lnx64/lib/csim" -lhlsmc++-GCC46 -Wl,-rpath,"${AUT
 
 all: result
 
-result: src/GCN_compute.o src/conv_layer.o src/edge_embedding.o src/finalize.o src/globals.o src/linear.o src/load_inputs.o src/message_passing.o src/node_embedding.o testbench/main.o testbench/load.o
+result: src/GCN_compute.o src/conv_layer.o src/finalize.o src/globals.o src/linear.o src/load_inputs.o src/message_passing.o src/node_embedding.o testbench/main.o testbench/load.o
 	$(CC) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 clean:

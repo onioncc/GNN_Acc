@@ -1,5 +1,4 @@
 #include "conv_layer.h"
-#include "edge_embedding.h"
 #include "node_embedding.h"
 #include "message_passing.h"
 #include "load_inputs.h"
@@ -54,19 +53,14 @@ void message_passing_all_pes(
 
     hls::stream<mp_in_t> node_embeddings[EDGE_PARALLEL][NODE_PARALLEL];
 #pragma HLS STREAM variable=node_embeddings depth=40
-    hls::stream<mp_in_t> edge_embeddings[EDGE_PARALLEL];
-#pragma HLS STREAM variable=edge_embeddings depth=40
 
     ne_to_mp_adapter(ne_out, node_embeddings, num_of_nodes);
-    edge_embedding_multi_pe(edge_embeddings, layer_num);
-
     for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
     {
 #pragma HLS UNROLL
         message_passing_pe(
             pe_id,
             node_embeddings[pe_id],
-            edge_embeddings[pe_id],
             message[pe_id],
             layer_num,
             num_of_nodes

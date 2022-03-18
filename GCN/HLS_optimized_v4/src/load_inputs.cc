@@ -21,16 +21,22 @@ void load_weights(
 
     load_layer_weights: for (int l = 0; l < NUM_LAYERS; l++)
     {
-        load_layer_weights_dim_out: for (int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+        load_layer_weights_dim: for (int dim = 0; dim < EMB_DIM; dim++)
         {
-            convs_bias[l][dim_out] = convs_bias_in[l][dim_out];
-            convs_root_emb_weight[l][dim_out] = convs_root_emb_weight_in[l][dim_out];
-            bn_weight[l][dim_out] = bn_weight_in[l][dim_out];
-            bn_bias[l][dim_out] = bn_bias_in[l][dim_out];
-            bn_mean[l][dim_out] = bn_mean_in[l][dim_out];
-            bn_sqrt_var[l][dim_out] = hls::sqrt(bn_var_in[l][dim_out] + ap_fixed_epsilon<WT_TYPE>());
+            convs_bias[l][dim] = convs_bias_in[l][dim];
+            convs_root_emb_weight[l][dim] = convs_root_emb_weight_in[l][dim];
+            bn_weight[l][dim] = bn_weight_in[l][dim];
+            bn_bias[l][dim] = bn_bias_in[l][dim];
+            bn_mean[l][dim] = bn_mean_in[l][dim];
+            bn_sqrt_var[l][dim] = hls::sqrt(bn_var_in[l][dim] + ap_fixed_epsilon<WT_TYPE>());
+        }
+    }
 
-            load_layer_weights_dim_in: for (int dim_in = 0; dim_in < EMB_DIM; dim_in++)
+    load_conv_weights: for (int l = 0; l < NUM_LAYERS; l++)
+    {
+        load_conv_weights_dim_out: for (int dim_out = 0; dim_out < EMB_DIM; dim_out++)
+        {
+            load_conv_weights_dim_in: for (int dim_in = 0; dim_in < EMB_DIM; dim_in++)
             {
                 convs_weight[l][dim_out][dim_in] = convs_weight_in[l][dim_out][dim_in];
             }
@@ -43,7 +49,12 @@ void load_weights(
         {
             load_edge_emb_weights_dim: for (int dim = 0; dim < EMB_DIM; dim++)
             {
-                edge_embedding_weight[l][i][dim] = edge_embedding_weight_in[l][i][dim];
+                WT_TYPE tmp = edge_embedding_weight_in[l][i][dim];
+                for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+                {
+#pragma HLS UNROLL
+                    edge_embedding_weights[pe_id][l][i][dim] = tmp;
+                }
             }
         }
     }

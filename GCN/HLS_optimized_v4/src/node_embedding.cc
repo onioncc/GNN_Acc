@@ -25,6 +25,7 @@ void node_embedding_multi_pe(
 )
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=degree_table cyclic factor=NODE_PARALLEL dim=1
 #pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=NODE_PARALLEL dim=1
 #pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=APPLY_PARALLEL dim=2
 
@@ -102,6 +103,11 @@ static void accumulate(
 #pragma HLS ARRAY_PARTITION variable=convs_weight complete dim=2
 #pragma HLS ARRAY_PARTITION variable=convs_weight cyclic factor=APPLY_PARALLEL dim=3
 #pragma HLS ARRAY_PARTITION variable=convs_bias complete dim=2
+#pragma HLS ARRAY_PARTITION variable=bn_sqrt_var cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=bn_weight cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=bn_mean cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=bn_bias cyclic factor=APPLY_PARALLEL dim=2
+#pragma HLS ARRAY_PARTITION variable=convs_root_emb_weight cyclic factor=APPLY_PARALLEL dim=2
 
     for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
     {

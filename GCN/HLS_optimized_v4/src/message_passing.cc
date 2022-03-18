@@ -1,5 +1,7 @@
 #include "message_passing.h"
 
+static const int ed_feature_offsets[ED_FEATURE_PER_LAYER] = {0, 5, 11};
+
 // #region Internal Function Declarations
 static void filter(
     int pe_id,
@@ -18,7 +20,6 @@ static void scatter(
     int pe_id,
     int layer_num,
     hls::stream<mp_in_t>& node_embeddings_per_edge,
-    hls::stream<mp_in_t>& edge_embeddings,
     FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM]
 );
 // #endregion
@@ -26,7 +27,6 @@ static void scatter(
 void message_passing_pe(
     int pe_id,
     hls::stream<mp_in_t> node_embeddings[NODE_PARALLEL],
-    hls::stream<mp_in_t>& edge_embeddings,
     FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
@@ -44,7 +44,7 @@ void message_passing_pe(
 
     filter(pe_id, node_embeddings, degrees, filtered_embeddings_per_node, num_of_nodes);
     duplicate(pe_id, degrees, filtered_embeddings_per_node, node_embeddings_per_edge);
-    scatter(pe_id, layer_num, node_embeddings_per_edge, edge_embeddings, message);
+    scatter(pe_id, layer_num, node_embeddings_per_edge, message);
 }
 
 static void filter(
@@ -96,7 +96,7 @@ static void duplicate(
     for (int e = 0; e < num_of_edges; e++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=0 max=ANALYSIS_MAX_EDGES avg=ceildiv(ANALYSIS_AVG_EDGES, EDGE_PARALLEL)
-        for (int dim_base = 0, i = 0; dim_base < EMB_DIM; dim_base += SCATTER_PARALLEL, i++)
+        for (int i = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++)
         {
             if (e >= e_end)
             {
@@ -125,16 +125,17 @@ static void scatter(
     int pe_id,
     int layer_num,
     hls::stream<mp_in_t>& node_embeddings_per_edge,
-    hls::stream<mp_in_t>& edge_embeddings,
     FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM]
 )
 {
 #pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=ed_feature_offsets complete dim=1
+#pragma HLS ARRAY_PARTITION variable=edge_embedding_weights complete dim=1
+#pragma HLS ARRAY_PARTITION variable=edge_embedding_weights cyclic factor=SCATTER_PARALLEL dim=4
+#pragma HLS BIND_STORAGE variable=edge_embedding_weights type=ram_1wnr
 
     mp_in_t node_embedding;
 #pragma HLS AGGREGATE variable=node_embedding
-    mp_in_t edge_embedding;
-#pragma HLS AGGREGATE variable=edge_embedding
     int num_of_edges = num_of_edges_per_pe[pe_id];
 
     for (int e = 0; e < num_of_edges; e++)
@@ -145,8 +146,8 @@ static void scatter(
         {
             int v = neighbor_tables[pe_id][e];
             WT_TYPE norm = norms[pe_id][e];
+            edge_attr_t attrs = edge_attrs[pe_id][e];
             node_embeddings_per_edge >> node_embedding;
-            edge_embeddings >> edge_embedding;
 
             for (int dim_offset = 0; dim_offset < SCATTER_PARALLEL; dim_offset++)
             {
@@ -154,7 +155,15 @@ static void scatter(
                 int dim = dim_base + dim_offset;
                 if (dim < EMB_DIM)
                 {
-                    FM_TYPE total_embed = node_embedding[dim_offset] + edge_embedding[dim_offset];
+                    FM_TYPE edge_embed = 0;
+                    edge_embed_loop: for (int ef = 0; ef < EDGE_ATTR; ef++)
+                    {
+#pragma HLS UNROLL
+                        int e_ef = ed_feature_offsets[ef] + attrs[ef];
+                        edge_embed += edge_embedding_weights[pe_id][layer_num][e_ef][dim];
+                    }
+
+                    FM_TYPE total_embed = edge_embed + node_embedding[dim_offset];
                     message[v][dim] += norm * ap_fixed_relu(total_embed);
                 }
             }

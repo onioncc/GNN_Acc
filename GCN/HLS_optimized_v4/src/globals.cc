@@ -9,7 +9,7 @@ WT_TYPE bn_bias[NUM_LAYERS][100];
 WT_TYPE bn_mean[NUM_LAYERS][100];
 WT_TYPE bn_sqrt_var[NUM_LAYERS][100];
 
-WT_TYPE edge_embedding_weight[NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
+WT_TYPE edge_embedding_weights[EDGE_PARALLEL][NUM_LAYERS][ED_FEATURE_PER_LAYER][EMB_DIM];
 WT_TYPE graph_pred_weights[NUM_TASK][EMB_DIM];
 WT_TYPE graph_pred_bias[NUM_TASK];
 
