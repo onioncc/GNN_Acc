@@ -1,0 +1,123 @@
+<ENTRY>
+{
+ "thisFile": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.xclbin.package_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Fri Mar 18 07:00:17 2022",
+ "timestampMillis": "1647601217950",
+ "buildStep": {
+  "cmdId": "130d3eaa-b20e-4d81-9f8f-712ee8c0ccd4",
+  "name": "v++",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4/_x/package/package.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -p ./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.link.xclbin -t hw --platform xilinx_u50_gen3x16_xdma_201920_3 --package.out_dir ./package.hw -o ./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.xclbin ",
+  "args": [
+   "-p",
+   "./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.link.xclbin",
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--package.out_dir",
+   "./package.hw",
+   "-o",
+   "./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Fri Mar 18 07:00:17 2022",
+ "timestampMillis": "1647601217951",
+ "status": {
+  "cmdId": "130d3eaa-b20e-4d81-9f8f-712ee8c0ccd4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Fri Mar 18 07:00:25 2022",
+ "timestampMillis": "1647601225195",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_PACKAGE",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GCN_compute_graphs",
+    "file": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [],
+  "toolVersion": "Vitis V++ Compiler Release 2021.1.1. SW Build 3278995 on 2021-07-20-20:33:48",
+  "inputBinaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GCN_compute_graphs.link",
+    "file": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GCN_compute_graphs.link.xclbin",
+    "reports": [],
+    "uuid": "22c133d7-c90d-474e-81a5-bc2df21232a0"
+   },
+   "kernels": []
+  }
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Fri Mar 18 07:00:26 2022",
+ "timestampMillis": "1647601226250",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4/_x/reports/package/v++_package_GCN_compute_graphs_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Fri Mar 18 07:00:26 2022",
+ "timestampMillis": "1647601226252",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GCN/U50/v4/_x/v++_package_GCN_compute_graphs_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Fri Mar 18 07:00:26 2022",
+ "timestampMillis": "1647601226256",
+ "status": {
+  "cmdId": "130d3eaa-b20e-4d81-9f8f-712ee8c0ccd4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>

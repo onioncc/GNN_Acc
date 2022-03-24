@@ -209,10 +209,13 @@ int main(int argc, char **argv) {
     krnl_DGN_compute_graphs.setArg(idx++, MLP_layer_FC_layers_2_weight_in_buf);
     krnl_DGN_compute_graphs.setArg(idx++, MLP_layer_FC_layers_2_bias_in_buf);
 
-    printf("Computing DGN ...\n");
-    OCL_CHECK(err, err = q.enqueueTask(krnl_DGN_compute_graphs));
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST));
-    OCL_CHECK(err, err = q.finish());
+    for (int i = 0; i < NUM_TRIALS; i++)
+    {
+        printf("(%d/%d) Computing DGN ...\n", i + 1, NUM_TRIALS);
+        OCL_CHECK(err, err = q.enqueueTask(krnl_DGN_compute_graphs));
+        OCL_CHECK(err, err = q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST));
+        OCL_CHECK(err, err = q.finish());
+    }
 
     FILE* c_output = fopen("HLS_output.txt", "w+");
     for (int g = 1; g <= NUM_GRAPHS; g++) {
