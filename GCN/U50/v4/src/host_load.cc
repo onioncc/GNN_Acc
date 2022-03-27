@@ -1,11 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "dcl.h"
-#include "xcl2.hpp"
+#include "host.h"
 
 int nd_feature_table[ND_FEATURE] = {119, 4, 12, 12, 10, 6, 6, 2, 2};
 int ed_feature_table[EDGE_ATTR] = {5, 6, 2};
-
 
 float node_embedding_weight_float[ND_FEATURE_TOTAL][EMB_DIM];
 float edge_embedding_weight_float[NUM_LAYERS * ED_FEATURE_PER_LAYER][EMB_DIM];
@@ -24,36 +22,6 @@ float bn_var_float[NUM_LAYERS][EMB_DIM];
 
 float graph_pred_linear_weight_float[NUM_TASK][EMB_DIM];
 float graph_pred_linear_bias_float[NUM_TASK];
-
-
-// WT_TYPE node_embedding_weight_fixed[ND_FEATURE_TOTAL][EMB_DIM];
-// WT_TYPE edge_embedding_weight_fixed[NUM_LAYERS * ED_FEATURE_PER_LAYER][EMB_DIM];
-
-// WT_TYPE convs_weight_fixed[NUM_LAYERS][EMB_DIM][EMB_DIM];
-// WT_TYPE convs_bias_fixed[NUM_LAYERS][EMB_DIM];
-// WT_TYPE convs_root_emb_weight_fixed[NUM_LAYERS][EMB_DIM];
-
-// WT_TYPE bn_weight_fixed[NUM_LAYERS][EMB_DIM];
-// WT_TYPE bn_bias_fixed[NUM_LAYERS][EMB_DIM];
-// WT_TYPE bn_mean_fixed[NUM_LAYERS][EMB_DIM];
-// WT_TYPE bn_var_fixed[NUM_LAYERS][EMB_DIM];
-
-// WT_TYPE graph_pred_linear_weight_fixed[NUM_TASK][EMB_DIM];
-// WT_TYPE graph_pred_linear_bias_fixed[NUM_TASK];
-
-
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> node_embedding_weight_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> edge_embedding_weight_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> convs_weight_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> convs_bias_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> convs_root_emb_weight_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_weight_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_bias_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_mean_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_var_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> graph_pred_linear_weight_fixed;
-extern std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> graph_pred_linear_bias_fixed;
-
 
 void load_weights()
 {
@@ -277,48 +245,47 @@ void load_weights()
 
 
 
-void fetch_one_graph(char* graph_name, std::vector<int, aligned_allocator<int>>* node_feature, std::vector<int, aligned_allocator<int>>* edge_list, std::vector<int, aligned_allocator<int>>* edge_attr, int num_of_nodes, int num_of_edges)
+
+void fetch_one_graph(
+    int g,
+    char* graph_name,
+    aligned_vector<node_feature_t>& node_feature,
+    aligned_vector<edge_t>& edge_list,
+    aligned_vector<edge_attr_t>& edge_attr,
+    int num_of_nodes,
+    int num_of_edges
+)
 {
-    printf("Loading graph ...\n");
-        
+    printf("(%d/%d) Loading graph %s ...\n", g, NUM_GRAPHS, graph_name);
+
     FILE* f;
 
-	char f_node_feature[128];
-	char f_edge_list[128];
-	char f_edge_attr[128];
+    char f_node_feature[128];
+    char f_edge_list[128];
+    char f_edge_attr[128];
 
-	sprintf(f_node_feature, "%s_node_feature.bin", graph_name);
-	sprintf(f_edge_list, "%s_edge_list.bin", graph_name);
-	sprintf(f_edge_attr, "%s_edge_attr.bin", graph_name);
-	
-	int node_feature_in[ND_FEATURE * MAX_NODE];
-	int edge_list_in[2 * MAX_EDGE];
-    int edge_attr_in[EDGE_ATTR * MAX_EDGE];
-        
+    sprintf(f_node_feature, "%s_node_feature.bin", graph_name);
+    sprintf(f_edge_list, "%s_edge_list.bin", graph_name);
+    sprintf(f_edge_attr, "%s_edge_attr.bin", graph_name);
 
-    f = fopen(f_node_feature, "r");
-	fread(node_feature_in, sizeof(int), num_of_nodes * ND_FEATURE, f);
+    f = fopen(f_node_feature, "rb");
+    size_t node_feature_start = node_feature.size();
+    node_feature.resize(node_feature_start + num_of_nodes);
+    node_feature_t* node_feature_ptr = &node_feature.data()[node_feature_start];
+    fread(node_feature_ptr, sizeof(node_feature_t), num_of_nodes, f);
     fclose(f);
 
-    f = fopen(f_edge_list, "r");
-    fread(edge_list_in, sizeof(int), 2 * num_of_edges, f);
+    f = fopen(f_edge_list, "rb");
+    size_t edge_list_start = edge_list.size();
+    edge_list.resize(edge_list_start + num_of_edges);
+    edge_t* edge_list_ptr = &edge_list.data()[edge_list_start];
+    fread(edge_list_ptr, sizeof(edge_t), num_of_edges, f);
     fclose(f);
 
-    f = fopen(f_edge_attr, "r");
-    fread(edge_attr_in, sizeof(int), EDGE_ATTR * num_of_edges, f);
+    f = fopen(f_edge_attr, "rb");
+    size_t edge_attr_start = edge_attr.size();
+    edge_attr.resize(edge_attr_start + num_of_edges);
+    edge_attr_t* edge_attr_ptr = &edge_attr.data()[edge_attr_start];
+    fread(edge_attr_ptr, sizeof(edge_attr_t), num_of_edges, f);
     fclose(f);
-
-	for(int i = 0; i < num_of_nodes * ND_FEATURE; i++) {
-		(*node_feature)[i] = node_feature_in[i];
-	}
-
-	for(int i = 0; i < 2 * num_of_edges; i++) {
-		(*edge_list)[i] = edge_list_in[i];
-	}
-
-	for(int i = 0; i < num_of_edges * EDGE_ATTR; i++) {
-		(*edge_attr)[i] = edge_attr_in[i];
-	}
-
-
 }

@@ -92,7 +92,7 @@ endif
 CXXFLAGS += -I$(XF_PROJ_ROOT)/../common/includes/xcl2
 HOST_SRCS += $(XF_PROJ_ROOT)/../common/includes/xcl2/xcl2.cpp
 HOST_SRCS += ./src/host.cc
-HOST_SRCS += ./src/load_weights_graph.cc
+HOST_SRCS += ./src/host_load.cc
 
 # Host compiler global settings
 CXXFLAGS += -fmessage-length=0 -Wno-int-in-bool-context -Wno-unused-result -Wno-unused-variable -Wno-unknown-pragmas

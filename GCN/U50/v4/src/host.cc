@@ -1,21 +1,20 @@
-#include "dcl.h"
+#include "host.h"
 #include "xcl2.hpp"
 
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> node_embedding_weight_fixed(ND_FEATURE_TOTAL * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> edge_embedding_weight_fixed(NUM_LAYERS * ED_FEATURE_PER_LAYER * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> convs_weight_fixed(NUM_LAYERS * EMB_DIM * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> convs_bias_fixed(NUM_LAYERS * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> convs_root_emb_weight_fixed(NUM_LAYERS * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_weight_fixed(NUM_LAYERS * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_bias_fixed(NUM_LAYERS * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_mean_fixed(NUM_LAYERS * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> bn_var_fixed(NUM_LAYERS * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> graph_pred_linear_weight_fixed(NUM_TASK * EMB_DIM);
-std::vector<WT_TYPE, aligned_allocator<WT_TYPE>> graph_pred_linear_bias_fixed(NUM_TASK);
+aligned_vector<WT_TYPE> node_embedding_weight_fixed(ND_FEATURE_TOTAL * EMB_DIM);
+aligned_vector<WT_TYPE> edge_embedding_weight_fixed(NUM_LAYERS * ED_FEATURE_PER_LAYER * EMB_DIM);
+aligned_vector<WT_TYPE> convs_weight_fixed(NUM_LAYERS * EMB_DIM * EMB_DIM);
+aligned_vector<WT_TYPE> convs_bias_fixed(NUM_LAYERS * EMB_DIM);
+aligned_vector<WT_TYPE> convs_root_emb_weight_fixed(NUM_LAYERS * EMB_DIM);
+aligned_vector<WT_TYPE> bn_weight_fixed(NUM_LAYERS * EMB_DIM);
+aligned_vector<WT_TYPE> bn_bias_fixed(NUM_LAYERS * EMB_DIM);
+aligned_vector<WT_TYPE> bn_mean_fixed(NUM_LAYERS * EMB_DIM);
+aligned_vector<WT_TYPE> bn_var_fixed(NUM_LAYERS * EMB_DIM);
+aligned_vector<WT_TYPE> graph_pred_linear_weight_fixed(NUM_TASK * EMB_DIM);
+aligned_vector<WT_TYPE> graph_pred_linear_bias_fixed(NUM_TASK);
 
-void GCN_compute_one_graph();
-void load_weights();
-void fetch_one_graph(char* graph_name, std::vector<int, aligned_allocator<int>>* node_feature, std::vector<int, aligned_allocator<int>>* edge_list, std::vector<int, aligned_allocator<int>>* edge_attr, int num_of_nodes, int num_of_edges);
+static const char* GRAPH_INFO_FORMAT = "../../../graphs/graph_info/g%d_info.txt";
+static const char* GRAPH_NAME_FORMAT = "../../../graphs/graph_bin/g%d";
 
 int main(int argc, char **argv) {
     if (argc != 2) {
@@ -26,7 +25,7 @@ int main(int argc, char **argv) {
     std::string binaryFile = argv[1];
     cl_int err;
     cl::Context context;
-    cl::Kernel krnl_GCN_compute_one_graph;
+    cl::Kernel krnl_GCN_compute_graphs;
     cl::CommandQueue q;
     
     auto devices = xcl::get_xil_devices();
@@ -48,7 +47,7 @@ int main(int argc, char **argv) {
                       << "] with xclbin file!\n";
         } else {
             std::cout << "Device[" << i << "]: program successful!\n";
-            OCL_CHECK(err, krnl_GCN_compute_one_graph = cl::Kernel(program, "GCN_compute_one_graph", &err));
+            OCL_CHECK(err, krnl_GCN_compute_graphs = cl::Kernel(program, "GCN_compute_graphs", &err));
             valid_device = true;
             break; // we break because we found a valid device
         }
@@ -64,175 +63,188 @@ int main(int argc, char **argv) {
     load_weights();
     printf("\n******* Weights loading done *******\n");
 
-    cl::Buffer node_embedding_weight_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                ND_FEATURE_TOTAL * EMB_DIM * sizeof(WT_TYPE),
-                                                node_embedding_weight_fixed.data(),
-                                                &err);
+    OCL_CHECK(err, cl::Buffer node_embedding_weight_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        ND_FEATURE_TOTAL * EMB_DIM * sizeof(WT_TYPE),
+        node_embedding_weight_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer edge_embedding_weight_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * ED_FEATURE_PER_LAYER * EMB_DIM * sizeof(WT_TYPE),
+        edge_embedding_weight_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer convs_weight_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * EMB_DIM * sizeof(WT_TYPE),
+        convs_weight_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer convs_bias_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
+        convs_bias_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer convs_root_emb_weight_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
+        convs_root_emb_weight_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer bn_weight_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
+        bn_weight_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer bn_bias_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
+        bn_bias_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer bn_mean_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
+        bn_mean_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer bn_var_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
+        bn_var_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer graph_pred_linear_weight_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_TASK * EMB_DIM * sizeof(WT_TYPE),
+        graph_pred_linear_weight_fixed.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer graph_pred_linear_bias_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_TASK * sizeof(WT_TYPE),
+        graph_pred_linear_bias_fixed.data(),
+        &err));
 
-    cl::Buffer edge_embedding_weight_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * ED_FEATURE_PER_LAYER * EMB_DIM * sizeof(WT_TYPE),
-                                                edge_embedding_weight_fixed.data(),
-                                                &err);
+    int num_of_graphs = NUM_GRAPHS;
+    aligned_vector<int> nums_of_nodes(NUM_GRAPHS);
+    aligned_vector<int> nums_of_edges(NUM_GRAPHS);
+    aligned_vector<int> reload_weights(NUM_GRAPHS);
+    aligned_vector<FM_TYPE> result(NUM_GRAPHS);
+    aligned_vector<node_feature_t> node_feature;
+    aligned_vector<edge_t> edge_list;
+    aligned_vector<edge_attr_t> edge_attr;
 
-    cl::Buffer convs_weight_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * EMB_DIM * sizeof(WT_TYPE),
-                                                convs_weight_fixed.data(),
-                                                &err);
-
-    cl::Buffer convs_bias_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
-                                                convs_bias_fixed.data(),
-                                                &err);
-
-    cl::Buffer convs_root_emb_weight_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
-                                                convs_root_emb_weight_fixed.data(),
-                                                &err);
-
-    cl::Buffer bn_weight_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
-                                                bn_weight_fixed.data(),
-                                                &err);
-
-    cl::Buffer bn_bias_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
-                                                bn_bias_fixed.data(),
-                                                &err);
-
-    cl::Buffer bn_mean_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
-                                                bn_mean_fixed.data(),
-                                                &err);
-
-    cl::Buffer bn_var_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_LAYERS * EMB_DIM * sizeof(WT_TYPE),
-                                                bn_var_fixed.data(),
-                                                &err);
-
-    cl::Buffer graph_pred_linear_weight_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_TASK * EMB_DIM * sizeof(WT_TYPE),
-                                                graph_pred_linear_weight_fixed.data(),
-                                                &err);
-
-    cl::Buffer graph_pred_linear_bias_fixed_in( context,
-                                                CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                                NUM_TASK * sizeof(WT_TYPE),
-                                                graph_pred_linear_bias_fixed.data(),
-                                                &err);
-
-
-    int idx = 5;
-    krnl_GCN_compute_one_graph.setArg(idx++, convs_weight_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, convs_bias_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, convs_root_emb_weight_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, bn_weight_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, bn_bias_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, bn_mean_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, bn_var_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, node_embedding_weight_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, edge_embedding_weight_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, graph_pred_linear_weight_fixed_in);
-    krnl_GCN_compute_one_graph.setArg(idx++, graph_pred_linear_bias_fixed_in);
-    
-
-    float all_results[4113];
-    FILE* c_output = fopen("HLS_output.txt", "w+");
-    int is_first = 1;
-    for(int g = 1; g <= 4112; g++ ) {
+    for (int g = 1; g <= NUM_GRAPHS; g++)
+    {
         char graph_name[128];
         char info_file[128];
         int num_of_nodes;
         int num_of_edges;
 
-	sprintf(info_file, "../../../../graph_info/g%d_info.txt", g);
-	sprintf(graph_name, "../../../../graph_bin/g%d", g);
-	
-	//sprintf(info_file, "gtest_info.txt");
-	//sprintf(graph_name, "gtest");
-	
-	//sprintf(info_file, "/nethome/chao33/test_graphs/random_graphs/g_rand_%d_info.txt", g);
-	//sprintf(graph_name, "/nethome/chao33/test_graphs/random_graphs/g_rand_%d", g);
+        sprintf(info_file, GRAPH_INFO_FORMAT, g);
+        sprintf(graph_name, GRAPH_NAME_FORMAT, g);
 
         FILE* f_info = fopen(info_file, "r");
-        fscanf (f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
-	fclose(f_info);
+        fscanf(f_info, "%d\n%d", &num_of_nodes, &num_of_edges);
+        fclose(f_info);
 
-printf("********** Computing Graph %s *************\n", graph_name);
-printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
+        nums_of_nodes[g - 1] = num_of_nodes;
+        nums_of_edges[g - 1] = num_of_edges;
+        reload_weights[g - 1] = g == 1;
 
-        std::vector<int, aligned_allocator<int>> node_feature(ND_FEATURE * MAX_NODE);
-        std::vector<int, aligned_allocator<int>> edge_list(2 * MAX_EDGE);
-        std::vector<int, aligned_allocator<int>> edge_attr(EDGE_ATTR * MAX_EDGE);
-        std::vector<int, aligned_allocator<int>> graph_attr(3);
-        std::vector<FM_TYPE, aligned_allocator<FM_TYPE>> task_out(NUM_TASK);
-
-        graph_attr[0] = num_of_nodes;
-        graph_attr[1] = num_of_edges;
-	graph_attr[2] = is_first;
-
-        fetch_one_graph(graph_name, &node_feature, &edge_list, &edge_attr, num_of_nodes, num_of_edges);
-
-
-        cl::Buffer node_feature_in( context,
-                                            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                            ND_FEATURE * MAX_NODE * sizeof(int),
-                                            node_feature.data(),
-                                            &err);
-
-        cl::Buffer edge_list_in( context,
-                                            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                            2 * MAX_EDGE * sizeof(int),
-                                            edge_list.data(),
-                                            &err);
-
-        cl::Buffer edge_attr_in( context,
-                                            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                            EDGE_ATTR * MAX_EDGE * sizeof(int),
-                                            edge_attr.data(),
-                                            &err);
-
-        cl::Buffer graph_attr_in( context,
-                                            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                            3 * sizeof(int),
-                                            graph_attr.data(),
-                                            &err);
-
-        cl::Buffer task_result( context,
-                                            CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
-                                            NUM_TASK * sizeof(WT_TYPE),
-                                            task_out.data(),
-                                            &err);
-
-        krnl_GCN_compute_one_graph.setArg(0, node_feature_in);
-        krnl_GCN_compute_one_graph.setArg(1, edge_list_in);
-        krnl_GCN_compute_one_graph.setArg(2, edge_attr_in);
-        krnl_GCN_compute_one_graph.setArg(3, graph_attr_in);
-        krnl_GCN_compute_one_graph.setArg(4, task_result);
-
-        OCL_CHECK(err, err = q.enqueueTask(krnl_GCN_compute_one_graph));
-        q.enqueueMigrateMemObjects({task_result}, CL_MIGRATE_MEM_OBJECT_HOST);
-        q.finish();
-
-        
-	printf("Final graph prediction:\n");
-        for(int tsk = 0; tsk < NUM_TASK; tsk++) {
-            printf("%.7f\n", task_out[tsk].to_float());
-        }
-        printf("GCN computation done.\n");
-
-	is_first = 0;
+        fetch_one_graph(g, graph_name, node_feature, edge_list, edge_attr, num_of_nodes, num_of_edges);
     }
 
-    
+    OCL_CHECK(err, cl::Buffer nums_of_nodes_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_GRAPHS * sizeof(int),
+        nums_of_nodes.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer nums_of_edges_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_GRAPHS * sizeof(int),
+        nums_of_edges.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer reload_weights_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        NUM_GRAPHS * sizeof(int),
+        reload_weights.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer result_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY,
+        NUM_GRAPHS * sizeof(FM_TYPE),
+        result.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer node_feature_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        node_feature.size() * sizeof(node_feature_t),
+        node_feature.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer edge_list_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        edge_list.size() * sizeof(edge_t),
+        edge_list.data(),
+        &err));
+    OCL_CHECK(err, cl::Buffer edge_attr_buf(
+        context,
+        CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY,
+        edge_attr.size() * sizeof(edge_attr_t),
+        edge_attr.data(),
+        &err));
+
+    int idx = 0;
+    krnl_GCN_compute_graphs.setArg(idx++, num_of_graphs);
+    krnl_GCN_compute_graphs.setArg(idx++, nums_of_nodes_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, nums_of_edges_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, reload_weights_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, result_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, node_feature_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, edge_list_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, edge_attr_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, node_embedding_weight_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, edge_embedding_weight_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, convs_weight_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, convs_bias_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, convs_root_emb_weight_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, bn_weight_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, bn_bias_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, bn_mean_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, bn_var_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, graph_pred_linear_weight_buf);
+    krnl_GCN_compute_graphs.setArg(idx++, graph_pred_linear_bias_buf);
+
+    for (int i = 0; i < NUM_TRIALS; i++)
+    {
+        printf("(%d/%d) Computing GCN ...\n", i + 1, NUM_TRIALS);
+        OCL_CHECK(err, err = q.enqueueTask(krnl_GCN_compute_graphs));
+        OCL_CHECK(err, err = q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST));
+        OCL_CHECK(err, err = q.finish());
+    }
+
+    FILE* c_output = fopen("HLS_output.txt", "w+");
+    for (int g = 1; g <= NUM_GRAPHS; g++) {
+        int num_of_nodes = nums_of_nodes[g - 1];
+        int num_of_edges = nums_of_edges[g - 1];
+        char graph_name[128];
+        sprintf(graph_name, GRAPH_NAME_FORMAT, g);
+
+        printf("********** Graph %s *************\n", graph_name);
+        printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
+        printf("%.8f\n", float(result[g - 1]));
+        fprintf(c_output, "g%d: %.8f\n", g, float(result[g - 1]));
+        printf("GCN computation done.\n");
+    }
+
     return 0;
 }
