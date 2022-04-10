@@ -6,7 +6,7 @@
 
 void node_embedding_multi_pe(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
 );

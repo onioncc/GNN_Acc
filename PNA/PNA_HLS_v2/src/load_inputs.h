@@ -27,12 +27,12 @@ void load_input_node_embeddings(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     node_feature_t* node_feature,
     WT_TYPE node_embedding_weight[ND_FEATURE_TOTAL][EMB_DIM],
-    FM_TYPE messages[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> messages[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int num_of_nodes
 );
 
 void reset_messages(
-    FM_TYPE messages[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> messages[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int num_of_nodes
 );
 

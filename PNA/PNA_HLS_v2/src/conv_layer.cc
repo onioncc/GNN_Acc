@@ -8,7 +8,7 @@
 // #region Internal Function Declarations
 void check_node_embedding(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     node_feature_t* node_feature_in,
     WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM],
     int i,
@@ -16,14 +16,14 @@ void check_node_embedding(
 );
 void check_message_passing(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_TYPE* result,
     int layer_num,
     int num_of_nodes
 );
 void message_passing_all_pes(
     hls::stream<ne_out_t> ne_out[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
 );
@@ -36,8 +36,8 @@ void ne_to_mp_adapter(
 
 void compute_CONV_layer(
     int layer_num,
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
-    FM_TYPE next_message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> next_message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     node_feature_t* node_feature_in,
     WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM],
     FM_TYPE* result,
@@ -47,13 +47,13 @@ void compute_CONV_layer(
 #pragma HLS INLINE off
 #pragma HLS DATAFLOW
 
-#pragma HLS ARRAY_PARTITION variable=message complete dim=3
-#pragma HLS ARRAY_PARTITION variable=message cyclic factor=SCATTER_PARALLEL dim=4
-#pragma HLS ARRAY_PARTITION variable=next_message complete dim=3
-#pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=4
+#pragma HLS ARRAY_PARTITION variable=message complete dim=1
+#pragma HLS ARRAY_PARTITION variable=message cyclic factor=SCATTER_PARALLEL dim=3
+#pragma HLS ARRAY_PARTITION variable=next_message complete dim=1
+#pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=3
 
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL];
-#pragma HLS STREAM variable=embeddings depth=200
+#pragma HLS STREAM variable=embeddings depth=(4 * ceildiv(EMB_DIM, APPLY_PARALLEL))
 
     check_node_embedding(embeddings, message, node_feature_in, node_embedding_weight_in, layer_num, num_of_nodes);
     check_message_passing(embeddings, next_message, result, layer_num, num_of_nodes);
@@ -61,7 +61,7 @@ void compute_CONV_layer(
 
 void check_node_embedding(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     node_feature_t* node_feature_in,
     WT_TYPE node_embedding_weight_in[ND_FEATURE_TOTAL][EMB_DIM],
     int i,
@@ -78,7 +78,7 @@ void check_node_embedding(
 
 void check_message_passing(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_TYPE* result,
     int layer_num,
     int num_of_nodes
@@ -105,7 +105,7 @@ void check_message_passing(
 
 void message_passing_all_pes(
     hls::stream<ne_out_t> ne_out[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
 )
@@ -114,7 +114,7 @@ void message_passing_all_pes(
 #pragma HLS DATAFLOW
 
     hls::stream<mp_in_t> mp_in[EDGE_PARALLEL][NODE_PARALLEL];
-#pragma HLS STREAM variable=mp_in depth=40
+#pragma HLS STREAM variable=mp_in depth=(20 * ceildiv(EMB_DIM, SCATTER_PARALLEL))
 
     ne_to_mp_adapter(ne_out, mp_in, num_of_nodes);
     for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)

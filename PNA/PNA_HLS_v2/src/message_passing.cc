@@ -8,24 +8,19 @@ static void filter(
     hls::stream<mp_in_t>& filtered_embeddings_per_node,
     int num_of_nodes
 );
-static void duplicate(
-    int pe_id,
-    hls::stream<int>& degrees,
-    hls::stream<mp_in_t>& embeddings_per_node,
-    hls::stream<mp_in_t>& node_embeddings_per_edge
-);
 static void scatter(
     int pe_id,
     int layer_num,
-    hls::stream<mp_in_t>& node_embeddings_per_edge,
-    FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM]
+    hls::stream<int>& degrees,
+    hls::stream<mp_in_t>& embeddings_per_node,
+    std::array<FM_TYPE, NUM_AGGRS> message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM]
 );
 // #endregion
 
 void message_passing_pe(
     int pe_id,
     hls::stream<mp_in_t> node_embeddings[NODE_PARALLEL],
-    FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
 )
@@ -37,12 +32,9 @@ void message_passing_pe(
 #pragma HLS STREAM variable=degrees depth=20
     hls::stream<mp_in_t> filtered_embeddings_per_node("filtered_embeddings_per_node");
 #pragma HLS STREAM variable=filtered_embeddings_per_node depth=(20 * ceildiv(EMB_DIM, SCATTER_PARALLEL))
-    hls::stream<mp_in_t> node_embeddings_per_edge("node_embeddings_per_edge");
-#pragma HLS STREAM variable=node_embeddings_per_edge depth=(20 * ceildiv(EMB_DIM, SCATTER_PARALLEL))
 
     filter(pe_id, node_embeddings, degrees, filtered_embeddings_per_node, num_of_nodes);
-    duplicate(pe_id, degrees, filtered_embeddings_per_node, node_embeddings_per_edge);
-    scatter(pe_id, layer_num, node_embeddings_per_edge, message);
+    scatter(pe_id, layer_num, degrees, filtered_embeddings_per_node, message);
 }
 
 static void filter(
@@ -57,34 +49,39 @@ static void filter(
 
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
-#pragma HLS PIPELINE II=ceildiv(EMB_DIM, SCATTER_PARALLEL)
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_NODES max=ANALYSIS_MAX_NODES avg=ANALYSIS_AVG_NODES
-        for (int dim_base = 0; dim_base < EMB_DIM; dim_base += SCATTER_PARALLEL)
+        for (int i = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++)
         {
-            int degree = out_degree_tables[pe_id][nd][0];
-            if (dim_base == 0 && degree != 0)
-            {
-                degrees << degree;
-            }
+#pragma HLS PIPELINE II=1
 
             mp_in_t embedding;
+#pragma HLS AGGREGATE variable=embedding
             unfiltered_embeddings_per_node[nd % NODE_PARALLEL] >> embedding;
+
+            int degree = out_degree_tables[pe_id][nd];
             if (degree != 0)
             {
+                if (i == 0)
+                {
+#pragma HLS OCCURRENCE cycle=ceildiv(EMB_DIM, SCATTER_PARALLEL)
+                    degrees << degree;
+                }
                 filtered_embeddings_per_node << embedding;
             }
         }
     }
 }
 
-static void duplicate(
+static void scatter(
     int pe_id,
+    int layer_num,
     hls::stream<int>& degrees,
     hls::stream<mp_in_t>& embeddings_per_node,
-    hls::stream<mp_in_t>& node_embeddings_per_edge
+    std::array<FM_TYPE, NUM_AGGRS> message[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM]
 )
 {
 #pragma HLS INLINE off
+#pragma HLS AGGREGATE variable=message
 
     mp_in_t mp_ins[ceildiv(EMB_DIM, SCATTER_PARALLEL)];
     int e_start = 0;
@@ -94,8 +91,12 @@ static void duplicate(
     for (int e = 0; e < num_of_edges; e++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=0 max=ANALYSIS_MAX_EDGES avg=ceildiv(ANALYSIS_AVG_EDGES, EDGE_PARALLEL)
-        for (int i = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++)
+
+        int v = neighbor_tables[pe_id][e];
+
+        for (int i = 0, dim_base = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++, dim_base += SCATTER_PARALLEL)
         {
+#pragma HLS PIPELINE II=1
             if (e >= e_end)
             {
                 int degree;
@@ -104,42 +105,18 @@ static void duplicate(
                 e_end = e + degree;
             }
 
-            mp_in_t mp_in;
+            mp_in_t node_embedding;
+#pragma HLS AGGREGATE variable=node_embedding
+
             if (e == e_start)
             {
-                embeddings_per_node >> mp_in;
-                mp_ins[i] = mp_in;
+                embeddings_per_node >> node_embedding;
+                mp_ins[i] = node_embedding;
             }
             else
             {
-                mp_in = mp_ins[i];
+                node_embedding = mp_ins[i];
             }
-            node_embeddings_per_edge << mp_in;
-        }
-    }
-}
-
-static void scatter(
-    int pe_id,
-    int layer_num,
-    hls::stream<mp_in_t>& node_embeddings_per_edge,
-    FM_TYPE message[ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM]
-)
-{
-#pragma HLS INLINE off
-
-    mp_in_t node_embedding;
-#pragma HLS AGGREGATE variable=node_embedding
-    int num_of_edges = num_of_edges_per_pe[pe_id];
-
-    for (int e = 0; e < num_of_edges; e++)
-    {
-#pragma HLS PIPELINE II=ceildiv(EMB_DIM, SCATTER_PARALLEL)
-#pragma HLS LOOP_TRIPCOUNT min=0 max=ANALYSIS_MAX_EDGES avg=ceildiv(ANALYSIS_AVG_EDGES, EDGE_PARALLEL)
-        for (int dim_base = 0; dim_base < EMB_DIM; dim_base += SCATTER_PARALLEL)
-        {
-            int v = neighbor_tables[pe_id][e];
-            node_embeddings_per_edge >> node_embedding;
 
             for (int dim_offset = 0; dim_offset < SCATTER_PARALLEL; dim_offset++)
             {
@@ -147,24 +124,24 @@ static void scatter(
                 int dim = dim_base + dim_offset;
                 if (dim < EMB_DIM)
                 {
-                    message[v][AGGR_MEAN][dim] += node_embedding[dim_offset];
-                    message[v][AGGR_STD][dim] += FM_TYPE(
-                        node_embedding[dim_offset] * node_embedding[dim_offset]);
-                    if (node_embedding[dim_offset] < message[v][AGGR_MIN][dim])
-                        message[v][AGGR_MIN][dim] = node_embedding[dim_offset];
-                    if (node_embedding[dim_offset] > message[v][AGGR_MAX][dim])
-                        message[v][AGGR_MAX][dim] = node_embedding[dim_offset];
+                    FM_TYPE embedding_dim = node_embedding[dim_offset];
+                    message[v][dim][AGGR_MEAN] += embedding_dim;
+                    message[v][dim][AGGR_STD] += FM_TYPE(embedding_dim * embedding_dim);
+                    if (embedding_dim < message[v][dim][AGGR_MIN])
+                        message[v][dim][AGGR_MIN] = embedding_dim;
+                    if (embedding_dim > message[v][dim][AGGR_MAX])
+                        message[v][dim][AGGR_MAX] = embedding_dim;
                 }
             }
         }
     }
 }
 
-void reset_message(FM_TYPE message[NUM_AGGRS][EMB_DIM], int dim)
+void reset_message(std::array<FM_TYPE, NUM_AGGRS> message[EMB_DIM], int dim)
 {
 #pragma HLS INLINE
-    message[AGGR_MEAN][dim] = 0;
-    message[AGGR_STD][dim] = 0;
-    message[AGGR_MIN][dim] = ap_fixed_max<FM_TYPE>();
-    message[AGGR_MAX][dim] = ap_fixed_min<FM_TYPE>();
+    message[dim][AGGR_MEAN] = 0;
+    message[dim][AGGR_STD] = 0;
+    message[dim][AGGR_MIN] = ap_fixed_max<FM_TYPE>();
+    message[dim][AGGR_MAX] = ap_fixed_min<FM_TYPE>();
 }

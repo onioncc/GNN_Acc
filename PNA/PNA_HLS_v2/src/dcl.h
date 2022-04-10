@@ -43,9 +43,8 @@ typedef enum {
 // #endregion
 
 // #region Hardware Parameters
-constexpr int LOAD_IN_EMB_PARALLEL = 2;
 constexpr int SCATTER_PARALLEL = 8; // how many dimensions of EMB_DIM should a message passing PE process each cycle?
-constexpr int APPLY_PARALLEL = 2; // how many dimensions of EMB_DIM should the node embedding PE process each cycle?
+constexpr int APPLY_PARALLEL = 1; // how many dimensions of EMB_DIM should the node embedding PE process each cycle?
 constexpr int NODE_PARALLEL = 2; // how many nodes should the node embedding PE process simultaneously?
 constexpr int EDGE_PARALLEL = 4; // how many message passing PEs are there?
 constexpr int MLP_PARALLEL = 2;
@@ -113,7 +112,7 @@ void PNA_compute_graphs(
 // #endregion
 
 // #region Global Variables
-extern WT_TYPE node_conv_weights[NUM_LAYERS][EMB_DIM][NUM_SCALERS][NUM_AGGRS][EMB_DIM];
+extern std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> node_conv_weights[NUM_LAYERS][EMB_DIM][EMB_DIM];
 extern WT_TYPE node_conv_bias[NUM_LAYERS][EMB_DIM];
 extern WT_TYPE graph_mlp_1_weights[GRAPH_MLP_1_OUT][EMB_DIM];
 extern WT_TYPE graph_mlp_1_bias[GRAPH_MLP_1_OUT];
@@ -124,15 +123,14 @@ extern WT_TYPE graph_mlp_3_bias[NUM_TASK];
 extern WT_TYPE avg_deg;
 
 extern int in_degree_table[MAX_NODE];
-extern int out_degree_table[MAX_NODE];
-extern int out_degree_tables[EDGE_PARALLEL][MAX_NODE][2];
+extern int out_degree_tables[EDGE_PARALLEL][MAX_NODE];
 extern int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
 extern int num_of_edges_per_pe[EDGE_PARALLEL];
 extern FM_TYPE log_degrees[MAX_NODE];
 
 // BRAM for intermediate storage
-extern FM_TYPE messages_ping[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM];
-extern FM_TYPE messages_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM];
+extern std::array<FM_TYPE, NUM_AGGRS> messages_ping[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM];
+extern std::array<FM_TYPE, NUM_AGGRS> messages_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM];
 
 extern FM_TYPE h_node[MAX_NODE][EMB_DIM];
 // #endregion

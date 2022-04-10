@@ -4,12 +4,11 @@
 
 // #region Internal Function Declarations
 static void accumulate(
-    FM_TYPE message[NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EMB_DIM],
     FM_TYPE h_node_v[EMB_DIM],
     FM_TYPE accs[EMB_DIM],
     FM_TYPE h_node_buf[EMB_DIM],
     int in_degree,
-    int out_degree,
     FM_TYPE log_degree,
     int layer_num,
     int dim_base
@@ -25,7 +24,7 @@ static void output(
 
 void node_embedding_multi_pe(
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
-    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     int layer_num,
     int num_of_nodes
 )
@@ -93,7 +92,6 @@ void node_embedding_multi_pe(
                             (i % 2 == 0) ? accs_ping[v_offset] : accs_pong[v_offset],
                             (i % 2 == 0) ? h_node_ping[v_offset] : h_node_pong[v_offset],
                             in_degree_table[v],
-                            out_degree_table[v],
                             log_degrees[v],
                             layer_num,
                             dim_base
@@ -106,12 +104,11 @@ void node_embedding_multi_pe(
 }
 
 static void accumulate(
-    FM_TYPE message[NUM_AGGRS][EMB_DIM],
+    std::array<FM_TYPE, NUM_AGGRS> message[EMB_DIM],
     FM_TYPE h_node_v[EMB_DIM],
     FM_TYPE accs[EMB_DIM],
     FM_TYPE h_node_buf[EMB_DIM],
     int in_degree,
-    int out_degree,
     FM_TYPE log_degree,
     int layer_num,
     int dim_base
@@ -119,9 +116,8 @@ static void accumulate(
 {
 #pragma HLS INLINE
 #pragma HLS ARRAY_PARTITION variable=node_conv_weights complete dim=2
-#pragma HLS ARRAY_PARTITION variable=node_conv_weights complete dim=3
-#pragma HLS ARRAY_PARTITION variable=node_conv_weights complete dim=4
-#pragma HLS ARRAY_PARTITION variable=node_conv_weights cyclic factor=APPLY_PARALLEL dim=5
+#pragma HLS ARRAY_PARTITION variable=node_conv_weights cyclic factor=APPLY_PARALLEL dim=3
+#pragma HLS AGGREGATE variable=node_conv_weights
 #pragma HLS ARRAY_PARTITION variable=node_conv_bias complete dim=2
 
     if (in_degree == 0) in_degree = 1;
@@ -134,10 +130,10 @@ static void accumulate(
         FM_TYPE h_node_el = h_node_v[dim_in];
         h_node_buf[dim_in] = h_node_el;
 
-        FM_TYPE sum = message[AGGR_MEAN][dim_in];
-        FM_TYPE sum_squares = message[AGGR_STD][dim_in];
-        FM_TYPE min = message[AGGR_MIN][dim_in];
-        FM_TYPE max = message[AGGR_MAX][dim_in];
+        FM_TYPE sum = message[dim_in][AGGR_MEAN];
+        FM_TYPE sum_squares = message[dim_in][AGGR_STD];
+        FM_TYPE min = message[dim_in][AGGR_MIN];
+        FM_TYPE max = message[dim_in][AGGR_MAX];
 
         // clear message table in preparation for next round of message passing
         reset_message(message, dim_in);
@@ -156,19 +152,37 @@ static void accumulate(
         for (int dim_out = 0; dim_out < EMB_DIM; dim_out++)
         {
 #pragma HLS UNROLL
-            FM_TYPE addend = (
-                mean * node_conv_weights[layer_num][dim_out][SCALER_NONE][AGGR_MEAN][dim_in]
-                + stddev * node_conv_weights[layer_num][dim_out][SCALER_NONE][AGGR_STD][dim_in]
-                + min * node_conv_weights[layer_num][dim_out][SCALER_NONE][AGGR_MIN][dim_in]
-                + max * node_conv_weights[layer_num][dim_out][SCALER_NONE][AGGR_MAX][dim_in]
-                + FM_TYPE(mean * t) * node_conv_weights[layer_num][dim_out][SCALER_T][AGGR_MEAN][dim_in]
-                + FM_TYPE(stddev * t) * node_conv_weights[layer_num][dim_out][SCALER_T][AGGR_STD][dim_in]
-                + FM_TYPE(min * t) * node_conv_weights[layer_num][dim_out][SCALER_T][AGGR_MIN][dim_in]
-                + FM_TYPE(max * t) * node_conv_weights[layer_num][dim_out][SCALER_T][AGGR_MAX][dim_in]
-                + FM_TYPE(mean * scale) * node_conv_weights[layer_num][dim_out][SCALER_SCALE][AGGR_MEAN][dim_in]
-                + FM_TYPE(stddev * scale) * node_conv_weights[layer_num][dim_out][SCALER_SCALE][AGGR_STD][dim_in]
-                + FM_TYPE(min * scale) * node_conv_weights[layer_num][dim_out][SCALER_SCALE][AGGR_MIN][dim_in]
-                + FM_TYPE(max * scale) * node_conv_weights[layer_num][dim_out][SCALER_SCALE][AGGR_MAX][dim_in]
+            std::array<std::array<WT_TYPE, NUM_AGGRS>, NUM_SCALERS> weights = node_conv_weights[layer_num][dim_out][dim_in];
+#pragma HLS AGGREGATE variable=weights
+
+            FM_TYPE addend = FM_TYPE(
+                FM_TYPE(
+                    FM_TYPE(
+                        FM_TYPE(mean * weights[SCALER_NONE][AGGR_MEAN])
+                        + FM_TYPE(stddev * weights[SCALER_NONE][AGGR_STD])
+                    ) + FM_TYPE(
+                        FM_TYPE(min * weights[SCALER_NONE][AGGR_MIN])
+                        + FM_TYPE(max * weights[SCALER_NONE][AGGR_MAX])
+                    )
+                ) + FM_TYPE(
+                    FM_TYPE(FM_TYPE(
+                        FM_TYPE(
+                            FM_TYPE(mean * weights[SCALER_T][AGGR_MEAN])
+                            + FM_TYPE(stddev * weights[SCALER_T][AGGR_STD])
+                        ) + FM_TYPE(
+                            FM_TYPE(min * weights[SCALER_T][AGGR_MIN])
+                            + FM_TYPE(max * weights[SCALER_T][AGGR_MAX])
+                        )
+                    ) * t) + FM_TYPE(FM_TYPE(
+                        FM_TYPE(
+                            FM_TYPE(mean * weights[SCALER_SCALE][AGGR_MEAN])
+                            + FM_TYPE(stddev * weights[SCALER_SCALE][AGGR_STD])
+                        ) + FM_TYPE(
+                            FM_TYPE(min * weights[SCALER_SCALE][AGGR_MIN])
+                            + FM_TYPE(max * weights[SCALER_SCALE][AGGR_MAX])
+                        )
+                    ) * scale)
+                )
             );
             FM_TYPE bias = node_conv_bias[layer_num][dim_out];
             accs[dim_out] = addend + ((dim_in == 0) ? bias : accs[dim_out]);
