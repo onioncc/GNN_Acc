@@ -1,0 +1,2077 @@
+<ENTRY>
+{
+ "thisFile": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sun Apr 10 02:16:20 2022",
+ "timestampMillis": "1649571380121",
+ "buildStep": {
+  "cmdId": "62337067-c915-47fd-83c5-bf66aec27737",
+  "name": "v++",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -t hw --platform xilinx_u50_gen3x16_xdma_201920_3 --save-temps -l --temp_dir ./_x.hw.xilinx_u50_gen3x16_xdma_201920_3 -o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin _x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.xo ",
+  "args": [
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--save-temps",
+   "-l",
+   "--temp_dir",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_201920_3",
+   "-o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin",
+   "_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:20 2022",
+ "timestampMillis": "1649571380122",
+ "status": {
+  "cmdId": "62337067-c915-47fd-83c5-bf66aec27737",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Sun Apr 10 02:16:31 2022",
+ "timestampMillis": "1649571391153",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "PNA_compute_graphs.link",
+    "file": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "PNA_compute_graphs",
+     "file": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/finalize.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/conv_layer.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/load_inputs.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/globals.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/linear.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/message_passing.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/PNA_compute.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/PNA_compute_graphs/PNA_compute_graphs/cpu_sources/node_embedding.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "PNA_compute_graphs_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2021.1.1. SW Build 3278995 on 2021-07-20-20:33:48"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 02:16:32 2022",
+ "timestampMillis": "1649571392312",
+ "buildStep": {
+  "cmdId": "7f5ef4a9-fcf0-4c64-96a7-99fec5e9f38b",
+  "name": "system_link",
+  "logFile": "",
+  "commandLine": "system_link --xo /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.xo -keep --xpfm /opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm --target hw --output_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --temp_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link",
+  "args": [
+   "--xo",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.xo",
+   "-keep",
+   "--xpfm",
+   "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+   "--target",
+   "hw",
+   "--output_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--temp_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:32 2022",
+ "timestampMillis": "1649571392313",
+ "status": {
+  "cmdId": "7f5ef4a9-fcf0-4c64-96a7-99fec5e9f38b",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:53 2022",
+ "timestampMillis": "1649571413110",
+ "status": {
+  "cmdId": "7f5ef4a9-fcf0-4c64-96a7-99fec5e9f38b",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 02:16:53 2022",
+ "timestampMillis": "1649571413128",
+ "buildStep": {
+  "cmdId": "b295167c-8e30-4bdf-8da1-f0e9de6421e4",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -sdsl /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -rtd /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd -nofilter /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd -xclbin /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -o /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml",
+  "args": [
+   "-sdsl",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-rtd",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd",
+   "-nofilter",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd",
+   "-xclbin",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-o",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:53 2022",
+ "timestampMillis": "1649571413129",
+ "status": {
+  "cmdId": "b295167c-8e30-4bdf-8da1-f0e9de6421e4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:56 2022",
+ "timestampMillis": "1649571416554",
+ "status": {
+  "cmdId": "b295167c-8e30-4bdf-8da1-f0e9de6421e4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 02:16:56 2022",
+ "timestampMillis": "1649571416564",
+ "buildStep": {
+  "cmdId": "fe564dfd-52e4-4511-8c3e-27f783524dd6",
+  "name": "rtd2_system_diagram",
+  "logFile": "",
+  "commandLine": "rtd2SystemDiagram",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:56 2022",
+ "timestampMillis": "1649571416564",
+ "status": {
+  "cmdId": "fe564dfd-52e4-4511-8c3e-27f783524dd6",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 02:16:57 2022",
+ "timestampMillis": "1649571417399",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModel.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:57 2022",
+ "timestampMillis": "1649571417405",
+ "status": {
+  "cmdId": "fe564dfd-52e4-4511-8c3e-27f783524dd6",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 02:16:57 2022",
+ "timestampMillis": "1649571417428",
+ "buildStep": {
+  "cmdId": "e20c4d11-c301-475e-8768-6cecee495069",
+  "name": "vpl",
+  "logFile": "",
+  "commandLine": "vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/.ipcache -s --output_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_PNA_compute_graphs_1_0 --messageDb /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl",
+  "args": [
+   "-t",
+   "hw",
+   "-f",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--remote_ip_cache",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/.ipcache",
+   "-s",
+   "--output_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--log_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link",
+   "--report_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link",
+   "--config",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+   "-k",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat",
+   "--webtalk_flag",
+   "Vitis",
+   "--temp_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link",
+   "--no-info",
+   "--iprepo",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_PNA_compute_graphs_1_0",
+   "--messageDb",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl"
+  ],
+  "iniFiles": [
+   {
+    "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+    "content": "[advanced]\nmisc=report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\nmisc=report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\nparam=compiler.enablePerformanceTrace=1\nparam=compiler.vppCurrentWorkingDir=/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2\nmisc=BinaryName=PNA_compute_graphs.link\n\n[connectivity]\nnk=PNA_compute_graphs:1:PNA_compute_graphs_1\n\n[vivado]\nprop=run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\n\n"
+   }
+  ],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:57 2022",
+ "timestampMillis": "1649571417429",
+ "status": {
+  "cmdId": "e20c4d11-c301-475e-8768-6cecee495069",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sun Apr 10 02:16:59 2022",
+ "timestampMillis": "1649571419779",
+ "buildStep": {
+  "cmdId": "b3d2ee0c-5c06-438e-9200-fbb351199edf",
+  "name": "vpl",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/.ipcache -s --output_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_PNA_compute_graphs_1_0 --messageDb /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl ",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:16:59 2022",
+ "timestampMillis": "1649571419780",
+ "status": {
+  "cmdId": "b3d2ee0c-5c06-438e-9200-fbb351199edf",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_VivadoProject",
+ "dateTimestamp": "Sun Apr 10 02:17:24 2022",
+ "timestampMillis": "1649571444870",
+ "vivadoProject": {
+  "openDir": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl",
+  "openScript": "openprj.tcl",
+  "relativeProject": "prj/prj.xpr"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 02:17:24 2022",
+ "timestampMillis": "1649571444878",
+ "buildStep": {
+  "cmdId": "3d388436-81f5-4559-9567-5ca40537f92f",
+  "name": "vivado",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/vivado.log",
+  "commandLine": "vivado -log vivado.log -applog -m64 -messageDb vivado.pb -mode batch -source vpl.tcl -notrace",
+  "args": [
+   "-log",
+   "vivado.log",
+   "-applog",
+   " -m64",
+   "-messageDb",
+   "vivado.pb",
+   "-mode",
+   "batch",
+   "-source",
+   "vpl.tcl",
+   "-notrace"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 02:17:24 2022",
+ "timestampMillis": "1649571444879",
+ "status": {
+  "cmdId": "3d388436-81f5-4559-9567-5ca40537f92f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sun Apr 10 05:28:24 2022",
+ "timestampMillis": "1649582904582",
+ "buildStep": {
+  "cmdId": "103e2941-6eca-41a9-9756-cf394a73b4af",
+  "name": "vivado.impl",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 05:28:24 2022",
+ "timestampMillis": "1649582904583",
+ "status": {
+  "cmdId": "103e2941-6eca-41a9-9756-cf394a73b4af",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sun Apr 10 05:28:24 2022",
+ "timestampMillis": "1649582904584",
+ "buildStep": {
+  "cmdId": "3c4c5c7d-b101-4e89-8239-c244beee2c56",
+  "name": "vivado.impl.impl_1",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/runme.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 05:28:24 2022",
+ "timestampMillis": "1649582904585",
+ "status": {
+  "cmdId": "3c4c5c7d-b101-4e89-8239-c244beee2c56",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 09:44:33 2022",
+ "timestampMillis": "1649598273337",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 09:47:39 2022",
+ "timestampMillis": "1649598459133",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 09:47:39 2022",
+ "timestampMillis": "1649598459140",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:07:59 2022",
+ "timestampMillis": "1649599679212",
+ "status": {
+  "cmdId": "3d388436-81f5-4559-9567-5ca40537f92f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680227",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680237",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680244",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680251",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680258",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680265",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680279",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680286",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680291",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680298",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680305",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680312",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680318",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680330",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680362",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_axi_gpio_null_1_synth_1_ulp_axi_gpio_null_1_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680371",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_axi_vip_ctrl_userpf_1_synth_1_ulp_axi_vip_ctrl_userpf_1_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680380",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_regslice_control_userpf_1_synth_1_ulp_regslice_control_userpf_1_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680386",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_ii_level0_wire_0_synth_1_ulp_ii_level0_wire_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680393",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_user_debug_bridge_0_synth_1_ulp_user_debug_bridge_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680400",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_debug_bridge_xsdbm_0_synth_1_ulp_debug_bridge_xsdbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680407",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_hmss_0_0_synth_1_ulp_hmss_0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680414",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_axi_vip_data_0_synth_1_ulp_axi_vip_data_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680422",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_ulp_ucs_0_synth_1_ulp_ulp_ucs_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680430",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_proc_sys_reset_ctrl_slr0_0_synth_1_ulp_proc_sys_reset_ctrl_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680437",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_proc_sys_reset_kernel_slr0_0_synth_1_ulp_proc_sys_reset_kernel_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680444",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_proc_sys_reset_kernel2_slr0_0_synth_1_ulp_proc_sys_reset_kernel2_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680454",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_workaround_cr1039626_orgate_0_synth_1_ulp_workaround_cr1039626_orgate_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680461",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_regslice_control_userpf_0_synth_1_ulp_regslice_control_userpf_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680468",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clk_hbm_adapt_0_synth_1_bd_22c0_clk_hbm_adapt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680478",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_hbm_0_synth_1_bd_22c0_psreset_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680483",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_frequency_counter_hbm_0_synth_1_bd_22c0_frequency_counter_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680488",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_hbm_0_synth_1_bd_22c0_fanout_aresetn_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680493",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_ctrl_slr0_0_synth_1_bd_22c0_fanout_aresetn_ctrl_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680497",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_pcie_slr0_0_synth_1_bd_22c0_fanout_aresetn_pcie_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680501",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_kernel_slr0_0_synth_1_bd_22c0_fanout_aresetn_kernel_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680505",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_kernel2_slr0_0_synth_1_bd_22c0_fanout_aresetn_kernel2_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680512",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clk_kernel2_cont_adapt_0_synth_1_bd_22c0_clk_kernel2_cont_adapt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680519",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_kernel2_0_synth_1_bd_22c0_psreset_kernel2_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680526",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_shutdown_clocks_latch_0_synth_1_bd_22c0_shutdown_clocks_latch_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680531",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gpio_ucs_control_status_0_synth_1_bd_22c0_gpio_ucs_control_status_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680538",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_adder_check_gpio_0_synth_1_bd_22c0_adder_check_gpio_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680544",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_reduce_check_gpio_0_synth_1_bd_22c0_reduce_check_gpio_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680552",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_or_shutdown_clocks_0_synth_1_bd_22c0_or_shutdown_clocks_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680560",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_frequency_counter_kernel_0_synth_1_bd_22c0_frequency_counter_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680567",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_freerun_refclk_0_synth_1_bd_22c0_psreset_freerun_refclk_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680574",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_frequency_counter_aclk_0_synth_1_bd_22c0_frequency_counter_aclk_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680581",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clkwiz_hbm_0_synth_1_bd_22c0_clkwiz_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680587",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_9997_bsip_0_synth_1_bd_9997_bsip_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680594",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_9997_bs_switch_1_0_synth_1_bd_9997_bs_switch_1_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680600",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_xbar_0_synth_1_ulp_xbar_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680607",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_PNA_compute_graphs_1_0_synth_1_ulp_PNA_compute_graphs_1_0_utilization_synth.rpt",
+  "name": "PNA_compute_graphs",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680613",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_9997_axi_jtag_0_synth_1_bd_9997_axi_jtag_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680620",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_0349_xsdbm_0_synth_1_bd_0349_xsdbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680625",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_0349_lut_buffer_0_synth_1_bd_0349_lut_buffer_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680632",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_xbar_1_synth_1_bd_22c0_xbar_1_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680637",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_build_info_0_synth_1_bd_22c0_build_info_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680644",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gpio_gapping_demand_0_synth_1_bd_22c0_gpio_gapping_demand_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680651",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clock_throttling_avg_0_synth_1_bd_22c0_clock_throttling_avg_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680658",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gapping_demand_update_0_synth_1_bd_22c0_gapping_demand_update_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680664",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gapping_demand_toggle_0_synth_1_bd_22c0_gapping_demand_toggle_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680670",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clock_throttling_kernel_0_synth_1_bd_22c0_clock_throttling_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680677",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clock_throttling_kernel2_0_synth_1_bd_22c0_clock_throttling_kernel2_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680684",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clkwiz_kernel_0_synth_1_bd_22c0_clkwiz_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680690",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clk_kernel_adapt_0_synth_1_bd_22c0_clk_kernel_adapt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680696",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_kernel_0_synth_1_bd_22c0_psreset_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680702",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clkwiz_kernel2_0_synth_1_bd_22c0_clkwiz_kernel2_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680708",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_vip_ctrl_mgmt_0_synth_1_bd_22c0_vip_ctrl_mgmt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680715",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_xbar_0_synth_1_bd_22c0_xbar_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680722",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_slice0_1_0_synth_1_bd_85ad_slice0_1_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680727",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_init_reduce_0_synth_1_bd_85ad_init_reduce_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680732",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_auto_cc_0_synth_1_bd_22c0_auto_cc_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680739",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_vip_S00_0_synth_1_bd_85ad_vip_S00_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680745",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_axi_apb_bridge_inst_0_synth_1_bd_85ad_axi_apb_bridge_inst_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680751",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_interconnect1_0_0_synth_1_bd_85ad_interconnect1_0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680758",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_hbm_reset_sync_SLR0_0_synth_1_bd_85ad_hbm_reset_sync_SLR0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680764",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_hbm_inst_0_synth_1_bd_85ad_hbm_inst_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680770",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_s00_regslice_10_synth_1_ulp_s00_regslice_10_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680778",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_m00_regslice_0_synth_1_ulp_m00_regslice_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680785",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_m01_regslice_0_synth_1_ulp_m01_regslice_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680789",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_auto_cc_0_synth_1_ulp_auto_cc_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680796",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_interconnect0_1_0_synth_1_bd_85ad_interconnect0_1_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680801",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": "3c4c5c7d-b101-4e89-8239-c244beee2c56"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680873",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3c4c5c7d-b101-4e89-8239-c244beee2c56"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680948",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "3c4c5c7d-b101-4e89-8239-c244beee2c56"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680954",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "3c4c5c7d-b101-4e89-8239-c244beee2c56"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:00 2022",
+ "timestampMillis": "1649599680996",
+ "status": {
+  "cmdId": "b3d2ee0c-5c06-438e-9200-fbb351199edf",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:01 2022",
+ "timestampMillis": "1649599681047",
+ "status": {
+  "cmdId": "e20c4d11-c301-475e-8768-6cecee495069",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 10:08:01 2022",
+ "timestampMillis": "1649599681085",
+ "buildStep": {
+  "cmdId": "80a0d6fa-bb52-48b5-be67-2add3126ccbe",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:01 2022",
+ "timestampMillis": "1649599681085",
+ "status": {
+  "cmdId": "80a0d6fa-bb52-48b5-be67-2add3126ccbe",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:01 2022",
+ "timestampMillis": "1649599681150",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 10:08:01 2022",
+ "timestampMillis": "1649599681168",
+ "buildStep": {
+  "cmdId": "9fc17b77-1c9a-4fc0-9fc9-03ff1f15e4e2",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml -sdsl /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -xclbin /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -rtd /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.rtd -o /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.xml",
+  "args": [
+   "-a",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml",
+   "-sdsl",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-xclbin",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.rtd",
+   "-o",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:01 2022",
+ "timestampMillis": "1649599681169",
+ "status": {
+  "cmdId": "9fc17b77-1c9a-4fc0-9fc9-03ff1f15e4e2",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684308",
+ "status": {
+  "cmdId": "9fc17b77-1c9a-4fc0-9fc9-03ff1f15e4e2",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684309",
+ "buildStep": {
+  "cmdId": "fd180f2b-e5ac-4bd0-a9d9-ebc0fb3dfc89",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.rtd",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684309",
+ "status": {
+  "cmdId": "fd180f2b-e5ac-4bd0-a9d9-ebc0fb3dfc89",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684324",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684329",
+ "status": {
+  "cmdId": "fd180f2b-e5ac-4bd0-a9d9-ebc0fb3dfc89",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684333",
+ "status": {
+  "cmdId": "80a0d6fa-bb52-48b5-be67-2add3126ccbe",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684355",
+ "buildStep": {
+  "cmdId": "f54100e4-a1da-4dc4-beb4-035b15fd0ac3",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.rtd --append-section :JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link_xml.rtd --add-section BUILD_METADATA:JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link_build.rtd --add-section EMBEDDED_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.xml --add-section SYSTEM_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3 --output /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.rtd",
+   "--append-section",
+   ":JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/PNA_compute_graphs.link.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3",
+   "--output",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684356",
+ "status": {
+  "cmdId": "f54100e4-a1da-4dc4-beb4-035b15fd0ac3",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684911",
+ "status": {
+  "cmdId": "f54100e4-a1da-4dc4-beb4-035b15fd0ac3",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684926",
+ "buildStep": {
+  "cmdId": "f10fe002-ae44-4093-8d37-0c58c1b6dd70",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin.info --input /net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin.info",
+   "--input",
+   "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/PNA_compute_graphs.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:04 2022",
+ "timestampMillis": "1649599684926",
+ "status": {
+  "cmdId": "f10fe002-ae44-4093-8d37-0c58c1b6dd70",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:05 2022",
+ "timestampMillis": "1649599685689",
+ "status": {
+  "cmdId": "f10fe002-ae44-4093-8d37-0c58c1b6dd70",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Apr 10 10:08:05 2022",
+ "timestampMillis": "1649599685704",
+ "buildStep": {
+  "cmdId": "47081f1a-4ecd-4be1-9b1f-16d07c89c370",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:05 2022",
+ "timestampMillis": "1649599685705",
+ "status": {
+  "cmdId": "47081f1a-4ecd-4be1-9b1f-16d07c89c370",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:05 2022",
+ "timestampMillis": "1649599685710",
+ "status": {
+  "cmdId": "47081f1a-4ecd-4be1-9b1f-16d07c89c370",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:06 2022",
+ "timestampMillis": "1649599686061",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/system_estimate_PNA_compute_graphs.link.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:06 2022",
+ "timestampMillis": "1649599686295",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/v++_link_PNA_compute_graphs.link_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:06 2022",
+ "timestampMillis": "1649599686296",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/v++_link_PNA_compute_graphs.link_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Apr 10 10:08:06 2022",
+ "timestampMillis": "1649599686312",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/PNA/PNA_HLS_U50/v2/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Apr 10 10:08:06 2022",
+ "timestampMillis": "1649599686319",
+ "status": {
+  "cmdId": "62337067-c915-47fd-83c5-bf66aec27737",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
