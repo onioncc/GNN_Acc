@@ -51,7 +51,7 @@ void compute_CONV_layer(
 #pragma HLS ARRAY_PARTITION variable=next_message cyclic factor=SCATTER_PARALLEL dim=3
 
     hls::stream<ne_out_t> embeddings[NODE_PARALLEL];
-#pragma HLS STREAM variable=embeddings depth=200
+#pragma HLS STREAM variable=embeddings depth=(4 * ceildiv(EMB_DIM, APPLY_PARALLEL))
 
     check_node_embedding(embeddings, message, node_feature_in, node_embedding_weight_in, layer_num, num_of_nodes);
     check_message_passing(embeddings, next_message, result, layer_num, num_of_nodes);
@@ -108,7 +108,7 @@ void message_passing_all_pes(
 #pragma HLS DATAFLOW
 
     hls::stream<mp_in_t> mp_in[EDGE_PARALLEL][NODE_PARALLEL];
-#pragma HLS STREAM variable=mp_in depth=40
+#pragma HLS STREAM variable=mp_in depth=(20 * ceildiv(EMB_DIM, SCATTER_PARALLEL))
 
     ne_to_mp_adapter(ne_out, mp_in, num_of_nodes);
     for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)

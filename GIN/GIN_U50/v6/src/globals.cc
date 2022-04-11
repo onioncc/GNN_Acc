@@ -11,7 +11,7 @@ WT_TYPE graph_pred_weights[NUM_TASK][EMB_DIM];
 WT_TYPE graph_pred_bias[NUM_TASK];
 
 int degree_table[MAX_NODE];
-int degree_tables[EDGE_PARALLEL][MAX_NODE][2];
+int degree_tables[EDGE_PARALLEL][MAX_NODE];
 int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
 edge_attr_t edge_attrs[EDGE_PARALLEL][MAX_EDGE];
 int num_of_edges_per_pe[EDGE_PARALLEL];

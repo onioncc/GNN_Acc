@@ -98,7 +98,6 @@ void load_graph(
     int neighbor_tables_offsets[EDGE_PARALLEL][MAX_NODE];
 
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=1
-#pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=3
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables complete dim=1
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables_offsets complete dim=1
 #pragma HLS ARRAY_PARTITION variable=edge_attrs complete dim=1
@@ -113,7 +112,7 @@ void load_graph(
         for (int j = 0; j < EDGE_PARALLEL; j++)
         {
 #pragma HLS UNROLL
-            degree_tables[j][i][0] = 0;
+            degree_tables[j][i] = 0;
         }
     }
 
@@ -127,7 +126,7 @@ void load_graph(
         int v = edge.v;
         int pe_id = v % EDGE_PARALLEL;
         degree_table[u]++;
-        degree_tables[pe_id][u][0]++;
+        degree_tables[pe_id][u]++;
         degree_inv_sqrt[u] = hls::recip(hls::sqrt(WT_TYPE(degree_table[u] + 1)));
     }
 
@@ -148,9 +147,8 @@ void load_graph(
         for (int j = 0; j < EDGE_PARALLEL; j++)
         {
 #pragma HLS UNROLL
-            int degree_j = degree_tables[j][i][0];
+            int degree_j = degree_tables[j][i];
             neighbor_tables_offsets[j][i] = num_of_edges_per_pe[j];
-            degree_tables[j][i][1] = num_of_edges_per_pe[j];
             num_of_edges_per_pe[j] += degree_j;
         }
     }
@@ -187,8 +185,7 @@ void load_input_node_embeddings(
     /*Embedding: compute input node embedding */
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
-// I wouldn't pipeline this loop, myself, but Vitis wanted to, so:
-#pragma HLS PIPELINE II=ceildiv(EMB_DIM, LOAD_IN_EMB_PARALLEL)
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, APPLY_PARALLEL)
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_NODES max=ANALYSIS_MAX_NODES avg=ANALYSIS_AVG_NODES
 
         array<WT_TYPE, EMB_DIM> weights[ND_FEATURE];
@@ -200,13 +197,10 @@ void load_input_node_embeddings(
             weights[nf] = *((array<WT_TYPE, EMB_DIM>*)node_embedding_weight[nd_f]);
         }
 
-        ne_out_t embedding;
-        int embedding_offset = 0;
-        for (int dim_base = 0; dim_base < EMB_DIM; dim_base += LOAD_IN_EMB_PARALLEL)
+        for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
-// Commented out since we are pipelining the outer loop:
-// #pragma HLS PIPELINE II=1
-            for (int dim_offset = 0; dim_offset < LOAD_IN_EMB_PARALLEL; dim_offset++)
+            ne_out_t embedding;
+            for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
             {
                 int dim = dim_base + dim_offset;
                 FM_TYPE h_node_nd_dim = 0;
@@ -215,21 +209,12 @@ void load_input_node_embeddings(
                     h_node_nd_dim += weights[nf][dim];
                 }
                 h_node[nd][dim] = h_node_nd_dim;
-
-                embedding[embedding_offset] = h_node_nd_dim;
-                if (embedding_offset == APPLY_PARALLEL - 1 || dim == EMB_DIM - 1)
-                {
-                    embeddings[nd % NODE_PARALLEL] << embedding;
-                    embedding_offset = 0;
-                }
-                else
-                {
-                    embedding_offset++;
-                }
+                embedding[dim_offset] = h_node_nd_dim;
 
                 // in preparation for next round of message passing
                 messages[nd % EDGE_PARALLEL][nd / EDGE_PARALLEL][dim] = 0;
             }
+            embeddings[nd % NODE_PARALLEL] << embedding;
         }
     }
 }

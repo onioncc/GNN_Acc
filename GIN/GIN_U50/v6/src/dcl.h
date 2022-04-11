@@ -27,7 +27,6 @@ constexpr int MLP_1_OUT = 200;
 // #endregion
 
 // #region Hardware Parameters
-constexpr int LOAD_IN_EMB_PARALLEL = 2;
 constexpr int SCATTER_PARALLEL = 8; // how many dimensions of EMB_DIM should a message passing PE process each cycle?
 constexpr int APPLY_PARALLEL = 2; // how many dimensions of EMB_DIM should the node embedding PE process each cycle?
 constexpr int NODE_PARALLEL = 2; // how many nodes should the node embedding PE process simultaneously?
@@ -107,7 +106,7 @@ extern WT_TYPE graph_pred_weights[NUM_TASK][EMB_DIM];
 extern WT_TYPE graph_pred_bias[NUM_TASK];
 
 extern int degree_table[MAX_NODE];
-extern int degree_tables[EDGE_PARALLEL][MAX_NODE][2];
+extern int degree_tables[EDGE_PARALLEL][MAX_NODE];
 extern int neighbor_tables[EDGE_PARALLEL][MAX_EDGE];
 extern edge_attr_t edge_attrs[EDGE_PARALLEL][MAX_EDGE];
 extern int num_of_edges_per_pe[EDGE_PARALLEL];
