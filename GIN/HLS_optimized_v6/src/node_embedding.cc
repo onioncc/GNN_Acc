@@ -2,19 +2,21 @@
 
 // #region Internal Function Declarations
 static void accumulate(
-    FM_TYPE message[EMB_DIM],
-    FM_TYPE h_node_v[EMB_DIM],
-    FM_TYPE accs[MLP_1_OUT],
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
+    FM_TYPE accs[NODE_PARALLEL][MLP_1_OUT],
     WT_TYPE eps,
     int layer_num,
-    int dim_base
+    int v_base,
+    int dim_base,
+    int num_of_nodes
 );
 static void output(
-    FM_TYPE h_node_v[EMB_DIM],
-    FM_TYPE accs[MLP_1_OUT],
-    hls::stream<ne_out_t>& embeddings,
+    FM_TYPE accs[NODE_PARALLEL][MLP_1_OUT],
+    hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     int layer_num,
-    int dim_base
+    int v_base,
+    int dim_base,
+    int num_of_nodes
 );
 // #endregion
 
@@ -52,53 +54,40 @@ void node_embedding_multi_pe(
 
             if (i != 0)
             {
-                for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
-                {
-#pragma HLS UNROLL
-                    int v = out_v_base + v_offset;
-                    if (v < num_of_nodes)
-                    {
-                        output(
-                            h_node[v],
-                            (i % 2 == 0) ? accs_pong[v_offset] : accs_ping[v_offset],
-                            embeddings[v_offset],
-                            layer_num,
-                            dim_base
-                        );
-                    }
-                }
+                output(
+                    (i % 2 == 0) ? accs_pong : accs_ping,
+                    embeddings,
+                    layer_num,
+                    out_v_base,
+                    dim_base,
+                    num_of_nodes
+                );
             }
 
             if (i != num_iters - 1)
             {
-                for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
-                {
-#pragma HLS UNROLL
-                    int v = acc_v_base + v_offset;
-                    if (v < num_of_nodes)
-                    {
-                        accumulate(
-                            message[v % EDGE_PARALLEL][v / EDGE_PARALLEL],
-                            h_node[v],
-                            (i % 2 == 0) ? accs_ping[v_offset] : accs_pong[v_offset],
-                            eps,
-                            layer_num,
-                            dim_base
-                        );
-                    }
-                }
+                accumulate(
+                    message,
+                    (i % 2 == 0) ? accs_ping : accs_pong,
+                    eps,
+                    layer_num,
+                    acc_v_base,
+                    dim_base,
+                    num_of_nodes
+                );
             }
         }
     }
 }
 
 static void accumulate(
-    FM_TYPE message[EMB_DIM],
-    FM_TYPE h_node_v[EMB_DIM],
-    FM_TYPE accs[MLP_1_OUT],
+    FM_TYPE message[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
+    FM_TYPE accs[NODE_PARALLEL][MLP_1_OUT],
     WT_TYPE eps,
     int layer_num,
-    int dim_base
+    int v_base,
+    int dim_base,
+    int num_of_nodes
 )
 {
 #pragma HLS INLINE
@@ -110,29 +99,50 @@ static void accumulate(
     {
 #pragma HLS UNROLL
         int dim_in = dim_base + dim_offset;
-        FM_TYPE message_dim = message[dim_in];
-        FM_TYPE h_node_el = h_node_v[dim_in];
+        FM_TYPE h_node_els[NODE_PARALLEL];
+#pragma HLS ARRAY_PARTITION variable=h_node_els complete dim=1
+        FM_TYPE activations[NODE_PARALLEL];
+#pragma HLS ARRAY_PARTITION variable=activations complete dim=1
 
-        // in preparation for next round of message passing
-        message[dim_in] = 0;
+        for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+        {
+            int v = v_base + v_offset;
+            h_node_els[v_offset] = 0;
+            activations[v_offset] = 0;
 
-        FM_TYPE activation = message_dim + (1 + eps) * h_node_el;
+            if (v < num_of_nodes)
+            {
+                FM_TYPE& message_dim = message[v % EDGE_PARALLEL][v / EDGE_PARALLEL][dim_in];
+                h_node_els[v_offset] = h_node[v][dim_in];
+                activations[v_offset] = message_dim + (1 + eps) * h_node_els[v_offset];
+
+                // in preparation for next round of message passing
+                message_dim = 0;
+            }
+        }
+
         for (int dim_out = 0; dim_out < MLP_1_OUT; dim_out++)
         {
 #pragma HLS UNROLL
-            FM_TYPE addend = activation * node_mlp_1_weights[layer_num][dim_out][dim_in];
+            WT_TYPE weight = node_mlp_1_weights[layer_num][dim_out][dim_in];
             FM_TYPE bias = node_mlp_1_bias[layer_num][dim_out];
-            accs[dim_out] = addend + ((dim_in == 0) ? bias : accs[dim_out]);
+            for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+            {
+#pragma HLS UNROLL
+                FM_TYPE addend = activations[v_offset] * weight;
+                accs[v_offset][dim_out] = addend + ((dim_in == 0) ? bias : accs[v_offset][dim_out]);
+            }
         }
     }
 }
 
 static void output(
-    FM_TYPE h_node_v[EMB_DIM],
-    FM_TYPE accs[MLP_1_OUT],
-    hls::stream<ne_out_t>& embeddings,
+    FM_TYPE accs[NODE_PARALLEL][MLP_1_OUT],
+    hls::stream<ne_out_t> embeddings[NODE_PARALLEL],
     int layer_num,
-    int dim_base
+    int v_base,
+    int dim_base,
+    int num_of_nodes
 )
 {
 #pragma HLS INLINE
@@ -140,30 +150,52 @@ static void output(
 #pragma HLS ARRAY_PARTITION variable=node_mlp_2_weights complete dim=3
 #pragma HLS ARRAY_PARTITION variable=node_mlp_2_bias cyclic factor=APPLY_PARALLEL dim=2
 
-    ne_out_t output;
-#pragma HLS AGGREGATE variable=output
+    ne_out_t outputs[NODE_PARALLEL];
+#pragma HLS ARRAY_PARTITION variable=outputs complete dim=1
+#pragma HLS AGGREGATE variable=outputs
 
     for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
     {
 #pragma HLS UNROLL
         int dim = dim_base + dim_offset;
 
-        FM_TYPE result = node_mlp_2_bias[layer_num][dim];
+        FM_TYPE results[NODE_PARALLEL];
+#pragma HLS ARRAY_PARTITION variable=results complete dim=1
+
+        FM_TYPE bias = node_mlp_2_bias[layer_num][dim];
+        for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+        {
+#pragma HLS UNROLL
+            results[v_offset] = bias;
+        }
+
         for (int dim_in = 0; dim_in < MLP_1_OUT; dim_in++)
         {
 #pragma HLS UNROLL
-            FM_TYPE activation = accs[dim_in];
-            result += ap_fixed_relu(activation) * node_mlp_2_weights[layer_num][dim][dim_in];
+            WT_TYPE weight = node_mlp_2_weights[layer_num][dim][dim_in];
+            for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+            {
+#pragma HLS UNROLL
+                FM_TYPE activation = accs[v_offset][dim_in];
+                results[v_offset] += ap_fixed_relu(activation) * weight;
+            }
         }
 
-        if (layer_num != NUM_LAYERS - 1)
+        for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
         {
-            result = ap_fixed_relu(result);
+#pragma HLS UNROLL
+            int v = v_base + v_offset;
+            FM_TYPE result = results[v_offset];
+            if (layer_num != NUM_LAYERS - 1) result = ap_fixed_relu(result);
+            outputs[v_offset][dim_offset] = result;
+            if (v < num_of_nodes) h_node[v][dim] = result;
         }
-
-        h_node_v[dim] = result;
-        output[dim_offset] = result;
     }
 
-    embeddings << output;
+    for (int v_offset = 0; v_offset < NODE_PARALLEL; v_offset++)
+    {
+#pragma HLS UNROLL
+        int v = v_base + v_offset;
+        if (v < num_of_nodes) embeddings[v_offset] << outputs[v_offset];
+    }
 }

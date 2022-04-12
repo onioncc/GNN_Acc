@@ -103,7 +103,9 @@ static void scatter(
 
         for (int i = 0, dim_base = 0; i < ceildiv(EMB_DIM, SCATTER_PARALLEL); i++, dim_base += SCATTER_PARALLEL)
         {
-#pragma HLS PIPELINE II=1
+#pragma HLS PIPELINE
+#pragma HLS DEPENDENCE variable=message inter true distance=ceildiv(EMB_DIM, SCATTER_PARALLEL)
+
             if (e >= e_end)
             {
                 int degree;
