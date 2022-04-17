@@ -1,19 +1,24 @@
 #include "message_passing.h"
 #include "hls_math.h"
 
+typedef struct {
+    int nd;
+    int degree;
+} node_t;
+
 // #region Internal Function Declarations
 static void read_degrees(
     int pe_id,
     hls::stream<int>& degrees,
-    hls::stream<int>& nonzero_degrees,
+    hls::stream<node_t>& nonzero_degree_nodes,
     int num_of_nodes
 );
 static void gather(
     int pe_id,
-    hls::stream<int>& nonzero_degrees,
+    hls::stream<node_t>& nonzero_degree_nodes,
     FM_VEC h_node[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[ceildiv(MAX_NODE, EDGE_PARALLEL)],
     hls::stream<mp_out_t>& messages,
     hls::stream<FM_VEC>& score_sums
 );
@@ -31,8 +36,8 @@ static void expand(
 void message_passing_pe(
     int pe_id,
     FM_VEC h_node[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[ceildiv(MAX_NODE, EDGE_PARALLEL)],
     hls::stream<mp_out_t> messages[NODE_PARALLEL],
     hls::stream<FM_VEC> score_sums[NODE_PARALLEL],
     int num_of_nodes
@@ -43,22 +48,22 @@ void message_passing_pe(
 
     hls::stream<int> degrees("degrees");
 #pragma HLS STREAM variable=degrees depth=20
-    hls::stream<int> nonzero_degrees("nonzero_degrees");
-#pragma HLS STREAM variable=nonzero_degrees depth=20
+    hls::stream<node_t> nonzero_degree_nodes("nonzero_degree_nodes");
+#pragma HLS STREAM variable=nonzero_degree_nodes depth=20
     hls::stream<mp_out_t> messages_per_nz_deg_node("messages_per_nz_deg_node");
 #pragma HLS STREAM variable=messages_per_nz_deg_node depth=(20 * ceildiv(EMB_DIM, GATHER_PARALLEL))
     hls::stream<FM_VEC> score_sums_per_nz_deg_node("score_sums_per_nz_deg_node");
 #pragma HLS STREAM variable=score_sums_per_nz_deg_node depth=20
 
-    read_degrees(pe_id, degrees, nonzero_degrees, num_of_nodes);
-    gather(pe_id, nonzero_degrees, h_node, scores_target, scores_source, messages_per_nz_deg_node, score_sums_per_nz_deg_node);
+    read_degrees(pe_id, degrees, nonzero_degree_nodes, num_of_nodes);
+    gather(pe_id, nonzero_degree_nodes, h_node, scores_source, scores_target, messages_per_nz_deg_node, score_sums_per_nz_deg_node);
     expand(pe_id, messages_per_nz_deg_node, score_sums_per_nz_deg_node, degrees, messages, score_sums, num_of_nodes);
 }
 
 static void read_degrees(
     int pe_id,
     hls::stream<int>& degrees,
-    hls::stream<int>& nonzero_degrees,
+    hls::stream<node_t>& nonzero_degree_nodes,
     int num_of_nodes
 )
 {
@@ -68,30 +73,30 @@ static void read_degrees(
     {
         int degree = degree_tables[pe_id][nd];
         degrees << degree;
-        if (degree != 0) nonzero_degrees << degree;
+        if (degree != 0)
+        {
+            nonzero_degree_nodes << node_t{nd, degree};
+        }
     }
 }
 
 static void gather(
     int pe_id,
-    hls::stream<int>& nonzero_degrees,
+    hls::stream<node_t>& nonzero_degree_nodes,
     FM_VEC h_node[ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[ceildiv(MAX_NODE, EDGE_PARALLEL)],
     hls::stream<mp_out_t>& messages,
     hls::stream<FM_VEC>& score_sums
 )
 {
 #pragma HLS INLINE off
 #pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=GATHER_PARALLEL dim=2
-#pragma HLS ARRAY_PARTITION variable=scores_source complete dim=1
-#pragma HLS ARRAY_PARTITION variable=scores_source complete dim=3
-#pragma HLS ARRAY_PARTITION variable=scores_target complete dim=2
-#pragma HLS BIND_STORAGE variable=scores_target type=ram_1wnr
+#pragma HLS BIND_STORAGE variable=scores_source type=ram_1wnr
 
     mp_out_t mp_outs[ceildiv(EMB_DIM, GATHER_PARALLEL)];
     FM_VEC score_sums_acc;
-    int v = -1;
+    int v = 0;
     int e_start = 0;
     int e_end = 0;
     int num_of_edges = num_of_edges_per_pe[pe_id];
@@ -108,15 +113,15 @@ static void gather(
 
             if (e >= e_end)
             {
-                int degree;
-                nonzero_degrees >> degree;
+                node_t node;
+                nonzero_degree_nodes >> node;
+                v = node.nd;
                 e_start = e;
-                e_end = e + degree;
+                e_end = e + node.degree;
                 score_sums_acc = FM_TYPE(0);
-                v++;
             }
 
-            FM_VEC scores = scores_source[u] + scores_target[v];
+            FM_VEC scores = scores_source[v] + scores_target[u];
             for (int head = 0; head < NUM_HEADS; head++)
             {
 #pragma HLS UNROLL

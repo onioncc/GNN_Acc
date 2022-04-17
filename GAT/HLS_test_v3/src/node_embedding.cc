@@ -13,11 +13,11 @@ static void accumulate(
 );
 static void output(
     FM_VEC accs[NODE_PARALLEL][EMB_DIM],
-    FM_VEC scores_target_accs[NODE_PARALLEL],
     FM_VEC scores_source_accs[NODE_PARALLEL],
+    FM_VEC scores_target_accs[NODE_PARALLEL],
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     int layer_num,
     int v_base,
     int dim_base,
@@ -30,8 +30,8 @@ void node_embedding_multi_pe(
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     int layer_num,
     int num_of_nodes
 )
@@ -44,10 +44,10 @@ void node_embedding_multi_pe(
 #pragma HLS ARRAY_PARTITION variable=accs_ping complete dim=0
     FM_VEC accs_pong[NODE_PARALLEL][EMB_DIM];
 #pragma HLS ARRAY_PARTITION variable=accs_pong complete dim=0
-    FM_VEC scores_target_accs[NODE_PARALLEL];
-#pragma HLS ARRAY_PARTITION variable=scores_target_accs complete dim=0
     FM_VEC scores_source_accs[NODE_PARALLEL];
 #pragma HLS ARRAY_PARTITION variable=scores_source_accs complete dim=0
+    FM_VEC scores_target_accs[NODE_PARALLEL];
+#pragma HLS ARRAY_PARTITION variable=scores_target_accs complete dim=0
 
     int num_iters = ceildiv(num_of_nodes, NODE_PARALLEL) + 1;
     for (
@@ -65,11 +65,11 @@ void node_embedding_multi_pe(
             {
                 output(
                     (i % 2 == 0) ? accs_pong : accs_ping,
-                    scores_target_accs,
                     scores_source_accs,
+                    scores_target_accs,
                     h_node,
-                    scores_target,
                     scores_source,
+                    scores_target,
                     layer_num,
                     out_v_base,
                     dim_base,
@@ -197,11 +197,11 @@ static void accumulate(
 
 static void output(
     FM_VEC accs[NODE_PARALLEL][EMB_DIM],
-    FM_VEC scores_target_accs[NODE_PARALLEL],
     FM_VEC scores_source_accs[NODE_PARALLEL],
+    FM_VEC scores_target_accs[NODE_PARALLEL],
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     int layer_num,
     int v_base,
     int dim_base,
@@ -251,8 +251,8 @@ static void output(
 
             if (dim_base == ((EMB_DIM - 1) / APPLY_PARALLEL) * APPLY_PARALLEL)
             {
-                scores_source[v % EDGE_PARALLEL][v / EDGE_PARALLEL] = scores_source_accs[v_offset];
-                scores_target[v] = scores_target_accs[v_offset];
+                scores_source[v] = scores_source_accs[v_offset];
+                scores_target[v % EDGE_PARALLEL][v / EDGE_PARALLEL] = scores_target_accs[v_offset];
             }
         }
     }

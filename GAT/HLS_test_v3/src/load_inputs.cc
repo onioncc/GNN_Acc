@@ -217,7 +217,7 @@ void load_input_node_embeddings(node_feature_t* node_feature, int num_of_nodes)
             scores_source_acc += result * scoring_fn_source_weights;
             scores_target_acc += result * scoring_fn_target_weights;
         }
-        scores_source_ping[nd % EDGE_PARALLEL][nd / EDGE_PARALLEL] = scores_source_acc;
-        scores_target_ping[nd] = scores_target_acc;
+        scores_source_ping[nd] = scores_source_acc;
+        scores_target_ping[nd % EDGE_PARALLEL][nd / EDGE_PARALLEL] = scores_target_acc;
     }
 }

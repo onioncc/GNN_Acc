@@ -11,8 +11,8 @@ void check_node_embedding(
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_TYPE* result,
     int layer_num,
     int num_of_nodes
@@ -30,10 +30,10 @@ void compute_CONV_layer(
     int layer_num,
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC next_h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC next_scores_target[MAX_NODE],
-    FM_VEC scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
-    FM_VEC next_scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC next_scores_source[MAX_NODE],
+    FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC next_scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     node_feature_t* node_feature_in,
@@ -62,8 +62,8 @@ void compute_CONV_layer(
         message_passing_pe(
             pe_id,
             h_node[pe_id],
-            scores_target,
-            scores_source[pe_id],
+            scores_source,
+            scores_target[pe_id],
             mp_out[pe_id],
             score_sums[pe_id],
             num_of_nodes
@@ -85,8 +85,8 @@ void compute_CONV_layer(
         next_h_node,
         out_nodes_features_skip_concat_bias,
         next_out_nodes_features_skip_concat_bias,
-        next_scores_target,
         next_scores_source,
+        next_scores_target,
         result,
         layer_num,
         num_of_nodes
@@ -98,8 +98,8 @@ void check_node_embedding(
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    FM_VEC scores_target[MAX_NODE],
-    FM_VEC scores_source[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
+    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_TYPE* result,
     int layer_num,
     int num_of_nodes
@@ -123,8 +123,8 @@ void check_node_embedding(
             h_node,
             out_nodes_features_skip_concat_bias,
             next_out_nodes_features_skip_concat_bias,
-            scores_target,
             scores_source,
+            scores_target,
             layer_num,
             num_of_nodes
         );
@@ -161,15 +161,6 @@ void mp_to_ne_adapter(
                     FM_VEC partial_sums;
                     score_sums[pe_id][nd_offset] >> partial_sums;
                     curr_score_sums += partial_sums;
-                }
-            }
-
-            // FIXME: this is probably temporary
-            for (int head = 0; head < NUM_HEADS; head++)
-            {
-                if (curr_score_sums[head] == 0)
-                {
-                    curr_score_sums[head] = 1;
                 }
             }
 

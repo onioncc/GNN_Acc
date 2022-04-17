@@ -55,8 +55,10 @@ constexpr int ANALYSIS_MAX_EDGES = 40;
 // #endregion
 
 // #region Data Types
-typedef ap_fixed<16, 6> FM_TYPE;
-typedef ap_fixed<16, 6> WT_TYPE;
+// typedef ap_fixed<16, 6> FM_TYPE;
+// typedef ap_fixed<16, 6> WT_TYPE;
+typedef ap_fixed<28, 10> FM_TYPE;
+typedef ap_fixed<28, 10> WT_TYPE;
 
 typedef hls::vector<FM_TYPE, NUM_HEADS> FM_VEC;
 typedef hls::vector<WT_TYPE, NUM_HEADS> WT_VEC;
@@ -112,10 +114,10 @@ extern FM_VEC h_node_ping[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_D
 extern FM_VEC h_node_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM];
 extern FM_VEC out_nodes_features_skip_concat_bias_ping[MAX_NODE][EMB_DIM];
 extern FM_VEC out_nodes_features_skip_concat_bias_pong[MAX_NODE][EMB_DIM];
-extern FM_VEC scores_target_ping[MAX_NODE];
-extern FM_VEC scores_target_pong[MAX_NODE];
-extern FM_VEC scores_source_ping[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)];
-extern FM_VEC scores_source_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)];
+extern FM_VEC scores_source_ping[MAX_NODE];
+extern FM_VEC scores_source_pong[MAX_NODE];
+extern FM_VEC scores_target_ping[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)];
+extern FM_VEC scores_target_pong[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)];
 // #endregion
 
 #endif

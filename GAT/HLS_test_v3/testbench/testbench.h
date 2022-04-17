@@ -3,7 +3,7 @@
 
 #include "src/dcl.h"
 
-constexpr int NUM_GRAPHS = 3; // 4113;
+constexpr int NUM_GRAPHS = 10; // 4113;
 
 extern WT_TYPE scoring_fn_target_fixed[NUM_LAYERS][NUM_HEADS][EMB_DIM];
 extern WT_TYPE scoring_fn_source_fixed[NUM_LAYERS][NUM_HEADS][EMB_DIM];

@@ -34,11 +34,11 @@ void load_weights()
     fclose(f);
 
     f = fopen("gat_ep1_scoring_fn_target_layer5.bin", "r");
-    fread(scoring_fn_target, sizeof(float), NUM_LAYERS * NUM_HEADS * EMB_DIM, f);
+    fread(scoring_fn_target_float, sizeof(float), NUM_LAYERS * NUM_HEADS * EMB_DIM, f);
     fclose(f);
 
     f = fopen("gat_ep1_scoring_fn_source_layer5.bin", "r");
-    fread(scoring_fn_source, sizeof(float), NUM_LAYERS * NUM_HEADS * EMB_DIM, f);
+    fread(scoring_fn_source_float, sizeof(float), NUM_LAYERS * NUM_HEADS * EMB_DIM, f);
     fclose(f);
 
     f = fopen("gat_ep1_linear_proj_weight_0_layer5.bin", "r");
@@ -68,8 +68,8 @@ void load_weights()
     for(int i = 0; i < NUM_LAYERS; i++) {
         for(int j = 0; j < NUM_HEADS; j++) {
             for (int k = 0; k < EMB_DIM; k++) {
-                scoring_fn_target_fixed[i][j][k] = (WT_TYPE)scoring_fn_target[i][j][k];
-                scoring_fn_source_fixed[i][j][k] = (WT_TYPE)scoring_fn_source[i][j][k];
+                scoring_fn_target_fixed[i][j][k] = (WT_TYPE)scoring_fn_target_float[i][j][k];
+                scoring_fn_source_fixed[i][j][k] = (WT_TYPE)scoring_fn_source_float[i][j][k];
             }
         }
     }
