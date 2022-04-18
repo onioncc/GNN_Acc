@@ -142,23 +142,30 @@ void mp_to_ne_adapter(
 {
 #pragma HLS INLINE off
 
+    FM_VEC curr_score_sums;
     int num_iters = ceildiv(num_of_nodes - nd_offset, NODE_PARALLEL);
+
     for (int i = 0; i < num_iters; i++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=ceildiv(ANALYSIS_MIN_NODES, NODE_PARALLEL) max=ceildiv(ANALYSIS_MAX_NODES, NODE_PARALLEL) avg=ceildiv(ANALYSIS_AVG_NODES, NODE_PARALLEL)
-#pragma HLS PIPELINE II=ceildiv(EMB_DIM, APPLY_PARALLEL)
-
-        FM_VEC curr_score_sums = FM_TYPE(0);
-        for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
-        {
-            FM_VEC partial_sums;
-            score_sums[pe_id][nd_offset] >> partial_sums;
-            curr_score_sums += partial_sums;
-        }
 
         // assumes GATHER_PARALLEL is divisible by APPLY_PARALLEL
         for (int mp_dim_base = 0; mp_dim_base < EMB_DIM; mp_dim_base += GATHER_PARALLEL)
         {
+#pragma HLS PIPELINE II=ceildiv(GATHER_PARALLEL, APPLY_PARALLEL)
+
+            if (mp_dim_base == 0)
+            {
+#pragma HLS OCCURRENCE cycle=ceildiv(EMB_DIM, GATHER_PARALLEL)
+                curr_score_sums = FM_TYPE(0);
+                for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+                {
+                    FM_VEC partial_sums;
+                    score_sums[pe_id][nd_offset] >> partial_sums;
+                    curr_score_sums += partial_sums;
+                }
+            }
+
             mp_out_t message = FM_VEC(0);
             for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
             {
