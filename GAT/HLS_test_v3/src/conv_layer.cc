@@ -153,6 +153,7 @@ void mp_to_ne_adapter(
         for (int mp_dim_base = 0; mp_dim_base < EMB_DIM; mp_dim_base += GATHER_PARALLEL)
         {
 #pragma HLS PIPELINE II=ceildiv(GATHER_PARALLEL, APPLY_PARALLEL)
+#pragma HLS ALLOCATION operation instances=sdiv limit=(APPLY_PARALLEL * NUM_HEADS)
 
             if (mp_dim_base == 0)
             {
