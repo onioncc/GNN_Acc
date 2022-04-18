@@ -11,7 +11,7 @@ void check_node_embedding(
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_source[EDGE_PARALLEL][MAX_NODE],
     FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_TYPE* result,
     int layer_num,
@@ -30,13 +30,12 @@ void compute_CONV_layer(
     int layer_num,
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC next_h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_source[MAX_NODE],
-    FM_VEC next_scores_source[MAX_NODE],
+    FM_VEC scores_source[EDGE_PARALLEL][MAX_NODE],
+    FM_VEC next_scores_source[EDGE_PARALLEL][MAX_NODE],
     FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_VEC next_scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    node_feature_t* node_feature_in,
     FM_TYPE* result,
     int num_of_nodes
 )
@@ -44,10 +43,14 @@ void compute_CONV_layer(
 #pragma HLS INLINE off
 #pragma HLS DATAFLOW
 
-#pragma HLS ARRAY_PARTITION variable=h_node complete dim=3
-#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=GATHER_PARALLEL dim=4
-#pragma HLS ARRAY_PARTITION variable=next_h_node complete dim=3
-#pragma HLS ARRAY_PARTITION variable=next_h_node cyclic factor=GATHER_PARALLEL dim=4
+#pragma HLS ARRAY_PARTITION variable=h_node complete dim=1
+#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=GATHER_PARALLEL dim=3
+#pragma HLS ARRAY_PARTITION variable=next_h_node complete dim=1
+#pragma HLS ARRAY_PARTITION variable=next_h_node cyclic factor=GATHER_PARALLEL dim=3
+#pragma HLS ARRAY_PARTITION variable=scores_source complete dim=1
+#pragma HLS ARRAY_PARTITION variable=next_scores_source complete dim=1
+#pragma HLS ARRAY_PARTITION variable=scores_target complete dim=1
+#pragma HLS ARRAY_PARTITION variable=next_scores_target complete dim=1
 
     hls::stream<mp_out_t> mp_out[EDGE_PARALLEL][NODE_PARALLEL];
 #pragma HLS STREAM variable=mp_out depth=(20 * ceildiv(EMB_DIM, GATHER_PARALLEL))
@@ -62,7 +65,7 @@ void compute_CONV_layer(
         message_passing_pe(
             pe_id,
             h_node[pe_id],
-            scores_source,
+            scores_source[pe_id],
             scores_target[pe_id],
             mp_out[pe_id],
             score_sums[pe_id],
@@ -98,7 +101,7 @@ void check_node_embedding(
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_source[EDGE_PARALLEL][MAX_NODE],
     FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     FM_TYPE* result,
     int layer_num,
@@ -106,7 +109,6 @@ void check_node_embedding(
 )
 {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=message complete dim=1
 
     if (layer_num == NUM_LAYERS - 1)
         finalize(
@@ -140,51 +142,46 @@ void mp_to_ne_adapter(
 {
 #pragma HLS INLINE off
 
-    int mp_dim_offset = GATHER_PARALLEL;
-    mp_out_t last_message;
-    FM_VEC curr_score_sums;
-
     int num_iters = ceildiv(num_of_nodes - nd_offset, NODE_PARALLEL);
     for (int i = 0; i < num_iters; i++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=ceildiv(ANALYSIS_MIN_NODES, NODE_PARALLEL) max=ceildiv(ANALYSIS_MAX_NODES, NODE_PARALLEL) avg=ceildiv(ANALYSIS_AVG_NODES, NODE_PARALLEL)
-        for (int ne_dim_base = 0; ne_dim_base < EMB_DIM; ne_dim_base += APPLY_PARALLEL)
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, APPLY_PARALLEL)
+
+        FM_VEC curr_score_sums = FM_TYPE(0);
+        for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
         {
-#pragma HLS PIPELINE
+            FM_VEC partial_sums;
+            score_sums[pe_id][nd_offset] >> partial_sums;
+            curr_score_sums += partial_sums;
+        }
 
-            if (ne_dim_base == 0)
+        // assumes GATHER_PARALLEL is divisible by APPLY_PARALLEL
+        for (int mp_dim_base = 0; mp_dim_base < EMB_DIM; mp_dim_base += GATHER_PARALLEL)
+        {
+            mp_out_t message = FM_VEC(0);
+            for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
             {
-#pragma HLS OCCURRENCE cycle=ceildiv(EMB_DIM, APPLY_PARALLEL)
-                curr_score_sums = FM_TYPE(0);
-                for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
-                {
-                    FM_VEC partial_sums;
-                    score_sums[pe_id][nd_offset] >> partial_sums;
-                    curr_score_sums += partial_sums;
-                }
+                mp_out_t partial_message;
+                mp_out[pe_id][nd_offset] >> partial_message;
+                message += partial_message;
             }
+            message /= curr_score_sums;
 
-            ne_in_t curr_ne_in;
-            for (int ne_dim_offset = 0; ne_dim_offset < APPLY_PARALLEL; ne_dim_offset++)
+            for (int mp_dim_offset = 0; mp_dim_offset < GATHER_PARALLEL; mp_dim_offset += APPLY_PARALLEL)
             {
-                if (mp_dim_offset == GATHER_PARALLEL || (ne_dim_base == 0 && ne_dim_offset == 0))
+                int ne_dim_base = mp_dim_base + mp_dim_offset;
+                if (ne_dim_base < EMB_DIM)
                 {
-#pragma HLS OCCURRENCE cycle=min(ceildiv(EMB_DIM, APPLY_PARALLEL), ceildiv(GATHER_PARALLEL, APPLY_PARALLEL))
-                    last_message = FM_VEC(0);
-                    for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+                    ne_in_t message_split;
+                    for (int ne_dim_offset = 0; ne_dim_offset < APPLY_PARALLEL; ne_dim_offset++)
                     {
-                        mp_out_t partial_message;
-                        mp_out[pe_id][nd_offset] >> partial_message;
-                        last_message += partial_message / curr_score_sums;
+                        int dim_offset = mp_dim_offset + ne_dim_offset;
+                        message_split[ne_dim_offset] = message[dim_offset];
                     }
-                    mp_dim_offset = 0;
+                    ne_in << message_split;
                 }
-
-                curr_ne_in[ne_dim_offset] = last_message[mp_dim_offset];
-                mp_dim_offset++;
             }
-
-            ne_in << curr_ne_in;
         }
     }
 }

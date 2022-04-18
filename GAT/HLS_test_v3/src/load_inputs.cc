@@ -15,6 +15,7 @@ void load_weights(
     {
         load_scoring_fn_target_head: for (int h = 0; h < NUM_HEADS; h++)
         {
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, 2)
             load_scoring_fn_target_dim: for (int dim = 0; dim < EMB_DIM; dim++)
             {
                 scoring_fn_target[l][h][dim] = scoring_fn_target_in[l][h][dim];
@@ -26,6 +27,7 @@ void load_weights(
     {
         load_scoring_fn_source_head: for (int h = 0; h < NUM_HEADS; h++)
         {
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, 2)
             load_scoring_fn_source_dim: for (int dim = 0; dim < EMB_DIM; dim++)
             {
                 scoring_fn_source[l][h][dim] = scoring_fn_source_in[l][h][dim];
@@ -41,6 +43,7 @@ void load_weights(
             {
                 load_linear_proj_weights_head_in: for (int h_in = 0; h_in < NUM_HEADS; h_in++)
                 {
+#pragma HLS PIPELINE II=ceildiv(EMB_DIM, 2)
                     load_linear_proj_weights_dim_in: for (int dim_in = 0; dim_in < EMB_DIM; dim_in++)
                     {
                         linear_proj_weights[l][h_out][dim_out][h_in][dim_in] = linear_proj_weights_in[l][h_out][dim_out][h_in][dim_in];
@@ -94,7 +97,6 @@ void load_graph(
 #pragma HLS ARRAY_PARTITION variable=degree_tables complete dim=1
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables complete dim=1
 #pragma HLS ARRAY_PARTITION variable=neighbor_tables_offsets complete dim=1
-#pragma HLS ARRAY_PARTITION variable=edge_attrs complete dim=1
 #pragma HLS ARRAY_PARTITION variable=num_of_edges_per_pe complete dim=1
 
     for (int i = 0; i < num_of_nodes; i++)
@@ -166,7 +168,6 @@ void load_graph(
 void load_input_node_embeddings(node_feature_t* node_feature, int num_of_nodes)
 {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=nd_feature_offsets complete dim=1
 
     /*Embedding: compute input node embedding */
     for (int nd = 0; nd < num_of_nodes; nd++)
@@ -176,7 +177,7 @@ void load_input_node_embeddings(node_feature_t* node_feature, int num_of_nodes)
 
         node_feature_t node_feature_nd = node_feature[nd];
         FM_VEC nodes_features_proj[EMB_DIM];
-#pragma HLS ARRAY_PARTITION variable=node_features_proj complete dim=0
+#pragma HLS ARRAY_PARTITION variable=nodes_features_proj complete dim=0
 
         for (int dim = 0; dim < EMB_DIM; dim++)
         {
@@ -217,7 +218,10 @@ void load_input_node_embeddings(node_feature_t* node_feature, int num_of_nodes)
             scores_source_acc += result * scoring_fn_source_weights;
             scores_target_acc += result * scoring_fn_target_weights;
         }
-        scores_source_ping[nd] = scores_source_acc;
+        for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+        {
+            scores_source_ping[pe_id][nd] = scores_source_acc;
+        }
         scores_target_ping[nd % EDGE_PARALLEL][nd / EDGE_PARALLEL] = scores_target_acc;
     }
 }

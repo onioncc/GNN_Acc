@@ -16,7 +16,7 @@ static void output(
     FM_VEC scores_source_accs[NODE_PARALLEL],
     FM_VEC scores_target_accs[NODE_PARALLEL],
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_source[EDGE_PARALLEL][MAX_NODE],
     FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     int layer_num,
     int v_base,
@@ -30,15 +30,13 @@ void node_embedding_multi_pe(
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
     FM_VEC out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
     FM_VEC next_out_nodes_features_skip_concat_bias[MAX_NODE][EMB_DIM],
-    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_source[EDGE_PARALLEL][MAX_NODE],
     FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     int layer_num,
     int num_of_nodes
 )
 {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=NODE_PARALLEL dim=1
-#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=APPLY_PARALLEL dim=2
 
     FM_VEC accs_ping[NODE_PARALLEL][EMB_DIM];
 #pragma HLS ARRAY_PARTITION variable=accs_ping complete dim=0
@@ -60,6 +58,9 @@ void node_embedding_multi_pe(
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
 #pragma HLS PIPELINE II=1
+#pragma HLS DEPENDENCE variable=h_node inter false
+#pragma HLS DEPENDENCE variable=scores_source inter false
+#pragma HLS DEPENDENCE variable=scores_target inter false
 
             if (i != 0)
             {
@@ -180,15 +181,17 @@ static void accumulate(
                 // compute_nodes_features_proj()
                 for (int proj_dim_out = 0; proj_dim_out < EMB_DIM; proj_dim_out++)
                 {
-                    if (dim_out == 0) accs[v_offset][proj_dim_out] = FM_TYPE(0);
-                    for (int head_out = 0; head_out < NUM_HEADS; head_out++)
+                    FM_VEC acc = (dim_out != 0) ? accs[v_offset][proj_dim_out] : FM_VEC(0);
+                    for (int head_in = 0; head_in < NUM_HEADS; head_in++)
                     {
-                        for (int head_in = 0; head_in < NUM_HEADS; head_in++)
+                        WT_VEC weight;
+                        for (int head_out = 0; head_out < NUM_HEADS; head_out++)
                         {
-                            WT_TYPE weight = curr_linear_proj_weights[head_out][proj_dim_out][head_in][dim_out_offset];
-                            accs[v_offset][proj_dim_out][head_out] += next_out_node_feature_skip_concat_bias[head_in] * weight;
+                            weight[head_out] = curr_linear_proj_weights[head_out][proj_dim_out][head_in][dim_out_offset];
                         }
+                        acc += next_out_node_feature_skip_concat_bias[head_in] * weight;
                     }
+                    accs[v_offset][proj_dim_out] = acc;
                 }
             }
         }
@@ -200,7 +203,7 @@ static void output(
     FM_VEC scores_source_accs[NODE_PARALLEL],
     FM_VEC scores_target_accs[NODE_PARALLEL],
     FM_VEC h_node[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)][EMB_DIM],
-    FM_VEC scores_source[MAX_NODE],
+    FM_VEC scores_source[EDGE_PARALLEL][MAX_NODE],
     FM_VEC scores_target[EDGE_PARALLEL][ceildiv(MAX_NODE, EDGE_PARALLEL)],
     int layer_num,
     int v_base,
@@ -234,25 +237,34 @@ static void output(
         int v = v_base + v_offset;
         if (v < num_of_nodes)
         {
-            if (dim_base == 0)
-            {
-                scores_source_accs[v_offset] = FM_TYPE(0);
-                scores_target_accs[v_offset] = FM_TYPE(0);
-            }
+            FM_VEC scores_source_acc = FM_TYPE(0);
+            FM_VEC scores_target_acc = FM_TYPE(0);
 
             for (int dim_offset = 0; dim_offset < APPLY_PARALLEL; dim_offset++)
             {
                 int dim = dim_base + dim_offset;
                 FM_VEC result = accs[v_offset][dim];
                 h_node[v % EDGE_PARALLEL][v / EDGE_PARALLEL][dim] = result;
-                scores_source_accs[v_offset] += result * scoring_fn_source_weights[dim_offset];
-                scores_target_accs[v_offset] += result * scoring_fn_target_weights[dim_offset];
+                scores_source_acc += result * scoring_fn_source_weights[dim_offset];
+                scores_target_acc += result * scoring_fn_target_weights[dim_offset];
             }
+
+            if (dim_base != 0)
+            {
+                scores_source_acc += scores_source_accs[v_offset];
+                scores_target_acc += scores_target_accs[v_offset];
+            }
+
+            scores_source_accs[v_offset] = scores_source_acc;
+            scores_target_accs[v_offset] = scores_target_acc;
 
             if (dim_base == ((EMB_DIM - 1) / APPLY_PARALLEL) * APPLY_PARALLEL)
             {
-                scores_source[v] = scores_source_accs[v_offset];
-                scores_target[v % EDGE_PARALLEL][v / EDGE_PARALLEL] = scores_target_accs[v_offset];
+                for (int pe_id = 0; pe_id < EDGE_PARALLEL; pe_id++)
+                {
+                    scores_source[pe_id][v] = scores_source_acc;
+                }
+                scores_target[v % EDGE_PARALLEL][v / EDGE_PARALLEL] = scores_target_acc;
             }
         }
     }

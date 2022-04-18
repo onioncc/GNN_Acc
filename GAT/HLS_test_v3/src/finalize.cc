@@ -58,6 +58,7 @@ static void make_embeddings(
     int num_iters = ceildiv(num_of_nodes, NODE_PARALLEL);
     for (int i = 0, v_base = 0; i < num_iters; i++, v_base += NODE_PARALLEL)
     {
+#pragma HLS LOOP_TRIPCOUNT min=ceildiv(ANALYSIS_MIN_NODES, NODE_PARALLEL) max=ceildiv(ANALYSIS_MAX_NODES, NODE_PARALLEL) avg=ceildiv(ANALYSIS_AVG_NODES, NODE_PARALLEL)
         for (int dim_base = 0; dim_base < EMB_DIM; dim_base += APPLY_PARALLEL)
         {
 #pragma HLS PIPELINE II=1

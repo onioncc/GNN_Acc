@@ -35,6 +35,15 @@ void GAT_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_weights_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_bias_in offset=slave bundle=mem
 
+#pragma HLS AGGREGATE variable=h_node_ping
+#pragma HLS AGGREGATE variable=h_node_pong
+#pragma HLS AGGREGATE variable=out_nodes_features_skip_concat_bias_ping
+#pragma HLS AGGREGATE variable=out_nodes_features_skip_concat_bias_pong
+#pragma HLS AGGREGATE variable=scores_source_ping
+#pragma HLS AGGREGATE variable=scores_source_pong
+#pragma HLS AGGREGATE variable=scores_target_ping
+#pragma HLS AGGREGATE variable=scores_target_pong
+
     for (int graph = 0, weights_ndx = -1, nodes_offset = 0, edges_offset = 0; graph < num_graphs; graph++)
     {
 #pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_NUM_GRAPHS max=ANALYSIS_NUM_GRAPHS avg=ANALYSIS_NUM_GRAPHS
@@ -75,7 +84,6 @@ void GAT_compute_graphs(
                     scores_target_pong,
                     out_nodes_features_skip_concat_bias_ping,
                     out_nodes_features_skip_concat_bias_pong,
-                    &node_feature_in[nodes_offset],
                     out[graph],
                     num_of_nodes
                 );
@@ -90,7 +98,6 @@ void GAT_compute_graphs(
                     scores_target_ping,
                     out_nodes_features_skip_concat_bias_pong,
                     out_nodes_features_skip_concat_bias_ping,
-                    &node_feature_in[nodes_offset],
                     out[graph],
                     num_of_nodes
                 );

@@ -23,7 +23,6 @@ static void gather(
     hls::stream<FM_VEC>& score_sums
 );
 static void expand(
-    int pe_id,
     hls::stream<mp_out_t>& messages_per_nz_deg_node,
     hls::stream<FM_VEC>& score_sums_per_nz_deg_node,
     hls::stream<int>& degrees,
@@ -57,7 +56,7 @@ void message_passing_pe(
 
     read_degrees(pe_id, degrees, nonzero_degree_nodes, num_of_nodes);
     gather(pe_id, nonzero_degree_nodes, h_node, scores_source, scores_target, messages_per_nz_deg_node, score_sums_per_nz_deg_node);
-    expand(pe_id, messages_per_nz_deg_node, score_sums_per_nz_deg_node, degrees, messages, score_sums, num_of_nodes);
+    expand(messages_per_nz_deg_node, score_sums_per_nz_deg_node, degrees, messages, score_sums, num_of_nodes);
 }
 
 static void read_degrees(
@@ -71,6 +70,7 @@ static void read_degrees(
 
     for (int nd = 0; nd < num_of_nodes; nd++)
     {
+#pragma HLS LOOP_TRIPCOUNT min=ANALYSIS_MIN_NODES max=ANALYSIS_MAX_NODES avg=ANALYSIS_AVG_NODES
         int degree = degree_tables[pe_id][nd];
         degrees << degree;
         if (degree != 0)
@@ -91,8 +91,6 @@ static void gather(
 )
 {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=h_node cyclic factor=GATHER_PARALLEL dim=2
-#pragma HLS BIND_STORAGE variable=scores_source type=ram_1wnr
 
     mp_out_t mp_outs[ceildiv(EMB_DIM, GATHER_PARALLEL)];
     FM_VEC score_sums_acc;
@@ -131,21 +129,21 @@ static void gather(
             }
             if (i == 0) score_sums_acc += scores;
 
+            mp_out_t mp_out = (e != e_start) ? mp_outs[i] : FM_VEC(0);
             for (int dim_offset = 0; dim_offset < GATHER_PARALLEL; dim_offset++)
             {
 #pragma HLS UNROLL
                 int dim = dim_base + dim_offset;
                 if (dim < EMB_DIM)
                 {
-                    FM_VEC addend = scores * h_node[u][dim];
-                    FM_VEC prev = (e != e_start) ? mp_outs[i][dim_offset] : FM_TYPE(0);
-                    mp_outs[i][dim_offset] = prev + addend;
+                    mp_out[dim_offset] += scores * h_node[u][dim];
                 }
             }
+            mp_outs[i] = mp_out;
 
             if (e + 1 == e_end)
             {
-                messages << mp_outs[i];
+                messages << mp_out;
                 if (i == 0) score_sums << score_sums_acc;
             }
         }
@@ -153,7 +151,6 @@ static void gather(
 }
 
 static void expand(
-    int pe_id,
     hls::stream<mp_out_t>& messages_per_nz_deg_node,
     hls::stream<FM_VEC>& score_sums_per_nz_deg_node,
     hls::stream<int>& degrees,
