@@ -1,0 +1,2077 @@
+<ENTRY>
+{
+ "thisFile": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin.link_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Apr 12 00:03:57 2022",
+ "timestampMillis": "1649736237124",
+ "buildStep": {
+  "cmdId": "a0a914ed-fd05-47fa-a050-008a2210dacc",
+  "name": "v++",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -t hw --platform xilinx_u50_gen3x16_xdma_201920_3 --save-temps -l --temp_dir ./_x.hw.xilinx_u50_gen3x16_xdma_201920_3 -o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin _x.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.xo ",
+  "args": [
+   "-t",
+   "hw",
+   "--platform",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--save-temps",
+   "-l",
+   "--temp_dir",
+   "./_x.hw.xilinx_u50_gen3x16_xdma_201920_3",
+   "-o./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin",
+   "_x.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:03:57 2022",
+ "timestampMillis": "1649736237125",
+ "status": {
+  "cmdId": "a0a914ed-fd05-47fa-a050-008a2210dacc",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Tue Apr 12 00:04:09 2022",
+ "timestampMillis": "1649736249645",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_LINK",
+  "target": "TT_HW",
+  "binaryContainer": {
+   "base": {
+    "type": "BT_UKNOWN",
+    "name": "GIN_compute_graphs.link",
+    "file": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin",
+    "reports": [],
+    "uuid": ""
+   },
+   "kernels": []
+  },
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "GIN_compute_graphs",
+     "file": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/finalize.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/conv_layer.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/load_inputs.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/globals.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/GIN_compute.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/linear.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/message_passing.cc",
+     "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/GIN_compute_graphs/GIN_compute_graphs/cpu_sources/node_embedding.cc"
+    ],
+    "psSources": [],
+    "cuNames": [
+     "GIN_compute_graphs_1"
+    ],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2021.1.1. SW Build 3278995 on 2021-07-20-20:33:48"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 00:04:11 2022",
+ "timestampMillis": "1649736251965",
+ "buildStep": {
+  "cmdId": "2b9f908f-5a74-4501-acda-2fd78e4ee4fa",
+  "name": "system_link",
+  "logFile": "",
+  "commandLine": "system_link --xo /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.xo -keep --xpfm /opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm --target hw --output_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --temp_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link",
+  "args": [
+   "--xo",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.xo",
+   "-keep",
+   "--xpfm",
+   "/opt/xilinx/platforms/xilinx_u50_gen3x16_xdma_201920_3/xilinx_u50_gen3x16_xdma_201920_3.xpfm",
+   "--target",
+   "hw",
+   "--output_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--temp_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/sys_link"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:11 2022",
+ "timestampMillis": "1649736251966",
+ "status": {
+  "cmdId": "2b9f908f-5a74-4501-acda-2fd78e4ee4fa",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:33 2022",
+ "timestampMillis": "1649736273732",
+ "status": {
+  "cmdId": "2b9f908f-5a74-4501-acda-2fd78e4ee4fa",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 00:04:33 2022",
+ "timestampMillis": "1649736273745",
+ "buildStep": {
+  "cmdId": "2ac5bce2-5a6f-4def-8cd4-d4326bade29d",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -sdsl /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -rtd /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd -nofilter /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd -xclbin /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -o /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml",
+  "args": [
+   "-sdsl",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-rtd",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw.rtd",
+   "-nofilter",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/cf2sw_full.rtd",
+   "-xclbin",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-o",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.1.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:33 2022",
+ "timestampMillis": "1649736273746",
+ "status": {
+  "cmdId": "2ac5bce2-5a6f-4def-8cd4-d4326bade29d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:37 2022",
+ "timestampMillis": "1649736277743",
+ "status": {
+  "cmdId": "2ac5bce2-5a6f-4def-8cd4-d4326bade29d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 00:04:37 2022",
+ "timestampMillis": "1649736277751",
+ "buildStep": {
+  "cmdId": "35242c99-b550-42b8-a55e-f81de1529887",
+  "name": "rtd2_system_diagram",
+  "logFile": "",
+  "commandLine": "rtd2SystemDiagram",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:37 2022",
+ "timestampMillis": "1649736277752",
+ "status": {
+  "cmdId": "35242c99-b550-42b8-a55e-f81de1529887",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 00:04:39 2022",
+ "timestampMillis": "1649736279399",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModel.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:39 2022",
+ "timestampMillis": "1649736279402",
+ "status": {
+  "cmdId": "35242c99-b550-42b8-a55e-f81de1529887",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 00:04:39 2022",
+ "timestampMillis": "1649736279413",
+ "buildStep": {
+  "cmdId": "eec4f85b-291d-489f-93fa-636fc9ebd14b",
+  "name": "vpl",
+  "logFile": "",
+  "commandLine": "vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/.ipcache -s --output_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_GIN_compute_graphs_1_0 --messageDb /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl",
+  "args": [
+   "-t",
+   "hw",
+   "-f",
+   "xilinx_u50_gen3x16_xdma_201920_3",
+   "--remote_ip_cache",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/.ipcache",
+   "-s",
+   "--output_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int",
+   "--log_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link",
+   "--report_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link",
+   "--config",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+   "-k",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat",
+   "--webtalk_flag",
+   "Vitis",
+   "--temp_dir",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link",
+   "--no-info",
+   "--iprepo",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_GIN_compute_graphs_1_0",
+   "--messageDb",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl"
+  ],
+  "iniFiles": [
+   {
+    "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini",
+    "content": "[advanced]\nmisc=report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\nmisc=report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\nparam=compiler.enablePerformanceTrace=1\nparam=compiler.vppCurrentWorkingDir=/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6\nmisc=BinaryName=GIN_compute_graphs.link\n\n[connectivity]\nnk=GIN_compute_graphs:1:GIN_compute_graphs_1\n\n[vivado]\nprop=run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\n\n"
+   }
+  ],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:39 2022",
+ "timestampMillis": "1649736279414",
+ "status": {
+  "cmdId": "eec4f85b-291d-489f-93fa-636fc9ebd14b",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Apr 12 00:04:42 2022",
+ "timestampMillis": "1649736282119",
+ "buildStep": {
+  "cmdId": "17b3b18d-78f3-43e2-b29d-a5688a7884f2",
+  "name": "vpl",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/link.steps.log",
+  "commandLine": "/tools/reconfig/xilinx/Vitis/2021.1/Vitis/2021.1/bin/unwrapped/lnx64.o/vpl -t hw -f xilinx_u50_gen3x16_xdma_201920_3 --remote_ip_cache /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/.ipcache -s --output_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int --log_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/link --report_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link --config /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/vplConfig.ini -k /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link --no-info --iprepo /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xo/ip_repo/xilinx_com_hls_GIN_compute_graphs_1_0 --messageDb /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link/vpl.pb /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/dr.bd.tcl ",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:04:42 2022",
+ "timestampMillis": "1649736282120",
+ "status": {
+  "cmdId": "17b3b18d-78f3-43e2-b29d-a5688a7884f2",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_VivadoProject",
+ "dateTimestamp": "Tue Apr 12 00:05:02 2022",
+ "timestampMillis": "1649736302252",
+ "vivadoProject": {
+  "openDir": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl",
+  "openScript": "openprj.tcl",
+  "relativeProject": "prj/prj.xpr"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 00:05:02 2022",
+ "timestampMillis": "1649736302257",
+ "buildStep": {
+  "cmdId": "676c4cba-ef91-48aa-87a8-48609d5a182e",
+  "name": "vivado",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/vivado.log",
+  "commandLine": "vivado -log vivado.log -applog -m64 -messageDb vivado.pb -mode batch -source vpl.tcl -notrace",
+  "args": [
+   "-log",
+   "vivado.log",
+   "-applog",
+   " -m64",
+   "-messageDb",
+   "vivado.pb",
+   "-mode",
+   "batch",
+   "-source",
+   "vpl.tcl",
+   "-notrace"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/run_link"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 00:05:02 2022",
+ "timestampMillis": "1649736302257",
+ "status": {
+  "cmdId": "676c4cba-ef91-48aa-87a8-48609d5a182e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Apr 12 04:23:19 2022",
+ "timestampMillis": "1649751799934",
+ "buildStep": {
+  "cmdId": "5cf4863d-ba24-47c3-b628-de02fbc10462",
+  "name": "vivado.impl",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 04:23:19 2022",
+ "timestampMillis": "1649751799934",
+ "status": {
+  "cmdId": "5cf4863d-ba24-47c3-b628-de02fbc10462",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Apr 12 04:23:19 2022",
+ "timestampMillis": "1649751799935",
+ "buildStep": {
+  "cmdId": "811e457d-9de0-4153-9b7a-1c32d41cd049",
+  "name": "vivado.impl.impl_1",
+  "logFile": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/runme.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 04:23:19 2022",
+ "timestampMillis": "1649751799936",
+ "status": {
+  "cmdId": "811e457d-9de0-4153-9b7a-1c32d41cd049",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:32:19 2022",
+ "timestampMillis": "1649766739093",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/vivado/vpl/prj/prj.runs/impl_1/system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:36:22 2022",
+ "timestampMillis": "1649766982875",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:36:22 2022",
+ "timestampMillis": "1649766982880",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/kernel_service.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "KERNEL_SERVICE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329162",
+ "status": {
+  "cmdId": "676c4cba-ef91-48aa-87a8-48609d5a182e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329889",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329893",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329897",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329900",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329904",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329907",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_PLACEMENT",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329913",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_ROUTED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329916",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329920",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329923",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_synthed.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329926",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_slr_util_placed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SLR_UTIL_PLACED",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329929",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_routed.xutil",
+  "name": "",
+  "fileType": "XUTIL",
+  "reportType": "KERNEL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329932",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_kernel_util_synthed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "KERNEL_UTILIZATION_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329939",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_full_util_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_UTILIZATION_ROUTE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329965",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_ii_level0_wire_0_synth_1_ulp_ii_level0_wire_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329969",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_user_debug_bridge_0_synth_1_ulp_user_debug_bridge_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329972",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_debug_bridge_xsdbm_0_synth_1_ulp_debug_bridge_xsdbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329976",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_hmss_0_0_synth_1_ulp_hmss_0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329979",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_axi_vip_data_0_synth_1_ulp_axi_vip_data_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329983",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_ulp_ucs_0_synth_1_ulp_ulp_ucs_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329986",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_proc_sys_reset_ctrl_slr0_0_synth_1_ulp_proc_sys_reset_ctrl_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329989",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_proc_sys_reset_kernel_slr0_0_synth_1_ulp_proc_sys_reset_kernel_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329993",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_proc_sys_reset_kernel2_slr0_0_synth_1_ulp_proc_sys_reset_kernel2_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:49 2022",
+ "timestampMillis": "1649768329997",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_workaround_cr1039626_orgate_0_synth_1_ulp_workaround_cr1039626_orgate_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330000",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_axi_gpio_null_0_synth_1_ulp_axi_gpio_null_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330003",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_axi_vip_ctrl_userpf_0_synth_1_ulp_axi_vip_ctrl_userpf_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330006",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_regslice_control_userpf_0_synth_1_ulp_regslice_control_userpf_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330010",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_regslice_control_userpf_1_synth_1_ulp_regslice_control_userpf_1_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330013",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clk_kernel2_cont_adapt_0_synth_1_bd_22c0_clk_kernel2_cont_adapt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330016",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_kernel2_0_synth_1_bd_22c0_psreset_kernel2_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330019",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_shutdown_clocks_latch_0_synth_1_bd_22c0_shutdown_clocks_latch_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330023",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gpio_ucs_control_status_0_synth_1_bd_22c0_gpio_ucs_control_status_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330026",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_adder_check_gpio_0_synth_1_bd_22c0_adder_check_gpio_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330029",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_reduce_check_gpio_0_synth_1_bd_22c0_reduce_check_gpio_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330033",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_or_shutdown_clocks_0_synth_1_bd_22c0_or_shutdown_clocks_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330036",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_frequency_counter_kernel_0_synth_1_bd_22c0_frequency_counter_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330040",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_freerun_refclk_0_synth_1_bd_22c0_psreset_freerun_refclk_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330043",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_frequency_counter_aclk_0_synth_1_bd_22c0_frequency_counter_aclk_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330046",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clkwiz_hbm_0_synth_1_bd_22c0_clkwiz_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330048",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clk_hbm_adapt_0_synth_1_bd_22c0_clk_hbm_adapt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330051",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_hbm_0_synth_1_bd_22c0_psreset_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330053",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_frequency_counter_hbm_0_synth_1_bd_22c0_frequency_counter_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330056",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_hbm_0_synth_1_bd_22c0_fanout_aresetn_hbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330058",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_ctrl_slr0_0_synth_1_bd_22c0_fanout_aresetn_ctrl_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330060",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_pcie_slr0_0_synth_1_bd_22c0_fanout_aresetn_pcie_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330063",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_kernel_slr0_0_synth_1_bd_22c0_fanout_aresetn_kernel_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330067",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_fanout_aresetn_kernel2_slr0_0_synth_1_bd_22c0_fanout_aresetn_kernel2_slr0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330071",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_9997_bsip_0_synth_1_bd_9997_bsip_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330075",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_9997_bs_switch_1_0_synth_1_bd_9997_bs_switch_1_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330078",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_xbar_1_synth_1_bd_22c0_xbar_1_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330082",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_build_info_0_synth_1_bd_22c0_build_info_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330086",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gpio_gapping_demand_0_synth_1_bd_22c0_gpio_gapping_demand_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330090",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clock_throttling_avg_0_synth_1_bd_22c0_clock_throttling_avg_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330094",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gapping_demand_update_0_synth_1_bd_22c0_gapping_demand_update_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330097",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_gapping_demand_toggle_0_synth_1_bd_22c0_gapping_demand_toggle_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330101",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clock_throttling_kernel_0_synth_1_bd_22c0_clock_throttling_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330104",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clock_throttling_kernel2_0_synth_1_bd_22c0_clock_throttling_kernel2_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330108",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clkwiz_kernel_0_synth_1_bd_22c0_clkwiz_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330111",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clk_kernel_adapt_0_synth_1_bd_22c0_clk_kernel_adapt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330115",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_psreset_kernel_0_synth_1_bd_22c0_psreset_kernel_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330119",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_clkwiz_kernel2_0_synth_1_bd_22c0_clkwiz_kernel2_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330123",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_9997_axi_jtag_0_synth_1_bd_9997_axi_jtag_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330126",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_0349_xsdbm_0_synth_1_bd_0349_xsdbm_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330130",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_0349_lut_buffer_0_synth_1_bd_0349_lut_buffer_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330134",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_vip_ctrl_mgmt_0_synth_1_bd_22c0_vip_ctrl_mgmt_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330137",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_xbar_0_synth_1_bd_22c0_xbar_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330141",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_xbar_0_synth_1_ulp_xbar_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330144",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_GIN_compute_graphs_1_0_synth_1_ulp_GIN_compute_graphs_1_0_utilization_synth.rpt",
+  "name": "GIN_compute_graphs",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330148",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_slice0_1_0_synth_1_bd_85ad_slice0_1_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330152",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_init_reduce_0_synth_1_bd_85ad_init_reduce_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330155",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_22c0_auto_cc_0_synth_1_bd_22c0_auto_cc_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330159",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_interconnect0_1_0_synth_1_bd_85ad_interconnect0_1_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330163",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_s00_regslice_11_synth_1_ulp_s00_regslice_11_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330167",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_hbm_reset_sync_SLR0_0_synth_1_bd_85ad_hbm_reset_sync_SLR0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330170",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_vip_S01_0_synth_1_bd_85ad_vip_S01_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330174",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_hbm_inst_0_synth_1_bd_85ad_hbm_inst_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330177",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_s00_regslice_10_synth_1_ulp_s00_regslice_10_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330180",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_m01_regslice_0_synth_1_ulp_m01_regslice_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330184",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/ulp_auto_cc_0_synth_1_ulp_auto_cc_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330188",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_axi_apb_bridge_inst_0_synth_1_bd_85ad_axi_apb_bridge_inst_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330191",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/syn/bd_85ad_interconnect1_0_0_synth_1_bd_85ad_interconnect1_0_0_utilization_synth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_UTILIZATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330198",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_system_diagram.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": "811e457d-9de0-4153-9b7a-1c32d41cd049"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330248",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "811e457d-9de0-4153-9b7a-1c32d41cd049"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330298",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpx",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY",
+  "cmdId": "811e457d-9de0-4153-9b7a-1c32d41cd049"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330302",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/imp/impl_1_hw_bb_locked_timing_summary_routed.rpv",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_REPORT_TIMING_SUMMARY_CONCISE",
+  "cmdId": "811e457d-9de0-4153-9b7a-1c32d41cd049"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330332",
+ "status": {
+  "cmdId": "17b3b18d-78f3-43e2-b29d-a5688a7884f2",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330379",
+ "status": {
+  "cmdId": "eec4f85b-291d-489f-93fa-636fc9ebd14b",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330395",
+ "buildStep": {
+  "cmdId": "3a0a3a1b-46b0-40ca-b518-8bd77b649bb0",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "rtdgen",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330395",
+ "status": {
+  "cmdId": "3a0a3a1b-46b0-40ca-b518-8bd77b649bb0",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330547",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link_xml.rtd",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "XCLBIN_INFO",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330559",
+ "buildStep": {
+  "cmdId": "2fc33464-7717-4074-a345-1a35f16c201b",
+  "name": "cf2sw",
+  "logFile": "",
+  "commandLine": "cf2sw -a /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml -sdsl /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat -xclbin /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml -rtd /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.rtd -o /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.xml",
+  "args": [
+   "-a",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/address_map.xml",
+   "-sdsl",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/sdsl.dat",
+   "-xclbin",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/xclbin_orig.xml",
+   "-rtd",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.rtd",
+   "-o",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.xml"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:50 2022",
+ "timestampMillis": "1649768330559",
+ "status": {
+  "cmdId": "2fc33464-7717-4074-a345-1a35f16c201b",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334278",
+ "status": {
+  "cmdId": "2fc33464-7717-4074-a345-1a35f16c201b",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334279",
+ "buildStep": {
+  "cmdId": "439cbe1c-2f77-489d-96b1-5b3b1d8b34c4",
+  "name": "rtdgen",
+  "logFile": "",
+  "commandLine": "writeSystemDiagram",
+  "args": [
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.rtd",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334280",
+ "status": {
+  "cmdId": "439cbe1c-2f77-489d-96b1-5b3b1d8b34c4",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334287",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "SYSTEM_DIAGRAM_PLUS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334289",
+ "status": {
+  "cmdId": "439cbe1c-2f77-489d-96b1-5b3b1d8b34c4",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334290",
+ "status": {
+  "cmdId": "3a0a3a1b-46b0-40ca-b518-8bd77b649bb0",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334298",
+ "buildStep": {
+  "cmdId": "6c971420-46e6-4880-80b5-29a8fb9279b2",
+  "name": "xclbinutil",
+  "logFile": "",
+  "commandLine": "xclbinutil --add-section BITSTREAM:RAW:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit --force --target hw --key-value SYS:dfx_enable:true --add-section :JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.rtd --append-section :JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link_xml.rtd --add-section BUILD_METADATA:JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link_build.rtd --add-section EMBEDDED_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.xml --add-section SYSTEM_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json --key-value SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3 --output /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin",
+  "args": [
+   "--add-section",
+   "BITSTREAM:RAW:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/partial.bit",
+   "--force",
+   "--target",
+   "hw",
+   "--key-value",
+   "SYS:dfx_enable:true",
+   "--add-section",
+   ":JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.rtd",
+   "--append-section",
+   ":JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/appendSection.rtd",
+   "--add-section",
+   "CLOCK_FREQ_TOPOLOGY:JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link_xml.rtd",
+   "--add-section",
+   "BUILD_METADATA:JSON:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link_build.rtd",
+   "--add-section",
+   "EMBEDDED_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/GIN_compute_graphs.link.xml",
+   "--add-section",
+   "SYSTEM_METADATA:RAW:/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/link/int/systemDiagramModelSlrBaseAddress.json",
+   "--key-value",
+   "SYS:PlatformVBNV:xilinx_u50_gen3x16_xdma_201920_3",
+   "--output",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334299",
+ "status": {
+  "cmdId": "6c971420-46e6-4880-80b5-29a8fb9279b2",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334763",
+ "status": {
+  "cmdId": "6c971420-46e6-4880-80b5-29a8fb9279b2",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334775",
+ "buildStep": {
+  "cmdId": "c5b38df4-c862-44c3-973b-538c67f25533",
+  "name": "xclbinutilinfo",
+  "logFile": "",
+  "commandLine": "xclbinutil --quiet --force --info /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin.info --input /net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin",
+  "args": [
+   "--quiet",
+   "--force",
+   "--info",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin.info",
+   "--input",
+   "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/./build_dir.hw.xilinx_u50_gen3x16_xdma_201920_3/GIN_compute_graphs.link.xclbin"
+  ],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:54 2022",
+ "timestampMillis": "1649768334775",
+ "status": {
+  "cmdId": "c5b38df4-c862-44c3-973b-538c67f25533",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:55 2022",
+ "timestampMillis": "1649768335585",
+ "status": {
+  "cmdId": "c5b38df4-c862-44c3-973b-538c67f25533",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 12 08:58:55 2022",
+ "timestampMillis": "1649768335595",
+ "buildStep": {
+  "cmdId": "87695973-85f9-412b-b45c-2b1c08e0b939",
+  "name": "generate_sc_driver",
+  "logFile": "",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:55 2022",
+ "timestampMillis": "1649768335596",
+ "status": {
+  "cmdId": "87695973-85f9-412b-b45c-2b1c08e0b939",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:55 2022",
+ "timestampMillis": "1649768335598",
+ "status": {
+  "cmdId": "87695973-85f9-412b-b45c-2b1c08e0b939",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:56 2022",
+ "timestampMillis": "1649768336308",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/system_estimate_GIN_compute_graphs.link.xtxt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "GLOBAL_SYSTEM_ESTIMATE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:56 2022",
+ "timestampMillis": "1649768336561",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/reports/link/v++_link_GIN_compute_graphs.link_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:56 2022",
+ "timestampMillis": "1649768336562",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/v++_link_GIN_compute_graphs.link_guidance.pb",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 12 08:58:56 2022",
+ "timestampMillis": "1649768336575",
+ "report": {
+  "path": "/net/netscratch/rsarkar30/GNN_Acc/GIN/GIN_U50/v6/_x.hw.xilinx_u50_gen3x16_xdma_201920_3/logs/optraceViewer.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "OPERATION_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 12 08:58:56 2022",
+ "timestampMillis": "1649768336578",
+ "status": {
+  "cmdId": "a0a914ed-fd05-47fa-a050-008a2210dacc",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
