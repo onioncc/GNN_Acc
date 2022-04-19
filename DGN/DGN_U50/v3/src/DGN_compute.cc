@@ -29,9 +29,9 @@ void DGN_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=nums_of_edges offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=reload_weights offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=out offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(9 * 500) port=node_feature_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=node_eigen_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=edge_list_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_NODE) port=node_feature_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_NODE) port=node_eigen_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_EDGE) port=edge_list_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=embedding_h_atom_embedding_list_weights_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=layers_posttrans_fully_connected_0_linear_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=layers_posttrans_fully_connected_0_linear_bias_in offset=slave bundle=mem
@@ -44,6 +44,16 @@ void DGN_compute_graphs(
 
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_weight type=RAM_2P impl=bram
 #pragma HLS bind_storage variable=layers_posttrans_fully_connected_0_linear_bias type=RAM_2P impl=bram
+
+#pragma HLS bind_storage variable=degree_table type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=degree_tables type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=neighbor_tables type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=eig_w type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=eig_abssums type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=eigw_sums type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=messages_ping type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=messages_pong type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=h_node type=RAM_2P impl=uram
 
     for (int graph = 0, weights_ndx = -1, nodes_offset = 0, edges_offset = 0; graph < num_graphs; graph++)
     {

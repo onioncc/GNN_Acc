@@ -26,8 +26,8 @@ void GAT_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=nums_of_edges offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=reload_weights offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=out offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=node_feature_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=edge_list_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_NODE) port=node_feature_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_EDGE) port=edge_list_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=scoring_fn_target_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=scoring_fn_source_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=linear_proj_weights_in offset=slave bundle=mem
@@ -43,6 +43,18 @@ void GAT_compute_graphs(
 #pragma HLS AGGREGATE variable=scores_source_pong
 #pragma HLS AGGREGATE variable=scores_target_ping
 #pragma HLS AGGREGATE variable=scores_target_pong
+
+#pragma HLS bind_storage variable=degree_table type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=degree_tables type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=neighbor_tables type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=h_node_ping type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=h_node_pong type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=out_nodes_features_skip_concat_bias_ping type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=out_nodes_features_skip_concat_bias_pong type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=scores_source_ping type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=scores_source_pong type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=scores_target_ping type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=scores_target_pong type=RAM_2P impl=uram
 
     for (int graph = 0, weights_ndx = -1, nodes_offset = 0, edges_offset = 0; graph < num_graphs; graph++)
     {

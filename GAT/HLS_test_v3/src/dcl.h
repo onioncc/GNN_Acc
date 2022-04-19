@@ -14,8 +14,8 @@
 #include <hls_vector.h>
 
 // #region Model Parameters
-constexpr int MAX_EDGE = 500;
-constexpr int MAX_NODE = 500;
+constexpr int MAX_EDGE = 90000;
+constexpr int MAX_NODE = 20000;
 constexpr int ND_FEATURE = 9;
 constexpr int ND_FEATURE_TOTAL = 173;
 constexpr int EDGE_ATTR = 3;

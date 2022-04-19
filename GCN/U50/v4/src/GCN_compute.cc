@@ -32,9 +32,9 @@ void GCN_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=nums_of_edges offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=reload_weights offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=out offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=node_feature_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=edge_list_in offset=slave bundle=mem
-#pragma HLS INTERFACE m_axi depth=(500) port=edge_attr_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_NODE) port=node_feature_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_EDGE) port=edge_list_in offset=slave bundle=mem
+#pragma HLS INTERFACE m_axi depth=(MAX_EDGE) port=edge_attr_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=node_embedding_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=edge_embedding_weight_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=convs_weight_in offset=slave bundle=mem
@@ -46,6 +46,15 @@ void GCN_compute_graphs(
 #pragma HLS INTERFACE m_axi depth=(1) port=bn_var_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_weights_in offset=slave bundle=mem
 #pragma HLS INTERFACE m_axi depth=(1) port=graph_pred_bias_in offset=slave bundle=mem
+
+#pragma HLS bind_storage variable=degree_table type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=degree_tables type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=neighbor_tables type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=norms type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=edge_attrs type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=messages_ping type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=messages_pong type=RAM_2P impl=uram
+#pragma HLS bind_storage variable=h_node type=RAM_2P impl=uram
 
     for (int graph = 0, weights_ndx = -1, nodes_offset = 0, edges_offset = 0; graph < num_graphs; graph++)
     {
